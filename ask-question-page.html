@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask a Question</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .welcome-box {
+            background: #e8f5e9;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .question-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .type-card {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .form-group {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            background: #0066cc;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #0052a3;
+        }
+        
+        .faq-preview {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ask a Question</h1>
+    
+    <div class="welcome-box">
+        <h2>All Questions Are Good Questions</h2>
+        <p><strong>Seriously.</strong> There are no dumb questions here. If something confuses you, that's valuable feedback. If you think you found an error, you might be right. If you're 14 and just learned about quantum mechanics, your fresh perspective matters.</p>
+        
+        <p>Questions help in three ways:</p>
+        <ul>
+            <li><strong>Clarification:</strong> "I don't understand what 'information processing' means" helps us explain better</li>
+            <li><strong>Criticism:</strong> "This contradicts X" helps us fix errors or clarify distinctions</li>
+            <li><strong>Curiosity:</strong> "What about Y?" helps us explore implications we missed</li>
+        </ul>
+    </div>
+
+    <div class="question-types">
+        <div class="type-card">
+            <strong>Clarification</strong>
+            <p>"What does [term] mean?"</p>
+            <p>"Can you explain [concept] differently?"</p>
+        </div>
+        
+        <div class="type-card">
+            <strong>Challenge</strong>
+            <p>"This seems wrong because..."</p>
+            <p>"How does this explain [phenomenon]?"</p>
+        </div>
+        
+        <div class="type-card">
+            <strong>Connection</strong>
+            <p>"How does this relate to [other theory]?"</p>
+            <p>"What about [related topic]?"</p>
+        </div>
+        
+        <div class="type-card">
+            <strong>Curiosity</strong>
+            <p>"What would this mean for [application]?"</p>
+            <p>"Has anyone tested [prediction]?"</p>
+        </div>
+    </div>
+
+    <form action="submit-question.php" method="POST">
+        <div class="form-group">
+            <label for="background">Your Background (optional, helps us answer appropriately):</label>
+            <select id="background" name="background">
+                <option value="">Prefer not to say</option>
+                <option value="high-school">High school student</option>
+                <option value="undergrad">College student</option>
+                <option value="grad">Graduate student</option>
+                <option value="researcher">Professional researcher</option>
+                <option value="curious">Just curious about science</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="element">Which Element is your question about? (optional):</label>
+            <select id="element" name="element">
+                <option value="general">General question</option>
+                <option value="element-1">Element 1 - Reality is Relational</option>
+                <option value="element-2">Element 2 - Landauer's Principle</option>
+                <option value="element-3">Element 3 - Universe Processes Information</option>
+                <!-- Add all 21 elements -->
+                <option value="predictions">Predictions</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="question">Your Question:</label>
+            <textarea id="question" name="question" required placeholder="Ask anything... explain what confuses you, challenge what seems wrong, explore what interests you."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email (optional, for response notification):</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com">
+            <small>We'll only use this to notify you when your question is answered. Never shared or sold.</small>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="public" value="yes" checked>
+                Make my question public (helps others learning too)
+            </label>
+        </div>
+        
+        <button type="submit">Submit Question</button>
+    </form>
+
+    <div class="faq-preview">
+        <h3>Frequently Asked Questions (Growing List)</h3>
+        <p><strong>Q: "How is this different from string theory?"</strong><br>
+        A: String theory proposes new fundamental entities (strings). This framework uses established physics (quantum mechanics, information theory, thermodynamics) to ask if information processing is fundamental. <a href="faq.html#string-theory">Read more →</a></p>
+        
+        <p><strong>Q: "What does 'information' mean in physics?"</strong><br>
+        A: It's not about meaning or knowledge. Physical information measures distinguishable states. A bit can be 0 or 1 (two states). A qubit can be in superposition. Landauer proved processing this information costs measurable energy. <a href="faq.html#what-is-information">Read more →</a></p>
+        
+        <p><strong>Q: "Is this proven?"</strong><br>
+        A: No. Parts are established (Landauer's principle, quantum error correction). Parts are testable predictions. Parts will likely be wrong. That's why it's a framework needing validation, not a theory claiming certainty. <a href="faq.html#proven">Read more →</a></p>
+        
+        <p><a href="faq.html">View All FAQs →</a></p>
+    </div>
+
+    <p style="margin-top: 40px; text-align: center;">
+        <a href="index.html">← Back to Home</a> | 
+        <a href="discussion.html">View Discussion Forum →</a>
+    </p>
+</body>
+</html>
