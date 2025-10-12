@@ -23,8 +23,9 @@
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
         }
         
@@ -68,7 +69,6 @@
             color: #667eea;
         }
         
-        /* Dropdown for Discussion */
         .dropdown {
             position: relative;
         }
@@ -102,20 +102,16 @@
             border-bottom: none;
         }
         
-        .dropdown-content a:hover {
-            background: rgba(102, 126, 234, 0.1);
-        }
-        
-        /* Hero Section with Book */
-        .hero {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 40px;
+        /* FRAME 1 - Hero with Book */
+        .frame-hero {
+            min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
-            min-height: calc(100vh - 80px);
+            padding: 120px 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .hero-content h1 {
@@ -146,7 +142,6 @@
             font-weight: 500;
         }
         
-        /* Book Cover Section */
         .book-showcase {
             position: relative;
             display: flex;
@@ -171,33 +166,20 @@
             overflow: hidden;
         }
         
-        .book-cover::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><circle cx="50" cy="50" r="25" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><circle cx="50" cy="50" r="10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>') center/150px repeat;
-            opacity: 0.3;
-        }
-        
-        .book-cover-content {
-            position: relative;
-            z-index: 1;
-        }
-        
         .book-cover h2 {
             font-size: 2.5em;
             color: white;
             margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
         
         .book-cover .book-subtitle {
             font-size: 1.3em;
             color: rgba(255,255,255,0.9);
             margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
         }
         
         .book-cover .author-name {
@@ -206,9 +188,10 @@
             margin-top: auto;
             padding-top: 40px;
             font-weight: 300;
+            position: relative;
+            z-index: 1;
         }
         
-        /* Action Buttons - Bottom Right of Book */
         .action-buttons {
             position: absolute;
             bottom: -20px;
@@ -218,7 +201,7 @@
             gap: 12px;
         }
         
-        .btn-primary {
+        .btn-pill {
             padding: 15px 30px;
             background: rgba(255, 255, 255, 0.95);
             color: #667eea;
@@ -231,25 +214,19 @@
             align-items: center;
             gap: 10px;
             font-size: 0.95em;
+            border: none;
+            cursor: pointer;
         }
         
-        .btn-primary:hover {
+        .btn-pill:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-            background: white;
         }
         
-        /* Links Section */
         .links-section {
             display: flex;
             gap: 40px;
             margin-top: 40px;
-        }
-        
-        .links-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
         }
         
         .links-group h3 {
@@ -257,25 +234,21 @@
             color: #808080;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         
         .links-group a {
+            display: block;
             color: #667eea;
             text-decoration: none;
-            transition: color 0.3s;
+            margin: 8px 0;
             font-size: 0.95em;
         }
         
-        .links-group a:hover {
-            color: #764ba2;
-        }
-        
-        /* Social Icons */
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         
         .social-icon {
@@ -289,21 +262,257 @@
             color: #e0e0e0;
             text-decoration: none;
             transition: all 0.3s;
-            font-size: 1.2em;
         }
         
         .social-icon:hover {
             border-color: #667eea;
             color: #667eea;
-            transform: translateY(-3px);
+        }
+        
+        /* FRAME 2 - Membership CTA (White) */
+        .frame-membership {
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 100px 40px;
+            text-align: center;
+        }
+        
+        .frame-membership h2 {
+            font-size: 4em;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 50px;
+            color: #1a1a1a;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-transparent {
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid #1a1a1a;
+            color: #1a1a1a;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+        
+        .btn-transparent:hover {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        /* FRAME 3 - Quote with Image */
+        .frame-quote {
+            min-height: 100vh;
+            background: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920') center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .frame-quote::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .quote-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            text-align: center;
+        }
+        
+        .quote-content blockquote {
+            font-size: 2.5em;
+            font-weight: 300;
+            line-height: 1.4;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .quote-content cite {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            font-style: normal;
+        }
+        
+        /* FRAME 4 - Announcement (Half Height) */
+        .frame-announcement {
+            min-height: 55vh;
+            background: #1a1a1a;
+            padding: 80px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .announcement-content {
+            max-width: 900px;
+            text-align: center;
+        }
+        
+        .announcement-content h2 {
+            font-size: 3em;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+        
+        .announcement-content p {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        /* FRAME 5 - Photo Gallery */
+        .frame-gallery {
+            min-height: 55vh;
+            background: #0a0a0a;
+            padding: 80px 40px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* FRAME 6 - Footer */
+        .frame-footer {
+            min-height: 90vh;
+            background: #1a1a1a;
+            padding: 100px 40px 60px;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.8em;
+            color: #fff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin: 15px 0;
+        }
+        
+        .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.05em;
+        }
+        
+        .footer-section a:hover {
+            color: #667eea;
+        }
+        
+        .newsletter-form {
+            margin-top: 30px;
+        }
+        
+        .newsletter-form p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .newsletter-form input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-form button {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+        
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .newsletter-form .disclaimer {
+            font-size: 0.85em;
+            color: #808080;
+            margin-top: 15px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            color: #808080;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 40px;
         }
         
         /* Responsive */
         @media (max-width: 968px) {
-            .hero {
+            .frame-hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 60px;
             }
             
             .action-buttons {
@@ -313,12 +522,26 @@
                 margin-top: 30px;
             }
             
-            .links-section {
-                justify-content: center;
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
             
-            .hero-content h1 {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .frame-membership h2 {
                 font-size: 2.5em;
+            }
+            
+            .quote-content blockquote {
+                font-size: 1.8em;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
             }
             
             .nav-links {
@@ -326,15 +549,9 @@
             }
         }
         
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                text-align: center;
+        @media (max-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -345,22 +562,22 @@
         <div class="nav-container">
             <div class="site-title">THE <span>COSMIC</span> FRAMEWORK</div>
             <ul class="nav-links">
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html">Events</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#events">Events</a></li>
                 <li class="dropdown">
                     <a href="#" style="cursor: pointer;">Discussion ▾</a>
                     <div class="dropdown-content">
                         <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
-                        <a href="signup.html">Create Free Account</a>
-                        <a href="login.html">Log In</a>
+                        <a href="#membership">Create Free Account</a>
+                        <a href="#membership">Log In</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- FRAME 1: Hero with Book -->
+    <section class="frame-hero">
         <div class="hero-content">
             <h1>
                 The Quest for <br>
@@ -383,11 +600,7 @@
                     <div class="social-links">
                         <a href="#" class="social-icon" title="Twitter">𝕏</a>
                         <a href="#" class="social-icon" title="LinkedIn">in</a>
-                        <a href="https://github.com/mikeb7777/physics-framework" class="social-icon" title="GitHub" target="_blank">
-                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                            </svg>
-                        </a>
+                        <a href="https://github.com/mikeb7777/physics-framework" class="social-icon" title="GitHub" target="_blank">⚡</a>
                         <a href="mailto:mkbinfo@proton.me" class="social-icon" title="Email">✉</a>
                     </div>
                 </div>
@@ -396,22 +609,112 @@
         
         <div class="book-showcase">
             <div class="book-cover">
-                <div class="book-cover-content">
-                    <h2>THE BIG TOE</h2>
-                    <p class="book-subtitle">The COSMIC Framework's Theory of Everything</p>
-                    <p class="author-name">Michael K. Baines</p>
-                </div>
+                <h2>THE BIG TOE</h2>
+                <p class="book-subtitle">The COSMIC Framework's Theory of Everything</p>
+                <p class="author-name">Michael K. Baines</p>
             </div>
             
-            <!-- Action Buttons -->
             <div class="action-buttons">
-                <a href="framework-book.pdf" class="btn-primary" download>
+                <a href="framework-book.pdf" class="btn-pill" download>
                     📥 Download Book
                 </a>
-                <a href="contribute.html" class="btn-primary">
+                <a href="#footer" class="btn-pill">
                     💡 Contribute
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- FRAME 2: Membership CTA -->
+    <section class="frame-membership" id="membership">
+        <h2>Become a Member<br>and Join the Discussion</h2>
+        <div class="cta-buttons">
+            <a href="login.html" class="btn-transparent">Log In</a>
+            <a href="signup.html" class="btn-transparent">Subscribe</a>
+        </div>
+    </section>
+
+    <!-- FRAME 3: Quote with Image -->
+    <section class="frame-quote">
+        <div class="quote-content">
+            <blockquote>
+                "Information is not just what we process—it may be the very fabric from which reality is woven."
+            </blockquote>
+            <cite>— Michael K. Baines</cite>
+        </div>
+    </section>
+
+    <!-- FRAME 4: Announcement -->
+    <section class="frame-announcement" id="events">
+        <div class="announcement-content">
+            <h2>Upcoming Virtual Book Launch</h2>
+            <p>Join us for an exclusive presentation of the COSMIC Framework with live Q&A. Explore the testable predictions that could reshape our understanding of reality.</p>
+            <a href="events.html" class="btn-pill" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">Learn More</a>
+        </div>
+    </section>
+
+    <!-- FRAME 5: Gallery -->
+    <section class="frame-gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <!-- Replace with actual images -->
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400" alt="Cosmic Structure">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400" alt="Quantum Mechanics">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400" alt="Information Theory">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=400" alt="Mathematical Constants">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400" alt="Neural Networks">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=400" alt="Cosmic Web">
+            </div>
+        </div>
+    </section>
+
+    <!-- FRAME 6: Footer -->
+    <section class="frame-footer" id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></li>
+                    <li><a href="https://michaelkbaines.com" target="_blank">michaelkbaines.com</a></li>
+                    <li><a href="https://github.com/mikeb7777/physics-framework" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <div class="newsletter-form">
+                    <p>Get inspired. Stay connected. Sign up for fresh ideas, event updates & more.</p>
+                    <form action="#" method="POST">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe Now</button>
+                        <p class="disclaimer">By signing up, you agree to receive emails from The COSMIC Framework. You can unsubscribe at any time. For details on how we handle your data, please see our <a href="privacy.html" style="color: #667eea;">Privacy Policy</a>.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Michael K. Baines | The COSMIC Framework | All Rights Reserved</p>
         </div>
     </section>
 </body>
