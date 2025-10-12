@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - The COSMIC Framework</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            background: #0a0a0a;
+            color: #e0e0e0;
+        }
+        
+        .top-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        
+        .site-title span {
+            color: #667eea;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(20, 20, 30, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            text-transform: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-content a:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        
+        h1 .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section {
+            margin: 60px 0;
+        }
+        
+        .section h2 {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin: 20px 0;
+        }
+        
+        .author-section {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: start;
+        }
+        
+        .author-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: white;
+        }
+        
+        .author-info h3 {
+            font-size: 1.8em;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .author-info .title {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: rgba(20, 20, 40, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .contact-info h3 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            color: #b0b0b0;
+        }
+        
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            color: #764ba2;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .author-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="site-title">THE <span>COSMIC</span> FRAMEWORK</a>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li class="dropdown">
+                    <a href="#" style="cursor: pointer;">Discussion ▾</a>
+                    <div class="dropdown-content">
+                        <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
+                        <a href="signup.html">Create Free Account</a>
+                        <a href="login.html">Log In</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>About <span class="highlight">The COSMIC Framework</span></h1>
+        
+        <div class="section">
+            <h2>The Framework</h2>
+            <p>
+                <strong>The Quest for The Big TOE: The COSMIC Framework's Theory of Everything</strong> presents a revolutionary approach to understanding the fundamental nature of reality through information processing principles.
+            </p>
+            <p>
+                This framework proposes that information processing isn't just something that happens in the universe—it may be fundamental to how the universe operates. By connecting quantum mechanics, thermodynamics, and information theory, the COSMIC Framework offers testable predictions that can be validated or falsified through experimental observation.
+            </p>
+            <p>
+                Unlike purely speculative theories, every claim in this framework either connects to established physics or makes specific, testable predictions. This commitment to scientific rigor ensures the framework can evolve based on experimental evidence.
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2>About the Author</h2>
+            <div class="author-section">
+                <div class="author-image">MKB</div>
+                <div class="author-info">
+                    <h3>Michael K. Baines</h3>
+                    <p class="title">Theoretical Physicist & Author</p>
+                    <p style="color: #b0b0b0; line-height: 1.8;">
+                        [Add your bio here - your educational background, research interests, what motivated you to develop the COSMIC Framework, your approach to theoretical physics, and your vision for open science.]
+                    </p>
+                    <p style="color: #b0b0b0; line-height: 1.8; margin-top: 15px;">
+                        [Example: "My journey into information-theoretic physics began with a simple question: What if the universe operates more like a computer than a machine? This led to years of research exploring whether mathematical constants, cosmic structure, and quantum phenomena could all emerge from fundamental information processing principles."]
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>Email: <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></span>
+                </div>
+                <div class="contact-item">
+                    <span>🌐</span>
+                    <span>Website: <a href="https://michaelkbaines.com" target="_blank">michaelkbaines.com</a></span>
+                </div>
+                <div class="contact-item">
+                    <span>💬</span>
+                    <span>Discussions: <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Join the Community</a></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Philosophy</h2>
+            <p><strong style="color: #fff;">Science Over Dogma:</strong> Every prediction can be tested. Every claim can be challenged. If the framework fails experimental tests, it gets revised or discarded.</p>
+            
+            <p><strong style="color: #fff;">Open Access Always:</strong> No paywalls, no institutional barriers. From high schoolers to seasoned researchers, everyone gets the same access to ideas.</p>
+            
+            <p><strong style="color: #fff;">Collaboration Welcomed:</strong> Found an error? Great—let's fix it. Have a better explanation? Share it. Want to test a prediction? Let's collaborate.</p>
+            
+            <p><strong style="color: #fff;">Transparency First:</strong> All versions archived. All failed predictions documented. Science thrives on honesty, not infallibility.</p>
+        </div>
+        
+        <div style="text-align: center; margin: 60px 0;">
+            <a href="index.html" style="color: #667eea; text-decoration: none; font-size: 1.1em;">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

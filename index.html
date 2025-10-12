@@ -3,300 +3,416 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Information-First Physics Framework</title>
+    <title>The Quest for The Big TOE - Michael K. Baines</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        .container {
-            max-width: 1200px;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            background: #0a0a0a;
+            color: #e0e0e0;
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            border-bottom: 3px solid #667eea;
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-            margin: -40px -40px 40px -40px;
-            border-radius: 12px 12px 0 0;
+        .site-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
         }
         
-        .header h1 {
+        .site-title span {
+            color: #667eea;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        /* Dropdown for Discussion */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(20, 20, 30, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            text-transform: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-content a:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        /* Hero Section with Book */
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .hero-content h1 .highlight {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 2.5em;
-            margin: 0;
         }
         
-        .tagline {
-            font-size: 1.2em;
-            color: #666;
-            margin-top: 10px;
+        .hero-content .subtitle {
+            font-size: 1.5em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            font-weight: 300;
         }
         
-        .audience-selector {
+        .hero-content .author {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+        
+        /* Book Cover Section */
+        .book-showcase {
+            position: relative;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-            flex-wrap: wrap;
+            align-items: center;
         }
         
-        .audience-card {
-            border: 2px solid #667eea;
-            border-radius: 12px;
-            padding: 20px;
-            width: 280px;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: white;
-        }
-        
-        .audience-card:hover {
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-        
-        .audience-card h3 {
-            color: #667eea;
-            margin-top: 0;
-            font-size: 1.3em;
-        }
-        
-        .framework-intro {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 30px;
-            border-radius: 12px;
-            margin: 40px 0;
-            border-left: 5px solid #667eea;
-        }
-        
-        .key-claims {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .claim-card {
-            background: white;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .claim-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-        }
-        
-        .version-info {
-            background: #fff8dc;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-            border-left: 4px solid #ffa500;
-        }
-        
-        .cta-section {
-            text-align: center;
-            padding: 40px 0;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
+        .book-cover {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 2/3;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            margin: 10px;
-            transition: all 0.3s;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-        
-        .cta-button.secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-        
-        .cta-button.secondary:hover {
-            background: #667eea;
-            color: white;
-        }
-        
-        .download-contribute {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 12px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 40px;
-            border-radius: 12px;
-            margin: 40px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><circle cx="50" cy="50" r="25" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><circle cx="50" cy="50" r="10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>') center/150px repeat;
+            opacity: 0.3;
+        }
+        
+        .book-cover-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .book-cover h2 {
+            font-size: 2.5em;
             color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         
-        .download-contribute h2 {
-            margin-top: 0;
-            font-size: 2em;
+        .book-cover .book-subtitle {
+            font-size: 1.3em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
         }
         
-        .download-contribute .cta-button {
+        .book-cover .author-name {
+            font-size: 1.5em;
+            color: white;
+            margin-top: auto;
+            padding-top: 40px;
+            font-weight: 300;
+        }
+        
+        /* Action Buttons - Bottom Right of Book */
+        .action-buttons {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn-primary {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
             background: white;
-            color: #11998e;
-            font-size: 1.1em;
         }
         
-        .download-contribute .cta-button:hover {
-            background: #f0f0f0;
+        /* Links Section */
+        .links-section {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
         }
         
-        .questions-welcome {
-            background: linear-gradient(135deg, #e8f5e915 0%, #c3f5d915 100%);
-            padding: 30px;
-            border-radius: 12px;
-            margin: 40px 0;
-            text-align: center;
-            border: 2px solid #11998e;
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .links-group h3 {
+            font-size: 0.85em;
+            color: #808080;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .links-group a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95em;
+        }
+        
+        .links-group a:hover {
+            color: #764ba2;
+        }
+        
+        /* Social Icons */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2em;
+        }
+        
+        .social-icon:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 60px;
+            }
+            
+            .action-buttons {
+                position: static;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 30px;
+            }
+            
+            .links-section {
+                justify-content: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>An Information-First Framework for Physics</h1>
-            <p class="tagline">Testing whether information processing is fundamental to physical reality</p>
-            <p><strong>Version 1.0</strong> | Last Updated: October 2025</p>
-        </div>
-
-        <div class="version-info">
-            <strong>Living Document Notice:</strong> This framework evolves based on experimental results and community feedback. All versions remain publicly accessible. When predictions are validated or falsified, this document updates transparently.
-        </div>
-
-        <div class="audience-selector">
-            <div class="audience-card">
-                <h3>🔬 For Researchers</h3>
-                <p>Explore testable predictions, experimental protocols, and technical appendices with full mathematical derivations.</p>
-                <a href="#quick-intro" style="color: #667eea; font-weight: 600;">Learn More →</a>
-            </div>
-            
-            <div class="audience-card">
-                <h3>🎓 For Students</h3>
-                <p>Start with accessible explanations, interactive examples, and "Experience This" experiments you can try.</p>
-                <a href="#quick-intro" style="color: #667eea; font-weight: 600;">Begin Learning →</a>
-            </div>
-            
-            <div class="audience-card">
-                <h3>🤔 Just Curious?</h3>
-                <p>Read the 5-minute overview, explore what interests you, ask questions anytime.</p>
-                <a href="#quick-intro" style="color: #667eea; font-weight: 600;">Quick Introduction →</a>
-            </div>
-        </div>
-
-        <div class="framework-intro" id="quick-intro">
-            <h2>What This Framework Proposes</h2>
-            <p>Physics has three pillars: quantum mechanics, relativity, and thermodynamics. This framework asks whether a fourth principle operates underneath them all: <strong>information processing</strong>.</p>
-            
-            <p>We know from experiments that information is physical (Landauer's principle). We know quantum mechanics requires information conservation. We know the universe processes vast amounts of information at every scale.</p>
-            
-            <p><strong>The central question:</strong> If information processing is truly fundamental, can it explain patterns we currently treat as mysteries? Things like:</p>
-            <ul>
-                <li>Why physical constants have the specific values we observe (fine-tuning)</li>
-                <li>Why brain networks and cosmic structure show identical statistical patterns</li>
-                <li>Whether gravity emerges from information patterns rather than being fundamental</li>
-                <li>How consciousness relates to physical information processing</li>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="site-title">THE <span>COSMIC</span> FRAMEWORK</div>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li class="dropdown">
+                    <a href="#" style="cursor: pointer;">Discussion ▾</a>
+                    <div class="dropdown-content">
+                        <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
+                        <a href="signup.html">Create Free Account</a>
+                        <a href="login.html">Log In</a>
+                    </div>
+                </li>
             </ul>
-            
-            <p>This framework makes specific, testable predictions. It can be proven wrong. That's what makes it science rather than philosophy.</p>
         </div>
+    </nav>
 
-        <div class="key-claims">
-            <div class="claim-card">
-                <h3>Reality is Relational</h3>
-                <p>Nothing has intrinsic properties. Everything exists through relationships. This follows from quantum mechanics and relativity.</p>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                The Quest for <br>
+                <span class="highlight">The Big TOE</span>
+            </h1>
+            <p class="subtitle">The COSMIC Framework's Theory of Everything</p>
+            <p class="author">by Michael K. Baines</p>
             
-            <div class="claim-card">
-                <h3>Information is Physical</h3>
-                <p>Processing information costs measurable energy (Landauer's principle). Experimentally validated.</p>
-            </div>
-            
-            <div class="claim-card">
-                <h3>Processing is Necessary</h3>
-                <p>If consciousness processes information using universal constituents, then universal constituents process information. Logical argument from established facts.</p>
-            </div>
-            
-            <div class="claim-card">
-                <h3>Optimization Appears Everywhere</h3>
-                <p>Mathematical constants (π, φ, e) appear wherever systems optimize relationships. Pattern spans quantum to cosmic scales.</p>
-            </div>
-            
-            <div class="claim-card">
-                <h3>Neural-Cosmic Identity</h3>
-                <p>Brain networks and cosmic structure show statistical patterns so similar that machine learning cannot distinguish them.</p>
-            </div>
-            
-            <div class="claim-card">
-                <h3>Quantum Error Correction</h3>
-                <p>Information principles work in quantum regimes. Recent breakthrough (Google Willow, Nature 2024) validates predictions.</p>
-            </div>
-        </div>
-
-        <div class="download-contribute">
-            <h2>📚 Get the Complete Framework</h2>
-            <p style="font-size: 1.1em; margin: 20px 0;">Download the full book with all 21 elements, mathematical derivations, and experimental protocols.</p>
-            <a href="framework-book.pdf" class="cta-button" download>Download Complete Book (PDF)</a>
-            
-            <div style="margin-top: 40px; padding-top: 40px; border-top: 2px solid rgba(255,255,255,0.3);">
-                <h2>💡 Support This Work</h2>
-                <p>Help keep this research open and accessible to everyone.</p>
-                <a href="contribute.html" class="cta-button">Make a Contribution</a>
+            <div class="links-section">
+                <div class="links-group">
+                    <h3>Quick Links</h3>
+                    <a href="appendix.html">Appendix</a>
+                    <a href="references.html">References</a>
+                    <a href="https://michaelkbaines.com" target="_blank">Author's Website</a>
+                    <a href="mailto:mkbinfo@proton.me">Contact Author</a>
+                </div>
+                
+                <div class="links-group">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" title="Twitter">𝕏</a>
+                        <a href="#" class="social-icon" title="LinkedIn">in</a>
+                        <a href="https://github.com/mikeb7777/physics-framework" class="social-icon" title="GitHub" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:mkbinfo@proton.me" class="social-icon" title="Email">✉</a>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="questions-welcome">
-            <h2>Questions Are Welcome Here</h2>
-            <p><strong>Confused? That's normal.</strong> These ideas challenge intuitions built over a lifetime. <strong>Skeptical? Good.</strong> Healthy skepticism improves science. <strong>Disagree? Even better.</strong> Tell us where the framework fails.</p>
-            
-            <p>Whether you're 14 or 40, physicist or poet, we want to hear from you:</p>
-            
-            <div style="margin: 20px 0;">
-                <a href="discussions.html" class="cta-button">Join the Discussion</a>
+        
+        <div class="book-showcase">
+            <div class="book-cover">
+                <div class="book-cover-content">
+                    <h2>THE BIG TOE</h2>
+                    <p class="book-subtitle">The COSMIC Framework's Theory of Everything</p>
+                    <p class="author-name">Michael K. Baines</p>
+                </div>
             </div>
             
-            <p style="font-size: 0.9em; color: #555;">No question is too basic. If something doesn't make sense, that's valuable feedback. Help us explain better.</p>
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="framework-book.pdf" class="btn-primary" download>
+                    📥 Download Book
+                </a>
+                <a href="contribute.html" class="btn-primary">
+                    💡 Contribute
+                </a>
+            </div>
         </div>
-
-        <div class="cta-section">
-            <h2>Explore the Framework</h2>
-            <p style="color: #666; margin-bottom: 30px;">More pages coming soon - framework is actively being developed</p>
-        </div>
-
-        <footer style="border-top: 2px solid #eee; margin-top: 60px; padding-top: 20px; text-align: center; color: #666;">
-            <p>All content licensed under Creative Commons BY 4.0 | Hosted on GitHub for full transparency</p>
-        </footer>
-    </div>
+    </section>
 </body>
 </html>
