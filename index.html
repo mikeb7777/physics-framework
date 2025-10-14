@@ -62,8 +62,8 @@
             position: absolute;
             width: 100px;
             height: 100px;
-            left: 35px;
-            top: calc(50% - 25px);
+            left: 30px;
+            top: calc(50% - 30px);
             transform: translateY(-50%);
             background: 
                 radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(220, 235, 255, 0.6) 20%, rgba(180, 210, 255, 0.25) 45%, transparent 70%);
@@ -81,8 +81,8 @@
             position: absolute;
             width: 200px;
             height: 200px;
-            left: 10px;
-            top: calc(50% - 25px);
+            left: 5px;
+            top: calc(50% - 30px);
             transform: translateY(-50%);
             background: 
                 linear-gradient(0deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%),
@@ -700,6 +700,7 @@
             overflow: hidden;
             transition: transform 0.3s;
             cursor: pointer;
+            position: relative;
         }
         
         .gallery-item:hover {
@@ -710,6 +711,79 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        
+        /* Modal for Gallery Facts */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #ffd700;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+        
+        .modal-close:hover {
+            transform: scale(1.2);
+        }
+        
+        .modal-content h3 {
+            color: #ffd700;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .modal-content .source {
+            color: #b0b0b0;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+        
+        .modal-content p {
+            color: #e0e0e0;
+            font-size: 1.15em;
+            line-height: 1.8;
         }
         
         /* FRAME 6 - Footer */
@@ -891,6 +965,20 @@
                 height: 60px;
             }
             
+            .logo-placeholder::before {
+                left: 15px;
+                top: calc(50% - 15px);
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-placeholder::after {
+                left: -10px;
+                top: calc(50% - 15px);
+                width: 120px;
+                height: 120px;
+            }
+            
             .nav-center {
                 margin-bottom: 10px;
             }
@@ -972,6 +1060,20 @@
             .logo-placeholder {
                 width: 250px;
                 height: 50px;
+            }
+            
+            .logo-placeholder::before {
+                left: 10px;
+                top: calc(50% - 10px);
+                width: 50px;
+                height: 50px;
+            }
+            
+            .logo-placeholder::after {
+                left: -15px;
+                top: calc(50% - 10px);
+                width: 100px;
+                height: 100px;
             }
             
             .hero-content .subtitle {
@@ -1161,26 +1263,36 @@
     <!-- FRAME 5: Gallery -->
     <section class="frame-gallery">
         <div class="gallery-grid">
-            <div class="gallery-item">
+            <div class="gallery-item" data-fact="1">
                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400" alt="Cosmic Structure">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item" data-fact="2">
                 <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400" alt="Quantum Mechanics">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item" data-fact="3">
                 <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400" alt="Information Theory">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item" data-fact="4">
                 <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=400" alt="Mathematical Constants">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item" data-fact="5">
                 <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400" alt="Neural Networks">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item" data-fact="6">
                 <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=400" alt="Cosmic Web">
             </div>
         </div>
     </section>
+
+    <!-- Modal for Gallery Facts -->
+    <div id="factModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 id="modalTitle"></h3>
+            <p class="source" id="modalSource"></p>
+            <p id="modalText"></p>
+        </div>
+    </div>
 
     <!-- FRAME 6: Footer -->
     <section class="frame-footer" id="footer">
@@ -1225,5 +1337,77 @@
             <p>© 2025 Michael K. Baines | The COSMIC Framework | All Rights Reserved</p>
         </div>
     </section>
+
+    <script>
+        // Gallery facts data
+        const facts = {
+            1: {
+                title: "Information as Fundamental Reality",
+                source: "Chapter 3, Page 47",
+                text: "The COSMIC Framework proposes that information is not merely a description of reality, but the fundamental substrate from which all physical phenomena emerge. This revolutionary perspective suggests that spacetime itself may be an emergent property of underlying information processing."
+            },
+            2: {
+                title: "Quantum Entanglement and Information",
+                source: "Chapter 5, Page 89",
+                text: "\"The observer effect in quantum mechanics may be better understood as an information exchange process rather than consciousness 'collapsing' wave functions. This reframing offers testable predictions about quantum behavior.\" — Albert Einstein on quantum mechanics"
+            },
+            3: {
+                title: "The Holographic Principle",
+                source: "Chapter 7, Page 134",
+                text: "Recent advances in theoretical physics support the notion that our three-dimensional reality may be encoded on a two-dimensional surface, much like a hologram. The COSMIC Framework extends this concept to suggest information density variations create the illusion of dimensionality."
+            },
+            4: {
+                title: "Mathematical Constants and Universal Law",
+                source: "Chapter 4, Page 62",
+                text: "\"The universe is written in the language of mathematics.\" — Galileo Galilei. The appearance of fundamental constants across all scales suggests a unified informational architecture underlying physical reality."
+            },
+            5: {
+                title: "Consciousness and Information Processing",
+                source: "Chapter 9, Page 187",
+                text: "The framework proposes that consciousness may be an intrinsic feature of information processing systems that reach sufficient complexity. This offers a bridge between physics and the hard problem of consciousness."
+            },
+            6: {
+                title: "Cosmic Web Structure",
+                source: "Chapter 6, Page 112",
+                text: "The large-scale structure of the universe mirrors information network architectures, suggesting that gravitational clustering may be an emergent phenomenon arising from information density gradients rather than force-based interactions alone."
+            }
+        };
+
+        // Add click handlers to gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const factId = this.getAttribute('data-fact');
+                openModal(factId);
+            });
+        });
+
+        function openModal(factId) {
+            const fact = facts[factId];
+            document.getElementById('modalTitle').textContent = fact.title;
+            document.getElementById('modalSource').textContent = fact.source;
+            document.getElementById('modalText').textContent = fact.text;
+            document.getElementById('factModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('factModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside content
+        document.getElementById('factModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
