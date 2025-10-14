@@ -30,31 +30,52 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            padding: 15px 0;
         }
         
         .nav-container {
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px 40px;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .logo-section {
             display: flex;
-            justify-content: space-between;
             align-items: center;
         }
         
-        .site-title {
-            font-size: 1.2em;
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-weight: 700;
-            color: #fff;
-            letter-spacing: 1px;
+            font-size: 1.5em;
         }
         
-        .site-title span {
-            color: #667eea;
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .nav-center {
+            display: flex;
+            justify-content: center;
         }
         
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 50px;
             list-style: none;
         }
         
@@ -69,6 +90,56 @@
         }
         
         .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+        
+        .nav-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+        
+        .nav-social-icon:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .nav-login-btn {
+            padding: 10px 25px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-login-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
             color: #667eea;
         }
         
@@ -325,7 +396,7 @@
         }
         
         .btn-pill {
-            padding: 18px 40px;
+            padding: 12px 32px;
             background: transparent;
             color: #fff;
             text-decoration: none;
@@ -334,7 +405,7 @@
             transition: all 0.3s;
             border: 2px solid rgba(255, 255, 255, 0.9);
             display: inline-block;
-            font-size: 1.1em;
+            font-size: 1em;
             cursor: pointer;
             backdrop-filter: blur(10px);
             text-transform: uppercase;
@@ -764,12 +835,44 @@
         
         /* Responsive */
         @media (max-width: 968px) {
+            .nav-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+            
+            .logo-section {
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+            
+            .nav-center {
+                margin-bottom: 10px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-right {
+                justify-content: center;
+            }
+            
             .frame-hero {
                 grid-template-columns: 1fr;
                 text-align: center;
                 height: auto;
                 min-height: 100vh;
                 padding: 100px 40px 120px;
+            }
+            
+            .hero-content h1 .quest-text {
+                font-size: 1em;
+            }
+            
+            .hero-content h1 .highlight {
+                font-size: 3em;
             }
             
             .action-buttons {
@@ -804,15 +907,6 @@
             .quote-content blockquote {
                 font-size: 1.8em;
             }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .nav-links {
-                gap: 20px;
-            }
         }
         
         @media (max-width: 640px) {
@@ -829,6 +923,15 @@
                 width: 100%;
                 text-align: center;
             }
+            
+            .nav-social {
+                gap: 10px;
+            }
+            
+            .nav-login-btn {
+                font-size: 0.8em;
+                padding: 8px 20px;
+            }
         }
     </style>
 </head>
@@ -836,19 +939,35 @@
     <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="nav-container">
-            <div class="site-title">THE <span>COSMIC</span> FRAMEWORK</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#events">Events</a></li>
-                <li class="dropdown">
-                    <a href="#" style="cursor: pointer;">Discussion ▾</a>
-                    <div class="dropdown-content">
-                        <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
-                        <a href="#membership">Create Free Account</a>
-                        <a href="#membership">Log In</a>
-                    </div>
-                </li>
-            </ul>
+            <!-- Logo Section - Replace "CF" with <img src="your-logo.png" alt="Logo"> -->
+            <div class="logo-section">
+                <div class="logo-placeholder">CF</div>
+            </div>
+            
+            <!-- Centered Navigation Links -->
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li class="dropdown">
+                        <a href="#" style="cursor: pointer;">Discussion ▾</a>
+                        <div class="dropdown-content">
+                            <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
+                            <a href="#membership">Create Free Account</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Right Section: Social Media + Login -->
+            <div class="nav-right">
+                <div class="nav-social">
+                    <a href="#" class="nav-social-icon" title="Twitter">𝕏</a>
+                    <a href="https://github.com/mikeb7777/physics-framework" class="nav-social-icon" title="GitHub" target="_blank">⚡</a>
+                    <a href="mailto:mkbinfo@proton.me" class="nav-social-icon" title="Email">✉</a>
+                </div>
+                <a href="login.html" class="nav-login-btn">Log In</a>
+            </div>
         </div>
     </nav>
 
@@ -862,7 +981,7 @@
         
         <div class="hero-content">
             <h1>
-                The Quest for <br>
+                <span class="quest-text">The Quest for</span>
                 <span class="highlight">The Big TOE</span>
             </h1>
             <p class="subtitle">The COSMIC Framework's Theory of Everything</p>
