@@ -711,79 +711,57 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.5s;
         }
         
-        /* Modal for Gallery Facts */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-content {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #ffd700;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal-close {
+        .gallery-overlay {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2em;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        
+        .gallery-item:hover .gallery-overlay,
+        .gallery-item.active .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-item:hover img,
+        .gallery-item.active img {
+            filter: grayscale(100%) brightness(0.3);
+        }
+        
+        .gallery-overlay h4 {
             color: #ffd700;
-            cursor: pointer;
-            background: none;
-            border: none;
-            transition: transform 0.3s;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
         }
         
-        .modal-close:hover {
-            transform: scale(1.2);
-        }
-        
-        .modal-content h3 {
-            color: #ffd700;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-        
-        .modal-content .source {
+        .gallery-overlay .source {
             color: #b0b0b0;
-            font-size: 0.9em;
+            font-size: 0.8em;
             font-style: italic;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
+            text-align: center;
         }
         
-        .modal-content p {
+        .gallery-overlay p {
             color: #e0e0e0;
-            font-size: 1.15em;
-            line-height: 1.8;
+            font-size: 0.95em;
+            line-height: 1.6;
+            text-align: center;
         }
         
         /* FRAME 6 - Footer */
@@ -1034,6 +1012,14 @@
                 grid-template-columns: repeat(3, 1fr);
             }
             
+            .gallery-overlay h4 {
+                font-size: 1.1em;
+            }
+            
+            .gallery-overlay p {
+                font-size: 0.9em;
+            }
+            
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 60px;
@@ -1104,6 +1090,23 @@
             
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-overlay h4 {
+                font-size: 1em;
+            }
+            
+            .gallery-overlay .source {
+                font-size: 0.7em;
+                margin-bottom: 8px;
+            }
+            
+            .gallery-overlay p {
+                font-size: 0.85em;
+            }
+            
+            .gallery-overlay {
+                padding: 20px;
             }
             
             .action-buttons {
@@ -1263,36 +1266,56 @@
     <!-- FRAME 5: Gallery -->
     <section class="frame-gallery">
         <div class="gallery-grid">
-            <div class="gallery-item" data-fact="1">
+            <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400" alt="Cosmic Structure">
+                <div class="gallery-overlay">
+                    <h4>Information as Fundamental Reality</h4>
+                    <p class="source">Chapter 3, Page 47</p>
+                    <p>The COSMIC Framework proposes that information is not merely a description of reality, but the fundamental substrate from which all physical phenomena emerge.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-fact="2">
+            <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400" alt="Quantum Mechanics">
+                <div class="gallery-overlay">
+                    <h4>Quantum Entanglement</h4>
+                    <p class="source">Chapter 5, Page 89</p>
+                    <p>"The observer effect in quantum mechanics may be better understood as an information exchange process." — Einstein on quantum behavior</p>
+                </div>
             </div>
-            <div class="gallery-item" data-fact="3">
+            <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400" alt="Information Theory">
+                <div class="gallery-overlay">
+                    <h4>The Holographic Principle</h4>
+                    <p class="source">Chapter 7, Page 134</p>
+                    <p>Our three-dimensional reality may be encoded on a two-dimensional surface, much like a hologram. Information density variations create the illusion of dimensionality.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-fact="4">
+            <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=400" alt="Mathematical Constants">
+                <div class="gallery-overlay">
+                    <h4>Universal Mathematical Language</h4>
+                    <p class="source">Chapter 4, Page 62</p>
+                    <p>"The universe is written in the language of mathematics." — Galileo Galilei. Fundamental constants suggest a unified informational architecture.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-fact="5">
+            <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400" alt="Neural Networks">
+                <div class="gallery-overlay">
+                    <h4>Consciousness & Information</h4>
+                    <p class="source">Chapter 9, Page 187</p>
+                    <p>Consciousness may be an intrinsic feature of information processing systems that reach sufficient complexity, bridging physics and the hard problem of consciousness.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-fact="6">
+            <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=400" alt="Cosmic Web">
+                <div class="gallery-overlay">
+                    <h4>Cosmic Web Structure</h4>
+                    <p class="source">Chapter 6, Page 112</p>
+                    <p>The large-scale structure of the universe mirrors information network architectures, suggesting gravitational clustering may be emergent from information density gradients.</p>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Modal for Gallery Facts -->
-    <div id="factModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h3 id="modalTitle"></h3>
-            <p class="source" id="modalSource"></p>
-            <p id="modalText"></p>
-        </div>
-    </div>
 
     <!-- FRAME 6: Footer -->
     <section class="frame-footer" id="footer">
@@ -1339,73 +1362,32 @@
     </section>
 
     <script>
-        // Gallery facts data
-        const facts = {
-            1: {
-                title: "Information as Fundamental Reality",
-                source: "Chapter 3, Page 47",
-                text: "The COSMIC Framework proposes that information is not merely a description of reality, but the fundamental substrate from which all physical phenomena emerge. This revolutionary perspective suggests that spacetime itself may be an emergent property of underlying information processing."
-            },
-            2: {
-                title: "Quantum Entanglement and Information",
-                source: "Chapter 5, Page 89",
-                text: "\"The observer effect in quantum mechanics may be better understood as an information exchange process rather than consciousness 'collapsing' wave functions. This reframing offers testable predictions about quantum behavior.\" — Albert Einstein on quantum mechanics"
-            },
-            3: {
-                title: "The Holographic Principle",
-                source: "Chapter 7, Page 134",
-                text: "Recent advances in theoretical physics support the notion that our three-dimensional reality may be encoded on a two-dimensional surface, much like a hologram. The COSMIC Framework extends this concept to suggest information density variations create the illusion of dimensionality."
-            },
-            4: {
-                title: "Mathematical Constants and Universal Law",
-                source: "Chapter 4, Page 62",
-                text: "\"The universe is written in the language of mathematics.\" — Galileo Galilei. The appearance of fundamental constants across all scales suggests a unified informational architecture underlying physical reality."
-            },
-            5: {
-                title: "Consciousness and Information Processing",
-                source: "Chapter 9, Page 187",
-                text: "The framework proposes that consciousness may be an intrinsic feature of information processing systems that reach sufficient complexity. This offers a bridge between physics and the hard problem of consciousness."
-            },
-            6: {
-                title: "Cosmic Web Structure",
-                source: "Chapter 6, Page 112",
-                text: "The large-scale structure of the universe mirrors information network architectures, suggesting that gravitational clustering may be an emergent phenomenon arising from information density gradients rather than force-based interactions alone."
-            }
-        };
-
-        // Add click handlers to gallery items
+        // Mobile tap to toggle overlay
         document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const factId = this.getAttribute('data-fact');
-                openModal(factId);
+            item.addEventListener('click', function(e) {
+                // Only on mobile/touch devices
+                if ('ontouchstart' in window) {
+                    e.preventDefault();
+                    
+                    // Close all other overlays
+                    document.querySelectorAll('.gallery-item').forEach(other => {
+                        if (other !== this) {
+                            other.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle this overlay
+                    this.classList.toggle('active');
+                }
             });
         });
-
-        function openModal(factId) {
-            const fact = facts[factId];
-            document.getElementById('modalTitle').textContent = fact.title;
-            document.getElementById('modalSource').textContent = fact.source;
-            document.getElementById('modalText').textContent = fact.text;
-            document.getElementById('factModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('factModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside content
-        document.getElementById('factModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
+        
+        // Close overlay when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            if ('ontouchstart' in window && !e.target.closest('.gallery-item')) {
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    item.classList.remove('active');
+                });
             }
         });
     </script>
