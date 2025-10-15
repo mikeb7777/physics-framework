@@ -217,6 +217,75 @@
             border-bottom: none;
         }
         
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            gap: 5px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            padding: 20px;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mobile-menu ul li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .mobile-menu ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-menu ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            display: block;
+        }
+        
         /* FRAME 1 - Hero with Book */
         .frame-hero {
             height: 100vh;
@@ -929,13 +998,12 @@
         /* Responsive */
         @media (max-width: 968px) {
             .nav-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr auto;
                 padding: 0 20px;
             }
             
             .logo-section {
-                justify-content: center;
-                margin-bottom: 10px;
+                justify-content: flex-start;
             }
             
             .logo-placeholder {
@@ -957,18 +1025,13 @@
                 height: 120px;
             }
             
-            .nav-center {
-                margin-bottom: 10px;
-            }
-            
-            .nav-links {
-                gap: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
+            .nav-center,
             .nav-right {
-                justify-content: center;
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
             }
             
             .frame-hero {
@@ -1119,15 +1182,6 @@
                 text-align: center;
             }
             
-            .nav-social {
-                gap: 10px;
-            }
-            
-            .nav-login-btn {
-                font-size: 0.8em;
-                padding: 8px 20px;
-            }
-            
             .quote-content blockquote {
                 font-size: 1.5em;
             }
@@ -1181,8 +1235,28 @@
                 </div>
                 <a href="login.html" class="nav-login-btn">Log In</a>
             </div>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a></li>
+            <li><a href="#membership">Create Free Account</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+        </ul>
+    </div>
 
     <!-- FRAME 1: Hero with Book -->
     <section class="frame-hero">
@@ -1250,7 +1324,7 @@
             <blockquote>
                 "The important thing is not to stop questioning. Curiosity has its own reason for existing."
             </blockquote>
-            <cite>— Albert Einstein</cite>
+            <cite>– Albert Einstein</cite>
         </div>
     </section>
 
@@ -1279,7 +1353,7 @@
                 <div class="gallery-overlay">
                     <h4>Quantum Entanglement</h4>
                     <p class="source">Chapter 5, Page 89</p>
-                    <p>"The observer effect in quantum mechanics may be better understood as an information exchange process." — Einstein on quantum behavior</p>
+                    <p>"The observer effect in quantum mechanics may be better understood as an information exchange process." – Einstein on quantum behavior</p>
                 </div>
             </div>
             <div class="gallery-item">
@@ -1295,7 +1369,7 @@
                 <div class="gallery-overlay">
                     <h4>Universal Mathematical Language</h4>
                     <p class="source">Chapter 4, Page 62</p>
-                    <p>"The universe is written in the language of mathematics." — Galileo Galilei. Fundamental constants suggest a unified informational architecture.</p>
+                    <p>"The universe is written in the language of mathematics." – Galileo Galilei. Fundamental constants suggest a unified informational architecture.</p>
                 </div>
             </div>
             <div class="gallery-item">
@@ -1362,6 +1436,23 @@
     </section>
 
     <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
         // Mobile tap to toggle overlay
         document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', function(e) {
