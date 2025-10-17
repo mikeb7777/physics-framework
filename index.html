@@ -184,39 +184,6 @@
             color: #667eea;
         }
         
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: rgba(20, 20, 30, 0.98);
-            backdrop-filter: blur(10px);
-            min-width: 200px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            text-transform: none;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-        
         /* Hamburger Menu */
         .hamburger {
             display: none;
@@ -1207,15 +1174,9 @@
             <!-- Centered Navigation Links -->
             <div class="nav-center">
                 <ul class="nav-links">
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="legal.html">About</a></li>
                     <li><a href="#events">Events</a></li>
-                    <li class="dropdown">
-                        <a href="#" style="cursor: pointer;">Discussion ▾</a>
-                        <div class="dropdown-content">
-                            <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
-                            <a href="signup.html">Create Free Account</a>
-                        </div>
-                    </li>
+                    <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
                 </ul>
             </div>
             
@@ -1250,9 +1211,9 @@
     <div class="mobile-menu">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="legal.html">About</a></li>
             <li><a href="#events">Events</a></li>
-            <li><a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Discussion</a></li>
+            <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
             <li><a href="login.html">Log In</a></li>
             <li><a href="signup.html">Sign Up</a></li>
             <li><a href="contribute.html">Contribute</a></li>
@@ -1330,7 +1291,7 @@
             <blockquote>
                 "The important thing is not to stop questioning. Curiosity has its own reason for existing."
             </blockquote>
-            <cite>— Albert Einstein</cite>
+            <cite>– Albert Einstein</cite>
         </div>
     </section>
 
@@ -1443,6 +1404,24 @@
     </section>
 
     <script>
+        // Check if user is logged in
+        function isUserLoggedIn() {
+            return localStorage.getItem('userLoggedIn') === 'true';
+        }
+
+        // Handle discussion link click
+        function handleDiscussionClick(event) {
+            event.preventDefault();
+            
+            if (isUserLoggedIn()) {
+                // User is logged in, go to discussions
+                window.location.href = 'discussions.html';
+            } else {
+                // User is not logged in, redirect to login page
+                window.location.href = 'login.html';
+            }
+        }
+
         // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.querySelector('.mobile-menu');

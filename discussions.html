@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussions - The Big TOE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Starfield Background */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .stars-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat;
+        }
+        
+        .stars-layer-1 {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 60px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 50px 50px, #ddd, transparent);
+            background-size: 200px 200px;
+            animation: twinkle 3s ease-in-out infinite, move-stars-1 120s linear infinite;
+        }
+        
+        .stars-layer-2 {
+            background-image:
+                radial-gradient(3px 3px at 100px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 160px, #ddd, transparent);
+            background-size: 300px 300px;
+            animation: twinkle 4s ease-in-out infinite 1s, move-stars-2 180s linear infinite;
+        }
+        
+        @keyframes move-stars-1 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+        
+        @keyframes move-stars-2 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-300px); }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 550px 1fr 350px;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-placeholder {
+            width: 500px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 30px;
+            top: calc(50% - 30px);
+            transform: translateY(-50%);
+            background: 
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(220, 235, 255, 0.6) 20%, rgba(180, 210, 255, 0.25) 45%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(10px);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.8),
+                0 0 50px rgba(220, 235, 255, 0.5),
+                0 0 75px rgba(180, 210, 255, 0.25);
+        }
+        
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-center {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ffd700;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+        
+        .nav-social {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .nav-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2em;
+        }
+        
+        .nav-social-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .nav-social-icon:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .nav-login-btn {
+            padding: 10px 28px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            margin-left: 5px;
+        }
+        
+        .nav-login-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-profile:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffd700;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+        }
+        
+        .user-name {
+            color: #e0e0e0;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .logout-btn {
+            padding: 6px 16px;
+            background: rgba(255, 50, 50, 0.1);
+            border: 1px solid rgba(255, 50, 50, 0.3);
+            border-radius: 15px;
+            color: #ff6666;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 10px;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 50, 50, 0.2);
+            border-color: #ff6666;
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3.5em;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .page-header p {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            font-weight: 300;
+        }
+        
+        /* Discussion Controls */
+        .discussion-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(30, 30, 40, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            color: #e0e0e0;
+            font-size: 0.95em;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+        
+        .new-discussion-btn {
+            padding: 12px 30px;
+            background: #ffd700;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .new-discussion-btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .category-tab {
+            padding: 10px 24px;
+            background: rgba(30, 30, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: #b0b0b0;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 0.9em;
+        }
+        
+        .category-tab:hover {
+            border-color: #ffd700;
+            color: #ffd700;
+        }
+        
+        .category-tab.active {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: #ffd700;
+            color: #ffd700;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+        
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        
+        /* Discussion List */
+        .discussion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .discussion-item {
+            background: rgba(20, 20, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .discussion-item:hover {
+            border-color: #ffd700;
+            transform: translateX(5px);
+        }
+        
+        .discussion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+        
+        .discussion-title {
+            font-size: 1.4em;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .discussion-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            font-size: 0.75em;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .discussion-body {
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .discussion-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.85em;
+            color: #808080;
+        }
+        
+        .discussion-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .discussion-author {
+            color: #ffd700;
+            font-weight: 500;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.8em;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+        
+        .empty-state p {
+            color: #808080;
+            font-size: 1.05em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-container {
+                grid-template-columns: 1fr auto;
+                padding: 0 20px;
+            }
+            
+            .nav-center,
+            .nav-right {
+                display: none;
+            }
+            
+            .main-content {
+                padding: 100px 20px 60px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5em;
+            }
+            
+            .discussion-controls {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="starfield">
+        <div class="stars-layer stars-layer-1"></div>
+        <div class="stars-layer stars-layer-2"></div>
+    </div>
+
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo-section">
+                <div class="logo-placeholder" onclick="window.location.href='index.html'">
+                    <img src="logo.png" alt="The Big TOE Logo">
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="legal.html">About</a></li>
+                    <li><a href="index.html#events">Events</a></li>
+                    <li><a href="discussions.html" class="active">Discussion</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-right" id="navRight">
+                <div class="nav-social">
+                    <a href="#" class="nav-social-icon" title="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="nav-social-icon" title="YouTube">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:mkbinfo@proton.me" class="nav-social-icon" title="Email">✉</a>
+                </div>
+                <!-- This will be dynamically populated based on login status -->
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Community Discussions</h1>
+            <p>Explore ideas, ask questions, and collaborate with fellow researchers</p>
+        </div>
+
+        <div class="discussion-controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search discussions...">
+            </div>
+            <button class="new-discussion-btn" onclick="createNewDiscussion()">+ New Discussion</button>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs">
+            <div class="category-tab active" data-category="all">All Discussions</div>
+            <div class="category-tab" data-category="general">General</div>
+            <div class="category-tab" data-category="questions">Q&A</div>
+            <div class="category-tab" data-category="ideas">Ideas</div>
+            <div class="category-tab" data-category="announcements">Announcements</div>
+        </div>
+
+        <div id="discussionContainer">
+            <div class="loading">Loading discussions</div>
+        </div>
+    </main>
+
+    <script>
+        // GitHub API Configuration
+        const GITHUB_REPO_OWNER = 'mikeb7777';
+        const GITHUB_REPO_NAME = 'physics-framework';
+        const GITHUB_API_URL = 'https://api.github.com';
+
+        // This is a public readonly token - safe to use in frontend for read operations
+        // For write operations, you'll need a backend proxy
+        const GITHUB_TOKEN = null; // Set to null for public access, or use your token
+
+        let allDiscussions = [];
+        let filteredDiscussions = [];
+        let currentCategory = 'all';
+
+        // Fetch discussions from GitHub
+        async function fetchDiscussions() {
+            try {
+                const headers = {
+                    'Accept': 'application/vnd.github.v3+json'
+                };
+                
+                if (GITHUB_TOKEN) {
+                    headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+                }
+
+                // Using GitHub REST API to get discussions
+                const response = await fetch(
+                    `${GITHUB_API_URL}/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/discussions`,
+                    { headers }
+                );
+
+                if (!response.ok) {
+                    // Fallback: If discussions API doesn't work, use issues as fallback
+                    return fetchIssuesAsFallback();
+                }
+
+                const discussions = await response.json();
+                return discussions;
+            } catch (error) {
+                console.error('Error fetching discussions:', error);
+                // Return mock data for demonstration
+                return getMockDiscussions();
+            }
+        }
+
+        // Fallback: Use issues if discussions API is not available
+        async function fetchIssuesAsFallback() {
+            try {
+                const response = await fetch(
+                    `${GITHUB_API_URL}/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/issues?state=all&per_page=50`,
+                    {
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    return getMockDiscussions();
+                }
+
+                const issues = await response.json();
+                
+                // Transform issues to discussion format
+                return issues.map(issue => ({
+                    title: issue.title,
+                    body: issue.body || 'No description provided.',
+                    author: { login: issue.user.login },
+                    createdAt: issue.created_at,
+                    comments: { totalCount: issue.comments },
+                    upvoteCount: issue.reactions['+1'] || 0,
+                    category: { name: issue.labels[0]?.name || 'General' },
+                    url: issue.html_url
+                }));
+            } catch (error) {
+                return getMockDiscussions();
+            }
+        }
+
+        // Mock discussions for demonstration
+        function getMockDiscussions() {
+            return [
+                {
+                    title: "Information-Theoretic Foundations of the Framework",
+                    body: "Exploring how information theory provides the mathematical foundation for understanding consciousness and physical reality...",
+                    author: { login: "researcher01" },
+                    createdAt: "2024-10-15T10:30:00Z",
+                    comments: { totalCount: 15 },
+                    upvoteCount: 23,
+                    category: { name: "General" },
+                    url: "#"
+                },
+                {
+                    title: "Question: How does this relate to quantum mechanics?",
+                    body: "I'm trying to understand the connection between the COSMIC framework and standard quantum theory. Can someone explain?",
+                    author: { login: "curious_student" },
+                    createdAt: "2024-10-16T14:20:00Z",
+                    comments: { totalCount: 8 },
+                    upvoteCount: 12,
+                    category: { name: "Q&A" },
+                    url: "#"
+                },
+                {
+                    title: "Proposal: Experimental Test for Information Density",
+                    body: "I have an idea for testing the information density predictions using gravitational wave detectors...",
+                    author: { login: "experimental_physicist" },
+                    createdAt: "2024-10-17T09:15:00Z",
+                    comments: { totalCount: 22 },
+                    upvoteCount: 35,
+                    category: { name: "Ideas" },
+                    url: "#"
+                },
+                {
+                    title: "New Paper Released: Mathematical Formalism Update",
+                    body: "We've released an updated version of the mathematical framework paper with corrections and new derivations.",
+                    author: { login: "mkbaines" },
+                    createdAt: "2024-10-18T08:00:00Z",
+                    comments: { totalCount: 5 },
+                    upvoteCount: 45,
+                    category: { name: "Announcements" },
+                    url: "#"
+                }
+            ];
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+            return date.toLocaleDateString();
+        }
+
+        // Truncate text
+        function truncateText(text, maxLength = 200) {
+            if (!text) return 'No description provided.';
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+
+        // Render discussions
+        function renderDiscussions(discussions) {
+            const container = document.getElementById('discussionContainer');
+            
+            if (!discussions || discussions.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No discussions found</h3>
+                        <p>Be the first to start a conversation!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="discussion-list">
+                    ${discussions.map(discussion => `
+                        <div class="discussion-item" onclick="openDiscussion('${discussion.url}')">
+                            <div class="discussion-header">
+                                <div>
+                                    <div class="discussion-title">${discussion.title}</div>
+                                    <span class="discussion-category">${discussion.category?.name || 'General'}</span>
+                                </div>
+                            </div>
+                            <div class="discussion-body">
+                                ${truncateText(discussion.body)}
+                            </div>
+                            <div class="discussion-meta">
+                                <span>
+                                    <span class="discussion-author">${discussion.author.login}</span>
+                                </span>
+                                <span>💬 ${discussion.comments.totalCount} replies</span>
+                                <span>👍 ${discussion.upvoteCount} upvotes</span>
+                                <span>📅 ${formatDate(discussion.createdAt)}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Open discussion (for now, alerts - you'll make a detail page)
+        function openDiscussion(url) {
+            if (url === '#') {
+                alert('Discussion detail view coming soon! This will show the full discussion with all replies.');
+            } else {
+                // For now, open in new tab - later you'll render it in your own interface
+                window.open(url, '_blank');
+            }
+        }
+
+        // Filter discussions by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            if (category === 'all') {
+                filteredDiscussions = allDiscussions;
+            } else {
+                filteredDiscussions = allDiscussions.filter(d => 
+                    d.category?.name?.toLowerCase() === category.toLowerCase()
+                );
+            }
+            
+            renderDiscussions(filteredDiscussions);
+        }
+
+        // Search discussions
+        function searchDiscussions(query) {
+            if (!query.trim()) {
+                filterByCategory(currentCategory);
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            const results = (currentCategory === 'all' ? allDiscussions : filteredDiscussions).filter(d =>
+                d.title.toLowerCase().includes(lowerQuery) ||
+                d.body.toLowerCase().includes(lowerQuery)
+            );
+            
+            renderDiscussions(results);
+        }
+
+        // Create new discussion
+        function createNewDiscussion() {
+            alert('To create a new discussion, please log in first. This will be integrated with the login system.');
+            // Later: window.location.href = 'new-discussion.html';
+        }
+
+        // Initialize
+        async function init() {
+            // Fetch discussions
+            allDiscussions = await fetchDiscussions();
+            filteredDiscussions = allDiscussions;
+            renderDiscussions(allDiscussions);
+
+            // Setup category tabs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    filterByCategory(this.dataset.category);
+                });
+            });
+
+            // Setup search
+            const searchInput = document.getElementById('searchInput');
+            let searchTimeout;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => searchDiscussions(this.value), 300);
+            });
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>

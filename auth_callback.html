@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticating... - The Big TOE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .loading-container {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            border-top-color: #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        h2 {
+            color: #ffd700;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            color: #b0b0b0;
+            font-size: 1.05em;
+        }
+        
+        .error-message {
+            background: rgba(255, 50, 50, 0.1);
+            border: 1px solid rgba(255, 50, 50, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #ff6666;
+        }
+        
+        .retry-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #ffd700;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <h2>Completing Sign In...</h2>
+        <p>Please wait while we authenticate your account</p>
+        <div id="errorContainer"></div>
+    </div>
+
+    <script>
+        // IMPORTANT: You need a backend server to exchange the code for a token
+        // GitHub doesn't allow direct token exchange from the browser for security
+        
+        const BACKEND_URL = 'YOUR_BACKEND_URL'; // e.g., 'https://your-server.com/api/github-oauth'
+        
+        async function handleOAuthCallback() {
+            try {
+                // Get the authorization code from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('code');
+                const state = urlParams.get('state');
+                const error = urlParams.get('error');
+                
+                // Check for errors
+                if (error) {
+                    showError(`Authentication failed: ${error}`);
+                    return;
+                }
+                
+                if (!code) {
+                    showError('No authorization code received');
+                    return;
+                }
+                
+                // Exchange code for access token via backend
+                // NOTE: This MUST be done through a backend server, not directly from browser
+                const response = await fetch(`${BACKEND_URL}/exchange-token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ code })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to exchange token');
+                }
+                
+                const data = await response.json();
+                const accessToken = data.access_token;
+                
+                // Get user information
+                const userResponse = await fetch('https://api.github.com/user', {
+                    headers: {
+                        'Authorization': `token ${accessToken}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                
+                if (!userResponse.ok) {
+                    throw new Error('Failed to fetch user information');
+                }
+                
+                const userData = await userResponse.json();
+                
+                // Store authentication data
+                localStorage.setItem('github_token', accessToken);
+                localStorage.setItem('github_username', userData.login);
+                localStorage.setItem('github_avatar', userData.avatar_url);
+                localStorage.setItem('github_name', userData.name || userData.login);
+                localStorage.setItem('userLoggedIn', 'true');
+                
+                // Redirect to original destination or discussions
+                const redirectTo = sessionStorage.getItem('loginRedirect') || 'discussions.html';
+                sessionStorage.removeItem('loginRedirect');
+                
+                window.location.href = redirectTo;
+                
+            } catch (error) {
+                console.error('Authentication error:', error);
+                showError(error.message);
+            }
+        }
+        
+        function showError(message) {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.innerHTML = `
+                <div class="error-message">
+                    <strong>Authentication Error</strong><br>
+                    ${message}
+                    <br><br>
+                    <a href="login.html" class="retry-btn">Try Again</a>
+                </div>
+            `;
+        }
+        
+        // For demonstration purposes (won't work without backend)
+        function demoMode() {
+            // Simulate authentication for demo
+            console.log('Running in demo mode - backend not configured');
+            
+            // Get code from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            
+            if (code) {
+                // Simulate successful login
+                localStorage.setItem('github_token', 'demo_token_' + Date.now());
+                localStorage.setItem('github_username', 'demo_user');
+                localStorage.setItem('github_avatar', 'https://github.com/identicons/demo.png');
+                localStorage.setItem('github_name', 'Demo User');
+                localStorage.setItem('userLoggedIn', 'true');
+                
+                setTimeout(() => {
+                    window.location.href = 'discussions.html';
+                }, 1500);
+            } else {
+                showError('Backend server not configured. See console for setup instructions.');
+                console.log(`
+                    TO COMPLETE GITHUB OAUTH SETUP:
+                    
+                    You need a backend server to exchange the OAuth code for an access token.
+                    
+                    Backend endpoints needed:
+                    
+                    POST /exchange-token
+                    - Accepts: { code: string }
+                    - Returns: { access_token: string }
+                    
+                    Simple Node.js example:
+                    
+                    const express = require('express');
+                    const axios = require('axios');
+                    const app = express();
+                    
+                    app.post('/exchange-token', async (req, res) => {
+                        const { code } = req.body;
+                        
+                        const response = await axios.post('https://github.com/login/oauth/access_token', {
+                            client_id: 'YOUR_CLIENT_ID',
+                            client_secret: 'YOUR_CLIENT_SECRET',
+                            code: code
+                        }, {
+                            headers: { 'Accept': 'application/json' }
+                        });
+                        
+                        res.json(response.data);
+                    });
+                    
+                    See full documentation: https://docs.github.com/en/developers/apps/building-oauth-apps
+                `);
+            }
+        }
+        
+        // Initialize
+        if (BACKEND_URL === 'YOUR_BACKEND_URL') {
+            demoMode();
+        } else {
+            handleOAuthCallback();
+        }
+    </script>
+</body>
+</html>
