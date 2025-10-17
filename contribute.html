@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribute - The Big TOE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Starfield Background */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .stars-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat;
+        }
+        
+        .stars-layer-1 {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 60px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 50px 50px, #ddd, transparent);
+            background-size: 200px 200px;
+            animation: twinkle 3s ease-in-out infinite, move-stars-1 120s linear infinite;
+        }
+        
+        .stars-layer-2 {
+            background-image:
+                radial-gradient(3px 3px at 100px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 160px, #ddd, transparent);
+            background-size: 300px 300px;
+            animation: twinkle 4s ease-in-out infinite 1s, move-stars-2 180s linear infinite;
+        }
+        
+        @keyframes move-stars-1 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+        
+        @keyframes move-stars-2 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-300px); }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 550px 1fr 350px;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-placeholder {
+            width: 500px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+        }
+        
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 30px;
+            top: calc(50% - 30px);
+            transform: translateY(-50%);
+            background: 
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(220, 235, 255, 0.6) 20%, rgba(180, 210, 255, 0.25) 45%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(10px);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.8),
+                0 0 50px rgba(220, 235, 255, 0.5),
+                0 0 75px rgba(180, 210, 255, 0.25);
+        }
+        
+        .logo-placeholder::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            left: 5px;
+            top: calc(50% - 30px);
+            transform: translateY(-50%);
+            background: 
+                linear-gradient(0deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%),
+                linear-gradient(90deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%);
+            z-index: -1;
+            filter: blur(3px);
+            opacity: 0.5;
+        }
+        
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-center {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+        
+        .nav-social {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .nav-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2em;
+        }
+        
+        .nav-social-icon:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .nav-login-btn {
+            padding: 10px 28px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            margin-left: 5px;
+        }
+        
+        .nav-login-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            gap: 5px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 150px 40px 80px;
+        }
+        
+        .contribute-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .contribute-hero h1 {
+            font-size: 3.5em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .contribute-hero .tagline {
+            font-size: 1.625em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .honor-section {
+            background: rgba(20, 20, 30, 0.8);
+            padding: 60px;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .honor-section h2 {
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        
+        .honor-section p {
+            font-size: 1.2em;
+            line-height: 1.9;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+        }
+        
+        .honor-section .emphasis {
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .live-science-box {
+            background: #ffffff;
+            border: 2px solid #d0d0d0;
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .live-science-box h3 {
+            font-size: 2em;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .live-science-box p {
+            font-size: 1.3em;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+        
+        .live-science-box .emphasis {
+            color: #ff0000;
+            font-weight: 600;
+        }
+        
+        .contribute-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .contribute-card {
+            background: rgba(30, 30, 40, 0.8);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .contribute-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+        
+        .contribute-card .amount {
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .contribute-card h4 {
+            font-size: 1.5em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .contribute-card p {
+            font-size: 1.05em;
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        
+        .btn-contribute {
+            padding: 14px 32px;
+            background: transparent;
+            border: 2px solid #ffd700;
+            border-radius: 50px;
+            color: #ffd700;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-contribute:hover {
+            background: #ffd700;
+            color: #0a0a0a;
+            transform: translateY(-2px);
+        }
+        
+        .custom-amount {
+            text-align: center;
+            margin: 50px 0;
+            padding: 40px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 12px;
+        }
+        
+        .custom-amount h3 {
+            font-size: 1.8em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+        
+        .custom-amount p {
+            font-size: 1.15em;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+        }
+        
+        .impact-section {
+            background: rgba(80, 80, 80, 0.08);
+            padding: 50px;
+            border-radius: 12px;
+            margin: 60px 0;
+        }
+        
+        .impact-section h3 {
+            font-size: 2em;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .impact-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .impact-item {
+            text-align: center;
+        }
+        
+        .impact-item .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .impact-item h4 {
+            font-size: 1.3em;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .impact-item p {
+            font-size: 1em;
+            color: #d0d0d0;
+            line-height: 1.6;
+        }
+        
+        .footer-note {
+            text-align: center;
+            padding: 40px;
+            color: #808080;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-container {
+                grid-template-columns: 1fr auto;
+                padding: 0 20px;
+            }
+            
+            .logo-placeholder {
+                width: 300px;
+                height: 60px;
+            }
+            
+            .nav-center,
+            .nav-right {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .contribute-hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .honor-section {
+                padding: 40px 30px;
+            }
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            padding: 20px;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mobile-menu ul li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .mobile-menu ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="starfield">
+        <div class="stars-layer stars-layer-1"></div>
+        <div class="stars-layer stars-layer-2"></div>
+    </div>
+
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <img src="logo.png" alt="The Big TOE Logo">
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#events">Events</a></li>
+                    <li><a href="#">Discussion ▾</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-right">
+                <div class="nav-social">
+                    <a href="https://www.instagram.com" class="nav-social-icon">📷</a>
+                    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" class="nav-social-icon">▶</a>
+                    <a href="mailto:mkbinfo@proton.me" class="nav-social-icon">✉</a>
+                </div>
+                <a href="index.html" class="nav-login-btn">Home</a>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+        </ul>
+    </div>
+
+    <main class="main-content">
+        <div class="contribute-hero">
+            <h1>Support the Quest</h1>
+            <p class="tagline">Be Part of Live Science in Action</p>
+        </div>
+        
+        <div class="live-science-box">
+            <h3>You Are a Participant</h3>
+            <p>This is not science conducted behind closed doors in ivory towers. <span class="emphasis">You are an active participant</span> in this living experiment. Your engagement, questions, and support help shape and advance this research in real-time.</p>
+        </div>
+        
+        <div class="honor-section">
+            <h2>Honor System Distribution</h2>
+            <p>This book operates on an <span class="emphasis">honor system</span>. If you cannot afford to pay (such as students, those experiencing financial hardship, or anyone for whom payment would be a burden) then this is your copy, <span class="emphasis">free of charge, with gratitude</span>.</p>
+            
+            <p>Download it, read it, share it.</p>
+            
+            <p>If you can afford to contribute, please pay what you feel this work is worth to you. Your contribution supports <span class="emphasis">experimental validation, laboratory work, precision measurements, and collaborative research</span> to test whether these hypotheses match reality.</p>
+            
+            <p>No one will pursue you for payment. This is about <span class="emphasis">advancing understanding</span>, not enforcing transactions.</p>
+        </div>
+        
+        <div class="contribute-options">
+            <div class="contribute-card">
+                <div class="amount">FREE</div>
+                <h4>Student / Hardship</h4>
+                <p>Knowledge should be accessible to all. Download the book and join the community without any financial barrier.</p>
+                <a href="framework-book.pdf" class="btn-contribute" download>Download Book</a>
+            </div>
+            
+            <div class="contribute-card">
+                <div class="amount">$20</div>
+                <h4>Supporter</h4>
+                <p>Cover the basic costs of maintaining this project and help keep the research accessible to everyone.</p>
+                <a href="#payment" class="btn-contribute">Contribute $20</a>
+            </div>
+            
+            <div class="contribute-card">
+                <div class="amount">$50+</div>
+                <h4>Patron</h4>
+                <p>Enable deeper research, support experimental validation, and help fund collaborative scientific efforts.</p>
+                <a href="#payment" class="btn-contribute">Contribute $50+</a>
+            </div>
+        </div>
+        
+        <div class="custom-amount">
+            <h3>Choose Your Own Contribution</h3>
+            <p>Every contribution, regardless of size, directly supports the advancement of this research and keeps it openly accessible to all.</p>
+            <a href="#payment" class="btn-contribute">Custom Amount</a>
+        </div>
+        
+        <div class="impact-section">
+            <h3>Your Contribution Enables</h3>
+            <div class="impact-list">
+                <div class="impact-item">
+                    <div class="icon">🔬</div>
+                    <h4>Experimental Validation</h4>
+                    <p>Testing predictions through rigorous scientific experiments</p>
+                </div>
+                <div class="impact-item">
+                    <div class="icon">📊</div>
+                    <h4>Data Analysis</h4>
+                    <p>Processing and analyzing experimental results and observations</p>
+                </div>
+                <div class="impact-item">
+                    <div class="icon">🤝</div>
+                    <h4>Collaboration</h4>
+                    <p>Building partnerships with researchers and institutions worldwide</p>
+                </div>
+                <div class="impact-item">
+                    <div class="icon">📚</div>
+                    <h4>Open Access</h4>
+                    <p>Keeping all findings and publications freely available to everyone</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <p>Questions about contributions? Contact us at <a href="mailto:mkbinfo@proton.me" style="color: #ffd700; text-decoration: none;">mkbinfo@proton.me</a></p>
+            <p>All contributions are processed securely. Your support is deeply appreciated.</p>
+        </div>
+    </main>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Payment handling (placeholder)
+        document.querySelectorAll('a[href="#payment"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Payment processing will be integrated here. For now, please contact mkbinfo@proton.me to contribute.');
+            });
+        });
+    </script>
+</body>
+</html>

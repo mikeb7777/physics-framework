@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - The Big TOE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Starfield Background */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .stars-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat;
+        }
+        
+        .stars-layer-1 {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 60px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 50px 50px, #ddd, transparent);
+            background-size: 200px 200px;
+            animation: twinkle 3s ease-in-out infinite, move-stars-1 120s linear infinite;
+        }
+        
+        .stars-layer-2 {
+            background-image:
+                radial-gradient(3px 3px at 100px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 160px, #ddd, transparent);
+            background-size: 300px 300px;
+            animation: twinkle 4s ease-in-out infinite 1s, move-stars-2 180s linear infinite;
+        }
+        
+        @keyframes move-stars-1 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+        
+        @keyframes move-stars-2 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-300px); }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 550px 1fr 350px;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-placeholder {
+            width: 500px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+        }
+        
+        .logo-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 30px;
+            top: calc(50% - 30px);
+            transform: translateY(-50%);
+            background: 
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(220, 235, 255, 0.6) 20%, rgba(180, 210, 255, 0.25) 45%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(10px);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.8),
+                0 0 50px rgba(220, 235, 255, 0.5),
+                0 0 75px rgba(180, 210, 255, 0.25);
+        }
+        
+        .logo-placeholder::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            left: 5px;
+            top: calc(50% - 30px);
+            transform: translateY(-50%);
+            background: 
+                linear-gradient(0deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%),
+                linear-gradient(90deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%);
+            z-index: -1;
+            filter: blur(3px);
+            opacity: 0.5;
+        }
+        
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-center {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+        
+        .nav-social {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .nav-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2em;
+        }
+        
+        .nav-social-icon:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .nav-login-btn {
+            padding: 10px 28px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            margin-left: 5px;
+        }
+        
+        .nav-login-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            gap: 5px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            padding: 20px;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mobile-menu ul li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .mobile-menu ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            display: block;
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 150px 40px 80px;
+        }
+        
+        .signup-container {
+            background: rgba(20, 20, 30, 0.9);
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        
+        .signup-container h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .signup-container .subtitle {
+            font-size: 1.1em;
+            color: #b0b0b0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #e0e0e0;
+            font-size: 1.05em;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 3px;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        
+        .form-group select {
+            cursor: pointer;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .password-hint {
+            font-size: 0.85em;
+            color: #808080;
+            margin-top: 5px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 30px 0;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-group label {
+            color: #d0d0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label a {
+            color: #ffd700;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .checkbox-group label a:hover {
+            color: #ffed4e;
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #ffd700;
+            border: none;
+            border-radius: 50px;
+            color: #0a0a0a;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .submit-btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .divider {
+            text-align: center;
+            color: #808080;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .divider::before {
+            left: 0;
+        }
+        
+        .divider::after {
+            right: 0;
+        }
+        
+        .login-link {
+            text-align: center;
+            color: #d0d0d0;
+            font-size: 1em;
+        }
+        
+        .login-link a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .login-link a:hover {
+            color: #ffed4e;
+        }
+        
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #51cf66;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-container {
+                grid-template-columns: 1fr auto;
+                padding: 0 20px;
+            }
+            
+            .logo-placeholder {
+                width: 300px;
+                height: 60px;
+            }
+            
+            .nav-center,
+            .nav-right {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .main-content {
+                padding: 120px 20px 60px;
+            }
+            
+            .signup-container {
+                padding: 40px 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="starfield">
+        <div class="stars-layer stars-layer-1"></div>
+        <div class="stars-layer stars-layer-2"></div>
+    </div>
+
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <img src="logo.png" alt="The Big TOE Logo">
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#events">Events</a></li>
+                    <li><a href="#">Discussion ▾</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-right">
+                <div class="nav-social">
+                    <a href="https://www.instagram.com" class="nav-social-icon">📷</a>
+                    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" class="nav-social-icon">▶</a>
+                    <a href="mailto:mkbinfo@proton.me" class="nav-social-icon">✉</a>
+                </div>
+                <a href="index.html" class="nav-login-btn">Home</a>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+        </ul>
+    </div>
+
+    <main class="main-content">
+        <div class="signup-container">
+            <h1>Join the Quest</h1>
+            <p class="subtitle">Become part of the COSMIC community and participate in live science</p>
+            
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+            
+            <form id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="screenName">Screen Name / Username <span class="required">*</span></label>
+                    <input type="text" id="screenName" name="screenName" required placeholder="Choose your display name">
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" required placeholder="Create a strong password">
+                    <p class="password-hint">At least 8 characters, including uppercase, lowercase, and numbers</p>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Re-enter your password">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="">Select your country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="JP">Japan</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest">Primary Interest</label>
+                        <select id="interest" name="interest">
+                            <option value="">Select your interest</option>
+                            <option value="physics">Physics</option>
+                            <option value="information">Information Theory</option>
+                            <option value="consciousness">Consciousness Studies</option>
+                            <option value="cosmology">Cosmology</option>
+                            <option value="quantum">Quantum Mechanics</option>
+                            <option value="research">Research Collaboration</option>
+                            <option value="general">General Interest</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter" name="newsletter" checked>
+                    <label for="newsletter">Yes, I want to receive updates about new discoveries, events, and community discussions</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="legal.html#terms" target="_blank">Terms of Service</a> and <a href="legal.html#privacy" target="_blank">Privacy Policy</a> <span class="required">*</span></label>
+                </div>
+                
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            
+            <div class="divider">OR</div>
+            
+            <p class="login-link">Already have an account? <a href="login.html">Log in here</a></p>
+        </div>
+    </main>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Signup form handling
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Clear previous messages
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            // Validation
+            if (password !== confirmPassword) {
+                showMessage('error', 'Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showMessage('error', 'Password must be at least 8 characters');
+                return;
+            }
+            
+            if (!terms) {
+                showMessage('error', 'Please accept the Terms of Service and Privacy Policy');
+                return;
+            }
+            
+            // Success - in production, this would send to backend
+            showMessage('success', 'Welcome to the COSMIC community! Check your email to verify your account.');
+            
+            // In production, you would send form data to your backend here
+            // fetch('/api/signup', { method: 'POST', body: JSON.stringify(formData) })
+        });
+
+        function showMessage(type, message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            if (type === 'error') {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            } else {
+                successDiv.textContent = message;
+                successDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
