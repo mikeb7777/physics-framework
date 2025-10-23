@@ -399,6 +399,11 @@
             transform: translateY(-2px);
         }
         
+        .paypal-button-container {
+            margin-top: 20px;
+            min-height: 50px;
+        }
+        
         .custom-amount {
             text-align: center;
             margin: 50px 0;
@@ -628,21 +633,21 @@
                 <div class="amount">$20</div>
                 <h4>Supporter</h4>
                 <p>Cover the basic costs of maintaining this project and help keep the research accessible to everyone.</p>
-                <a href="#payment" class="btn-contribute">Contribute $20</a>
+                <div id="paypal-container-20" class="paypal-button-container"></div>
             </div>
             
             <div class="contribute-card">
                 <div class="amount">$50+</div>
                 <h4>Patron</h4>
                 <p>Enable deeper research, support experimental validation, and help fund collaborative scientific efforts.</p>
-                <a href="#payment" class="btn-contribute">Contribute $50+</a>
+                <div id="paypal-container-50" class="paypal-button-container"></div>
             </div>
         </div>
         
         <div class="custom-amount">
             <h3>Choose Your Own Contribution</h3>
             <p>Every contribution, regardless of size, directly supports the advancement of this research and keeps it openly accessible to all.</p>
-            <a href="#payment" class="btn-contribute">Custom Amount</a>
+            <div id="paypal-container-custom" class="paypal-button-container"></div>
         </div>
         
         <div class="impact-section">
@@ -673,9 +678,12 @@
         
         <div class="footer-note">
             <p>Questions about contributions? Contact us at <a href="mailto:mkbinfo@proton.me" style="color: #ffd700; text-decoration: none;">mkbinfo@proton.me</a></p>
-            <p>All contributions are processed securely. Your support is deeply appreciated.</p>
+            <p>All contributions are processed securely through PayPal. Your support is deeply appreciated.</p>
         </div>
     </main>
+
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAayQDLoTF4n5_YavgkSMVahYRXeRXOuiNuvTZ7ksAa9QrWh6TnQatmfNoLDcHFb0ENu6hUyjGh94f7E8&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
 
     <script>
         // Check if user is logged in
@@ -688,10 +696,8 @@
             event.preventDefault();
             
             if (isUserLoggedIn()) {
-                // User is logged in, go to discussions
                 window.location.href = 'discussions.html';
             } else {
-                // User is not logged in, redirect to login page
                 window.location.href = 'login.html';
             }
         }
@@ -711,13 +717,49 @@
             });
         });
         
-        // Payment handling (placeholder)
-        document.querySelectorAll('a[href="#payment"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Payment processing will be integrated here. For now, please contact mkbinfo@proton.me to contribute.');
-            });
-        });
+        // PayPal Button - You provided the button ID: 4FM5PMUS387MC
+        // This loads your button in the $50+ card
+        paypal.HostedButtons({
+            hostedButtonId: "4FM5PMUS387MC",
+        }).render("#paypal-container-50");
+        
+        // For the other amounts, you'll need to create additional buttons in PayPal
+        // Instructions below in the console
+        
+        console.log(`
+            PAYPAL BUTTON SETUP:
+            
+            Your $50+ button is working! To add the other payment options:
+            
+            1. Go to: https://www.paypal.com/buttons/
+            2. Create a new button for $20 (fixed amount)
+            3. Copy the hostedButtonId (similar to: 4FM5PMUS387MC)
+            4. Paste it in the code where it says BUTTON_ID_FOR_20
+            
+            5. Create another button for custom amounts (let user choose)
+            6. Copy that hostedButtonId
+            7. Paste it where it says BUTTON_ID_FOR_CUSTOM
+            
+            Current buttons:
+            - FREE: Download link (no button needed)
+            - $20: Needs button ID
+            - $50+: Working! (4FM5PMUS387MC)
+            - Custom: Needs button ID
+        `);
+        
+        // Placeholder for $20 button - replace BUTTON_ID_FOR_20 with your actual button ID
+        /*
+        paypal.HostedButtons({
+            hostedButtonId: "BUTTON_ID_FOR_20",
+        }).render("#paypal-container-20");
+        */
+        
+        // Placeholder for custom amount button - replace BUTTON_ID_FOR_CUSTOM with your actual button ID
+        /*
+        paypal.HostedButtons({
+            hostedButtonId: "BUTTON_ID_FOR_CUSTOM",
+        }).render("#paypal-container-custom");
+        */
     </script>
 </body>
 </html>
