@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Consent Banner - The Big TOE</title>
+</head>
+<body>
+
+<!-- COOKIE CONSENT BANNER -->
+<!-- Add this code just before the closing </body> tag on all pages -->
+
+<style>
+/* Cookie Consent Banner Styles */
+.cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(10px);
+    border-top: 2px solid rgba(255, 215, 0, 0.3);
+    padding: 25px;
+    z-index: 10000;
+    display: none; /* Hidden by default, shown by JavaScript if needed */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.cookie-consent-banner.show {
+    display: block;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cookie-consent-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.cookie-consent-text {
+    flex: 1;
+    color: #e0e0e0;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.cookie-consent-text h3 {
+    color: #ffd700;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.cookie-consent-text p {
+    margin-bottom: 8px;
+}
+
+.cookie-consent-text a {
+    color: #ffd700;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.cookie-consent-text a:hover {
+    border-bottom-color: #ffd700;
+}
+
+.cookie-consent-buttons {
+    display: flex;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.cookie-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cookie-btn-accept {
+    background: #ffd700;
+    color: #0a0a0a;
+}
+
+.cookie-btn-accept:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.cookie-btn-decline {
+    background: transparent;
+    color: #e0e0e0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.cookie-btn-decline:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cookie-consent-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cookie-consent-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cookie-btn {
+        width: 100%;
+    }
+}
+</style>
+
+<!-- Cookie Consent Banner HTML -->
+<div class="cookie-consent-banner" id="cookieConsentBanner">
+    <div class="cookie-consent-content">
+        <div class="cookie-consent-text">
+            <h3>🍪 Cookie Notice</h3>
+            <p>We use only essential cookies required for basic website functionality (login sessions, security). We do NOT use tracking, analytics, or advertising cookies. Your privacy matters to us.</p>
+            <p><a href="legal.html#privacy">Learn more in our Privacy Policy</a></p>
+        </div>
+        <div class="cookie-consent-buttons">
+            <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Accept Essential Cookies</button>
+            <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()">Decline</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Cookie Consent Banner JavaScript
+(function() {
+    // Check if user has already made a choice
+    const cookieConsent = localStorage.getItem('cookieConsent');
+    
+    // If no choice has been made, show the banner after a short delay
+    if (!cookieConsent) {
+        setTimeout(function() {
+            const banner = document.getElementById('cookieConsentBanner');
+            if (banner) {
+                banner.classList.add('show');
+            }
+        }, 1000); // Show after 1 second
+    }
+})();
+
+function acceptCookies() {
+    // Store the user's consent
+    localStorage.setItem('cookieConsent', 'accepted');
+    
+    // Hide the banner
+    const banner = document.getElementById('cookieConsentBanner');
+    if (banner) {
+        banner.style.animation = 'slideDown 0.3s ease-out';
+        setTimeout(function() {
+            banner.classList.remove('show');
+            banner.style.display = 'none';
+        }, 300);
+    }
+    
+    // Here you would initialize any cookies that require consent
+    // Since we only use essential cookies, nothing additional is needed
+    console.log('Essential cookies accepted');
+}
+
+function declineCookies() {
+    // Store the user's choice to decline
+    localStorage.setItem('cookieConsent', 'declined');
+    
+    // Hide the banner
+    const banner = document.getElementById('cookieConsentBanner');
+    if (banner) {
+        banner.style.animation = 'slideDown 0.3s ease-out';
+        setTimeout(function() {
+            banner.classList.remove('show');
+            banner.style.display = 'none';
+        }, 300);
+    }
+    
+    // Disable all non-essential cookies
+    // Since we only use essential cookies, we should still allow basic functionality
+    // but inform the user that some features may be limited
+    console.log('Non-essential cookies declined');
+    
+    // Optional: Show a brief message that some features may be limited
+    alert('You have declined cookies. Please note that some website features (like staying logged in) may be limited.');
+}
+
+// Animation for hiding the banner
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideDown {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
+
+<!--
+INSTALLATION INSTRUCTIONS:
+========================
+
+1. Copy the entire <style> block and paste it in the <head> section of each page, or add to your main CSS file.
+
+2. Copy the <div class="cookie-consent-banner"> HTML block and paste it just before the closing </body> tag on each page.
+
+3. Copy the entire <script> block and paste it just before the closing </body> tag (after the HTML).
+
+4. Make sure the link to your Privacy Policy (legal.html#privacy) is correct.
+
+5. Test on different devices to ensure responsive design works properly.
+
+6. The banner will automatically:
+   - Show after 1 second when a user first visits
+   - Remember the user's choice using localStorage
+   - Not show again if they've already made a choice
+   - Work without cookies for basic functionality
+
+CUSTOMIZATION:
+==============
+- Adjust colors in the CSS to match your site's design
+- Modify the delay time (currently 1000ms = 1 second)
+- Change button text if desired
+- Adjust animation speed (currently 0.4s)
+
+GDPR/CCPA COMPLIANCE:
+===================
+This banner meets basic requirements for:
+✓ Informing users about cookies
+✓ Explaining what cookies are used for
+✓ Providing a link to full Privacy Policy
+✓ Giving users choice to accept or decline
+✓ Remembering user preferences
+
+Since you only use ESSENTIAL cookies (no tracking/analytics),
+this simplified approach is appropriate and privacy-friendly.
+-->

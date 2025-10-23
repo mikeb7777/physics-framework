@@ -138,7 +138,9 @@
             transform: translateY(-50%);
             background: 
                 linear-gradient(0deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%),
-                linear-gradient(90deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%);
+                linear-gradient(90deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%),
+                linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.12) 48.5%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.12) 51.5%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, rgba(255, 255, 255, 0.12) 48.5%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.12) 51.5%, transparent 55%);
             z-index: -1;
             filter: blur(3px);
             opacity: 0.5;
@@ -148,301 +150,441 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            position: relative;
-            z-index: 1;
         }
         
         .nav-center {
             display: flex;
             justify-content: center;
+            gap: 45px;
         }
         
-        .nav-links {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-        }
-        
-        .nav-links a {
+        .nav-link {
             color: #e0e0e0;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.05em;
+            letter-spacing: 0.3px;
             transition: color 0.3s;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            position: relative;
         }
         
-        .nav-links a:hover {
-            color: #ffd700;
+        .nav-link:hover {
+            color: #fff;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
         }
         
         .nav-right {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 20px;
+            gap: 25px;
         }
         
         .nav-social {
             display: flex;
-            gap: 12px;
+            gap: 18px;
+            align-items: center;
         }
         
         .nav-social-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1a1a1a;
+            color: #e0e0e0;
+            font-size: 1.3em;
+            transition: color 0.3s;
             text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.2em;
-        }
-        
-        .nav-social-icon svg {
-            width: 18px;
-            height: 18px;
         }
         
         .nav-social-icon:hover {
-            background: #667eea;
-            color: white;
+            color: #ffd700;
         }
         
         .nav-login-btn {
             padding: 10px 28px;
             background: transparent;
-            color: #fff;
-            text-decoration: none;
+            border: 2px solid #ffd700;
             border-radius: 50px;
-            font-weight: 600;
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 700;
             transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
-            text-transform: uppercase;
+            font-size: 1em;
             letter-spacing: 0.5px;
-            white-space: nowrap;
-            margin-left: 5px;
         }
         
         .nav-login-btn:hover {
-            background: rgba(255, 255, 255, 0.95);
-            color: #667eea;
+            background: #ffd700;
+            color: #0a0a0a;
+            transform: translateY(-2px);
         }
         
+        /* Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
+            gap: 5px;
             cursor: pointer;
             padding: 5px;
-            gap: 5px;
         }
         
         .hamburger span {
             width: 25px;
             height: 3px;
             background: #ffd700;
-            border-radius: 3px;
+            border-radius: 2px;
             transition: all 0.3s;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 131px;
+            left: -100%;
+            width: 100%;
+            height: calc(100% - 131px);
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            transition: left 0.3s;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            left: 0;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            padding: 40px 20px;
+        }
+        
+        .mobile-menu ul li {
+            margin: 20px 0;
+        }
+        
+        .mobile-menu ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: block;
+            padding: 15px 20px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu ul li a:hover {
+            color: #ffd700;
+            border-left-color: #ffd700;
+            padding-left: 30px;
         }
         
         /* Main Content */
-        .main-content {
+        .contribute-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 180px 40px 100px;
             position: relative;
             z-index: 1;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 150px 40px 80px;
         }
         
-        .contribute-hero {
+        .page-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         
-        .contribute-hero h1 {
-            font-size: 3.5em;
-            color: #ffffff;
+        .page-title h1 {
+            font-size: 4em;
+            color: #fff;
             margin-bottom: 20px;
-        }
-        
-        .contribute-hero .tagline {
-            font-size: 1.3em;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-        
-        .honor-section {
-            background: rgba(20, 20, 30, 0.8);
-            padding: 60px;
-            border-radius: 12px;
-            margin-bottom: 50px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .honor-section h2 {
-            font-size: 2.5em;
-            color: #ffd700;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-        
-        .honor-section p {
-            font-size: 1.2em;
-            line-height: 1.9;
-            color: #e0e0e0;
-            margin-bottom: 25px;
-        }
-        
-        .honor-section .emphasis {
-            font-weight: 600;
-            color: #ffffff;
-        }
-        
-        .live-science-box {
-            background: #ffffff;
-            border: 2px solid #d0d0d0;
-            padding: 40px;
-            margin: 40px 0;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .live-science-box h3 {
-            font-size: 2em;
-            color: #1a1a1a;
-            margin-bottom: 20px;
-            text-transform: uppercase;
             letter-spacing: 2px;
-        }
-        
-        .live-science-box p {
-            font-size: 1.3em;
-            color: #1a1a1a;
-            line-height: 1.8;
-            margin-bottom: 0;
-        }
-        
-        .live-science-box .emphasis {
-            color: #ff0000;
-            font-weight: 600;
-        }
-        
-        .contribute-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }
-        
-        .contribute-card {
-            background: rgba(30, 30, 40, 0.8);
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .contribute-card:hover {
-            border-color: #ffd700;
-            transform: translateY(-5px);
-        }
-        
-        .contribute-card .amount {
-            font-size: 2.5em;
-            color: #ffd700;
-            margin-bottom: 10px;
             font-weight: 700;
         }
         
-        .contribute-card h4 {
-            font-size: 1.5em;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-        
-        .contribute-card p {
-            font-size: 1.05em;
+        .page-title p {
+            font-size: 1.3em;
             color: #b0b0b0;
-            line-height: 1.7;
-            margin-bottom: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
         }
         
-        .btn-contribute {
-            padding: 14px 32px;
+        /* Contribution Options */
+        .contribution-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .contribution-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 50px 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contribution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .contribution-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,215,0,0.3);
+            transform: translateY(-5px);
+        }
+        
+        .contribution-card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .card-header h3 {
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .card-header .amount {
+            font-size: 3em;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .card-header .period {
+            font-size: 1em;
+            color: #b0b0b0;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 35px;
+        }
+        
+        .features li {
+            padding: 12px 0;
+            color: #d0d0d0;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .features li::before {
+            content: '✓';
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
             background: transparent;
             border: 2px solid #ffd700;
             border-radius: 50px;
             color: #ffd700;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             text-decoration: none;
-            display: inline-block;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            cursor: pointer;
+            letter-spacing: 0.5px;
         }
         
-        .btn-contribute:hover {
+        .download-btn:hover {
             background: #ffd700;
             color: #0a0a0a;
             transform: translateY(-2px);
         }
         
-        .paypal-button-container {
-            margin-top: 20px;
-            min-height: 50px;
+        /* Combined Payment Card */
+        .payment-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 20px;
+            padding: 50px 40px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .custom-amount {
-            text-align: center;
-            margin: 50px 0;
-            padding: 40px;
-            background: rgba(255, 215, 0, 0.05);
-            border-radius: 12px;
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
         }
         
-        .custom-amount h3 {
-            font-size: 1.8em;
-            color: #ffd700;
-            margin-bottom: 20px;
-        }
-        
-        .custom-amount p {
-            font-size: 1.15em;
-            color: #e0e0e0;
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
             margin-bottom: 30px;
         }
         
-        .impact-section {
-            background: rgba(80, 80, 80, 0.08);
-            padding: 50px;
-            border-radius: 12px;
-            margin: 60px 0;
+        .payment-tier {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            transition: all 0.3s;
         }
         
-        .impact-section h3 {
+        .payment-tier:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,215,0,0.3);
+        }
+        
+        .payment-tier h3 {
             font-size: 2em;
             color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .payment-tier .amount {
+            font-size: 2.5em;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .payment-tier ul {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .payment-tier ul li {
+            padding: 8px 0;
+            color: #d0d0d0;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .payment-tier ul li::before {
+            content: '✓';
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .custom-contribution {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255,215,0,0.05);
+            border-radius: 15px;
             margin-bottom: 30px;
+        }
+        
+        .custom-contribution p {
+            color: #ffd700;
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .custom-contribution small {
+            color: #b0b0b0;
+            font-size: 0.9em;
+        }
+        
+        .eu-waiver {
+            background: rgba(255,215,0,0.05);
+            border: 1px solid rgba(255,215,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .eu-waiver label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            color: #e0e0e0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .eu-waiver input[type="checkbox"] {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .paypal-button-container {
             text-align: center;
         }
         
-        .impact-list {
+        /* Impact Section */
+        .impact-section {
+            background: rgba(255,215,0,0.03);
+            border: 2px solid rgba(255,215,0,0.2);
+            border-radius: 20px;
+            padding: 60px 50px;
+            margin-bottom: 80px;
+        }
+        
+        .impact-section h2 {
+            text-align: center;
+            font-size: 2.8em;
+            color: #ffd700;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        
+        .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
         }
         
         .impact-item {
@@ -451,27 +593,91 @@
         
         .impact-item .icon {
             font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .impact-item h3 {
+            font-size: 1.5em;
+            color: #fff;
             margin-bottom: 15px;
         }
         
-        .impact-item h4 {
-            font-size: 1.3em;
+        .impact-item p {
+            color: #b0b0b0;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        /* Legal Compliance Section */
+        .legal-compliance {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .legal-compliance h2 {
+            font-size: 1.8em;
             color: #ffd700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .legal-compliance-content {
+            font-size: 0.9em;
+            color: #ffffff;
+            line-height: 1.8;
+        }
+        
+        .legal-compliance-content h3 {
+            color: #ffd700;
+            font-size: 1.1em;
+            margin-top: 25px;
             margin-bottom: 10px;
         }
         
-        .impact-item p {
-            font-size: 1em;
-            color: #d0d0d0;
-            line-height: 1.6;
+        .legal-compliance-content p {
+            margin-bottom: 15px;
         }
         
+        .legal-compliance-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .legal-compliance-content ul li {
+            margin-bottom: 8px;
+        }
+        
+        .legal-compliance-content a {
+            color: #ffd700;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .legal-compliance-content a:hover {
+            border-bottom-color: #ffd700;
+        }
+        
+        /* Footer Note */
         .footer-note {
             text-align: center;
-            padding: 40px;
+            padding: 40px 20px;
             color: #808080;
-            font-size: 1em;
-            line-height: 1.8;
+            font-size: 0.95em;
+        }
+        
+        .footer-note a {
+            color: #ffd700;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .footer-note a:hover {
+            border-bottom-color: #ffd700;
         }
         
         /* Responsive */
@@ -479,11 +685,6 @@
             .nav-container {
                 grid-template-columns: 1fr auto;
                 padding: 0 20px;
-            }
-            
-            .logo-placeholder {
-                width: 300px;
-                height: 60px;
             }
             
             .nav-center,
@@ -495,49 +696,40 @@
                 display: flex;
             }
             
-            .contribute-hero h1 {
-                font-size: 2.5em;
+            .contribution-options {
+                grid-template-columns: 1fr;
             }
             
-            .honor-section {
-                padding: 40px 30px;
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title h1 {
+                font-size: 2.5em;
             }
         }
         
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 90px;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 999;
-            padding: 20px;
-        }
-        
-        .mobile-menu.active {
-            display: block;
-        }
-        
-        .mobile-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .mobile-menu ul li {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .mobile-menu ul li a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 500;
-            display: block;
+        @media (max-width: 640px) {
+            .contribute-container {
+                padding: 140px 20px 60px;
+            }
+            
+            .contribution-card,
+            .payment-card {
+                padding: 30px 25px;
+            }
+            
+            .page-title h1 {
+                font-size: 2em;
+            }
+            
+            .page-title p {
+                font-size: 1.1em;
+            }
         }
     </style>
 </head>
@@ -547,30 +739,29 @@
         <div class="stars-layer stars-layer-2"></div>
     </div>
 
+    <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="nav-container">
             <div class="logo-section">
-                <div class="logo-placeholder">
+                <a href="index.html" class="logo-placeholder">
                     <img src="logo.png" alt="The Big TOE Logo">
-                </div>
+                </a>
             </div>
             
             <div class="nav-center">
-                <ul class="nav-links">
-                    <li><a href="legal.html">About</a></li>
-                    <li><a href="index.html#events">Events</a></li>
-                    <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
-                </ul>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="legal.html" class="nav-link">About</a>
+                <a href="#" onclick="handleDiscussionClick(event)" class="nav-link">Discussion</a>
             </div>
             
             <div class="nav-right">
                 <div class="nav-social">
-                    <a href="#" class="nav-social-icon" title="Instagram">
+                    <a href="https://www.instagram.com" class="nav-social-icon" title="Instagram">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                     </a>
-                    <a href="#" class="nav-social-icon" title="YouTube">
+                    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" class="nav-social-icon" title="YouTube" target="_blank">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                         </svg>
@@ -580,6 +771,7 @@
                 <a href="login.html" class="nav-login-btn">Log In</a>
             </div>
             
+            <!-- Hamburger Menu -->
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -588,104 +780,172 @@
         </div>
     </nav>
     
+    <!-- Mobile Menu -->
     <div class="mobile-menu">
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="legal.html">About</a></li>
-            <li><a href="index.html#events">Events</a></li>
             <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
             <li><a href="login.html">Log In</a></li>
-            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
         </ul>
     </div>
 
-    <main class="main-content">
-        <div class="contribute-hero">
-            <h1>Support the Quest</h1>
-            <p class="tagline">Be Part of Live Science in Action</p>
+    <div class="contribute-container">
+        <div class="page-title">
+            <h1>Support The Big TOE</h1>
+            <p>Your contribution helps keep this research freely available while supporting ongoing development of the COSMIC Framework.</p>
         </div>
-        
-        <div class="live-science-box">
-            <h3>You Are a Participant</h3>
-            <p>This is not science conducted behind closed doors in ivory towers. <span class="emphasis">You are an active participant</span> in this living experiment. Your engagement, questions, and support help shape and advance this research in real-time.</p>
-        </div>
-        
-        <div class="honor-section">
-            <h2>Honor System Distribution</h2>
-            <p>This book operates on an <span class="emphasis">honor system</span>. If you cannot afford to pay (such as students, those experiencing financial hardship, or anyone for whom payment would be a burden) then this is your copy, <span class="emphasis">free of charge, with gratitude</span>.</p>
-            
-            <p>Download it, read it, share it.</p>
-            
-            <p>If you can afford to contribute, please pay what you feel this work is worth to you. Your contribution supports <span class="emphasis">experimental validation, laboratory work, precision measurements, and collaborative research</span> to test whether these hypotheses match reality.</p>
-            
-            <p>No one will pursue you for payment. This is about <span class="emphasis">advancing understanding</span>, not enforcing transactions.</p>
-        </div>
-        
-        <div class="contribute-options">
-            <div class="contribute-card">
-                <div class="amount">FREE</div>
-                <h4>Student / Hardship</h4>
-                <p>Knowledge should be accessible to all. Download the book and join the community without any financial barrier.</p>
-                <a href="framework-book.pdf" class="btn-contribute" download>Download Book</a>
+
+        <div class="contribution-options">
+            <!-- Free Download -->
+            <div class="contribution-card">
+                <div class="card-header">
+                    <h3>Free Access</h3>
+                    <div class="amount">$0</div>
+                </div>
+                <ul class="features">
+                    <li>Complete book access</li>
+                    <li>All appendices & references</li>
+                    <li>Forever yours to keep</li>
+                </ul>
+                <a href="framework-book.pdf" class="download-btn" download>Download Free</a>
             </div>
-            
-            <div class="contribute-card">
-                <div class="amount">$20</div>
-                <h4>Supporter</h4>
-                <p>Cover the basic costs of maintaining this project and help keep the research accessible to everyone.</p>
-                <div id="paypal-container-20" class="paypal-button-container"></div>
-            </div>
-            
-            <div class="contribute-card">
-                <div class="amount">$50+</div>
-                <h4>Patron</h4>
-                <p>Enable deeper research, support experimental validation, and help fund collaborative scientific efforts.</p>
-                <div id="paypal-container-50" class="paypal-button-container"></div>
+
+            <!-- Combined Payment Options -->
+            <div class="payment-card">
+                <div class="payment-options">
+                    <div class="payment-tier">
+                        <h3>Patron</h3>
+                        <div class="amount">$50+</div>
+                        <ul>
+                            <li>Support research</li>
+                            <li>Help keep book free</li>
+                            <li>Enable future projects</li>
+                        </ul>
+                    </div>
+                    <div class="payment-tier">
+                        <h3>Supporter</h3>
+                        <div class="amount">$20</div>
+                        <ul>
+                            <li>Show appreciation</li>
+                            <li>Support the work</li>
+                            <li>Make a difference</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="custom-contribution">
+                    <p>Choose Your Own Contribution</p>
+                    <small>Enter any amount you wish when you reach PayPal</small>
+                </div>
+                
+                <!-- EU Waiver Checkbox -->
+                <div class="eu-waiver">
+                    <label>
+                        <input type="checkbox" id="eu-waiver-checkbox" required>
+                        <span><strong>Required for EU Contributors:</strong> I understand and agree that by contributing and immediately downloading digital content, I explicitly waive my 14-day right of withdrawal as provided under EU Consumer Rights Directive. I acknowledge that all contributions are final and non-refundable.</span>
+                    </label>
+                </div>
+                
+                <div class="paypal-button-container">
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" onsubmit="return validateEUWaiver()">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="4FM5PMUS387MC">
+                        <button type="submit" class="download-btn" style="background: #ffd700; color: #0a0a0a; border: none;">
+                            Contribute via PayPal
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-        
-        <div class="custom-amount">
-            <h3>Choose Your Own Contribution</h3>
-            <p>Every contribution, regardless of size, directly supports the advancement of this research and keeps it openly accessible to all.</p>
-            <div id="paypal-container-custom" class="paypal-button-container"></div>
-        </div>
-        
+
+        <!-- Impact Section -->
         <div class="impact-section">
-            <h3>Your Contribution Enables</h3>
-            <div class="impact-list">
-                <div class="impact-item">
-                    <div class="icon">🔬</div>
-                    <h4>Experimental Validation</h4>
-                    <p>Testing predictions through rigorous scientific experiments</p>
-                </div>
-                <div class="impact-item">
-                    <div class="icon">📊</div>
-                    <h4>Data Analysis</h4>
-                    <p>Processing and analyzing experimental results and observations</p>
-                </div>
-                <div class="impact-item">
-                    <div class="icon">🤝</div>
-                    <h4>Collaboration</h4>
-                    <p>Building partnerships with researchers and institutions worldwide</p>
-                </div>
+            <h2>Your Contribution Enables</h2>
+            <div class="impact-grid">
                 <div class="impact-item">
                     <div class="icon">📚</div>
-                    <h4>Open Access</h4>
-                    <p>Keeping all findings and publications freely available to everyone</p>
+                    <h3>Free Access</h3>
+                    <p>Keeping the book freely available to everyone, removing barriers to knowledge</p>
+                </div>
+                <div class="impact-item">
+                    <div class="icon">🔬</div>
+                    <h3>Continued Research</h3>
+                    <p>Supporting ongoing development and refinement of the COSMIC Framework</p>
+                </div>
+                <div class="impact-item">
+                    <div class="icon">🌍</div>
+                    <h3>Community Building</h3>
+                    <p>Maintaining this platform and fostering meaningful discussions</p>
                 </div>
             </div>
         </div>
-        
-        <div class="footer-note">
-            <p>Questions about contributions? Contact us at <a href="mailto:mkbinfo@proton.me" style="color: #ffd700; text-decoration: none;">mkbinfo@proton.me</a></p>
-            <p>All contributions are processed securely through PayPal. Your support is deeply appreciated.</p>
-        </div>
-    </main>
 
-    <!-- PayPal SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAayQDLoTF4n5_YavgkSMVahYRXeRXOuiNuvTZ7ksAa9QrWh6TnQatmfNoLDcHFb0ENu6hUyjGh94f7E8&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+        <!-- Legal Compliance Section -->
+        <div class="legal-compliance">
+            <h2>Legal & Compliance Information</h2>
+            <div class="legal-compliance-content">
+                
+                <h3>Tax Deductibility</h3>
+                <p>Contributions to this project are <strong>not</strong> tax-deductible charitable donations. This is a personal project, not a registered nonprofit or charitable organization. Consult your tax advisor regarding any potential deductions.</p>
+
+                <h3>No Refund Policy</h3>
+                <p>All contributions are <strong>final and non-refundable</strong>. By contributing, you acknowledge that you are supporting ongoing research and development, not purchasing a product or service. For EU contributors: You explicitly waive your right of withdrawal when immediately accessing digital content.</p>
+
+                <h3>Payment Processing</h3>
+                <p>All payments are securely processed through PayPal. By contributing, you agree to PayPal's terms of service and privacy policy. We do not store or have access to your payment information. PayPal handles all VAT and applicable taxes for international transactions.</p>
+
+                <h3>Use of Funds</h3>
+                <p>Contributions support research, website maintenance, and ongoing development of the COSMIC Framework. There is no guarantee of specific deliverables or timeline for future work.</p>
+
+                <h3>Not an Investment or Security</h3>
+                <p>Contributions are voluntary support, not investments. You will not receive equity, ownership, returns, or any financial benefits. This is not a security offering and is not subject to securities regulations.</p>
+
+                <h3>International Compliance</h3>
+                <p>This website is operated from the United States. By contributing, you confirm that you are legally permitted to make such contributions in your jurisdiction. We cannot accept contributions from individuals in countries subject to U.S. economic sanctions (including but not limited to Iran, North Korea, Syria, Cuba, Russia, and Belarus).</p>
+
+                <h3>Data Protection & Privacy</h3>
+                <p>We respect your privacy. PayPal processes payments and may share limited transaction information (email, amount) with us for record-keeping. We will not sell, rent, or share your personal information with third parties for marketing purposes. See our <a href="legal.html#privacy">Privacy Policy</a> for details on data handling and your rights under GDPR and CCPA.</p>
+
+                <h3>GDPR Compliance (EU Contributors)</h3>
+                <p>For EU contributors, you have the right to access, rectify, erase, restrict processing, data portability, and to object to processing of your personal data. Contact us at mkbinfo@proton.me to exercise these rights. We retain transaction records as required by law.</p>
+
+                <h3>Age Requirement</h3>
+                <p>You must be at least 18 years old to make a contribution. By contributing, you represent that you meet this age requirement.</p>
+
+                <h3>Disclaimer of Warranties</h3>
+                <p>The book and website content are provided "AS IS" without warranties of any kind, express or implied. We make no guarantees about accuracy, completeness, or suitability for any purpose.</p>
+
+                <h3>Translation Notice</h3>
+                <p>This website may be automatically translated by browser tools (such as Google Translate). Automated translations are provided for convenience only and may not be accurate. The English version of all legal documents is the authoritative version and governs in case of any conflict or discrepancy.</p>
+
+                <h3>Terms & Conditions</h3>
+                <p>By contributing or using this website, you agree to our complete <a href="legal.html#terms">Terms & Conditions</a>. For questions about these policies, contact us at mkbinfo@proton.me.</p>
+
+                <h3>Contact for Legal Questions</h3>
+                <p>For questions about contributions, refunds, or legal matters, email: <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a><br>
+                Mailing Address: <strong>[PO BOX - TO BE ADDED]</strong>, Inglewood, CA</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <p>Thank you for your support! Questions? Contact us at <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></p>
+            <p style="margin-top: 20px;"><a href="index.html">← Back to Home</a> | <a href="legal.html">Terms & Privacy</a></p>
+        </div>
+    </div>
 
     <script>
+        // EU Waiver validation
+        function validateEUWaiver() {
+            const checkbox = document.getElementById('eu-waiver-checkbox');
+            if (!checkbox.checked) {
+                alert('Please confirm that you understand and agree to the terms, including waiving your right of withdrawal for immediate digital content access.');
+                return false;
+            }
+            return true;
+        }
+
         // Check if user is logged in
         function isUserLoggedIn() {
             return localStorage.getItem('userLoggedIn') === 'true';
@@ -702,64 +962,24 @@
             }
         }
 
+        // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.querySelector('.mobile-menu');
         
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-        
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
             });
-        });
-        
-        // PayPal Button - You provided the button ID: 4FM5PMUS387MC
-        // This loads your button in the $50+ card
-        paypal.HostedButtons({
-            hostedButtonId: "4FM5PMUS387MC",
-        }).render("#paypal-container-50");
-        
-        // For the other amounts, you'll need to create additional buttons in PayPal
-        // Instructions below in the console
-        
-        console.log(`
-            PAYPAL BUTTON SETUP:
             
-            Your $50+ button is working! To add the other payment options:
-            
-            1. Go to: https://www.paypal.com/buttons/
-            2. Create a new button for $20 (fixed amount)
-            3. Copy the hostedButtonId (similar to: 4FM5PMUS387MC)
-            4. Paste it in the code where it says BUTTON_ID_FOR_20
-            
-            5. Create another button for custom amounts (let user choose)
-            6. Copy that hostedButtonId
-            7. Paste it where it says BUTTON_ID_FOR_CUSTOM
-            
-            Current buttons:
-            - FREE: Download link (no button needed)
-            - $20: Needs button ID
-            - $50+: Working! (4FM5PMUS387MC)
-            - Custom: Needs button ID
-        `);
-        
-        // Placeholder for $20 button - replace BUTTON_ID_FOR_20 with your actual button ID
-        /*
-        paypal.HostedButtons({
-            hostedButtonId: "BUTTON_ID_FOR_20",
-        }).render("#paypal-container-20");
-        */
-        
-        // Placeholder for custom amount button - replace BUTTON_ID_FOR_CUSTOM with your actual button ID
-        /*
-        paypal.HostedButtons({
-            hostedButtonId: "BUTTON_ID_FOR_CUSTOM",
-        }).render("#paypal-container-custom");
-        */
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        }
     </script>
 </body>
 </html>

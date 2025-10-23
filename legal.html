@@ -73,7 +73,7 @@
             50% { opacity: 0.3; }
         }
         
-        /* Top Navigation */
+        /* Navigation */
         .top-nav {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
@@ -150,139 +150,100 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            position: relative;
-            z-index: 1;
         }
         
         .nav-center {
             display: flex;
             justify-content: center;
+            gap: 45px;
         }
         
-        .nav-links {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-        }
-        
-        .nav-links a {
+        .nav-link {
             color: #e0e0e0;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.05em;
+            letter-spacing: 0.3px;
             transition: color 0.3s;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            position: relative;
         }
         
-        .nav-links a:hover {
-            color: #ffd700;
+        .nav-link:hover {
+            color: #fff;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
         }
         
         .nav-right {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 20px;
+            gap: 25px;
         }
         
         .nav-social {
             display: flex;
-            gap: 12px;
+            gap: 18px;
+            align-items: center;
         }
         
         .nav-social-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1a1a1a;
+            color: #e0e0e0;
+            font-size: 1.3em;
+            transition: color 0.3s;
             text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.2em;
-        }
-        
-        .nav-social-icon svg {
-            width: 18px;
-            height: 18px;
         }
         
         .nav-social-icon:hover {
-            background: #667eea;
-            color: white;
+            color: #ffd700;
         }
         
         .nav-login-btn {
             padding: 10px 28px;
             background: transparent;
-            color: #fff;
-            text-decoration: none;
+            border: 2px solid #ffd700;
             border-radius: 50px;
-            font-weight: 600;
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 700;
             transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
-            text-transform: uppercase;
+            font-size: 1em;
             letter-spacing: 0.5px;
-            white-space: nowrap;
-            margin-left: 5px;
         }
         
         .nav-login-btn:hover {
-            background: rgba(255, 255, 255, 0.95);
-            color: #667eea;
-        }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: rgba(20, 20, 30, 0.98);
-            backdrop-filter: blur(10px);
-            min-width: 200px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            text-transform: none;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .dropdown-content a:last-child {
-            border-bottom: none;
+            background: #ffd700;
+            color: #0a0a0a;
+            transform: translateY(-2px);
         }
         
         /* Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
+            gap: 5px;
             cursor: pointer;
             padding: 5px;
-            gap: 5px;
         }
         
         .hamburger span {
             width: 25px;
             height: 3px;
             background: #ffd700;
-            border-radius: 3px;
+            border-radius: 2px;
             transition: all 0.3s;
         }
         
@@ -298,161 +259,128 @@
             transform: rotate(-45deg) translate(7px, -7px);
         }
         
+        /* Mobile Menu */
         .mobile-menu {
-            display: none;
             position: fixed;
-            top: 90px;
-            left: 0;
-            right: 0;
+            top: 131px;
+            left: -100%;
+            width: 100%;
+            height: calc(100% - 131px);
             background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 999;
-            padding: 20px;
+            transition: left 0.3s;
+            overflow-y: auto;
         }
         
         .mobile-menu.active {
-            display: block;
+            left: 0;
         }
         
         .mobile-menu ul {
             list-style: none;
-            padding: 0;
-            margin: 0;
+            padding: 40px 20px;
         }
         
         .mobile-menu ul li {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .mobile-menu ul li:last-child {
-            border-bottom: none;
+            margin: 20px 0;
         }
         
         .mobile-menu ul li a {
             color: #e0e0e0;
             text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 500;
+            font-size: 1.2em;
+            font-weight: 600;
             display: block;
+            padding: 15px 20px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu ul li a:hover {
+            color: #ffd700;
+            border-left-color: #ffd700;
+            padding-left: 30px;
         }
         
         /* Main Content */
-        .main-content {
+        .legal-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 180px 40px 100px;
             position: relative;
             z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 40px 80px;
         }
         
         .page-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         
         .page-header h1 {
-            font-size: 3.5em;
-            color: #ffffff;
-            margin-bottom: 15px;
+            font-size: 4em;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
         }
         
         .page-header p {
             font-size: 1.3em;
             color: #b0b0b0;
-            font-weight: 300;
+            line-height: 1.8;
         }
         
-        /* Legal Content */
+        /* Section Styles */
         .legal-section {
-            background: rgba(20, 20, 30, 0.6);
-            padding: 40px;
-            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 50px;
             margin-bottom: 40px;
         }
         
-        .legal-section.white-bg {
-            background: #ffffff;
-            color: #1a1a1a;
-        }
-        
-        .legal-section.white-bg h2,
-        .legal-section.white-bg h3,
-        .legal-section.white-bg h4 {
-            color: #1a1a1a;
-        }
-        
-        .legal-section.white-bg p,
-        .legal-section.white-bg ul li {
-            color: #1a1a1a;
-        }
-        
-        .legal-section.white-bg ul li::before {
-            color: #ff0000;
-        }
-        
-        .legal-section.white-bg a {
-            color: #ff0000;
-            font-weight: 600;
-        }
-        
-        .legal-section.white-bg a:hover {
-            border-bottom-color: #ff0000;
-        }
-        
         .legal-section h2 {
-            color: #ffd700;
             font-size: 2.5em;
+            color: #ffd700;
             margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
             padding-bottom: 15px;
-            border-bottom: 3px solid #ffd700;
         }
         
         .legal-section h3 {
-            color: #ffffff;
-            font-size: 1.8em;
-            margin-top: 30px;
+            font-size: 1.6em;
+            color: #ffd700;
+            margin-top: 35px;
             margin-bottom: 15px;
         }
         
         .legal-section h4 {
-            color: #ffd700;
             font-size: 1.3em;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            color: #e0e0e0;
+            margin-top: 25px;
+            margin-bottom: 12px;
         }
         
         .legal-section p {
-            color: #d0d0d0;
+            color: #ffffff;
+            font-size: 0.9em;
             line-height: 1.8;
             margin-bottom: 15px;
-            font-size: 1.05em;
         }
         
-        .legal-section ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 15px 0;
+        .legal-section ul,
+        .legal-section ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-size: 0.9em;
+            line-height: 1.8;
         }
         
-        .legal-section ul li {
-            padding: 8px 0 8px 25px;
-            position: relative;
-            color: #d0d0d0;
-            line-height: 1.7;
-        }
-        
-        .legal-section ul li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #ffd700;
-            font-weight: bold;
+        .legal-section ul li,
+        .legal-section ol li {
+            margin-bottom: 10px;
         }
         
         .legal-section a {
@@ -466,33 +394,39 @@
             border-bottom-color: #ffd700;
         }
         
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 50px;
-            height: 50px;
-            background: #ffd700;
-            color: #0a0a0a;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5em;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            z-index: 999;
+        .legal-section strong {
+            color: #ffd700;
         }
         
-        .back-to-top:hover {
-            background: #ffed4e;
-            transform: translateY(-5px);
+        .highlight-box {
+            background: rgba(255,215,0,0.05);
+            border-left: 4px solid #ffd700;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
         }
         
-        .back-to-top.visible {
-            display: flex;
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .back-link {
+            text-align: center;
+            padding: 40px 20px;
+            color: #808080;
+            font-size: 0.95em;
+        }
+        
+        .back-link a {
+            color: #ffd700;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+            font-weight: 600;
+        }
+        
+        .back-link a:hover {
+            border-bottom-color: #ffd700;
         }
         
         /* Responsive */
@@ -500,11 +434,6 @@
             .nav-container {
                 grid-template-columns: 1fr auto;
                 padding: 0 20px;
-            }
-            
-            .logo-placeholder {
-                width: 300px;
-                height: 60px;
             }
             
             .nav-center,
@@ -516,16 +445,30 @@
                 display: flex;
             }
             
-            .main-content {
-                padding: 100px 20px 60px;
+            .legal-container {
+                padding: 140px 20px 60px;
+            }
+            
+            .legal-section {
+                padding: 30px 25px;
             }
             
             .page-header h1 {
                 font-size: 2.5em;
             }
+        }
+        
+        @media (max-width: 640px) {
+            .page-header h1 {
+                font-size: 2em;
+            }
             
-            .legal-section {
-                padding: 20px;
+            .legal-section h2 {
+                font-size: 1.8em;
+            }
+            
+            .legal-section h3 {
+                font-size: 1.3em;
             }
         }
     </style>
@@ -536,36 +479,29 @@
         <div class="stars-layer stars-layer-2"></div>
     </div>
 
+    <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="nav-container">
             <div class="logo-section">
-                <div class="logo-placeholder">
+                <a href="index.html" class="logo-placeholder">
                     <img src="logo.png" alt="The Big TOE Logo">
-                </div>
+                </a>
             </div>
             
             <div class="nav-center">
-                <ul class="nav-links">
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#events">Events</a></li>
-                    <li class="dropdown">
-                        <a href="#" style="cursor: pointer;">Discussion ▾</a>
-                        <div class="dropdown-content">
-                            <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
-                            <a href="index.html#membership">Create Free Account</a>
-                        </div>
-                    </li>
-                </ul>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="legal.html" class="nav-link">About</a>
+                <a href="#" onclick="handleDiscussionClick(event)" class="nav-link">Discussion</a>
             </div>
             
             <div class="nav-right">
                 <div class="nav-social">
-                    <a href="#" class="nav-social-icon" title="Instagram">
+                    <a href="https://www.instagram.com" class="nav-social-icon" title="Instagram">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                     </a>
-                    <a href="#" class="nav-social-icon" title="YouTube">
+                    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" class="nav-social-icon" title="YouTube" target="_blank">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                         </svg>
@@ -575,6 +511,7 @@
                 <a href="login.html" class="nav-login-btn">Log In</a>
             </div>
             
+            <!-- Hamburger Menu -->
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -583,262 +520,519 @@
         </div>
     </nav>
     
+    <!-- Mobile Menu -->
     <div class="mobile-menu">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#events">Events</a></li>
-            <li><a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Discussion</a></li>
+            <li><a href="legal.html">About</a></li>
+            <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
             <li><a href="login.html">Log In</a></li>
             <li><a href="signup.html">Sign Up</a></li>
-            <li><a href="appendix.html">Appendices</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
-            <li><a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" target="_blank">YouTube</a></li>
-            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
         </ul>
     </div>
 
-    <main class="main-content">
+    <div class="legal-container">
         <div class="page-header">
             <h1>About & Legal</h1>
-            <p>Information about The COSMIC Framework</p>
+            <p>Important information about The Big TOE, your rights, and our policies.</p>
         </div>
 
-        <!-- About Us Section -->
-        <section id="about" class="legal-section">
-            <h2>About Us</h2>
-            <p>The COSMIC Framework represents a groundbreaking approach to understanding the fundamental nature of reality. Developed by Michael K. Baines, this theoretical framework proposes that information is not merely a description of reality, but the fundamental substrate from which all physical phenomena emerge.</p>
+        <!-- ABOUT SECTION -->
+        <div class="legal-section" id="about">
+            <h2>About The Big TOE & The COSMIC Framework</h2>
             
-            <h3>Our Mission</h3>
-            <p>To advance our understanding of the universe through rigorous scientific inquiry, collaborative research, and open discussion. We believe that the deepest truths about reality emerge from the intersection of physics, information theory, and consciousness studies.</p>
+            <p>The COSMIC Framework is a comprehensive theoretical framework that proposes information as the fundamental substrate of reality, from which all physical phenomena emerge. Developed by Michael K. Baines, this framework attempts to unify quantum mechanics, relativity, consciousness studies, and cosmology into a coherent Theory of Everything.</p>
             
-            <h3>The Framework</h3>
-            <p>The COSMIC Framework builds upon established physics while proposing novel connections between:</p>
-            <ul>
-                <li>Information theory and thermodynamics</li>
-                <li>Quantum mechanics and consciousness</li>
-                <li>Gravitational phenomena and information density</li>
-                <li>Mathematical constants and physical reality</li>
-            </ul>
+            <h3>What is "The Big TOE"?</h3>
+            <p>"The Big TOE" refers to "Theory of Everything," representing an ambitious attempt to explain the fundamental nature of reality through an information-theoretic lens. The COSMIC Framework proposes testable predictions and seeks to bridge the gap between physics, consciousness, and the nature of reality itself.</p>
             
-            <h3>Research Approach</h3>
-            <p>We are committed to transparent, reproducible research. All methodologies, data analysis protocols, and preliminary findings are made available for independent verification and peer review.</p>
+            <h3>About the Author</h3>
+            <p>Michael K. Baines is an independent researcher dedicated to exploring fundamental questions about the nature of reality. This work represents years of synthesis across multiple disciplines, offered freely to encourage discussion, critique, and advancement of these ideas.</p>
             
-            <h3>Community</h3>
-            <p>Join our growing community of researchers, physicists, philosophers, and curious minds exploring these profound questions about the nature of reality.</p>
-        </section>
+            <h3>Mission</h3>
+            <p>Our mission is to make theoretical physics and consciousness research accessible to everyone, fostering meaningful dialogue and advancing our collective understanding of reality. By keeping this book freely available, we remove barriers to knowledge and encourage global participation in these important questions.</p>
+            
+            <h3>Contact Information</h3>
+            <p>For questions, feedback, or collaboration inquiries:<br>
+            Email: <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a><br>
+            Mailing Address: <strong>[PO BOX - TO BE ADDED]</strong>, Inglewood, CA</p>
+        </div>
 
-        <!-- Privacy Policy Section -->
-        <section id="privacy" class="legal-section white-bg">
+        <!-- TERMS & CONDITIONS (CONSOLIDATED) -->
+        <div class="legal-section" id="terms">
+            <h2>Terms & Conditions</h2>
+            
+            <p><em>Last Updated: October 24, 2025</em></p>
+            
+            <div class="highlight-box">
+                <p><strong>Translation Notice:</strong> This website may be automatically translated by browser tools (such as Google Translate). Automated translations are provided for convenience only and may not be accurate. The English version of all legal documents is the authoritative version and governs in case of any conflict or discrepancy.</p>
+            </div>
+            
+            <h3>Section 1: Acceptance of Terms</h3>
+            <p>By accessing, browsing, or using this website (thebigtoe.com or any related pages), downloading content, contributing financially, or participating in discussions, you agree to be bound by these Terms & Conditions, our Privacy Policy, and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+            
+            <h3>Section 2: Disclaimer of Professional Advice</h3>
+            
+            <h4>No Legal Advice</h4>
+            <p><strong>I am not a lawyer and nothing on this website constitutes legal advice.</strong> Any discussion of legal concepts, regulations, or compliance matters is provided for general informational purposes only and should not be relied upon as legal counsel. You should consult with a qualified attorney licensed in your jurisdiction for advice regarding specific legal questions or situations.</p>
+            
+            <h4>No Medical Advice</h4>
+            <p><strong>I am not a healthcare provider and nothing on this website constitutes medical advice.</strong> Any discussion of consciousness, neuroscience, or biological systems is purely theoretical and educational. This content is not intended to diagnose, treat, cure, or prevent any disease or medical condition. Always seek the advice of qualified healthcare professionals regarding medical questions or health conditions.</p>
+            
+            <h4>No Financial Advice</h4>
+            <p><strong>I am not a financial advisor and nothing on this website constitutes financial, investment, or tax advice.</strong> Any discussion of contributions, funding, or economic matters is provided for informational purposes only. You should consult with qualified financial professionals regarding investment decisions, tax implications, or financial planning.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Professional Consultation Requirement:</strong> Before making any decisions based on information from this website—whether legal, medical, financial, or otherwise—you must consult with appropriately licensed and qualified professionals in your jurisdiction who can provide advice tailored to your specific circumstances.</p>
+            </div>
+            
+            <h3>Section 3: Hold Harmless Agreement & Release of Liability</h3>
+            
+            <p><strong>TO THE FULLEST EXTENT PERMITTED BY LAW, BY USING THIS WEBSITE, YOU AGREE TO RELEASE, INDEMNIFY, AND HOLD HARMLESS MICHAEL K. BAINES AND ALL ASSOCIATED PARTIES (INCLUDING BUT NOT LIMITED TO CONTRIBUTORS, AFFILIATES, CONTRACTORS, AND SERVICE PROVIDERS) FROM ANY AND ALL CLAIMS, DAMAGES, LOSSES, LIABILITIES, COSTS, AND EXPENSES (INCLUDING REASONABLE ATTORNEYS' FEES) ARISING FROM OR RELATED TO:</strong></p>
+            
+            <ul>
+                <li><strong>Your use of this website</strong> and any content, materials, or information provided herein;</li>
+                <li><strong>Your reliance on any research, theories, or information</strong> presented on this website;</li>
+                <li><strong>Any decisions or actions you take</strong> based on content from this website;</li>
+                <li><strong>Your contributions</strong>, donations, or any financial transactions made through this website;</li>
+                <li><strong>Your participation in discussions</strong>, forums, or any interactive features;</li>
+                <li><strong>Your breach</strong> of these Terms & Conditions or violation of any law or regulation;</li>
+                <li><strong>Any disputes</strong> you have with other users of the website;</li>
+                <li><strong>Any claim</strong> that your use of the website violated the rights of any third party.</li>
+            </ul>
+            
+            <h4>Acknowledgment of Risk</h4>
+            <p>You acknowledge and agree that:</p>
+            <ul>
+                <li>The theories and information presented are <strong>speculative and theoretical</strong> in nature;</li>
+                <li>You use this website and its content <strong>entirely at your own risk</strong>;</li>
+                <li>You are <strong>solely responsible</strong> for evaluating the accuracy, completeness, and usefulness of all information;</li>
+                <li>No warranties or guarantees are made regarding the accuracy or reliability of content;</li>
+                <li>You will <strong>seek professional advice</strong> before making any significant decisions based on website content.</li>
+            </ul>
+            
+            <h3>Section 4: Intellectual Property & Copyright</h3>
+            
+            <p>All content on this website, including but not limited to text, graphics, logos, images, book content, theoretical frameworks, research, and software, is the property of Michael K. Baines and is protected by United States and international copyright laws.</p>
+            
+            <h4>Protected Works Include:</h4>
+            <ul>
+                <li><strong>"The Big TOE" Book</strong> © 2025 Michael K. Baines - All rights reserved</li>
+                <li><strong>The COSMIC Framework Theory</strong> - Original theoretical work and all associated concepts</li>
+                <li><strong>Website Content</strong> - All text, articles, and written materials</li>
+                <li><strong>Graphics & Design</strong> - All images, logos, layout, and visual design elements</li>
+                <li><strong>Research & Analysis</strong> - All original research, data analysis, and interpretations</li>
+            </ul>
+            
+            <h4>Permitted Uses:</h4>
+            <p>You may:</p>
+            <ul>
+                <li><strong>Download and read</strong> "The Big TOE" book for personal, non-commercial use;</li>
+                <li><strong>Share the book</strong> with others by directing them to this website;</li>
+                <li><strong>Quote brief excerpts</strong> (up to 300 words) in academic, educational, or journalistic work with proper attribution;</li>
+                <li><strong>Cite the COSMIC Framework</strong> in academic papers or research with proper attribution.</li>
+            </ul>
+            
+            <h4>Prohibited Uses:</h4>
+            <p>You may NOT:</p>
+            <ul>
+                <li><strong>Reproduce, republish, or redistribute</strong> substantial portions of the book or website content;</li>
+                <li><strong>Sell, license, or commercially exploit</strong> any content from this website;</li>
+                <li><strong>Modify, create derivative works</strong>, or adapt the content without written permission;</li>
+                <li><strong>Remove copyright notices</strong> or author attribution from any materials;</li>
+                <li><strong>Use content for AI training</strong> without explicit written permission;</li>
+                <li><strong>Claim ownership</strong> or authorship of any content from this website.</li>
+            </ul>
+            
+            <h4>DMCA Compliance</h4>
+            <p>We respect intellectual property rights and expect users to do the same. If you believe content on this website infringes your copyright, please contact our DMCA agent:</p>
+            <p>Email: <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a><br>
+            Subject Line: "DMCA Takedown Notice"<br>
+            Mailing Address: <strong>[PO BOX - TO BE ADDED]</strong>, Inglewood, CA</p>
+            
+            <p>Your notice must include:</p>
+            <ol>
+                <li>Identification of the copyrighted work claimed to have been infringed;</li>
+                <li>Identification of the material claimed to be infringing and its location;</li>
+                <li>Your contact information (name, address, telephone, email);</li>
+                <li>A statement that you have a good faith belief that the use is not authorized;</li>
+                <li>A statement that the information is accurate and you are authorized to act;</li>
+                <li>Your physical or electronic signature.</li>
+            </ol>
+            
+            <h3>Section 5: User Conduct & Prohibited Activities</h3>
+            
+            <p>When using this website, you agree NOT to:</p>
+            <ul>
+                <li>Violate any applicable laws or regulations;</li>
+                <li>Post or transmit harmful, threatening, abusive, harassing, defamatory, or offensive content;</li>
+                <li>Impersonate any person or entity;</li>
+                <li>Interfere with or disrupt the website or servers;</li>
+                <li>Attempt to gain unauthorized access to any portion of the website;</li>
+                <li>Use automated systems (bots, scrapers) without permission;</li>
+                <li>Collect personal information about other users;</li>
+                <li>Engage in any activity that could damage, disable, or impair the website.</li>
+            </ul>
+            
+            <p>We reserve the right to terminate or suspend your access to the website at any time, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason.</p>
+            
+            <h3>Section 6: Contributions & Financial Support</h3>
+            
+            <h4>Tax Deductibility</h4>
+            <p>Contributions to this project are <strong>NOT tax-deductible charitable donations</strong>. This is a personal project, not a registered 501(c)(3) nonprofit or charitable organization. Consult your tax advisor regarding any potential deductions.</p>
+            
+            <h4>No Refund Policy</h4>
+            <p>All contributions are <strong>final and non-refundable</strong>. By contributing, you acknowledge that you are supporting ongoing research and development, not purchasing a product or service with guaranteed deliverables.</p>
+            
+            <h4>EU Right of Withdrawal</h4>
+            <p>For contributors in the European Union: By contributing and immediately downloading digital content, you <strong>explicitly waive your 14-day right of withdrawal</strong> as provided under the EU Consumer Rights Directive (Directive 2011/83/EU). You acknowledge and agree that digital content is made available immediately upon contribution and that you forfeit your cancellation rights by choosing immediate access.</p>
+            
+            <h4>Payment Processing</h4>
+            <p>All payments are securely processed through PayPal. By contributing, you agree to PayPal's terms of service and privacy policy. We do not store or have access to your payment information. PayPal handles all applicable Value-Added Tax (VAT) for international transactions.</p>
+            
+            <h4>Use of Funds</h4>
+            <p>Contributions support:</p>
+            <ul>
+                <li>Ongoing research and development of the COSMIC Framework;</li>
+                <li>Website hosting, maintenance, and improvements;</li>
+                <li>Creating and distributing free educational content;</li>
+                <li>Administrative costs and operational expenses.</li>
+            </ul>
+            
+            <p>There is <strong>no guarantee of specific deliverables, timeline, or results</strong> from your contribution.</p>
+            
+            <h4>Not an Investment</h4>
+            <p>Contributions are <strong>voluntary support, not investments</strong>. You will not receive:</p>
+            <ul>
+                <li>Equity or ownership in any entity;</li>
+                <li>Financial returns, dividends, or profit sharing;</li>
+                <li>Any securities or investment instruments.</li>
+            </ul>
+            
+            <p>This is not a securities offering and is not subject to securities regulations.</p>
+            
+            <h4>International Compliance & Sanctions</h4>
+            <p>This website is operated from the United States. By contributing, you confirm that:</p>
+            <ul>
+                <li>You are <strong>legally permitted</strong> to make such contributions in your jurisdiction;</li>
+                <li>You are <strong>not located in</strong> or a resident of any country subject to U.S. economic sanctions, including but not limited to Iran, North Korea, Syria, Cuba, Russia, and Belarus;</li>
+                <li>You are <strong>not on any U.S. government list</strong> of prohibited or restricted parties;</li>
+                <li>Your contribution does not violate any export control or sanctions laws.</li>
+            </ul>
+            
+            <h4>Age Requirement</h4>
+            <p>You must be at least <strong>18 years old</strong> to make a contribution. By contributing, you represent that you meet this age requirement and have the legal capacity to enter into these Terms.</p>
+            
+            <h3>Section 7: Disclaimers & Limitation of Liability</h3>
+            
+            <h4>No Warranties</h4>
+            <p>This website and all content are provided <strong>"AS IS" and "AS AVAILABLE"</strong> without warranties of any kind, either express or implied, including but not limited to:</p>
+            <ul>
+                <li>Warranties of merchantability or fitness for a particular purpose;</li>
+                <li>Warranties of accuracy, reliability, or completeness;</li>
+                <li>Warranties of non-infringement;</li>
+                <li>Warranties that the website will be uninterrupted or error-free.</li>
+            </ul>
+            
+            <h4>Theoretical Nature of Content</h4>
+            <p>The COSMIC Framework and all theories presented are <strong>speculative and theoretical</strong>. They have not been peer-reviewed or scientifically validated. Any testable predictions remain unverified. This content represents the author's personal research and interpretation and should be evaluated critically.</p>
+            
+            <h4>Limitation of Liability</h4>
+            <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</strong></p>
+            <p>Michael K. Baines and all associated parties SHALL NOT BE LIABLE for any:</p>
+            <ul>
+                <li>Direct, indirect, incidental, special, consequential, or punitive damages;</li>
+                <li>Loss of profits, revenue, data, or use;</li>
+                <li>Personal injury or property damage;</li>
+                <li>Damages arising from your access to or use of (or inability to access or use) this website;</li>
+                <li>Damages arising from reliance on any content or information;</li>
+                <li>Damages arising from third-party content or conduct;</li>
+            </ul>
+            
+            <p>This limitation applies <strong>regardless of the legal theory</strong> (contract, tort, negligence, strict liability, or otherwise) and even if we have been advised of the possibility of such damages.</p>
+            
+            <p>Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability for consequential damages. In such jurisdictions, our liability is limited to the <strong>maximum extent permitted by law</strong>. In no event shall our total liability exceed <strong>$100 USD or the amount you contributed</strong>, whichever is less.</p>
+            
+            <h3>Section 8: Third-Party Links & Services</h3>
+            
+            <p>This website may contain links to third-party websites or services (including PayPal, social media platforms, etc.). We are not responsible for:</p>
+            <ul>
+                <li>The content, privacy policies, or practices of third-party sites;</li>
+                <li>Products or services offered by third parties;</li>
+                <li>Any damages or losses arising from your use of third-party sites.</li>
+            </ul>
+            
+            <p>Links are provided for convenience only and do not imply endorsement. You access third-party sites at your own risk.</p>
+            
+            <h3>Section 9: Modifications to Terms</h3>
+            
+            <p>We reserve the right to modify these Terms & Conditions at any time. Changes will be effective immediately upon posting to this website. Your continued use of the website after changes are posted constitutes acceptance of the modified terms.</p>
+            
+            <p>We will update the "Last Updated" date at the top of this page when changes are made. We encourage you to review these Terms periodically.</p>
+            
+            <h3>Section 10: Severability</h3>
+            
+            <p>If any provision of these Terms is found to be invalid, illegal, or unenforceable by a court of competent jurisdiction, the remaining provisions shall continue in full force and effect. The invalid provision shall be modified to the minimum extent necessary to make it valid and enforceable while preserving its intent.</p>
+            
+            <h3>Section 11: Governing Law & Dispute Resolution</h3>
+            
+            <p>These Terms & Conditions are governed by the laws of the State of California and the United States, without regard to conflict of law principles.</p>
+            
+            <p>Any disputes arising from these Terms or your use of this website shall be resolved through:</p>
+            <ol>
+                <li><strong>Informal Negotiation:</strong> First, contact us at mkbinfo@proton.me to attempt good-faith resolution;</li>
+                <li><strong>Binding Arbitration:</strong> If negotiation fails, disputes shall be resolved through binding arbitration in Los Angeles County, California, under the rules of the American Arbitration Association;</li>
+                <li><strong>Class Action Waiver:</strong> You agree to resolve disputes on an individual basis only, not as a class action or representative proceeding.</li>
+            </ol>
+            
+            <h4>EU Online Dispute Resolution</h4>
+            <p>For EU contributors: The European Commission provides an Online Dispute Resolution (ODR) platform available at: <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a></p>
+            
+            <h3>Section 12: California Consumer Rights (CCPA)</h3>
+            
+            <p>California residents have specific rights regarding their personal information under the California Consumer Privacy Act (CCPA):</p>
+            <ul>
+                <li><strong>Right to Know:</strong> What personal information we collect and how it's used;</li>
+                <li><strong>Right to Delete:</strong> Request deletion of your personal information;</li>
+                <li><strong>Right to Opt-Out:</strong> We do NOT sell your personal information to third parties;</li>
+                <li><strong>Right to Non-Discrimination:</strong> You will not be discriminated against for exercising your CCPA rights.</li>
+            </ul>
+            
+            <p>To exercise these rights, contact us at mkbinfo@proton.me with "CCPA Request" in the subject line.</p>
+            
+            <h3>Section 13: Accessibility Commitment</h3>
+            
+            <p>We are committed to making this website accessible to all users, including those with disabilities. We strive for WCAG 2.1 Level AA compliance and continually work to improve accessibility.</p>
+            
+            <p>If you encounter accessibility barriers or have suggestions for improvement, please contact us at mkbinfo@proton.me with "Accessibility" in the subject line.</p>
+            
+            <h3>Section 14: Cookie Policy & Tracking</h3>
+            
+            <p>This website uses minimal essential cookies required for basic functionality. We do NOT use:</p>
+            <ul>
+                <li>Analytics or tracking cookies;</li>
+                <li>Advertising or marketing cookies;</li>
+                <li>Social media tracking pixels.</li>
+            </ul>
+            
+            <p>Essential cookies include:</p>
+            <ul>
+                <li>Session cookies for login functionality;</li>
+                <li>Security cookies for fraud prevention;</li>
+                <li>Preference cookies to remember your settings.</li>
+            </ul>
+            
+            <p>By using this website, you consent to our use of essential cookies. See our Privacy Policy for more information.</p>
+            
+            <h3>Section 15: Email Communications & CAN-SPAM Compliance</h3>
+            
+            <p>If you subscribe to our newsletter or provide your email address, we will:</p>
+            <ul>
+                <li>Only send emails related to the COSMIC Framework and website updates;</li>
+                <li>Include a clear unsubscribe link in every email;</li>
+                <li>Process unsubscribe requests within 10 business days;</li>
+                <li>Never sell or rent your email address to third parties;</li>
+                <li>Include our physical mailing address in all emails: <strong>[PO BOX - TO BE ADDED]</strong>, Inglewood, CA</li>
+            </ul>
+            
+            <h3>Section 16: Contact Information</h3>
+            
+            <p>For questions, concerns, or notices regarding these Terms & Conditions:</p>
+            
+            <p>Email: <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a><br>
+            Mailing Address: <strong>[PO BOX - TO BE ADDED]</strong>, Inglewood, CA</p>
+            
+            <div class="highlight-box">
+                <p><strong>By using this website, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions.</strong></p>
+            </div>
+        </div>
+
+        <!-- PRIVACY POLICY -->
+        <div class="legal-section" id="privacy">
             <h2>Privacy Policy</h2>
-            <p><strong>Last Updated:</strong> October 16, 2025</p>
             
-            <h3>1. Information We Collect</h3>
+            <p><em>Last Updated: October 24, 2025</em></p>
             
-            <h4>1.1 Information You Provide</h4>
-            <p>When you subscribe to our newsletter or create an account, we collect:</p>
+            <p>This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website thebigtoe.com. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.</p>
+            
+            <h3>Information We Collect</h3>
+            
+            <h4>Personal Information</h4>
+            <p>We may collect personal information that you voluntarily provide to us when you:</p>
             <ul>
-                <li>Email address</li>
-                <li>Name (if provided)</li>
-                <li>Communication preferences</li>
+                <li>Subscribe to our newsletter (email address, name);</li>
+                <li>Make a contribution (email address, transaction details from PayPal);</li>
+                <li>Create an account or register for discussions (username, email, password);</li>
+                <li>Contact us directly (name, email, message content).</li>
             </ul>
             
-            <h4>1.2 Automatically Collected Information</h4>
-            <p>When you visit our website, we may automatically collect:</p>
+            <h4>Automatically Collected Information</h4>
+            <p>When you visit our website, our server may automatically log standard data such as:</p>
             <ul>
-                <li>Browser type and version</li>
-                <li>Operating system</li>
-                <li>IP address</li>
-                <li>Pages visited and time spent</li>
-                <li>Referring website</li>
+                <li>IP address;</li>
+                <li>Browser type and version;</li>
+                <li>Pages visited and time spent on pages;</li>
+                <li>Referring website address;</li>
+                <li>Device information.</li>
             </ul>
             
-            <h3>2. How We Use Your Information</h3>
-            <p>We use the information we collect to:</p>
+            <p><strong>Important:</strong> We do NOT use analytics services (like Google Analytics), advertising tracking, or social media pixels. We collect only the minimal server logs necessary for security and technical functionality.</p>
+            
+            <h3>How We Use Your Information</h3>
+            
+            <p>We use collected information to:</p>
             <ul>
-                <li>Send you newsletter updates and event announcements</li>
-                <li>Respond to your inquiries and support requests</li>
-                <li>Improve our website and services</li>
-                <li>Analyze website usage and trends</li>
-                <li>Comply with legal obligations</li>
+                <li><strong>Provide services:</strong> Process contributions, deliver book downloads, manage user accounts;</li>
+                <li><strong>Communicate:</strong> Send newsletters, updates, and respond to inquiries;</li>
+                <li><strong>Improve website:</strong> Understand how users interact with the site to make improvements;</li>
+                <li><strong>Security:</strong> Monitor for fraudulent activity and protect against security threats;</li>
+                <li><strong>Legal compliance:</strong> Comply with applicable laws and regulations.</li>
             </ul>
             
-            <h3>3. Information Sharing</h3>
-            <p>We do not sell, trade, or rent your personal information to third parties. We may share information only in these circumstances:</p>
+            <h3>Disclosure of Your Information</h3>
+            
+            <p>We do NOT sell, rent, or trade your personal information to third parties for marketing purposes.</p>
+            
+            <p>We may share information with:</p>
             <ul>
-                <li>With your explicit consent</li>
-                <li>To comply with legal requirements</li>
-                <li>To protect our rights and safety</li>
-                <li>With service providers who assist in our operations (under strict confidentiality agreements)</li>
+                <li><strong>Payment Processors:</strong> PayPal processes contributions and may share limited transaction data (email, amount) with us;</li>
+                <li><strong>Service Providers:</strong> Email service providers for newsletter delivery (with appropriate data protection agreements);</li>
+                <li><strong>Legal Requirements:</strong> When required by law, court order, or legal process;</li>
+                <li><strong>Protection of Rights:</strong> To protect our rights, property, safety, or that of others.</li>
             </ul>
             
-            <h3>4. Data Security</h3>
-            <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure, and we cannot guarantee absolute security.</p>
+            <h3>International Data Transfers</h3>
             
-            <h3>5. Your Rights</h3>
+            <p>Your information may be transferred to and maintained on servers located outside your state, province, country, or other governmental jurisdiction where data protection laws may differ. By using our website, you consent to such transfers.</p>
+            
+            <h3>Data Retention</h3>
+            
+            <p>We retain personal information only as long as necessary to:</p>
+            <ul>
+                <li>Fulfill the purposes outlined in this Privacy Policy;</li>
+                <li>Comply with legal, accounting, or reporting requirements;</li>
+                <li>Resolve disputes and enforce agreements.</li>
+            </ul>
+            
+            <p>Contribution records are retained as required by tax and financial regulations (typically 7 years). Newsletter subscribers can unsubscribe at any time, and their data will be removed from active lists.</p>
+            
+            <h3>Your Data Protection Rights</h3>
+            
+            <h4>General Rights</h4>
             <p>You have the right to:</p>
             <ul>
-                <li>Access your personal information</li>
-                <li>Correct inaccurate information</li>
-                <li>Request deletion of your information</li>
-                <li>Opt-out of marketing communications</li>
-                <li>Object to processing of your information</li>
+                <li><strong>Access:</strong> Request a copy of personal information we hold about you;</li>
+                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data;</li>
+                <li><strong>Deletion:</strong> Request deletion of your personal information (subject to legal retention requirements);</li>
+                <li><strong>Opt-Out:</strong> Unsubscribe from newsletters at any time;</li>
+                <li><strong>Data Portability:</strong> Request your data in a portable format.</li>
             </ul>
             
-            <h3>6. Cookies</h3>
-            <p>We use cookies and similar technologies to enhance your browsing experience. You can control cookie preferences through your browser settings.</p>
+            <h4>GDPR Rights (EU Residents)</h4>
+            <p>If you are in the European Economic Area (EEA), you have additional rights under GDPR:</p>
+            <ul>
+                <li>Right to restrict processing of your data;</li>
+                <li>Right to object to processing;</li>
+                <li>Right to lodge a complaint with your local data protection authority;</li>
+                <li>Right to withdraw consent at any time (where processing is based on consent).</li>
+            </ul>
             
-            <h3>7. Third-Party Links</h3>
-            <p>Our website may contain links to third-party websites. We are not responsible for the privacy practices of these external sites.</p>
+            <h4>CCPA Rights (California Residents)</h4>
+            <p>California residents have rights under the California Consumer Privacy Act:</p>
+            <ul>
+                <li>Right to know what personal information is collected;</li>
+                <li>Right to know whether personal information is sold or disclosed;</li>
+                <li>Right to opt-out of sale (we do NOT sell your information);</li>
+                <li>Right to deletion;</li>
+                <li>Right to non-discrimination for exercising CCPA rights.</li>
+            </ul>
             
-            <h3>8. Children's Privacy</h3>
-            <p>Our services are not directed to individuals under 18 years of age. We do not knowingly collect personal information from children.</p>
+            <p><strong>To exercise any of these rights, contact us at:</strong> mkbinfo@proton.me with "Privacy Request" in the subject line. We will respond within 30 days.</p>
             
-            <h3>9. Changes to Privacy Policy</h3>
-            <p>We may update this privacy policy periodically. We will notify you of significant changes by posting a notice on our website or sending an email.</p>
+            <h3>Cookies & Tracking Technologies</h3>
             
-            <h3>10. Contact Us</h3>
-            <p>For questions about this privacy policy or to exercise your rights, contact us at:</p>
-            <p><a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></p>
-        </section>
+            <p>We use only essential cookies required for website functionality:</p>
+            <ul>
+                <li><strong>Session Cookies:</strong> Temporary cookies deleted when you close your browser, used for login sessions;</li>
+                <li><strong>Security Cookies:</strong> Help protect against fraud and unauthorized access;</li>
+                <li><strong>Preference Cookies:</strong> Remember your settings and preferences.</li>
+            </ul>
+            
+            <p>We do NOT use:</p>
+            <ul>
+                <li>Analytics or tracking cookies (no Google Analytics);</li>
+                <li>Advertising cookies;</li>
+                <li>Social media tracking pixels or third-party cookies.</li>
+            </ul>
+            
+            <p>You can control cookies through your browser settings, but disabling essential cookies may affect website functionality.</p>
+            
+            <h3>Third-Party Websites</h3>
+            
+            <p>Our website may contain links to third-party sites (PayPal, social media, etc.). We are not responsible for the privacy practices of these sites. We encourage you to review their privacy policies.</p>
+            
+            <h3>Children's Privacy</h3>
+            
+            <p>Our website is not intended for children under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately at mkbinfo@proton.me.</p>
+            
+            <h3>Security of Your Information</h3>
+            
+            <p>We use reasonable administrative, technical, and physical security measures to protect your personal information. However, no method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+            
+            <h3>Changes to This Privacy Policy</h3>
+            
+            <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated "Last Updated" date. We encourage you to review this Privacy Policy periodically.</p>
+            
+            <h3>Contact Us</h3>
+            
+            <p>If you have questions or concerns about this Privacy Policy or our data practices:</p>
+            
+            <p>Email: <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a><br>
+            Subject Line: "Privacy Inquiry"<br>
+            Mailing Address: <strong>[PO BOX - TO BE ADDED]</strong>, Inglewood, CA</p>
+        </div>
 
-        <!-- Terms and Conditions Section -->
-        <section id="terms" class="legal-section">
-            <h2>Terms & Conditions</h2>
-            <p><strong>Last Updated:</strong> October 16, 2025</p>
-            
-            <h3>1. Acceptance of Terms</h3>
-            <p>By accessing and using this website, you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use this website.</p>
-            
-            <h3>2. Intellectual Property</h3>
-            <p>All content on this website, including text, graphics, logos, images, and software, is the property of The COSMIC Framework or its content suppliers and is protected by copyright laws.</p>
-            
-            <h4>2.1 Research Materials</h4>
-            <ul>
-                <li>The book "The Big TOE" and associated materials are protected by copyright</li>
-                <li>You may download and use materials for personal, non-commercial purposes</li>
-                <li>Citation and attribution are required for any academic or research use</li>
-            </ul>
-            
-            <h3>3. Use of Website</h3>
-            <p>You agree to use this website only for lawful purposes and in a way that does not infringe upon the rights of others or restrict their use of the website.</p>
-            
-            <h4>Prohibited Activities:</h4>
-            <ul>
-                <li>Unauthorized copying or distribution of content</li>
-                <li>Harassment or abuse of other users</li>
-                <li>Attempting to gain unauthorized access to systems</li>
-                <li>Transmitting viruses or malicious code</li>
-                <li>Impersonating others</li>
-            </ul>
-            
-            <h3>4. User Accounts</h3>
-            <p>If you create an account, you are responsible for:</p>
-            <ul>
-                <li>Maintaining the confidentiality of your login credentials</li>
-                <li>All activities that occur under your account</li>
-                <li>Notifying us immediately of any unauthorized use</li>
-            </ul>
-            
-            <h3>5. Research and Academic Use</h3>
-            <p>When using materials from this website for research or academic purposes:</p>
-            <ul>
-                <li>Proper citation is required</li>
-                <li>Acknowledge the speculative nature of theoretical frameworks where appropriate</li>
-                <li>Distinguish between established physics and novel theoretical proposals</li>
-            </ul>
-            
-            <h3>6. Disclaimers</h3>
-            
-            <h4>6.1 Scientific Content</h4>
-            <p>The COSMIC Framework represents theoretical work that includes both established physics and novel proposals. Some content is speculative and requires experimental validation.</p>
-            
-            <h4>6.2 Website Content</h4>
-            <p>We strive for accuracy but make no warranties regarding:</p>
-            <ul>
-                <li>Completeness or accuracy of information</li>
-                <li>Suitability for any particular purpose</li>
-                <li>Uninterrupted or error-free operation</li>
-            </ul>
-            
-            <h3>7. Limitation of Liability</h3>
-            <p>To the fullest extent permitted by law, The COSMIC Framework shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of this website.</p>
-            
-            <h3>8. External Links</h3>
-            <p>Our website may contain links to third-party websites. We do not endorse or assume responsibility for the content, privacy policies, or practices of third-party sites.</p>
-            
-            <h3>9. Newsletter and Communications</h3>
-            <p>By subscribing to our newsletter:</p>
-            <ul>
-                <li>You consent to receive periodic emails</li>
-                <li>You can unsubscribe at any time</li>
-                <li>We will not share your information with third parties for marketing purposes</li>
-            </ul>
-            
-            <h3>10. Modifications to Terms</h3>
-            <p>We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting to the website. Your continued use constitutes acceptance of modified terms.</p>
-            
-            <h3>11. Governing Law</h3>
-            <p>These terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.</p>
-            
-            <h3>12. Severability</h3>
-            <p>If any provision of these terms is found to be unenforceable, the remaining provisions shall remain in full force and effect.</p>
-            
-            <h3>13. Contact Information</h3>
-            <p>For questions about these Terms and Conditions, contact us at:</p>
-            <p><a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></p>
-        </section>
-
-    </main>
-
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+        <div class="back-link">
+            <p><a href="index.html">← Back to Home</a> | <a href="contribute.html">Support This Work</a></p>
+        </div>
+    </div>
 
     <script>
+        // Check if user is logged in
+        function isUserLoggedIn() {
+            return localStorage.getItem('userLoggedIn') === 'true';
+        }
+
+        // Handle discussion link click
+        function handleDiscussionClick(event) {
+            event.preventDefault();
+            
+            if (isUserLoggedIn()) {
+                window.location.href = 'discussions.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.querySelector('.mobile-menu');
         
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-        
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
             });
-        });
-
-        window.addEventListener('scroll', function() {
-            const backToTop = document.getElementById('backToTop');
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
             });
         }
-        
-        // Smooth scroll to sections
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
     </script>
 </body>
 </html>
