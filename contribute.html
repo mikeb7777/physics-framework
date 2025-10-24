@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contribute - The Big TOE</title>
+    
+    <!-- PayPal SDK Script -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAayQDLoTF4n5_YavgkSMVahYRXeRXOuiNuvTZ7ksAa9QrWh6TnQatmfNoLDcHFb0ENu6hUyjGh94f7E8&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+    
     <style>
         * {
             margin: 0;
@@ -155,7 +159,7 @@
         .nav-center {
             display: flex;
             justify-content: center;
-            gap: 45px;
+            gap: 35px;
         }
         
         .nav-link {
@@ -750,8 +754,9 @@
             
             <div class="nav-center">
                 <a href="index.html" class="nav-link">Home</a>
-                <a href="legal.html" class="nav-link">About</a>
+                <a href="contribute.html" class="nav-link">Contribute</a>
                 <a href="#" onclick="handleDiscussionClick(event)" class="nav-link">Discussion</a>
+                <a href="legal.html" class="nav-link">Legal</a>
             </div>
             
             <div class="nav-right">
@@ -784,8 +789,9 @@
     <div class="mobile-menu">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="legal.html">About</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
             <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
+            <li><a href="legal.html">Legal</a></li>
             <li><a href="login.html">Log In</a></li>
             <li><a href="signup.html">Sign Up</a></li>
         </ul>
@@ -801,6 +807,7 @@
             <!-- Free Download -->
             <div class="contribution-card">
                 <div class="card-header">
+                    <h3 style="font-size: 0.9em; font-weight: 300; margin-bottom: 5px; color: #ffffff;">Students/Hardship</h3>
                     <h3>Free Access</h3>
                     <div class="amount">$0</div>
                 </div>
@@ -817,7 +824,7 @@
                 <div class="payment-options">
                     <div class="payment-tier">
                         <h3>Patron</h3>
-                        <div class="amount">$50+</div>
+                        <div class="amount">$50+ <small style="font-size: 0.5em;">USD</small></div>
                         <ul>
                             <li>Support research</li>
                             <li>Help keep book free</li>
@@ -826,7 +833,7 @@
                     </div>
                     <div class="payment-tier">
                         <h3>Supporter</h3>
-                        <div class="amount">$20</div>
+                        <div class="amount">$20 <small style="font-size: 0.5em;">USD</small></div>
                         <ul>
                             <li>Show appreciation</li>
                             <li>Support the work</li>
@@ -849,13 +856,13 @@
                 </div>
                 
                 <div class="paypal-button-container">
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" onsubmit="return validateEUWaiver()">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                        <input type="hidden" name="hosted_button_id" value="4FM5PMUS387MC">
-                        <button type="submit" class="download-btn" style="background: #ffd700; color: #0a0a0a; border: none;">
-                            Contribute via PayPal
-                        </button>
-                    </form>
+                    <!-- PayPal Hosted Button -->
+                    <div id="paypal-container-NVWZV5VQ7Y7SE"></div>
+                    <script>
+                        paypal.HostedButtons({
+                            hostedButtonId: "NVWZV5VQ7Y7SE",
+                        }).render("#paypal-container-NVWZV5VQ7Y7SE")
+                    </script>
                 </div>
             </div>
         </div>
