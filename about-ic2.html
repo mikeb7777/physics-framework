@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Ic² Institute</title>
+    <link rel="icon" type="image/png" href="logoRed.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        /* Geometric background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(30deg, #f8f9fa 12%, transparent 12.5%, transparent 87%, #f8f9fa 87.5%, #f8f9fa),
+                linear-gradient(150deg, #f8f9fa 12%, transparent 12.5%, transparent 87%, #f8f9fa 87.5%, #f8f9fa),
+                linear-gradient(30deg, #f8f9fa 12%, transparent 12.5%, transparent 87%, #f8f9fa 87.5%, #f8f9fa),
+                linear-gradient(150deg, #f8f9fa 12%, transparent 12.5%, transparent 87%, #f8f9fa 87.5%, #f8f9fa),
+                linear-gradient(60deg, #f5f5f5 25%, transparent 25.5%, transparent 75%, #f5f5f5 75%, #f5f5f5),
+                linear-gradient(60deg, #f5f5f5 25%, transparent 25.5%, transparent 75%, #f5f5f5 75%, #f5f5f5);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* Professional Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-bottom: 3px solid #dc143c;
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .site-branding {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .site-subtitle {
+            font-size: 0.8rem;
+            color: #dc143c;
+            font-weight: 500;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a:hover {
+            color: #dc143c;
+        }
+
+        nav a.active {
+            color: #dc143c;
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #dc143c;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(220,20,60,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section .highlight {
+            color: #dc143c;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            font-size: 2.3rem;
+            color: #1a1a2e;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #dc143c;
+        }
+
+        .section p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #555;
+            margin: 20px 0;
+        }
+
+        .author-section {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 50px;
+            align-items: start;
+            margin: 40px 0;
+        }
+
+        .author-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .author-qr {
+            width: 200px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .mission-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 35px;
+            border-radius: 12px;
+            border-left: 4px solid #dc143c;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(220,20,60,0.15);
+        }
+
+        .mission-card-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+
+        .mission-card p {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .social-section h2 {
+            color: white;
+            border: none;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px);
+        }
+
+        .social-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .social-link:hover .social-icon {
+            box-shadow: 0 12px 35px rgba(220,20,60,0.4);
+            transform: scale(1.1);
+        }
+
+        .social-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .social-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 40px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #dc143c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff1744;
+        }
+
+        .footer p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .author-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .content {
+                padding: 40px 20px;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            .hero-section {
+                padding: 50px 30px;
+            }
+
+            .social-links {
+                gap: 30px;
+            }
+
+            .social-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .social-icon img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section">
+                <img src="logoRed.png" alt="Ic² Institute Logo" class="logo">
+                <div class="site-branding">
+                    <div class="site-title">Ic² Institute</div>
+                    <div class="site-subtitle">Information • Consciousness • Computation</div>
+                </div>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about-page.html" class="active">About</a>
+                <a href="book-versions.html">The Book</a>
+                <a href="testing.html">Research</a>
+                <a href="blog.html">Blog</a>
+                <a href="discussions-page.html">Community</a>
+                <a href="events.html">Events</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="hero-section">
+            <h1>About <span class="highlight">Ic² Institute</span></h1>
+            <p>Advancing the understanding of reality through the lens of information, consciousness, and computation. We bridge theoretical physics, mathematics, and philosophy to explore the fundamental nature of existence.</p>
+        </div>
+
+        <div class="section">
+            <h2>Our Mission</h2>
+            <p>The Ic² Institute (Information-Consciousness-Computation Institute) is dedicated to developing and validating comprehensive theoretical frameworks that explain the relationship between information, consciousness, and the computational substrate of reality.</p>
+            
+            <p>We believe that understanding consciousness and reality requires integrating insights from multiple disciplines: theoretical physics, mathematics, computer science, neuroscience, and philosophy. Our work focuses on creating testable predictions and falsifiable hypotheses that can advance scientific understanding.</p>
+
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Theory Icon" class="mission-card-icon">
+                    <h3>Theoretical Development</h3>
+                    <p>Building rigorous mathematical frameworks that unify quantum mechanics, relativity, and consciousness within a computational paradigm.</p>
+                </div>
+
+                <div class="mission-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3655/3655580.png" alt="Research Icon" class="mission-card-icon">
+                    <h3>Experimental Validation</h3>
+                    <p>Designing testable predictions and collaborating with research institutions to validate theoretical claims through empirical investigation.</p>
+                </div>
+
+                <div class="mission-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3139/3139556.png" alt="Education Icon" class="mission-card-icon">
+                    <h3>Knowledge Dissemination</h3>
+                    <p>Making complex theoretical frameworks accessible through publications, educational content, and community engagement.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>The Author</h2>
+            <div class="author-section">
+                <div>
+                    <img src="https://ui-avatars.com/api/?name=Michael+Baines&size=250&background=1a1a2e&color=dc143c&bold=true&font-size=0.4" alt="Michael K. Baines" class="author-image">
+                    <img src="Michael_K__Baiqrcode.png" alt="Contact QR Code" class="author-qr">
+                </div>
+                <div>
+                    <h3 style="font-size: 1.8rem; color: #1a1a2e; margin-bottom: 20px;">Michael K. Baines</h3>
+                    <p>Michael K. Baines is a theoretical researcher focused on understanding the fundamental nature of reality through information theory, consciousness studies, and computational models. His work synthesizes insights from physics, mathematics, and philosophy to develop comprehensive frameworks that address longstanding questions about existence, awareness, and the structure of the universe.</p>
+                    
+                    <p>His primary work, <em>The Big TOE: A Theory of Everything</em>, presents a unified framework integrating quantum mechanics, relativity, and consciousness within a computational substrate. The theory makes specific testable predictions about quantum decoherence, consciousness signatures, and computational limits.</p>
+                    
+                    <p>Michael approaches theoretical work with a commitment to scientific rigor, falsifiability, and open science principles. All predictions are documented with publication dates to establish clear timelines for validation, and experimental methodologies are made publicly available to enable independent verification.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="social-section">
+            <h2>Connect With Us</h2>
+            <p style="font-size: 1.2rem; color: #e0e0e0;">Join the conversation and stay updated on the latest developments</p>
+            
+            <div class="social-links">
+                <a href="https://www.instagram.com/yourhandle" target="_blank" class="social-link">
+                    <div class="social-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    </div>
+                    <span class="social-label">Instagram</span>
+                </a>
+
+                <a href="https://www.youtube.com/@yourchannel" target="_blank" class="social-link">
+                    <div class="social-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+                    </div>
+                    <span class="social-label">YouTube</span>
+                </a>
+
+                <a href="mailto:mkbinfo@proton.me" class="social-link">
+                    <div class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email">
+                    </div>
+                    <span class="social-label">Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about-page.html">About</a>
+            <a href="legal.html">Legal</a>
+            <a href="privacy-policy.html">Privacy</a>
+            <a href="terms-conditions.html">Terms</a>
+        </div>
+        <p>&copy; 2025 Ic² Institute. All rights reserved.</p>
+    </footer>
+</body>
+</html>

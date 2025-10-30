@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing & Validation - The Big TOE</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid #dc143c;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            color: #dc143c;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #dc143c;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #dc143c;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #dc143c;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .tab:hover {
+            background: rgba(220, 20, 60, 0.2);
+        }
+
+        .tab.active {
+            background: #dc143c;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #dc143c;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 5px;
+        }
+
+        .section h2 {
+            color: #dc143c;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section h3 {
+            color: #e0e0e0;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: #c0c0c0;
+        }
+
+        .section ul, .section ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+            color: #c0c0c0;
+        }
+
+        .prediction-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #dc143c;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prediction-card h4 {
+            color: #dc143c;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-untested {
+            background: #555;
+            color: #ccc;
+        }
+
+        .status-testing {
+            background: #f39c12;
+            color: white;
+        }
+
+        .status-validated {
+            background: #27ae60;
+            color: white;
+        }
+
+        .status-refuted {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .data-section {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .data-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #dc143c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .data-link:hover {
+            background: #b01030;
+            transform: translateY(-2px);
+        }
+
+        .zenodo-section {
+            background: rgba(220, 20, 60, 0.1);
+            border: 2px solid #dc143c;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .zenodo-section h3 {
+            color: #dc143c;
+            margin-bottom: 1rem;
+        }
+
+        .info-box {
+            background: rgba(220, 20, 60, 0.1);
+            border: 1px solid #dc143c;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box h4 {
+            color: #dc143c;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid #dc143c;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #dc143c;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                margin-left: 0;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="logo.png" alt="Ic² Institute Logo" class="logo">
+                <div class="site-title">The Big TOE</div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="book-versions.html">Versions</a>
+                <a href="blog.html">Blog</a>
+                <a href="about-page.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Testing & Experimental Validation</h1>
+            <p>Testable predictions, experimental methodologies, and validation results</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('predictions')">Predictions</button>
+            <button class="tab" onclick="switchTab('methodology')">Methodology</button>
+            <button class="tab" onclick="switchTab('results')">Results</button>
+            <button class="tab" onclick="switchTab('data')">Data Repository</button>
+        </div>
+
+        <!-- Predictions Tab -->
+        <div id="predictions" class="tab-content active">
+            <div class="section">
+                <h2>Testable Predictions</h2>
+                <p>The Big TOE makes specific, falsifiable predictions that can be tested experimentally. These predictions emerge from the theoretical framework and provide paths for validation or refutation.</p>
+
+                <div class="info-box">
+                    <h4>Scientific Falsifiability</h4>
+                    <p>A theory that cannot be falsified is not scientific. Every prediction listed here provides a specific criterion that, if violated by experimental results, would demonstrate problems with the theoretical framework.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Quantum Decoherence Predictions</h2>
+                
+                <div class="prediction-card">
+                    <span class="status-badge status-untested">UNTESTED</span>
+                    <h4>Prediction 1: Computational Decoherence Signatures</h4>
+                    <p><strong>Prediction:</strong> Quantum decoherence rates should show discrete computational signatures consistent with fundamental processing constraints.</p>
+                    <p><strong>Specific Claim:</strong> Decoherence times will exhibit quantized patterns related to computational complexity classes.</p>
+                    <p><strong>Published:</strong> October 30, 2025 (Version 3.0)</p>
+                    <p><strong>Testability:</strong> Measure decoherence rates across varying system sizes and complexities. Look for step-function transitions rather than smooth scaling.</p>
+                    <p><strong>Falsification Criterion:</strong> If decoherence shows purely smooth exponential decay with no discrete signatures, this prediction fails.</p>
+                </div>
+
+                <div class="prediction-card">
+                    <span class="status-badge status-untested">UNTESTED</span>
+                    <h4>Prediction 2: Environmental Decoherence Scaling</h4>
+                    <p><strong>Prediction:</strong> Environmental decoherence should scale with computational cost of simulating the environment, not just with environment size.</p>
+                    <p><strong>Specific Claim:</strong> High-entropy environments cause faster decoherence than low-entropy environments of equal size.</p>
+                    <p><strong>Published:</strong> October 30, 2025 (Version 3.0)</p>
+                    <p><strong>Testability:</strong> Compare decoherence rates in thermal vs. ordered environments with controlled system sizes.</p>
+                    <p><strong>Falsification Criterion:</strong> If decoherence depends only on particle count and not entropy, this prediction fails.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Consciousness-Related Predictions</h2>
+                
+                <div class="prediction-card">
+                    <span class="status-badge status-untested">UNTESTED</span>
+                    <h4>Prediction 3: Integrated Information Signatures</h4>
+                    <p><strong>Prediction:</strong> Conscious systems should exhibit specific integrated information (Φ) signatures that correlate with reported subjective experience.</p>
+                    <p><strong>Specific Claim:</strong> Φ values above threshold correlate with consciousness; below threshold correlates with unconscious processing.</p>
+                    <p><strong>Published:</strong> October 30, 2025 (Version 3.0)</p>
+                    <p><strong>Testability:</strong> Measure Φ during various consciousness states (awake, sleeping, anesthesia, disorders of consciousness).</p>
+                    <p><strong>Falsification Criterion:</strong> If Φ shows no correlation with consciousness states, this prediction fails.</p>
+                </div>
+
+                <div class="prediction-card">
+                    <span class="status-badge status-untested">UNTESTED</span>
+                    <h4>Prediction 4: Anesthesia Information Integration</h4>
+                    <p><strong>Prediction:</strong> General anesthetics should reduce brain information integration (Φ) before suppressing neural activity.</p>
+                    <p><strong>Specific Claim:</strong> Loss of consciousness correlates with Φ reduction, not with raw activity levels.</p>
+                    <p><strong>Published:</strong> October 30, 2025 (Version 3.0)</p>
+                    <p><strong>Testability:</strong> Monitor both Φ and neural firing rates during anesthesia induction.</p>
+                    <p><strong>Falsification Criterion:</strong> If neural suppression precedes Φ reduction, this prediction fails.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Computational Limit Predictions</h2>
+                
+                <div class="prediction-card">
+                    <span class="status-badge status-untested">UNTESTED</span>
+                    <h4>Prediction 5: Quantum Computer Performance Walls</h4>
+                    <p><strong>Prediction:</strong> Quantum computers will encounter performance barriers at specific scales related to simulation complexity.</p>
+                    <p><strong>Specific Claim:</strong> Scaling will not be smooth but will show discrete barriers at points where simulation cost exceeds available resources.</p>
+                    <p><strong>Published:</strong> October 30, 2025 (Version 3.0)</p>
+                    <p><strong>Testability:</strong> Map quantum computer performance as qubit count increases. Look for unexpected plateaus.</p>
+                    <p><strong>Falsification Criterion:</strong> If quantum computers scale smoothly according to theoretical limits without discrete barriers, this prediction fails.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Prime Number Logic Gate Predictions</h2>
+                
+                <div class="prediction-card">
+                    <span class="status-badge status-untested">UNTESTED</span>
+                    <h4>Prediction 6: Prime-Based Computational Efficiency</h4>
+                    <p><strong>Prediction:</strong> Algorithms structured around prime number properties will show unexpected efficiency advantages in quantum systems.</p>
+                    <p><strong>Specific Claim:</strong> Certain computational problems will solve faster when represented using prime factorization frameworks.</p>
+                    <p><strong>Published:</strong> October 30, 2025 (Version 3.0)</p>
+                    <p><strong>Testability:</strong> Compare standard vs. prime-based algorithms on quantum hardware for specific problem classes.</p>
+                    <p><strong>Falsification Criterion:</strong> If no efficiency advantage emerges for prime-structured algorithms, this prediction fails.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Tab -->
+        <div id="methodology" class="tab-content">
+            <div class="section">
+                <h2>Experimental Methodologies</h2>
+                <p>This section outlines the proposed experimental approaches for testing predictions from The Big TOE framework.</p>
+            </div>
+
+            <div class="section">
+                <h2>Quantum Decoherence Experiments</h2>
+                
+                <h3>Required Equipment</h3>
+                <ul>
+                    <li>Trapped ion or superconducting qubit quantum computer</li>
+                    <li>High-precision timing equipment (picosecond resolution)</li>
+                    <li>Controlled thermal environments (various temperatures)</li>
+                    <li>Magnetic shielding and vibration isolation</li>
+                </ul>
+
+                <h3>Experimental Protocol</h3>
+                <ol>
+                    <li><strong>Baseline Measurement:</strong> Establish decoherence rates in minimal-environment conditions</li>
+                    <li><strong>Environmental Variation:</strong> Systematically vary environment complexity (temperature, magnetic fields, photon presence)</li>
+                    <li><strong>Entropy Control:</strong> Test both high-entropy (thermal) and low-entropy (ordered) environments</li>
+                    <li><strong>Scale Testing:</strong> Measure across different numbers of qubits (1, 2, 4, 8, 16...)</li>
+                    <li><strong>Data Analysis:</strong> Look for discrete transitions and entropy correlations</li>
+                </ol>
+
+                <h3>Data Collection</h3>
+                <p>Minimum requirements:</p>
+                <ul>
+                    <li>1000+ measurements per configuration</li>
+                    <li>Multiple quantum hardware platforms for reproducibility</li>
+                    <li>Statistical significance (p < 0.01)</li>
+                    <li>Full error analysis and calibration data</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Consciousness Integration Experiments</h2>
+                
+                <h3>Required Equipment</h3>
+                <ul>
+                    <li>High-density EEG (256+ channels) or MEG</li>
+                    <li>fMRI for spatial resolution</li>
+                    <li>Computing cluster for Φ calculation</li>
+                    <li>Anesthesia delivery and monitoring systems</li>
+                </ul>
+
+                <h3>Experimental Protocol</h3>
+                <ol>
+                    <li><strong>Baseline States:</strong> Measure Φ during normal waking consciousness</li>
+                    <li><strong>Sleep Stages:</strong> Track Φ through sleep stages (REM, N1, N2, N3)</li>
+                    <li><strong>Anesthesia:</strong> Monitor Φ during anesthesia induction and emergence</li>
+                    <li><strong>Disorders:</strong> Compare patients with varying consciousness levels (coma, vegetative state, minimally conscious)</li>
+                    <li><strong>Correlation Analysis:</strong> Relate Φ values to subjective reports and clinical assessments</li>
+                </ol>
+
+                <h3>Ethical Considerations</h3>
+                <p>All consciousness experiments must be:</p>
+                <ul>
+                    <li>IRB approved with informed consent</li>
+                    <li>Conducted by qualified medical personnel</li>
+                    <li>Non-invasive where possible</li>
+                    <li>Respectful of patient dignity and rights</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Computational Limit Testing</h2>
+                
+                <h3>Quantum Computer Scaling</h3>
+                <ol>
+                    <li><strong>Hardware Access:</strong> Secure access to various quantum platforms (IBM, Google, IonQ, etc.)</li>
+                    <li><strong>Benchmark Problems:</strong> Select standard quantum algorithms (Shor's, Grover's, quantum simulation)</li>
+                    <li><strong>Scaling Study:</strong> Run identical problems at increasing qubit counts</li>
+                    <li><strong>Performance Metrics:</strong> Track fidelity, gate error rates, execution time vs. theoretical predictions</li>
+                    <li><strong>Anomaly Detection:</strong> Look for unexpected plateaus or barriers in performance</li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2>Data Management</h2>
+                
+                <h3>Open Science Principles</h3>
+                <p>All experimental data will be:</p>
+                <ul>
+                    <li>Published on Zenodo with DOI</li>
+                    <li>Released under Creative Commons license</li>
+                    <li>Fully documented with methodology</li>
+                    <li>Version controlled with timestamps</li>
+                    <li>Available for independent verification</li>
+                </ul>
+
+                <h3>Reproducibility</h3>
+                <p>Complete packages will include:</p>
+                <ul>
+                    <li>Raw data files</li>
+                    <li>Analysis code (Python/Julia)</li>
+                    <li>Hardware specifications</li>
+                    <li>Calibration parameters</li>
+                    <li>Statistical methods</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Results Tab -->
+        <div id="results" class="tab-content">
+            <div class="section">
+                <h2>Experimental Results</h2>
+                <p>As experimental validation proceeds, results will be documented here with full data, analysis, and interpretation.</p>
+
+                <div class="info-box">
+                    <h4>Results Status: In Progress</h4>
+                    <p>Experimental testing is currently in the planning and proposal stage. Results will be published as they become available through peer-reviewed channels and open data repositories.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Expected Timeline</h2>
+                
+                <h3>Phase 1: Initial Tests (2025-2026)</h3>
+                <ul>
+                    <li>Quantum decoherence baseline measurements</li>
+                    <li>Initial consciousness integration studies</li>
+                    <li>Preliminary data publication</li>
+                </ul>
+
+                <h3>Phase 2: Detailed Analysis (2026-2027)</h3>
+                <ul>
+                    <li>Large-scale decoherence study across platforms</li>
+                    <li>Comprehensive consciousness state mapping</li>
+                    <li>Prime-based algorithm testing</li>
+                </ul>
+
+                <h3>Phase 3: Validation (2027-2028)</h3>
+                <ul>
+                    <li>Independent replication efforts</li>
+                    <li>Meta-analysis of accumulated data</li>
+                    <li>Theory revision based on results</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Publication Plan</h2>
+                <p>Results will be disseminated through multiple channels:</p>
+                <ul>
+                    <li><strong>Preprints:</strong> arXiv.org for rapid dissemination</li>
+                    <li><strong>Peer Review:</strong> Submission to journals (Nature Physics, Physical Review, etc.)</li>
+                    <li><strong>Open Data:</strong> Zenodo repositories with DOIs</li>
+                    <li><strong>Conference Presentations:</strong> APS, Quantum Information conferences</li>
+                    <li><strong>This Website:</strong> Regular updates and summaries</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>How Results Will Be Interpreted</h2>
+                
+                <h3>If Predictions Are Validated</h3>
+                <p>Experimental confirmation would provide strong support for the theoretical framework and warrant deeper investigation into its implications.</p>
+
+                <h3>If Predictions Are Refuted</h3>
+                <p>Clear refutation would require theory revision or abandonment of specific claims. This is how science progresses - through honest evaluation of evidence.</p>
+
+                <h3>If Results Are Ambiguous</h3>
+                <p>Unclear results would necessitate improved experimental design, more sensitive equipment, or reformulation of predictions to be more testable.</p>
+
+                <div class="info-box">
+                    <h4>Scientific Integrity</h4>
+                    <p>All results - whether supporting, refuting, or ambiguous - will be published transparently. Negative results are as valuable as positive ones for advancing understanding.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Repository Tab -->
+        <div id="data" class="tab-content">
+            <div class="section">
+                <h2>Open Data Repository</h2>
+                <p>All experimental data, analysis code, and supporting materials will be published on Zenodo with permanent DOIs for citation and verification.</p>
+            </div>
+
+            <div class="zenodo-section">
+                <h3>Zenodo Data Archive</h3>
+                <p><strong>Purpose:</strong> Provide permanent, citable, versioned storage for all research data related to testing The Big TOE framework.</p>
+                
+                <p style="margin-top: 1rem;"><strong>Repository Contents:</strong></p>
+                <ul>
+                    <li>Raw experimental data files</li>
+                    <li>Processed data and analysis results</li>
+                    <li>Analysis code and scripts (Python, Julia, MATLAB)</li>
+                    <li>Documentation and methodology descriptions</li>
+                    <li>Hardware specifications and calibration data</li>
+                    <li>Figures and visualizations</li>
+                </ul>
+
+                <div class="data-section">
+                    <h4>Access the Data</h4>
+                    <p>Coming Soon: DOI links will be added as data becomes available</p>
+                    <p style="margin-top: 1rem;"><strong>Example Structure:</strong></p>
+                    <ul>
+                        <li><code>doi:10.5281/zenodo.XXXXX</code> - Quantum Decoherence Study 2025</li>
+                        <li><code>doi:10.5281/zenodo.XXXXX</code> - Consciousness Integration Data 2025</li>
+                        <li><code>doi:10.5281/zenodo.XXXXX</code> - Prime Algorithm Benchmarks 2025</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Data Usage Guidelines</h2>
+                
+                <h3>License</h3>
+                <p>All data is released under <strong>Creative Commons Attribution 4.0 (CC BY 4.0)</strong></p>
+                <p>You are free to:</p>
+                <ul>
+                    <li>Share - copy and redistribute the data</li>
+                    <li>Adapt - remix, transform, and build upon the data</li>
+                    <li>Use for commercial or academic purposes</li>
+                </ul>
+                <p>Under the following terms:</p>
+                <ul>
+                    <li>Attribution - cite the original work with DOI</li>
+                    <li>No additional restrictions</li>
+                </ul>
+
+                <h3>Citation Format</h3>
+                <p style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                    Author Name. (2025). Dataset Title [Data set]. Zenodo. https://doi.org/10.5281/zenodo.XXXXX
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>Contributing Data</h2>
+                <p>Researchers conducting independent tests of Big TOE predictions are encouraged to contribute their data:</p>
+                
+                <h3>Submission Process</h3>
+                <ol>
+                    <li>Conduct experiments following published methodologies</li>
+                    <li>Document methodology and parameters thoroughly</li>
+                    <li>Prepare data in standard formats (HDF5, CSV, etc.)</li>
+                    <li>Upload to Zenodo with appropriate metadata</li>
+                    <li>Link to this project via community features</li>
+                    <li>Notify us for inclusion in results summary</li>
+                </ol>
+
+                <h3>Data Standards</h3>
+                <p>Contributed data should include:</p>
+                <ul>
+                    <li>Complete methodology description</li>
+                    <li>Hardware/software specifications</li>
+                    <li>Raw data files</li>
+                    <li>Processing code</li>
+                    <li>Error analysis</li>
+                    <li>Calibration information</li>
+                    <li>Timestamp and version information</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Independent Verification</h2>
+                <p>Scientific claims require independent verification. We encourage:</p>
+                <ul>
+                    <li>Replication studies by other research groups</li>
+                    <li>Alternative analysis methods on same data</li>
+                    <li>Critical evaluation and peer review</li>
+                    <li>Publication of both confirming and disconfirming results</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>Collaborative Science</h4>
+                    <p>By making all data and code openly available, we enable the scientific community to verify, critique, extend, or refute this work. This transparency accelerates scientific progress and maintains integrity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Ic² Institute. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="legal.html">Institute Legal</a> | 
+            <a href="book-legal.html">Book Disclaimers</a> | 
+            <a href="privacy-policy.html">Privacy</a>
+        </p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
