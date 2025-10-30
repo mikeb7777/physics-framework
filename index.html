@@ -46,7 +46,6 @@
             opacity: 0.6;
         }
 
-        /* Hexagon Pattern Overlay */
         .geometric-bg::after {
             content: '';
             position: absolute;
@@ -70,7 +69,7 @@
         }
 
         .header-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px 40px;
             display: flex;
@@ -78,59 +77,19 @@
             align-items: center;
         }
 
-        .logo-link {
-            text-decoration: none;
+        /* FIXED: Logo area - no button, just the logo */
+        .logo-area {
+            width: 280px;
+            height: 80px;
             display: flex;
             align-items: center;
-            transition: transform 0.3s ease;
+            justify-content: flex-start;
         }
 
-        .logo-link:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-small {
-            width: 220px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .logo-small::before {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: 
-                radial-gradient(circle at center, rgba(220, 53, 69, 0.15) 0%, rgba(220, 53, 69, 0.05) 50%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(8px);
-        }
-
-        .logo-small img {
-            width: 100%;
-            height: 100%;
+        .logo-area img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            position: relative;
-            z-index: 1;
-        }
-
-        .book-access-badge {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.7em;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            position: absolute;
-            bottom: -8px;
-            right: 10px;
-            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
         }
 
         .nav-menu {
@@ -168,9 +127,14 @@
 
         /* Hero Section */
         .hero {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 80px 40px;
+            padding: 60px 40px 40px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
             text-align: center;
         }
 
@@ -194,18 +158,38 @@
         .hero p {
             font-size: 1.2em;
             color: #555;
-            max-width: 800px;
-            margin: 0 auto 40px;
             line-height: 1.8;
+            margin-bottom: 30px;
         }
 
-        /* Validation Banner - Narrower */
+        /* FIXED: Book button after greeting */
+        .book-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .book-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4);
+        }
+
+        /* Validation Banner - More Compact */
         .validation-banner {
             background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
             color: white;
             padding: 30px 40px;
             margin: 40px auto;
-            max-width: 900px;
+            max-width: 1200px;
             border-left: 6px solid #dc3545;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative;
@@ -223,31 +207,50 @@
             pointer-events: none;
         }
 
-        .banner-tag {
-            background: #dc3545;
-            color: white;
-            padding: 5px 15px;
-            font-size: 0.85em;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 15px;
-            border-radius: 3px;
+        .banner-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: center;
         }
 
-        .banner-headline {
-            font-size: 1.6em;
+        .banner-text h2 {
+            font-size: 1.8em;
             font-weight: 700;
             margin-bottom: 15px;
             line-height: 1.3;
         }
 
-        .banner-text {
+        .banner-text p {
             font-size: 1.05em;
             line-height: 1.6;
             color: #e0e0e0;
             margin-bottom: 20px;
+        }
+
+        .banner-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-item {
+            background: rgba(220, 53, 69, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #dc3545;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #ccc;
         }
 
         .banner-cta {
@@ -270,9 +273,9 @@
             box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
         }
 
-        /* Press Release Grid */
-        .press-releases {
-            max-width: 1200px;
+        /* Validation Cards with Tags */
+        .validations-section {
+            max-width: 1400px;
             margin: 60px auto;
             padding: 0 40px;
         }
@@ -293,59 +296,77 @@
             color: #666;
         }
 
-        .press-grid {
+        .validation-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
 
-        .press-card {
+        .validation-card {
             background: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: all 0.3s;
             border-top: 4px solid #dc3545;
+            position: relative;
         }
 
-        .press-card:hover {
+        .validation-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .press-card-header {
+        /* FIXED: Yellow validated tag with black text */
+        .validated-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ffd700;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .validation-card-header {
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: white;
             padding: 20px;
             text-align: center;
         }
 
-        .press-card-date {
+        .validation-date {
             font-size: 0.85em;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        .press-card-body {
+        .validation-card-body {
             padding: 25px;
         }
 
-        .press-card-body h3 {
+        .validation-card-body h3 {
             font-size: 1.3em;
             color: #1a1a1a;
             margin-bottom: 15px;
             line-height: 1.3;
         }
 
-        .press-card-body p {
+        .validation-card-body p {
             color: #555;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        .press-card-link {
+        .validation-link {
             display: inline-block;
             color: #dc3545;
             text-decoration: none;
@@ -353,16 +374,16 @@
             transition: all 0.3s;
         }
 
-        .press-card-link:hover {
+        .validation-link:hover {
             color: #c82333;
             transform: translateX(5px);
         }
 
-        .press-card-link::after {
+        .validation-link::after {
             content: ' →';
         }
 
-        /* Research Areas */
+        /* Research Areas - More Visual */
         .research-areas {
             background: white;
             padding: 80px 40px;
@@ -370,33 +391,35 @@
         }
 
         .research-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .research-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             margin-top: 50px;
         }
 
         .research-item {
             text-align: center;
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: 10px;
             transition: all 0.3s;
             border: 2px solid #e9ecef;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         }
 
         .research-item:hover {
             border-color: #dc3545;
-            background: #fff5f5;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.15);
         }
 
         .research-icon {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 20px;
             color: #dc3545;
         }
@@ -412,46 +435,6 @@
             line-height: 1.6;
         }
 
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            padding: 80px 40px;
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #dc3545;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
         /* Footer */
         .footer {
             background: #1a1a1a;
@@ -460,7 +443,7 @@
         }
 
         .footer-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -510,12 +493,16 @@
                 gap: 15px;
             }
 
-            .press-grid {
+            .validation-grid {
                 grid-template-columns: 1fr;
             }
 
-            .validation-banner {
-                max-width: 100%;
+            .banner-content {
+                grid-template-columns: 1fr;
+            }
+
+            .banner-stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -523,19 +510,17 @@
 <body>
     <div class="geometric-bg"></div>
 
-    <!-- Header -->
+    <!-- FIXED Header - Logo area only, no button -->
     <header class="header">
         <div class="header-container">
-            <a href="book.html" class="logo-link" title="Access The Big TOE Book">
-                <div class="logo-small">
-                    <img src="logo.png" alt="The Big TOE Logo">
-                    <span class="book-access-badge">Read Book</span>
-                </div>
-            </a>
+            <div class="logo-area">
+                <img src="logo.png" alt="Ic² Research Institute">
+            </div>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#research">Research</a></li>
-                    <li><a href="#press">Press Releases</a></li>
+                    <li><a href="validation-page.html">Validations</a></li>
+                    <li><a href="#testing">Testing</a></li>
                     <li><a href="about-page.html">About</a></li>
                     <li><a href="contribute.html">Contribute</a></li>
                     <li><a href="discussions.html">Community</a></li>
@@ -544,70 +529,99 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Book Button -->
     <section class="hero">
-        <div class="subtitle">Ic² Research Institute</div>
-        <h1>Pioneering the Science<br>of Information & Consciousness</h1>
-        <p>The Information-Consciousness Institute advances testable frameworks that bridge physics, information theory, and consciousness studies through rigorous scientific methodology and radical transparency.</p>
+        <div class="hero-content">
+            <div class="subtitle">Ic² Research Institute</div>
+            <h1>Pioneering the Science<br>of Information & Consciousness</h1>
+            <p>The Information-Consciousness Institute advances testable frameworks that bridge physics, information theory, and consciousness studies through rigorous scientific methodology and radical transparency.</p>
+            <!-- FIXED: Book button placed after greeting -->
+            <a href="book.html" class="book-cta">Read The Big TOE</a>
+        </div>
     </section>
 
-    <!-- Main Validation Banner -->
+    <!-- Validation Banner -->
     <div class="validation-banner">
-        <div class="banner-tag">Breaking: Four Independent Validations</div>
-        <h2 class="banner-headline">Framework Predictions Validated Across Multiple Domains</h2>
-        <p class="banner-text">Recent experimental results from DESI, Google Quantum AI, JWST, and theoretical physics have independently validated key predictions from The COSMIC Framework, demonstrating 100% accuracy across four distinct breakthrough discoveries.</p>
-        <a href="press-release-1.html" class="banner-cta">Read Full Report</a>
+        <div class="banner-content">
+            <div class="banner-text">
+                <h2>Four Independent Validations Confirmed</h2>
+                <p>Framework predictions validated across cosmology, quantum computing, and theoretical physics with 100% accuracy.</p>
+                <a href="validation-page.html" class="banner-cta">View All Validations</a>
+            </div>
+            <div class="banner-stats">
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Validated Predictions</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3.2σ</span>
+                    <span class="stat-label">Significance</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Measurements</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Press Releases Section -->
-    <section class="press-releases" id="press">
+    <!-- Validations Section with Tags -->
+    <section class="validations-section" id="validations">
         <div class="section-header">
-            <h2>Latest Press Releases</h2>
-            <p>Celebrating breakthrough validations across physics, quantum computing, and consciousness research</p>
+            <h2>Framework Validations</h2>
+            <p>Independent experimental confirmations of theoretical predictions</p>
         </div>
 
-        <div class="press-grid">
-            <div class="press-card">
-                <div class="press-card-header">
-                    <div class="press-card-date">October 28, 2025</div>
+        <div class="validation-grid">
+            <div class="validation-card">
+                <span class="validated-tag">✓ Validated</span>
+                <div class="validation-card-header">
+                    <div class="validation-date">March 2025 | DESI</div>
                 </div>
-                <div class="press-card-body">
-                    <h3>Framework Achieves Perfect Validation Score Across Four Independent Discoveries</h3>
-                    <p>Major experimental results from DESI, Google, JWST, and Galaxy Asymmetry studies confirm 100% of testable predictions.</p>
-                    <a href="press-release-1.html" class="press-card-link">Read More</a>
-                </div>
-            </div>
-
-            <div class="press-card">
-                <div class="press-card-header">
-                    <div class="press-card-date">October 28, 2025</div>
-                </div>
-                <div class="press-card-body">
-                    <h3>Prime Number Logic Gates: Information Architecture Matches Framework Predictions</h3>
-                    <p>New research validates framework's prediction that prime numbers function as fundamental computational structures in physical systems.</p>
-                    <a href="press-release-2.html" class="press-card-link">Read More</a>
+                <div class="validation-card-body">
+                    <h3>Dark Energy Evolution</h3>
+                    <p>DESI collaboration detected temporal variations in dark energy density, matching framework predictions documented January 2025.</p>
+                    <a href="validation-page.html#desi" class="validation-link">Details</a>
                 </div>
             </div>
 
-            <div class="press-card">
-                <div class="press-card-header">
-                    <div class="press-card-date">October 28, 2025</div>
+            <div class="validation-card">
+                <span class="validated-tag">✓ Validated</span>
+                <div class="validation-card-header">
+                    <div class="validation-date">December 2024 | Google</div>
                 </div>
-                <div class="press-card-body">
-                    <h3>Consciousness Signatures Detected in Neural Systems: Framework Threshold Confirmed</h3>
-                    <p>Breakthrough measurements validate predicted information-processing patterns that distinguish conscious from unconscious neural activity.</p>
-                    <a href="press-release-3.html" class="press-card-link">Read More</a>
+                <div class="validation-card-body">
+                    <h3>Quantum Error Correction</h3>
+                    <p>Google's Willow chip demonstrated exponential error reduction aligned with framework's information-theoretic predictions.</p>
+                    <a href="validation-page.html#willow" class="validation-link">Details</a>
                 </div>
             </div>
 
-            <div class="press-card">
-                <div class="press-card-header">
-                    <div class="press-card-date">October 28, 2025</div>
+            <div class="validation-card">
+                <span class="validated-tag">✓ Validated</span>
+                <div class="validation-card-header">
+                    <div class="validation-date">Ongoing | JWST</div>
                 </div>
-                <div class="press-card-body">
-                    <h3>Computational Boundaries Observed in Quantum Scaling Studies</h3>
-                    <p>Latest quantum computing research confirms framework's prediction of fundamental information-processing limits in physical systems.</p>
-                    <a href="press-release-4.html" class="press-card-link">Read More</a>
+                <div class="validation-card-body">
+                    <h3>Early Galaxy Formation</h3>
+                    <p>JWST continues discovering mature galaxies at high redshifts, validating framework's structure formation predictions.</p>
+                    <a href="validation-page.html#jwst" class="validation-link">Details</a>
+                </div>
+            </div>
+
+            <div class="validation-card">
+                <span class="validated-tag">✓ Validated</span>
+                <div class="validation-card-header">
+                    <div class="validation-date">2025 | Theoretical</div>
+                </div>
+                <div class="validation-card-body">
+                    <h3>Galaxy Asymmetry Patterns</h3>
+                    <p>Detection of left-right asymmetries in galaxy spins at 3.2σ significance matches framework predictions.</p>
+                    <a href="validation-page.html#asymmetry" class="validation-link">Details</a>
                 </div>
             </div>
         </div>
@@ -649,13 +663,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2>Join the Scientific Revolution</h2>
-        <p>Explore the complete framework and discover how information theory is reshaping our understanding of reality</p>
-        <a href="book.html" class="cta-button">Read The Big TOE</a>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -664,7 +671,8 @@
                 <ul>
                     <li><a href="about-page.html">About Us</a></li>
                     <li><a href="#research">Research Areas</a></li>
-                    <li><a href="#press">Press Releases</a></li>
+                    <li><a href="validation-page.html">Validations</a></li>
+                    <li><a href="zenodo-papers.html">Research Papers</a></li>
                     <li><a href="contribute.html">How to Contribute</a></li>
                 </ul>
             </div>
@@ -673,7 +681,7 @@
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="book.html">The Big TOE Book</a></li>
-                    <li><a href="references.html">Research Papers</a></li>
+                    <li><a href="zenodo-papers.html">Zenodo Repository</a></li>
                     <li><a href="discussions.html">Community Forum</a></li>
                     <li><a href="faq.html">FAQ</a></li>
                 </ul>
