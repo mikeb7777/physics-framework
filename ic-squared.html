@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ic² Research Institute | Information Computing Institute</title>
+    <meta name="description" content="Ic² Research Institute - Advancing understanding through testable predictions in cosmology, quantum information, and consciousness research.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text {
+            font-size: 2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.9em;
+            color: #95a5a6;
+            margin-left: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-login-btn {
+            padding: 10px 28px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid rgba(102, 126, 234, 0.8);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-login-btn:hover {
+            background: rgba(102, 126, 234, 0.95);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 60px 60px;
+            background: 
+                radial-gradient(ellipse at top, rgba(102, 126, 234, 0.15), transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(118, 75, 162, 0.15), transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 10px 30px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            border-radius: 50px;
+            color: #667eea;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.3em;
+            color: #d0d0d0;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            text-decoration: none;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Research Areas */
+        .research-areas {
+            padding: 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .section-header p {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .research-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .research-card:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .research-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .research-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .research-card p {
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .research-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s;
+        }
+
+        .research-link:hover {
+            gap: 15px;
+        }
+
+        /* Validation Section */
+        .validation-section {
+            padding: 100px 60px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+        }
+
+        .validation-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .validation-highlight {
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid #2ecc71;
+            border-radius: 20px;
+            padding: 50px;
+            margin-top: 50px;
+        }
+
+        .validation-highlight h3 {
+            font-size: 2.2em;
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+
+        .validation-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 60px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .footer-section p {
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #d0d0d0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #95a5a6;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo-section">
+                <div class="logo-text">Ic²</div>
+                <div class="logo-subtitle">Research Institute</div>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="ic-squared.html">Home</a></li>
+                <li><a href="validation-system.html">Validation</a></li>
+                <li><a href="book-index.html">The Book</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+            </ul>
+            
+            <a href="login_page_complete.html" class="nav-login-btn">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">INFORMATION COMPUTING INSTITUTE</div>
+            <h1>Ic²</h1>
+            <div class="hero-subtitle">Research Institute</div>
+            <p class="hero-description">
+                Advancing understanding through testable predictions. We explore fundamental questions about information, consciousness, and cosmology—not through speculation alone, but through rigorous experimental validation.
+            </p>
+            <div class="hero-cta">
+                <a href="validation-system.html" class="cta-btn cta-primary">View Validation System</a>
+                <a href="book-index.html" class="cta-btn cta-secondary">Read The Book</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Areas -->
+    <section class="research-areas">
+        <div class="section-header">
+            <h2>Research Programs</h2>
+            <p>Multiple interconnected research programs investigating the fundamental nature of reality through testable predictions</p>
+        </div>
+
+        <div class="research-grid">
+            <div class="research-card">
+                <div class="research-icon">🌌</div>
+                <h3>Cosmology & Dark Energy</h3>
+                <p>
+                    Investigating dark energy evolution, cosmic structure formation, and the Big Bang as an information substrate phase transition. Recent validation: Dark energy evolution predicted and confirmed by DESI collaboration.
+                </p>
+                <a href="validation-system.html#dark-energy" class="research-link">
+                    View Validation Status →
+                </a>
+            </div>
+
+            <div class="research-card">
+                <div class="research-icon">⚛️</div>
+                <h3>Quantum Information</h3>
+                <p>
+                    Exploring how quantization might emerge from information optimization principles, quantum error correction enhancement, and frequency-dependent effects in quantum systems.
+                </p>
+                <a href="validation-system.html#quantum" class="research-link">
+                    Current Experiments →
+                </a>
+            </div>
+
+            <div class="research-card">
+                <div class="research-icon">🧠</div>
+                <h3>Consciousness Research</h3>
+                <p>
+                    Testing whether consciousness interfaces with fundamental physics through information processing. Investigating consciousness-gravity correlations and neural information patterns.
+                </p>
+                <a href="validation-system.html#consciousness" class="research-link">
+                    Research Protocols →
+                </a>
+            </div>
+
+            <div class="research-card">
+                <div class="research-icon">🔢</div>
+                <h3>Mathematical Foundations</h3>
+                <p>
+                    Investigating whether mathematical constants play active roles in physics, prime numbers as computational structures, and information-theoretic optimization across scales.
+                </p>
+                <a href="blog-prime-numbers.html" class="research-link">
+                    Explore Hypothesis →
+                </a>
+            </div>
+
+            <div class="research-card">
+                <div class="research-icon">📊</div>
+                <h3>Pattern-Emergent Gravity</h3>
+                <p>
+                    Testing whether gravitational effects emerge from information patterns. Laboratory tests of multi-property gravimetry and astrophysical predictions currently underway.
+                </p>
+                <a href="validation-system.html#peg" class="research-link">
+                    Experimental Status →
+                </a>
+            </div>
+
+            <div class="research-card">
+                <div class="research-icon">🌐</div>
+                <h3>Network Information Theory</h3>
+                <p>
+                    Analyzing universal information processing principles across scales—from neural networks to the cosmic web. Testing for cross-scale pattern correlations.
+                </p>
+                <a href="validation-system.html#networks" class="research-link">
+                    View Predictions →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Validation Highlight -->
+    <section class="validation-section">
+        <div class="validation-content">
+            <div class="section-header">
+                <h2>Framework Validation</h2>
+                <p>Science advances through bold hypotheses tested by careful experiments</p>
+            </div>
+
+            <div class="validation-highlight">
+                <h3>✅ First Major Validation: Dark Energy Evolution</h3>
+                <p style="font-size: 1.2em; color: #d0d0d0; line-height: 1.8;">
+                    On <strong>January 29, 2025</strong>, we documented and legally notarized a prediction: Pattern-Emergent Gravity theory requires dark energy to vary with information density.
+                    <br><br>
+                    On <strong>March 19, 2025</strong>—49 days later—the DESI collaboration independently announced evidence for dark energy evolution at 2.8-4.2σ significance.
+                    <br><br>
+                    This represents a <strong>documented prediction with legal timestamp verification</strong>, made before independent validation.
+                </p>
+
+                <div class="validation-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Validated Prediction</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Testable Predictions</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">49</div>
+                        <div class="stat-label">Days Priority Window</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">4.2σ</div>
+                        <div class="stat-label">Evidence Level</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Ic²</h3>
+                <p>
+                    The Information Computing Institute (Ic²) is a research organization dedicated to advancing understanding through testable predictions in cosmology, quantum information, consciousness research, and fundamental physics.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Research</h3>
+                <ul class="footer-links">
+                    <li><a href="validation-system.html">Validation System</a></li>
+                    <li><a href="validation-system.html#predictions">Active Predictions</a></li>
+                    <li><a href="#">Zenodo Repository</a></li>
+                    <li><a href="#">Publications</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul class="footer-links">
+                    <li><a href="discussions-page.html">Discussions</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>The Book</h3>
+                <ul class="footer-links">
+                    <li><a href="book-index.html">A Quest for The Big TOE</a></li>
+                    <li><a href="appendix.html">Appendix</a></li>
+                    <li><a href="references.html">References</a></li>
+                    <li><a href="legal.html">About the Author</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute | Information Computing Institute | All Rights Reserved</p>
+            <p style="margin-top: 10px;">Contact: mkb.info@proton.me | <a href="privacy-policy.html" style="color: #667eea;">Privacy Policy</a> | <a href="terms-conditions.html" style="color: #667eea;">Terms</a></p>
+        </div>
+    </footer>
+</body>
+</html>
