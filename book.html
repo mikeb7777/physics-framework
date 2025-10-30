@@ -3,1457 +3,622 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Quest for The Big TOE - Michael K. Baines</title>
+    <title>A Quest for The Big TOE - Download the Book</title>
+    <meta name="description" content="Download A Quest for The Big TOE - A comprehensive theoretical framework making testable predictions in physics, cosmology, and consciousness studies.">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-red: #e33d2f;
+            --accent-green: #a1cd5f;
+            --accent-orange: #f58b2b;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        /* Top Navigation */
-        .top-nav {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-        }
-        
-        .nav-container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 60px;
-            display: grid;
-            grid-template-columns: 550px 1fr 350px;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-placeholder {
-            width: 500px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            position: relative;
-        }
-        
-        .logo-placeholder::before {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            left: 30px;
-            top: calc(50% - 30px);
-            transform: translateY(-50%);
-            background: 
-                radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(220, 235, 255, 0.6) 20%, rgba(180, 210, 255, 0.25) 45%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(10px);
-            box-shadow: 
-                0 0 25px rgba(255, 255, 255, 0.8),
-                0 0 50px rgba(220, 235, 255, 0.5),
-                0 0 75px rgba(180, 210, 255, 0.25);
-        }
-        
-        .logo-placeholder::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            left: 5px;
-            top: calc(50% - 30px);
-            transform: translateY(-50%);
-            background: 
-                linear-gradient(0deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%),
-                linear-gradient(90deg, transparent 45%, rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0.25) 49.5%, rgba(255, 255, 255, 0.25) 50.5%, rgba(255, 255, 255, 0.15) 52%, transparent 55%),
-                linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.12) 48.5%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.12) 51.5%, transparent 55%),
-                linear-gradient(-45deg, transparent 45%, rgba(255, 255, 255, 0.12) 48.5%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.12) 51.5%, transparent 55%);
-            z-index: -1;
-            filter: blur(3px);
-            opacity: 0.5;
-        }
-        
-        .logo-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .nav-center {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .nav-links a:hover {
-            color: #ffd700;
-        }
-        
-        .nav-right {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 20px;
-        }
-        
-        .nav-social {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .nav-social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        /* Instagram - Full Color Gradient */
-        .nav-social-icon.instagram {
-            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-        }
-        
-        .nav-social-icon.instagram:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(193, 53, 132, 0.4);
-        }
-        
-        /* YouTube - Full Red */
-        .nav-social-icon.youtube {
-            background: #FF0000;
-        }
-        
-        .nav-social-icon.youtube:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
-        }
-        
-        /* Email - Full Blue */
-        .nav-social-icon.email {
-            background: #4285F4;
-        }
-        
-        .nav-social-icon.email:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
-        }
-        
-        .nav-social-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-        
-        .nav-login-btn {
-            padding: 10px 28px;
-            background: rgba(128, 128, 128, 0.25);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-            margin-left: 5px;
-        }
-        
-        .nav-login-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #ffffff;
-            transform: translateY(-2px);
-        }
-        
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 5px;
-            gap: 5px;
-        }
-        
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #ffd700;
-            border-radius: 3px;
-            transition: all 0.3s;
-        }
-        
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-        
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 90px;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 999;
-            padding: 20px;
-        }
-        
-        .mobile-menu.active {
-            display: block;
-        }
-        
-        .mobile-menu ul {
-            list-style: none;
-            padding: 0;
+            color: white;
             margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
-        
-        .mobile-menu ul li {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .mobile-menu ul li:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-menu ul li a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 500;
-            display: block;
-        }
-        
-        /* FRAME 1 - Hero with Book */
-        .frame-hero {
-            height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            padding: 140px 40px 60px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .frame-hero::before {
-            content: '';
-            position: absolute;
+
+        /* Starfield Background */
+        #stars-canvas {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: #0a0a0a;
+            width: 100%;
+            height: 100%;
             z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
         }
-        
-        .hero-starfield {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-        
-        .hero-starfield .stars-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-repeat: repeat;
-        }
-        
-        .hero-content,
-        .book-showcase {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Starfield animations for hero */
-        .stars-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-repeat: repeat;
-        }
-        
-        /* Small stars - fastest */
-        .stars-layer-1 {
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
-                radial-gradient(2px 2px at 60px 70px, #fff, transparent),
-                radial-gradient(1px 1px at 50px 50px, #ddd, transparent),
-                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
-                radial-gradient(2px 2px at 90px 10px, #fff, transparent);
-            background-size: 200px 200px;
-            animation: twinkle 3s ease-in-out infinite, move-stars-1 120s linear infinite;
-        }
-        
-        /* Medium stars - medium speed */
-        .stars-layer-2 {
-            background-image:
-                radial-gradient(3px 3px at 100px 120px, #fff, transparent),
-                radial-gradient(2px 2px at 40px 160px, #ddd, transparent),
-                radial-gradient(2px 2px at 180px 40px, #eee, transparent),
-                radial-gradient(3px 3px at 150px 200px, #fff, transparent);
-            background-size: 300px 300px;
-            animation: twinkle 4s ease-in-out infinite 1s, move-stars-2 180s linear infinite;
-        }
-        
-        /* Large stars - slowest */
-        .stars-layer-3 {
-            background-image:
-                radial-gradient(4px 4px at 80px 90px, #fff, transparent),
-                radial-gradient(3px 3px at 200px 150px, #ddd, transparent),
-                radial-gradient(4px 4px at 140px 220px, #fff, transparent);
-            background-size: 400px 400px;
-            animation: twinkle 5s ease-in-out infinite 2s, move-stars-3 240s linear infinite;
-        }
-        
-        @keyframes move-stars-1 {
-            from { transform: translateY(0); }
-            to { transform: translateY(-200px); }
-        }
-        
-        @keyframes move-stars-2 {
-            from { transform: translateY(0); }
-            to { transform: translateY(-300px); }
-        }
-        
-        @keyframes move-stars-3 {
-            from { transform: translateY(0); }
-            to { transform: translateY(-400px); }
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        
-        /* Nebula effect for hero */
-        .hero-starfield::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 20% 30%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(118, 75, 162, 0.06) 0%, transparent 50%);
-            animation: nebula-drift 60s ease-in-out infinite alternate;
-        }
-        
-        @keyframes nebula-drift {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, -20px) scale(1.1); }
-        }
-        
-        .hero-content h1 {
-            font-size: 3.5em;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        
-        .hero-content h1 .highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-content .subtitle {
-            font-size: 1.625em;
-            color: #b0b0b0;
-            margin-bottom: 20px;
-            font-weight: 300;
-            margin-top: -264px;
-        }
-        
-        .hero-content .author {
-            font-size: 1.3em;
-            color: #ffd700;
-            margin-bottom: 40px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: inline-block;
-        }
-        
-        .hero-content .author:hover {
-            color: #ffed4e;
-        }
-        
-        .book-showcase {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding-top: 0;
-        }
-        
-        .book-cover {
-            width: 100%;
-            max-width: 450px;
-            aspect-ratio: 2/3;
-            border-radius: 12px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .book-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-        
-        .action-buttons {
-            position: absolute;
-            bottom: 24px;
-            left: 40px;
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            z-index: 10;
-        }
-        
-        .btn-pill {
-            padding: 12px 32px;
-            background: transparent;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            display: inline-block;
-            font-size: 1em;
-            cursor: pointer;
+
+        /* Header */
+        .site-header {
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .btn-pill:hover {
-            background: rgba(255, 255, 255, 0.95);
-            color: #667eea;
-            transform: translateY(-2px);
-            border-color: #fff;
-        }
-        
-        .links-section {
-            display: flex;
-            gap: 40px;
-            margin-top: 15px;
-            padding-bottom: 0;
-        }
-        
-        .links-group h3 {
-            font-size: 0.85em;
-            color: #808080;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-        
-        .links-group a {
-            display: block;
-            color: #ffd700;
-            text-decoration: none;
-            margin: 8px 0;
-            font-size: 0.95em;
-            transition: color 0.3s;
-        }
-        
-        .links-group a:hover {
-            color: #ffed4e;
-        }
-        
-        .social-links {
-            display: none;
-        }
-        
-        .social-icon {
-            display: none;
-        }
-        
-        /* FRAME 2 - Membership CTA (White) */
-        .frame-membership {
-            background: #ffffff;
-            color: #1a1a1a;
-            padding: 100px 40px;
-            text-align: center;
-        }
-        
-        .frame-membership h2 {
-            font-size: 4em;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 30px;
-            color: #1a1a1a;
-        }
-        
-        .membership-description {
-            max-width: 700px;
-            margin: 0 auto 40px;
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #1a1a1a;
-        }
-        
-        .membership-description p {
-            margin-bottom: 15px;
-        }
-        
-        .membership-description .bold {
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-        
-        .membership-disclaimer {
-            max-width: 650px;
-            margin: 30px auto 0;
-            font-size: 0.95em;
-            line-height: 1.6;
-            color: #1a1a1a;
-        }
-        
-        .membership-disclaimer a {
-            color: #ff0000;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-            font-weight: 600;
-        }
-        
-        .membership-disclaimer a:hover {
-            border-bottom-color: #ff0000;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn-transparent {
-            padding: 15px 40px;
-            background: transparent;
-            border: 2px solid #1a1a1a;
-            color: #1a1a1a;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-            font-size: 1em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-transparent:hover {
-            background: #1a1a1a;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* FRAME 3 - Quote with Starfield */
-        .frame-quote {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            background: #000;
-            overflow: hidden;
-        }
-        
-        .frame-quote::before {
-            content: '';
-            position: absolute;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%),
-                url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920') center/cover;
-            opacity: 0.4;
+            z-index: 1000;
         }
-        
-        .quote-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1000px;
-            text-align: center;
-        }
-        
-        .quote-content blockquote {
-            font-size: 4em;
-            font-weight: 400;
-            line-height: 1.4;
-            color: white;
-            margin-bottom: 30px;
-            font-family: Impact, 'Arial Black', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .quote-content cite {
-            font-size: 1.3em;
-            color: #b0b0b0;
-            font-style: normal;
-        }
-        
-        /* FRAME 4 - Announcement (Half Height) */
-        .frame-announcement {
-            min-height: 55vh;
-            background: #0a0a0a;
-            position: relative;
-            padding: 80px 40px;
+
+        .header-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
         }
-        
-        .frame-announcement::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 100%),
-                url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=30') center/cover;
-            opacity: 0.15;
+
+        .site-logo img {
+            height: 50px;
+            width: auto;
         }
-        
-        .announcement-content {
-            max-width: 900px;
+
+        .main-navigation ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .main-navigation a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-navigation a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-login {
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* Hero Section */
+        .book-hero {
+            padding: 6rem 2rem 4rem;
             text-align: center;
-            position: relative;
-            z-index: 1;
         }
-        
-        .announcement-content h2 {
-            font-size: 3em;
-            color: #fff;
-            margin-bottom: 30px;
-        }
-        
-        .announcement-content p {
-            font-size: 1.3em;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-        
-        /* FRAME 5 - Photo Gallery */
-        .frame-gallery {
-            min-height: 55vh;
-            background: #0a0a0a;
-            padding: 80px 40px;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
-            max-width: 1400px;
+
+        .hero-content {
+            max-width: var(--max-width);
             margin: 0 auto;
         }
-        
-        .gallery-item {
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            cursor: pointer;
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 3rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .hero-book-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .book-cover-wrapper {
             position: relative;
         }
-        
-        .gallery-item:hover {
+
+        .book-cover {
+            max-width: 350px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .book-cover:hover {
             transform: scale(1.05);
         }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s;
+
+        .hero-cta {
+            max-width: 500px;
+            text-align: left;
         }
-        
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            opacity: 0;
-            transition: opacity 0.5s;
-            pointer-events: none;
+
+        .validation-badge {
+            display: inline-block;
+            background: #f1e303;
+            color: #2c3e50;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
         }
-        
-        .gallery-item:hover .gallery-overlay,
-        .gallery-item.active .gallery-overlay {
-            opacity: 1;
+
+        .hero-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
-        
-        .gallery-item:hover img,
-        .gallery-item.active img {
-            filter: grayscale(100%) brightness(0.3);
+
+        .hero-cta p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.9);
         }
-        
-        .gallery-overlay h4 {
-            color: #ffd700;
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            text-align: center;
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 4px;
             font-weight: 600;
-        }
-        
-        .gallery-overlay .source {
-            color: #b0b0b0;
-            font-size: 0.8em;
-            font-style: italic;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .gallery-overlay p {
-            color: #e0e0e0;
-            font-size: 0.95em;
-            line-height: 1.6;
-            text-align: center;
-        }
-        
-        /* FRAME 6 - Footer */
-        .frame-footer {
-            min-height: 90vh;
-            background: #0a0a0a;
-            position: relative;
-            padding: 100px 40px 60px;
-            overflow: hidden;
-        }
-        
-        .frame-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.85) 100%),
-                url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1920&q=30') center/cover;
-            opacity: 0.12;
-        }
-        
-        .footer-divider {
-            max-width: 1400px;
-            margin: 0 auto 60px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .footer-divider hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(255, 215, 0, 0.2) 5%, 
-                rgba(255, 215, 0, 0.5) 50%, 
-                rgba(255, 215, 0, 0.2) 95%, 
-                transparent 100%);
-            margin: 0;
-        }
-        
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 80px;
-            margin-bottom: 80px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .footer-section h3 {
-            font-size: 2em;
-            color: #fff;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-        
-        .footer-section ul {
-            list-style: none;
-        }
-        
-        .footer-section ul li {
-            margin: 15px 0;
-        }
-        
-        .footer-section a {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-        
-        .footer-section a:hover {
-            color: #ffd700;
-        }
-        
-        .newsletter-form {
-            margin-top: 30px;
-        }
-        
-        .newsletter-form p {
-            color: #b0b0b0;
-            margin-bottom: 20px;
-            line-height: 1.8;
-            font-size: 1.05em;
-            font-weight: 500;
-        }
-        
-        .newsletter-form input {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1.05em;
-            margin-bottom: 15px;
-            transition: all 0.3s;
-        }
-        
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: #667eea;
-            background: rgba(255,255,255,0.08);
-        }
-        
-        .newsletter-form button {
-            width: 100%;
-            padding: 16px 30px;
-            background: transparent;
-            border: 2px solid #ffd700;
-            border-radius: 50px;
-            color: #ffd700;
-            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 1.125rem;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.05em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            border: none;
         }
-        
-        .newsletter-form button:hover {
-            background: #ffd700;
-            color: #0a0a0a;
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a00000;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4);
         }
-        
-        .newsletter-form .disclaimer {
-            font-size: 0.8em;
-            color: #808080;
-            margin-top: 15px;
-            line-height: 1.6;
-            font-weight: 400;
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            margin-left: 1rem;
         }
-        
-        .newsletter-form .disclaimer a {
-            color: #ffd700;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
         }
-        
-        .newsletter-form .disclaimer a:hover {
-            border-bottom-color: #ffd700;
+
+        /* Features Section */
+        .features-section {
+            padding: 5rem 2rem;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
         }
-        
-        .footer-bottom {
+
+        .section-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .tagline {
             text-align: center;
-            color: #808080;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 40px;
-            position: relative;
-            z-index: 1;
-            font-size: 1em;
-            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
-        
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-card p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+
+        /* Validation Section */
+        .validation-section {
+            padding: 5rem 2rem;
+        }
+
+        .validation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .validation-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .validation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .validation-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #f1e303;
+        }
+
+        .validation-card p {
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 0.5rem;
+        }
+
+        .validation-card .date {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.6);
+            font-style: italic;
+        }
+
+        /* Social Section */
+        .social-section {
+            padding: 4rem 2rem;
+            background: rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .social-btn.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .social-btn.youtube {
+            background: #FF0000;
+        }
+
+        .social-btn.email {
+            background: #0072C6;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
-            .nav-container {
-                grid-template-columns: 1fr auto;
-                padding: 0 20px;
-            }
-            
-            .logo-section {
-                justify-content: flex-start;
-            }
-            
-            .logo-placeholder {
-                width: 300px;
-                height: 60px;
-            }
-            
-            .logo-placeholder::before {
-                left: 15px;
-                top: calc(50% - 15px);
-                width: 60px;
-                height: 60px;
-            }
-            
-            .logo-placeholder::after {
-                left: -10px;
-                top: calc(50% - 15px);
-                width: 120px;
-                height: 120px;
-            }
-            
-            .nav-center,
-            .nav-right {
-                display: none;
-            }
-            
-            .hamburger {
-                display: flex;
-            }
-            
-            .frame-hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                height: auto;
-                min-height: 100vh;
-                padding: 120px 40px 140px;
-                gap: 40px;
-            }
-            
-            .hero-content .subtitle {
-                margin-top: 0;
-                font-size: 1.3em;
-            }
-            
-            .hero-content .author {
-                font-size: 1.2em;
-            }
-            
-            .book-showcase {
-                order: -1;
-            }
-            
-            .book-cover {
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            
-            .action-buttons {
-                position: static;
-                flex-direction: row;
-                justify-content: center;
-                margin-top: 40px;
-                flex-wrap: wrap;
-                left: auto;
-                bottom: auto;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .gallery-overlay h4 {
-                font-size: 1.1em;
-            }
-            
-            .gallery-overlay p {
-                font-size: 0.9em;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 60px;
-            }
-            
-            .frame-membership h2 {
-                font-size: 2.5em;
-            }
-            
-            .membership-description {
-                font-size: 1em;
-            }
-            
-            .membership-disclaimer {
-                font-size: 0.85em;
-            }
-            
-            .quote-content blockquote {
-                font-size: 2em;
-            }
-        }
-        
-        @media (max-width: 640px) {
-            .logo-placeholder {
-                width: 250px;
-                height: 50px;
-            }
-            
-            .logo-placeholder::before {
-                left: 10px;
-                top: calc(50% - 10px);
-                width: 50px;
-                height: 50px;
-            }
-            
-            .logo-placeholder::after {
-                left: -15px;
-                top: calc(50% - 10px);
-                width: 100px;
-                height: 100px;
-            }
-            
-            .hero-content .subtitle {
-                font-size: 1.1em;
-            }
-            
-            .hero-content .author {
-                font-size: 1em;
-            }
-            
-            .links-section {
+            .hero-book-container {
                 flex-direction: column;
-                gap: 30px;
+                gap: 3rem;
             }
-            
+
+            .hero-cta {
+                text-align: center;
+            }
+
             .book-cover {
                 max-width: 280px;
             }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
             }
-            
-            .gallery-overlay h4 {
-                font-size: 1em;
+
+            .hero-subtitle {
+                font-size: 1.25rem;
             }
-            
-            .gallery-overlay .source {
-                font-size: 0.7em;
-                margin-bottom: 8px;
+
+            .main-navigation ul {
+                gap: 1rem;
+                font-size: 0.9rem;
             }
-            
-            .gallery-overlay p {
-                font-size: 0.85em;
+
+            .section-title {
+                font-size: 2rem;
             }
-            
-            .gallery-overlay {
-                padding: 20px;
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
             }
-            
-            .action-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .btn-pill {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .quote-content blockquote {
-                font-size: 1.5em;
-            }
-            
-            .frame-membership h2 {
-                font-size: 2em;
+
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <nav class="top-nav">
-        <div class="nav-container">
-            <!-- Logo Section -->
-            <a href="book.html" class="logo-section">
-                <div class="logo-placeholder">
-                    <img src="logo.png" alt="The Big TOE Logo">
-                </div>
-            </a>
-            
-            <!-- Centered Navigation Links -->
-            <div class="nav-center">
-                <ul class="nav-links">
+    <canvas id="stars-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <a href="book.html">
+                    <img src="logo.png" alt="The Big TOE">
+                </a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
                     <li><a href="index.html">Ic² Institute</a></li>
-                    <li><a href="legal.html">About</a></li>
-                    <li><a href="#events">Events</a></li>
-                    <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="discussions-page.html">Discussions</a></li>
+                    <li><a href="faq-page.html">FAQ</a></li>
+                    <li><a href="login_page_complete.html" class="btn-login">Login</a></li>
                 </ul>
-            </div>
-            
-            <!-- Right Section: Social Media + Login -->
-            <div class="nav-right">
-                <div class="nav-social">
-                    <a href="https://www.instagram.com" class="nav-social-icon instagram" title="Instagram">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" class="nav-social-icon youtube" title="YouTube" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:mkbinfo@proton.me" class="nav-social-icon email" title="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
-                </div>
-                <a href="login.html" class="nav-login-btn">Log In</a>
-            </div>
-            
-            <!-- Hamburger Menu -->
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            </nav>
         </div>
-    </nav>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="legal.html">About</a></li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#" onclick="handleDiscussionClick(event)">Discussion</a></li>
-            <li><a href="login.html">Log In</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
-            <li><a href="contribute.html">Contribute</a></li>
-            <li><a href="appendix.html">Appendices</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
-            <li><a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" target="_blank">YouTube</a></li>
-            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
-        </ul>
-    </div>
+    </header>
 
-    <!-- FRAME 1: Hero with Book -->
-    <section class="frame-hero">
-        <div class="hero-starfield">
-            <div class="stars-layer stars-layer-1"></div>
-            <div class="stars-layer stars-layer-2"></div>
-            <div class="stars-layer stars-layer-3"></div>
-        </div>
-        
+    <!-- Hero Section -->
+    <section class="book-hero">
         <div class="hero-content">
-            <p class="subtitle">The COSMIC Framework's Theory of Everything</p>
-            <a href="https://michaelkbaines.com" target="_blank" class="author">by Michael K. Baines</a>
+            <h1 class="hero-title" data-aos="fade-down">A Quest for The Big TOE</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Theory of Everything</p>
             
-            <div class="links-section">
-                <div class="links-group">
-                    <h3>Quick Links</h3>
-                    <a href="appendix.html">Appendices</a>
-                    <a href="references.html">References</a>
-                    <a href="https://michaelkbaines.com" target="_blank">Author's Website</a>
-                    <a href="mailto:mkbinfo@proton.me">Contact Author</a>
+            <div class="hero-book-container">
+                <div class="book-cover-wrapper" data-aos="fade-right" data-aos-delay="400">
+                    <img src="bookcover.jpg" alt="A Quest for The Big TOE Book Cover" class="book-cover">
                 </div>
-            </div>
-        </div>
-        
-        <div class="book-showcase">
-            <div class="book-cover">
-                <img src="book-cover.png" alt="The Big TOE Book Cover">
-            </div>
-        </div>
-        
-        <div class="action-buttons">
-            <a href="framework-book.pdf" class="btn-pill" download>
-                Download Book
-            </a>
-            <a href="contribute.html" class="btn-pill">
-                Contribute
-            </a>
-        </div>
-    </section>
-
-    <!-- FRAME 2: Membership CTA -->
-    <section class="frame-membership" id="membership">
-        <h2>Become a Member<br>and Join the Discussion!</h2>
-        
-        <div class="membership-description">
-            <p>Sign up for our newsletter to get updates on speaker announcements, and to join the discussion. No spam â€“ just a few meaningful updates throughout the year.</p>
-            <p class="bold">Join our mailing list and be part of the COSMIC community.</p>
-        </div>
-        
-        <div class="cta-buttons">
-            <a href="login.html" class="btn-transparent">Log In</a>
-            <a href="signup.html" class="btn-transparent">Subscribe</a>
-        </div>
-        
-        <div class="membership-disclaimer">
-            By signing up, you agree to receive emails from The COSMIC Framework. You can unsubscribe at any time. For details on how we handle your data, please see our <a href="legal.html#privacy">Privacy Policy</a>.
-        </div>
-    </section>
-
-    <!-- FRAME 3: Quote with Background -->
-    <section class="frame-quote">
-        <div class="quote-content">
-            <blockquote>
-                "The important thing is not to stop questioning. Curiosity has its own reason for existing."
-            </blockquote>
-            <cite>â€“ Albert Einstein</cite>
-        </div>
-    </section>
-
-    <!-- FRAME 4: Announcement -->
-    <section class="frame-announcement" id="events">
-        <div class="announcement-content">
-            <h2>Upcoming Virtual Book Launch</h2>
-            <p>Join us for an exclusive presentation of the COSMIC Framework with live Q&A. Explore the testable predictions that could reshape our understanding of reality.</p>
-            <a href="events.html" class="btn-pill" style="background: #ffd700; color: #0a0a0a; border: none; font-weight: 700;">Learn More</a>
-        </div>
-    </section>
-
-    <!-- FRAME 5: Gallery -->
-    <section class="frame-gallery">
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400" alt="Cosmic Structure">
-                <div class="gallery-overlay">
-                    <h4>Information as Fundamental Reality</h4>
-                    <p class="source">Chapter 3, Page 47</p>
-                    <p>The COSMIC Framework proposes that information is not merely a description of reality, but the fundamental substrate from which all physical phenomena emerge.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400" alt="Quantum Mechanics">
-                <div class="gallery-overlay">
-                    <h4>Quantum Entanglement</h4>
-                    <p class="source">Chapter 5, Page 89</p>
-                    <p>"The observer effect in quantum mechanics may be better understood as an information exchange process." â€“ Einstein on quantum behavior</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400" alt="Information Theory">
-                <div class="gallery-overlay">
-                    <h4>The Holographic Principle</h4>
-                    <p class="source">Chapter 7, Page 134</p>
-                    <p>Our three-dimensional reality may be encoded on a two-dimensional surface, much like a hologram. Information density variations create the illusion of dimensionality.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=400" alt="Mathematical Constants">
-                <div class="gallery-overlay">
-                    <h4>Universal Mathematical Language</h4>
-                    <p class="source">Chapter 4, Page 62</p>
-                    <p>"The universe is written in the language of mathematics." â€“ Galileo Galilei. Fundamental constants suggest a unified informational architecture.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400" alt="Neural Networks">
-                <div class="gallery-overlay">
-                    <h4>Consciousness & Information</h4>
-                    <p class="source">Chapter 9, Page 187</p>
-                    <p>Consciousness may be an intrinsic feature of information processing systems that reach sufficient complexity, bridging physics and the hard problem of consciousness.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=400" alt="Cosmic Web">
-                <div class="gallery-overlay">
-                    <h4>Cosmic Web Structure</h4>
-                    <p class="source">Chapter 6, Page 112</p>
-                    <p>The large-scale structure of the universe mirrors information network architectures, suggesting gravitational clustering may be emergent from information density gradients.</p>
+                
+                <div class="hero-cta" data-aos="fade-left" data-aos-delay="600">
+                    <span class="validation-badge">✨ PREDICTIONS VALIDATED 2024-2025</span>
+                    <h2>The Framework That Predicted the Future</h2>
+                    <p>Download the complete book featuring testable predictions in dark energy, quantum computing, and cosmology - now experimentally validated by DESI, Google Quantum AI, and JWST.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary">Download PDF</a>
+                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FRAME 6: Footer -->
-    <section class="frame-footer" id="footer">
-        <div class="footer-divider">
-            <hr>
-        </div>
-        
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Support</h3>
-                <ul>
-                    <li><a href="legal.html#terms">Terms & Conditions</a></li>
-                    <li><a href="legal.html#privacy">Privacy Policy</a></li>
-                    <li><a href="contribute.html">Contribute</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                </ul>
-            </div>
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-container">
+            <p class="tagline" data-aos="fade-up">What's Inside</p>
+            <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">A Comprehensive Framework</h2>
             
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul>
-                    <li><a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></li>
-                    <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
-                    <li><a href="https://x.com" target="_blank">X (Twitter)</a></li>
-                    <li><a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" target="_blank">YouTube</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Newsletter</h3>
-                <div class="newsletter-form">
-                    <p>Get inspired. Stay connected. Sign up for fresh ideas, event updates & more.</p>
-                    <form action="#" method="POST">
-                        <input type="email" placeholder="Your email address" required>
-                        <button type="submit">Subscribe Now</button>
-                        <p class="disclaimer">By signing up, you agree to receive emails from The COSMIC Framework. You can unsubscribe at any time. For details on how we handle your data, please see our <a href="legal.html#privacy">Privacy Policy</a>.</p>
-                    </form>
+            <div class="features-grid">
+                <div class="feature-card" style="--accent-color: #005ba5;" data-aos="fade-up" data-aos-delay="200">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23005ba5'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" class="feature-icon" alt="Testable Predictions">
+                    <h3>Testable Predictions</h3>
+                    <p>Clear, falsifiable predictions across multiple domains of physics, documented before experimental validation.</p>
+                </div>
+                
+                <div class="feature-card" style="--accent-color: #e33d2f;" data-aos="fade-up" data-aos-delay="300">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e33d2f'%3E%3Cpath d='M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z'/%3E%3C/svg%3E" class="feature-icon" alt="Timeline">
+                    <h3>Complete Timeline</h3>
+                    <p>Version history with publication dates proving predictions were made before experimental confirmation.</p>
+                </div>
+                
+                <div class="feature-card" style="--accent-color: #a1cd5f;" data-aos="fade-up" data-aos-delay="400">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1cd5f'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" class="feature-icon" alt="Mathematical Framework">
+                    <h3>Mathematical Rigor</h3>
+                    <p>Complete mathematical foundations supporting each prediction with detailed derivations.</p>
                 </div>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>Â© 2025 Michael K. Baines | The COSMIC Framework | All Rights Reserved</p>
+    </section>
+
+    <!-- Validation Section -->
+    <section class="validation-section">
+        <div class="section-container">
+            <p class="tagline" data-aos="fade-up">Experimental Validation</p>
+            <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Three Major Breakthroughs</h2>
+            
+            <div class="validation-cards">
+                <div class="validation-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>🌌 Dark Energy Evolution</h3>
+                    <p>DESI collaboration confirmed the predicted time-varying nature of dark energy, observing 3.2σ deviation from cosmological constant.</p>
+                    <p class="date">Validated: January 2025</p>
+                </div>
+                
+                <div class="validation-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>⚛️ Quantum Error Correction</h3>
+                    <p>Google's Willow chip demonstrated the predicted exponential error suppression with increasing qubit count.</p>
+                    <p class="date">Validated: December 2024</p>
+                </div>
+                
+                <div class="validation-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>🔭 Early Galaxy Formation</h3>
+                    <p>JWST observations confirmed predicted galaxy formation patterns in the early universe.</p>
+                    <p class="date">Validated: Ongoing 2024</p>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Social Section -->
+    <section class="social-section">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-up">Stay Connected</h2>
+            <p style="max-width: 600px; margin: 0 auto; font-size: 1.125rem;" data-aos="fade-up" data-aos-delay="100">Join our community to discuss the framework, ask questions, and stay updated on new developments.</p>
+            
+            <div class="social-buttons" data-aos="fade-up" data-aos-delay="200">
+                <a href="#" class="social-btn instagram">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    Instagram
+                </a>
+                
+                <a href="#" class="social-btn youtube">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    YouTube
+                </a>
+                
+                <a href="mailto:contact@example.com" class="social-btn email">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    Email Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Starfield Animation -->
     <script>
-        // Check if user is logged in
-        function isUserLoggedIn() {
-            return localStorage.getItem('userLoggedIn') === 'true';
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const stars = [];
+        const starCount = 200;
+        
+        for (let i = 0; i < starCount; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                vx: Math.random() * 0.5 - 0.25,
+                vy: Math.random() * 0.5 - 0.25,
+                opacity: Math.random()
+            });
         }
-
-        // Handle discussion link click
-        function handleDiscussionClick(event) {
-            event.preventDefault();
+        
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
             
-            if (isUserLoggedIn()) {
-                // User is logged in, go to discussions
-                window.location.href = 'discussions.html';
-            } else {
-                // User is not logged in, redirect to login page
-                window.location.href = 'login.html';
-            }
+            stars.forEach(star => {
+                ctx.globalAlpha = star.opacity;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                star.x += star.vx;
+                star.y += star.vy;
+                
+                if (star.x < 0 || star.x > canvas.width) star.vx *= -1;
+                if (star.y < 0 || star.y > canvas.height) star.vy *= -1;
+                
+                star.opacity += (Math.random() - 0.5) * 0.02;
+                star.opacity = Math.max(0.2, Math.min(1, star.opacity));
+            });
+            
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(drawStars);
         }
+        
+        drawStars();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 
-        // Hamburger menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
-        });
-        
-        // Mobile tap to toggle overlay
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                // Only on mobile/touch devices
-                if ('ontouchstart' in window) {
-                    e.preventDefault();
-                    
-                    // Close all other overlays
-                    document.querySelectorAll('.gallery-item').forEach(other => {
-                        if (other !== this) {
-                            other.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle this overlay
-                    this.classList.toggle('active');
-                }
-            });
-        });
-        
-        // Close overlay when clicking outside on mobile
-        document.addEventListener('click', function(e) {
-            if ('ontouchstart' in window && !e.target.closest('.gallery-item')) {
-                document.querySelectorAll('.gallery-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-            }
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
         });
     </script>
 </body>

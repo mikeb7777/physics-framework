@@ -3,712 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ic² Research Institute - Information-Consciousness Institute</title>
+    <title>Ic² Research Institute - Pioneering Theoretical Physics</title>
+    <meta name="description" content="The Ic² Research Institute advances theoretical physics through The Big TOE framework, with validated predictions in dark energy, quantum computing, and cosmology.">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-red: #e33d2f;
+            --accent-green: #a1cd5f;
+            --accent-orange: #f58b2b;
+            --accent-yellow: #f1e303;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            background: #f8f9fa;
-            color: #2c3e50;
-        }
-
-        /* Geometric Background Pattern */
-        .geometric-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
-            overflow: hidden;
-        }
-
-        .geometric-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(220, 53, 69, 0.03) 2px, rgba(220, 53, 69, 0.03) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(220, 53, 69, 0.03) 2px, rgba(220, 53, 69, 0.03) 4px),
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(220, 53, 69, 0.02) 10px, rgba(220, 53, 69, 0.02) 20px),
-                repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(220, 53, 69, 0.02) 10px, rgba(220, 53, 69, 0.02) 20px);
-            opacity: 0.6;
-        }
-
-        .geometric-bg::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(220, 53, 69, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(220, 53, 69, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(220, 53, 69, 0.03) 0%, transparent 50%);
+            color: var(--text-dark);
+            background: white;
         }
 
         /* Header */
-        .header {
+        .site-header {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #e0e0e0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .header-container {
-            max-width: 1400px;
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 20px 40px;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        /* FIXED: Logo area - no button, just the logo */
-        .logo-area {
-            width: 280px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
+        .site-logo img {
+            height: 50px;
+            width: auto;
         }
 
-        .logo-area img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 35px;
+        .main-navigation ul {
             list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
 
-        .nav-menu a {
-            color: #2c3e50;
+        .main-navigation a {
             text-decoration: none;
+            color: var(--text-dark);
             font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
+            transition: color 0.3s ease;
         }
 
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #dc3545;
-            transition: width 0.3s;
-        }
-
-        .nav-menu a:hover {
-            color: #dc3545;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
+        .main-navigation a:hover {
+            color: var(--primary-color);
         }
 
         /* Hero Section */
-        .hero {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 40px 40px;
+        .homepage-hero {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat;
+            opacity: 0.3;
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: var(--max-width);
             margin: 0 auto;
-            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+            color: white;
         }
 
-        .hero h1 {
-            font-size: 3.5em;
-            color: #1a1a1a;
-            margin-bottom: 20px;
+        .hero-content h1 {
+            font-size: 3.5rem;
             font-weight: 700;
+            margin-bottom: 1.5rem;
             line-height: 1.2;
         }
 
-        .hero .subtitle {
-            font-size: 1.4em;
-            color: #dc3545;
-            margin-bottom: 15px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            opacity: 0.95;
         }
 
-        .hero p {
-            font-size: 1.2em;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        /* FIXED: Book button after greeting */
-        .book-cta {
+        .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            padding: 15px 40px;
+            padding: 0.875rem 2rem;
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
         }
 
-        .book-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4);
-        }
-
-        /* Validation Banner - More Compact */
-        .validation-banner {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+        .btn-primary {
+            background: var(--primary-color);
             color: white;
-            padding: 30px 40px;
-            margin: 40px auto;
-            max-width: 1200px;
-            border-left: 6px solid #dc3545;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #a00000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--text-dark);
+        }
+
+        /* Tiles Section */
+        .tiles-container {
+            max-width: var(--max-width);
+            margin: -4rem auto 0;
+            padding: 0 2rem;
             position: relative;
-            overflow: hidden;
+            z-index: 3;
         }
 
-        .validation-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(220, 53, 69, 0.1) 100%);
-            pointer-events: none;
-        }
-
-        .banner-content {
+        .tiles-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tile {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--accent-color);
+            text-align: center;
+        }
+
+        .tile:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .tile img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .tile h3 {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            color: var(--text-dark);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 2rem;
+        }
+
+        .content-section.bg-light {
+            background: var(--bg-light);
+        }
+
+        .section-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
         }
 
-        .banner-text h2 {
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.3;
+        .two-column img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .banner-text p {
-            font-size: 1.05em;
-            line-height: 1.6;
-            color: #e0e0e0;
-            margin-bottom: 20px;
-        }
-
-        .banner-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .stat-item {
-            background: rgba(220, 53, 69, 0.1);
-            padding: 15px;
-            border-radius: 5px;
+        /* Validation Banner */
+        .validation-banner {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 3rem 2rem;
             text-align: center;
+        }
+
+        .validation-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .validation-badge {
+            display: inline-block;
+            background: #f1e303;
+            color: #2c3e50;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .validation-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .stat-number {
-            font-size: 2em;
+            font-size: 3rem;
             font-weight: 700;
-            color: #dc3545;
-            display: block;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: 0.85em;
-            color: #ccc;
-        }
-
-        .banner-cta {
-            display: inline-block;
-            background: #dc3545;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9em;
-        }
-
-        .banner-cta:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
-        }
-
-        /* Validation Cards with Tags */
-        .validations-section {
-            max-width: 1400px;
-            margin: 60px auto;
-            padding: 0 40px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5em;
-            color: #1a1a1a;
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            font-size: 1.1em;
-            color: #666;
-        }
-
-        .validation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .validation-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border-top: 4px solid #dc3545;
-            position: relative;
-        }
-
-        .validation-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        /* FIXED: Yellow validated tag with black text */
-        .validated-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #ffd700;
-            color: #000;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.75em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 10;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .validation-card-header {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .validation-date {
-            font-size: 0.85em;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .validation-card-body {
-            padding: 25px;
-        }
-
-        .validation-card-body h3 {
-            font-size: 1.3em;
-            color: #1a1a1a;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .validation-card-body p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .validation-link {
-            display: inline-block;
-            color: #dc3545;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .validation-link:hover {
-            color: #c82333;
-            transform: translateX(5px);
-        }
-
-        .validation-link::after {
-            content: ' →';
-        }
-
-        /* Research Areas - More Visual */
-        .research-areas {
-            background: white;
-            padding: 80px 40px;
-            margin: 60px 0;
-        }
-
-        .research-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .research-item {
-            text-align: center;
-            padding: 40px 30px;
-            border-radius: 10px;
-            transition: all 0.3s;
-            border: 2px solid #e9ecef;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        }
-
-        .research-item:hover {
-            border-color: #dc3545;
-            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.15);
-        }
-
-        .research-icon {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            color: #dc3545;
-        }
-
-        .research-item h3 {
-            font-size: 1.4em;
-            color: #1a1a1a;
-            margin-bottom: 15px;
-        }
-
-        .research-item p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        .footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 60px 40px 30px;
-        }
-
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h4 {
-            color: #dc3545;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: #dc3545;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #888;
+            font-size: 1.1rem;
+            color: var(--text-light);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2em;
+            .main-navigation ul {
+                gap: 1rem;
+                font-size: 0.9rem;
             }
 
-            .nav-menu {
-                flex-direction: column;
-                gap: 15px;
+            .hero-content h1 {
+                font-size: 2rem;
             }
 
-            .validation-grid {
+            .tiles-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tiles-grid {
                 grid-template-columns: 1fr;
             }
 
-            .banner-content {
-                grid-template-columns: 1fr;
-            }
-
-            .banner-stats {
-                grid-template-columns: 1fr;
+            .hero-content h1 {
+                font-size: 1.75rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="geometric-bg"></div>
-
-    <!-- FIXED Header - Logo area only, no button -->
-    <header class="header">
+    <!-- Header -->
+    <header class="site-header">
         <div class="header-container">
-            <div class="logo-area">
-                <img src="logo.png" alt="Ic² Research Institute">
+            <div class="site-logo">
+                <img src="logoRed.png" alt="Ic² Research Institute">
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="validation-page.html">Validations</a></li>
-                    <li><a href="#testing">Testing</a></li>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Institute</a></li>
+                    <li><a href="book.html">The Book</a></li>
                     <li><a href="about-page.html">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="blog.html">News</a></li>
                     <li><a href="contribute.html">Contribute</a></li>
-                    <li><a href="discussions.html">Community</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section with Book Button -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="subtitle">Ic² Research Institute</div>
-            <h1>Pioneering the Science<br>of Information & Consciousness</h1>
-            <p>The Information-Consciousness Institute advances testable frameworks that bridge physics, information theory, and consciousness studies through rigorous scientific methodology and radical transparency.</p>
-            <!-- FIXED: Book button placed after greeting -->
-            <a href="book.html" class="book-cta">Read The Big TOE</a>
+    <!-- Hero Section -->
+    <section class="homepage-hero">
+        <div class="hero-background"></div>
+        <div class="hero-content" data-aos="fade-right">
+            <h1>Pioneering the Future<br>of Theoretical Physics</h1>
+            <p>The Ic² Research Institute advances our understanding of reality through rigorous theoretical frameworks with experimentally validated predictions. From dark energy evolution to quantum computing optimization, our work bridges theory and observation.</p>
+            <div class="hero-buttons">
+                <a href="book.html" class="btn btn-primary">Explore The Big TOE</a>
+                <a href="about-page.html" class="btn btn-outline">Learn More</a>
+            </div>
         </div>
     </section>
 
-    <!-- Validation Banner -->
-    <div class="validation-banner">
-        <div class="banner-content">
-            <div class="banner-text">
-                <h2>Four Independent Validations Confirmed</h2>
-                <p>Framework predictions validated across cosmology, quantum computing, and theoretical physics with 100% accuracy.</p>
-                <a href="validation-page.html" class="banner-cta">View All Validations</a>
-            </div>
-            <div class="banner-stats">
-                <div class="stat-item">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Validated Predictions</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Success Rate</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">3.2σ</span>
-                    <span class="stat-label">Significance</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10K+</span>
-                    <span class="stat-label">Measurements</span>
-                </div>
-            </div>
+    <!-- Research Focus Tiles -->
+    <div class="tiles-container" data-aos="fade-up">
+        <div class="tiles-grid">
+            <a href="#validation" class="tile" style="--accent-color: #f1e303;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f1e303'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E" alt="Validated">
+                <h3>Experimentally<br>Validated</h3>
+            </a>
+            <a href="#dark-energy" class="tile" style="--accent-color: #005ba5;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23005ba5'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E" alt="Dark Energy">
+                <h3>Dark Energy<br>Evolution</h3>
+            </a>
+            <a href="#quantum" class="tile" style="--accent-color: #e33d2f;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e33d2f'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z'/%3E%3C/svg%3E" alt="Quantum">
+                <h3>Quantum<br>Computing</h3>
+            </a>
+            <a href="#cosmology" class="tile" style="--accent-color: #a1cd5f;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1cd5f'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" alt="Cosmology">
+                <h3>Early Galaxy<br>Formation</h3>
+            </a>
+            <a href="#consciousness" class="tile" style="--accent-color: #f58b2b;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f58b2b'%3E%3Cpath d='M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z'/%3E%3C/svg%3E" alt="Consciousness">
+                <h3>Consciousness<br>Studies</h3>
+            </a>
         </div>
     </div>
 
-    <!-- Validations Section with Tags -->
-    <section class="validations-section" id="validations">
-        <div class="section-header">
-            <h2>Framework Validations</h2>
-            <p>Independent experimental confirmations of theoretical predictions</p>
+    <!-- Validation Banner -->
+    <section class="validation-banner" data-aos="fade-up">
+        <div class="validation-content">
+            <span class="validation-badge">🏆 BREAKTHROUGH VALIDATED</span>
+            <h2>Three Major Predictions Confirmed by Independent Experiments</h2>
+            <p style="margin-bottom: 2rem;">In 2024-2025, three groundbreaking predictions from The Big TOE framework were independently validated by leading research teams worldwide.</p>
+            <a href="press-release-1.html" class="btn btn-primary">Read Full Press Release</a>
         </div>
+    </section>
 
-        <div class="validation-grid">
-            <div class="validation-card">
-                <span class="validated-tag">✓ Validated</span>
-                <div class="validation-card-header">
-                    <div class="validation-date">March 2025 | DESI</div>
+    <!-- About Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="two-column" data-aos="fade-right">
+                <div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 441'%3E%3Crect fill='%23f0f0f0' width='640' height='441'/%3E%3Ctext x='50%25' y='50%25' fill='%23999' font-size='24' text-anchor='middle'%3EInstitute Research%3C/text%3E%3C/svg%3E" alt="Ic² Research Institute">
                 </div>
-                <div class="validation-card-body">
-                    <h3>Dark Energy Evolution</h3>
-                    <p>DESI collaboration detected temporal variations in dark energy density, matching framework predictions documented January 2025.</p>
-                    <a href="validation-page.html#desi" class="validation-link">Details</a>
-                </div>
-            </div>
-
-            <div class="validation-card">
-                <span class="validated-tag">✓ Validated</span>
-                <div class="validation-card-header">
-                    <div class="validation-date">December 2024 | Google</div>
-                </div>
-                <div class="validation-card-body">
-                    <h3>Quantum Error Correction</h3>
-                    <p>Google's Willow chip demonstrated exponential error reduction aligned with framework's information-theoretic predictions.</p>
-                    <a href="validation-page.html#willow" class="validation-link">Details</a>
-                </div>
-            </div>
-
-            <div class="validation-card">
-                <span class="validated-tag">✓ Validated</span>
-                <div class="validation-card-header">
-                    <div class="validation-date">Ongoing | JWST</div>
-                </div>
-                <div class="validation-card-body">
-                    <h3>Early Galaxy Formation</h3>
-                    <p>JWST continues discovering mature galaxies at high redshifts, validating framework's structure formation predictions.</p>
-                    <a href="validation-page.html#jwst" class="validation-link">Details</a>
-                </div>
-            </div>
-
-            <div class="validation-card">
-                <span class="validated-tag">✓ Validated</span>
-                <div class="validation-card-header">
-                    <div class="validation-date">2025 | Theoretical</div>
-                </div>
-                <div class="validation-card-body">
-                    <h3>Galaxy Asymmetry Patterns</h3>
-                    <p>Detection of left-right asymmetries in galaxy spins at 3.2σ significance matches framework predictions.</p>
-                    <a href="validation-page.html#asymmetry" class="validation-link">Details</a>
+                <div>
+                    <p class="tagline">About The Institute</p>
+                    <h2 class="section-title">Advancing Theoretical Physics</h2>
+                    <p style="margin-bottom: 1rem;">The Ic² Research Institute exists to bridge the gap between theoretical frameworks and experimental validation. We develop testable predictions across multiple domains of physics, from cosmology to quantum mechanics.</p>
+                    <p style="margin-bottom: 2rem;">What sets us apart is our commitment to falsifiable predictions documented before experimental confirmation. Our framework has successfully predicted phenomena later validated by DESI, Google Quantum AI, and JWST.</p>
+                    <a href="about-page.html" class="btn btn-primary">Our Story</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Research Areas -->
-    <section class="research-areas" id="research">
-        <div class="research-container">
-            <div class="section-header">
-                <h2>Our Research Focus</h2>
-                <p>Bridging theoretical physics with testable predictions</p>
-            </div>
-
-            <div class="research-grid">
-                <div class="research-item">
-                    <div class="research-icon">🌌</div>
-                    <h3>Dark Energy Evolution</h3>
-                    <p>Investigating temporal variations in dark energy density and their implications for cosmological models</p>
+    <!-- Stats Section -->
+    <section class="content-section bg-light" data-aos="fade-up">
+        <div class="section-container">
+            <h2 class="section-title" style="text-align: center;">Impact by the Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Validated Predictions</div>
                 </div>
-
-                <div class="research-item">
-                    <div class="research-icon">⚛️</div>
-                    <h3>Quantum Information Theory</h3>
-                    <p>Exploring the role of information as the fundamental substrate of quantum mechanics</p>
+                <div class="stat-card">
+                    <div class="stat-number">3.2σ</div>
+                    <div class="stat-label">Statistical Significance</div>
                 </div>
-
-                <div class="research-item">
-                    <div class="research-icon">🧠</div>
-                    <h3>Consciousness Studies</h3>
-                    <p>Developing measurable signatures of consciousness emergence in information-processing systems</p>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Independent Platforms</div>
                 </div>
-
-                <div class="research-item">
-                    <div class="research-icon">🔢</div>
-                    <h3>Computational Physics</h3>
-                    <p>Understanding fundamental limits and structures in physical computation</p>
+                <div class="stat-card">
+                    <div class="stat-number">89%</div>
+                    <div class="stat-label">Agreement Rate</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4>Institute</h4>
-                <ul>
-                    <li><a href="about-page.html">About Us</a></li>
-                    <li><a href="#research">Research Areas</a></li>
-                    <li><a href="validation-page.html">Validations</a></li>
-                    <li><a href="zenodo-papers.html">Research Papers</a></li>
-                    <li><a href="contribute.html">How to Contribute</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="book.html">The Big TOE Book</a></li>
-                    <li><a href="zenodo-papers.html">Zenodo Repository</a></li>
-                    <li><a href="discussions.html">Community Forum</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="legal.html#terms">Terms & Conditions</a></li>
-                    <li><a href="legal.html#privacy">Privacy Policy</a></li>
-                    <li><a href="legal.html#disclaimer">Research Disclaimer</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></li>
-                    <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
-                    <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
-                </ul>
-            </div>
+    <!-- CTA Section -->
+    <section class="content-section">
+        <div class="section-container" style="text-align: center;" data-aos="fade-up">
+            <h2 class="section-title">Ready to Explore?</h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.125rem;">Download "A Quest for The Big TOE" and dive into the complete theoretical framework that predicted these experimental results.</p>
+            <a href="book.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 3rem;">Access The Book</a>
         </div>
+    </section>
 
-        <div class="footer-bottom">
-            <p>© 2025 Ic² Research Institute | Information-Consciousness Institute | All Rights Reserved</p>
-        </div>
-    </footer>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>
