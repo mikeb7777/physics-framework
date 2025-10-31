@@ -3,471 +3,688 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ic² Research Institute - Pioneering Theoretical Physics</title>
-    <meta name="description" content="The Ic² Research Institute advances theoretical physics through The Big TOE framework, with validated predictions in dark energy, quantum computing, and cosmology.">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <title>Ic² Research Institute - Information, Consciousness, Computation</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        :root {
-            --primary-color: #8B0000;
-            --secondary-color: #2c3e50;
-            --accent-blue: #005ba5;
-            --accent-red: #e33d2f;
-            --accent-green: #a1cd5f;
-            --accent-orange: #f58b2b;
-            --accent-yellow: #f1e303;
-            --text-dark: #2c3e50;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --max-width: 1200px;
-        }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
-            background: white;
+            background: #f8f9fa;
+            color: #2c3e50;
         }
-
-        /* Header */
-        .site-header {
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
+        
+        /* Top Navigation */
+        .top-nav {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 15px 0;
         }
-
-        .header-container {
-            max-width: var(--max-width);
+        
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .site-logo img {
-            height: 50px;
-            width: auto;
-        }
-
-        .main-navigation ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .main-navigation a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .main-navigation a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .homepage-hero {
-            position: relative;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            position: relative;
-            z-index: 2;
-            color: white;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
+        
+        .site-title {
+            font-size: 1.5em;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            opacity: 0.95;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.875rem 2rem;
+            color: #2c3e50;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-
-        .btn-primary {
-            background: var(--primary-color);
+        
+        .site-title .logo-mark {
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
             color: white;
-        }
-
-        .btn-primary:hover {
-            background: #a00000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            margin-left: 1rem;
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--text-dark);
-        }
-
-        /* Tiles Section */
-        .tiles-container {
-            max-width: var(--max-width);
-            margin: -4rem auto 0;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 3;
-        }
-
-        .tiles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .tile {
-            background: white;
-            padding: 2rem 1.5rem;
+            padding: 8px 12px;
             border-radius: 8px;
+            font-weight: 800;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #2c3e50;
             text-decoration: none;
-            color: var(--text-dark);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-bottom: 4px solid var(--accent-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #dc143c;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            text-transform: none;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-content a:hover {
+            background: rgba(220, 20, 60, 0.05);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 40px 100px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
             text-align: center;
         }
-
-        .tile:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-
-        .tile img {
-            height: 60px;
-            margin-bottom: 1rem;
-        }
-
-        .tile h3 {
-            font-size: 1.1rem;
-            line-height: 1.4;
-            color: var(--text-dark);
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 5rem 2rem;
-        }
-
-        .content-section.bg-light {
-            background: var(--bg-light);
-        }
-
-        .section-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-        }
-
-        .tagline {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
+        
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #2c3e50;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-dark);
         }
-
-        /* Two Column Layout */
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        
+        .hero h1 .highlight {
+            color: #dc143c;
         }
-
-        .two-column img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        
+        .hero-tagline {
+            font-size: 1.5em;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
+        
         /* Validation Banner */
         .validation-banner {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
             color: white;
-            padding: 3rem 2rem;
+            padding: 30px 40px;
+            margin-top: 40px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .banner-stat {
             text-align: center;
         }
-
-        .validation-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .validation-badge {
-            display: inline-block;
-            background: #f1e303;
-            color: #2c3e50;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
+        
+        .banner-stat-number {
+            font-size: 3.5em;
             font-weight: 700;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
+            line-height: 1;
         }
-
-        .validation-banner h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        
+        .banner-stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-top: 5px;
         }
-
-        /* Stats Section */
-        .stats-grid {
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        
+        /* Validation Tile Gallery */
+        .validation-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .validation-tile {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .validation-tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.2);
+        }
+        
+        .tile-header {
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            color: white;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .tile-status {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .tile-header h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .tile-date {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+        
+        .tile-content {
+            padding: 30px;
+        }
+        
+        .tile-content p {
+            color: #7f8c8d;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .tile-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tile-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .tile-detail-icon {
+            color: #dc143c;
+            font-weight: bold;
+            min-width: 20px;
+        }
+        
+        .tile-detail-text {
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .tile-footer {
+            padding: 20px 30px;
+            background: rgba(220, 20, 60, 0.05);
+            text-align: center;
+            font-weight: 600;
+            color: #dc143c;
+        }
+        
+        /* Quick Links Grid */
+        .quick-links-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            gap: 25px;
+            margin-bottom: 80px;
         }
-
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
+        
+        .quick-link-card {
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
         }
-
-        .stat-number {
-            font-size: 3rem;
+        
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
+        }
+        
+        .quick-link-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .quick-link-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+        
+        .quick-link-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            border-radius: 12px;
+        }
+        
+        .cta-section h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #ffd700;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 50px;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            font-size: 1.2em;
+            transition: all 0.3s;
         }
-
-        .stat-label {
-            font-size: 1.1rem;
-            color: var(--text-light);
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
         }
-
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 40px 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a:hover {
+            color: #dc143c;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+        
         /* Responsive */
-        @media (max-width: 768px) {
-            .main-navigation ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 2.5em;
             }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .tiles-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .two-column {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .tiles-grid {
+            
+            .validation-gallery {
                 grid-template-columns: 1fr;
             }
-
-            .hero-content h1 {
-                font-size: 1.75rem;
+            
+            .banner-stat-number {
+                font-size: 2.5em;
+            }
+            
+            .nav-links {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
-        <div class="header-container">
-            <div class="site-logo">
-                <img src="logoRed.png" alt="Ic² Research Institute">
-            </div>
-            <nav class="main-navigation">
-                <ul>
-                    <li><a href="index.html">Institute</a></li>
-                    <li><a href="book.html">The Book</a></li>
-                    <li><a href="about-page.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="blog.html">News</a></li>
-                    <li><a href="contribute.html">Contribute</a></li>
-                </ul>
-            </nav>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="site-title">
+                <span class="logo-mark">Ic²</span>
+                Research Institute
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li class="dropdown">
+                    <a href="#">Research</a>
+                    <div class="dropdown-content">
+                        <a href="validation.html">Validation System</a>
+                        <a href="testing-schedule.html">Testing Schedule</a>
+                        <a href="results.html">Results & Papers</a>
+                    </div>
+                </li>
+                <li><a href="contribute.html">Support</a></li>
+                <li><a href="book.html">The Big TOE</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="homepage-hero">
-        <div class="hero-background"></div>
-        <div class="hero-content" data-aos="fade-right">
-            <h1>Pioneering the Future<br>of Theoretical Physics</h1>
-            <p>The Ic² Research Institute advances our understanding of reality through rigorous theoretical frameworks with experimentally validated predictions. From dark energy evolution to quantum computing optimization, our work bridges theory and observation.</p>
-            <div class="hero-buttons">
-                <a href="book.html" class="btn btn-primary">Explore The Big TOE</a>
-                <a href="about-page.html" class="btn btn-outline">Learn More</a>
+    <section class="hero">
+        <h1 data-aos="fade-up">
+            <span class="highlight">Ic²</span> Research Institute
+        </h1>
+        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">
+            Information • Consciousness • Computation
+        </p>
+        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="200" style="font-size: 1.2em;">
+            Advancing open, transparent research into the fundamental nature of reality
+        </p>
+        
+        <div class="validation-banner" data-aos="fade-up" data-aos-delay="300">
+            <div class="banner-stat">
+                <div class="banner-stat-number">3</div>
+                <div class="banner-stat-label">Validated Predictions</div>
+            </div>
+            <div class="banner-stat">
+                <div class="banner-stat-number">100%</div>
+                <div class="banner-stat-label">Success Rate</div>
+            </div>
+            <div class="banner-stat">
+                <div class="banner-stat-number">0</div>
+                <div class="banner-stat-label">Failed Predictions</div>
             </div>
         </div>
     </section>
 
-    <!-- Research Focus Tiles -->
-    <div class="tiles-container" data-aos="fade-up">
-        <div class="tiles-grid">
-            <a href="#validation" class="tile" style="--accent-color: #f1e303;">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f1e303'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E" alt="Validated">
-                <h3>Experimentally<br>Validated</h3>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Validation Tile Gallery -->
+        <div class="section-header" data-aos="fade-up">
+            <h2>Framework Validations</h2>
+            <p>Independent experimental confirmation of testable predictions</p>
+        </div>
+
+        <div class="validation-gallery">
+            <!-- Validation 1: Dark Energy -->
+            <a href="validation.html#desi" class="validation-tile" data-aos="fade-up">
+                <div class="tile-header">
+                    <div class="tile-status">✓ VALIDATED</div>
+                    <h3>Dark Energy Evolution</h3>
+                    <div class="tile-date">Validated: January 2025 (DESI)</div>
+                </div>
+                <div class="tile-content">
+                    <p>Framework predicted dark energy would exhibit dynamic behavior rather than remaining constant (cosmological constant Λ).</p>
+                    <div class="tile-details">
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">DESI confirmed 3.2σ deviation from Λ</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">Evidence for quintessence behavior</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">Prediction documented Jan 2025</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    View Full Details →
+                </div>
             </a>
-            <a href="#dark-energy" class="tile" style="--accent-color: #005ba5;">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23005ba5'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E" alt="Dark Energy">
-                <h3>Dark Energy<br>Evolution</h3>
+
+            <!-- Validation 2: Quantum Error Correction -->
+            <a href="validation.html#willow" class="validation-tile" data-aos="fade-up" data-aos-delay="100">
+                <div class="tile-header">
+                    <div class="tile-status">✓ VALIDATED</div>
+                    <h3>Quantum Error Correction</h3>
+                    <div class="tile-date">Validated: December 2024 (Google Willow)</div>
+                </div>
+                <div class="tile-content">
+                    <p>Framework predicted exponential error reduction scaling with logical qubit size based on information-theoretic principles.</p>
+                    <div class="tile-details">
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">Willow achieved "below threshold"</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">Exponential scaling confirmed</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">30-year challenge solved</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    View Full Details →
+                </div>
             </a>
-            <a href="#quantum" class="tile" style="--accent-color: #e33d2f;">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e33d2f'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z'/%3E%3C/svg%3E" alt="Quantum">
-                <h3>Quantum<br>Computing</h3>
+
+            <!-- Validation 3: JWST Early Galaxies -->
+            <a href="validation.html#jwst" class="validation-tile" data-aos="fade-up" data-aos-delay="200">
+                <div class="tile-header">
+                    <div class="tile-status">✓ VALIDATED</div>
+                    <h3>Early Galaxy Formation</h3>
+                    <div class="tile-date">Validated: 2024-2025 (JWST)</div>
+                </div>
+                <div class="tile-content">
+                    <p>Framework predicted massive, fully-formed galaxies at z=10-15+, contradicting standard ΛCDM models.</p>
+                    <div class="tile-details">
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">100+ unexpected early galaxies</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">Galaxies at z=14+ (280M years)</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">✓</div>
+                            <div class="tile-detail-text">Systematic pattern as predicted</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    View Full Details →
+                </div>
             </a>
-            <a href="#cosmology" class="tile" style="--accent-color: #a1cd5f;">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1cd5f'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" alt="Cosmology">
-                <h3>Early Galaxy<br>Formation</h3>
+
+            <!-- Corroborating Evidence: Galaxy Asymmetry -->
+            <a href="validation.html#asymmetry" class="validation-tile" data-aos="fade-up" data-aos-delay="300">
+                <div class="tile-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="tile-status">⋯ CORROBORATING</div>
+                    <h3>Galaxy Asymmetry</h3>
+                    <div class="tile-date">Multiple Independent Studies (2022+)</div>
+                </div>
+                <div class="tile-content">
+                    <p>Framework predicted multi-scale directional asymmetries in galaxy distributions and cosmic parameters.</p>
+                    <div class="tile-details">
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">⋯</div>
+                            <div class="tile-detail-text">Shamir (2022): Galaxy spin axis</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">⋯</div>
+                            <div class="tile-detail-text">Yeung & Chu (2022): 3σ parameter variation</div>
+                        </div>
+                        <div class="tile-detail">
+                            <div class="tile-detail-icon">⋯</div>
+                            <div class="tile-detail-text">4+ independent confirmations</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    View Full Details →
+                </div>
             </a>
-            <a href="#consciousness" class="tile" style="--accent-color: #f58b2b;">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f58b2b'%3E%3Cpath d='M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z'/%3E%3C/svg%3E" alt="Consciousness">
-                <h3>Consciousness<br>Studies</h3>
+        </div>
+
+        <!-- Quick Access Links -->
+        <div class="section-header" data-aos="fade-up">
+            <h2>Research Resources</h2>
+            <p>Explore our transparent research process</p>
+        </div>
+
+        <div class="quick-links-grid">
+            <a href="validation.html" class="quick-link-card" data-aos="fade-up">
+                <div class="quick-link-icon">✓</div>
+                <h3>Validation System</h3>
+                <p>Comprehensive checklist and methodology for validating theoretical predictions</p>
+            </a>
+
+            <a href="testing-schedule.html" class="quick-link-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="quick-link-icon">📅</div>
+                <h3>Testing Schedule</h3>
+                <p>Upcoming experiments and observations that will test framework predictions</p>
+            </a>
+
+            <a href="results.html" class="quick-link-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="quick-link-icon">📊</div>
+                <h3>Results & Papers</h3>
+                <p>Published research, data, and analysis available on Zenodo and open repositories</p>
+            </a>
+
+            <a href="about.html" class="quick-link-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="quick-link-icon">🔬</div>
+                <h3>About Ic²</h3>
+                <p>Our mission, values, and commitment to open, transparent science</p>
             </a>
         </div>
     </div>
 
-    <!-- Validation Banner -->
-    <section class="validation-banner" data-aos="fade-up">
-        <div class="validation-content">
-            <span class="validation-badge">🏆 BREAKTHROUGH VALIDATED</span>
-            <h2>Three Major Predictions Confirmed by Independent Experiments</h2>
-            <p style="margin-bottom: 2rem;">In 2024-2025, three groundbreaking predictions from The Big TOE framework were independently validated by leading research teams worldwide.</p>
-            <a href="press-release-1.html" class="btn btn-primary">Read Full Press Release</a>
+    <!-- Call to Action -->
+    <div class="container">
+        <div class="cta-section" data-aos="fade-up">
+            <h2>Explore the Complete Framework</h2>
+            <p>Read the comprehensive theoretical foundation behind these predictions</p>
+            <a href="book.html" class="cta-btn">The Big TOE</a>
         </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section class="content-section">
-        <div class="section-container">
-            <div class="two-column" data-aos="fade-right">
-                <div>
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 441'%3E%3Crect fill='%23f0f0f0' width='640' height='441'/%3E%3Ctext x='50%25' y='50%25' fill='%23999' font-size='24' text-anchor='middle'%3EInstitute Research%3C/text%3E%3C/svg%3E" alt="Ic² Research Institute">
-                </div>
-                <div>
-                    <p class="tagline">About The Institute</p>
-                    <h2 class="section-title">Advancing Theoretical Physics</h2>
-                    <p style="margin-bottom: 1rem;">The Ic² Research Institute exists to bridge the gap between theoretical frameworks and experimental validation. We develop testable predictions across multiple domains of physics, from cosmology to quantum mechanics.</p>
-                    <p style="margin-bottom: 2rem;">What sets us apart is our commitment to falsifiable predictions documented before experimental confirmation. Our framework has successfully predicted phenomena later validated by DESI, Google Quantum AI, and JWST.</p>
-                    <a href="about-page.html" class="btn btn-primary">Our Story</a>
-                </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Ic² Research Institute</h3>
+                <p>Information • Consciousness • Computation</p>
+                <p>Advancing open, transparent research in fundamental physics</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="about.html">About</a>
+                <a href="validation.html">Validation</a>
+                <a href="testing-schedule.html">Testing Schedule</a>
+                <a href="results.html">Results</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="book.html">The Big TOE Book</a>
+                <a href="events.html">Events</a>
+                <a href="contribute.html">Support Us</a>
+                <a href="legal.html">Legal</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="#">GitHub</a>
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+                <a href="#">Email Updates</a>
             </div>
         </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="content-section bg-light" data-aos="fade-up">
-        <div class="section-container">
-            <h2 class="section-title" style="text-align: center;">Impact by the Numbers</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Validated Predictions</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">3.2σ</div>
-                    <div class="stat-label">Statistical Significance</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">Independent Platforms</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">89%</div>
-                    <div class="stat-label">Agreement Rate</div>
-                </div>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="content-section">
-        <div class="section-container" style="text-align: center;" data-aos="fade-up">
-            <h2 class="section-title">Ready to Explore?</h2>
-            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.125rem;">Download "A Quest for The Big TOE" and dive into the complete theoretical framework that predicted these experimental results.</p>
-            <a href="book.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 3rem;">Access The Book</a>
-        </div>
-    </section>
+    </footer>
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 1000,
+            duration: 800,
             once: true,
             offset: 100
         });

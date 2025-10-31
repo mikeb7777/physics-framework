@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Schedule - Ic² Research Institute</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .site-title .logo-mark {
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #dc143c;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 140px 40px 80px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        .hero h1 .highlight {
+            color: #dc143c;
+        }
+        
+        .hero-tagline {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #dc143c 0%, rgba(220, 20, 60, 0.3) 100%);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 40px);
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 40px);
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #dc143c;
+            border: 4px solid #f8f9fa;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        
+        .timeline-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            color: white;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .timeline-card h3 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-card p {
+            color: #7f8c8d;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .prediction-details {
+            background: rgba(220, 20, 60, 0.05);
+            padding: 20px;
+            border-left: 4px solid #dc143c;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .prediction-details h4 {
+            color: #dc143c;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .prediction-details p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .prediction-details ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        
+        .prediction-details li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .prediction-details li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #dc143c;
+            font-weight: bold;
+        }
+        
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        .status-upcoming {
+            background: rgba(255, 193, 7, 0.1);
+            color: #f57c00;
+        }
+        
+        .status-ongoing {
+            background: rgba(33, 150, 243, 0.1);
+            color: #1976d2;
+        }
+        
+        .status-planned {
+            background: rgba(156, 39, 176, 0.1);
+            color: #7b1fa2;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .info-box h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .info-box p {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 40px 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a:hover {
+            color: #dc143c;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 0;
+            }
+            
+            .timeline-marker {
+                left: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="site-title">
+                <span class="logo-mark">Ic²</span>
+                Research Institute
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="book.html">The Big TOE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1 data-aos="fade-up">Testing <span class="highlight">Schedule</span></h1>
+        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">Upcoming experiments and observations that will test framework predictions</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Info Box -->
+        <div class="info-box" data-aos="fade-up">
+            <h2>How We Test Predictions</h2>
+            <p>Every prediction made by the COSMIC Framework is documented with timestamps before experimental results become available. This page tracks upcoming experiments and observations that will test our theoretical predictions. We maintain complete transparency—documenting both successes and failures.</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            <!-- Test 1 -->
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2025-2026</span>
+                    <h3>Euclid Mission Galaxy Surveys</h3>
+                    <p>The Euclid space telescope will conduct extensive surveys of galaxy distributions and large-scale structure, providing additional tests of cosmic asymmetry predictions.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>Euclid will detect systematic directional variations in:</p>
+                        <ul>
+                            <li>Galaxy clustering patterns aligned with cosmic axis</li>
+                            <li>Large-scale structure asymmetries</li>
+                            <li>Weak lensing signal variations by direction</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-ongoing">Ongoing Mission</span>
+                </div>
+            </div>
+
+            <!-- Test 2 -->
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2025-2027</span>
+                    <h3>JWST Continued Early Galaxy Observations</h3>
+                    <p>James Webb Space Telescope continues deep field observations, expected to find even earlier galaxies.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>JWST will continue to find massive galaxies at increasingly high redshifts:</p>
+                        <ul>
+                            <li>Galaxies at z > 15 (earlier than 270 million years)</li>
+                            <li>Fully formed structures earlier than ΛCDM predicts</li>
+                            <li>Systematic pattern continuing indefinitely</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-ongoing">Ongoing Observations</span>
+                </div>
+            </div>
+
+            <!-- Test 3 -->
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2026-2027</span>
+                    <h3>Simons Observatory CMB Measurements</h3>
+                    <p>Next-generation cosmic microwave background observations with improved precision on hemispherical asymmetries.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>Enhanced measurements will confirm and refine detection of:</p>
+                        <ul>
+                            <li>Hemispherical power asymmetry in CMB</li>
+                            <li>Alignment with galaxy asymmetry axis</li>
+                            <li>Increased statistical significance (> 4σ)</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-upcoming">Upcoming</span>
+                </div>
+            </div>
+
+            <!-- Test 4 -->
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2026-2028</span>
+                    <h3>Quantum Computing Scaling Studies</h3>
+                    <p>Multiple teams working on scaling quantum error correction to larger logical qubit arrays.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>Information-theoretic principles predict continued scaling:</p>
+                        <ul>
+                            <li>Exponential error reduction continues with array size</li>
+                            <li>Below-threshold performance maintained</li>
+                            <li>Information conservation limits confirmed</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-ongoing">Multiple Projects</span>
+                </div>
+            </div>
+
+            <!-- Test 5 -->
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2027-2028</span>
+                    <h3>Vera C. Rubin Observatory First Light</h3>
+                    <p>The Rubin Observatory will conduct the Legacy Survey of Space and Time (LSST), mapping the southern sky.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>LSST will provide unprecedented statistical power to detect:</p>
+                        <ul>
+                            <li>Large-scale asymmetries in galaxy distributions</li>
+                            <li>Systematic variations in cosmic structure by direction</li>
+                            <li>Correlation with other asymmetry measurements</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+            </div>
+
+            <!-- Test 6 -->
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2028-2030</span>
+                    <h3>Nancy Grace Roman Space Telescope</h3>
+                    <p>Roman will provide wide-field infrared surveys complementing JWST's deep field observations.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>Roman's wide field will enable:</p>
+                        <ul>
+                            <li>Statistical studies of early galaxy populations</li>
+                            <li>Dark energy evolution measurements at multiple epochs</li>
+                            <li>Large-scale structure mapping for asymmetry tests</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-planned">Launch ~2027</span>
+                </div>
+            </div>
+
+            <!-- Test 7 -->
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2029+</span>
+                    <h3>Extremely Large Telescope (ELT)</h3>
+                    <p>Ground-based optical/infrared observations with unprecedented resolution and sensitivity.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>ELT's capabilities will enable:</p>
+                        <ul>
+                            <li>Detailed spectroscopy of high-redshift galaxies</li>
+                            <li>Confirmation of early galaxy structure and composition</li>
+                            <li>Tests of cosmic acceleration evolution</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-planned">First Light 2028</span>
+                </div>
+            </div>
+
+            <!-- Test 8 -->
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card">
+                    <span class="timeline-date">2030+</span>
+                    <h3>LiteBIRD CMB Polarization Mission</h3>
+                    <p>Space-based mission dedicated to mapping CMB polarization with extreme precision.</p>
+                    
+                    <div class="prediction-details">
+                        <h4>Framework Prediction:</h4>
+                        <p>Precision polarization measurements will reveal:</p>
+                        <ul>
+                            <li>Enhanced detection of hemispherical asymmetries</li>
+                            <li>Directional variations in primordial power spectrum</li>
+                            <li>Potential detection of parity violations</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="status-badge status-planned">Launch ~2032</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="info-box" data-aos="fade-up" style="background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);">
+            <h2>Want to Track Results?</h2>
+            <p style="margin-bottom: 30px;">Follow our validation page for updates as experimental results become available. We document everything transparently—successes and failures alike.</p>
+            <a href="validation.html" style="display: inline-block; padding: 15px 40px; background: #dc143c; color: white; text-decoration: none; border-radius: 50px; font-weight: 700; transition: all 0.3s;">View Validations</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Ic² Research Institute</h3>
+                <p>Advancing open, transparent research in consciousness and computation.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="about.html">About</a>
+                <a href="validation.html">Validation</a>
+                <a href="testing-schedule.html">Testing Schedule</a>
+                <a href="results.html">Results</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="book.html">The Big TOE Book</a>
+                <a href="contribute.html">Support Us</a>
+                <a href="legal.html">Legal</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="#">GitHub</a>
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

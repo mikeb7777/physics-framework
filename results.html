@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results & Publications - Ic² Research Institute</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .site-title .logo-mark {
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #dc143c;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 140px 40px 80px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        .hero h1 .highlight {
+            color: #dc143c;
+        }
+        
+        .hero-tagline {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .zenodo-badge {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #024;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .zenodo-badge:hover {
+            background: #036;
+            transform: scale(1.05);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        
+        /* Paper Cards */
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .paper-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .paper-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
+        }
+        
+        .paper-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(220, 20, 60, 0.1);
+            color: #dc143c;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .paper-card h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .paper-authors {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .paper-date {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .paper-card p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .paper-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .paper-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #dc143c;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        
+        .paper-link:hover {
+            background: #8b0000;
+            transform: translateX(3px);
+        }
+        
+        .paper-link.secondary {
+            background: transparent;
+            color: #dc143c;
+            border: 2px solid #dc143c;
+        }
+        
+        .paper-link.secondary:hover {
+            background: #dc143c;
+            color: white;
+        }
+        
+        /* Data Section */
+        .data-repository {
+            background: white;
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .data-repository h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #dc143c;
+        }
+        
+        .data-repository p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .data-item {
+            padding: 25px;
+            background: rgba(220, 20, 60, 0.05);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .data-item h4 {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .data-item p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .data-item a {
+            display: inline-block;
+            color: #dc143c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .data-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Projects Section */
+        .projects-section {
+            margin-bottom: 80px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #dc143c;
+        }
+        
+        .project-status {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .status-active {
+            background: rgba(76, 175, 80, 0.1);
+            color: #388e3c;
+        }
+        
+        .status-planned {
+            background: rgba(255, 193, 7, 0.1);
+            color: #f57c00;
+        }
+        
+        .project-card h3 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .project-card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .project-detail-item {
+            padding: 15px;
+            background: rgba(220, 20, 60, 0.05);
+            border-radius: 6px;
+        }
+        
+        .project-detail-label {
+            font-weight: 600;
+            color: #dc143c;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        
+        .project-detail-value {
+            color: #555;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 40px 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a:hover {
+            color: #dc143c;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .papers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="site-title">
+                <span class="logo-mark">Ic²</span>
+                Research Institute
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="book.html">The Big TOE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1 data-aos="fade-up">Results & <span class="highlight">Publications</span></h1>
+        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">
+            Open access research papers, data, and analysis hosted on Zenodo and open repositories
+        </p>
+        <a href="https://zenodo.org/" class="zenodo-badge" data-aos="fade-up" data-aos-delay="200">
+            View on Zenodo →
+        </a>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Published Papers -->
+        <div class="section-header" data-aos="fade-up">
+            <h2>Published Research</h2>
+            <p>Peer-reviewed and preprint publications with full open access</p>
+        </div>
+
+        <div class="papers-grid">
+            <!-- Paper 1 -->
+            <div class="paper-card" data-aos="fade-up">
+                <span class="paper-badge">Preprint</span>
+                <h3>Validation of Dark Energy Evolution Prediction via DESI Observations</h3>
+                <p class="paper-authors">Baines, M.K.</p>
+                <p class="paper-date">Published: February 2025</p>
+                <p>Analysis of DESI collaboration results showing 3.2σ deviation from cosmological constant, validating framework predictions of dynamic dark energy documented prior to observational confirmation.</p>
+                <div class="paper-links">
+                    <a href="#" class="paper-link">Zenodo →</a>
+                    <a href="#" class="paper-link secondary">PDF</a>
+                </div>
+            </div>
+
+            <!-- Paper 2 -->
+            <div class="paper-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="paper-badge">Preprint</span>
+                <h3>Information-Theoretic Foundations of Quantum Error Correction: Google Willow Validation</h3>
+                <p class="paper-authors">Baines, M.K.</p>
+                <p class="paper-date">Published: January 2025</p>
+                <p>Comprehensive analysis of Google Willow's achievement of below-threshold quantum error correction, demonstrating agreement with framework predictions based on information conservation principles.</p>
+                <div class="paper-links">
+                    <a href="#" class="paper-link">Zenodo →</a>
+                    <a href="#" class="paper-link secondary">PDF</a>
+                </div>
+            </div>
+
+            <!-- Paper 3 -->
+            <div class="paper-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="paper-badge">Preprint</span>
+                <h3>JWST Early Galaxy Discoveries and Rapid Complexity Emergence</h3>
+                <p class="paper-authors">Baines, M.K.</p>
+                <p class="paper-date">Published: February 2025</p>
+                <p>Analysis of JWST's systematic discovery of massive galaxies at z > 14, validating framework prediction of rapid early structure formation from information-theoretic "fast to complex" transition.</p>
+                <div class="paper-links">
+                    <a href="#" class="paper-link">Zenodo →</a>
+                    <a href="#" class="paper-link secondary">PDF</a>
+                </div>
+            </div>
+
+            <!-- Paper 4 -->
+            <div class="paper-card" data-aos="fade-up" data-aos-delay="300">
+                <span class="paper-badge">Analysis</span>
+                <h3>Multi-Scale Cosmic Axis: Corroborating Evidence from Independent Studies</h3>
+                <p class="paper-authors">Baines, M.K.</p>
+                <p class="paper-date">Published: January 2025</p>
+                <p>Synthesis of independent studies (Shamir 2022, Yeung & Chu 2022, CMB anomalies) showing aligned directional asymmetries consistent with framework predictions of multi-scale cosmic structure.</p>
+                <div class="paper-links">
+                    <a href="#" class="paper-link">Zenodo →</a>
+                    <a href="#" class="paper-link secondary">PDF</a>
+                </div>
+            </div>
+
+            <!-- Paper 5 -->
+            <div class="paper-card" data-aos="fade-up" data-aos-delay="400">
+                <span class="paper-badge">Theoretical</span>
+                <h3>The COSMIC Framework: Information-Theoretic Foundations</h3>
+                <p class="paper-authors">Baines, M.K.</p>
+                <p class="paper-date">Version 3.0 | Published: January 2025</p>
+                <p>Comprehensive exposition of the COSMIC (Computational Ontology and Substrate Model of Information Conservation) Framework, presenting information-theoretic foundations for physics.</p>
+                <div class="paper-links">
+                    <a href="#" class="paper-link">Zenodo →</a>
+                    <a href="#" class="paper-link secondary">Full Book</a>
+                </div>
+            </div>
+
+            <!-- Paper 6 -->
+            <div class="paper-card" data-aos="fade-up" data-aos-delay="500">
+                <span class="paper-badge">Working Paper</span>
+                <h3>Prime Number Logic Gates: Computational Efficiency in Natural Systems</h3>
+                <p class="paper-authors">Baines, M.K.</p>
+                <p class="paper-date">Submitted: March 2025</p>
+                <p>Analysis of how prime number relationships may function as natural logic gates in computational substrates, with implications for quantum information processing and biological systems.</p>
+                <div class="paper-links">
+                    <a href="#" class="paper-link">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Data Repository -->
+        <div class="data-repository" data-aos="fade-up">
+            <h2>Open Data Repository</h2>
+            <p>All data, analysis code, and computational resources freely available under open licenses. We believe scientific progress requires complete transparency and reproducibility.</p>
+            
+            <div class="data-grid">
+                <div class="data-item">
+                    <h4>Raw Data</h4>
+                    <p>All observational and experimental data used in analyses</p>
+                    <a href="#">Browse on Zenodo →</a>
+                </div>
+                
+                <div class="data-item">
+                    <h4>Analysis Code</h4>
+                    <p>Complete source code for all statistical analyses and visualizations</p>
+                    <a href="#">View on GitHub →</a>
+                </div>
+                
+                <div class="data-item">
+                    <h4>Computational Models</h4>
+                    <p>Simulation code and model parameters</p>
+                    <a href="#">Access Repository →</a>
+                </div>
+                
+                <div class="data-item">
+                    <h4>Documentation</h4>
+                    <p>Methodology guides and supplementary materials</p>
+                    <a href="#">Read Docs →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Projects -->
+        <div class="projects-section">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Active Research Projects</h2>
+                <p>Current investigations and upcoming publications</p>
+            </div>
+
+            <!-- Project 1 -->
+            <div class="project-card" data-aos="fade-up">
+                <span class="project-status status-active">Active</span>
+                <h3>Euclid Mission Data Analysis</h3>
+                <p>Ongoing analysis of Euclid space telescope observations for evidence of large-scale cosmic asymmetries. Preliminary results show directional variations consistent with framework predictions.</p>
+                <div class="project-details">
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Timeline</div>
+                        <div class="project-detail-value">2025-2026</div>
+                    </div>
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Data Source</div>
+                        <div class="project-detail-value">Euclid Mission</div>
+                    </div>
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Expected Publication</div>
+                        <div class="project-detail-value">Q3 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="project-status status-active">Active</span>
+                <h3>Quantum Information Processing Validation Studies</h3>
+                <p>Continued monitoring and analysis of quantum computing advances to test framework predictions about information-theoretic scaling laws and error correction thresholds.</p>
+                <div class="project-details">
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Timeline</div>
+                        <div class="project-detail-value">Ongoing</div>
+                    </div>
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Collaborators</div>
+                        <div class="project-detail-value">Multiple QC groups</div>
+                    </div>
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Status</div>
+                        <div class="project-detail-value">Data collection phase</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="project-status status-planned">Planned</span>
+                <h3>LSST Large-Scale Structure Analysis</h3>
+                <p>Preparation for Vera C. Rubin Observatory Legacy Survey of Space and Time data. Developing analysis pipeline for detecting directional asymmetries in galaxy distributions.</p>
+                <div class="project-details">
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Start Date</div>
+                        <div class="project-detail-value">2027-2028</div>
+                    </div>
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Data Source</div>
+                        <div class="project-detail-value">Rubin Observatory</div>
+                    </div>
+                    <div class="project-detail-item">
+                        <div class="project-detail-label">Scope</div>
+                        <div class="project-detail-value">Unprecedented scale</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Ic² Research Institute</h3>
+                <p>Advancing open, transparent research in consciousness and computation.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="about.html">About</a>
+                <a href="validation.html">Validation</a>
+                <a href="testing-schedule.html">Testing Schedule</a>
+                <a href="results.html">Results</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="book.html">The Big TOE Book</a>
+                <a href="contribute.html">Support Us</a>
+                <a href="legal.html">Legal</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="#">GitHub</a>
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

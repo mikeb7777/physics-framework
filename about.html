@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Ic² Research Institute</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .site-title .logo-mark {
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #dc143c;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 140px 40px 80px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        .hero h1 .highlight {
+            color: #dc143c;
+        }
+        
+        .hero-tagline {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        /* About Name Section */
+        .name-explanation {
+            background: white;
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .name-explanation h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .name-visual {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .name-equation {
+            font-size: 4em;
+            font-weight: 700;
+            color: #dc143c;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+        }
+        
+        .name-subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .name-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .name-component {
+            text-align: center;
+            padding: 30px;
+            background: rgba(220, 20, 60, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .name-component:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(220, 20, 60, 0.15);
+        }
+        
+        .name-component .letter {
+            font-size: 3em;
+            font-weight: 700;
+            color: #dc143c;
+            margin-bottom: 15px;
+        }
+        
+        .name-component h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .name-component p {
+            color: #7f8c8d;
+            line-height: 1.7;
+        }
+        
+        .name-note {
+            background: rgba(220, 20, 60, 0.05);
+            border-left: 4px solid #dc143c;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 4px;
+        }
+        
+        .name-note p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .name-note p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            background: white;
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .mission-section h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .mission-section p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
+        }
+        
+        .value-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .value-card h3 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .value-card p {
+            color: #7f8c8d;
+            line-height: 1.7;
+        }
+        
+        /* Team Section */
+        .team-section {
+            background: white;
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .team-section h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .team-section p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 40px 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a:hover {
+            color: #dc143c;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .name-equation {
+                font-size: 3em;
+            }
+            
+            .name-breakdown {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="site-title">
+                <span class="logo-mark">Ic²</span>
+                Research Institute
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="book.html">The Big TOE</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1 data-aos="fade-up">About <span class="highlight">Ic²</span></h1>
+        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">
+            Where information is fundamental to physical reality
+        </p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Our Name -->
+        <div class="name-explanation" data-aos="fade-up">
+            <h2>About Our Name</h2>
+            
+            <div class="name-visual">
+                <div class="name-equation">Ic²</div>
+                <div class="name-subtitle">Information • Consciousness • Computation</div>
+            </div>
+            
+            <div class="name-breakdown">
+                <div class="name-component">
+                    <div class="letter">I</div>
+                    <h3>Information</h3>
+                    <p>The fundamental substrate of reality. Information is not derived from matter and energy—matter and energy emerge from information.</p>
+                </div>
+                
+                <div class="name-component">
+                    <div class="letter">c</div>
+                    <h3>Consciousness</h3>
+                    <p>The observer component that enables measurement and collapse of quantum states. Consciousness is intrinsic to information processing.</p>
+                </div>
+                
+                <div class="name-component">
+                    <div class="letter">c²</div>
+                    <h3>Computation</h3>
+                    <p>The processing mechanism by which information evolves and transforms. Reality operates as a computational system.</p>
+                </div>
+            </div>
+            
+            <div class="name-note">
+                <p><strong>About the visual similarity to E=mc²:</strong> The resemblance to Einstein's famous equation is intentional—a respectful homage to physics. However, <strong>the "c" in Ic² does NOT represent the speed of light.</strong></p>
+                
+                <p>Our acronym represents the three pillars of our theoretical framework: <strong>Information</strong>, <strong>Consciousness</strong>, and <strong>Computation</strong>. We compress these into "Ic²" where the second "c" is stylized as "squared" for visual effect.</p>
+                
+                <p><strong>Why this name?</strong> Because our framework proposes that everything—energy, matter, spacetime—emerges from information-consciousness-computation, not the other way around. The visual echo of physics' most famous equation reminds us that we're proposing something equally fundamental: information as the ground state of reality.</p>
+            </div>
+        </div>
+
+        <!-- Mission -->
+        <div class="mission-section" data-aos="fade-up">
+            <h2>Our Mission</h2>
+            <p>The Ic² Research Institute advances open, transparent research into the fundamental nature of reality through the lens of information theory, consciousness studies, and computational frameworks.</p>
+            <p>We believe that scientific progress requires complete transparency, community involvement, and the free exchange of ideas. No paywalls. No gatekeeping. No hiding failures.</p>
+        </div>
+
+        <!-- Core Values -->
+        <div class="values-grid">
+            <div class="value-card" data-aos="fade-up">
+                <div class="value-icon">🔓</div>
+                <h3>Open Science</h3>
+                <p>All research, data, and analysis freely available. We publish everything openly, including our failures and ongoing investigations.</p>
+            </div>
+            
+            <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="value-icon">🔍</div>
+                <h3>Radical Transparency</h3>
+                <p>Complete documentation of predictions before validation. Public financial records. Open methodology. We hide nothing.</p>
+            </div>
+            
+            <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="value-icon">👥</div>
+                <h3>Community-Driven</h3>
+                <p>Science advances through collaboration. We welcome contributions from anyone, regardless of credentials or institutional affiliation.</p>
+            </div>
+            
+            <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="value-icon">✓</div>
+                <h3>Testable Predictions</h3>
+                <p>Every claim must be falsifiable. We document specific predictions with timestamps, then let experiments decide.</p>
+            </div>
+            
+            <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="value-icon">⚖️</div>
+                <h3>Intellectual Honesty</h3>
+                <p>We acknowledge limitations, report negative results, and distinguish between validation and corroboration.</p>
+            </div>
+            
+            <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="value-icon">🚫</div>
+                <h3>No Gatekeeping</h3>
+                <p>Knowledge should be accessible to all. We reject paywalls, closed peer review, and artificial barriers to information.</p>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section" data-aos="fade-up">
+            <h2>The Team</h2>
+            <p><strong>Ic² Research Institute</strong> is an independent research platform, not a registered legal entity or non-profit organization. We operate as a transparent, community-driven initiative focused on advancing fundamental physics through information-theoretic frameworks.</p>
+            
+            <p><strong>Founder & Principal Researcher:</strong> Michael K. Baines</p>
+            
+            <p>We maintain this structure intentionally to ensure complete independence from institutional pressures, funding biases, and traditional academic constraints. This allows us to pursue research directions that might be considered unconventional or risky within traditional frameworks.</p>
+            
+            <p><strong>Want to contribute?</strong> We welcome collaboration from researchers, physicists, mathematicians, computer scientists, and anyone with relevant expertise. Visit our <a href="contribute.html" style="color: #dc143c; text-decoration: none; font-weight: 600;">contributions page</a> to learn more.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Ic² Research Institute</h3>
+                <p>Information • Consciousness • Computation</p>
+                <p>Advancing open, transparent research in fundamental physics</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="about.html">About</a>
+                <a href="validation.html">Validation</a>
+                <a href="testing-schedule.html">Testing Schedule</a>
+                <a href="results.html">Results</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="book.html">The Big TOE Book</a>
+                <a href="events.html">Events</a>
+                <a href="contribute.html">Support Us</a>
+                <a href="legal.html">Legal</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="#">GitHub</a>
+                <a href="#">Twitter</a>
+                <a href="#">YouTube</a>
+                <a href="#">Email Updates</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

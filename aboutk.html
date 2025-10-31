@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Ic² Research Institute</title>
+    <meta name="description" content="Learn about the Ic² Research Institute, our mission, and the team behind The Big TOE framework.">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-red: #e33d2f;
+            --accent-green: #a1cd5f;
+            --accent-orange: #f58b2b;
+            --accent-yellow: #f1e303;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: white;
+        }
+
+        /* Header */
+        .site-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .main-navigation ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .main-navigation a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-navigation a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-yellow);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 2rem;
+        }
+
+        .content-section.bg-light {
+            background: var(--bg-light);
+        }
+
+        .section-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .section-intro {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .two-column img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Mission Cards */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-bottom: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .mission-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .team-member h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .team-member .role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-member p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--accent-blue);
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--accent-blue);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:first-child {
+            grid-column: 2;
+        }
+
+        .timeline-date {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #34495e 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.125rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a00000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--text-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-navigation ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                padding-left: 60px;
+            }
+
+            .timeline-item::after {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content:first-child {
+                grid-column: 1;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <a href="index.html">
+                    <img src="logoRed.png" alt="Ic² Research Institute">
+                </a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Institute</a></li>
+                    <li><a href="book.html">The Book</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="blog.html">News</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-background"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <p class="tagline">Our Story</p>
+            <h1 class="page-title">About the Ic² Research Institute</h1>
+            <p class="page-subtitle">Pioneering theoretical physics through rigorous frameworks and testable predictions</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div data-aos="fade-up">
+                <h2 class="section-title">Our Mission</h2>
+                <p class="section-intro">The Ic² Research Institute is dedicated to advancing our understanding of fundamental physics through the development of comprehensive theoretical frameworks that make testable, falsifiable predictions.</p>
+            </div>
+
+            <div class="mission-grid">
+                <div class="mission-card" style="--accent-color: #005ba5;" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Rigorous Theory</h3>
+                    <p>We develop comprehensive theoretical frameworks grounded in mathematical rigor and logical consistency, bridging quantum mechanics, cosmology, and consciousness studies.</p>
+                </div>
+
+                <div class="mission-card" style="--accent-color: #e33d2f;" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Testable Predictions</h3>
+                    <p>Every prediction is documented before experimental validation, ensuring scientific integrity and establishing clear priority for theoretical insights.</p>
+                </div>
+
+                <div class="mission-card" style="--accent-color: #a1cd5f;" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Open Science</h3>
+                    <p>We believe in transparent research practices, making our frameworks freely accessible while maintaining rigorous peer review and validation standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="two-column" data-aos="fade-right">
+                <div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 441'%3E%3Crect fill='%23f0f0f0' width='640' height='441'/%3E%3Ctext x='50%25' y='50%25' fill='%23999' font-size='24' text-anchor='middle'%3EResearch Foundation%3C/text%3E%3C/svg%3E" alt="Research">
+                </div>
+                <div>
+                    <p class="tagline">Our Foundation</p>
+                    <h2 class="section-title">How It Began</h2>
+                    <p style="margin-bottom: 1rem;">The Ic² Institute was founded on the principle that theoretical physics should produce testable predictions that can be validated or falsified through experiment and observation.</p>
+                    <p style="margin-bottom: 1rem;">The COSMIC Framework, detailed in "A Quest for The Big TOE," represents years of rigorous theoretical development, resulting in specific predictions across multiple domains of physics.</p>
+                    <p>In 2024-2025, three major predictions were independently validated by DESI, Google Quantum AI, and JWST, marking a significant milestone in the framework's development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+                <p class="tagline">Our Journey</p>
+                <h2 class="section-title">Timeline</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 March</div>
+                        <h3 class="timeline-title">Version 1.0 Published</h3>
+                        <p>Initial framework released with core predictions documented for dark energy evolution, quantum computing, and cosmological observations.</p>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 August</div>
+                        <h3 class="timeline-title">Version 2.0 Released</h3>
+                        <p>Expanded framework with additional predictions and refined mathematical foundations across multiple physics domains.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 December</div>
+                        <h3 class="timeline-title">First Validation</h3>
+                        <p>Google's Willow chip confirmed quantum error correction predictions with exponential error suppression.</p>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up">
+                    <div></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025 January</div>
+                        <h3 class="timeline-title">Version 3.0 & Breakthrough</h3>
+                        <p>Current version released. DESI confirmed dark energy evolution (3.2σ significance), validating key cosmological predictions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
+                <p class="tagline">The Team</p>
+                <h2 class="section-title">Research Team</h2>
+                <p class="section-intro">Dedicated researchers advancing theoretical physics</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-member" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-avatar">👤</div>
+                    <h3>Lead Researcher</h3>
+                    <p class="role">Theoretical Physics</p>
+                    <p>Leading the development of The COSMIC Framework and coordinating research initiatives.</p>
+                </div>
+
+                <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-avatar">👤</div>
+                    <h3>Research Associate</h3>
+                    <p class="role">Quantum Mechanics</p>
+                    <p>Specializing in quantum computing predictions and error correction theory.</p>
+                </div>
+
+                <div class="team-member" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-avatar">👤</div>
+                    <h3>Research Associate</h3>
+                    <p class="role">Cosmology</p>
+                    <p>Focusing on dark energy evolution and early universe galaxy formation.</p>
+                </div>
+
+                <div class="team-member" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-avatar">👤</div>
+                    <h3>Research Associate</h3>
+                    <p class="role">Consciousness Studies</p>
+                    <p>Investigating the intersection of physics and consciousness phenomena.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" data-aos="fade-up">
+        <div class="section-container">
+            <h2 class="section-title" style="color: white;">Join Our Journey</h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.125rem;">Explore The Big TOE framework and be part of the next breakthroughs in theoretical physics.</p>
+            <div>
+                <a href="book.html" class="btn btn-primary">Download The Book</a>
+                <a href="contribute.html" class="btn btn-outline">Get Involved</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
