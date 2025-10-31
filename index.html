@@ -50,15 +50,16 @@
         .header-container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .site-logo img {
-            height: 50px;
-            width: auto;
+        .site-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
         }
 
         .main-navigation ul {
@@ -77,6 +78,11 @@
 
         .main-navigation a:hover {
             color: var(--primary-color);
+        }
+
+        .main-navigation a.login-link {
+            color: var(--primary-color);
+            font-weight: 600;
         }
 
         /* Hero Section */
@@ -108,6 +114,27 @@
             color: white;
         }
 
+        /* Big TOE Logo as Button */
+        .hero-logo-button {
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .hero-bigtoe-logo {
+            height: 60px;
+            width: auto;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            vertical-align: middle;
+        }
+
+        .hero-logo-button:hover .hero-bigtoe-logo {
+            transform: scale(1.1) rotate(2deg);
+            filter: drop-shadow(0 8px 16px rgba(255,255,0,0.4));
+        }
+
+        /* Hero Text Content */
         .hero-content h1 {
             font-size: 3.5rem;
             font-weight: 700;
@@ -118,8 +145,15 @@
         .hero-content p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            max-width: 700px;
             opacity: 0.95;
+            max-width: 800px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -170,6 +204,18 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .tile {
@@ -301,6 +347,55 @@
             color: var(--text-light);
         }
 
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .main-navigation ul {
@@ -310,6 +405,15 @@
 
             .hero-content h1 {
                 font-size: 2rem;
+            }
+
+            .hero-bigtoe-logo {
+                height: 50px;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
             }
 
             .tiles-grid {
@@ -325,9 +429,9 @@
                 font-size: 2rem;
             }
 
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 1rem;
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
 
@@ -339,6 +443,10 @@
             .hero-content h1 {
                 font-size: 1.75rem;
             }
+
+            .hero-bigtoe-logo {
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -347,7 +455,7 @@
     <header class="site-header">
         <div class="header-container">
             <div class="site-logo">
-                <img src="logoRed.png" alt="Ic² Research Institute">
+                Ic² Research Institute
             </div>
             <nav class="main-navigation">
                 <ul>
@@ -357,8 +465,8 @@
                     <li><a href="testing-schedule.html">Testing</a></li>
                     <li><a href="results.html">Results</a></li>
                     <li><a href="about-page.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
                     <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="login.html" class="login-link">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -367,12 +475,14 @@
     <!-- Hero Section -->
     <section class="homepage-hero">
         <div class="hero-background"></div>
-        <div class="hero-content" data-aos="fade-right">
+        <div class="hero-content" data-aos="fade-up">
             <h1>Pioneering the Future<br>of Theoretical Physics</h1>
             <p>The Ic² Research Institute advances our understanding of reality through rigorous theoretical frameworks with experimentally validated predictions. From dark energy evolution to quantum computing optimization, our work bridges theory and observation.</p>
             <div class="hero-buttons">
-                <a href="book.html" class="btn btn-primary">Explore The Big TOE</a>
                 <a href="about-page.html" class="btn btn-outline">Learn More</a>
+                <a href="book.html" class="hero-logo-button">
+                    <img src="bigtoeindexlogo.png" alt="The Big TOE" class="hero-bigtoe-logo">
+                </a>
             </div>
         </div>
     </section>
@@ -418,7 +528,7 @@
         <div class="section-container">
             <div class="two-column" data-aos="fade-right">
                 <div>
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 441'%3E%3Crect fill='%23f0f0f0' width='640' height='441'/%3E%3Ctext x='50%25' y='50%25' fill='%23999' font-size='24' text-anchor='middle'%3EInstitute Research%3C/text%3E%3C/svg%3E" alt="Ic² Research Institute">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Institute Research">
                 </div>
                 <div>
                     <p class="tagline">About The Institute</p>
@@ -460,10 +570,49 @@
     <section class="content-section">
         <div class="section-container" style="text-align: center;" data-aos="fade-up">
             <h2 class="section-title">Ready to Explore?</h2>
-            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.125rem;">Download "A Quest for The Big TOE" and dive into the complete theoretical framework that predicted these experimental results.</p>
-            <a href="book.html" class="btn" style="background: #f1e303; color: #000; font-size: 1.125rem; padding: 1rem 3rem;">The Big TOE</a>
+            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.125rem;">Dive into The Big TOE - an exploration of the COSMIC Framework's Unification Theory with validated predictions and testable hypotheses across multiple domains of physics.</p>
+            <a href="book.html" class="btn" style="background: #8B0000; color: #f1e303; font-size: 1.125rem; padding: 1rem 3rem;">Explore The Big TOE</a>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Ic² Research Institute</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">Advancing theoretical physics through rigorous frameworks with experimentally validated predictions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Research</h3>
+                <ul>
+                    <li><a href="validation.html">Validation</a></li>
+                    <li><a href="testing-schedule.html">Testing</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="zenodo-papers.html">Papers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="book.html">The Big TOE</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="faq-page.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="discussions-page.html">Discussions</a></li>
+                    <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
+        </div>
+    </footer>
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
