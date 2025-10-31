@@ -4,764 +4,449 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events - Ic² Research Institute</title>
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <meta name="description" content="Upcoming events, workshops, and conferences from the Ic² Research Institute.">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-red: #e33d2f;
+            --accent-green: #a1cd5f;
+            --accent-orange: #f58b2b;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            background: #f8f9fa;
-            color: #2c3e50;
+            color: var(--text-dark);
+            background: white;
         }
-        
-        /* Top Navigation */
-        .top-nav {
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
+
+        /* Header */
+        .site-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
             top: 0;
-            width: 100%;
             z-index: 1000;
-            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        
-        .nav-container {
-            max-width: 1400px;
+
+        .header-container {
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .site-title {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #2c3e50;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+
+        .site-logo img {
+            height: 50px;
+            width: auto;
         }
-        
-        .site-title .logo-mark {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: 800;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
+
+        .main-navigation ul {
             list-style: none;
-        }
-        
-        .nav-links a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .nav-links a:hover {
-            color: #dc143c;
-        }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: white;
-            min-width: 220px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 8px;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            text-transform: none;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-        
-        .dropdown-content a:hover {
-            background: rgba(220, 20, 60, 0.05);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 140px 40px 80px;
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            font-weight: 700;
-        }
-        
-        .hero h1 .highlight {
-            color: #dc143c;
-        }
-        
-        .hero-tagline {
-            font-size: 1.3em;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-        }
-        
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 40px;
-        }
-        
-        /* Event Filters */
-        .event-filters {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 50px;
+            gap: 2rem;
+            align-items: center;
         }
-        
-        .filter-btn {
-            padding: 12px 28px;
-            border: 2px solid #dc143c;
-            background: white;
-            color: #dc143c;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
+
+        .main-navigation a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
-        
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: #dc143c;
+
+        .main-navigation a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 4rem 2rem;
+            text-align: center;
             color: white;
         }
-        
-        /* Event Cards Grid */
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 2rem;
+        }
+
+        .section-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* Event Cards */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
+
         .event-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .event-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.2);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
-        
-        .event-date-banner {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+
+        .event-header {
+            background: var(--primary-color);
             color: white;
-            padding: 20px;
-            text-align: center;
+            padding: 1.5rem;
         }
-        
-        .event-month {
-            font-size: 0.9em;
+
+        .event-date {
+            font-size: 0.875rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 0.5rem;
         }
-        
-        .event-day {
-            font-size: 3em;
+
+        .event-title {
+            font-size: 1.5rem;
             font-weight: 700;
-            line-height: 1;
+            margin-bottom: 0.5rem;
         }
-        
-        .event-content {
-            padding: 25px;
-        }
-        
+
         .event-type {
             display: inline-block;
-            padding: 5px 12px;
-            background: rgba(220, 20, 60, 0.1);
-            color: #dc143c;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 15px;
         }
-        
-        .event-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            color: #2c3e50;
+
+        .event-body {
+            padding: 1.5rem;
         }
-        
+
         .event-details {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
         }
-        
+
         .event-detail {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #7f8c8d;
-            font-size: 0.95em;
+            gap: 0.5rem;
+            color: var(--text-light);
         }
-        
-        .event-detail-icon {
-            width: 20px;
-            text-align: center;
+
+        .event-detail svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
         }
-        
-        .event-card p {
-            color: #7f8c8d;
+
+        .event-description {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
             line-height: 1.6;
-            margin-bottom: 20px;
         }
-        
-        .event-btn {
+
+        .btn {
             display: inline-block;
-            padding: 10px 25px;
-            background: #dc143c;
-            color: white;
+            padding: 0.75rem 1.5rem;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 4px;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
         }
-        
-        .event-btn:hover {
-            background: #8b0000;
-            transform: translateX(5px);
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
         }
-        
-        /* Past Events Section */
+
+        .btn-primary:hover {
+            background: #a00000;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Past Events */
         .past-events {
-            margin-top: 80px;
+            background: var(--bg-light);
+            padding: 3rem 0;
         }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-header h2 {
-            font-size: 2.5em;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .section-header p {
-            font-size: 1.2em;
-            color: #7f8c8d;
-        }
-        
-        .past-event-item {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
+        .past-event {
             display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-        
-        .past-event-date {
-            min-width: 80px;
-            text-align: center;
-            padding: 15px;
-            background: rgba(220, 20, 60, 0.05);
-            border-radius: 8px;
-        }
-        
-        .past-event-date .day {
-            font-size: 2em;
-            font-weight: 700;
-            color: #dc143c;
-        }
-        
-        .past-event-date .month {
-            font-size: 0.9em;
-            color: #7f8c8d;
-        }
-        
-        .past-event-info {
-            flex: 1;
-        }
-        
-        .past-event-info h4 {
-            font-size: 1.3em;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-        
-        .past-event-info p {
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-        
-        .recordings-link {
-            color: #dc143c;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .recordings-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* Call to Action */
-        .cta-section {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            color: white;
-            padding: 60px 40px;
-            text-align: center;
-            margin-top: 80px;
-            border-radius: 12px;
-        }
-        
-        .cta-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 40px;
+            gap: 2rem;
+            padding: 1.5rem;
             background: white;
-            color: #dc143c;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: all 0.3s;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        
-        .cta-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        /* Footer */
-        .footer {
-            background: #2c3e50;
-            color: white;
-            padding: 60px 40px 30px;
-            margin-top: 80px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
-        
-        .footer-section a:hover {
-            color: #dc143c;
-        }
-        
-        .footer-bottom {
+
+        .past-event-date {
+            flex-shrink: 0;
+            width: 80px;
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 4px;
         }
-        
+
+        .past-event-date-day {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .past-event-date-month {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .past-event-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .past-event-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
         /* Responsive */
-        @media (max-width: 968px) {
-            .hero h1 {
-                font-size: 2.5em;
+        @media (max-width: 768px) {
+            .main-navigation ul {
+                gap: 1rem;
+                font-size: 0.9rem;
             }
-            
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
             .events-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .past-event-item {
+
+            .past-event {
                 flex-direction: column;
-                text-align: center;
             }
-            
-            .nav-links {
-                display: none;
+
+            .past-event-date {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="top-nav">
-        <div class="nav-container">
-            <a href="index.html" class="site-title">
-                <span class="logo-mark">Ic²</span>
-                Research Institute
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li class="dropdown">
-                    <a href="#">Research</a>
-                    <div class="dropdown-content">
-                        <a href="validation.html">Validation</a>
-                        <a href="papers.html">Publications</a>
-                        <a href="data.html">Open Data</a>
-                    </div>
-                </li>
-                <li><a href="contribute.html">Support</a></li>
-                <li><a href="book.html">The Book</a></li>
-            </ul>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <img src="logoRed.png" alt="Ic² Research Institute">
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Institute</a></li>
+                    <li><a href="book.html">The Book</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1 data-aos="fade-up">Events & <span class="highlight">Conferences</span></h1>
-        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">Join us in advancing the frontiers of consciousness and computation research</p>
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Events</h1>
+        <p>Join us for workshops, seminars, and conferences exploring the frontiers of theoretical physics</p>
     </section>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Event Filters -->
-        <div class="event-filters" data-aos="fade-up">
-            <button class="filter-btn active" data-filter="all">All Events</button>
-            <button class="filter-btn" data-filter="conference">Conferences</button>
-            <button class="filter-btn" data-filter="workshop">Workshops</button>
-            <button class="filter-btn" data-filter="webinar">Webinars</button>
-            <button class="filter-btn" data-filter="meetup">Community Meetups</button>
-        </div>
+    <!-- Upcoming Events -->
+    <section class="content-section">
+        <div class="section-container">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Upcoming Events</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">Connect with fellow researchers and explore the latest developments in our framework</p>
 
-        <!-- Upcoming Events -->
-        <div class="events-grid">
-            <!-- Event Card 1 -->
-            <div class="event-card" data-aos="fade-up" data-type="conference">
-                <div class="event-date-banner">
-                    <div class="event-month">December</div>
-                    <div class="event-day">15</div>
-                    <div class="event-month">2025</div>
-                </div>
-                <div class="event-content">
-                    <span class="event-type">Conference</span>
-                    <h3>Annual Ic² Research Symposium</h3>
-                    <div class="event-details">
-                        <div class="event-detail">
-                            <span class="event-detail-icon">📍</span>
-                            <span>Virtual & Los Angeles, CA</span>
-                        </div>
-                        <div class="event-detail">
-                            <span class="event-detail-icon">🕐</span>
-                            <span>9:00 AM - 5:00 PM PST</span>
-                        </div>
+            <div class="events-grid" data-aos="fade-up">
+                <!-- Event 1: Virtual Workshop -->
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-date">December 15, 2025</div>
+                        <h3 class="event-title">Virtual Workshop: Understanding COSMIC Predictions</h3>
+                        <span class="event-type">Online Workshop</span>
                     </div>
-                    <p>Our flagship annual event bringing together researchers, physicists, and consciousness scientists to discuss latest validation results and future research directions.</p>
-                    <a href="#" class="event-btn">Register Now →</a>
+                    <div class="event-body">
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+                                <span>2:00 PM - 4:00 PM PST</span>
+                            </div>
+                            <div class="event-detail">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                                <span>Zoom Webinar</span>
+                            </div>
+                        </div>
+                        <p class="event-description">A hands-on workshop exploring how The COSMIC Framework made its validated predictions about dark energy, quantum computing, and cosmology.</p>
+                        <a href="#" class="btn btn-primary">Register Now</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Event Card 2 -->
-            <div class="event-card" data-aos="fade-up" data-aos-delay="100" data-type="webinar">
-                <div class="event-date-banner">
-                    <div class="event-month">November</div>
-                    <div class="event-day">22</div>
-                    <div class="event-month">2025</div>
-                </div>
-                <div class="event-content">
-                    <span class="event-type">Webinar</span>
-                    <h3>DESI Dark Energy Results Deep Dive</h3>
-                    <div class="event-details">
-                        <div class="event-detail">
-                            <span class="event-detail-icon">📍</span>
-                            <span>Online (Zoom)</span>
-                        </div>
-                        <div class="event-detail">
-                            <span class="event-detail-icon">🕐</span>
-                            <span>2:00 PM - 3:30 PM PST</span>
-                        </div>
+                <!-- Event 2: Conference -->
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-date">January 20-22, 2026</div>
+                        <h3 class="event-title">Annual Theoretical Physics Symposium</h3>
+                        <span class="event-type">Conference</span>
                     </div>
-                    <p>Comprehensive analysis of DESI's validation of our framework's dark energy evolution predictions. Q&A with lead researchers.</p>
-                    <a href="#" class="event-btn">Join Webinar →</a>
+                    <div class="event-body">
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+                                <span>3 Days • Full Program</span>
+                            </div>
+                            <div class="event-detail">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                                <span>San Francisco, CA</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Our flagship annual conference bringing together researchers from around the world to discuss implications of validated theoretical predictions.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="#" class="btn btn-outline" style="margin-left: 0.5rem;">Submit Paper</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Event Card 3 -->
-            <div class="event-card" data-aos="fade-up" data-aos-delay="200" data-type="workshop">
-                <div class="event-date-banner">
-                    <div class="event-month">November</div>
-                    <div class="event-day">30</div>
-                    <div class="event-month">2025</div>
-                </div>
-                <div class="event-content">
-                    <span class="event-type">Workshop</span>
-                    <h3>Quantum Computing & Information Theory</h3>
-                    <div class="event-details">
-                        <div class="event-detail">
-                            <span class="event-detail-icon">📍</span>
-                            <span>MIT Campus, Cambridge, MA</span>
-                        </div>
-                        <div class="event-detail">
-                            <span class="event-detail-icon">🕐</span>
-                            <span>10:00 AM - 4:00 PM EST</span>
-                        </div>
+                <!-- Event 3: Seminar Series -->
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-date">Ongoing • Monthly</div>
+                        <h3 class="event-title">Consciousness & Computation Seminar Series</h3>
+                        <span class="event-type">Seminar Series</span>
                     </div>
-                    <p>Hands-on workshop exploring Google Willow's validation of our quantum error correction predictions. Limited to 50 participants.</p>
-                    <a href="#" class="event-btn">Apply Now →</a>
-                </div>
-            </div>
-
-            <!-- Event Card 4 -->
-            <div class="event-card" data-aos="fade-up" data-type="meetup">
-                <div class="event-date-banner">
-                    <div class="event-month">December</div>
-                    <div class="event-day">8</div>
-                    <div class="event-month">2025</div>
-                </div>
-                <div class="event-content">
-                    <span class="event-type">Community Meetup</span>
-                    <h3>Los Angeles Research Community Social</h3>
-                    <div class="event-details">
-                        <div class="event-detail">
-                            <span class="event-detail-icon">📍</span>
-                            <span>Downtown LA (Location TBA)</span>
+                    <div class="event-body">
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+                                <span>First Wednesday • 7:00 PM PST</span>
+                            </div>
+                            <div class="event-detail">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                                <span>Hybrid (In-Person & Online)</span>
+                            </div>
                         </div>
-                        <div class="event-detail">
-                            <span class="event-detail-icon">🕐</span>
-                            <span>6:00 PM - 9:00 PM PST</span>
-                        </div>
+                        <p class="event-description">Monthly seminars exploring the intersection of consciousness studies and computational theory within The COSMIC Framework.</p>
+                        <a href="#" class="btn btn-primary">View Schedule</a>
                     </div>
-                    <p>Informal gathering for local researchers and enthusiasts. Network, discuss ideas, and connect with like-minded individuals.</p>
-                    <a href="#" class="event-btn">RSVP →</a>
-                </div>
-            </div>
-
-            <!-- Event Card 5 -->
-            <div class="event-card" data-aos="fade-up" data-aos-delay="100" data-type="conference">
-                <div class="event-date-banner">
-                    <div class="event-month">January</div>
-                    <div class="event-day">20</div>
-                    <div class="event-month">2026</div>
-                </div>
-                <div class="event-content">
-                    <span class="event-type">Conference</span>
-                    <h3>Consciousness & Computation Summit</h3>
-                    <div class="event-details">
-                        <div class="event-detail">
-                            <span class="event-detail-icon">📍</span>
-                            <span>Stanford University, CA</span>
-                        </div>
-                        <div class="event-detail">
-                            <span class="event-detail-icon">🕐</span>
-                            <span>8:00 AM - 6:00 PM PST</span>
-                        </div>
-                    </div>
-                    <p>Multi-day conference exploring the intersection of consciousness science, quantum mechanics, and information theory.</p>
-                    <a href="#" class="event-btn">Early Bird Registration →</a>
-                </div>
-            </div>
-
-            <!-- Event Card 6 -->
-            <div class="event-card" data-aos="fade-up" data-aos-delay="200" data-type="webinar">
-                <div class="event-date-banner">
-                    <div class="event-month">January</div>
-                    <div class="event-day">12</div>
-                    <div class="event-month">2026</div>
-                </div>
-                <div class="event-content">
-                    <span class="event-type">Webinar</span>
-                    <h3>JWST Discoveries & Cosmological Predictions</h3>
-                    <div class="event-details">
-                        <div class="event-detail">
-                            <span class="event-detail-icon">📍</span>
-                            <span>Online (YouTube Live)</span>
-                        </div>
-                        <div class="event-detail">
-                            <span class="event-detail-icon">🕐</span>
-                            <span>3:00 PM - 4:30 PM PST</span>
-                        </div>
-                    </div>
-                    <p>Discussion of JWST's continued discovery of early galaxies and validation of our cosmological framework predictions.</p>
-                    <a href="#" class="event-btn">Set Reminder →</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Past Events Section -->
-        <div class="past-events">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Past Events & Recordings</h2>
-                <p>Catch up on what you missed</p>
-            </div>
-
-            <div class="past-event-item" data-aos="fade-up">
+    <!-- Past Events -->
+    <section class="past-events">
+        <div class="section-container">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--text-dark);">Past Events</h2>
+            
+            <div class="past-event" data-aos="fade-right">
                 <div class="past-event-date">
-                    <div class="day">15</div>
-                    <div class="month">Oct 2025</div>
+                    <div class="past-event-date-day">15</div>
+                    <div class="past-event-date-month">OCT 2025</div>
                 </div>
-                <div class="past-event-info">
-                    <h4>Framework Validation Celebration Webinar</h4>
-                    <p>📍 Online | 2:00 PM - 3:30 PM PST</p>
-                    <a href="#" class="recordings-link">Watch Recording →</a>
+                <div class="past-event-content">
+                    <h3>Validation Celebration: DESI Results Discussion</h3>
+                    <p>A special event celebrating the DESI confirmation of our dark energy evolution predictions. Over 200 attendees joined remotely.</p>
+                    <a href="#" class="btn btn-outline" style="font-size: 0.875rem;">View Recording</a>
                 </div>
             </div>
 
-            <div class="past-event-item" data-aos="fade-up" data-aos-delay="50">
+            <div class="past-event" data-aos="fade-right">
                 <div class="past-event-date">
-                    <div class="day">3</div>
-                    <div class="month">Oct 2025</div>
+                    <div class="past-event-date-day">03</div>
+                    <div class="past-event-date-month">SEP 2025</div>
                 </div>
-                <div class="past-event-info">
-                    <h4>Prime Number Logic Gates Workshop</h4>
-                    <p>📍 UC Berkeley | 10:00 AM - 4:00 PM PST</p>
-                    <a href="#" class="recordings-link">View Materials →</a>
+                <div class="past-event-content">
+                    <h3>Quantum Computing & Error Correction Workshop</h3>
+                    <p>Deep dive into Google's Willow chip results and their alignment with framework predictions.</p>
+                    <a href="#" class="btn btn-outline" style="font-size: 0.875rem;">View Materials</a>
                 </div>
             </div>
 
-            <div class="past-event-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="past-event" data-aos="fade-right">
                 <div class="past-event-date">
-                    <div class="day">20</div>
-                    <div class="month">Sep 2025</div>
+                    <div class="past-event-date-day">21</div>
+                    <div class="past-event-date-month">JUL 2025</div>
                 </div>
-                <div class="past-event-info">
-                    <h4>Open Science in Physics Panel Discussion</h4>
-                    <p>📍 Virtual | 4:00 PM - 5:30 PM PST</p>
-                    <a href="#" class="recordings-link">Watch Recording →</a>
+                <div class="past-event-content">
+                    <h3>Introduction to The Big TOE Framework</h3>
+                    <p>An introductory course for newcomers covering the fundamental principles and predictions of the framework.</p>
+                    <a href="#" class="btn btn-outline" style="font-size: 0.875rem;">View Recording</a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Call to Action -->
-    <div class="container">
-        <div class="cta-section" data-aos="fade-up">
-            <h2>Host an Event with Us</h2>
-            <p>Interested in organizing a workshop, talk, or community gathering? We'd love to collaborate!</p>
-            <a href="contribute.html" class="cta-btn">Get in Touch</a>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Ic² Research Institute</h3>
-                <p>Advancing open, transparent research in consciousness and computation.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="about.html">About</a>
-                <a href="validation.html">Validation</a>
-                <a href="papers.html">Publications</a>
-                <a href="contribute.html">Support Us</a>
-            </div>
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <a href="book.html">The Big TOE Book</a>
-                <a href="faq.html">FAQ</a>
-                <a href="legal.html">Legal</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <a href="#">GitHub</a>
-                <a href="#">Twitter</a>
-                <a href="#">YouTube</a>
-                <a href="#">Email Updates</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
-        </div>
-    </footer>
+    </section>
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 800,
+            duration: 1000,
             once: true,
             offset: 100
-        });
-
-        // Filter functionality
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const eventCards = document.querySelectorAll('.event-card');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Update active button
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Filter events
-                const filter = button.dataset.filter;
-                eventCards.forEach(card => {
-                    if (filter === 'all' || card.dataset.type === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
         });
     </script>
 </body>

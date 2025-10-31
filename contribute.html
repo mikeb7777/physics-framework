@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Us - Ic² Research Institute</title>
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <title>Contribute - Ic² Research Institute</title>
+    <meta name="description" content="Support open science and contribute to the Ic² Research Institute.">
     
-    <!-- PayPal SDK Script -->
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAayQDLoTF4n5_YavgkSMVahYRXeRXOuiNuvTZ7ksAa9QrWh6TnQatmfNoLDcHFb0ENu6hUyjGh94f7E8&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         * {
@@ -15,913 +15,471 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-green: #a1cd5f;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            background: #f8f9fa;
-            color: #2c3e50;
+            color: var(--text-dark);
+            background: white;
         }
-        
-        /* Top Navigation */
-        .top-nav {
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
+
+        /* Header */
+        .site-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
             top: 0;
-            width: 100%;
             z-index: 1000;
-            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        
-        .nav-container {
-            max-width: 1400px;
+
+        .header-container {
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .site-title {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #2c3e50;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+
+        .site-logo img {
+            height: 50px;
+            width: auto;
         }
-        
-        .site-title .logo-mark {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: 800;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
+
+        .main-navigation ul {
             list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
-        
-        .nav-links a {
-            color: #2c3e50;
+
+        .main-navigation a {
             text-decoration: none;
+            color: var(--text-dark);
             font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
-        
-        .nav-links a:hover {
-            color: #dc143c;
+
+        .main-navigation a:hover {
+            color: var(--primary-color);
         }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: white;
-            min-width: 220px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 8px;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            text-transform: none;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-        
-        .dropdown-content a:hover {
-            background: rgba(220, 20, 60, 0.05);
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 140px 40px 80px;
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 4rem 2rem;
             text-align: center;
+            color: white;
         }
-        
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            font-weight: 700;
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
-        
-        .hero h1 .highlight {
-            color: #dc143c;
+
+        .page-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
-        
-        .hero-tagline {
-            font-size: 1.3em;
-            color: #7f8c8d;
-            margin-bottom: 30px;
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 2rem;
+        }
+
+        .content-section.bg-light {
+            background: var(--bg-light);
+        }
+
+        .section-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            text-align: center;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 4rem;
         }
-        
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 40px;
+
+        .section-intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
         }
-        
-        /* Impact Statement */
-        .impact-statement {
-            background: white;
-            border-radius: 12px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-align: center;
+
+        .section-intro p {
+            font-size: 1.125rem;
+            color: var(--text-light);
         }
-        
-        .impact-statement h2 {
-            font-size: 2.5em;
-            margin-bottom: 25px;
-            color: #2c3e50;
-        }
-        
-        .impact-statement p {
-            font-size: 1.2em;
-            color: #7f8c8d;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        .impact-statement .highlight-text {
-            color: #dc143c;
-            font-weight: 600;
-        }
-        
-        /* Contribution Options */
-        .contribution-options {
+
+        /* Contribution Ways */
+        .contribution-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
-        
+
         .contribution-card {
             background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
         }
-        
+
         .contribution-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
         }
-        
+
         .contribution-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
         }
-        
+
         .contribution-card h3 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
         }
-        
+
         .contribution-card p {
-            color: #7f8c8d;
-            line-height: 1.7;
-            margin-bottom: 25px;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
         }
-        
-        .contribution-card ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        
-        .contribution-card li {
-            padding: 10px 0;
-            color: #7f8c8d;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .contribution-card li:last-child {
-            border-bottom: none;
-        }
-        
-        .contribution-card li::before {
-            content: "✓ ";
-            color: #dc143c;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-        
-        .contribution-btn {
+
+        .btn {
             display: inline-block;
-            padding: 12px 30px;
-            background: #dc143c;
-            color: white;
+            padding: 0.75rem 1.5rem;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 4px;
             font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .contribution-btn:hover {
-            background: #8b0000;
-            transform: scale(1.05);
-        }
-        
-        .contribution-btn.secondary {
-            background: transparent;
-            color: #dc143c;
-            border: 2px solid #dc143c;
-        }
-        
-        .contribution-btn.secondary:hover {
-            background: #dc143c;
-            color: white;
-        }
-        
-        /* Donation Section */
-        .donation-section {
-            background: white;
-            border-radius: 12px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        
-        .donation-section h2 {
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-        
-        .donation-section > p {
-            text-align: center;
-            font-size: 1.1em;
-            color: #7f8c8d;
-            margin-bottom: 40px;
-        }
-        
-        .donation-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .donation-amount {
-            background: rgba(220, 20, 60, 0.05);
-            border: 2px solid #dc143c;
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: all 0.3s;
+            border: none;
+            font-size: 0.9rem;
         }
-        
-        .donation-amount:hover {
-            background: #dc143c;
-            transform: scale(1.05);
-        }
-        
-        .donation-amount:hover .amount {
+
+        .btn-primary {
+            background: var(--primary-color);
             color: white;
         }
-        
-        .donation-amount:hover .description {
-            color: rgba(255,255,255,0.9);
+
+        .btn-primary:hover {
+            background: #a00000;
         }
-        
-        .donation-amount .amount {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #dc143c;
-            margin-bottom: 10px;
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
         }
-        
-        .donation-amount .description {
-            color: #7f8c8d;
-            font-size: 0.95em;
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
         }
-        
-        .paypal-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        /* Transparency Section */
-        .transparency-section {
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
-            border-radius: 12px;
-            padding: 50px;
-            margin-bottom: 60px;
-        }
-        
-        .transparency-section h2 {
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #2c3e50;
-        }
-        
-        .transparency-grid {
+
+        /* Values Section */
+        .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .transparency-item {
+
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .value-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .value-item p {
+            color: var(--text-light);
+        }
+
+        /* Donation Tiers */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tier-card {
             background: white;
             border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .transparency-item h3 {
-            font-size: 3em;
-            color: #dc143c;
-            margin-bottom: 10px;
-        }
-        
-        .transparency-item p {
-            color: #7f8c8d;
-            font-size: 1.1em;
-        }
-        
-        /* Use of Funds */
-        .funds-breakdown {
-            background: white;
-            border-radius: 12px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        
-        .funds-breakdown h2 {
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #2c3e50;
-        }
-        
-        .fund-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .fund-item:last-child {
-            border-bottom: none;
-        }
-        
-        .fund-icon {
-            font-size: 2.5em;
-            margin-right: 25px;
-            min-width: 60px;
-            text-align: center;
-        }
-        
-        .fund-info {
-            flex: 1;
-        }
-        
-        .fund-info h3 {
-            font-size: 1.5em;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-        
-        .fund-info p {
-            color: #7f8c8d;
-            line-height: 1.6;
-        }
-        
-        .fund-percentage {
-            font-size: 2em;
-            font-weight: 700;
-            color: #dc143c;
-            min-width: 80px;
-            text-align: center;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            margin-bottom: 60px;
-        }
-        
-        .faq-section h2 {
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #2c3e50;
-        }
-        
-        .faq-item {
-            background: white;
-            border-radius: 12px;
-            padding: 25px 30px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .faq-item:hover {
-            box-shadow: 0 4px 20px rgba(220, 20, 60, 0.1);
-        }
-        
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 1.1em;
-        }
-        
-        .faq-toggle {
-            color: #dc143c;
-            font-size: 1.5em;
-            transition: transform 0.3s;
-        }
-        
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            color: #7f8c8d;
-            line-height: 1.7;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
-        
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            margin-top: 15px;
+
+        .tier-card:hover {
+            transform: translateY(-5px);
         }
-        
-        /* Call to Action */
-        .cta-section {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            color: white;
-            padding: 60px 40px;
+
+        .tier-header {
+            padding: 2rem;
             text-align: center;
-            border-radius: 12px;
+            background: var(--bg-light);
         }
-        
-        .cta-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: white;
-            color: #dc143c;
-            text-decoration: none;
-            border-radius: 50px;
+
+        .tier-name {
+            font-size: 1.25rem;
             font-weight: 700;
-            font-size: 1.1em;
-            transition: all 0.3s;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
         }
-        
-        .cta-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+        .tier-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
         }
-        
-        .cta-btn.secondary {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
+
+        .tier-period {
+            color: var(--text-light);
+            font-size: 0.875rem;
         }
-        
-        .cta-btn.secondary:hover {
-            background: white;
-            color: #dc143c;
+
+        .tier-body {
+            padding: 2rem;
         }
-        
-        /* Footer */
-        .footer {
-            background: #2c3e50;
-            color: white;
-            padding: 60px 40px 30px;
-            margin-top: 80px;
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 2rem;
         }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+
+        .tier-features li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .footer-section h3 {
-            margin-bottom: 20px;
-            color: white;
+
+        .tier-features li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 700;
         }
-        
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
-        
-        .footer-section a:hover {
-            color: #dc143c;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
-        }
-        
+
         /* Responsive */
-        @media (max-width: 968px) {
-            .hero h1 {
-                font-size: 2.5em;
+        @media (max-width: 768px) {
+            .main-navigation ul {
+                gap: 1rem;
+                font-size: 0.9rem;
             }
-            
-            .contribution-options {
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-intro h2 {
+                font-size: 2rem;
+            }
+
+            .contribution-grid,
+            .tier-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .fund-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .fund-icon {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-            
-            .nav-links {
-                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="top-nav">
-        <div class="nav-container">
-            <a href="index.html" class="site-title">
-                <span class="logo-mark">Ic²</span>
-                Research Institute
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li class="dropdown">
-                    <a href="#">Research</a>
-                    <div class="dropdown-content">
-                        <a href="validation.html">Validation</a>
-                        <a href="papers.html">Publications</a>
-                        <a href="data.html">Open Data</a>
-                    </div>
-                </li>
-                <li><a href="contribute.html">Support</a></li>
-                <li><a href="book.html">The Book</a></li>
-            </ul>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <img src="logoRed.png" alt="Ic² Research Institute">
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Institute</a></li>
+                    <li><a href="book.html">The Book</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1 data-aos="fade-up">Support <span class="highlight">Open Science</span></h1>
-        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">Help us advance transparent, community-driven research in consciousness and computation</p>
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Support Open Science</h1>
+        <p>Join us in advancing theoretical physics research through transparent, collaborative inquiry</p>
     </section>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Impact Statement -->
-        <div class="impact-statement" data-aos="fade-up">
-            <h2>Your Support Makes a Difference</h2>
-            <p>The Ic² Research Institute operates on a foundation of radical transparency and community involvement. Unlike traditional institutions with paywalls and gatekeeping, we believe scientific knowledge should be <span class="highlight-text">free and accessible to all</span>.</p>
-            <p>Every contribution directly funds open research, open data, and the free dissemination of knowledge. We publish all research openly, share all data without restrictions, and maintain complete transparency in our operations.</p>
-        </div>
-
-        <!-- Contribution Options -->
-        <div class="contribution-options">
-            <div class="contribution-card" data-aos="fade-up">
-                <div class="contribution-icon">💰</div>
-                <h3>Financial Support</h3>
-                <p>One-time or recurring donations help fund research, infrastructure, and community events.</p>
-                <ul>
-                    <li>Support open research projects</li>
-                    <li>Fund computational resources</li>
-                    <li>Enable community events</li>
-                    <li>Maintain open infrastructure</li>
-                </ul>
-                <a href="#donate" class="contribution-btn">Donate Now</a>
+    <!-- Ways to Contribute -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-intro" data-aos="fade-up">
+                <h2>Ways to Contribute</h2>
+                <p>Whether through financial support, intellectual collaboration, or community engagement, every contribution helps advance our mission of open, transparent scientific research.</p>
             </div>
 
-            <div class="contribution-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="contribution-icon">🔬</div>
-                <h3>Research Collaboration</h3>
-                <p>Contribute your expertise to advance the frontiers of consciousness and computation science.</p>
-                <ul>
-                    <li>Submit research proposals</li>
-                    <li>Collaborate on projects</li>
-                    <li>Peer review submissions</li>
-                    <li>Join working groups</li>
-                </ul>
-                <a href="mailto:research@ic2institute.org" class="contribution-btn secondary">Get Involved</a>
-            </div>
+            <div class="contribution-grid">
+                <div class="contribution-card" style="--accent-color: #005ba5;" data-aos="fade-up">
+                    <svg class="contribution-icon" fill="#005ba5" viewBox="0 0 24 24"><path d="M12 2L2 7v9c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                    <h3>Financial Support</h3>
+                    <p>Help fund research, validate predictions, and maintain our open-access resources.</p>
+                    <a href="#donation-tiers" class="btn btn-primary">View Options</a>
+                </div>
 
-            <div class="contribution-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="contribution-icon">💻</div>
-                <h3>Technical Contributions</h3>
-                <p>Help build and maintain our open-source infrastructure and computational tools.</p>
-                <ul>
-                    <li>Contribute code to projects</li>
-                    <li>Improve documentation</li>
-                    <li>Build analysis tools</li>
-                    <li>Enhance infrastructure</li>
-                </ul>
-                <a href="https://github.com/ic2institute" class="contribution-btn secondary">View on GitHub</a>
-            </div>
-        </div>
+                <div class="contribution-card" style="--accent-color: #e33d2f;" data-aos="fade-up" data-aos-delay="100">
+                    <svg class="contribution-icon" fill="#e33d2f" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <h3>Research Collaboration</h3>
+                    <p>Contribute your expertise to validate predictions or develop new theoretical frameworks.</p>
+                    <a href="#" class="btn btn-primary">Get Involved</a>
+                </div>
 
-        <!-- Donation Section -->
-        <div class="donation-section" id="donate" data-aos="fade-up">
-            <h2>Make a Donation</h2>
-            <p>Choose an amount that works for you, or enter a custom amount below</p>
-            
-            <div class="donation-options">
-                <div class="donation-amount">
-                    <div class="amount">$10</div>
-                    <div class="description">Support Student</div>
-                </div>
-                <div class="donation-amount">
-                    <div class="amount">$25</div>
-                    <div class="description">Research Contributor</div>
-                </div>
-                <div class="donation-amount">
-                    <div class="amount">$50</div>
-                    <div class="description">Science Advocate</div>
-                </div>
-                <div class="donation-amount">
-                    <div class="amount">$100</div>
-                    <div class="description">Community Champion</div>
-                </div>
-                <div class="donation-amount">
-                    <div class="amount">$250</div>
-                    <div class="description">Research Partner</div>
-                </div>
-                <div class="donation-amount">
-                    <div class="amount">Custom</div>
-                    <div class="description">Your Amount</div>
-                </div>
-            </div>
-
-            <div class="paypal-container">
-                <div id="paypal-button-container"></div>
-            </div>
-        </div>
-
-        <!-- Transparency Section -->
-        <div class="transparency-section" data-aos="fade-up">
-            <h2>Financial Transparency</h2>
-            <div class="transparency-grid">
-                <div class="transparency-item">
-                    <h3>100%</h3>
-                    <p>Open Financial Records</p>
-                </div>
-                <div class="transparency-item">
-                    <h3>0%</h3>
-                    <p>Administrative Overhead</p>
-                </div>
-                <div class="transparency-item">
-                    <h3>$0</h3>
-                    <p>Salaries Paid</p>
-                </div>
-                <div class="transparency-item">
-                    <h3>100%</h3>
-                    <p>To Research & Community</p>
+                <div class="contribution-card" style="--accent-color: #a1cd5f;" data-aos="fade-up" data-aos-delay="200">
+                    <svg class="contribution-icon" fill="#a1cd5f" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    <h3>Community Engagement</h3>
+                    <p>Participate in discussions, share insights, and help grow our research community.</p>
+                    <a href="discussions.html" class="btn btn-primary">Join Discussions</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Use of Funds -->
-        <div class="funds-breakdown" data-aos="fade-up">
-            <h2>How Your Contribution is Used</h2>
-            
-            <div class="fund-item">
-                <div class="fund-icon">🖥️</div>
-                <div class="fund-info">
-                    <h3>Computational Infrastructure</h3>
-                    <p>Server costs, data storage, cloud computing resources for running simulations and analyses. All code and data remain open and freely accessible.</p>
-                </div>
-                <div class="fund-percentage">40%</div>
+    <!-- Core Values -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-intro" data-aos="fade-up">
+                <h2>Our Commitment to You</h2>
+                <p>Your contribution supports a research institute built on principles of transparency, integrity, and open science.</p>
             </div>
 
-            <div class="fund-item">
-                <div class="fund-icon">📚</div>
-                <div class="fund-info">
-                    <h3>Research & Publication</h3>
-                    <p>Funding open-access publication fees, research materials, and collaborative projects. No paywalls, ever.</p>
+            <div class="values-grid">
+                <div class="value-item" data-aos="fade-up">
+                    <h3>No Gatekeeping</h3>
+                    <p>All research findings are freely accessible to everyone, regardless of institutional affiliation.</p>
                 </div>
-                <div class="fund-percentage">30%</div>
-            </div>
 
-            <div class="fund-item">
-                <div class="fund-icon">👥</div>
-                <div class="fund-info">
-                    <h3>Community & Events</h3>
-                    <p>Workshops, conferences, meetups, and educational programs to engage the community and advance public understanding.</p>
+                <div class="value-item" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Full Transparency</h3>
+                    <p>We document all predictions before validation and openly share both successes and failures.</p>
                 </div>
-                <div class="fund-percentage">20%</div>
-            </div>
 
-            <div class="fund-item">
-                <div class="fund-icon">🌐</div>
-                <div class="fund-info">
-                    <h3>Platform & Outreach</h3>
-                    <p>Website hosting, communication tools, and outreach to ensure research reaches the widest possible audience.</p>
+                <div class="value-item" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Scientific Integrity</h3>
+                    <p>We prioritize rigorous testing and welcome critical scrutiny of all theoretical claims.</p>
                 </div>
-                <div class="fund-percentage">10%</div>
-            </div>
-        </div>
 
-        <!-- FAQ Section -->
-        <div class="faq-section" data-aos="fade-up">
-            <h2>Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Is my donation tax-deductible?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Currently, Ic² Research Institute operates as an independent research platform, not a registered 501(c)(3) organization. Therefore, donations are not tax-deductible at this time. We maintain this status to ensure complete independence and avoid institutional pressures.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>How do I know my money is being used effectively?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <p>We publish quarterly financial reports detailing every dollar received and spent. All financial records are publicly available, and we maintain a commitment to radical transparency. You can review our financial statements anytime on our website.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Can I contribute in ways other than money?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Absolutely! We welcome research collaborations, technical contributions, peer review, documentation improvements, and community engagement. Visit our GitHub or contact us directly to discuss how you can contribute your expertise.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Will you ever introduce paywalls or restrict access?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Never. Our commitment to open science is absolute. All research, data, and publications will always remain freely accessible to everyone, everywhere. This is a core value that will never change, regardless of funding challenges.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Can I set up a recurring donation?</span>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes! PayPal allows you to set up monthly recurring donations. This provides stable, predictable funding that helps us plan long-term research initiatives. You can modify or cancel recurring donations anytime through your PayPal account.</p>
+                <div class="value-item" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Community-Driven</h3>
+                    <p>Research directions are shaped by community input and collaborative discussion.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Call to Action -->
-    <div class="container">
-        <div class="cta-section" data-aos="fade-up">
-            <h2>Join the Movement</h2>
-            <p>Together, we're building a new model for how science should be conducted: open, transparent, and accessible to all.</p>
-            <div class="cta-buttons">
-                <a href="#donate" class="cta-btn">Support Our Mission</a>
-                <a href="about.html" class="cta-btn secondary">Learn More About Us</a>
+    <!-- Donation Tiers -->
+    <section class="content-section" id="donation-tiers">
+        <div class="section-container">
+            <div class="section-intro" data-aos="fade-up">
+                <h2>Support Our Mission</h2>
+                <p>Choose a contribution level that works for you. Every dollar goes directly to research and open-access publishing.</p>
             </div>
-        </div>
-    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Ic² Research Institute</h3>
-                <p>Advancing open, transparent research in consciousness and computation.</p>
+            <div class="tier-grid">
+                <div class="tier-card" data-aos="fade-up">
+                    <div class="tier-header">
+                        <div class="tier-name">Supporter</div>
+                        <div class="tier-amount">$5</div>
+                        <div class="tier-period">per month</div>
+                    </div>
+                    <div class="tier-body">
+                        <ul class="tier-features">
+                            <li>Early access to research updates</li>
+                            <li>Community forum access</li>
+                            <li>Monthly newsletter</li>
+                            <li>Supporter badge</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Become a Supporter</a>
+                    </div>
+                </div>
+
+                <div class="tier-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tier-header">
+                        <div class="tier-name">Contributor</div>
+                        <div class="tier-amount">$25</div>
+                        <div class="tier-period">per month</div>
+                    </div>
+                    <div class="tier-body">
+                        <ul class="tier-features">
+                            <li>All Supporter benefits</li>
+                            <li>Quarterly video updates</li>
+                            <li>Priority event registration</li>
+                            <li>Contributor badge</li>
+                            <li>Recognition on website</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Become a Contributor</a>
+                    </div>
+                </div>
+
+                <div class="tier-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tier-header">
+                        <div class="tier-name">Patron</div>
+                        <div class="tier-amount">$100</div>
+                        <div class="tier-period">per month</div>
+                    </div>
+                    <div class="tier-body">
+                        <ul class="tier-features">
+                            <li>All Contributor benefits</li>
+                            <li>Direct researcher access</li>
+                            <li>Exclusive seminars</li>
+                            <li>Research input opportunities</li>
+                            <li>Patron badge</li>
+                            <li>Annual report dedication</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Become a Patron</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="about.html">About</a>
-                <a href="validation.html">Validation</a>
-                <a href="papers.html">Publications</a>
-                <a href="contribute.html">Support Us</a>
-            </div>
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <a href="book.html">The Big TOE Book</a>
-                <a href="faq.html">FAQ</a>
-                <a href="legal.html">Legal</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <a href="#">GitHub</a>
-                <a href="#">Twitter</a>
-                <a href="#">YouTube</a>
-                <a href="#">Email Updates</a>
+
+            <div style="text-align: center; margin-top: 3rem;" data-aos="fade-up">
+                <p style="color: var(--text-light); margin-bottom: 1rem;">Prefer a one-time contribution?</p>
+                <a href="#" class="btn btn-outline">Make a One-Time Donation</a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
-        </div>
-    </footer>
+    </section>
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 800,
+            duration: 1000,
             once: true,
             offset: 100
         });
-
-        // FAQ Toggle
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('active');
-            });
-        });
-
-        // PayPal Button
-        paypal.HostedButtons({
-            hostedButtonId: "YOUR_BUTTON_ID_HERE"
-        }).render("#paypal-button-container");
     </script>
 </body>
 </html>
