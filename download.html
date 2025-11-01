@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download - A Quest for The Big TOE</title>
-    <meta name="description" content="Download the complete book with version history and change logs.">
+    <meta name="description" content="Download the complete book - Free access to knowledge. Contributions welcome but never required.">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         * {
@@ -13,169 +16,237 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-red: #e33d2f;
+            --accent-green: #a1cd5f;
+            --accent-orange: #f58b2b;
+            --accent-yellow: #f1e303;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000000;
-            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            min-height: 100vh;
-            position: relative;
+            color: white;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
         }
 
         /* Starfield Background */
-        .starfield {
+        #stars-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
         }
 
         /* Header */
-        header {
-            background: rgba(10, 10, 10, 0.9);
+        .site-header {
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
-        nav {
-            max-width: 1200px;
+        .header-container {
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #ffd700;
-            text-decoration: none;
+        .site-logo img {
+            height: 50px;
+            width: auto;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
+        .main-navigation ul {
             list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
 
-        .nav-links a {
-            color: #ffffff;
+        .main-navigation a {
             text-decoration: none;
+            color: white;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: #ffd700;
+        .main-navigation a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-login {
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
         }
 
         /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        .main-content {
+            padding: 4rem 2rem;
         }
 
+        .section-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* Page Header */
         .page-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 4rem;
         }
 
         .page-header h1 {
-            font-size: 3em;
-            color: #ffd700;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        .page-header p {
-            font-size: 1.2em;
-            color: #e0e0e0;
+        .page-header .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
             max-width: 800px;
             margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Honor System Box */
+        .honor-system-box {
+            background: rgba(139, 0, 0, 0.2);
+            border: 2px solid rgba(139, 0, 0, 0.5);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .honor-system-box h2 {
+            color: var(--accent-yellow);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .honor-system-box p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .honor-system-box strong {
+            color: var(--accent-yellow);
+        }
+
+        .honor-system-box a {
+            color: var(--accent-yellow);
+            text-decoration: underline;
         }
 
         /* Version Cards */
-        .versions-grid {
-            display: grid;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
         .version-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .version-card:hover {
+            border-color: rgba(241, 227, 3, 0.4);
+            box-shadow: 0 12px 40px rgba(241, 227, 3, 0.2);
+            transform: translateY(-2px);
         }
 
         .version-card.current {
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            border: 2px solid var(--accent-yellow);
+            box-shadow: 0 12px 40px rgba(241, 227, 3, 0.3);
         }
 
         .version-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .version-number {
-            font-size: 2em;
-            color: #ffd700;
+            font-size: 2.5rem;
+            color: white;
             font-weight: 700;
         }
 
         .version-badge {
-            background: #ffd700;
-            color: #000000;
-            padding: 8px 20px;
+            background: var(--accent-yellow);
+            color: var(--text-dark);
+            padding: 0.625rem 1.5rem;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.9em;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
         }
 
         .version-date {
-            color: #b0b0b0;
-            margin-bottom: 20px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
         }
 
+        .version-description {
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.95);
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+
+        /* Changelog */
         .changelog {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-yellow);
         }
 
         .changelog h4 {
-            color: #ffd700;
-            margin-bottom: 15px;
+            color: var(--accent-yellow);
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
         }
 
         .changelog ul {
@@ -184,221 +255,431 @@
         }
 
         .changelog li {
-            padding: 8px 0;
+            padding: 0.75rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e0e0e0;
+            color: rgba(255,255,255,0.95);
+            padding-left: 1.75rem;
+            position: relative;
+        }
+
+        .changelog li:before {
+            content: "✓";
+            color: var(--accent-yellow);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.1rem;
         }
 
         .changelog li:last-child {
             border-bottom: none;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #ffd700;
-            border: none;
-            border-radius: 30px;
-            color: #000000;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin-right: 15px;
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .btn:hover {
-            background: #ffed4e;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.125rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a00000;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid #ffd700;
-            color: #ffd700;
+            border: 2px solid white;
+            color: white;
         }
 
         .btn-outline:hover {
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Citation Box */
         .citation-box {
-            background: rgba(255, 215, 0, 0.1);
-            border-left: 4px solid #ffd700;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 50px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent-yellow);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin: 4rem 0;
+            backdrop-filter: blur(10px);
         }
 
         .citation-box h3 {
-            color: #ffd700;
-            margin-bottom: 15px;
+            color: var(--accent-yellow);
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+
+        .citation-box p {
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 1.5rem;
         }
 
         .citation-text {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 5px;
-            font-family: monospace;
-            color: #ffffff;
-            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.5rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            color: white;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        .footer-bottom a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent-yellow);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                gap: 15px;
-                font-size: 0.9em;
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .main-navigation ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
             }
 
             .page-header h1 {
-                font-size: 2em;
+                font-size: 2rem;
             }
 
             .version-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+            }
+
+            .version-number {
+                font-size: 2rem;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .honor-system-box,
+            .version-card,
+            .citation-box {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="starfield" id="starfield"></div>
+    <!-- Canvas for Starfield -->
+    <canvas id="stars-canvas"></canvas>
 
     <!-- Header -->
-    <header>
-        <nav>
-            <a href="book.html" class="logo">A Quest for The Big TOE</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Institute Home</a></li>
-                <li><a href="book.html">Book</a></li>
-                <li><a href="references.html">References</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="appendix.html">Appendix</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <a href="book.html"><img src="logo.png" alt="The Big TOE"></a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Institute Home</a></li>
+                    <li><a href="book.html">Book</a></li>
+                    <li><a href="references.html">References</a></li>
+                    <li><a href="discussions-page.html">Discussions</a></li>
+                    <li><a href="appendix.html">Appendix</a></li>
+                    <li><a href="contribute.html" class="btn-login">Contribute</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1>Download The Book</h1>
-            <p>Free access to all versions with complete version history and change logs</p>
-        </div>
 
-        <!-- Current Version -->
-        <div class="versions-grid">
-            <div class="version-card current">
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="section-container">
+            <!-- Page Header -->
+            <div class="page-header" data-aos="fade-up">
+                <h1>Download The Big TOE</h1>
+                <p class="subtitle">A Quest for The Big TOE: The COSMIC Framework Unification Theory</p>
+            </div>
+
+            <!-- Honor System Message -->
+            <div class="honor-system-box" data-aos="fade-up">
+                <h2>🌟 Knowledge Should Be Free</h2>
+                <p><strong>This book is available on an honor system.</strong> We believe knowledge should be accessible to everyone, regardless of financial circumstances.</p>
+                <p>If you're facing hardship, please download and read freely. If this work provides value and you're able to contribute, <a href="contribute.html">voluntary contributions</a> help us continue our research and keep this knowledge open to all.</p>
+                <p>We will <strong>never</strong> solicit you for more payments or sell your data. Your support powers independent research.</p>
+            </div>
+
+            <!-- Current Version -->
+            <div class="version-card current" data-aos="fade-up">
                 <div class="version-header">
                     <div class="version-number">Version 3.0</div>
-                    <div class="version-badge">CURRENT</div>
+                    <div class="version-badge">CURRENT EDITION</div>
                 </div>
                 <div class="version-date">Published: January 15, 2025</div>
-                <p style="margin-bottom: 25px; color: #e0e0e0;">The latest and most complete edition featuring all validated predictions and updated analysis of recent experimental confirmations.</p>
+                <p class="version-description">The latest and most complete edition featuring all experimentally validated predictions and updated analysis of recent confirmations from DESI, Google's Willow quantum chip, and JWST observations.</p>
                 
                 <div class="changelog">
-                    <h4>📝 What's New in Version 3.0</h4>
+                    <h4>What's New in Version 3.0</h4>
                     <ul>
-                        <li>✅ Added DESI dark energy validation analysis (January 2025)</li>
-                        <li>✅ Updated quantum computing section with Willow chip results</li>
-                        <li>✅ Expanded JWST early galaxy formation predictions</li>
-                        <li>✅ New chapter on prime number logic gates</li>
-                        <li>✅ Enhanced mathematical appendices</li>
-                        <li>✅ Updated citations and references</li>
+                        <li>Added DESI dark energy validation analysis (January 2025)</li>
+                        <li>Updated quantum computing section with Willow chip error correction results</li>
+                        <li>Expanded JWST early galaxy formation predictions and confirmations</li>
+                        <li>New chapter: "Could the Universe Use Prime Numbers as Logic Gates?"</li>
+                        <li>Enhanced mathematical appendices with detailed proofs</li>
+                        <li>Comprehensive updated citations and references</li>
+                        <li>Galaxy asymmetry predictions documented</li>
                     </ul>
                 </div>
 
-                <div>
-                    <a href="A_Quest_for_The_Big_TOE_v3.0.pdf" class="btn" download>Download PDF (15.2 MB)</a>
-                    <a href="#" class="btn btn-outline">View Online</a>
+                <div class="btn-container">
+                    <a href="The_Big_TOE_Ver_3_0.pdf" class="btn btn-primary" download>📥 Download PDF (15.2 MB)</a>
+                    <a href="contribute.html" class="btn btn-outline">💝 Optional Contribution</a>
                 </div>
             </div>
 
             <!-- Version 2.0 -->
-            <div class="version-card">
+            <div class="version-card" data-aos="fade-up">
                 <div class="version-header">
                     <div class="version-number">Version 2.0</div>
                 </div>
                 <div class="version-date">Published: August 12, 2024</div>
-                <p style="margin-bottom: 25px; color: #e0e0e0;">Major update including quantum error correction predictions and expanded consciousness framework.</p>
+                <p class="version-description">Major update including quantum error correction predictions (later validated by Google's Willow chip) and expanded consciousness framework.</p>
                 
                 <div class="changelog">
-                    <h4>📝 Changes in Version 2.0</h4>
+                    <h4>Changes in Version 2.0</h4>
                     <ul>
                         <li>Added quantum error correction optimization predictions</li>
                         <li>Expanded consciousness and information processing chapters</li>
-                        <li>New section on computational boundaries</li>
+                        <li>New section on computational boundaries in physics</li>
                         <li>Enhanced dark energy evolution models</li>
-                        <li>Additional mathematical proofs</li>
+                        <li>Additional mathematical proofs and derivations</li>
+                        <li>Refined terminology and explanations</li>
                     </ul>
                 </div>
 
-                <div>
-                    <a href="A_Quest_for_The_Big_TOE_v2.0.pdf" class="btn btn-outline" download>Download PDF (12.8 MB)</a>
+                <div class="btn-container">
+                    <a href="The_Big_TOE_Ver_2_0.pdf" class="btn btn-outline" download>📥 Download PDF (12.8 MB)</a>
                 </div>
             </div>
 
             <!-- Version 1.0 -->
-            <div class="version-card">
+            <div class="version-card" data-aos="fade-up">
                 <div class="version-header">
                     <div class="version-number">Version 1.0</div>
                 </div>
                 <div class="version-date">Published: March 5, 2024</div>
-                <p style="margin-bottom: 25px; color: #e0e0e0;">Original release establishing The COSMIC Framework and initial predictions.</p>
+                <p class="version-description">Original release establishing The COSMIC Framework and initial predictions that were later experimentally validated.</p>
                 
                 <div class="changelog">
-                    <h4>📝 Original Content</h4>
+                    <h4>Original Content</h4>
                     <ul>
                         <li>Complete COSMIC Framework foundation</li>
-                        <li>Dark energy evolution predictions</li>
-                        <li>Early galaxy formation predictions</li>
-                        <li>Information-consciousness relationship</li>
-                        <li>Mathematical framework</li>
+                        <li>Dark energy evolution predictions (validated by DESI 2024-2025)</li>
+                        <li>Early galaxy formation predictions (confirmed by JWST)</li>
+                        <li>Information-consciousness relationship framework</li>
+                        <li>Mathematical framework and derivations</li>
+                        <li>Testable predictions across multiple domains</li>
                     </ul>
                 </div>
 
-                <div>
-                    <a href="A_Quest_for_The_Big_TOE_v1.0.pdf" class="btn btn-outline" download>Download PDF (10.4 MB)</a>
+                <div class="btn-container">
+                    <a href="The_Big_TOE_Ver_1_0.pdf" class="btn btn-outline" download>📥 Download PDF (10.4 MB)</a>
                 </div>
             </div>
-        </div>
 
-        <!-- Citation -->
-        <div class="citation-box">
-            <h3>📚 How to Cite This Work</h3>
-            <p style="color: #e0e0e0; margin-bottom: 15px;">If you reference this work in your research, please use the following citation format:</p>
-            <div class="citation-text">
-Author. (2025). A Quest for The Big TOE: The COSMIC Framework 
-(Version 3.0). Ic² Research Institute.
-Retrieved from https://ic2institute.org/download
+            <!-- Citation Box -->
+            <div class="citation-box" data-aos="fade-up">
+                <h3>📚 How to Cite This Work</h3>
+                <p>If you reference this work in your research, please use the following citation format:</p>
+                <div class="citation-text">Bai, M. K. (2025). A Quest for The Big TOE: The COSMIC Framework 
+Unification Theory (Version 3.0). Ic² Research Institute.
+Retrieved from https://ic2institute.org/download</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>The Big TOE</h3>
+                <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">A comprehensive theoretical framework with experimentally validated predictions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="book.html">Book Home</a></li>
+                    <li><a href="download.html">Download</a></li>
+                    <li><a href="references.html">References</a></li>
+                    <li><a href="appendix.html">Appendix</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Research</h3>
+                <ul>
+                    <li><a href="validation.html">Validation</a></li>
+                    <li><a href="testing-schedule.html">Testing</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="index.html">Institute</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="discussions-page.html">Discussions</a></li>
+                    <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+                </ul>
             </div>
         </div>
-
-        <!-- Additional Info -->
-        <div style="text-align: center; margin-top: 50px; padding: 30px; background: rgba(255, 215, 0, 0.05); border-radius: 15px;">
-            <h3 style="color: #ffd700; margin-bottom: 15px;">📖 Open Access Commitment</h3>
-            <p style="color: #e0e0e0; max-width: 800px; margin: 0 auto;">This work is freely available to everyone. We believe in open science and transparent research. All predictions were documented before experimental validation to establish scientific priority.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
         </div>
-    </div>
+    </footer>
 
+    <!-- Starfield Animation -->
     <script>
-        // Create starfield
-        function createStarfield() {
-            const starfield = document.getElementById('starfield');
-            const numberOfStars = 200;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starfield.appendChild(star);
-            }
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const stars = [];
+        const starCount = 200;
+        
+        for (let i = 0; i < starCount; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                vx: Math.random() * 0.5 - 0.25,
+                vy: Math.random() * 0.5 - 0.25,
+                opacity: Math.random()
+            });
         }
+        
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            
+            stars.forEach(star => {
+                ctx.globalAlpha = star.opacity;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                star.x += star.vx;
+                star.y += star.vy;
+                
+                if (star.x < 0 || star.x > canvas.width) star.vx *= -1;
+                if (star.y < 0 || star.y > canvas.height) star.vy *= -1;
+                
+                star.opacity += (Math.random() - 0.5) * 0.02;
+                star.opacity = Math.max(0.2, Math.min(1, star.opacity));
+            });
+            
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(drawStars);
+        }
+        
+        drawStars();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 
-        createStarfield();
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
     </script>
 </body>
 </html>
