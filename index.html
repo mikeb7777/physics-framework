@@ -1,1 +1,808 @@
-<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Ic² Research Institute - Pioneering Theoretical Physics</title>    <meta name="description" content="The Ic² Research Institute advances theoretical physics by leveraging community support for rigorous testing and validation.">        <!-- AOS Animation Library -->    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">        <style>        * {            margin: 0;            padding: 0;            box-sizing: border-box;        }        :root {            --primary-color: #8B0000;            --secondary-color: #2c3e50;            --accent-blue: #005ba5;            --accent-red: #e33d2f;            --accent-green: #a1cd5f;            --accent-orange: #f58b2b;            --accent-yellow: #f1e303;            --text-dark: #2c3e50;            --text-light: #666;            --bg-light: #f8f9fa;            --max-width: 1200px;        }        body {            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;            line-height: 1.6;            color: var(--text-dark);            background: white;        }        /* Header */        .site-header {            background: white;            border-bottom: 1px solid #e0e0e0;            position: sticky;            top: 0;            z-index: 1000;            box-shadow: 0 2px 5px rgba(0,0,0,0.05);        }        .header-container {            max-width: var(--max-width);            margin: 0 auto;            padding: 0.5rem 2rem;            display: flex;            justify-content: space-between;            align-items: center;        }        .site-logo {            font-size: 1.25rem;            font-weight: 700;            color: var(--primary-color);        }        .main-navigation ul {            list-style: none;            display: flex;            gap: 2rem;            align-items: center;        }        .main-navigation a {            text-decoration: none;            color: var(--text-dark);            font-weight: 500;            transition: color 0.3s ease;        }        .main-navigation a:hover {            color: var(--primary-color);        }        .main-navigation a.login-link {            color: var(--primary-color);            font-weight: 600;        }        /* Hero Section */        .homepage-hero {            position: relative;            min-height: 600px;            display: flex;            align-items: center;            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);            overflow: hidden;        }        .hero-background {            position: absolute;            top: 0;            left: 0;            width: 100%;            height: 100%;            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat;            opacity: 0.3;        }        .hero-content {            max-width: var(--max-width);            margin: 0 auto;            padding: 4rem 2rem;            position: relative;            z-index: 2;            color: white;        }        /* Big TOE Logo as Button */        .hero-logo-button {            display: inline-block;            text-decoration: none;            transition: all 0.4s ease;        }        .hero-bigtoe-logo {            height: 60px;            width: auto;            transition: all 0.4s ease;            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));            vertical-align: middle;        }        .hero-logo-button:hover .hero-bigtoe-logo {            transform: scale(1.1) rotate(2deg);            filter: drop-shadow(0 8px 16px rgba(255,255,0,0.4));        }        /* Hero Text Content */        .hero-content h1 {            font-size: 3.5rem;            font-weight: 700;            margin-bottom: 1.5rem;            line-height: 1.2;        }        .hero-content p {            font-size: 1.25rem;            margin-bottom: 2rem;            opacity: 0.95;            max-width: 800px;        }        .hero-buttons {            display: flex;            gap: 1rem;            align-items: center;            flex-wrap: wrap;        }        .btn {            display: inline-block;            padding: 0.875rem 2rem;            text-decoration: none;            border-radius: 4px;            font-weight: 600;            transition: all 0.3s ease;            cursor: pointer;            border: none;            font-size: 1rem;        }        .btn-primary {            background: var(--primary-color);            color: white;        }        .btn-primary:hover {            background: #a00000;            transform: translateY(-2px);            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);        }        .btn-outline {            background: transparent;            color: white;            border: 2px solid white;            margin-left: 1rem;        }        .btn-outline:hover {            background: white;            color: var(--text-dark);        }        /* Tiles Section */        .tiles-container {            max-width: var(--max-width);            margin: -4rem auto 0;            padding: 0 2rem;            position: relative;            z-index: 3;        }        .tiles-grid {            display: grid;            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));            gap: 1.5rem;            animation: slideUp 0.6s ease-out;        }        @keyframes slideUp {            from {                opacity: 0;                transform: translateY(20px);            }            to {                opacity: 1;                transform: translateY(0);            }        }        .tile {            background: white;            padding: 2rem 1.5rem;            border-radius: 8px;            text-decoration: none;            color: var(--text-dark);            box-shadow: 0 4px 20px rgba(0,0,0,0.1);            transition: all 0.3s ease;            border-bottom: 4px solid var(--accent-color);            text-align: center;        }        .tile:hover {            transform: translateY(-8px);            box-shadow: 0 8px 30px rgba(0,0,0,0.15);        }        .tile img {            height: 60px;            margin-bottom: 1rem;        }        .tile h3 {            font-size: 1.1rem;            line-height: 1.4;            color: var(--text-dark);        }        /* Content Sections */        .content-section {            padding: 5rem 2rem;        }        .content-section.bg-light {            background: var(--bg-light);        }        .section-container {            max-width: var(--max-width);            margin: 0 auto;        }        .tagline {            font-size: 0.875rem;            text-transform: uppercase;            letter-spacing: 1.5px;            color: var(--primary-color);            font-weight: 600;            margin-bottom: 0.5rem;        }        .section-title {            font-size: 2.5rem;            font-weight: 700;            margin-bottom: 1.5rem;            color: var(--text-dark);        }        /* Two Column Layout */        .two-column {            display: grid;            grid-template-columns: 1fr 1fr;            gap: 4rem;            align-items: center;        }        .two-column img {            width: 100%;            border-radius: 8px;            box-shadow: 0 4px 20px rgba(0,0,0,0.1);        }        /* Validation Banner */        .validation-banner {            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);            color: white;            padding: 3rem 2rem;            text-align: center;        }        .validation-content {            max-width: 900px;            margin: 0 auto;        }        .validation-badge {            display: inline-block;            background: #f1e303;            color: #2c3e50;            padding: 0.5rem 1.5rem;            border-radius: 20px;            font-weight: 700;            font-size: 0.875rem;            margin-bottom: 1rem;        }        .validation-banner h2 {            font-size: 2rem;            margin-bottom: 1rem;        }        /* Stats Section */        .stats-grid {            display: grid;            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));            gap: 2rem;            margin: 3rem 0;        }        .stat-card {            text-align: center;            padding: 2rem;            background: white;            border-radius: 8px;            box-shadow: 0 4px 15px rgba(0,0,0,0.08);        }        .stat-number {            font-size: 3rem;            font-weight: 700;            color: var(--primary-color);            margin-bottom: 0.5rem;        }        .stat-label {            font-size: 1.1rem;            color: var(--text-light);        }        /* Footer */        footer {            background: #2c3e50;            color: white;            padding: 3rem 2rem 1.5rem;        }        .footer-container {            max-width: var(--max-width);            margin: 0 auto;            display: grid;            grid-template-columns: 2fr 1fr 1fr 1fr;            gap: 3rem;            margin-bottom: 2rem;        }        .footer-section h3 {            margin-bottom: 1rem;            font-size: 1.1rem;        }        .footer-section ul {            list-style: none;        }        .footer-section ul li {            margin-bottom: 0.5rem;        }        .footer-section a {            color: rgba(255, 255, 255, 0.8);            text-decoration: none;            transition: color 0.3s ease;        }        .footer-section a:hover {            color: white;        }        .footer-bottom {            max-width: var(--max-width);            margin: 0 auto;            padding-top: 2rem;            border-top: 1px solid rgba(255, 255, 255, 0.1);            text-align: center;            color: rgba(255, 255, 255, 0.6);            font-size: 0.9rem;        }        /* Responsive */        @media (max-width: 768px) {            .main-navigation ul {                gap: 1rem;                font-size: 0.9rem;            }            .hero-content h1 {                font-size: 2rem;            }            .hero-bigtoe-logo {                height: 50px;            }            .hero-buttons {                flex-direction: row;                flex-wrap: wrap;            }            .tiles-grid {                grid-template-columns: 1fr 1fr;            }            .two-column {                grid-template-columns: 1fr;                gap: 2rem;            }            .section-title {                font-size: 2rem;            }            .footer-container {                grid-template-columns: 1fr;                gap: 2rem;            }        }        @media (max-width: 480px) {            .tiles-grid {                grid-template-columns: 1fr;            }            .hero-content h1 {                font-size: 1.75rem;            }            .hero-bigtoe-logo {                height: 40px;            }        }    </style></head><body>    <!-- Header -->    <header class="site-header">        <div class="header-container">            <div class="site-logo">                <img src="ic2logo.png" alt="Ic2 Research Institute" class="site-logo">                </a>            </div>            <nav class="main-navigation">                <ul>                    <li><a href="index.html">Institute</a></li>                    <li><a href="book.html">The Big TOE</a></li>                    <li><a href="validation.html">Validation</a></li>                    <li><a href="testing-schedule.html">Testing</a></li>                    <li><a href="results.html">Results</a></li>                    <li><a href="about-page.html">About</a></li>                    <li><a href="contribute.html">Contribute</a></li>                    <li><a href="login.html" class="login-link">Login</a></li>                </ul>            </nav>        </div>    </header>    <!-- Hero Section -->    <section class="homepage-hero">        <div class="hero-background"></div>        <div class="hero-content" data-aos="fade-up">            <h1>Pioneering the Future<br>of Theoretical Physics</h1>            <p>The Ic² Research Institute advances our understanding of reality through rigorous theoretical frameworks with experimentally validated predictions. We engage and acknowledge community support and transparent testing.</p>            <div class="hero-buttons">                <a href="about-page.html" class="btn btn-outline">Learn More</a>                <a href="book.html" class="hero-logo-button">                    <img src="bigtoeindexlogo.png" alt="The Big TOE" class="hero-bigtoe-logo">                </a>            </div>        </div>    </section>    <!-- Research Focus Tiles -->    <div class="tiles-container" data-aos="fade-up">        <div class="tiles-grid">            <a href="validation.html" class="tile" style="--accent-color: #f1e303;">                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f1e303'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E" alt="Validated">                <h3>Experimentally<br>Validated</h3>            </a>            <a href="validation.html#desi" class="tile" style="--accent-color: #005ba5;">                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23005ba5'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E" alt="Dark Energy">                <h3>Dark Energy<br>Evolution</h3>            </a>            <a href="validation.html#willow" class="tile" style="--accent-color: #e33d2f;">                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e33d2f'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z'/%3E%3C/svg%3E" alt="Quantum">                <h3>Quantum<br>Computing</h3>            </a>            <a href="validation.html#jwst" class="tile" style="--accent-color: #a1cd5f;">                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1cd5f'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" alt="Cosmology">                <h3>Early Galaxy<br>Formation</h3>            </a>            <a href="validation.html#asymmetry" class="tile" style="--accent-color: #f58b2b;">                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f58b2b'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E" alt="Galaxy Asymmetry">                <h3>Galaxy<br>Asymmetry</h3>            </a>        </div>    </div>    <!-- Validation Banner -->    <section class="validation-banner" data-aos="fade-up">        <div class="validation-content">            <span class="validation-badge">🏆 BREAKTHROUGH VALIDATED</span>            <h2>Three Major Predictions Confirmed by Independent Experiments</h2>            <p style="margin-bottom: 2rem;">In 2024-2025, three groundbreaking predictions from The Big TOE framework were independently validated by leading research teams worldwide.</p>            <a href="press-release-1.html" class="btn btn-primary">Read Full Press Release</a>        </div>    </section>    <!-- About Section -->    <section class="content-section">        <div class="section-container">            <div class="two-column" data-aos="fade-right">                <div>                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Institute Research">                </div>                <div>                    <p class="tagline">About The Institute</p>                    <h2 class="section-title">Advancing Theoretical Physics</h2>                    <p style="margin-bottom: 1rem;">The Ic² Research Institute exists to bridge the gap between theoretical frameworks and experimental validation. We develop testable predictions across multiple domains of physics, from cosmology to quantum mechanics.</p>                    <p style="margin-bottom: 2rem;">What sets us apart is our commitment to falsifiable predictions documented before experimental confirmation. Our framework has successfully predicted phenomena later validated by DESI, Google Quantum AI, and JWST.</p>                    <a href="about-page.html" class="btn btn-primary">Our Story</a>                </div>            </div>        </div>    </section>    <!-- Stats Section -->    <section class="content-section bg-light" data-aos="fade-up">        <div class="section-container">            <h2 class="section-title" style="text-align: center;">Impact by the Numbers</h2>            <div class="stats-grid">                <div class="stat-card">                    <div class="stat-number">3</div>                    <div class="stat-label">Validated Predictions</div>                </div>                <div class="stat-card">                    <div class="stat-number">3.2σ</div>                    <div class="stat-label">Statistical Significance</div>                </div>                <div class="stat-card">                    <div class="stat-number">4</div>                    <div class="stat-label">Independent Platforms</div>                </div>                <div class="stat-card">                    <div class="stat-number">89%</div>                    <div class="stat-label">Agreement Rate</div>                </div>            </div>        </div>    </section>    <!-- CTA Section -->    <section class="content-section">        <div class="section-container" style="text-align: center;" data-aos="fade-up">            <h2 class="section-title">Ready to Explore?</h2>            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.125rem;">Dive into The Big TOE - an exploration of the COSMIC Framework's Unification Theory with validated predictions and testable hypotheses across multiple domains of physics.</p>            <a href="book.html" class="btn" style="background: #8B0000; color: #f1e303; font-size: 1.125rem; padding: 1rem 3rem;">Explore The Big TOE</a>        </div>    </section>    <!-- Footer -->    <footer>        <div class="footer-container">            <div class="footer-section">                <h3>Ic² Research Institute</h3>                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>            </div>            <div class="footer-section">                <h3>Research</h3>                <ul>                    <li><a href="validation.html">Validation</a></li>                    <li><a href="testing-schedule.html">Testing</a></li>                    <li><a href="results.html">Results</a></li>                    <li><a href="zenodo-papers.html">Papers</a></li>                </ul>            </div>            <div class="footer-section">                <h3>Resources</h3>                <ul>                    <li><a href="book.html">The Big TOE</a></li>                    <li><a href="about-page.html">About</a></li>                    <li><a href="events.html">Events</a></li>                    <li><a href="faq-page.html">FAQ</a></li>                    <li><a href="members.html">Our Members</a></li>                </ul>            </div>            <div class="footer-section">                <h3>Connect</h3>                <ul>                    <li><a href="contribute.html">Contribute</a></li>                    <li><a href="discussions-page.html">Discussions</a></li>                    <li><a href="become-member.html">Become a Member</a></li>                    <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>                </ul>            </div>        </div>        <div class="footer-bottom">            <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>        </div>    </footer>    <!-- AOS Animation Library -->    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>    <script>        AOS.init({            duration: 1000,            once: true,            offset: 100        });    </script></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ic² Research Institute - Pioneering Theoretical Physics</title>
+    <meta name="description" content="The Ic² Research Institute advances theoretical physics by leveraging community support for rigorous testing and validation.">
+    
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        }
+    </script>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-red: #e33d2f;
+            --accent-green: #a1cd5f;
+            --accent-orange: #f58b2b;
+            --accent-yellow: #f1e303;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: white;
+        }
+
+        /* Header */
+        .site-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .site-logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .main-navigation ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .main-navigation a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-navigation a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-navigation a.login-link {
+            background: linear-gradient(135deg, #8B0000 0%, #a00000 100%);
+            color: #f1e303;
+            padding: 0.5rem 1.25rem;
+            border-radius: 25px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+        }
+
+        .main-navigation a.login-link:hover {
+            background: linear-gradient(135deg, #a00000 0%, #8B0000 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+        }
+
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 73px;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 999;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            max-height: 600px;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .mobile-menu ul li {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-menu a:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        .mobile-menu a.login-link {
+            background: linear-gradient(135deg, #8B0000 0%, #a00000 100%);
+            color: #f1e303;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .homepage-hero {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        /* Big TOE Logo as Button */
+        .hero-logo-button {
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .hero-bigtoe-logo {
+            height: 60px;
+            width: auto;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            vertical-align: middle;
+        }
+
+        .hero-logo-button:hover .hero-bigtoe-logo {
+            transform: scale(1.1) rotate(2deg);
+            filter: drop-shadow(0 8px 16px rgba(255,255,0,0.4));
+        }
+
+        /* Hero Text Content */
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 800px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a00000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--text-dark);
+        }
+
+        /* Tiles Section */
+        .tiles-container {
+            max-width: var(--max-width);
+            margin: -4rem auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tile {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--accent-color);
+            text-align: center;
+        }
+
+        .tile:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .tile img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .tile h3 {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            color: var(--text-dark);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 2rem;
+        }
+
+        .content-section.bg-light {
+            background: var(--bg-light);
+        }
+
+        .section-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .two-column img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Validation Banner */
+        .validation-banner {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .validation-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .validation-badge {
+            display: inline-block;
+            background: #f1e303;
+            color: #2c3e50;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .validation-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-navigation {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .main-navigation ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-bigtoe-logo {
+                height: 50px;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .tiles-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-bigtoe-logo {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <img src="ic2-logo.png" alt="Ic2 Research Institute" class="site-logo">
+                </a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="book.html">Big Toe</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="validation.html">Validation</a></li>
+                    <li><a href="testing-schedule.html">Testing</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="discussions-page.html">Discussion</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="login.html" class="login-link">Login</a></li>
+                </ul>
+            </nav>
+            <!-- Hamburger Menu Button -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="book.html">Big Toe</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="discussions-page.html">Discussion</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="login.html" class="login-link">Login</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="homepage-hero">
+        <div class="hero-background"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Pioneering the Future<br>of Theoretical Physics</h1>
+            <p>The IC2 Research Institute advances our understanding of reality through open and honest examination of our theories. We embrace failure for its ability to provide new questions with answers to pursue. We acknowledge that we can never know everything, but by understanding what we can, we enhance our comprehension of the universe and our place within it.</p>
+            <div class="hero-buttons">
+                <a href="about-page.html" class="btn btn-outline">Learn More</a>
+                <a href="book.html" class="hero-logo-button">
+                    <img src="bigtoeindexlogo.png" alt="The Big TOE" class="hero-bigtoe-logo">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Focus Tiles -->
+    <div class="tiles-container" data-aos="fade-up">
+        <div class="tiles-grid">
+            <a href="validation.html" class="tile" style="--accent-color: #f1e303;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f1e303'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E" alt="Validated">
+                <h3>Experimentally<br>Validated</h3>
+            </a>
+            <a href="validation.html#desi" class="tile" style="--accent-color: #005ba5;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23005ba5'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E" alt="Dark Energy">
+                <h3>Dark Energy<br>Evolution</h3>
+            </a>
+            <a href="validation.html#willow" class="tile" style="--accent-color: #e33d2f;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e33d2f'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z'/%3E%3C/svg%3E" alt="Quantum">
+                <h3>Quantum<br>Computing</h3>
+            </a>
+            <a href="validation.html#jwst" class="tile" style="--accent-color: #a1cd5f;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1cd5f'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" alt="Cosmology">
+                <h3>Early Galaxy<br>Formation</h3>
+            </a>
+            <a href="validation.html#asymmetry" class="tile" style="--accent-color: #f58b2b;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f58b2b'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E" alt="Galaxy Asymmetry">
+                <h3>Galaxy<br>Asymmetry</h3>
+            </a>
+        </div>
+    </div>
+
+    <!-- Validation Banner -->
+    <section class="validation-banner" data-aos="fade-up">
+        <div class="validation-content">
+            <span class="validation-badge">🏆 BREAKTHROUGH VALIDATED</span>
+            <h2>Three Major Predictions Confirmed by Independent Experiments</h2>
+            <p style="margin-bottom: 2rem;">In 2024-2025, three groundbreaking predictions from The Big TOE framework were independently validated by leading research teams worldwide.</p>
+            <a href="press-release-1.html" class="btn btn-primary">Read Full Press Release</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="two-column" data-aos="fade-right">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Institute Research">
+                </div>
+                <div>
+                    <p class="tagline">About The Institute</p>
+                    <h2 class="section-title">Advancing Theoretical Physics</h2>
+                    <p style="margin-bottom: 1rem;">The Ic² Research Institute exists to bridge the gap between theoretical frameworks and experimental validation. We develop testable predictions across multiple domains of physics, from cosmology to quantum mechanics.</p>
+                    <p style="margin-bottom: 2rem;">What sets us apart is our commitment to falsifiable predictions documented before experimental confirmation. Our framework has successfully predicted phenomena later validated by DESI, Google Quantum AI, and JWST.</p>
+                    <a href="about-page.html" class="btn btn-primary">Our Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="content-section bg-light" data-aos="fade-up">
+        <div class="section-container">
+            <h2 class="section-title" style="text-align: center;">Impact by the Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Validated Predictions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3.2σ</div>
+                    <div class="stat-label">Statistical Significance</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Independent Platforms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">89%</div>
+                    <div class="stat-label">Agreement Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="content-section">
+        <div class="section-container" style="text-align: center;" data-aos="fade-up">
+            <h2 class="section-title">Ready to Explore?</h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.125rem;">Dive into The Big TOE - an exploration of the COSMIC Framework's Unification Theory with validated predictions and testable hypotheses across multiple domains of physics.</p>
+            <a href="book.html" class="btn" style="background: #8B0000; color: #f1e303; font-size: 1.125rem; padding: 1rem 3rem;">Explore The Big TOE</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Ic² Research Institute</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Research</h3>
+                <ul>
+                    <li><a href="validation.html">Validation</a></li>
+                    <li><a href="testing-schedule.html">Testing</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="zenodo-papers.html">Papers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="book.html">The Big TOE</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="simulations.html">Simulations</a></li>
+                    <li><a href="faq-page.html">FAQ</a></li>
+                    <li><a href="members.html">Our Members</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="discussions-page.html">Discussions</a></li>
+                    <li><a href="become-member.html">Become a Member</a></li>
+                    <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        }
+    </script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
