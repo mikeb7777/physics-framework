@@ -6,339 +6,452 @@
     <title>Sign Up - Ic² Research Institute</title>
     <meta name="description" content="Create your Ic² Research Institute account.">
     
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
 
-        :root {
-            --primary-color: #8B0000;
-            --text-dark: #2c3e50;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --max-width: 1200px;
-        }
+    :root {
+    --primary-color: #8B0000;
+    --secondary-color: #2c3e50;
+    --accent-blue: #005ba5;
+    --accent-green: #28a745;
+    --accent-yellow: #f1e303;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--bg-light);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: var(--bg-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    }
 
-        /* Header */
-        .site-header {
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+    /* Header (from validation.html) */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
 
-        .header-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
 
-        .site-logo img {
-            height: 50px;
-            width: auto;
-        }
+    .site-logo img {
+    height: 50px;
+    width: auto;
+    }
 
-        .back-link {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    }
 
-        .back-link:hover {
-            color: var(--primary-color);
-        }
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
 
-        /* Main Content */
-        .signup-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 2rem;
-        }
+    .main-navigation a:hover {
+    color: var(--primary-color);
+    }
 
-        .signup-box {
-            background: white;
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 550px;
-        }
+    /* Main Content */
+    .signup-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    }
 
-        .signup-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+    .signup-box {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 550px;
+    }
 
-        .signup-header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
+    .signup-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    }
 
-        .signup-header p {
-            color: var(--text-light);
-        }
+    .signup-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
+    .signup-header p {
+    color: var(--text-light);
+    }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+    .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
+    .form-group {
+    margin-bottom: 1.5rem;
+    }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
+    label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    }
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    }
 
-        .terms {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.875rem;
-        }
+    input:focus,
+    select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    }
 
-        .terms input[type="checkbox"] {
-            margin-top: 0.25rem;
-        }
+    .terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    }
 
-        .terms a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
+    .terms input[type="checkbox"] {
+    margin-top: 0.25rem;
+    }
 
-        .terms a:hover {
-            text-decoration: underline;
-        }
+    .terms a {
+    color: var(--primary-color);
+    text-decoration: none;
+    }
 
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 0.875rem;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            text-align: center;
-        }
+    .terms a:hover {
+    text-decoration: underline;
+    }
 
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-        }
+    .btn {
+    display: block;
+    width: 100%;
+    padding: 0.875rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    text-align: center;
+    }
 
-        .btn-primary:hover {
-            background: #a00000;
-        }
+    .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    }
 
-        .divider {
-            text-align: center;
-            margin: 2rem 0;
-            color: var(--text-light);
-            position: relative;
-        }
+    .btn-primary:hover {
+    background: #a0000;
+    }
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: #ddd;
-        }
+    .divider {
+    text-align: center;
+    margin: 2rem 0;
+    color: var(--text-light);
+    position: relative;
+    }
 
-        .divider::before {
-            left: 0;
-        }
+    .divider::before,
+    .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #ddd;
+    }
 
-        .divider::after {
-            right: 0;
-        }
+    .divider::before {
+    left: 0;
+    }
 
-        .social-signup {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
+    .divider::after {
+    right: 0;
+    }
 
-        .social-btn {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
+    .social-signup {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    }
 
-        .social-btn:hover {
-            background: var(--bg-light);
-            border-color: var(--primary-color);
-        }
+    .social-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.875rem;
+    }
 
-        .login-link {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--text-light);
-        }
+    .social-btn:hover {
+    background: var(--bg-light);
+    border-color: var(--primary-color);
+    }
 
-        .login-link a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
+    .login-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-light);
+    }
 
-        .login-link a:hover {
-            text-decoration: underline;
-        }
+    .login-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    }
 
-        @media (max-width: 768px) {
-            .signup-box {
-                padding: 2rem;
-            }
+    .login-link a:hover {
+    text-decoration: underline;
+    }
 
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+    /* Footer (from validation.html) */
+    footer {
+    background: var(--secondary-color);
+    color: white;
+    padding: 2.5rem 2rem 1rem;
+    }
 
-            .social-signup {
-                flex-direction: column;
-            }
-        }
+    footer h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    }
+
+    footer p, footer a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    text-decoration: none;
+    }
+
+    footer a:hover {
+    color: var(--accent-yellow);
+    }
+
+    @media (max-width: 768px) {
+    .signup-box {
+    padding: 2rem;
+    }
+
+    .form-row {
+    grid-template-columns: 1fr;
+    }
+
+    .social-signup {
+    flex-direction: column;
+    }
+    
+    .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    }
+    
+    .main-navigation ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    }
+    }
+
+    /* Page Header */
+    .page-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+    font-size: 1rem;
+    opacity: 0.95;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgba(255,255,255,0.9);
+    }
+
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header (from validation.html) -->
     <header class="site-header">
-        <div class="header-container">
-            <div class="site-logo">
-                <img src="logoRed.png" alt="Ic² Research Institute">
-            </div>
-            <a href="index.html" class="back-link">← Back to Home</a>
-        </div>
+    <div class="header-container">
+    <div class="site-logo">
+    <img src="ic2-logo.png" alt="Ic² Research Institute">
+    </div>
+    <nav class="main-navigation">
+    <ul>
+    <li><a href="index.html">Institute</a></li>
+    <li><a href="book.html">The Big TOE</a></li>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="results.html">Results</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    </ul>
+    </nav>
+    </div>
     </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+    <h1>Create Your Profile</h1>
+    <p>Complete your details to set up your Ic² Research Institute profile and connect with the community.</p>
+    </section>
 
     <!-- Signup Container -->
     <div class="signup-container">
-        <div class="signup-box">
-            <div class="signup-header">
-                <h1>Join Our Community</h1>
-                <p>Create your account to access exclusive content and discussions</p>
-            </div>
-
-            <form action="#" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="John" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="affiliation">Affiliation (Optional)</label>
-                    <input type="text" id="affiliation" name="affiliation" placeholder="University or Organization">
-                </div>
-
-                <div class="form-group">
-                    <label for="interest">Primary Interest</label>
-                    <select id="interest" name="interest">
-                        <option value="">Select your main interest</option>
-                        <option value="cosmology">Cosmology & Dark Energy</option>
-                        <option value="quantum">Quantum Computing</option>
-                        <option value="consciousness">Consciousness Studies</option>
-                        <option value="theoretical">Theoretical Physics</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
-                </div>
-
-                <div class="terms">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms" style="margin-bottom: 0; font-weight: normal;">
-                        I agree to the <a href="terms-conditions.html">Terms & Conditions</a> and <a href="privacy-policy.html">Privacy Policy</a>
-                    </label>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Create Account</button>
-            </form>
-
-            <div class="divider">or</div>
-
-            <div class="social-signup">
-                <button class="social-btn">Google</button>
-                <button class="social-btn">GitHub</button>
-            </div>
-
-            <div class="login-link">
-                Already have an account? <a href="login.html">Sign in</a>
-            </div>
-        </div>
+    <div class="signup-box" data-aos="fade-up">
+    <div class="signup-header">
+    <h1>Join Our Community</h1>
+    <p>Create your account to access exclusive content and discussions</p>
     </div>
+
+    <form action="#" method="POST">
+    <div class="form-row">
+    <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" name="firstName" placeholder="John" required>
+    </div>
+    <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+    </div>
+
+    <div class="form-group">
+    <label for="affiliation">Affiliation (Optional)</label>
+    <input type="text" id="affiliation" name="affiliation" placeholder="University or Organization">
+    </div>
+
+    <div class="form-group">
+    <label for="interest">Primary Interest</label>
+    <select id="interest" name="interest">
+    <option value="">Select your main interest</option>
+    <option value="cosmology">Cosmology & Dark Energy</option>
+    <option value="quantum">Quantum Computing</option>
+    <option value="consciousness">Consciousness Studies</option>
+    <option value="theoretical">Theoretical Physics</option>
+    <option value="other">Other</option>
+    </select>
+    </div>
+
+    <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+    </div>
+
+    <div class="form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
+    </div>
+
+    <div class="terms">
+    <input type="checkbox" id="terms" name="terms" required>
+    <label for="terms" style="margin-bottom: 0; font-weight: normal;">
+    I agree to the <a href="terms-conditions.html">Terms & Conditions</a> and <a href="privacy-policy.html">Privacy Policy</a>
+    </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    <div class="social-signup">
+    <button class="social-btn">Google</button>
+    <button class="social-btn">GitHub</button>
+    </div>
+
+    <div class="login-link">
+    Already have an account? <a href="login.html">Sign in</a>
+    </div>
+    </div>
+    </div>
+
+    <!-- Footer (from validation.html) -->
+    <footer>
+    <div style="max-width: var(--max-width); margin: 0 auto; text-align: center; margin-bottom: 1.5rem;">
+    <h3>Ic² Research Institute</h3>
+    <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+    </div>
+    <div style="max-width: var(--max-width); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">
+    <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
+    </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+    AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+    });
+    </script>
 </body>
 </html>
