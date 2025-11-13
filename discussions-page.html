@@ -1,417 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Discussions - Information-First Physics Framework</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            line-height: 1.6;
-            background: #0a0a0a;
-            color: #e0e0e0;
-        }
-        
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .nav {
-            background: rgba(20, 20, 40, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px 30px;
-            border-radius: 50px;
-            margin: 20px auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(100, 100, 255, 0.3);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.3em;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 8px 16px;
-            border-radius: 20px;
-        }
-        
-        .nav-links a:hover {
-            color: #fff;
-            background: rgba(102, 126, 234, 0.2);
-        }
-        
-        .hero {
-            text-align: center;
-            padding: 60px 20px 40px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-        }
-        
-        .intro-card {
-            background: rgba(20, 20, 40, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 100, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 30px 0;
-            border-left: 5px solid #667eea;
-        }
-        
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin: 50px 0;
-        }
-        
-        .category-card {
-            background: rgba(20, 20, 40, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 100, 255, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.4s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .category-card:hover::before {
-            opacity: 1;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(102, 126, 234, 0.5);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-        }
-        
-        .category-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .category-card h3 {
-            color: #fff;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        
-        .category-card p {
-            color: #b0b0b0;
-            margin: 10px 0;
-        }
-        
-        .category-card .hint {
-            color: #808080;
-            font-size: 0.9em;
-            margin-top: 15px;
-            font-style: italic;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            margin: 10px;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-        
-        .cta-button.secondary {
-            background: transparent;
-            border: 2px solid #667eea;
-        }
-        
-        .cta-section {
-            text-align: center;
-            margin: 60px 0;
-        }
-        
-        .guidelines-card {
-            background: rgba(255, 200, 0, 0.1);
-            border: 1px solid rgba(255, 200, 0, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
-        }
-        
-        .guidelines-card h3 {
-            color: #ffc800;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-        
-        .guidelines-card ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .guidelines-card li {
-            padding: 12px 0;
-            color: #e0e0e0;
-            font-size: 1.05em;
-        }
-        
-        .guidelines-card li strong {
-            color: #ffc800;
-        }
-        
-        .ai-preview {
-            background: rgba(17, 153, 142, 0.1);
-            border: 2px dashed rgba(56, 239, 125, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
-        }
-        
-        .ai-preview h3 {
-            color: #38ef7d;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            
-            .nav {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Discussions - Ic² Research Institute</title>
+  <meta name="description" content="Community discussions are coming soon. Share your thoughts and ideas with us in the meantime." />
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --primary-color: #8B0000;
+      --secondary-color: #2c3e50;
+      --text-dark: #2c3e50;
+      --text-light: #666;
+      --bg-light: #f8f9fa;
+      --max-width: 1200px;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Unified Header */
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .header-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .site-logo img {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+    
+    .site-logo a {
+      display: block;
+      text-decoration: none;
+    }
+    
+    .main-navigation ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .main-navigation a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .main-navigation a:hover {
+      color: var(--primary-color);
+    }
+    
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 3rem;
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.9);
+    }
+    
+    /* Main Content */
+    .content-container {
+      flex: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      width: 100%;
+    }
+    
+    .coming-soon-box {
+      background: white;
+      border-radius: 8px;
+      padding: 3rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    
+    .coming-soon-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .coming-soon-box h2 {
+      font-size: 2rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .coming-soon-box p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    
+    .features-list {
+      text-align: left;
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #f8f9fa;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    
+    .features-list h3 {
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .features-list ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .features-list li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    
+    .features-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    
+    /* Contact Form */
+    .contact-form-section {
+      background: white;
+      border-radius: 8px;
+      padding: 3rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    
+    .contact-form-section h3 {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .contact-form-section p {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .submit-btn:hover {
+      background: #6B0000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    }
+    
+    .form-note {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--secondary-color);
+      color: white;
+      padding: 2.5rem 2rem 1rem;
+      margin-top: auto;
+      text-align: center;
+    }
+    
+    footer h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+    
+    footer p, footer a {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .main-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      
+      .page-header h1 {
+        font-size: 1.75rem;
+      }
+      
+      .coming-soon-box,
+      .contact-form-section {
+        padding: 2rem 1.5rem;
+      }
+      
+      .coming-soon-box h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
+  <!-- Unified Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="site-logo">
+        <a href="index.html">
+          <img src="ic2-logo.png" alt="Ic² Research Institute" />
+        </a>
+      </div>
+      <nav class="main-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="book.html">The Big TOE</a></li>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Community Discussions</h1>
+    <p>Connect, collaborate, and explore ideas with fellow researchers</p>
+  </section>
+  
+  <!-- Main Content -->
+  <main class="content-container">
     
-    <div class="container">
-        <nav class="nav">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">🌌</div>
-                <span>Framework</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="contribute.html">Support</a></li>
-            </ul>
-        </nav>
-        
-        <section class="hero">
-            <h1>Community Discussions</h1>
-            <p style="font-size: 1.3em; color: #b0b0b0;">Join the conversation. All perspectives welcome.</p>
-        </section>
-        
-        <div class="intro-card">
-            <h2 style="color: #fff; font-size: 2em; margin-bottom: 20px;">This Is YOUR Space</h2>
-            <p style="font-size: 1.1em; color: #b0b0b0; line-height: 1.8;">
-                Discuss ideas, share insights, challenge assumptions, and collaborate with others exploring this framework. <strong style="color: #fff;">No gatekeepers here.</strong> Whether you're a high school student asking your first question or a physics professor pointing out a critical flaw, all voices matter equally.
-            </p>
-            <p style="margin-top: 20px; font-size: 1.1em; color: #b0b0b0;">
-                The best ideas win through discussion, not credentials.
-            </p>
-        </div>
-
-        <div class="cta-section">
-            <a href="https://github.com/mikeb7777/physics-framework/discussions" class="cta-button" target="_blank">
-                🚀 Go to Discussions
-            </a>
-        </div>
-
-        <h2 style="text-align: center; font-size: 2.5em; margin: 60px 0 40px; color: #fff;">Discussion Categories</h2>
-
-        <div class="category-grid">
-            <div class="category-card" onclick="window.open('https://github.com/mikeb7777/physics-framework/discussions/categories/questions', '_blank')">
-                <span class="category-icon">❓</span>
-                <h3>Questions</h3>
-                <p>Ask anything about the framework—concepts, math, predictions, implications.</p>
-                <p class="hint">Great for: "What does X mean?", "How does Y work?", "Can someone explain Z?"</p>
-            </div>
-            
-            <div class="category-card" onclick="window.open('https://github.com/mikeb7777/physics-framework/discussions/categories/challenges', '_blank')">
-                <span class="category-icon">🔍</span>
-                <h3>Challenges & Critiques</h3>
-                <p>Found an error? See a contradiction? Think something's wrong? Share it here.</p>
-                <p class="hint">Great for: "This contradicts...", "I think there's an error in...", "What about...?"</p>
-            </div>
-            
-            <div class="category-card" onclick="window.open('https://github.com/mikeb7777/physics-framework/discussions/categories/experiments', '_blank')">
-                <span class="category-icon">🔬</span>
-                <h3>Experimental Results</h3>
-                <p>Share test results, propose new experiments, discuss methodologies.</p>
-                <p class="hint">Great for: Testing predictions, sharing data, collaborative research</p>
-            </div>
-            
-            <div class="category-card" onclick="window.open('https://github.com/mikeb7777/physics-framework/discussions/categories/ideas', '_blank')">
-                <span class="category-icon">💡</span>
-                <h3>Ideas & Extensions</h3>
-                <p>Explore implications, suggest applications, connect to other fields.</p>
-                <p class="hint">Great for: "What if...", "This could explain...", "Have you considered...?"</p>
-            </div>
-            
-            <div class="category-card" onclick="window.open('https://github.com/mikeb7777/physics-framework/discussions/categories/learning', '_blank')">
-                <span class="category-icon">📚</span>
-                <h3>Learning Together</h3>
-                <p>Study groups, explanations, resources, helping each other understand.</p>
-                <p class="hint">Great for: Study buddies, simplified explanations, recommended reading</p>
-            </div>
-            
-            <div class="category-card" onclick="window.open('https://github.com/mikeb7777/physics-framework/discussions/categories/general', '_blank')">
-                <span class="category-icon">💬</span>
-                <h3>General</h3>
-                <p>Everything else—introductions, meta-discussions, off-topic science chat.</p>
-                <p class="hint">Great for: "Hi I'm new!", casual conversations, related topics</p>
-            </div>
-        </div>
-
-        <div class="ai-preview">
-            <h3>🤖 Coming Soon: AI Research Assistant</h3>
-            <p style="color: #e0e0e0; font-size: 1.05em; line-height: 1.8;">
-                We're working on an AI assistant that can answer basic questions instantly using the framework documentation, help you find relevant discussions, suggest which category to post in, and provide context before you post to the community.
-            </p>
-            <p style="margin-top: 20px; color: #b0b0b0;">
-                <strong style="color: #38ef7d;">For now:</strong> Post directly to discussions and the community will help! Human insights are invaluable—the AI will assist, not replace, community interaction.
-            </p>
-        </div>
-
-        <div class="guidelines-card">
-            <h3>🌟 Discussion Guidelines</h3>
-            <ul>
-                <li><strong>Be curious:</strong> Ask "why?" and "how?" freely</li>
-                <li><strong>Be respectful:</strong> Attack ideas, not people</li>
-                <li><strong>Be honest:</strong> "I don't understand" is a valuable contribution</li>
-                <li><strong>Be specific:</strong> Quote what you're responding to</li>
-                <li><strong>Be open:</strong> Your mind might change—that's growth</li>
-                <li><strong>Be helpful:</strong> If you know something, share it</li>
-            </ul>
-            
-            <p style="margin-top: 25px; font-size: 1.05em; color: #e0e0e0;">
-                <strong style="color: #ffc800;">Remember:</strong> Someone understanding physics for the first time is exactly as valuable as someone who's studied it for decades. Fresh eyes catch blind spots.
-            </p>
-        </div>
-
-        <div class="cta-section">
-            <h2 style="color: #fff; margin-bottom: 30px;">Ready to Jump In?</h2>
-            <a href="https://github.com/mikeb7777/physics-framework/discussions/new" class="cta-button" target="_blank">
-                ✍️ Start a New Discussion
-            </a>
-            <br>
-            <a href="https://github.com/mikeb7777/physics-framework/discussions" class="cta-button secondary" target="_blank">
-                👀 Browse Existing Discussions
-            </a>
-        </div>
-
-        <p style="text-align: center; margin: 60px 0;">
-            <a href="index.html" style="color: #667eea; text-decoration: none; font-weight: 600; font-size: 1.1em;">← Back to Home</a>
-        </p>
+    <!-- Coming Soon Box -->
+    <div class="coming-soon-box" data-aos="fade-up">
+      <div class="coming-soon-icon">🚀</div>
+      <h2>Discussions Platform Coming Soon</h2>
+      <p>We're building a dedicated community discussion platform where researchers, enthusiasts, and curious minds can connect, share ideas, and collaborate on theoretical physics research.</p>
+      
+      <div class="features-list">
+        <h3>What to Expect:</h3>
+        <ul>
+          <li>Discussion forums for theoretical physics topics</li>
+          <li>Direct interaction with research community members</li>
+          <li>Share your own research and hypotheses</li>
+          <li>Collaborative exploration of speculative ideas</li>
+          <li>Real-time notifications and updates</li>
+          <li>User profiles and networking capabilities</li>
+        </ul>
+      </div>
+      
+      <p><strong>In the meantime</strong>, we'd love to hear from you! Use the form below to share your thoughts, questions, or ideas.</p>
     </div>
     
-    <script>
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.width = Math.random() * 2 + 1 + 'px';
-            star.style.height = star.style.width;
-            star.style.animationDelay = Math.random() * 3 + 's';
-            starsContainer.appendChild(star);
-        }
-    </script>
+    <!-- Contact Form -->
+    <div class="contact-form-section" data-aos="fade-up" data-aos-delay="100">
+      <h3>Share Your Thoughts</h3>
+      <p>Have questions, ideas, or feedback? Send us a message and we'll get back to you.</p>
+      
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="category">Topic Category</label>
+          <select id="category" name="category">
+            <option value="general">General Question</option>
+            <option value="cosmic-framework">COSMIC Framework</option>
+            <option value="validation">Prediction Validation</option>
+            <option value="research">Research Collaboration</option>
+            <option value="membership">Membership Inquiry</option>
+            <option value="feedback">Feedback/Suggestions</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Your Message *</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Send Message</button>
+        
+        <p class="form-note">We typically respond within 24-48 hours.</p>
+      </form>
+    </div>
+    
+  </main>
+  
+  <!-- Unified Footer -->
+  <footer>
+    <h3>Ic² Research Institute</h3>
+    <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
+  </footer>
+  
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 80 });
+  </script>
 </body>
 </html>
