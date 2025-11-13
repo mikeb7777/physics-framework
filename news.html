@@ -1,488 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>News - Ic² Research Institute</title>
-    <meta name="description" content="Latest news, press releases, and announcements from the Ic² Research Institute.">
+    <meta name="description" content="Latest news, press releases, and announcements from the Ic² Research Institute."/>
     
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        :root {
-            --primary-color: #8B0000;
-            --secondary-color: #2c3e50;
-            --accent-blue: #005ba5;
-            --accent-yellow: #f1e303;
-            --text-dark: #2c3e50;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --max-width: 1200px;
-        }
+    :root {
+      --primary-color: #8B0000;
+      --secondary-color: #2c3e50;
+      --accent-blue: #005ba5;
+      --accent-yellow: #f1e303;
+      --text-dark: #2c3e50;
+      --text-light: #666;
+      --bg-light: #f8f9fa;
+      --max-width: 1200px;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: white;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        /* Header */
-        .site-header {
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+    /* Unified Header */
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
 
-        .header-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .header-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .site-logo img {
-            height: 50px;
-            width: auto;
-        }
+    .site-logo img {
+      height: 50px;
+      width: auto;
+    }
 
-        .main-navigation ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+    .main-navigation ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
 
-        .main-navigation a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+    .main-navigation a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
 
-        .main-navigation a:hover {
-            color: var(--primary-color);
-        }
+    .main-navigation a:hover {
+      color: var(--primary-color);
+    }
 
-        /* Breaking News Banner */
-        .breaking-news {
-            background: var(--accent-yellow);
-            color: var(--text-dark);
-            padding: 0.75rem 2rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.875rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
+    /* Breaking News Banner */
+    .breaking-news {
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+      padding: 0.75rem 2rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.9; }
-        }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.9; }
+    }
 
-        /* Page Header */
-        .page-header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 4rem 2rem;
-            text-align: center;
-            color: white;
-        }
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
 
-        .page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
 
-        .page-header p {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+    .page-header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-        /* Content Section */
-        .content-section {
-            padding: 5rem 2rem;
-        }
+    /* Content Section */
+    .content-section { padding: 5rem 2rem; flex: 1; }
 
-        .section-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-        }
+    .section-container { max-width: var(--max-width); margin: 0 auto; }
 
-        /* News Grid */
-        .news-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
+    /* News Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
 
-        /* Featured Article */
-        .featured-article {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
+    /* Featured Article */
+    .featured-article {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
 
-        .featured-article:hover {
-            transform: translateY(-5px);
-        }
+    .featured-article:hover { transform: translateY(-5px); }
 
-        .featured-image {
-            width: 100%;
-            height: 400px;
-            background: var(--bg-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--text-light);
-        }
+    .featured-image {
+      width: 100%;
+      height: 400px;
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-light);
+    }
 
-        .featured-content {
-            padding: 2rem;
-        }
+    .featured-content { padding: 2rem; }
 
-        .article-badge {
-            display: inline-block;
-            background: var(--accent-yellow);
-            color: var(--text-dark);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-        }
+    .article-badge {
+      display: inline-block;
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
 
-        .featured-content h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
+    .featured-content h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark); }
 
-        .article-meta {
-            display: flex;
-            gap: 1.5rem;
-            color: var(--text-light);
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
+    .article-meta {
+      display: flex;
+      gap: 1.5rem;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
 
-        .featured-content p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
+    .featured-content p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
 
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-        }
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
 
-        .btn-primary:hover {
-            background: #a00000;
-        }
+    .btn-primary:hover { background: #a00000; }
 
-        /* Recent News Sidebar */
-        .recent-news h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-dark);
-        }
+    /* Recent News Sidebar */
+    .recent-news h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-dark); }
 
-        .news-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: box-shadow 0.3s ease;
-        }
+    .news-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: box-shadow 0.3s ease;
+    }
 
-        .news-item:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
+    .news-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 
-        .news-item-date {
-            color: var(--primary-color);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
+    .news-item-date {
+      color: var(--primary-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
 
-        .news-item h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
+    .news-item h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-dark); }
 
-        .news-item p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 0.75rem;
-        }
+    .news-item p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem; }
 
-        .news-item a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
+    .news-item a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
 
-        .news-item a:hover {
-            text-decoration: underline;
-        }
+    .news-item a:hover { text-decoration: underline; }
 
-        /* Press Releases Section */
-        .press-releases {
-            background: var(--bg-light);
-            padding: 5rem 2rem;
-        }
+    /* Press Releases Section */
+    .press-releases { background: var(--bg-light); padding: 5rem 2rem; }
 
-        .press-release-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-color);
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+    .press-release-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary-color);
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
 
-        .press-release-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
+    .press-release-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
 
-        .press-release-title {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
+    .press-release-title { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 0.5rem; }
 
-        .press-release-date {
-            color: var(--text-light);
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
+    .press-release-date { color: var(--text-light); font-size: 0.875rem; font-weight: 600; }
 
-        .press-release-body {
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
+    .press-release-body { color: var(--text-dark); margin-bottom: 1rem; }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-navigation ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
+    /* Unified Footer */
+    footer {
+      background: var(--secondary-color);
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 4rem;
+    }
 
-            .page-header h1 {
-                font-size: 2rem;
-            }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
 
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
+    .footer-section h3 { color: white; margin-bottom: 1rem; font-size: 1.1rem; }
 
-            .featured-image {
-                height: 250px;
-            }
+    .footer-section ul { list-style: none; }
 
-            .featured-content h2 {
-                font-size: 1.5rem;
-            }
-        }
+    .footer-section ul li { margin-bottom: 0.5rem; }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover { color: white; }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main-navigation ul { gap: 1rem; font-size: 0.9rem; }
+      .header-container { flex-direction: column; gap: 1rem; }
+      .main-navigation ul { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .page-header h1 { font-size: 2rem; }
+      .news-grid { grid-template-columns: 1fr; }
+      .featured-image { height: 250px; }
+      .featured-content h2 { font-size: 1.5rem; }
+    }
     </style>
 </head>
 <body>
     <!-- Breaking News Banner -->
     <div class="breaking-news">
-        🏆 BREAKTHROUGH: Three Major Predictions Validated by Independent Experiments
+      🏆 BREAKTHROUGH: Three Major Predictions Validated by Independent Experiments
     </div>
 
-    <!-- Header -->
+    <!-- Unified Header -->
     <header class="site-header">
-        <div class="header-container">
-            <div class="site-logo">
-                <img src="logoRed.png" alt="Ic² Research Institute">
-            </div>
-            <nav class="main-navigation">
-                <ul>
-                    <li><a href="index.html">Institute</a></li>
-                    <li><a href="book.html">The Book</a></li>
-                    <li><a href="about-page.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="contribute.html">Contribute</a></li>
-                </ul>
-            </nav>
+      <div class="header-container">
+        <div class="site-logo">
+          <img src="ic2-logo.png" alt="Ic² Research Institute">
         </div>
+        <nav class="main-navigation">
+          <ul>
+            <li><a href="index.html">Institute</a></li>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1>News & Updates</h1>
-        <p>Stay informed about the latest developments in theoretical physics research</p>
+      <h1>News & Updates</h1>
+      <p>Stay informed about the latest developments in theoretical physics research</p>
     </section>
 
     <!-- Main Content -->
     <section class="content-section">
-        <div class="section-container">
-            <div class="news-grid">
-                <!-- Featured Article -->
-                <div data-aos="fade-right">
-                    <article class="featured-article">
-                        <div class="featured-image">
-                            Featured Article Image
-                        </div>
-                        <div class="featured-content">
-                            <span class="article-badge">Breakthrough</span>
-                            <h2>Three Major Predictions Independently Validated</h2>
-                            <div class="article-meta">
-                                <span>October 31, 2025</span>
-                                <span>By Ic² Research Team</span>
-                            </div>
-                            <p>In an unprecedented achievement for theoretical physics, three distinct predictions from The COSMIC Framework have been independently validated by leading research institutions. DESI's confirmation of dark energy evolution, Google's quantum computing breakthrough with Willow, and JWST's early galaxy discoveries all align with framework predictions documented years before experimental confirmation.</p>
-                            <a href="press-release-1.html" class="btn btn-primary">Read Full Article</a>
-                        </div>
-                    </article>
+      <div class="section-container">
+        <div class="news-grid">
+          <!-- Featured Article -->
+          <div data-aos="fade-right">
+            <article class="featured-article">
+              <div class="featured-image">
+                Featured Article Image
+              </div>
+              <div class="featured-content">
+                <span class="article-badge">Breakthrough</span>
+                <h2>Three Major Predictions Independently Validated</h2>
+                <div class="article-meta">
+                  <span>October 31, 2025</span>
+                  <span>By Ic² Research Team</span>
                 </div>
+                <p>In an unprecedented achievement for theoretical physics, three distinct predictions from The COSMIC Framework have been independently validated by leading research institutions. DESI's confirmation of dark energy evolution, Google's quantum computing breakthrough with Willow, and JWST's early galaxy discoveries all align with framework predictions documented years before experimental confirmation.</p>
+                <a href="press-release-1.html" class="btn btn-primary">Read Full Article</a>
+              </div>
+            </article>
+          </div>
 
-                <!-- Recent News Sidebar -->
-                <aside class="recent-news" data-aos="fade-left">
-                    <h3>Recent Updates</h3>
+          <!-- Recent News Sidebar -->
+          <aside class="recent-news" data-aos="fade-left">
+            <h3>Recent Updates</h3>
 
-                    <div class="news-item">
-                        <div class="news-item-date">October 28, 2025</div>
-                        <h4>JWST Discovers Ultra-Early Galaxies</h4>
-                        <p>New observations align perfectly with framework predictions about early structure formation.</p>
-                        <a href="#">Read more →</a>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-item-date">October 15, 2025</div>
-                        <h4>Virtual Workshop Announced</h4>
-                        <p>Join us December 15th for an in-depth exploration of validated predictions.</p>
-                        <a href="events.html">Learn more →</a>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-item-date">October 1, 2025</div>
-                        <h4>New Research Paper Published</h4>
-                        <p>Exploring implications of validated dark energy evolution for cosmological models.</p>
-                        <a href="#">Read paper →</a>
-                    </div>
-
-                    <div class="news-item">
-                        <div class="news-item-date">September 20, 2025</div>
-                        <h4>Quantum Computing Discussion Series</h4>
-                        <p>Monthly seminars examining Google's Willow chip results and their theoretical implications.</p>
-                        <a href="events.html">View schedule →</a>
-                    </div>
-                </aside>
+            <div class="news-item">
+              <div class="news-item-date">October 28, 2025</div>
+              <h4>JWST Discovers Ultra-Early Galaxies</h4>
+              <p>New observations align perfectly with framework predictions about early structure formation.</p>
+              <a href="#">Read more →</a>
             </div>
+
+            <div class="news-item">
+              <div class="news-item-date">October 15, 2025</div>
+              <h4>Virtual Workshop Announced</h4>
+              <p>Join us December 15th for an in-depth exploration of validated predictions.</p>
+              <a href="events.html">Learn more →</a>
+            </div>
+
+            <div class="news-item">
+              <div class="news-item-date">October 1, 2025</div>
+              <h4>New Research Paper Published</h4>
+              <p>Exploring implications of validated dark energy evolution for cosmological models.</p>
+              <a href="#">Read paper →</a>
+            </div>
+
+            <div class="news-item">
+              <div class="news-item-date">September 20, 2025</div>
+              <h4>Quantum Computing Discussion Series</h4>
+              <p>Monthly seminars examining Google's Willow chip results and their theoretical implications.</p>
+              <a href="events.html">View schedule →</a>
+            </div>
+          </aside>
         </div>
+      </div>
     </section>
 
     <!-- Press Releases Section -->
     <section class="press-releases">
-        <div class="section-container">
-            <h2 style="font-size: 2.5rem; margin-bottom: 3rem; color: var(--text-dark);">Official Press Releases</h2>
+      <div class="section-container">
+        <h2 style="font-size: 2.5rem; margin-bottom: 3rem; color: var(--text-dark);">Official Press Releases</h2>
 
-            <div class="press-release-card" data-aos="fade-up">
-                <div class="press-release-header">
-                    <div>
-                        <h3 class="press-release-title">Major Validation: Framework Predictions Confirmed</h3>
-                        <div class="press-release-date">October 31, 2025</div>
-                    </div>
-                </div>
-                <div class="press-release-body">
-                    <p>The Ic² Research Institute announces unprecedented validation of three major theoretical predictions across multiple domains of physics. Independent experiments by DESI, Google Quantum AI, and JWST have confirmed predictions documented in "A Quest for The Big TOE" years before experimental confirmation.</p>
-                </div>
-                <a href="press-release-1.html" class="btn btn-primary">Full Press Release</a>
+        <div class="press-release-card" data-aos="fade-up">
+          <div class="press-release-header">
+            <div>
+              <h3 class="press-release-title">Major Validation: Framework Predictions Confirmed</h3>
+              <div class="press-release-date">October 31, 2025</div>
             </div>
-
-            <div class="press-release-card" data-aos="fade-up">
-                <div class="press-release-header">
-                    <div>
-                        <h3 class="press-release-title">Quantum Computing Optimization Validated</h3>
-                        <div class="press-release-date">December 10, 2024</div>
-                    </div>
-                </div>
-                <div class="press-release-body">
-                    <p>Google's Willow quantum chip demonstrates exponential error reduction, confirming framework predictions about optimal error correction strategies. This validation represents a major milestone in quantum computing development.</p>
-                </div>
-                <a href="press-release-2.html" class="btn btn-primary">Full Press Release</a>
-            </div>
-
-            <div class="press-release-card" data-aos="fade-up">
-                <div class="press-release-header">
-                    <div>
-                        <h3 class="press-release-title">Dark Energy Evolution Confirmed by DESI</h3>
-                        <div class="press-release-date">January 7, 2025</div>
-                    </div>
-                </div>
-                <div class="press-release-body">
-                    <p>The Dark Energy Spectroscopic Instrument provides 3.9σ evidence for evolving dark energy, directly confirming The COSMIC Framework's predictions about dynamic dark energy behavior documented in 2024.</p>
-                </div>
-                <a href="press-release-3.html" class="btn btn-primary">Full Press Release</a>
-            </div>
-
-            <div class="press-release-card" data-aos="fade-up">
-                <div class="press-release-header">
-                    <div>
-                        <h3 class="press-release-title">JWST Observations Validate Early Galaxy Predictions</h3>
-                        <div class="press-release-date">May 15, 2025</div>
-                    </div>
-                </div>
-                <div class="press-release-body">
-                    <p>James Webb Space Telescope discoveries of massive, mature galaxies at extreme redshifts align with framework predictions about early structure formation, challenging conventional cosmological models.</p>
-                </div>
-                <a href="press-release-4.html" class="btn btn-primary">Full Press Release</a>
-            </div>
+          </div>
+          <div class="press-release-body">
+            <p>The Ic² Research Institute announces unprecedented validation of three major theoretical predictions across multiple domains of physics. Independent experiments by DESI, Google Quantum AI, and JWST have confirmed predictions documented in "A Quest for The Big TOE" years before experimental confirmation.</p>
+          </div>
+          <a href="press-release-1.html" class="btn btn-primary">Full Press Release</a>
         </div>
+
+        <div class="press-release-card" data-aos="fade-up">
+          <div class="press-release-header">
+            <div>
+              <h3 class="press-release-title">Quantum Computing Optimization Validated</h3>
+              <div class="press-release-date">December 10, 2024</div>
+            </div>
+          </div>
+          <div class="press-release-body">
+            <p>Google's Willow quantum chip demonstrates exponential error reduction, confirming framework predictions about optimal error correction strategies. This validation represents a major milestone in quantum computing development.</p>
+          </div>
+          <a href="press-release-2.html" class="btn btn-primary">Full Press Release</a>
+        </div>
+
+        <div class="press-release-card" data-aos="fade-up">
+          <div class="press-release-header">
+            <div>
+              <h3 class="press-release-title">Dark Energy Evolution Confirmed by DESI</h3>
+              <div class="press-release-date">January 7, 2025</div>
+            </div>
+          </div>
+          <div class="press-release-body">
+            <p>The Dark Energy Spectroscopic Instrument provides 3.9σ evidence for evolving dark energy, directly confirming The COSMIC Framework's predictions about dynamic dark energy behavior documented in 2024.</p>
+          </div>
+          <a href="press-release-3.html" class="btn btn-primary">Full Press Release</a>
+        </div>
+
+        <div class="press-release-card" data-aos="fade-up">
+          <div class="press-release-header">
+            <div>
+              <h3 class="press-release-title">JWST Observations Validate Early Galaxy Predictions</h3>
+              <div class="press-release-date">May 15, 2025</div>
+            </div>
+          </div>
+          <div class="press-release-body">
+            <p>James Webb Space Telescope discoveries of massive, mature galaxies at extreme redshifts align with framework predictions about early structure formation, challenging conventional cosmological models.</p>
+          </div>
+          <a href="press-release-4.html" class="btn btn-primary">Full Press Release</a>
+        </div>
+
+      </div>
     </section>
+
+    <!-- Unified Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>About Ic² Research</h3>
+          <p style="color: rgba(255,255,255,0.8); line-height: 1.6;">
+            The Ic² Research Institute pursues theoretical and experimental research to test The COSMIC Framework and publish open science results.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:info@ic2institute.org">info@ic2institute.org</a></li>
+            <li><a href="contact.html">Contact form</a></li>
+            <li><a href="events.html">Events</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="#" aria-label="Twitter">Twitter</a></li>
+            <li><a href="#" aria-label="Facebook">Facebook</a></li>
+            <li><a href="#" aria-label="YouTube">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; <span id="currentYear">2025</span> Ic² Research Institute — All rights reserved.
+      </div>
+    </footer>
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
+      AOS.init({ duration: 1000, once: true, offset: 100 });
+      // set current year
+      (function(){ document.getElementById('currentYear').textContent = new Date().getFullYear(); })();
     </script>
 </body>
 </html>
+   
