@@ -1,776 +1,716 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Become a Member - Ic² Research Institute</title>
-    <meta name="description" content="Join the Ic² Research Institute as a member researcher. Retain 100% rights to your work while collaborating with independent researchers.">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Become a Member - Ic² Research Institute</title>
+  <meta name="description" content="Join the Ic² Research Institute as a member researcher. Retain 100% rights to your work while collaborating with independent researchers.">
 
-        :root {
-            --primary-color: #8B0000;
-            --secondary-color: #2c3e50;
-            --text-dark: #2c3e50;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --max-width: 1200px;
-        }
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: white;
-        }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Header */
-        .site-header {
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+    :root {
+      --primary-color: #8B0000;
+      --secondary-color: #2c3e50;
+      --text-dark: #2c3e50;
+      --text-light: #666;
+      --bg-light: #f8f9fa;
+      --max-width: 1200px;
+    }
 
-        .header-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .site-logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
+    /* Unified Header (consistent across pages) */
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
 
-        .main-navigation ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+    .header-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem; /* unified padding */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .main-navigation a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+    .site-logo img {
+      height: 50px; /* unified logo size */
+      width: auto;
+      display: block;
+    }
 
-        .main-navigation a:hover {
-            color: var(--primary-color);
-        }
+    .main-navigation ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
 
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
+    .main-navigation a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
 
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
+    .main-navigation a:hover {
+      color: var(--primary-color);
+    }
 
-        .hero-section p {
-            font-size: 1.25rem;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
 
-        /* Content Section */
-        .content-section {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
+    .hero-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
 
-        .intro-box {
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 3rem;
-            border-left: 4px solid var(--primary-color);
-        }
+    .hero-section p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
 
-        .intro-box h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
+    /* Content Section */
+    .content-section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      flex: 1;
+    }
 
-        .intro-box ul {
-            margin-left: 1.5rem;
-            margin-top: 1rem;
-        }
+    .intro-box {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 3rem;
+      border-left: 4px solid var(--primary-color);
+    }
 
-        .intro-box li {
-            margin-bottom: 0.5rem;
-        }
+    .intro-box h2 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
 
-        /* Form Styling */
-        .membership-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+    .intro-box ul {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
 
-        .form-section {
-            margin-bottom: 2.5rem;
-        }
+    .intro-box li { margin-bottom: 0.5rem; }
 
-        .form-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-            border-bottom: 2px solid var(--bg-light);
-            padding-bottom: 0.5rem;
-        }
+    /* Form Styling */
+    .membership-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+    .form-section { margin-bottom: 2.5rem; }
 
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
+    .form-section h3 {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      border-bottom: 2px solid var(--bg-light);
+      padding-bottom: 0.5rem;
+    }
 
-        .required {
-            color: var(--primary-color);
-        }
+    .form-group { margin-bottom: 1.5rem; }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="url"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+    .required { color: var(--primary-color); }
 
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
 
-        .file-upload {
-            border: 2px dashed #ddd;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 4px;
-            background: var(--bg-light);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    input:focus,
+    textarea:focus,
+    select:focus { outline: none; border-color: var(--primary-color); }
 
-        .file-upload:hover {
-            border-color: var(--primary-color);
-            background: white;
-        }
+    textarea { min-height: 120px; resize: vertical; }
 
-        .file-upload input[type="file"] {
-            display: none;
-        }
+    .file-upload {
+      border: 2px dashed #ddd;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 4px;
+      background: var(--bg-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        .file-label {
-            display: block;
-            cursor: pointer;
-        }
+    .file-upload:hover { border-color: var(--primary-color); background: white; }
+    .file-upload input[type="file"] { display: none; }
+    .file-label { display: block; cursor: pointer; }
+    .file-info { margin-top: 1rem; font-size: 0.875rem; color: var(--text-light); }
 
-        .file-info {
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
+    .checkbox-group { display: flex; align-items: start; gap: 0.5rem; }
+    .checkbox-group input[type="checkbox"] { width: auto; margin-top: 0.25rem; }
+    .checkbox-group label { margin-bottom: 0; font-weight: normal; }
 
-        .checkbox-group {
-            display: flex;
-            align-items: start;
-            gap: 0.5rem;
-        }
+    /* Submit Button */
+    .submit-section { text-align: center; margin-top: 3rem; }
 
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin-top: 0.25rem;
-        }
+    .btn-submit {
+      background: var(--primary-color);
+      color: white;
+      padding: 1rem 3rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-weight: normal;
-        }
+    .btn-submit:hover {
+      background: #a00000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    }
 
-        /* Submit Button */
-        .submit-section {
-            text-align: center;
-            margin-top: 3rem;
-        }
+    /* Footer */
+    footer {
+      background: var(--secondary-color);
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 4rem;
+    }
 
-        .btn-submit {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
 
-        .btn-submit:hover {
-            background: #a00000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
-        }
+    .footer-section h3 { color: white; margin-bottom: 1rem; font-size: 1.1rem; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin-bottom: 0.5rem; }
+    .footer-section a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s ease; }
+    .footer-section a:hover { color: white; }
 
-        /* Footer */
-        footer {
-            background: var(--secondary-color);
-            color: white;
-            padding: 3rem 2rem 1.5rem;
-            margin-top: 4rem;
-        }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+    }
 
-        .footer-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-
-            .main-navigation ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .membership-form {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+    @media (max-width: 768px) {
+      .hero-section h1 { font-size: 2rem; }
+      .main-navigation ul { gap: 1rem; font-size: 0.9rem; }
+      .membership-form { padding: 1.5rem; }
+      .header-container { flex-direction: column; gap: 1rem; }
+      .main-navigation ul { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
-        <div class="header-container">
-            <a href="index.html" class="site-logo">Ic² Research Institute</a>
-            <nav class="main-navigation">
-                <ul>
-                    <li><a href="index.html">Institute</a></li>
-                    <li><a href="book.html">The Big TOE</a></li>
-                    <li><a href="about-page.html">About</a></li>
-                    <li><a href="members.html">Members</a></li>
-                    <li><a href="login.html">Login</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <!-- Unified Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="site-logo">
+        <!-- ensure ic2-logo.png exists in the same folder -->
+        <img src="ic2-logo.png" alt="Ic² Research Institute">
+      </div>
 
-    <!-- Hero -->
-    <section class="hero-section">
-        <h1>Join Our Research Community</h1>
-        <p>Thank you for your interest in becoming a member of the Ic² Research Institute</p>
-    </section>
+      <nav class="main-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Institute</a></li>
+          <li><a href="book.html">The Big TOE</a></li>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Main Content -->
-    <div class="content-section">
-        <div class="intro-box">
-            <h2>About Membership</h2>
-            <p>The Ic² Research Institute is a collaborative workspace of independent researchers working to advance theoretical physics and consciousness studies. We welcome three types of participation:</p>
-            
-            <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">Research Members</h3>
-            <ul>
-                <li><strong>Retain 100% of the rights to your work</strong> - You own everything you create</li>
-                <li><strong>Choose your publication approach</strong> - Publish under the institute's auspices or independently in your own name</li>
-                <li><strong>Collaborate with independent researchers</strong> - Join project groups or start your own</li>
-                <li><strong>Access collaborative resources</strong> - Share knowledge and resources with fellow members</li>
-                <li><strong>Contribute to cutting-edge research</strong> - Work on projects aligned with your interests and expertise</li>
-            </ul>
+  <!-- Hero -->
+  <section class="hero-section" data-aos="fade-up">
+    <h1>Join Our Research Community</h1>
+    <p>Thank you for your interest in becoming a member of the Ic² Research Institute</p>
+  </section>
 
-            <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">Support Members</h3>
-            <ul>
-                <li><strong>Provide essential services</strong> - Accounting, graphic arts, web design, social media marketing, legal, and other support functions</li>
-                <li><strong>Enable research excellence</strong> - Help researchers focus on science by handling operational needs</li>
-                <li><strong>Retain full rights</strong> - Own your creative work and contributions</li>
-                <li><strong>Flexible engagement</strong> - Work on projects or institute-wide needs as available</li>
-            </ul>
+  <!-- Main Content -->
+  <main class="content-section">
+    <div class="intro-box" data-aos="fade-up">
+      <h2>About Membership</h2>
+      <p>The Ic² Research Institute is a collaborative workspace of independent researchers working to advance theoretical physics and consciousness studies. We welcome three types of participation:</p>
 
-            <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">Observers</h3>
-            <ul>
-                <li><strong>Complete transparency</strong> - Read-only access to project activities</li>
-                <li><strong>Stay informed</strong> - Receive updates on research progress</li>
-                <li><strong>Participate in discussions</strong> - Comment when comments are open</li>
-                <li><strong>Open to all site members</strong> - Anyone can become an observer in any project group</li>
-            </ul>
+      <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">Research Members</h3>
+      <ul>
+        <li><strong>Retain 100% of the rights to your work</strong> - You own everything you create</li>
+        <li><strong>Choose your publication approach</strong> - Publish under the institute's auspices or independently in your own name</li>
+        <li><strong>Collaborate with independent researchers</strong> - Join project groups or start your own</li>
+        <li><strong>Access collaborative resources</strong> - Share knowledge and resources with fellow members</li>
+        <li><strong>Contribute to cutting-edge research</strong> - Work on projects aligned with your interests and expertise</li>
+      </ul>
 
-            <p style="margin-top: 1rem;"><strong>Please complete the form below to apply for membership.</strong> Applications are reviewed by our membership committee, and we'll contact you within 2-3 weeks regarding your application status.</p>
-        </div>
+      <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">Support Members</h3>
+      <ul>
+        <li><strong>Provide essential services</strong> - Accounting, graphic arts, web design, social media marketing, legal, and other support functions</li>
+        <li><strong>Enable research excellence</strong> - Help researchers focus on science by handling operational needs</li>
+        <li><strong>Retain full rights</strong> - Own your creative work and contributions</li>
+        <li><strong>Flexible engagement</strong> - Work on projects or institute-wide needs as available</li>
+      </ul>
 
-        <!-- Application Form -->
-        <form class="membership-form" id="membershipForm">
-            <!-- Personal Information -->
-            <div class="form-section">
-                <h3>Personal Information</h3>
-                
-                <div class="form-group">
-                    <label for="fullName">Full Name <span class="required">*</span></label>
-                    <input type="text" id="fullName" name="fullName" required>
-                </div>
+      <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.5rem;">Observers</h3>
+      <ul>
+        <li><strong>Complete transparency</strong> - Read-only access to project activities</li>
+        <li><strong>Stay informed</strong> - Receive updates on research progress</li>
+        <li><strong>Participate in discussions</strong> - Comment when comments are open</li>
+        <li><strong>Open to all site members</strong> - Anyone can become an observer in any project group</li>
+      </ul>
 
-                <div class="form-group">
-                    <label for="email">Email Address <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number (Optional)</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-
-                <div class="form-group">
-                    <label for="location">Location (City, Country) <span class="required">*</span></label>
-                    <input type="text" id="location" name="location" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="website">Personal Website or LinkedIn (Optional)</label>
-                    <input type="url" id="website" name="website" placeholder="https://">
-                </div>
-            </div>
-
-            <!-- Membership Type -->
-            <div class="form-section">
-                <h3>Membership Type</h3>
-                
-                <div class="form-group">
-                    <label for="membershipType">I am applying as: <span class="required">*</span></label>
-                    <select id="membershipType" name="membershipType" required onchange="updateFormSections()">
-                        <option value="">Select membership type...</option>
-                        <option value="research">Research Member - Conduct theoretical physics or consciousness research</option>
-                        <option value="support">Support Member - Provide operational support (design, legal, accounting, etc.)</option>
-                        <option value="observer">Observer - Read-only access to follow research progress</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Professional Background -->
-            <div class="form-section" id="professionalSection">
-                <h3>Professional Background</h3>
-                
-                <div class="form-group">
-                    <label for="currentPosition">Current Position/Affiliation <span class="required">*</span></label>
-                    <input type="text" id="currentPosition" name="currentPosition" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="education">Highest Level of Education <span class="required">*</span></label>
-                    <select id="education" name="education" required>
-                        <option value="">Select...</option>
-                        <option value="highschool">High School</option>
-                        <option value="bachelors">Bachelor's Degree</option>
-                        <option value="masters">Master's Degree</option>
-                        <option value="phd">PhD/Doctorate</option>
-                        <option value="postdoc">Postdoctoral</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="fieldOfStudy">Field of Study <span class="required">*</span></label>
-                    <input type="text" id="fieldOfStudy" name="fieldOfStudy" required placeholder="e.g., Theoretical Physics, Cosmology, Quantum Mechanics">
-                </div>
-
-                <div class="form-group">
-                    <label for="experience">Research Experience (Years) <span class="required">*</span></label>
-                    <input type="text" id="experience" name="experience" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="previousWork">Previous Research & Publications</label>
-                    <textarea id="previousWork" name="previousWork" placeholder="Briefly describe your previous research work, publications, or relevant projects..."></textarea>
-                </div>
-            </div>
-
-            <!-- Research Interests (for Research Members) -->
-            <div class="form-section" id="researchInterestsSection">
-                <h3>Research Interests</h3>
-                
-                <div class="form-group">
-                    <label for="primaryInterest">Primary Area of Interest <span class="required">*</span></label>
-                    <select id="primaryInterest" name="primaryInterest">
-                        <option value="">Select...</option>
-                        <option value="theoretical-physics">Theoretical Physics</option>
-                        <option value="cosmology">Cosmology</option>
-                        <option value="quantum-mechanics">Quantum Mechanics</option>
-                        <option value="consciousness-studies">Consciousness Studies</option>
-                        <option value="dark-energy">Dark Energy & Dark Matter</option>
-                        <option value="quantum-computing">Quantum Computing</option>
-                        <option value="philosophy-physics">Philosophy of Physics</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="specificInterests">Specific Research Interests <span class="required">*</span></label>
-                    <textarea id="specificInterests" name="specificInterests" placeholder="Describe the specific topics, questions, or areas you'd like to research at Ic²..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="skillsContribution">Skills & How You Can Contribute <span class="required">*</span></label>
-                    <textarea id="skillsContribution" name="skillsContribution" placeholder="What unique skills, perspectives, or expertise would you bring to the institute? How do you envision contributing to collaborative projects?"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="motivations">Why Join Ic²? <span class="required">*</span></label>
-                    <textarea id="motivations" name="motivations" placeholder="What motivates you to join the Ic² Research Institute? What are you hoping to achieve as a member?"></textarea>
-                </div>
-            </div>
-
-            <!-- Support Skills (for Support Members) -->
-            <div class="form-section" id="supportSkillsSection" style="display: none;">
-                <h3>Support Skills & Services</h3>
-                
-                <div class="form-group">
-                    <label for="supportArea">Primary Support Area <span class="required">*</span></label>
-                    <select id="supportArea" name="supportArea">
-                        <option value="">Select...</option>
-                        <option value="graphic-design">Graphic Design & Visual Arts</option>
-                        <option value="web-design">Web Design & Development</option>
-                        <option value="social-media">Social Media Marketing</option>
-                        <option value="accounting">Accounting & Financial Management</option>
-                        <option value="legal">Legal Services</option>
-                        <option value="technical-writing">Technical Writing & Documentation</option>
-                        <option value="data-visualization">Data Visualization</option>
-                        <option value="video-production">Video Production & Editing</option>
-                        <option value="project-management">Project Management</option>
-                        <option value="fundraising">Fundraising & Grant Writing</option>
-                        <option value="communications">Communications & PR</option>
-                        <option value="other-support">Other Support Services</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="supportSkills">Specific Skills & Tools <span class="required">*</span></label>
-                    <textarea id="supportSkills" name="supportSkills" placeholder="List the specific skills, software, or tools you're proficient with (e.g., Adobe Creative Suite, QuickBooks, WordPress, Canva, legal specialties, etc.)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="supportExperience">Relevant Experience <span class="required">*</span></label>
-                    <textarea id="supportExperience" name="supportExperience" placeholder="Describe your experience providing these support services. Include any relevant projects, clients, or organizations you've worked with."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="availabilitySupport">Availability & Commitment</label>
-                    <textarea id="availabilitySupport" name="availabilitySupport" placeholder="How much time can you commit per week/month? Are you available for specific projects or ongoing support?"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="supportMotivation">Why Join as Support Member? <span class="required">*</span></label>
-                    <textarea id="supportMotivation" name="supportMotivation" placeholder="What motivates you to support the Ic² Research Institute? What interests you about helping advance theoretical physics research?"></textarea>
-                </div>
-            </div>
-
-            <!-- Observer Interests (for Observers) -->
-            <div class="form-section" id="observerInterestsSection" style="display: none;">
-                <h3>Areas of Interest</h3>
-                
-                <div class="form-group">
-                    <label for="observerInterest">What research areas interest you? <span class="required">*</span></label>
-                    <textarea id="observerInterest" name="observerInterest" placeholder="Tell us which research topics or projects you'd like to follow as an observer..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="observerBackground">Your Background (Optional)</label>
-                    <textarea id="observerBackground" name="observerBackground" placeholder="Share a bit about your background and why you're interested in our research (optional but helpful)..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="observerGoals">What do you hope to gain? <span class="required">*</span></label>
-                    <textarea id="observerGoals" name="observerGoals" placeholder="What are you hoping to learn or gain by following our research as an observer?"></textarea>
-                </div>
-            </div>
-
-            <!-- Project Interest -->
-            <div class="form-section" id="projectInterestSection">
-                <h3>Project Involvement</h3>
-                
-                <div class="form-group">
-                    <label for="projectRole">Preferred Role <span class="required">*</span></label>
-                    <select id="projectRole" name="projectRole" required>
-                        <option value="">Select...</option>
-                        <option value="member">Project Member - I want to contribute to existing projects</option>
-                        <option value="manager">Project Manager - I want to lead or co-manage projects</option>
-                        <option value="support">Support Role - I want to provide support services to projects</option>
-                        <option value="observer">Observer - I want read-only access to follow project progress</option>
-                        <option value="flexible">Flexible - Open to different roles based on project needs</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="existingProjects">Existing Projects of Interest (Optional)</label>
-                    <textarea id="existingProjects" name="existingProjects" placeholder="Are there any current Ic² projects you'd like to join or observe? List them here or describe the type of projects you're interested in..."></textarea>
-                </div>
-
-                <div class="form-group" id="newProjectField">
-                    <label for="newProjectIdea">New Project Ideas (Optional)</label>
-                    <textarea id="newProjectIdea" name="newProjectIdea" placeholder="Do you have ideas for new research projects you'd like to initiate at Ic²?"></textarea>
-                </div>
-            </div>
-
-            <!-- File Uploads -->
-            <div class="form-section">
-                <h3>Supporting Documents</h3>
-                
-                <div class="form-group">
-                    <label>Profile Photo (Optional)</label>
-                    <div class="file-upload" onclick="document.getElementById('photoUpload').click()">
-                        <label class="file-label">
-                            📷 Click to upload your photo
-                            <div class="file-info">JPG, PNG, or GIF (max 5MB)</div>
-                        </label>
-                        <input type="file" id="photoUpload" name="photo" accept="image/*">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Resume/CV (Optional but Recommended)</label>
-                    <div class="file-upload" onclick="document.getElementById('resumeUpload').click()">
-                        <label class="file-label">
-                            📄 Click to upload your resume/CV
-                            <div class="file-info">PDF or DOCX (max 10MB)</div>
-                        </label>
-                        <input type="file" id="resumeUpload" name="resume" accept=".pdf,.doc,.docx">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Agreement -->
-            <div class="form-section">
-                <h3>Agreement</h3>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="agreement" name="agreement" required>
-                    <label for="agreement">
-                        I understand that membership is subject to approval by the Ic² Research Institute. I agree to collaborate respectfully with other members and acknowledge that I retain 100% rights to my work while being able to publish under the institute's auspices or independently. <span class="required">*</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Submit -->
-            <div class="submit-section">
-                <button type="submit" class="btn-submit">Submit Application</button>
-            </div>
-        </form>
+      <p style="margin-top: 1rem;"><strong>Please complete the form below to apply for membership.</strong> Applications are reviewed by our membership committee, and we'll contact you within 2-3 weeks regarding your application status.</p>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Ic² Research Institute</h3>
-                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Research</h3>
-                <ul>
-                    <li><a href="validation.html">Validation</a></li>
-                    <li><a href="testing-schedule.html">Testing</a></li>
-                    <li><a href="results.html">Results</a></li>
-                    <li><a href="zenodo-papers.html">Papers</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="book.html">The Big TOE</a></li>
-                    <li><a href="about-page.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="faq-page.html">FAQ</a></li>
-                    <li><a href="members.html">Our Members</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <ul>
-                    <li><a href="contribute.html">Contribute</a></li>
-                    <li><a href="discussions-page.html">Discussions</a></li>
-                    <li><a href="become-member.html">Become a Member</a></li>
-                    <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
-        </div>
-    </footer>
+    <!-- Application Form -->
+    <form class="membership-form" id="membershipForm" data-aos="fade-up">
+      <!-- Personal Information -->
+      <div class="form-section">
+        <h3>Personal Information</h3>
 
-    <script>
-        // Update form sections based on membership type
-        function updateFormSections() {
-            const membershipType = document.getElementById('membershipType').value;
-            
-            // Get all conditional sections
-            const professionalSection = document.getElementById('professionalSection');
-            const researchInterestsSection = document.getElementById('researchInterestsSection');
-            const supportSkillsSection = document.getElementById('supportSkillsSection');
-            const observerInterestsSection = document.getElementById('observerInterestsSection');
-            const projectInterestSection = document.getElementById('projectInterestSection');
-            const newProjectField = document.getElementById('newProjectField');
-            
-            // Hide all conditional sections first
-            if (researchInterestsSection) researchInterestsSection.style.display = 'none';
-            if (supportSkillsSection) supportSkillsSection.style.display = 'none';
-            if (observerInterestsSection) observerInterestsSection.style.display = 'none';
-            
-            // Update required fields based on type
-            const researchFields = ['primaryInterest', 'specificInterests', 'skillsContribution', 'motivations'];
-            const supportFields = ['supportArea', 'supportSkills', 'supportExperience', 'supportMotivation'];
-            const observerFields = ['observerInterest', 'observerGoals'];
-            
-            // Remove all required attributes first
-            [...researchFields, ...supportFields, ...observerFields].forEach(id => {
-                const field = document.getElementById(id);
-                if (field) field.removeAttribute('required');
-            });
-            
-            // Show relevant sections and add required attributes
-            if (membershipType === 'research') {
-                if (researchInterestsSection) researchInterestsSection.style.display = 'block';
-                if (newProjectField) newProjectField.style.display = 'block';
-                researchFields.forEach(id => {
-                    const field = document.getElementById(id);
-                    if (field) field.setAttribute('required', 'required');
-                });
-            } else if (membershipType === 'support') {
-                if (supportSkillsSection) supportSkillsSection.style.display = 'block';
-                if (newProjectField) newProjectField.style.display = 'none';
-                supportFields.forEach(id => {
-                    const field = document.getElementById(id);
-                    if (field) field.setAttribute('required', 'required');
-                });
-            } else if (membershipType === 'observer') {
-                if (observerInterestsSection) observerInterestsSection.style.display = 'block';
-                if (professionalSection) {
-                    // Make professional fields optional for observers
-                    const profFields = professionalSection.querySelectorAll('[required]');
-                    profFields.forEach(field => {
-                        if (field.id !== 'currentPosition') { // Keep position required
-                            field.removeAttribute('required');
-                        }
-                    });
-                }
-                if (newProjectField) newProjectField.style.display = 'none';
-                observerFields.forEach(id => {
-                    const field = document.getElementById(id);
-                    if (field) field.setAttribute('required', 'required');
-                });
-            }
+        <div class="form-group">
+          <label for="fullName">Full Name <span class="required">*</span></label>
+          <input type="text" id="fullName" name="fullName" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number (Optional)</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location (City, Country) <span class="required">*</span></label>
+          <input type="text" id="location" name="location" required>
+        </div>
+
+        <div class="form-group">
+          <label for="website">Personal Website or LinkedIn (Optional)</label>
+          <input type="url" id="website" name="website" placeholder="https://">
+        </div>
+      </div>
+
+      <!-- Membership Type -->
+      <div class="form-section">
+        <h3>Membership Type</h3>
+
+        <div class="form-group">
+          <label for="membershipType">I am applying as: <span class="required">*</span></label>
+          <select id="membershipType" name="membershipType" required onchange="updateFormSections()">
+            <option value="">Select membership type...</option>
+            <option value="research">Research Member - Conduct theoretical physics or consciousness research</option>
+            <option value="support">Support Member - Provide operational support (design, legal, accounting, etc.)</option>
+            <option value="observer">Observer - Read-only access to follow research progress</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Professional Background -->
+      <div class="form-section" id="professionalSection">
+        <h3>Professional Background</h3>
+
+        <div class="form-group">
+          <label for="currentPosition">Current Position/Affiliation <span class="required">*</span></label>
+          <input type="text" id="currentPosition" name="currentPosition" required>
+        </div>
+
+        <div class="form-group">
+          <label for="education">Highest Level of Education <span class="required">*</span></label>
+          <select id="education" name="education" required>
+            <option value="">Select...</option>
+            <option value="highschool">High School</option>
+            <option value="bachelors">Bachelor's Degree</option>
+            <option value="masters">Master's Degree</option>
+            <option value="phd">PhD/Doctorate</option>
+            <option value="postdoc">Postdoctoral</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fieldOfStudy">Field of Study <span class="required">*</span></label>
+          <input type="text" id="fieldOfStudy" name="fieldOfStudy" required placeholder="e.g., Theoretical Physics, Cosmology, Quantum Mechanics">
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Research Experience (Years) <span class="required">*</span></label>
+          <input type="text" id="experience" name="experience" required>
+        </div>
+
+        <div class="form-group">
+          <label for="previousWork">Previous Research & Publications</label>
+          <textarea id="previousWork" name="previousWork" placeholder="Briefly describe your previous research work, publications, or relevant projects..."></textarea>
+        </div>
+      </div>
+
+      <!-- Research Interests (for Research Members) -->
+      <div class="form-section" id="researchInterestsSection">
+        <h3>Research Interests</h3>
+
+        <div class="form-group">
+          <label for="primaryInterest">Primary Area of Interest <span class="required">*</span></label>
+          <select id="primaryInterest" name="primaryInterest">
+            <option value="">Select...</option>
+            <option value="theoretical-physics">Theoretical Physics</option>
+            <option value="cosmology">Cosmology</option>
+            <option value="quantum-mechanics">Quantum Mechanics</option>
+            <option value="consciousness-studies">Consciousness Studies</option>
+            <option value="dark-energy">Dark Energy & Dark Matter</option>
+            <option value="quantum-computing">Quantum Computing</option>
+            <option value="philosophy-physics">Philosophy of Physics</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="specificInterests">Specific Research Interests <span class="required">*</span></label>
+          <textarea id="specificInterests" name="specificInterests" placeholder="Describe the specific topics, questions, or areas you'd like to research at Ic²..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="skillsContribution">Skills & How You Can Contribute <span class="required">*</span></label>
+          <textarea id="skillsContribution" name="skillsContribution" placeholder="What unique skills, perspectives, or expertise would you bring to the institute? How do you envision contributing to collaborative projects?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="motivations">Why Join Ic²? <span class="required">*</span></label>
+          <textarea id="motivations" name="motivations" placeholder="What motivates you to join the Ic² Research Institute? What are you hoping to achieve as a member?"></textarea>
+        </div>
+      </div>
+
+      <!-- Support Skills (for Support Members) -->
+      <div class="form-section" id="supportSkillsSection" style="display: none;">
+        <h3>Support Skills & Services</h3>
+
+        <div class="form-group">
+          <label for="supportArea">Primary Support Area <span class="required">*</span></label>
+          <select id="supportArea" name="supportArea">
+            <option value="">Select...</option>
+            <option value="graphic-design">Graphic Design & Visual Arts</option>
+            <option value="web-design">Web Design & Development</option>
+            <option value="social-media">Social Media Marketing</option>
+            <option value="accounting">Accounting & Financial Management</option>
+            <option value="legal">Legal Services</option>
+            <option value="technical-writing">Technical Writing & Documentation</option>
+            <option value="data-visualization">Data Visualization</option>
+            <option value="video-production">Video Production & Editing</option>
+            <option value="project-management">Project Management</option>
+            <option value="fundraising">Fundraising & Grant Writing</option>
+            <option value="communications">Communications & PR</option>
+            <option value="other-support">Other Support Services</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="supportSkills">Specific Skills & Tools <span class="required">*</span></label>
+          <textarea id="supportSkills" name="supportSkills" placeholder="List the specific skills, software, or tools you're proficient with (e.g., Adobe Creative Suite, QuickBooks, WordPress, Canva, legal specialties, etc.)"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="supportExperience">Relevant Experience <span class="required">*</span></label>
+          <textarea id="supportExperience" name="supportExperience" placeholder="Describe your experience providing these support services. Include any relevant projects, clients, or organizations you've worked with."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="availabilitySupport">Availability & Commitment</label>
+          <textarea id="availabilitySupport" name="availabilitySupport" placeholder="How much time can you commit per week/month? Are you available for specific projects or ongoing support?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="supportMotivation">Why Join as Support Member? <span class="required">*</span></label>
+          <textarea id="supportMotivation" name="supportMotivation" placeholder="What motivates you to support the Ic² Research Institute? What interests you about helping advance theoretical physics research?"></textarea>
+        </div>
+      </div>
+
+      <!-- Observer Interests (for Observers) -->
+      <div class="form-section" id="observerInterestsSection" style="display: none;">
+        <h3>Areas of Interest</h3>
+
+        <div class="form-group">
+          <label for="observerInterest">What research areas interest you? <span class="required">*</span></label>
+          <textarea id="observerInterest" name="observerInterest" placeholder="Tell us which research topics or projects you'd like to follow as an observer..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="observerBackground">Your Background (Optional)</label>
+          <textarea id="observerBackground" name="observerBackground" placeholder="Share a bit about your background and why you're interested in our research (optional but helpful)..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="observerGoals">What do you hope to gain? <span class="required">*</span></label>
+          <textarea id="observerGoals" name="observerGoals" placeholder="What are you hoping to learn or gain by following our research as an observer?"></textarea>
+        </div>
+      </div>
+
+      <!-- Project Interest -->
+      <div class="form-section" id="projectInterestSection">
+        <h3>Project Involvement</h3>
+
+        <div class="form-group">
+          <label for="projectRole">Preferred Role <span class="required">*</span></label>
+          <select id="projectRole" name="projectRole" required>
+            <option value="">Select...</option>
+            <option value="member">Project Member - I want to contribute to existing projects</option>
+            <option value="manager">Project Manager - I want to lead or co-manage projects</option>
+            <option value="support">Support Role - I want to provide support services to projects</option>
+            <option value="observer">Observer - I want read-only access to follow project progress</option>
+            <option value="flexible">Flexible - Open to different roles based on project needs</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="existingProjects">Existing Projects of Interest (Optional)</label>
+          <textarea id="existingProjects" name="existingProjects" placeholder="Are there any current Ic² projects you'd like to join or observe? List them here or describe the type of projects you're interested in..."></textarea>
+        </div>
+
+        <div class="form-group" id="newProjectField">
+          <label for="newProjectIdea">New Project Ideas (Optional)</label>
+          <textarea id="newProjectIdea" name="newProjectIdea" placeholder="Do you have ideas for new research projects you'd like to initiate at Ic²?"></textarea>
+        </div>
+      </div>
+
+      <!-- File Uploads -->
+      <div class="form-section">
+        <h3>Supporting Documents</h3>
+
+        <div class="form-group">
+          <label>Profile Photo (Optional)</label>
+          <div class="file-upload" onclick="document.getElementById('photoUpload').click()">
+            <label class="file-label">
+              📷 Click to upload your photo
+              <div class="file-info">JPG, PNG, or GIF (max 5MB)</div>
+            </label>
+            <input type="file" id="photoUpload" name="photo" accept="image/*">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Resume/CV (Optional but Recommended)</label>
+          <div class="file-upload" onclick="document.getElementById('resumeUpload').click()">
+            <label class="file-label">
+              📄 Click to upload your resume/CV
+              <div class="file-info">PDF or DOCX (max 10MB)</div>
+            </label>
+            <input type="file" id="resumeUpload" name="resume" accept=".pdf,.doc,.docx">
+          </div>
+        </div>
+      </div>
+
+      <!-- Agreement -->
+      <div class="form-section">
+        <h3>Agreement</h3>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="agreement" name="agreement" required>
+          <label for="agreement">
+            I understand that membership is subject to approval by the Ic² Research Institute. I agree to collaborate respectfully with other members and acknowledge that I retain 100% rights to my work while being able to publish under the institute's auspices or independently. <span class="required">*</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-section">
+        <button type="submit" class="btn-submit">Submit Application</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+          A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Research</h3>
+        <ul>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="zenodo-papers.html">Papers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="book.html">The Big TOE</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="faq-page.html">FAQ</a></li>
+          <li><a href="members.html">Our Members</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="discussions-page.html">Discussions</a></li>
+          <li><a href="become-member.html">Become a Member</a></li>
+          <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Ic² Research Institute. All rights reserved. |
+        <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> |
+        <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- AOS and form JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 80 });
+
+    // Show/hide sections depending on membership type
+    function updateFormSections() {
+      const membershipType = document.getElementById('membershipType').value;
+      const researchInterestsSection = document.getElementById('researchInterestsSection');
+      const supportSkillsSection = document.getElementById('supportSkillsSection');
+      const observerInterestsSection = document.getElementById('observerInterestsSection');
+      const newProjectField = document.getElementById('newProjectField');
+      const professionalSection = document.getElementById('professionalSection');
+
+      // hide all conditional
+      if (researchInterestsSection) researchInterestsSection.style.display = 'none';
+      if (supportSkillsSection) supportSkillsSection.style.display = 'none';
+      if (observerInterestsSection) observerInterestsSection.style.display = 'none';
+
+      // Clear required attributes
+      const researchFields = ['primaryInterest', 'specificInterests', 'skillsContribution', 'motivations'];
+      const supportFields = ['supportArea', 'supportSkills', 'supportExperience', 'supportMotivation'];
+      const observerFields = ['observerInterest', 'observerGoals'];
+
+      [...researchFields, ...supportFields, ...observerFields].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.removeAttribute('required');
+      });
+
+      if (membershipType === 'research') {
+        if (researchInterestsSection) researchInterestsSection.style.display = 'block';
+        if (newProjectField) newProjectField.style.display = 'block';
+        researchFields.forEach(id => { const f = document.getElementById(id); if (f) f.setAttribute('required', 'required'); });
+      } else if (membershipType === 'support') {
+        if (supportSkillsSection) supportSkillsSection.style.display = 'block';
+        if (newProjectField) newProjectField.style.display = 'none';
+        supportFields.forEach(id => { const f = document.getElementById(id); if (f) f.setAttribute('required', 'required'); });
+      } else if (membershipType === 'observer') {
+        if (observerInterestsSection) observerInterestsSection.style.display = 'block';
+        if (professionalSection) {
+          const profFields = professionalSection.querySelectorAll('[required]');
+          profFields.forEach(field => {
+            if (field.id !== 'currentPosition') field.removeAttribute('required');
+          });
         }
+        if (newProjectField) newProjectField.style.display = 'none';
+        observerFields.forEach(id => { const f = document.getElementById(id); if (f) f.setAttribute('required', 'required'); });
+      }
+    }
 
-        // Form submission handling
-        document.getElementById('membershipForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const membershipType = document.getElementById('membershipType').value;
-            let message = 'Thank you for your application! ';
-            
-            if (membershipType === 'observer') {
-                message += 'Observer applications are typically approved within 1 week. You\'ll receive an email with access details soon.';
-            } else {
-                message += 'We will review your submission and contact you within 2-3 weeks.';
-            }
-            
-            alert(message);
-            
-            // Reset form
-            this.reset();
-            updateFormSections(); // Reset visibility
-        });
+    // Form submission handling
+    const membershipForm = document.getElementById('membershipForm');
+    if (membershipForm) {
+      membershipForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const membershipType = document.getElementById('membershipType').value;
+        let message = 'Thank you for your application! ';
+        if (membershipType === 'observer') {
+          message += "Observer applications are typically approved within 1 week. You'll receive an email with access details soon.";
+        } else {
+          message += 'We will review your submission and contact you within 2-3 weeks.';
+        }
+        alert(message);
+        this.reset();
+        updateFormSections();
+      });
+    }
 
-        // File upload feedback
-        document.getElementById('photoUpload').addEventListener('change', function(e) {
-            if (e.target.files.length > 0) {
-                const fileName = e.target.files[0].name;
-                this.parentElement.querySelector('.file-label').innerHTML = `✓ Selected: ${fileName}<div class="file-info">Click to change</div>`;
-            }
-        });
+    // File upload feedback
+    const photoUpload = document.getElementById('photoUpload');
+    if (photoUpload) {
+      photoUpload.addEventListener('change', function (e) {
+        if (e.target.files.length > 0) {
+          const fileName = e.target.files[0].name;
+          this.parentElement.querySelector('.file-label').innerHTML = `✓ Selected: ${fileName}<div class="file-info">Click to change</div>`;
+        }
+      });
+    }
 
-        document.getElementById('resumeUpload').addEventListener('change', function(e) {
-            if (e.target.files.length > 0) {
-                const fileName = e.target.files[0].name;
-                this.parentElement.querySelector('.file-label').innerHTML = `✓ Selected: ${fileName}<div class="file-info">Click to change</div>`;
-            }
-        });
-    </script>
+    const resumeUpload = document.getElementById('resumeUpload');
+    if (resumeUpload) {
+      resumeUpload.addEventListener('change', function (e) {
+        if (e.target.files.length > 0) {
+          const fileName = e.target.files[0].name;
+          this.parentElement.querySelector('.file-label').innerHTML = `✓ Selected: ${fileName}<div class="file-info">Click to change</div>`;
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,301 +1,1 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Ic² Research Institute</title>
-    <meta name="description" content="Login to access your Ic² Research Institute account.">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #8B0000;
-            --text-dark: #2c3e50;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-            --max-width: 1200px;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--bg-light);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Header */
-        .site-header {
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .header-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .site-logo img {
-            height: 50px;
-            width: auto;
-        }
-
-        .back-link {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: var(--primary-color);
-        }
-
-        /* Main Content */
-        .login-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 2rem;
-        }
-
-        .login-box {
-            background: white;
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .login-header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .login-header p {
-            color: var(--text-light);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 0.875rem;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .forgot-password {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 0.875rem;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #a00000;
-        }
-
-        .divider {
-            text-align: center;
-            margin: 2rem 0;
-            color: var(--text-light);
-            position: relative;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: #ddd;
-        }
-
-        .divider::before {
-            left: 0;
-        }
-
-        .divider::after {
-            right: 0;
-        }
-
-        .social-login {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-btn {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        .social-btn:hover {
-            background: var(--bg-light);
-            border-color: var(--primary-color);
-        }
-
-        .signup-link {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--text-light);
-        }
-
-        .signup-link a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .login-box {
-                padding: 2rem;
-            }
-
-            .social-login {
-                flex-direction: column;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="site-header">
-        <div class="header-container">
-            <div class="site-logo">
-                <img src="logoRed.png" alt="Ic² Research Institute">
-            </div>
-            <a href="index.html" class="back-link">← Back to Home</a>
-        </div>
-    </header>
-
-    <!-- Login Container -->
-    <div class="login-container">
-        <div class="login-box">
-            <div class="login-header">
-                <h1>Welcome Back</h1>
-                <p>Sign in to access your account</p>
-            </div>
-
-            <form action="#" method="POST">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="••••••••" required>
-                </div>
-
-                <div class="form-options">
-                    <div class="remember-me">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember" style="margin-bottom: 0; font-weight: normal;">Remember me</label>
-                    </div>
-                    <a href="#" class="forgot-password">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Sign In</button>
-            </form>
-
-            <div class="divider">or</div>
-
-            <div class="social-login">
-                <button class="social-btn">Google</button>
-                <button class="social-btn">GitHub</button>
-            </div>
-
-            <div class="signup-link">
-                Don't have an account? <a href="signup.html">Sign up</a>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Login - Ic² Research Institute</title>    <meta name="description" content="Login to access your Ic² Research Institute account.">    <!-- AOS Animation Library -->    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">    <style>    * {      margin: 0;      padding: 0;      box-sizing: border-box;    }    :root {      --primary-color: #8B0000;      --secondary-color: #2c3e50;      --accent-blue: #005ba5;      --accent-green: #28a745;      --accent-yellow: #f1e303;      --text-dark: #2c3e50;      --text-light: #666;      --bg-light: #f8f9fa;      --max-width: 1200px;    }    body {      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;      line-height: 1.6;      color: var(--text-dark);      background: var(--bg-light);      min-height: 100vh;      display: flex;      flex-direction: column;    }    /* Header (from validation.html / signup.html) */    .site-header {      background: white;      border-bottom: 1px solid #e0e0e0;      position: sticky;      top: 0;      z-index: 1000;      box-shadow: 0 2px 5px rgba(0,0,0,0.05);    }    .header-container {      max-width: var(--max-width);      margin: 0 auto;      padding: 1rem 2rem;      display: flex;      justify-content: space-between;      align-items: center;    }    .site-logo img {      height: 50px;      width: auto;    }    .main-navigation ul {      list-style: none;      display: flex;      gap: 2rem;      align-items: center;    }    .main-navigation a {      text-decoration: none;      color: var(--text-dark);      font-weight: 500;      transition: color 0.3s ease;    }    .main-navigation a:hover {      color: var(--primary-color);    }    /* Page Header */    .page-header {      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);      padding: 3rem 2rem;      text-align: center;      color: white;      border-radius: 0 0 8px 8px;      box-shadow: 0 4px 20px rgba(0,0,0,0.08);      margin-bottom: 2rem;    }    .page-header h1 {      font-size: 2.25rem;      margin-bottom: 0.5rem;    }    .page-header p {      font-size: 1rem;      opacity: 0.95;      max-width: 800px;      margin: 0 auto;      color: rgba(255,255,255,0.9);    }    /* Login / Signup shared styling */    .login-container,    .signup-container {      flex: 1;      display: flex;      align-items: center;      justify-content: center;      padding: 3rem 2rem;    }    .login-box {      background: white;      padding: 3rem;      border-radius: 8px;      box-shadow: 0 4px 20px rgba(0,0,0,0.1);      width: 100%;      max-width: 450px;    }    .login-header {      text-align: center;      margin-bottom: 2rem;    }    .login-header h1 {      font-size: 2rem;      margin-bottom: 0.5rem;      color: var(--text-dark);    }    .login-header p {      color: var(--text-light);    }    .form-row {      display: grid;      grid-template-columns: 1fr 1fr;      gap: 1rem;      margin-bottom: 1.5rem;    }    .form-group {      margin-bottom: 1.5rem;    }    label {      display: block;      margin-bottom: 0.5rem;      font-weight: 600;      color: var(--text-dark);    }    input[type="text"],    input[type="email"],    input[type="password"],    select {      width: 100%;      padding: 0.75rem 1rem;      border: 1px solid #ddd;      border-radius: 4px;      font-size: 1rem;      transition: border-color 0.3s ease;    }    input:focus,    select:focus {      outline: none;      border-color: var(--primary-color);    }    .form-options {      display: flex;      justify-content: space-between;      align-items: center;      margin-bottom: 1.5rem;      font-size: 0.875rem;    }    .remember-me {      display: flex;      align-items: center;      gap: 0.5rem;    }    .forgot-password {      color: var(--primary-color);      text-decoration: none;      font-weight: 600;    }    .forgot-password:hover {      text-decoration: underline;    }    .btn {      display: block;      width: 100%;      padding: 0.875rem;      text-decoration: none;      border-radius: 4px;      font-weight: 600;      transition: all 0.3s ease;      cursor: pointer;      border: none;      font-size: 1rem;      text-align: center;    }    .btn-primary {      background: var(--primary-color);      color: white;    }    .btn-primary:hover {      background: #a0000;    }    .divider {      text-align: center;      margin: 2rem 0;      color: var(--text-light);      position: relative;    }    .divider::before,    .divider::after {      content: '';      position: absolute;      top: 50%;      width: 40%;      height: 1px;      background: #ddd;    }    .divider::before {      left: 0;    }    .divider::after {      right: 0;    }    .social-login,    .social-signup {      display: flex;      gap: 1rem;      margin-bottom: 2rem;    }    .social-btn {      flex: 1;      padding: 0.75rem;      border: 1px solid #ddd;      border-radius: 4px;      background: white;      cursor: pointer;      transition: all 0.3s ease;      font-weight: 600;      font-size: 0.875rem;    }    .social-btn:hover {      background: var(--bg-light);      border-color: var(--primary-color);    }    .signup-link,    .login-link {      text-align: center;      margin-top: 2rem;      color: var(--text-light);    }    .signup-link a,    .login-link a {      color: var(--primary-color);      text-decoration: none;      font-weight: 600;    }    .signup-link a:hover,    .login-link a:hover {      text-decoration: underline;    }    /* Footer (from validation.html) */    footer {      background: var(--secondary-color);      color: white;      padding: 2.5rem 2rem 1rem;    }    footer h3 {      margin-bottom: 0.75rem;      font-size: 1.1rem;    }    footer p, footer a {      color: rgba(255, 255, 255, 0.8);      font-size: 0.9rem;      text-decoration: none;    }    footer a:hover {      color: var(--accent-yellow);    }    @media (max-width: 768px) {      .login-box {        padding: 2rem;      }      .social-login,      .social-signup {        flex-direction: column;      }      .signup-box {        padding: 2rem;      }      .form-row {        grid-template-columns: 1fr;      }      .header-container {        flex-direction: column;        gap: 1rem;      }      .main-navigation ul {        flex-wrap: wrap;        justify-content: center;        gap: 1rem;      }    }    </style></head><body>    <!-- Header (from signup.html / validation.html) -->    <header class="site-header">      <div class="header-container">        <div class="site-logo">          <img src="ic2-logo.png" alt="Ic² Research Institute">        </div>        <nav class="main-navigation">          <ul>            <li><a href="index.html">Institute</a></li>            <li><a href="book.html">The Big TOE</a></li>            <li><a href="validation.html">Validation</a></li>            <li><a href="testing-schedule.html">Testing</a></li>            <li><a href="results.html">Results</a></li>            <li><a href="about-page.html">About</a></li>            <li><a href="events.html">Events</a></li>            <li><a href="contribute.html">Contribute</a></li>          </ul>        </nav>      </div>    </header>    <!-- Page Header (new for login.html) -->    <section class="page-header">      <h1>Welcome Back</h1>      <p>Sign in to access your Ic² Research Institute account and continue collaborating with the community.</p>    </section>    <!-- Login Container -->    <div class="login-container">      <div class="login-box" data-aos="fade-up">        <div class="login-header">          <h1>Sign in to access your account</h1>          </div>        <form action="#" method="POST">          <div class="form-group">            <label for="email">Email Address</label>            <input type="email" id="email" name="email" placeholder="your@email.com" required>          </div>          <div class="form-group">            <label for="password">Password</label>            <input type="password" id="password" name="password" placeholder="••••" required>          </div>          <div class="form-options">            <div class="remember-me">              <input type="checkbox" id="remember" name="remember">              <label for="remember" style="margin-bottom: 0; font-weight: normal;">Remember me</label>            </div>            <a href="#" class="forgot-password">Forgot password?</a>          </div>          <button type="submit" class="btn btn-primary">Sign In</button>        </form>        <div class="divider">or</div>        <div class="social-login">          <button class="social-btn">Google</button>          <button class="social-btn">GitHub</button>        </div>        <div class="signup-link">          Don't have an account? <a href="signup.html">Sign up</a>        </div>      </div>    </div>    <!-- Footer (from signup.html) -->    <footer>      <div style="max-width: var(--max-width); margin: 0 auto; text-align: center; margin-bottom: 1.5rem;">        <h3>Ic² Research Institute</h3>        <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>      </div>      <div style="max-width: var(--max-width); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">        <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>      </div>    </footer>    <!-- AOS Animation Library -->    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>    <script>      AOS.init({        duration: 1000,        once: true,        offset: 100      });    </script></body></html>
