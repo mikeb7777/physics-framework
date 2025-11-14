@@ -1,170 +1,543 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - The COSMIC Framework</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Privacy Policy - Ic² Research Institute</title>
+    <meta name="description" content="Privacy policy for Ic² Research Institute / The COSMIC Framework." />
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            background: #0a0a0a;
-            color: #e0e0e0;
-        }
-        
-        .top-nav {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .site-title {
-            font-size: 1.2em;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 1px;
-            text-decoration: none;
-        }
-        
-        .site-title span {
-            color: #667eea;
-        }
-        
-        .content {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 80px 40px;
-        }
-        
-        h1 {
-            font-size: 3em;
-            color: #fff;
-            margin-bottom: 30px;
-        }
-        
-        h2 {
-            font-size: 1.8em;
-            color: #fff;
-            margin: 40px 0 20px;
-        }
-        
-        p {
-            color: #b0b0b0;
-            margin: 15px 0;
-            line-height: 1.8;
-        }
-        
-        ul {
-            margin: 15px 0 15px 30px;
-            color: #b0b0b0;
-        }
-        
-        ul li {
-            margin: 10px 0;
-        }
-        
-        .back-link {
-            text-align: center;
-            margin: 60px 0;
-        }
-        
-        .back-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 1.1em;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #8B0000;
+      --secondary-color: #2c3e50;
+      --accent-blue: #005ba5;
+      --accent-red: #e33d2f;
+      --accent-green: #a1cd5f;
+      --accent-orange: #f58b2b;
+      --accent-yellow: #f1e303;
+      --text-dark: #2c3e50;
+      --text-light: #666;
+      --bg-light: #f8f9fa;
+      --max-width: 1200px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: white;
+    }
+
+    /* Header */
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-logos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo.left {
+      justify-content: flex-start;
+      flex: 1;
+    }
+
+    .header-logo.center {
+      justify-content: center;
+      flex: 1;
+    }
+
+    .header-logo.right {
+      justify-content: flex-end;
+      flex: 1;
+    }
+
+    .header-logo a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .header-logo a:hover {
+      transform: scale(1.05);
+    }
+
+    .header-logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      padding: 8px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 73px;
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active {
+      max-height: 600px;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      padding: 1rem;
+    }
+
+    .mobile-menu ul li {
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .mobile-menu ul li:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .mobile-menu a:hover {
+      background: var(--bg-light);
+      color: var(--primary-color);
+    }
+
+    .mobile-menu a.login-link {
+      background: linear-gradient(135deg, #8B0000 0%, #a0000 100%);
+      color: #f1e303;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Content Section (Privacy Policy content) */
+    .content-section {
+      padding: 4rem 2rem;
+    }
+
+    .section-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .policy-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 2.5rem;
+      color: var(--text-dark);
+      line-height: 1.75;
+    }
+
+    .policy-card h2 {
+      font-size: 1.6rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+    }
+
+    .policy-card p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .policy-card ul {
+      margin: 0.5rem 0 1rem 1.25rem;
+      color: var(--text-light);
+    }
+
+    .policy-card ul li {
+      margin: 0.5rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background: #2c3e50;
+      color: white;
+      padding: 2.5rem 2rem 1rem;
+    }
+
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.35rem;
+    }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .header-logos {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-logo img {
+        height: 40px;
+      }
+    }
     </style>
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="nav-container">
-            <a href="index.html" class="site-title">THE <span>COSMIC</span> FRAMEWORK</a>
+    <!-- Header (copied from events.html) -->
+    <header class="site-header">
+      <div class="header-container">
+        <div class="header-logos">
+          <div class="header-logo left">
+            <a href="index.html">
+              <img src="ic2-logo.png" alt="Ic² Research Institute">
+            </a>
+          </div>
+          <div class="header-logo center">
+            <a href="framework.html">
+              <img src="framework.png" alt="Framework">
+            </a>
+          </div>
+          <div class="header-logo right">
+            <a href="book.html">
+              <img src="bigtoeindexlogo.png" alt="The Big TOE">
+            </a>
+          </div>
         </div>
-    </nav>
+        <!-- Hamburger Menu Button -->
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
 
-    <div class="content">
-        <h1>Privacy Policy</h1>
-        <p><em>Last Updated: October 2025</em></p>
-        
-        <h2>Introduction</h2>
-        <p>The COSMIC Framework ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website or subscribe to our newsletter.</p>
-        
-        <h2>Information We Collect</h2>
-        <p>We may collect the following types of information:</p>
-        <ul>
+    <!-- Mobile Menu (copied from events.html) -->
+    <div class="mobile-menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="framework.html">Framework</a></li>
+        <li><a href="book.html">Big Toe</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="discussions-page.html">Discussion</a></li>
+        <li><a href="about-page.html">About</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="login.html" class="login-link">Login</a></li>
+      </ul>
+    </div>
+
+    <!-- Page Header (styled like events.html) -->
+    <section class="page-header">
+      <h1>Privacy Policy</h1>
+      <p>How we collect, use, and protect information for Ic² Research Institute / The COSMIC Framework.</p>
+    </section>
+
+    <!-- Privacy Policy Content (styled to match events.html content) -->
+    <section class="content-section">
+      <div class="section-container">
+        <div class="policy-card" data-aos="fade-up">
+          <h2 style="font-size: 1.25rem; color: var(--text-dark); margin-bottom: 0.5rem;">Privacy Policy</h2>
+          <p style="font-style: italic; color: var(--text-light); margin-bottom: 1rem;">Last Updated: October 2025</p>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Introduction</h3>
+          <p> The COSMIC Framework ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website or subscribe to our newsletter.</p>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Information We Collect</h3>
+          <p>We may collect the following types of information:</p>
+          <ul>
             <li><strong>Email Address:</strong> When you subscribe to our newsletter or create an account</li>
             <li><strong>Name:</strong> If you choose to provide it</li>
             <li><strong>Usage Data:</strong> Information about how you interact with our website</li>
             <li><strong>Technical Data:</strong> IP address, browser type, device information</li>
-        </ul>
-        
-        <h2>How We Use Your Information</h2>
-        <p>We use your information to:</p>
-        <ul>
+          </ul>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">How We Use Your Information</h3>
+          <p>We use your information to:</p>
+          <ul>
             <li>Send you newsletters and event updates</li>
             <li>Respond to your inquiries</li>
             <li>Improve our website and services</li>
             <li>Analyze website usage and trends</li>
             <li>Comply with legal obligations</li>
-        </ul>
-        
-        <h2>Data Sharing</h2>
-        <p>We do not sell, rent, or trade your personal information. We may share your information with:</p>
-        <ul>
+          </ul>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Data Sharing</h3>
+          <p>We do not sell, rent, or trade your personal information. We may share your information with:</p>
+          <ul>
             <li><strong>Service Providers:</strong> Third-party services that help us operate our website (e.g., email providers, hosting services)</li>
             <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
-        </ul>
-        
-        <h2>Your Rights</h2>
-        <p>You have the right to:</p>
-        <ul>
+          </ul>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Your Rights</h3>
+          <p>You have the right to:</p>
+          <ul>
             <li>Access your personal information</li>
             <li>Correct inaccurate information</li>
             <li>Request deletion of your information</li>
             <li>Unsubscribe from our newsletters at any time</li>
             <li>Object to processing of your information</li>
-        </ul>
-        
-        <h2>Cookies</h2>
-        <p>We use cookies and similar technologies to enhance your experience. You can control cookie settings through your browser preferences.</p>
-        
-        <h2>Data Security</h2>
-        <p>We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
-        
-        <h2>Newsletter Subscriptions</h2>
-        <p>When you subscribe to our newsletter, you agree to receive periodic emails from us. You can unsubscribe at any time by clicking the "unsubscribe" link in any email we send you or by contacting us directly.</p>
-        
-        <h2>Children's Privacy</h2>
-        <p>Our website is not intended for children under 13. We do not knowingly collect information from children under 13.</p>
-        
-        <h2>Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.</p>
-        
-        <h2>Contact Us</h2>
-        <p>If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:</p>
-        <p><strong>Email:</strong> <a href="mailto:mkbinfo@proton.me" style="color: #667eea; text-decoration: none;">mkbinfo@proton.me</a></p>
-        
-        <div class="back-link">
-            <a href="index.html">← Back to Home</a>
+          </ul>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Cookies</h3>
+          <p>We use cookies and similar technologies to enhance your experience. You can control cookie settings through your browser preferences.</p>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Data Security</h3>
+          <p>We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Newsletter Subscriptions</h3>
+          <p>When you subscribe to our newsletter, you agree to receive periodic emails from us. You can unsubscribe at any time by clicking the "unsubscribe" link in any email we send you or by contacting us directly.</p>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Children's Privacy</h3>
+          <p>Our website is not intended for children under 13. We do not knowingly collect information from children under 13.</p>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Changes to This Policy</h3>
+          <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.</p>
+
+          <h3 style="margin-top: 1rem; color: var(--text-dark);">Contact Us</h3>
+          <p>If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:</p>
+          <p><strong>Email:</strong> <a href="mailto:mkbinfo@proton.me" style="color: var(--primary-color); text-decoration: none;">mkbinfo@proton.me</a></p>
+
+          <div style="text-align:center; margin-top: 1.5rem;">
+            <a href="index.html" class="btn btn-primary">← Back to Home</a>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+
+    <!-- Footer (copied from events.html) -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Ic² Research Institute</h3>
+          <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+            A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Research</h3>
+          <ul>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="zenodo-papers.html">Papers</a></li>
+            <li><a href="simulations.html">Simulations</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq-page.html">FAQ</a></li>
+            <li><a href="members.html">Our Members</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Connect</h3>
+          <ul>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="discussions-page.html">Discussions</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="become-member.html">Become a Member</a></li>
+            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms &amp; Conditions</a></p>
+      </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 900,
+        once: true,
+        offset: 80
+      });
+    </script>
+
+    <script>
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking a link
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+    }
+    </script>
 </body>
 </html>
