@@ -3,26 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>References - A Quest for The Big TOE</title>
-    <meta name="description" content="Complete scientific references and citations for The COSMIC Framework.">
-    
+    <title>References - The Big TOE</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000000;
-            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-
+        
         /* Starfield Background */
         .starfield {
             position: fixed;
@@ -30,417 +28,2798 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+            z-index: 0;
         }
-
-        .star {
+        
+        .stars-layer {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* Header */
-        header {
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-            padding: 20px 0;
-            position: sticky;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat;
         }
-
-        nav {
-            max-width: 1200px;
+        
+        .stars-layer-1 {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 60px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 50px 50px, #ddd, transparent);
+            background-size: 200px 200px;
+            animation: twinkle 3s ease-in-out infinite, move-stars-1 120s linear infinite;
+        }
+        
+        .stars-layer-2 {
+            background-image:
+                radial-gradient(3px 3px at 100px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 160px, #ddd, transparent);
+            background-size: 300px 300px;
+            animation: twinkle 4s ease-in-out infinite 1s, move-stars-2 180s linear infinite;
+        }
+        
+        @keyframes move-stars-1 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+        
+        @keyframes move-stars-2 {
+            from { transform: translateY(0); }
+            to { transform: translateY(-300px); }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 550px 1fr 350px;
             align-items: center;
+            gap: 40px;
         }
-
-        .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #ffd700;
-            text-decoration: none;
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-
+        
+        .logo-placeholder {
+            width: 500px;
+            height: 100px;
+            position: relative;
+        }
+        
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .nav-center {
+            display: flex;
+            justify-content: center;
+        }
+        
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 50px;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
-
+        
         .nav-links a {
-            color: #ffffff;
+            color: #e0e0e0;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             transition: color 0.3s;
         }
-
+        
         .nav-links a:hover {
             color: #ffd700;
         }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
         }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 50px;
+        
+        .nav-social {
+            display: flex;
+            gap: 12px;
         }
-
-        .page-header h1 {
-            font-size: 3em;
-            color: #ffd700;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .page-header p {
-            font-size: 1.2em;
-            color: #e0e0e0;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Category Sections */
-        .category-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .category-section h2 {
-            color: #ffd700;
-            font-size: 2em;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .reference-item {
-            padding: 20px;
-            margin-bottom: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border-left: 4px solid #ffd700;
-            transition: background 0.3s;
-        }
-
-        .reference-item:hover {
-            background: rgba(255, 215, 0, 0.05);
-        }
-
-        .ref-authors {
-            color: #ffd700;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .ref-title {
-            font-size: 1.1em;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .ref-details {
-            color: #b0b0b0;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-
-        .ref-link {
-            color: #ffd700;
+        
+        .nav-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
             text-decoration: none;
-            font-size: 0.9em;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 1.2em;
         }
-
-        .ref-link:hover {
-            color: #ffed4e;
-            text-decoration: underline;
+        
+        .nav-social-icon svg {
+            width: 18px;
+            height: 18px;
         }
-
-        /* Search Bar */
-        .search-section {
-            margin-bottom: 40px;
+        
+        .nav-social-icon:hover {
+            background: #667eea;
+            color: white;
         }
-
-        .search-box {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 215, 0, 0.3);
+        
+        .nav-login-btn {
+            padding: 10px 28px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
             border-radius: 50px;
-            color: #ffffff;
-            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            margin-left: 5px;
+        }
+        
+        .nav-login-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(20, 20, 30, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            text-transform: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            gap: 5px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 3px;
             transition: all 0.3s;
         }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #ffd700;
-            background: rgba(255, 255, 255, 0.15);
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
         }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
         }
-
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            padding: 20px;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mobile-menu ul li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .mobile-menu ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-menu ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            display: block;
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3.5em;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8),
+                         0 0 40px rgba(0, 0, 0, 0.6);
+        }
+        
+        .page-header p {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            font-weight: 300;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        
+        /* References Sections */
+        .references-section {
+            background: rgba(20, 20, 30, 0.6);
+            padding: 30px 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .references-section h2 {
+            color: #ffd700;
+            font-size: 1.6em;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            font-weight: 600;
+        }
+        
+        .references-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .reference-item {
+            padding: 12px 16px;
+            background: rgba(10, 10, 10, 0.4);
+            border-left: 3px solid #ffd700;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .reference-item:hover {
+            background: rgba(10, 10, 10, 0.6);
+            border-left-width: 4px;
+        }
+        
+        .reference-item p {
+            color: #d0d0d0;
+            line-height: 1.7;
+            margin: 0;
+            font-size: 0.95em;
+        }
+        
+        .reference-item strong {
+            color: #ffd700;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .reference-item a {
+            color: #ffd700;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .reference-item a:hover {
+            border-bottom-color: #ffd700;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background: #ffd700;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .back-to-top:hover {
+            background: #ffed4e;
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top.visible {
+            display: flex;
+        }
+        
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 15px;
+        @media (max-width: 968px) {
+            .nav-container {
+                grid-template-columns: 1fr auto;
+                padding: 0 20px;
+            }
+            
+            .logo-section {
+                justify-content: flex-start;
+            }
+            
+            .logo-placeholder {
+                width: 300px;
+                height: 60px;
+            }
+            
+            .nav-center,
+            .nav-right {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .main-content {
+                padding: 100px 20px 60px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5em;
+            }
+            
+            .references-section {
+                padding: 20px 25px;
+            }
+            
+            .references-section h2 {
+                font-size: 1.4em;
+            }
+            
+            .reference-item p {
                 font-size: 0.9em;
             }
-
+        }
+        
+        @media (max-width: 640px) {
             .page-header h1 {
                 font-size: 2em;
             }
-
-            .category-section {
-                padding: 20px;
+            
+            .references-section {
+                padding: 15px 20px;
             }
-
-            .category-section h2 {
-                font-size: 1.5em;
+            
+            .reference-item {
+                padding: 10px 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="starfield" id="starfield"></div>
-
-    <!-- Header -->
-    <header>
-        <nav>
-            <a href="book.html" class="logo">A Quest for The Big TOE</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Institute Home</a></li>
-                <li><a href="book.html">Book</a></li>
-                <li><a href="references.html">References</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="appendix.html">Appendix</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1>Scientific References</h1>
-            <p>Complete bibliography of research cited in The COSMIC Framework</p>
-        </div>
-
-        <!-- Search -->
-        <div class="search-section">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search references by author, title, or keyword...">
-            </div>
-        </div>
-
-        <!-- Cosmology & Dark Energy -->
-        <div class="category-section">
-            <h2>🌌 Cosmology & Dark Energy</h2>
-
-            <div class="reference-item">
-                <div class="ref-authors">DESI Collaboration</div>
-                <div class="ref-title">DESI 2024 Results: Baryon Acoustic Oscillations</div>
-                <div class="ref-details">arXiv:2404.03002 (2024)</div>
-                <a href="https://arxiv.org/abs/2404.03002" class="ref-link" target="_blank">View on arXiv →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Riess, A. G., et al.</div>
-                <div class="ref-title">A Comprehensive Measurement of the Local Value of the Hubble Constant with 1 km/s/Mpc Uncertainty</div>
-                <div class="ref-details">The Astrophysical Journal Letters, 934(1), L7 (2022)</div>
-                <a href="https://doi.org/10.3847/2041-8213/ac5c5b" class="ref-link" target="_blank">DOI: 10.3847/2041-8213/ac5c5b →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Planck Collaboration</div>
-                <div class="ref-title">Planck 2018 results. VI. Cosmological parameters</div>
-                <div class="ref-details">Astronomy & Astrophysics, 641, A6 (2020)</div>
-                <a href="https://doi.org/10.1051/0004-6361/201833910" class="ref-link" target="_blank">DOI: 10.1051/0004-6361/201833910 →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Perlmutter, S., et al.</div>
-                <div class="ref-title">Measurements of Ω and Λ from 42 High-Redshift Supernovae</div>
-                <div class="ref-details">The Astrophysical Journal, 517(2), 565 (1999)</div>
-                <a href="https://doi.org/10.1086/307221" class="ref-link" target="_blank">DOI: 10.1086/307221 →</a>
-            </div>
-        </div>
-
-        <!-- Quantum Computing -->
-        <div class="category-section">
-            <h2>⚛️ Quantum Computing & Error Correction</h2>
-
-            <div class="reference-item">
-                <div class="ref-authors">Google Quantum AI</div>
-                <div class="ref-title">Quantum Error Correction Below the Surface Code Threshold</div>
-                <div class="ref-details">Nature (2024)</div>
-                <a href="#" class="ref-link" target="_blank">View Publication →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Preskill, J.</div>
-                <div class="ref-title">Quantum Computing in the NISQ era and beyond</div>
-                <div class="ref-details">Quantum, 2, 79 (2018)</div>
-                <a href="https://doi.org/10.22331/q-2018-08-06-79" class="ref-link" target="_blank">DOI: 10.22331/q-2018-08-06-79 →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Shor, P. W.</div>
-                <div class="ref-title">Scheme for reducing decoherence in quantum computer memory</div>
-                <div class="ref-details">Physical Review A, 52(4), R2493 (1995)</div>
-                <a href="https://doi.org/10.1103/PhysRevA.52.R2493" class="ref-link" target="_blank">DOI: 10.1103/PhysRevA.52.R2493 →</a>
-            </div>
-        </div>
-
-        <!-- JWST & Early Galaxies -->
-        <div class="category-section">
-            <h2>🔭 JWST Observations & Early Galaxies</h2>
-
-            <div class="reference-item">
-                <div class="ref-authors">JWST Advanced Deep Extragalactic Survey (JADES) Team</div>
-                <div class="ref-title">Discovery and properties of ultra-high redshift galaxies (9 < z < 12)</div>
-                <div class="ref-details">Nature Astronomy (2023)</div>
-                <a href="#" class="ref-link" target="_blank">View Publication →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Naidu, R. P., et al.</div>
-                <div class="ref-title">Two Remarkably Luminous Galaxy Candidates at z ≈ 11–13</div>
-                <div class="ref-details">The Astrophysical Journal Letters, 940(1), L14 (2022)</div>
-                <a href="https://doi.org/10.3847/2041-8213/ac9b22" class="ref-link" target="_blank">DOI: 10.3847/2041-8213/ac9b22 →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Finkelstein, S. L., et al.</div>
-                <div class="ref-title">A Long Time Ago in a Galaxy Far, Far Away: A Candidate z ~ 14 Galaxy in Early JWST CEERS Imaging</div>
-                <div class="ref-details">The Astrophysical Journal Letters, 940(1), L55 (2023)</div>
-                <a href="https://doi.org/10.3847/2041-8213/ac966e" class="ref-link" target="_blank">DOI: 10.3847/2041-8213/ac966e →</a>
-            </div>
-        </div>
-
-        <!-- Consciousness & Information Theory -->
-        <div class="category-section">
-            <h2>🧠 Consciousness & Information Theory</h2>
-
-            <div class="reference-item">
-                <div class="ref-authors">Tononi, G.</div>
-                <div class="ref-title">An information integration theory of consciousness</div>
-                <div class="ref-details">BMC Neuroscience, 5(1), 42 (2004)</div>
-                <a href="https://doi.org/10.1186/1471-2202-5-42" class="ref-link" target="_blank">DOI: 10.1186/1471-2202-5-42 →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Shannon, C. E.</div>
-                <div class="ref-title">A Mathematical Theory of Communication</div>
-                <div class="ref-details">Bell System Technical Journal, 27(3), 379-423 (1948)</div>
-                <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x" class="ref-link" target="_blank">DOI: 10.1002/j.1538-7305.1948.tb01338.x →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Chalmers, D. J.</div>
-                <div class="ref-title">Facing Up to the Problem of Consciousness</div>
-                <div class="ref-details">Journal of Consciousness Studies, 2(3), 200-219 (1995)</div>
-                <a href="#" class="ref-link" target="_blank">View Publication →</a>
-            </div>
-        </div>
-
-        <!-- Mathematical & Computational Foundations -->
-        <div class="category-section">
-            <h2>📐 Mathematical & Computational Foundations</h2>
-
-            <div class="reference-item">
-                <div class="ref-authors">Wolfram, S.</div>
-                <div class="ref-title">A New Kind of Science</div>
-                <div class="ref-details">Wolfram Media (2002)</div>
-                <a href="#" class="ref-link" target="_blank">View Book →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Lloyd, S.</div>
-                <div class="ref-title">Computational capacity of the universe</div>
-                <div class="ref-details">Physical Review Letters, 88(23), 237901 (2002)</div>
-                <a href="https://doi.org/10.1103/PhysRevLett.88.237901" class="ref-link" target="_blank">DOI: 10.1103/PhysRevLett.88.237901 →</a>
-            </div>
-
-            <div class="reference-item">
-                <div class="ref-authors">Landauer, R.</div>
-                <div class="ref-title">Irreversibility and heat generation in the computing process</div>
-                <div class="ref-details">IBM Journal of Research and Development, 5(3), 183-191 (1961)</div>
-                <a href="https://doi.org/10.1147/rd.53.0183" class="ref-link" target="_blank">DOI: 10.1147/rd.53.0183 →</a>
-            </div>
-        </div>
-
-        <!-- Additional Resources -->
-        <div style="text-align: center; margin-top: 50px; padding: 30px; background: rgba(255, 215, 0, 0.05); border-radius: 15px;">
-            <h3 style="color: #ffd700; margin-bottom: 15px;">📚 Complete Bibliography</h3>
-            <p style="color: #e0e0e0; max-width: 800px; margin: 0 auto 20px;">For the complete bibliography with all 200+ references, download the full book or visit our Zenodo repository.</p>
-            <a href="download.html" style="display: inline-block; padding: 12px 30px; background: #ffd700; border-radius: 30px; color: #000000; text-decoration: none; font-weight: 600; transition: all 0.3s;">Download Complete Bibliography</a>
-        </div>
+    <!-- Starfield Background -->
+    <div class="starfield">
+        <div class="stars-layer stars-layer-1"></div>
+        <div class="stars-layer stars-layer-2"></div>
     </div>
 
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <img src="logo.png" alt="The Big TOE Logo">
+                </div>
+            </div>
+            
+            <!-- Centered Navigation Links -->
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#events">Events</a></li>
+                    <li class="dropdown">
+                        <a href="#" style="cursor: pointer;">Discussion ▾</a>
+                        <div class="dropdown-content">
+                            <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
+                            <a href="index.html#membership">Create Free Account</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Right Section: Social Media + Login -->
+            <div class="nav-right">
+                <div class="nav-social">
+                    <a href="#" class="nav-social-icon" title="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="nav-social-icon" title="YouTube">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:mkbinfo@proton.me" class="nav-social-icon" title="Email">✉</a>
+                </div>
+                <a href="login.html" class="nav-login-btn">Log In</a>
+            </div>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Discussion</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+            <li><a href="appendix.html">Appendices</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+            <li><a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" target="_blank">YouTube</a></li>
+            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>References</h1>
+            <p>Comprehensive Bibliography & Citations</p>
+        </div>
+
+        
+        <div class="references-section">
+            <h2>Introduction</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Patrignani, C. et al. (Particle Data Group). (2016). &quot;Review of Particle Physics.&quot; Chinese Physics C, 40(10), 100001.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Königlich Preußischen Akademie der Wissenschaften, 844-847.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Woit, P. (2006). Not Even Wrong: The Failure of String Theory and the Search for Unity in Physical Law. Basic Books.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Rovelli, C. (2004). Quantum Gravity. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Guth, A.H. (1981). &quot;Inflationary universe: A possible solution to the horizon and flatness problems.&quot; Physical Review D, 23(2), 347-356.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Tegmark, M. (2014). Our Mathematical Universe: My Quest for the Ultimate Nature of Reality. Knopf.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Chalmers, D.J. (1995). &quot;Facing up to the problem of consciousness.&quot; Journal of Consciousness Studies, 2(3), 200-219.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Vazza, F. &amp; Feletti, A. (2020). &quot;The quantitative comparison between the neuronal network and the cosmic web.&quot; Frontiers in Physics, 8, 525731.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Reality Is Fundamentally Relational</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Griffiths, D. (2017). Introduction to Electrodynamics, 4th ed. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Alberts, B. et al. (2019). Molecular Biology of the Cell, 6th ed. W.W. Norton.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Berg, J.M. et al. (2019). Biochemistry, 8th ed. W.H. Freeman.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Kumar, V. et al. (2020). Robbins Basic Pathology, 10th ed. Elsevier.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Atkins, P. &amp; de Paula, J. (2018). Physical Chemistry: Thermodynamics and Kinetics, 11th ed. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Carroll, S. (2019). Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Kandel, E.R. et al. (2021). Principles of Neural Science, 6th ed. McGraw-Hill.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Peskin, M.E. &amp; Schroeder, D.V. (1995). An Introduction to Quantum Field Theory. Westview Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Pauling, L. &amp; Wilson, E.B. (2021). Introduction to Quantum Mechanics. Dover Publications.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Alberts, B. et al. (2019). Molecular Biology of the Cell, 6th ed. W.W. Norton.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Binney, J. &amp; Tremaine, S. (2008). Galactic Dynamics, 2nd ed. Princeton University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Chalmers, D. (2010). The Character of Consciousness. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> CODATA (2018). &quot;Fundamental Physical Constants.&quot; Reviews of Modern Physics, 93(2).</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Psillos, S. (1999). Scientific Realism: How Science Tracks Truth. Routledge.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Goldstein, H. et al. (2013). Classical Mechanics, 3rd ed. Addison Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Einstein, A., Podolsky, B., &amp; Rosen, N. (1935). &quot;Can quantum-mechanical description of physical reality be considered complete?&quot; Physical Review, 47(10), 777-780.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Aspect, A. et al. (1982). &quot;Experimental realization of Einstein-Podolsky-Rosen-Bohm Gedankenexperiment.&quot; Physical Review Letters, 49(2), 91-94.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Rovelli, C. (1996). &quot;Relational quantum mechanics.&quot; International Journal of Theoretical Physics, 35(8), 1637-1678.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Born, M. (2005). The Born-Einstein Letters. Macmillan.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Bell, J.S. (1964). &quot;On the Einstein Podolsky Rosen paradox.&quot; Physics, 1(3), 195-200.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Hensen, B. et al. (2015). &quot;Loophole-free Bell inequality violation.&quot; Nature, 526(7575), 682-686.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Einstein, A. (1905). &quot;Zur Elektrodynamik bewegter Körper.&quot; Annalen der Physik, 17(10), 891-921.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Rindler, W. (2006). Introduction to Special Relativity, 2nd ed. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> French, S. &amp; Ladyman, J. (1999). &quot;Reinflating the semantic approach.&quot; International Studies in the Philosophy of Science, 13(2), 103-121.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[25]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Königlich Preußischen Akademie der Wissenschaften, 844-847.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[26]</strong> Maxwell, J.C. (1865). &quot;A dynamical theory of the electromagnetic field.&quot; Philosophical Transactions of the Royal Society, 155, 459-512.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[27]</strong> Hunt, D.M. et al. (2009). &quot;Evolution and selection of trichromatic vision in primates.&quot; Annual Review of Neuroscience, 32, 383-406.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[28]</strong> Boltzmann, L. (1896). Vorlesungen über Gastheorie. J.A. Barth.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[29]</strong> Ashby, M.F. (2011). Materials Selection in Mechanical Design, 4th ed. Butterworth-Heinemann.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[30]</strong> Newton, I. (1687). Philosophiæ Naturalis Principia Mathematica. Royal Society.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[31]</strong> Ashcroft, N.W. &amp; Mermin, N.D. (2022). Solid State Physics. Cengage Learning.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[32]</strong> Archimedes (c. 250 BCE). Measurement of a Circle.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[33]</strong> Livio, M. (2002). The Golden Ratio: The Story of Phi. Broadway Books.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[34]</strong> Euler, L. (1748). Introductio in analysin infinitorum. Marcum-Michaelem Bousquet.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[35]</strong> Wigner, E. (1960). &quot;The unreasonable effectiveness of mathematics.&quot; Communications in Pure and Applied Mathematics, 13(1), 1-14.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[36]</strong> Tegmark, M. (2014). Our Mathematical Universe. Knopf.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[37]</strong> Rovelli, C. (1996). &quot;Relational quantum mechanics.&quot; International Journal of Theoretical Physics, 35(8), 1637-1678.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[38]</strong> Shannon, C.E. (1948). &quot;A mathematical theory of communication.&quot; Bell System Technical Journal, 27(3), 379-423.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[39]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[40]</strong> Weinberg, S. (1995). The Quantum Theory of Fields. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[41]</strong> Dirac, P.A.M. (1928). &quot;The quantum theory of the electron.&quot; Proceedings of the Royal Society A, 117(778), 610-624.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[42]</strong> Feynman, R.P. (2006). QED: The Strange Theory of Light and Matter. Princeton University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[43]</strong> Susskind, L. (1995). &quot;The world as a hologram.&quot; Journal of Mathematical Physics, 36(11), 6377-6396.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[44]</strong> Tononi, G. (2008). &quot;Integrated information theory.&quot; Scholarpedia, 3(3), 4164.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[45]</strong> Rovelli, C. (2021). Helgoland: Making Sense of the Quantum Revolution. Riverhead Books.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[46]</strong> Dennett, D.C. (2003). Freedom Evolves. Viking Adult.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[47]</strong> Parfit, D. (1984). Reasons and Persons. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[48]</strong> Integrated Information Theory: Tononi, G. et al. (2016). &quot;Integrated information theory: from consciousness to its physical substrate.&quot; Nature Reviews Neuroscience, 17(7), 450-461.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Landauer Principle Physical Information</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Shannon, C.E. (1948). &quot;A mathematical theory of communication.&quot; Bell System Technical Journal, 27(3), 379-423.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Cover, T.M. &amp; Thomas, J.A. (2006). Elements of Information Theory, 2nd ed. Wiley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Atkins, P. &amp; de Paula, J. (2018). Physical Chemistry: Thermodynamics and Kinetics, 11th ed. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Boltzmann, L. (1896). Vorlesungen über Gastheorie. J.A. Barth.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Bennett, C.H. (1982). &quot;The thermodynamics of computation—a review.&quot; International Journal of Theoretical Physics, 21(12), 905-940.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Bérut, A. et al. (2012). &quot;Experimental verification of Landauer&#x27;s principle linking information and thermodynamics.&quot; Nature, 483(7388), 187-189.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Jun, Y. et al. (2014). &quot;High-precision test of Landauer&#x27;s principle in a feedback trap.&quot; Physical Review Letters, 113(19), 190601.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Yan, L.L. et al. (2018). &quot;Single-atom demonstration of the quantum Landauer principle.&quot; Physical Review Letters, 120(21), 210601.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Parrondo, J.M.R. et al. (2015). &quot;Thermodynamics of information.&quot; Nature Physics, 11(2), 131-139.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Koomey, J. et al. (2011). &quot;Implications of historical trends in the electrical efficiency of computing.&quot; IEEE Annals of the History of Computing, 33(3), 46-54.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Vopson, M.M. (2019). &quot;The mass-energy-information equivalence principle.&quot; AIP Advances, 9(9), 095206.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Cabello, A. (2020). &quot;The physical constraints on information.&quot; arXiv preprint, arXiv:2010.15435.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Hawking, S.W. (1975). &quot;Particle creation by black holes.&quot; Communications in Mathematical Physics, 43(3), 199-220.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Camsari, K.Y. et al. (2019). &quot;Stochastic p-bits for invertible logic.&quot; Physical Review X, 7(3), 031014.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Bekenstein, J.D. (1973). &quot;Black holes and entropy.&quot; Physical Review D, 7(8), 2333-2346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Hawking, S.W. (1976). &quot;Breakdown of predictability in gravitational collapse.&quot; Physical Review D, 14(10), 2460-2473.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Susskind, L. (2008). The Black Hole War. Little, Brown and Company.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> &#x27;t Hooft, G. (1993). &quot;Dimensional reduction in quantum gravity.&quot; arXiv preprint, gr-qc/9310026.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Kandel, E.R. et al. (2021). Principles of Neural Science, 6th ed. McGraw-Hill.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Tononi, G. (2008). &quot;Integrated information theory.&quot; Scholarpedia, 3(3), 4164.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Bennett, C.H. (1973). &quot;Logical reversibility of computation.&quot; IBM Journal of Research and Development, 17(6), 525-532.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Nielsen, M.A. &amp; Chuang, I.L. (2010). Quantum Computation and Quantum Information. Cambridge University Press.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Universe Processes Information Necessarily</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Azevedo, F.A. et al. (2009). &quot;Equal numbers of neuronal and nonneuronal cells make the human brain an isometrically scaled-up primate brain.&quot; Journal of Comparative Neurology, 513(5), 532-541.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Schurger, A. &amp; Sitt, J.D. (2017). &quot;An essay on how to make consciousness science testable.&quot; Frontiers in Psychology, 8, 424.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Weinberg, S. (2003). The Discovery of Subatomic Particles. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Shannon, C.E. (1948). &quot;A mathematical theory of communication.&quot; Bell System Technical Journal, 27(3), 379-423.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Newton, I. (1687). Philosophiæ Naturalis Principia Mathematica. Royal Society.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Born, M. (1926). &quot;Zur Quantenmechanik der Stoßvorgänge.&quot; Zeitschrift für Physik, 37(12), 863-867.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Bérut, A. et al. (2012). &quot;Experimental verification of Landauer&#x27;s principle linking information and thermodynamics.&quot; Nature, 483(7388), 187-189.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Jun, Y. et al. (2014). &quot;High-precision test of Landauer&#x27;s principle in a feedback trap.&quot; Physical Review Letters, 113(19), 190601.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Yan, L.L. et al. (2018). &quot;Single-atom demonstration of the quantum Landauer principle.&quot; Physical Review Letters, 120(21), 210601.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Bennett, C.H. (2003). &quot;Notes on Landauer&#x27;s principle, reversible computation, and Maxwell&#x27;s demon.&quot; Studies in History and Philosophy of Science Part B, 34(3), 501-510.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Kandel, E.R. et al. (2021). Principles of Neural Science, 6th ed. McGraw-Hill.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Bressler, S.L. &amp; Menon, V. (2010). &quot;Large-scale brain networks in cognition: emerging methods and principles.&quot; Trends in Cognitive Sciences, 14(6), 277-290.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Emsley, J. (2011). Nature&#x27;s Building Blocks: An A-Z Guide to the Elements. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Griffiths, D. (2008). Introduction to Elementary Particles, 2nd ed. Wiley-VCH.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Nielsen, M.A. &amp; Chuang, I.L. (2010). Quantum Computation and Quantum Information. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Barrow, J.D. (2002). The Constants of Nature. Pantheon Books.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Vazza, F. &amp; Feletti, A. (2020). &quot;The quantitative comparison between the neuronal network and the cosmic web.&quot; Frontiers in Physics, 8, 525731.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Chalmers, D.J. (1995). &quot;Facing up to the problem of consciousness.&quot; Journal of Consciousness Studies, 2(3), 200-219.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Lloyd, S. (2006). Programming the Universe. Knopf.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Wheeler, J.A. (1989). &quot;Information, physics, quantum: The search for links.&quot; Proceedings of the 3rd International Symposium on Foundations of Quantum Mechanics, 354-368.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Mathematical Framework For Rotation And Circular Optimization</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Griffiths, D.J. (2017). Introduction to Quantum Mechanics, 3rd ed. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Arfken, G.B. et al. (2013). Mathematical Methods for Physicists, 7th ed. Academic Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Goldstein, H. et al. (2013). Classical Mechanics, 3rd ed. Addison Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Landau, L.D. &amp; Lifshitz, E.M. (1976). Mechanics, 3rd ed. Butterworth-Heinemann.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Levine, I.N. (2013). Quantum Chemistry, 7th ed. Pearson.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Beckmann, P. (1971). A History of π (Pi). St. Martin&#x27;s Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Chandrasekhar, S. (1987). Ellipsoidal Figures of Equilibrium. Dover Publications.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Jackson, J.D. (1999). Classical Electrodynamics, 3rd ed. Wiley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Sakurai, J.J. &amp; Napolitano, J. (2017). Modern Quantum Mechanics, 2nd ed. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Pauling, L. (1960). The Nature of the Chemical Bond, 3rd ed. Cornell University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Thompson, D.W. (1992). On Growth and Form. Dover Publications.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Murray, C.D. &amp; Dermott, S.F. (1999). Solar System Dynamics. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Binney, J. &amp; Tremaine, S. (2008). Galactic Dynamics, 2nd ed. Princeton University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Appendix Element 5</p>
+                </div>
+                <div class="reference-item">
+                    <p>Mathematical Framework for Four Forces as Information Operations</p>
+                </div>
+                <div class="reference-item">
+                    <p>Section 5.A: Force Strength Hierarchy</p>
+                </div>
+                <div class="reference-item">
+                    <p>Coupling Constants at Different Scales</p>
+                </div>
+                <div class="reference-item">
+                    <p>Strong Force (QCD):</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_s(μ) = α_s(μ_0) / [1 + (b_0 α_s(μ_0) / 2π) ln(μ² / μ_0²)]</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>b_0 = 11 - (2/3)n_f (first beta function coefficient)</p>
+                </div>
+                <div class="reference-item">
+                    <p>n_f = number of active quark flavors</p>
+                </div>
+                <div class="reference-item">
+                    <p>μ = energy scale</p>
+                </div>
+                <div class="reference-item">
+                    <p>At μ = M_Z (Z boson mass):</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_s(M_Z) ≈ 0.118</p>
+                </div>
+                <div class="reference-item">
+                    <p>Electromagnetic Force:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α = e² / (4πε_0 ℏc) ≈ 1/137.036</p>
+                </div>
+                <div class="reference-item">
+                    <p>Running with energy:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α(μ) = α / [1 - (α / 3π) ln(μ / m_e)]</p>
+                </div>
+                <div class="reference-item">
+                    <p>At μ = M_Z:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α(M_Z) ≈ 1/128</p>
+                </div>
+                <div class="reference-item">
+                    <p>Weak Force:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_w = g²_w / (4π)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where g_w is weak coupling constant</p>
+                </div>
+                <div class="reference-item">
+                    <p>At M_Z:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_w ≈ 1/30</p>
+                </div>
+                <div class="reference-item">
+                    <p>Gravitational Force:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_g = G m_p² / (ℏc)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where m_p = proton mass</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_g ≈ 5.9 × 10⁻³⁹</p>
+                </div>
+                <div class="reference-item">
+                    <p>Hierarchy Problem</p>
+                </div>
+                <div class="reference-item">
+                    <p>Force Strength Ratios:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_s : α : α_w : α_g ≈ 1 : 10⁻² : 10⁻¹ : 10⁻³⁹</p>
+                </div>
+                <div class="reference-item">
+                    <p>Range Comparison:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Strong:    r ~ 10⁻¹⁵ m (nuclear size)</p>
+                </div>
+                <div class="reference-item">
+                    <p>EM:        r → ∞ (infinite range)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Weak:      r ~ 10⁻¹⁸ m (W/Z Compton wavelength)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Gravity:   r → ∞ (infinite range)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Relative Force Strengths (at 1 fm):</p>
+                </div>
+                <div class="reference-item">
+                    <p>F_strong / F_gravity ≈ 10³⁸</p>
+                </div>
+                <div class="reference-item">
+                    <p>F_EM / F_gravity ≈ 10³⁶</p>
+                </div>
+                <div class="reference-item">
+                    <p>F_weak / F_gravity ≈ 10³²</p>
+                </div>
+                <div class="reference-item">
+                    <p>Section 5.B: Strong Force Information Binding</p>
+                </div>
+                <div class="reference-item">
+                    <p>QCD Lagrangian</p>
+                </div>
+                <div class="reference-item">
+                    <p>Quantum Chromodynamics:</p>
+                </div>
+                <div class="reference-item">
+                    <p>L_QCD = Σ_f q̄_f (iγ^μ D_μ - m_f) q_f - (1/4) G^a_μν G^{aμν}</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>q_f = quark field for flavor f</p>
+                </div>
+                <div class="reference-item">
+                    <p>D_μ = covariant derivative</p>
+                </div>
+                <div class="reference-item">
+                    <p>G^a_μν = gluon field strength tensor</p>
+                </div>
+                <div class="reference-item">
+                    <p>m_f = quark mass</p>
+                </div>
+                <div class="reference-item">
+                    <p>Covariant Derivative:</p>
+                </div>
+                <div class="reference-item">
+                    <p>D_μ = ∂_μ - ig_s (λ^a / 2) A^a_μ</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>g_s = strong coupling constant</p>
+                </div>
+                <div class="reference-item">
+                    <p>λ^a = Gell-Mann matrices (8 generators of SU(3))</p>
+                </div>
+                <div class="reference-item">
+                    <p>A^a_μ = gluon field (a = 1...8)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Color Charge Algebra</p>
+                </div>
+                <div class="reference-item">
+                    <p>SU(3) Color Group:</p>
+                </div>
+                <div class="reference-item">
+                    <p>[T^a, T^b] = if^{abc} T^c</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>T^a = color charge generators</p>
+                </div>
+                <div class="reference-item">
+                    <p>f^{abc} = structure constants</p>
+                </div>
+                <div class="reference-item">
+                    <p>Number of Gluons:</p>
+                </div>
+                <div class="reference-item">
+                    <p>N_gluons = N_colors² - 1 = 3² - 1 = 8</p>
+                </div>
+                <div class="reference-item">
+                    <p>Color Singlet Condition (for hadrons):</p>
+                </div>
+                <div class="reference-item">
+                    <p>Σ_i T^a_i |hadron⟩ = 0</p>
+                </div>
+                <div class="reference-item">
+                    <p>Confinement and String Tension</p>
+                </div>
+                <div class="reference-item">
+                    <p>Linear Confinement Potential:</p>
+                </div>
+                <div class="reference-item">
+                    <p>V(r) = -α_s / r + σr</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>σ ≈ 1 GeV/fm (string tension)</p>
+                </div>
+                <div class="reference-item">
+                    <p>First term: short-range Coulomb-like</p>
+                </div>
+                <div class="reference-item">
+                    <p>Second term: long-range confinement</p>
+                </div>
+                <div class="reference-item">
+                    <p>Energy to Separate Quarks:</p>
+                </div>
+                <div class="reference-item">
+                    <p>E(r) = σr → ∞ as r → ∞</p>
+                </div>
+                <div class="reference-item">
+                    <p>Infinite energy required for complete separation.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Asymptotic Freedom</p>
+                </div>
+                <div class="reference-item">
+                    <p>Running Coupling at High Energy:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α_s(Q²) = 12π / [(33 - 2n_f) ln(Q² / Λ²_QCD)]</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Q = momentum transfer</p>
+                </div>
+                <div class="reference-item">
+                    <p>Λ_QCD ≈ 200 MeV (QCD scale)</p>
+                </div>
+                <div class="reference-item">
+                    <p>As Q² → ∞: α_s → 0 (quarks become free)</p>
+                </div>
+                <div class="reference-item">
+                    <p>As Q² → Λ²_QCD: α_s → ∞ (confinement)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Section 5.C: Electromagnetic Transmission Efficiency</p>
+                </div>
+                <div class="reference-item">
+                    <p>Fine Structure Constant</p>
+                </div>
+                <div class="reference-item">
+                    <p>Definition:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α = e² / (4πε_0 ℏc) = μ_0 e² c / (2h)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Numerical Value:</p>
+                </div>
+                <div class="reference-item">
+                    <p>α = 7.2973525693(11) × 10⁻³ ≈ 1/137.036</p>
+                </div>
+                <div class="reference-item">
+                    <p>Physical Interpretation:</p>
+                </div>
+                <div class="reference-item">
+                    <p>e² / (ℏc) = dimensionless coupling strength</p>
+                </div>
+                <div class="reference-item">
+                    <p>Probability amplitude for electron-photon vertex ∝ √α</p>
+                </div>
+                <div class="reference-item">
+                    <p>Photon Propagation</p>
+                </div>
+                <div class="reference-item">
+                    <p>Maxwell Equations in Vacuum:</p>
+                </div>
+                <div class="reference-item">
+                    <p>∇ · E = 0</p>
+                </div>
+                <div class="reference-item">
+                    <p>∇ · B = 0</p>
+                </div>
+                <div class="reference-item">
+                    <p>∇ × E = -∂B/∂t</p>
+                </div>
+                <div class="reference-item">
+                    <p>∇ × B = μ_0 ε_0 ∂E/∂t</p>
+                </div>
+                <div class="reference-item">
+                    <p>Wave Equation:</p>
+                </div>
+                <div class="reference-item">
+                    <p>∇²E - (1/c²)∂²E/∂t² = 0</p>
+                </div>
+                <div class="reference-item">
+                    <p>Plane Wave Solution:</p>
+                </div>
+                <div class="reference-item">
+                    <p>E = E_0 exp[i(k·r - ωt)]</p>
+                </div>
+                <div class="reference-item">
+                    <p>Dispersion Relation:</p>
+                </div>
+                <div class="reference-item">
+                    <p>ω = c|k|</p>
+                </div>
+                <div class="reference-item">
+                    <p>No dispersion - all frequencies travel at c.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Information Capacity</p>
+                </div>
+                <div class="reference-item">
+                    <p>Shannon-Hartley Theorem:</p>
+                </div>
+                <div class="reference-item">
+                    <p>C = B log₂(1 + S/N)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>C = channel capacity (bits/second)</p>
+                </div>
+                <div class="reference-item">
+                    <p>B = bandwidth (Hz)</p>
+                </div>
+                <div class="reference-item">
+                    <p>S/N = signal-to-noise ratio</p>
+                </div>
+                <div class="reference-item">
+                    <p>For Electromagnetic Channel:</p>
+                </div>
+                <div class="reference-item">
+                    <p>C_EM = ∫_0^∞ log₂(1 + P(f)/N(f)) df</p>
+                </div>
+                <div class="reference-item">
+                    <p>Unlimited bandwidth in principle.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Coupling Strength Optimization</p>
+                </div>
+                <div class="reference-item">
+                    <p>Interaction Cross-Section:</p>
+                </div>
+                <div class="reference-item">
+                    <p>σ ∝ α² / E²</p>
+                </div>
+                <div class="reference-item">
+                    <p>Mean Free Path:</p>
+                </div>
+                <div class="reference-item">
+                    <p>λ = 1/(nσ) ∝ E² / (nα²)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where n = particle density</p>
+                </div>
+                <div class="reference-item">
+                    <p>Optimal Coupling for Transmission: Too strong (α &gt;&gt; 1/137): photons can&#x27;t escape sources Too weak (α &lt;&lt; 1/137): insufficient interaction for detection</p>
+                </div>
+                <div class="reference-item">
+                    <p>Current value α ≈ 1/137 balances these requirements.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Section 5.D: Experimental Test Protocols</p>
+                </div>
+                <div class="reference-item">
+                    <p>Testing Information Storage Hypothesis</p>
+                </div>
+                <div class="reference-item">
+                    <p>Nuclear Binding Energy Analysis:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Binding Energy Per Nucleon:</p>
+                </div>
+                <div class="reference-item">
+                    <p>BE/A = a_v - a_s A^(-1/3) - a_c Z²/A^(4/3) - a_a (N-Z)²/A + δ(A,Z)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where:</p>
+                </div>
+                <div class="reference-item">
+                    <p>a_v = volume term</p>
+                </div>
+                <div class="reference-item">
+                    <p>a_s = surface term</p>
+                </div>
+                <div class="reference-item">
+                    <p>a_c = Coulomb term</p>
+                </div>
+                <div class="reference-item">
+                    <p>a_a = asymmetry term</p>
+                </div>
+                <div class="reference-item">
+                    <p>δ = pairing term</p>
+                </div>
+                <div class="reference-item">
+                    <p>Test for Optimization Patterns:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Analyze residuals: ΔBE = BE_measured - BE_model</p>
+                </div>
+                <div class="reference-item">
+                    <p>Search for systematic patterns in ΔBE vs. N, Z configurations.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Magic Number Analysis:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Shell closures at: N,Z = 2, 8, 20, 28, 50, 82, 126</p>
+                </div>
+                <div class="reference-item">
+                    <p>Measure:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Extra binding at shell closures</p>
+                </div>
+                <div class="reference-item">
+                    <p>Energy gaps to next excited states</p>
+                </div>
+                <div class="reference-item">
+                    <p>Two-neutron separation energies</p>
+                </div>
+                <div class="reference-item">
+                    <p>Testing Transmission Efficiency</p>
+                </div>
+                <div class="reference-item">
+                    <p>Fine Structure Constant Variations:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Measure α in different contexts:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Δα/α = (α_context - α_reference)/α_reference</p>
+                </div>
+                <div class="reference-item">
+                    <p>Contexts to test:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Atomic spectra (precision spectroscopy)</p>
+                </div>
+                <div class="reference-item">
+                    <p>QED processes (g-factor measurements)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Cosmological observations (quasar absorption lines)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Correlation with Information Transmission:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Measure: η_transmission vs. α deviations</p>
+                </div>
+                <div class="reference-item">
+                    <p>If α optimizes transmission, deviations should correlate with reduced efficiency.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Testing Transformation Control</p>
+                </div>
+                <div class="reference-item">
+                    <p>Weak Decay Rate Measurements:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Fermi&#x27;s Golden Rule:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Γ = (2π/ℏ) |M_fi|² ρ(E_f)</p>
+                </div>
+                <div class="reference-item">
+                    <p>CKM Matrix Elements:</p>
+                </div>
+                <div class="reference-item">
+                    <p>|V_ud| = 0.97417(21)</p>
+                </div>
+                <div class="reference-item">
+                    <p>|V_us| = 0.2248(6)</p>
+                </div>
+                <div class="reference-item">
+                    <p>|V_cd| = 0.220(5)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Test for Optimization: Measure whether transformation rates follow patterns beyond standard electroweak theory predictions.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Testing Gravitational Information Organization</p>
+                </div>
+                <div class="reference-item">
+                    <p>Precision Gravimetry During Information Processing:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Measure gravitational field during computation:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Δg/g = f(I_processing, t)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where I_processing = information processing rate</p>
+                </div>
+                <div class="reference-item">
+                    <p>Experimental Setup:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Precision gravimeter: Δg/g &lt; 10⁻¹⁵</p>
+                </div>
+                <div class="reference-item">
+                    <p>Controlled information processing system</p>
+                </div>
+                <div class="reference-item">
+                    <p>Isolated from environmental perturbations</p>
+                </div>
+                <div class="reference-item">
+                    <p>Long-term stability monitoring</p>
+                </div>
+                <div class="reference-item">
+                    <p>Prediction: If gravity organizes information, g should correlate with information density.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Statistical Requirements</p>
+                </div>
+                <div class="reference-item">
+                    <p>Significance Levels:</p>
+                </div>
+                <div class="reference-item">
+                    <p>p &lt; 0.001 (3σ minimum)</p>
+                </div>
+                <div class="reference-item">
+                    <p>p &lt; 3×10⁻⁷ (5σ preferred for discovery)</p>
+                </div>
+                <div class="reference-item">
+                    <p>Effect Size:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Cohen&#x27;s d = (μ₁ - μ₂)/σ_pooled &gt; 0.5</p>
+                </div>
+                <div class="reference-item">
+                    <p>Sample Size (power = 0.8):</p>
+                </div>
+                <div class="reference-item">
+                    <p>n = 2(Z_α/2 + Z_β)² σ² / (μ₁ - μ₂)²</p>
+                </div>
+                <div class="reference-item">
+                    <p>Systematic Error Control</p>
+                </div>
+                <div class="reference-item">
+                    <p>Environmental Factors:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Temperature: ΔT/T &lt; 10⁻⁴</p>
+                </div>
+                <div class="reference-item">
+                    <p>Pressure: ΔP/P &lt; 10⁻⁴</p>
+                </div>
+                <div class="reference-item">
+                    <p>Electromagnetic fields: shielded to background</p>
+                </div>
+                <div class="reference-item">
+                    <p>Vibration: seismically isolated</p>
+                </div>
+                <div class="reference-item">
+                    <p>Calibration:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Reference standards measured regularly</p>
+                </div>
+                <div class="reference-item">
+                    <p>Cross-calibration between methods</p>
+                </div>
+                <div class="reference-item">
+                    <p>Blind analysis protocols</p>
+                </div>
+                <div class="reference-item">
+                    <p>Computational Simulations</p>
+                </div>
+                <div class="reference-item">
+                    <p>QCD Lattice Calculations</p>
+                </div>
+                <div class="reference-item">
+                    <p>Discretized Spacetime:</p>
+                </div>
+                <div class="reference-item">
+                    <p>∫ d⁴x → a⁴ Σ_n</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where a = lattice spacing</p>
+                </div>
+                <div class="reference-item">
+                    <p>Wilson Action:</p>
+                </div>
+                <div class="reference-item">
+                    <p>S = -β/6 Σ_plaquettes [1 - (1/3)Re Tr(U_plaquette)]</p>
+                </div>
+                <div class="reference-item">
+                    <p>Quark Propagator:</p>
+                </div>
+                <div class="reference-item">
+                    <p>G(x,y) = ⟨q(x)q̄(y)⟩</p>
+                </div>
+                <div class="reference-item">
+                    <p>Information Storage Analysis: Search for mathematical constant ratios in:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Confinement energy scales</p>
+                </div>
+                <div class="reference-item">
+                    <p>Glueball mass spectra</p>
+                </div>
+                <div class="reference-item">
+                    <p>Baryon mass patterns</p>
+                </div>
+                <div class="reference-item">
+                    <p>Electromagnetic Field Simulations</p>
+                </div>
+                <div class="reference-item">
+                    <p>Finite-Difference Time-Domain (FDTD):</p>
+                </div>
+                <div class="reference-item">
+                    <p>E^{n+1} = E^n + (Δt/ε) × ∇ × H^{n+1/2}</p>
+                </div>
+                <div class="reference-item">
+                    <p>H^{n+1/2} = H^{n-1/2} - (Δt/μ) × ∇ × E^n</p>
+                </div>
+                <div class="reference-item">
+                    <p>Information Transmission Modeling:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Photon propagation in various media</p>
+                </div>
+                <div class="reference-item">
+                    <p>Signal degradation vs. α variations</p>
+                </div>
+                <div class="reference-item">
+                    <p>Bandwidth utilization efficiency</p>
+                </div>
+                <div class="reference-item">
+                    <p>Weak Interaction Monte Carlo</p>
+                </div>
+                <div class="reference-item">
+                    <p>Decay Rate Calculations:</p>
+                </div>
+                <div class="reference-item">
+                    <p>Γ = ∫ |M|² dΦ</p>
+                </div>
+                <div class="reference-item">
+                    <p>Where dΦ = phase space element</p>
+                </div>
+                <div class="reference-item">
+                    <p>CKM Matrix Sensitivity: Test transformation rate predictions for variations in mixing angles.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Four Forces As A Complete Information System</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p>Gross, D.J. &amp; Wilczek, F. (1973). Physical Review Letters, 30(26), 1343.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Peskin, M.E. &amp; Schroeder, D.V. (1995). An Introduction to Quantum Field Theory. Westview Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Particle Data Group (2020). Review of Particle Physics. Progress of Theoretical and Experimental Physics.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Shannon, C.E. (1948). Bell System Technical Journal, 27(3), 379-423.</p>
+                </div>
+                <div class="reference-item">
+                    <p>Bekenstein, J.D. (1973). Physical Review D, 7(8), 2333-2346.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Consciousness As A Cosmic Interface</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Kaschube, M., et al. (2010). &quot;Universality in the evolution of orientation columns in the visual cortex.&quot; Science, 330(6007), 1113-1116.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Roopun, A. K., et al. (2008). &quot;Temporal interactions between cortical rhythms.&quot; Frontiers in Neuroscience, 2(2), 145-154.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Koch, K., et al. (2006). &quot;How much the eye tells the brain.&quot; Current Biology, 16(14), 1428-1434.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Koch, C., Massimini, M., Boly, M., &amp; Tononi, G. (2016). &quot;Neural correlates of consciousness: progress and problems.&quot; Nature Reviews Neuroscience, 17(5), 307-321.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Anderson, J. R. (2007). How Can the Human Mind Occur in the Physical Universe? Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Hameroff, S., &amp; Penrose, R. (2014). &quot;Consciousness in the universe: A review of the &#x27;Orch OR&#x27; theory.&quot; Physics of Life Reviews, 11(1), 39-78.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Dehaene, S., &amp; Naccache, L. (2001). &quot;Towards a cognitive neuroscience of consciousness: basic evidence and a workspace framework.&quot; Cognition, 79(1-2), 1-37.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Crick, F., &amp; Koch, C. (2003). &quot;A framework for consciousness.&quot; Nature Neuroscience, 6(2), 119-126.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Kandel, E. R., et al. (2013). Principles of Neural Science, Fifth Edition. McGraw-Hill.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Buzsáki, G., &amp; Draguhn, A. (2004). &quot;Neuronal oscillations in cortical networks.&quot; Science, 304(5679), 1926-1929.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Shannon, C. E. (1948). &quot;A mathematical theory of communication.&quot; Bell System Technical Journal, 27(3), 379-423.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Csikszentmihalyi, M. (1990). Flow: The Psychology of Optimal Experience. Harper &amp; Row.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Dietrich, A. (2004). &quot;Neurocognitive mechanisms underlying the experience of flow.&quot; Consciousness and Cognition, 13(4), 746-761.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Lutz, A., et al. (2008). &quot;Attention regulation and monitoring in meditation.&quot; Trends in Cognitive Sciences, 12(4), 163-169.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Brewer, J. A., et al. (2011). &quot;Meditation experience is associated with differences in default mode network activity and connectivity.&quot; Proceedings of the National Academy of Sciences, 108(50), 20254-20259.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Lutz, A., et al. (2004). &quot;Long-term meditators self-induce high-amplitude gamma synchrony during mental practice.&quot; Proceedings of the National Academy of Sciences, 101(46), 16369-16373.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Cahn, B. R., &amp; Polich, J. (2006). &quot;Meditation states and traits: EEG, ERP, and neuroimaging studies.&quot; Psychological Bulletin, 132(2), 180-211.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Jung, C. G. (1960). Synchronicity: An Acausal Connecting Principle. Princeton University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Radin, D. (2006). Entangled Minds: Extrasensory Experiences in a Quantum Reality. Paraview Pocket Books.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Neural Network Cosmos</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Vazza, F., &amp; Feletti, A. (2020). &quot;The quantitative comparison between the neuronal network and the cosmic web.&quot; Frontiers in Physics, 8, 525731.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Mandelbrot, B. B. (1982). The Fractal Geometry of Nature. W. H. Freeman and Company.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Sporns, O., Tononi, G., &amp; Kötter, R. (2005). &quot;The human connectome: a structural description of the human brain.&quot; PLoS Computational Biology, 1(4), e42.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Springel, V., et al. (2005). &quot;Simulations of the formation, evolution and clustering of galaxies and quasars.&quot; Nature, 435(7042), 629-636.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Barabási, A. L., &amp; Albert, R. (1999). &quot;Emergence of scaling in random networks.&quot; Science, 286(5439), 509-512.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Watts, D. J., &amp; Strogatz, S. H. (1998). &quot;Collective dynamics of &#x27;small-world&#x27; networks.&quot; Nature, 393(6684), 440-442.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Albert, R., Jeong, H., &amp; Barabási, A. L. (2000). &quot;Error and attack tolerance of complex networks.&quot; Nature, 406(6794), 378-382.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Bullmore, E., &amp; Sporns, O. (2009). &quot;Complex brain networks: graph theoretical analysis of structural and functional systems.&quot; Nature Reviews Neuroscience, 10(3), 186-198.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Bassett, D. S., &amp; Bullmore, E. (2006). &quot;Small-world brain networks.&quot; The Neuroscientist, 12(6), 512-523.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Achard, S., et al. (2006). &quot;A resilient, low-frequency, small-world human brain functional network with highly connected association cortical hubs.&quot; Journal of Neuroscience, 26(1), 63-72.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Klypin, A., &amp; Holtzman, J. (1997). &quot;Particle-mesh code for cosmological simulations.&quot; arXiv preprint astro-ph/9712217.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Laughlin, S. B., &amp; Sejnowski, T. J. (2003). &quot;Communication in neuronal networks.&quot; Science, 301(5641), 1870-1874.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Meunier, D., Lambiotte, R., &amp; Bullmore, E. T. (2010). &quot;Modular and hierarchically modular organization of brain networks.&quot; Frontiers in Neuroscience, 4, 200.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Tononi, G. (2008). &quot;Consciousness as integrated information: a provisional manifesto.&quot; The Biological Bulletin, 215(3), 216-242.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Hopfield, J. J. (1982). &quot;Neural networks and physical systems with emergent collective computational abilities.&quot; Proceedings of the National Academy of Sciences, 79(8), 2554-2558.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Tononi, G., et al. (2016). &quot;Integrated information theory: from consciousness to its physical substrate.&quot; Nature Reviews Neuroscience, 17(7), 450-461.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Hebb, D. O. (1949). The Organization of Behavior: A Neuropsychological Theory. Wiley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Springel, V., et al. (2008). &quot;The Aquarius Project: the subhaloes of galactic haloes.&quot; Monthly Notices of the Royal Astronomical Society, 391(4), 1685-1711.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Herculano-Houzel, S. (2014). &quot;The glia/neuron ratio: how it varies uniformly across brain structures and species and what that means for brain physiology and evolution.&quot; Glia, 62(9), 1377-1391.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Allen, N. J., &amp; Barres, B. A. (2009). &quot;Neuroscience: Glia - more than just brain glue.&quot; Nature, 457(7230), 675-677.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Friston, K. (2010). &quot;The free-energy principle: a unified brain theory?&quot; Nature Reviews Neuroscience, 11(2), 127-138.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Clark, A. (2015). Surfing Uncertainty: Prediction, Action, and the Embodied Mind. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Barrett, L. F. (2017). How Emotions Are Made: The Secret Life of the Brain. Houghton Mifflin Harcourt.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> Tononi, G., et al. (2016). &quot;Integrated information theory: from consciousness to its physical substrate.&quot; Nature Reviews Neuroscience, 17(7), 450-461.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[25]</strong> Raibert, M., et al. (2008). &quot;BigDog, the Rough-Terrain Quadruped Robot.&quot; IFAC Proceedings Volumes, 41(2), 10822-10825.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[26]</strong> Buck, L., &amp; Axel, R. (1991). &quot;A novel multigene family may encode odorant receptors: a molecular basis for odor recognition.&quot; Cell, 65(1), 175-187.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[27]</strong> Kleinfeld, D., et al. (2006). &quot;Active sensation: insights from the rodent vibrissa sensorimotor system.&quot; Current Opinion in Neurobiology, 16(4), 435-444.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[28]</strong> Cannon, W. B. (1929). &quot;Organization for physiological homeostasis.&quot; Physiological Reviews, 9(3), 399-431.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[29]</strong> Bekenstein, J. D. (1981). &quot;Universal upper bound on the entropy-to-energy ratio for bounded systems.&quot; Physical Review D, 23(2), 287-298.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[30]</strong> Libet, B., et al. (1983). &quot;Time of conscious intention to act in relation to onset of cerebral activity (readiness-potential).&quot; Brain, 106(3), 623-642.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[31]</strong> Soon, C. S., et al. (2008). &quot;Unconscious determinants of free decisions in the human brain.&quot; Nature Neuroscience, 11(5), 543-545.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[32]</strong> Dehaene, S., &amp; Changeux, J. P. (2011). &quot;Experimental and theoretical approaches to conscious processing.&quot; Neuron, 70(2), 200-227.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[33]</strong> Tononi, G., et al. (2016). &quot;Integrated information theory: from consciousness to its physical substrate.&quot; Nature Reviews Neuroscience, 17(7), 450-461.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Gravity Emerges From Information Patterns</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Preussischen Akademie der Wissenschaften zu Berlin, 844-847.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Abbott, B. P., et al. (LIGO Scientific Collaboration and Virgo Collaboration). (2016). &quot;Observation of gravitational waves from a binary black hole merger.&quot; Physical Review Letters, 116(6), 061102.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Misner, C. W., Thorne, K. S., &amp; Wheeler, J. A. (1973). Gravitation. W. H. Freeman.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Bartelmann, M., &amp; Schneider, P. (2001). &quot;Weak gravitational lensing.&quot; Physics Reports, 340(4-5), 291-472.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Weinberg, S. (1995). The Quantum Theory of Fields, Volume 1: Foundations. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Rovelli, C. (2004). Quantum Gravity. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Green, M. B., Schwarz, J. H., &amp; Witten, E. (1987). Superstring Theory: Volume 1, Introduction. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Rovelli, C., &amp; Smolin, L. (1995). &quot;Discreteness of area and volume in quantum gravity.&quot; Nuclear Physics B, 442(3), 593-619.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Griffiths, D. (2008). Introduction to Elementary Particles, 2nd Edition. Wiley-VCH.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Carroll, S. M. (2004). Spacetime and Geometry: An Introduction to General Relativity. Addison Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Everitt, C. W. F., et al. (2011). &quot;Gravity Probe B: Final results of a space experiment to test general relativity.&quot; Physical Review Letters, 106(22), 221101.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Goldreich, P., &amp; Soter, S. (1966). &quot;Q in the solar system.&quot; Icarus, 5(1-6), 375-389.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Szebehely, V. (1967). Theory of Orbits: The Restricted Problem of Three Bodies. Academic Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Murray, C. D., &amp; Dermott, S. F. (1999). Solar System Dynamics. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Binney, J., &amp; Tremaine, S. (2008). Galactic Dynamics, 2nd Edition. Princeton University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Kasevich, M., &amp; Chu, S. (1991). &quot;Atomic interferometry using stimulated Raman transitions.&quot; Physical Review Letters, 67(2), 181-184.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Hawking, S. W. (1976). &quot;Breakdown of predictability in gravitational collapse.&quot; Physical Review D, 14(10), 2460-2473.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Preskill, J. (1992). &quot;Do black holes destroy information?&quot; arXiv preprint hep-th/9209058.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Hawking, S. W. (1975). &quot;Particle creation by black holes.&quot; Communications in Mathematical Physics, 43(3), 199-220.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Page, D. N. (1993). &quot;Information in black hole radiation.&quot; Physical Review Letters, 71(23), 3743-3746.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Susskind, L. (1995). &quot;The world as a hologram.&quot; Journal of Mathematical Physics, 36(11), 6377-6396.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Maldacena, J. (1998). &quot;The large N limit of superconformal field theories and supergravity.&quot; Advances in Theoretical and Mathematical Physics, 2(2), 231-252.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Van Raamsdonk, M. (2010). &quot;Building up spacetime with quantum entanglement.&quot; General Relativity and Gravitation, 42(10), 2323-2329.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> Bekenstein, J. D. (1973). &quot;Black holes and entropy.&quot; Physical Review D, 7(8), 2333-2346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[25]</strong> Maldacena, J., &amp; Susskind, L. (2013). &quot;Cool horizons for entangled black holes.&quot; Fortschritte der Physik, 61(9), 781-811.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[26]</strong> Wheeler, J. A. (1990). &quot;Information, physics, quantum: The search for links.&quot; In Complexity, Entropy, and the Physics of Information. Addison-Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[27]</strong> Verlinde, E. (2011). &quot;On the origin of gravity and the laws of Newton.&quot; Journal of High Energy Physics, 2011(4), 29.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[28]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[29]</strong> Bennett, C. H. (1982). &quot;The thermodynamics of computation—a review.&quot; International Journal of Theoretical Physics, 21(12), 905-940.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[30]</strong> Labbé, I., et al. (2023). &quot;A population of red candidate massive galaxies ~600 Myr after the Big Bang.&quot; Nature, 616(7956), 266-269.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[31]</strong> Castellano, M., et al. (2022). &quot;Early results from GLASS-JWST. III: Galaxy candidates at z~9-15.&quot; The Astrophysical Journal Letters, 938(2), L15.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[32]</strong> Naidu, R. P., et al. (2022). &quot;Two remarkably luminous galaxy candidates at z≈10-12 revealed by JWST.&quot; The Astrophysical Journal Letters, 940(1), L14.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[33]</strong> Boylan-Kolchin, M. (2023). &quot;Stress testing ΛCDM with high-redshift galaxy candidates.&quot; Nature Astronomy, 7(6), 731-735.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[34]</strong> Planck Collaboration. (2020). &quot;Planck 2018 results. VI. Cosmological parameters.&quot; Astronomy &amp; Astrophysics, 641, A6.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[35]</strong> Riess, A. G., et al. (2022). &quot;A comprehensive measurement of the local value of the Hubble constant with 1 km s-1 Mpc-1 uncertainty from the Hubble Space Telescope and the SH0ES team.&quot; The Astrophysical Journal Letters, 934(1), L7.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Quantization From Information Optimization</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Dirac, P. A. M. (1930). The Principles of Quantum Mechanics. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Planck, M. (1901). &quot;On the law of distribution of energy in the normal spectrum.&quot; Annalen der Physik, 4, 553.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Heisenberg, W. (1927). &quot;Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik.&quot; Zeitschrift für Physik, 43(3-4), 172-198.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Stern, O., &amp; Gerlach, W. (1922). &quot;Der experimentelle Nachweis der Richtungsquantelung im Magnetfeld.&quot; Zeitschrift für Physik, 9(1), 349-352.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Millikan, R. A. (1913). &quot;On the elementary electrical charge and the Avogadro constant.&quot; Physical Review, 2(2), 109-143.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Bohr, N. (1913). &quot;On the constitution of atoms and molecules.&quot; Philosophical Magazine, 26(151), 1-25.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Schrödinger, E. (1926). &quot;An undulatory theory of the mechanics of atoms and molecules.&quot; Physical Review, 28(6), 1049-1070.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Bohr, N. (1928). &quot;The quantum postulate and the recent development of atomic theory.&quot; Nature, 121(3050), 580-590.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Einstein, A., Podolsky, B., &amp; Rosen, N. (1935). &quot;Can quantum-mechanical description of physical reality be considered complete?&quot; Physical Review, 47(10), 777-780.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Weinberg, S. (1995). The Quantum Theory of Fields, Volume 1: Foundations. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Rovelli, C., &amp; Smolin, L. (1995). &quot;Discreteness of area and volume in quantum gravity.&quot; Nuclear Physics B, 442(3), 593-619.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Wheeler, J. A. (1990). &quot;Information, physics, quantum: The search for links.&quot; In Complexity, Entropy, and the Physics of Information. Addison-Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Nielsen, M. A., &amp; Chuang, I. L. (2010). Quantum Computation and Quantum Information: 10th Anniversary Edition. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Horodecki, R., et al. (2009). &quot;Quantum entanglement.&quot; Reviews of Modern Physics, 81(2), 865-942.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Bérut, A., et al. (2012). &quot;Experimental verification of Landauer&#x27;s principle linking information and thermodynamics.&quot; Nature, 483(7388), 187-189.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Susskind, L. (1995). &quot;The world as a hologram.&quot; Journal of Mathematical Physics, 36(11), 6377-6396.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Van Raamsdonk, M. (2010). &quot;Building up spacetime with quantum entanglement.&quot; General Relativity and Gravitation, 42(10), 2323-2329.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Shor, P. W. (1995). &quot;Scheme for reducing decoherence in quantum computer memory.&quot; Physical Review A, 52(4), R2493-R2496.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Shannon, C. E. (1948). &quot;A mathematical theory of communication.&quot; Bell System Technical Journal, 27(3), 379-423.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Barenco, A., et al. (1995). &quot;Elementary gates for quantum computation.&quot; Physical Review A, 52(5), 3457-3467.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Terhal, B. M. (2015). &quot;Quantum error correction for quantum memories.&quot; Reviews of Modern Physics, 87(2), 307-346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Zurek, W. H. (2003). &quot;Decoherence, einselection, and the quantum origins of the classical.&quot; Reviews of Modern Physics, 75(3), 715-775.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> Schlosshauer, M. (2007). Decoherence and the Quantum-To-Classical Transition. Springer.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[25]</strong> Hawking, S. W. (1976). &quot;Breakdown of predictability in gravitational collapse.&quot; Physical Review D, 14(10), 2460-2473.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[26]</strong> Hawking, S. W. (1975). &quot;Particle creation by black holes.&quot; Communications in Mathematical Physics, 43(3), 199-220.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[27]</strong> Page, D. N. (1993). &quot;Information in black hole radiation.&quot; Physical Review Letters, 71(23), 3743-3746.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[28]</strong> Clausius, R. (1865). &quot;Über verschiedene für die Anwendung bequeme Formen der Hauptgleichungen der mechanischen Wärmetheorie.&quot; Annalen der Physik, 201(7), 353-400.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[29]</strong> Callen, H. B. (1985). Thermodynamics and an Introduction to Thermostatistics, 2nd Edition. Wiley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[30]</strong> Preskill, J. (2018). &quot;Quantum computing in the NISQ era and beyond.&quot; Quantum, 2, 79.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[31]</strong> Degen, C. L., Reinhard, F., &amp; Cappellaro, P. (2017). &quot;Quantum sensing.&quot; Reviews of Modern Physics, 89(3), 035002.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[32]</strong> Lvovsky, A. I., Sanders, B. C., &amp; Tittel, W. (2009). &quot;Optical quantum memory.&quot; Nature Photonics, 3(12), 706-714.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Cmb Mathematical Patterns</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Penzias, A. A., &amp; Wilson, R. W. (1965). &quot;A measurement of excess antenna temperature at 4080 Mc/s.&quot; The Astrophysical Journal, 142, 419-421.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Dicke, R. H., et al. (1965). &quot;Cosmic black-body radiation.&quot; The Astrophysical Journal, 142, 414-419.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Smoot, G. F., et al. (1992). &quot;Structure in the COBE differential microwave radiometer first-year maps.&quot; The Astrophysical Journal, 396, L1-L5.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Spergel, D. N., et al. (2003). &quot;First-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Determination of cosmological parameters.&quot; The Astrophysical Journal Supplement Series, 148(1), 175-194.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Bennett, C. L., et al. (2013). &quot;Nine-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Final maps and results.&quot; The Astrophysical Journal Supplement Series, 208(2), 20.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Planck Collaboration. (2020). &quot;Planck 2018 results. VI. Cosmological parameters.&quot; Astronomy &amp; Astrophysics, 641, A6.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Gold, B., et al. (2011). &quot;Seven-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Galactic foreground emission.&quot; The Astrophysical Journal Supplement Series, 192(2), 15.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Hu, W., &amp; Sugiyama, N. (1995). &quot;Anisotropies in the cosmic microwave background: an analytic approach.&quot; The Astrophysical Journal, 444, 489-506.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Górski, K. M., et al. (2005). &quot;HEALPix: A framework for high-resolution discretization and fast analysis of data distributed on the sphere.&quot; The Astrophysical Journal, 622(2), 759-771.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Zaldarriaga, M., &amp; Seljak, U. (1997). &quot;An all sky analysis of polarization in the microwave background.&quot; Physical Review D, 55(4), 1830-1840.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Knox, L. (1995). &quot;Determination of inflationary observables by cosmic microwave background anisotropy experiments.&quot; Physical Review D, 52(8), 4307-4318.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Baines, M. K. (2024). &quot;Preliminary analysis of mathematical constant signatures in WMAP CMB data.&quot; [Unpublished manuscript]. Available at www.eequalsicsquared.com</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Tegmark, M., et al. (2004). &quot;Cosmological parameters from SDSS and WMAP.&quot; Physical Review D, 69(10), 103501.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Planck Collaboration. (2014). &quot;Planck 2013 results. XV. CMB power spectra and likelihood.&quot; Astronomy &amp; Astrophysics, 571, A15.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Gross, D. J., &amp; Wilczek, F. (1973). &quot;Ultraviolet behavior of non-abelian gauge theories.&quot; Physical Review Letters, 30(26), 1343-1346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Jackson, J. D. (1999). Classical Electrodynamics, 3rd Edition. Wiley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Amelino-Camelia, G., et al. (1998). &quot;Tests of quantum gravity from observations of γ-ray bursts.&quot; Nature, 393(6687), 763-765.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Sekino, Y., &amp; Susskind, L. (2008). &quot;Fast scramblers.&quot; Journal of High Energy Physics, 2008(10), 065.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Bekenstein, J. D. (1981). &quot;Universal upper bound on the entropy-to-energy ratio for bounded systems.&quot; Physical Review D, 23(2), 287-298.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Lyth, D. H., &amp; Liddle, A. R. (2009). The Primordial Density Perturbation: Cosmology, Inflation and the Origin of Structure. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> DeBoer, D. R., et al. (2017). &quot;Hydrogen Epoch of Reionization Array (HERA).&quot; Publications of the Astronomical Society of the Pacific, 129(974), 045001.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Amaro-Seoane, P., et al. (2017). &quot;Laser Interferometer Space Antenna.&quot; arXiv preprint arXiv:1702.00786.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Cross-Frequency Validation</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Bennett, C. L., et al. (2003). &quot;First-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Foreground emission.&quot; The Astrophysical Journal Supplement Series, 148(1), 97-117.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Planck Collaboration. (2014). &quot;Planck 2013 results. XII. Diffuse component separation.&quot; Astronomy &amp; Astrophysics, 571, A12.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Bennett, C. L., et al. (2013). &quot;Nine-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Final maps and results.&quot; The Astrophysical Journal Supplement Series, 208(2), 20.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Planck Collaboration. (2020). &quot;Planck 2018 results. I. Overview and the cosmological legacy of Planck.&quot; Astronomy &amp; Astrophysics, 641, A1.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Gold, B., et al. (2011). &quot;Seven-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Galactic foreground emission.&quot; The Astrophysical Journal Supplement Series, 192(2), 15.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Eriksen, H. K., et al. (2008). &quot;Joint Bayesian component separation and CMB power spectrum estimation.&quot; The Astrophysical Journal, 676(1), 10-32.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Planck Collaboration. (2014). &quot;Planck 2013 results. XI. All-sky model of thermal dust emission.&quot; Astronomy &amp; Astrophysics, 571, A11.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Tegmark, M., et al. (2003). &quot;A high resolution foreground cleaned CMB map from WMAP.&quot; Physical Review D, 68(12), 123523.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Gorski, K. M., et al. (1996). &quot;Cross-correlation of the cosmic microwave background and radio galaxies in real, harmonic and wavelet spaces: Detection of the integrated Sachs-Wolfe effect and dark energy constraints.&quot; The Astrophysical Journal, 464, L11-L14.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Jarosik, N., et al. (2011). &quot;Seven-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Sky maps, systematic errors, and basic results.&quot; The Astrophysical Journal Supplement Series, 192(2), 14.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Baines, M. K. (2024). &quot;Cross-dataset validation of mathematical constant signatures in CMB data.&quot; [Unpublished manuscript]. Available at www.eequalsicsquared.com</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Page, L., et al. (2003). &quot;First-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Interpretation of the TT and TE angular power spectrum peaks.&quot; The Astrophysical Journal Supplement Series, 148(1), 233-241.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Planck Collaboration. (2014). &quot;Planck 2013 results. VI. High Frequency Instrument data processing.&quot; Astronomy &amp; Astrophysics, 571, A6.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Hinshaw, G., et al. (2013). &quot;Nine-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Cosmological parameter results.&quot; The Astrophysical Journal Supplement Series, 208(2), 19.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Planck Collaboration. (2016). &quot;Planck 2015 results. VIII. High Frequency Instrument data processing: Calibration and maps.&quot; Astronomy &amp; Astrophysics, 594, A8.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Planck Collaboration. (2016). &quot;Planck 2015 results. XI. CMB power spectra, likelihoods, and robustness of parameters.&quot; Astronomy &amp; Astrophysics, 594, A11.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Knox, L. (1995). &quot;Determination of inflationary observables by cosmic microwave background anisotropy experiments.&quot; Physical Review D, 52(8), 4307-4318.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Baines, M. K. (2024). &quot;Monte Carlo validation of mathematical constant detection methodology in CMB analysis.&quot; [Unpublished manuscript]. Available at www.eequalsicsquared.com</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Hu, W., &amp; Sugiyama, N. (1995). &quot;Anisotropies in the cosmic microwave background: an analytic approach.&quot; The Astrophysical Journal, 444, 489-506.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Gross, D. J., &amp; Wilczek, F. (1973). &quot;Ultraviolet behavior of non-abelian gauge theories.&quot; Physical Review Letters, 30(26), 1343-1346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Wheeler, J. A. (1990). &quot;Information, physics, quantum: The search for links.&quot; In Complexity, Entropy, and the Physics of Information. Addison-Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Amelino-Camelia, G., et al. (1998). &quot;Tests of quantum gravity from observations of γ-ray bursts.&quot; Nature, 393(6687), 763-765.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Ade, P., et al. (2019). &quot;The Simons Observatory: science goals and forecasts.&quot; Journal of Cosmology and Astroparticle Physics, 2019(02), 056.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> Abazajian, K., et al. (2019). &quot;CMB-S4 science case, reference design, and project plan.&quot; arXiv preprint arXiv:1907.04473.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Quantum Memory Matrix: A Theoretical Framework</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Preußischen Akademie der Wissenschaften zu Berlin, 844-847.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Weinberg, S. (1995). The Quantum Theory of Fields, Volume 1: Foundations. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Susskind, L. (1995). &quot;The world as a hologram.&quot; Journal of Mathematical Physics, 36(11), 6377-6396.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Bekenstein, J. D. (1973). &quot;Black holes and entropy.&quot; Physical Review D, 7(8), 2333-2346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Hawking, S. W. (1975). &quot;Particle creation by black holes.&quot; Communications in Mathematical Physics, 43(3), 199-220.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Maldacena, J. (1998). &quot;The large N limit of superconformal field theories and supergravity.&quot; Advances in Theoretical and Mathematical Physics, 2(2), 231-252.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Wheeler, J. A. (1990). &quot;Information, physics, quantum: The search for links.&quot; In Complexity, Entropy, and the Physics of Information. Addison-Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Rovelli, C., &amp; Smolin, L. (1995). &quot;Discreteness of area and volume in quantum gravity.&quot; Nuclear Physics B, 442(3), 593-619.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Nielsen, M. A., &amp; Chuang, I. L. (2010). Quantum Computation and Quantum Information: 10th Anniversary Edition. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Terhal, B. M. (2015). &quot;Quantum error correction for quantum memories.&quot; Reviews of Modern Physics, 87(2), 307-346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Ballance, C. J., et al. (2016). &quot;High-fidelity quantum logic gates using trapped-ion hyperfine qubits.&quot; Physical Review Letters, 117(6), 060504.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Rol, M. A., et al. (2020). &quot;Fast, high-fidelity conditional-phase gate exploiting leakage interference in weakly anharmonic superconducting qubits.&quot; Physical Review Letters, 123(12), 120502.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Briegel, H. J., et al. (1998). &quot;Quantum repeaters: The role of imperfect local operations in quantum communication.&quot; Physical Review Letters, 81(26), 5932-5935.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Doherty, M. W., et al. (2013). &quot;The nitrogen-vacancy colour centre in diamond.&quot; Physics Reports, 528(1), 1-45.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Zurek, W. H. (2003). &quot;Decoherence, einselection, and the quantum origins of the classical.&quot; Reviews of Modern Physics, 75(3), 715-775.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Rovelli, C. (2004). Quantum Gravity. Cambridge University Press.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Mathematical Constants In Physics</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Nakahara, M. (2003). Geometry, Topology and Physics, 2nd Edition. Taylor &amp; Francis.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Maor, E. (1994). e: The Story of a Number. Princeton University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Livio, M. (2002). The Golden Ratio: The Story of Phi, the World&#x27;s Most Astonishing Number. Broadway Books.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Gabrielse, G., et al. (2006). &quot;New determination of the fine structure constant from the electron g value and QED.&quot; Physical Review Letters, 97(3), 030802.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Wigner, E. P. (1960). &quot;The unreasonable effectiveness of mathematics in the natural sciences.&quot; Communications in Pure and Applied Mathematics, 13(1), 1-14.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Tegmark, M. (2008). &quot;The mathematical universe.&quot; Foundations of Physics, 38(2), 101-150.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Sakurai, J. J., &amp; Napolitano, J. (2017). Modern Quantum Mechanics, 2nd Edition. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Landau, L. D., &amp; Lifshitz, E. M. (1976). Mechanics, 3rd Edition. Butterworth-Heinemann.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Goeppert-Mayer, M. (1949). &quot;On closed shells in nuclei. II.&quot; Physical Review, 75(12), 1969-1970.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Ring, P., &amp; Schuck, P. (2004). The Nuclear Many-Body Problem. Springer.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Dirac, P. A. M. (1930). The Principles of Quantum Mechanics. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Stewart, I. (2001). What Shape is a Snowflake? Magical Numbers in Nature. Weidenfeld &amp; Nicolson.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Malthus, T. R. (1798). An Essay on the Principle of Population. J. Johnson.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Kippenhahn, R., Weigert, A., &amp; Weiss, A. (2012). Stellar Structure and Evolution, 2nd Edition. Springer.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Binney, J., &amp; Tremaine, S. (2008). Galactic Dynamics, 2nd Edition. Princeton University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Tegmark, M. (2014). Our Mathematical Universe: My Quest for the Ultimate Nature of Reality. Knopf.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Ladyman, J. (1998). &quot;What is structural realism?&quot; Studies in History and Philosophy of Science Part A, 29(3), 409-424.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Wheeler, J. A. (1990). &quot;Information, physics, quantum: The search for links.&quot; In Complexity, Entropy, and the Physics of Information. Addison-Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Laughlin, R. B., &amp; Pines, D. (2000). &quot;The theory of everything.&quot; Proceedings of the National Academy of Sciences, 97(1), 28-31.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Kak, S. (2020). &quot;Information theory and dimensionality of space.&quot; Scientific Reports, 10, 20733.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Caruso, F., &amp; Oguri, V. (2008). &quot;The cosmic microwave background spectrum and an estimation of the spatial dimension.&quot; arXiv preprint arXiv:0806.2675.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Caruso, F., &amp; Oguri, V. (2009). &quot;Estimating the spatial dimension from the cosmic microwave background spectrum.&quot; Modern Physics Letters A, 24(32), 2571-2578.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Sylos Labini, F., et al. (2015). &quot;Fractality of isotherms of the cosmic microwave background based on data from the Planck spacecraft.&quot; Astronomy Reports, 59, 811-819.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> Sylos Labini, F. (2011). &quot;Inhomogeneities in the universe.&quot; Classical and Quantum Gravity, 28(16), 164003.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[25]</strong> Mandelbrot, B. B. (1982). The Fractal Geometry of Nature. W. H. Freeman.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[26]</strong> Seymour, P. W., &amp; Haslam, M. (2013). &quot;Evidence for chaotic behaviour in pulsar spin-down rates.&quot; Monthly Notices of the Royal Astronomical Society, 428(2), 983-989.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[27]</strong> Antonelli, M., et al. (2023). &quot;Stochastic processes for pulsar timing noise: fluctuations in the internal and external torques.&quot; Monthly Notices of the Royal Astronomical Society, 520(2), 2813-2828.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Information And Spacetime</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Preussischen Akademie der Wissenschaften zu Berlin, 844-847.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Dirac, P. A. M. (1930). The Principles of Quantum Mechanics. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Weinberg, S. (1995). The Quantum Theory of Fields, Volume 1: Foundations. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Green, M. B., Schwarz, J. H., &amp; Witten, E. (1987). Superstring Theory: Volume 1, Introduction. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Rovelli, C., &amp; Smolin, L. (1995). &quot;Discreteness of area and volume in quantum gravity.&quot; Nuclear Physics B, 442(3), 593-619.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Bombelli, L., et al. (1987). &quot;Space-time as a causal set.&quot; Physical Review Letters, 59(5), 521-524.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Riess, A. G., et al. (1998). &quot;Observational evidence from supernovae for an accelerating universe and a cosmological constant.&quot; The Astronomical Journal, 116(3), 1009-1038.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Einstein, A., Podolsky, B., &amp; Rosen, N. (1935). &quot;Can quantum-mechanical description of physical reality be considered complete?&quot; Physical Review, 47(10), 777-780.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Guth, A. H. (1981). &quot;Inflationary universe: A possible solution to the horizon and flatness problems.&quot; Physical Review D, 23(2), 347-356.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Rovelli, C. (2004). Quantum Gravity. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Wheeler, J. A. (1990). &quot;Information, physics, quantum: The search for links.&quot; In Complexity, Entropy, and the Physics of Information. Addison-Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> &#x27;t Hooft, G. (1993). &quot;Dimensional reduction in quantum gravity.&quot; arXiv preprint gr-qc/9310026.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Susskind, L. (1995). &quot;The world as a hologram.&quot; Journal of Mathematical Physics, 36(11), 6377-6396.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Maldacena, J. (1998). &quot;The large N limit of superconformal field theories and supergravity.&quot; Advances in Theoretical and Mathematical Physics, 2(2), 231-252.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Bekenstein, J. D. (1973). &quot;Black holes and entropy.&quot; Physical Review D, 7(8), 2333-2346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Hawking, S. W. (1975). &quot;Particle creation by black holes.&quot; Communications in Mathematical Physics, 43(3), 199-220.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Van Raamsdonk, M. (2010). &quot;Building up spacetime with quantum entanglement.&quot; General Relativity and Gravitation, 42(10), 2323-2329.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Almheiri, A., et al. (2015). &quot;Bulk locality and quantum error correction in AdS/CFT.&quot; Journal of High Energy Physics, 2015(4), 163.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Hawking, S. W. (1976). &quot;Breakdown of predictability in gravitational collapse.&quot; Physical Review D, 14(10), 2460-2473.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Universal Precision: The Fine-Tuning Mystery</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Kunkel, T. A. (2004). &quot;DNA replication fidelity.&quot; Annual Review of Biochemistry, 73, 681-702.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Garcia-Viloca, M., et al. (2004). &quot;How enzymes work: analysis by modern rate theory and computer simulations.&quot; Science, 303(5655), 186-195.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Barrow, J. D., &amp; Tipler, F. J. (1986). The Anthropic Cosmological Principle. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Rees, M. (1999). Just Six Numbers: The Deep Forces That Shape the Universe. Basic Books.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Weinberg, S. (1989). &quot;The cosmological constant problem.&quot; Reviews of Modern Physics, 61(1), 1-23.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Sommerfeld, A. (1916). &quot;Zur Quantentheorie der Spektrallinien.&quot; Annalen der Physik, 356(17), 1-94.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Kolb, E. W., &amp; Turner, M. S. (1990). The Early Universe. Addison-Wesley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Davies, P. C. W. (1982). The Accidental Universe. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Particle Data Group (2024). &quot;Review of Particle Physics.&quot; Progress of Theoretical and Experimental Physics.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Ball, P. (2008). &quot;Water as an active constituent in cell biology.&quot; Chemical Reviews, 108(1), 74-108.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Chaplin, M. (2006). &quot;Do we underestimate the importance of water in cell biology?&quot; Nature Reviews Molecular Cell Biology, 7(11), 861-866.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Vargaftik, N. B., et al. (1983). &quot;International tables of the surface tension of water.&quot; Journal of Physical and Chemical Reference Data, 12(3), 817-820.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Ball, P. (2017). &quot;Water is an active matrix of life for cell and molecular biology.&quot; Proceedings of the National Academy of Sciences, 114(51), 13327-13335.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Franks, F. (2000). Water: A Matrix of Life. Royal Society of Chemistry.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Debenedetti, P. G. (2003). &quot;Supercooled and glassy water.&quot; Journal of Physics: Condensed Matter, 15(45), R1669-R1726.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Millot, M., et al. (2019). &quot;Nanosecond X-ray diffraction of shock-compressed superionic water ice.&quot; Nature, 569(7755), 251-255.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Redmer, R., et al. (2011). &quot;The phase diagram of water and the magnetic fields of Uranus and Neptune.&quot; Icarus, 211(1), 798-803.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Kolesnikov, A. I., et al. (2016). &quot;Quantum tunneling of water in beryl.&quot; Physical Review Letters, 116(16), 167802.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Koshland, D. E. (1994). &quot;The key-lock theory and the induced fit theory.&quot; Angewandte Chemie International Edition, 33(23-24), 2375-2378.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> Wolfenden, R., &amp; Snider, M. J. (2001). &quot;The depth of chemical time and the power of enzymes as catalysts.&quot; Accounts of Chemical Research, 34(12), 938-945.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Anfinsen, C. B. (1973). &quot;Principles that govern the folding of protein chains.&quot; Science, 181(4096), 223-230.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Levinthal, C. (1969). &quot;How to fold graciously.&quot; Mossbauer Spectroscopy in Biological Systems, 67(41), 22-24.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Arditti, J., et al. (2012). &quot;&#x27;Good Heavens what insect can suck it&#x27;—Charles Darwin, Angraecum sesquipedale and Xanthopan morganii praedicta.&quot; Botanical Journal of the Linnean Society, 169(3), 403-432.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> Mebs, D. (2009). &quot;Chemical biology of the mutualistic relationships of sea anemones with fish and crustaceans.&quot; Toxicon, 54(8), 1071-1074.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[25]</strong> Cruaud, A., et al. (2012). &quot;An extreme case of plant-insect codiversification: figs and fig-pollinating wasps.&quot; Systematic Biology, 61(6), 1029-1047.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[26]</strong> Susskind, L. (2005). The Cosmic Landscape: String Theory and the Illusion of Intelligent Design. Little, Brown.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[27]</strong> Dawkins, R. (1986). The Blind Watchmaker. W. W. Norton &amp; Company.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[28]</strong> Ball, P. (2008). &quot;Water as an active constituent in cell biology.&quot; Chemical Reviews, 108(1), 74-108.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[29]</strong> Carter, B. (1974). &quot;Large number coincidences and the anthropic principle in cosmology.&quot; IAU Symposium, 63, 291-298.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[30]</strong> Nielsen, M. A., &amp; Chuang, I. L. (2000). Quantum Computation and Quantum Information. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[31]</strong> Wheeler, J. A. (1990). &quot;Information, physics, quantum: The search for links.&quot; Proceedings of the 3rd International Symposium on Foundations of Quantum Mechanics, Tokyo.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[32]</strong> Feynman, R. P., Leighton, R. B., &amp; Sands, M. (2011). The Feynman Lectures on Physics, Vol. II. Basic Books.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[33]</strong> Vazza, F., &amp; Feletti, A. (2020). &quot;The quantitative comparison between the neuronal network and the cosmic web.&quot; Frontiers in Physics, 8, 525731.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[34]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[35]</strong> Guth, A.H. (1981). &quot;Inflationary universe: A possible solution to the horizon and flatness problems.&quot; Physical Review D, 23(2), 347-356.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[36]</strong> Planck Collaboration (2020). &quot;Planck 2018 results. VI. Cosmological parameters.&quot; Astronomy &amp; Astrophysics, 641, A6.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[37]</strong> Dicke, R.H., &amp; Peebles, P.J.E. (1979). &quot;The big bang cosmology—enigmas and nostrums.&quot; In General Relativity: An Einstein Centenary Survey (pp. 504-517). Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[38]</strong> Preskill, J. (1979). &quot;Cosmological production of superheavy magnetic monopoles.&quot; Physical Review Letters, 43(19), 1365-1368.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[39]</strong> Linde, A.D. (1982). &quot;A new inflationary universe scenario: A possible solution of the horizon, flatness, homogeneity, isotropy and primordial monopole problems.&quot; Physics Letters B, 108(6), 389-393.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[40]</strong> Ijjas, A., Steinhardt, P.J., &amp; Loeb, A. (2013). &quot;Inflationary paradigm in trouble after Planck 2013.&quot; Physics Letters B, 723(4-5), 261-266.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[41]</strong> Guth, A.H., Kaiser, D.I., &amp; Nomura, Y. (2014). &quot;Inflationary paradigm after Planck 2013.&quot; Physics Letters B, 733, 112-119.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[42]</strong> Martin, J., Ringeval, C., &amp; Vennin, V. (2014). &quot;Encyclopædia Inflationaris.&quot; Physics of the Dark Universe, 5-6, 75-235.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[43]</strong> Linde, A. (2017). &quot;A brief history of the multiverse.&quot; Reports on Progress in Physics, 80(2), 022501.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[44]</strong> Borde, A., Guth, A.H., &amp; Vilenkin, A. (2003). &quot;Inflationary spacetimes are not past-complete.&quot; Physical Review Letters, 90(15), 151301.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[45]</strong> De Simone, A., Guth, A.H., Linde, A., Noorbala, M., Salem, M.P., &amp; Vilenkin, A. (2010). &quot;Boltzmann brains and the scale-factor cutoff measure of the multiverse.&quot; Physical Review D, 82(6), 063520.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[46]</strong> Bousso, R. (2002). &quot;The holographic principle.&quot; Reviews of Modern Physics, 74(3), 825-874.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[47]</strong> DES Collaboration (2022). &quot;Dark Energy Survey Year 3 results: Cosmological constraints from galaxy clustering and weak lensing.&quot; Physical Review D, 105(2), 023520.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[48]</strong> Ade, P.A., et al. (2016). &quot;Planck 2015 results. XX. Constraints on inflation.&quot; Astronomy &amp; Astrophysics, 594, A20.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Vision As Reality Construction</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Koch, K., et al. (2006). &quot;How much the eye tells the brain.&quot; Current Biology, 16(14), 1428-1434.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Zimmermann, E., et al. (2013). &quot;Buildup and transfer of object-based attention during saccadic eye movements.&quot; Psychonomic Bulletin &amp; Review, 20(2), 298-304.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Gregory, R. L. (1980). &quot;Perceptions as hypotheses.&quot; Philosophical Transactions of the Royal Society B, 290(1038), 181-197.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Hubel, D. H., &amp; Wiesel, T. N. (1962). &quot;Receptive fields, binocular interaction and functional architecture in the cat&#x27;s visual cortex.&quot; The Journal of Physiology, 160(1), 106-154.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Livingstone, M., &amp; Hubel, D. (1988). &quot;Segregation of form, color, movement, and depth: anatomy, physiology, and perception.&quot; Science, 240(4853), 740-749.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Srinivasan, M. V., Laughlin, S. B., &amp; Dubs, A. (1982). &quot;Predictive coding: a fresh view of inhibition in the retina.&quot; Proceedings of the Royal Society B, 216(1205), 427-459.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Kaschube, M., et al. (2010). &quot;Universality in the evolution of orientation columns in the visual cortex.&quot; Science, 330(6007), 1113-1116.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Buzsáki, G., &amp; Draguhn, A. (2004). &quot;Neuronal oscillations in cortical networks.&quot; Science, 304(5679), 1926-1929.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Roopun, A. K., et al. (2008). &quot;Temporal interactions between cortical rhythms.&quot; Frontiers in Neuroscience, 2(2), 145-154.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Olshausen, B. A., &amp; Field, D. J. (1996). &quot;Emergence of simple-cell receptive field properties by learning a sparse code for natural images.&quot; Nature, 381(6583), 607-609.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> DiCarlo, J. J., Zoccolan, D., &amp; Rust, N. C. (2012). &quot;How does the brain solve visual object recognition?&quot; Neuron, 73(3), 415-434.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Friston, K. (2010). &quot;The free-energy principle: a unified brain theory?&quot; Nature Reviews Neuroscience, 11(2), 127-138.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Ramachandran, V. S., &amp; Gregory, R. L. (1991). &quot;Perceptual filling in of artificially induced scotomas in human vision.&quot; Nature, 350(6320), 699-702.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Jackson, J. D. (1999). Classical Electrodynamics, 3rd Edition. Wiley.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Pöppel, E. (2009). &quot;Pre-semantically defined temporal windows for cognitive processing.&quot; Philosophical Transactions of the Royal Society B, 364(1525), 1887-1896.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Barbour, J. (1999). The End of Time: The Next Revolution in Physics. Oxford University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Roelfsema, P. R., et al. (2018). &quot;Basic neuroscience research with nonhuman primates: a small but indispensable component of biomedical research.&quot; Neuron, 100(1), 213-221.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Quantum Optimization: From Theory To Technology</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Preskill, J. (2018). &quot;Quantum computing in the NISQ era and beyond.&quot; Quantum, 2, 79.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Zurek, W. H. (2003). &quot;Decoherence, einselection, and the quantum origins of the classical.&quot; Reviews of Modern Physics, 75(3), 715-775.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Terhal, B. M. (2015). &quot;Quantum error correction for quantum memories.&quot; Reviews of Modern Physics, 87(2), 307-346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Fowler, A. G., et al. (2012). &quot;Surface codes: Towards practical large-scale quantum computation.&quot; Physical Review A, 86(3), 032324.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Glaser, S. J., et al. (2015). &quot;Training Schrödinger&#x27;s cat: quantum optimal control.&quot; The European Physical Journal D, 69(12), 279.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Khaneja, N., et al. (2005). &quot;Optimal control of coupled spin dynamics: design of NMR pulse sequences by gradient ascent algorithms.&quot; Journal of Magnetic Resonance, 172(2), 296-305.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Machnes, S., et al. (2018). &quot;Comparing, optimizing, and benchmarking quantum-control algorithms in a unifying programming framework.&quot; Physical Review A, 84(2), 022305.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Schulte-Herbrüggen, T., et al. (2011). &quot;Optimal control for generating quantum gates in open dissipative systems.&quot; Journal of Physics B, 44(15), 154013.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> McKay, D. C., et al. (2017). &quot;Efficient Z gates for quantum computing.&quot; Physical Review A, 96(2), 022330.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Motzoi, F., et al. (2009). &quot;Simple pulses for elimination of leakage in weakly nonlinear qubits.&quot; Physical Review Letters, 103(11), 110501.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Zanardi, P., &amp; Rasetti, M. (1999). &quot;Holonomic quantum computation.&quot; Physics Letters A, 264(2-3), 94-99.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Berry, M. V. (1984). &quot;Quantal phase factors accompanying adiabatic changes.&quot; Proceedings of the Royal Society of London A, 392(1802), 45-57.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Sjöqvist, E., et al. (2012). &quot;Non-adiabatic holonomic quantum computation.&quot; New Journal of Physics, 14(10), 103035.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Abdumalikov Jr, A. A., et al. (2013). &quot;Experimental realization of non-Abelian non-adiabatic geometric gates.&quot; Nature, 496(7446), 482-485.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Leibfried, D., et al. (2003). &quot;Experimental demonstration of a robust, high-fidelity geometric two ion-qubit phase gate.&quot; Nature, 422(6930), 412-415.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[16]</strong> Xu, G. F., et al. (2012). &quot;Nonadiabatic holonomic quantum computation in decoherence-free subspaces.&quot; Physical Review Letters, 109(17), 170501.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[17]</strong> Viola, L., &amp; Lloyd, S. (1998). &quot;Dynamical suppression of decoherence in two-state quantum systems.&quot; Physical Review A, 58(4), 2733-2744.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[18]</strong> Zanardi, P. (1999). &quot;Symmetrizing evolutions.&quot; Physics Letters A, 258(2-3), 77-82.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[19]</strong> Biercuk, M. J., et al. (2009). &quot;Optimized dynamical decoupling in a model quantum memory.&quot; Nature, 458(7241), 996-1000.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[20]</strong> de Lange, G., et al. (2010). &quot;Universal dynamical decoupling of a single solid-state spin from a spin bath.&quot; Science, 330(6000), 60-63.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[21]</strong> Khodjasteh, K., &amp; Viola, L. (2009). &quot;Dynamically error-corrected gates for universal quantum computation.&quot; Physical Review Letters, 102(8), 080501.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[22]</strong> Pokhrel, B., et al. (2018). &quot;Demonstration of fidelity improvement using dynamical decoupling with superconducting qubits.&quot; Physical Review Letters, 121(22), 220502.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[23]</strong> Kadowaki, T., &amp; Nishimori, H. (1998). &quot;Quantum annealing in the transverse Ising model.&quot; Physical Review E, 58(5), 5355-5363.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[24]</strong> Albash, T., &amp; Lidar, D. A. (2018). &quot;Adiabatic quantum computation.&quot; Reviews of Modern Physics, 90(1), 015002.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[25]</strong> Brooke, J., et al. (1999). &quot;Quantum annealing of a disordered magnet.&quot; Science, 284(5415), 779-781.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[26]</strong> Boixo, S., et al. (2014). &quot;Evidence for quantum annealing with more than one hundred qubits.&quot; Nature Physics, 10(3), 218-224.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[27]</strong> Rønnow, T. F., et al. (2014). &quot;Defining and detecting quantum speedup.&quot; Science, 345(6195), 420-424.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[28]</strong> Bukov, M., et al. (2018). &quot;Reinforcement learning in different phases of quantum control.&quot; Physical Review X, 8(3), 031086.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[29]</strong> Zahedinejad, E., et al. (2017). &quot;Designing high-fidelity single-shot three-qubit gates: A machine-learning approach.&quot; Physical Review Applied, 6(5), 054005.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[30]</strong> Fösel, T., et al. (2018). &quot;Reinforcement learning with neural networks for quantum feedback.&quot; Physical Review X, 8(3), 031084.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[31]</strong> Khatri, S., et al. (2019). &quot;Quantum-assisted quantum compiling.&quot; Quantum, 3, 140.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[32]</strong> Engel, G. S., et al. (2007). &quot;Evidence for wavelike energy transfer through quantum coherence in photosynthetic systems.&quot; Nature, 446(7137), 782-786.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Black Hole Information: The Ultimate Test</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Hawking, S. W. (1974). &quot;Black hole explosions?&quot; Nature, 248(5443), 30-31.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Nielsen, M. A., &amp; Chuang, I. L. (2000). Quantum Computation and Quantum Information. Cambridge University Press.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Penington, G. (2020). &quot;Entanglement wedge reconstruction and the information paradox.&quot; Journal of High Energy Physics, 2020(9), 1-84.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Almheiri, A., et al. (2020). &quot;The entropy of bulk quantum fields and the entanglement wedge of an evaporating black hole.&quot; Journal of High Energy Physics, 2019(12), 1-47.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Page, D. N. (1993). &quot;Information in black hole radiation.&quot; Physical Review Letters, 71(23), 3743-3746.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Ryu, S., &amp; Takayanagi, T. (2006). &quot;Holographic derivation of entanglement entropy from the anti-de Sitter space/conformal field theory correspondence.&quot; Physical Review Letters, 96(18), 181602.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Susskind, L. (1995). &quot;The world as a hologram.&quot; Journal of Mathematical Physics, 36(11), 6377-6396.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Steinhauer, J. (2016). &quot;Observation of quantum Hawking radiation and its entanglement in an analogue black hole.&quot; Nature Physics, 12(10), 959-965.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Abbott, B. P., et al. (2016). &quot;Observation of gravitational waves from a binary black hole merger.&quot; Physical Review Letters, 116(6), 061102.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Brown, A. R., et al. (2019). &quot;Quantum gravity in the lab: Teleportation by size and traversable wormholes.&quot; arXiv preprint arXiv:1911.06314.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Quantum Information Scrambling: How Fast Does Information Spread?</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Hosur, P., et al. (2016). &quot;Chaos in quantum channels.&quot; Journal of High Energy Physics, 2016(2), 1-49.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Sekino, Y., &amp; Susskind, L. (2008). &quot;Fast scramblers.&quot; Journal of High Energy Physics, 2008(10), 065.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Hayden, P., &amp; Preskill, J. (2007). &quot;Black holes as mirrors: quantum information in random subsystems.&quot; Journal of High Energy Physics, 2007(09), 120.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Larkin, A. I., &amp; Ovchinnikov, Y. N. (1969). &quot;Quasiclassical method in the theory of superconductivity.&quot; Soviet Journal of Experimental and Theoretical Physics, 28(6), 1200-1205.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Maldacena, J., et al. (2016). &quot;A bound on chaos.&quot; Journal of High Energy Physics, 2016(8), 1-17.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Gärttner, M., et al. (2017). &quot;Measuring out-of-time-order correlations and multiple quantum spectra in a trapped-ion quantum magnet.&quot; Nature Physics, 13(8), 781-786.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Li, J., et al. (2017). &quot;Measuring out-of-time-order correlators on a nuclear magnetic resonance quantum simulator.&quot; Physical Review X, 7(3), 031011.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Landsman, K. A., et al. (2019). &quot;Verified quantum information scrambling.&quot; Nature, 567(7746), 61-65.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Steinhauer, J. (2016). &quot;Observation of quantum Hawking radiation and its entanglement in an analogue black hole.&quot; Nature Physics, 12(10), 959-965.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Hayden, P., &amp; Preskill, J. (2007). &quot;Black holes as mirrors: quantum information in random subsystems.&quot; Journal of High Energy Physics, 2007(09), 120.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Sachdev, S., &amp; Ye, J. (1993). &quot;Gapless spin-fluid ground state in a random quantum Heisenberg magnet.&quot; Physical Review Letters, 70(21), 3339-3342.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[12]</strong> Srednicki, M. (1994). &quot;Chaos and quantum thermalization.&quot; Physical Review E, 50(2), 888-901.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[13]</strong> Terhal, B. M. (2015). &quot;Quantum error correction for quantum memories.&quot; Reviews of Modern Physics, 87(2), 307-346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[14]</strong> Swingle, B. (2018). &quot;Unscrambling the physics of out-of-time-order correlators.&quot; Nature Physics, 14(10), 988-990.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[15]</strong> Zhu, G., et al. (2016). &quot;Measurement of many-body chaos using a quantum clock.&quot; Physical Review A, 94(6), 062329.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>Quantum Error Correction: Information Preservation In Practice</h2>
+            <div class="references-list">
+                <div class="reference-item">
+                    <p><strong>[1]</strong> Google Quantum AI and Collaborators (2024). &quot;Quantum error correction below the surface code threshold.&quot; Nature, 595, 383-389.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[2]</strong> Shor, P. W. (1995). &quot;Scheme for reducing decoherence in quantum computer memory.&quot; Physical Review A, 52(4), R2493-R2496.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[3]</strong> Aharonov, D., &amp; Ben-Or, M. (1997). &quot;Fault-tolerant quantum computation with constant error.&quot; Proceedings of the 29th Annual ACM Symposium on Theory of Computing, 176-188.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[4]</strong> Fowler, A. G., et al. (2012). &quot;Surface codes: Towards practical large-scale quantum computation.&quot; Physical Review A, 86(3), 032324.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[5]</strong> Wootters, W. K., &amp; Zurek, W. H. (1982). &quot;A single quantum cannot be cloned.&quot; Nature, 299(5886), 802-803.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[6]</strong> Dennis, E., et al. (2002). &quot;Topological quantum memory.&quot; Journal of Mathematical Physics, 43(9), 4452-4505.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[7]</strong> Terhal, B. M. (2015). &quot;Quantum error correction for quantum memories.&quot; Reviews of Modern Physics, 87(2), 307-346.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[8]</strong> Baireuther, P., et al. (2018). &quot;Machine-learning-assisted correction of correlated qubit errors in a topological code.&quot; Quantum, 2, 48.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[9]</strong> Shannon, C. E. (1948). &quot;A mathematical theory of communication.&quot; Bell System Technical Journal, 27(3), 379-423.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[10]</strong> Campbell, E. T., et al. (2017). &quot;Roads towards fault-tolerant universal quantum computation.&quot; Nature, 549(7671), 172-179.</p>
+                </div>
+                <div class="reference-item">
+                    <p><strong>[11]</strong> Breuckmann, N. P., &amp; Eberhardt, J. N. (2021). &quot;Quantum low-density parity-check codes.&quot; PRX Quantum, 2(4), 040101.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
     <script>
-        // Create starfield
-        function createStarfield() {
-            const starfield = document.getElementById('starfield');
-            const numberOfStars = 200;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starfield.appendChild(star);
-            }
-        }
-
-        createStarfield();
-
-        // Simple search functionality
-        const searchInput = document.querySelector('.search-input');
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const references = document.querySelectorAll('.reference-item');
-
-            references.forEach(ref => {
-                const text = ref.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    ref.style.display = 'block';
-                } else {
-                    ref.style.display = 'none';
-                }
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
             });
         });
+
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
     </script>
 </body>
 </html>
