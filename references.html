@@ -4,569 +4,364 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>References - The Big TOE</title>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        /* Starfield Background */
-        .starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-        
-        .stars-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-repeat: repeat;
-        }
-        
-        .stars-layer-1 {
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
-                radial-gradient(2px 2px at 60px 70px, #fff, transparent),
-                radial-gradient(1px 1px at 50px 50px, #ddd, transparent);
-            background-size: 200px 200px;
-            animation: twinkle 3s ease-in-out infinite, move-stars-1 120s linear infinite;
-        }
-        
-        .stars-layer-2 {
-            background-image:
-                radial-gradient(3px 3px at 100px 120px, #fff, transparent),
-                radial-gradient(2px 2px at 40px 160px, #ddd, transparent);
-            background-size: 300px 300px;
-            animation: twinkle 4s ease-in-out infinite 1s, move-stars-2 180s linear infinite;
-        }
-        
-        @keyframes move-stars-1 {
-            from { transform: translateY(0); }
-            to { transform: translateY(-200px); }
-        }
-        
-        @keyframes move-stars-2 {
-            from { transform: translateY(0); }
-            to { transform: translateY(-300px); }
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        
-        /* Top Navigation */
-        .top-nav {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-        }
-        
-        .nav-container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 60px;
-            display: grid;
-            grid-template-columns: 550px 1fr 350px;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo-placeholder {
-            width: 500px;
-            height: 100px;
-            position: relative;
-        }
-        
-        .logo-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        
-        .nav-center {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #ffd700;
-        }
-        
-        .nav-right {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 20px;
-        }
-        
-        .nav-social {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .nav-social-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1a1a1a;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.2em;
-        }
-        
-        .nav-social-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-        
-        .nav-social-icon:hover {
-            background: #667eea;
-            color: white;
-        }
-        
-        .nav-login-btn {
-            padding: 10px 28px;
-            background: transparent;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-            margin-left: 5px;
-        }
-        
-        .nav-login-btn:hover {
-            background: rgba(255, 255, 255, 0.95);
-            color: #667eea;
-        }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: rgba(20, 20, 30, 0.98);
-            backdrop-filter: blur(10px);
-            min-width: 200px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            text-transform: none;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-        
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 5px;
-            gap: 5px;
-        }
-        
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #ffd700;
-            border-radius: 3px;
-            transition: all 0.3s;
-        }
-        
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-        
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 90px;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 999;
-            padding: 20px;
-        }
-        
-        .mobile-menu.active {
-            display: block;
-        }
-        
-        .mobile-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .mobile-menu ul li {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .mobile-menu ul li:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-menu ul li a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 500;
-            display: block;
-        }
-        
-        /* Main Content */
-        .main-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 40px 80px;
-        }
-        
-        .page-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .page-header h1 {
-            font-size: 3.5em;
-            color: #ffffff;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8),
-                         0 0 40px rgba(0, 0, 0, 0.6);
-        }
-        
-        .page-header p {
-            font-size: 1.3em;
-            color: #b0b0b0;
-            font-weight: 300;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-        }
-        
-        /* References Sections */
-        .references-section {
-            background: rgba(20, 20, 30, 0.6);
-            padding: 30px 40px;
-            border-radius: 8px;
-            margin-bottom: 40px;
-        }
-        
-        .references-section h2 {
-            color: #ffd700;
-            font-size: 1.6em;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-            font-weight: 600;
-        }
-        
-        .references-list {
-            display: grid;
-            gap: 12px;
-        }
-        
-        .reference-item {
-            padding: 12px 16px;
-            background: rgba(10, 10, 10, 0.4);
-            border-left: 3px solid #ffd700;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-        
-        .reference-item:hover {
-            background: rgba(10, 10, 10, 0.6);
-            border-left-width: 4px;
-        }
-        
-        .reference-item p {
-            color: #d0d0d0;
-            line-height: 1.7;
-            margin: 0;
-            font-size: 0.95em;
-        }
-        
-        .reference-item strong {
-            color: #ffd700;
-            font-weight: 600;
-            margin-right: 8px;
-        }
-        
-        .reference-item a {
-            color: #ffd700;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-        
-        .reference-item a:hover {
-            border-bottom-color: #ffd700;
-        }
-        
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 50px;
-            height: 50px;
-            background: #ffd700;
-            color: #0a0a0a;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5em;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            z-index: 999;
-        }
-        
-        .back-to-top:hover {
-            background: #ffed4e;
-            transform: translateY(-5px);
-        }
-        
-        .back-to-top.visible {
-            display: flex;
-        }
-        
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-container {
-                grid-template-columns: 1fr auto;
-                padding: 0 20px;
-            }
-            
-            .logo-section {
-                justify-content: flex-start;
-            }
-            
-            .logo-placeholder {
-                width: 300px;
-                height: 60px;
-            }
-            
-            .nav-center,
-            .nav-right {
-                display: none;
-            }
-            
-            .hamburger {
-                display: flex;
-            }
-            
-            .main-content {
-                padding: 100px 20px 60px;
-            }
-            
-            .page-header h1 {
-                font-size: 2.5em;
-            }
-            
-            .references-section {
-                padding: 20px 25px;
-            }
-            
-            .references-section h2 {
-                font-size: 1.4em;
-            }
-            
-            .reference-item p {
-                font-size: 0.9em;
-            }
-        }
-        
-        @media (max-width: 640px) {
-            .page-header h1 {
-                font-size: 2em;
-            }
-            
-            .references-section {
-                padding: 15px 20px;
-            }
-            
-            .reference-item {
-                padding: 10px 14px;
-            }
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-color: #8B0000;
+      --text-dark: #2c3e50;
+      --max-width: 1200px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.8;
+      color: var(--text-dark);
+      background: #ffffff;
+    }
+
+    .content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 2rem; margin: 3rem 0 1rem; padding-top: 2rem; border-top: 2px solid #e0e0e0; }
+    h2:first-of-type { border: none; padding-top: 0; }
+    p { margin-bottom: 1rem; }
+    a { color: var(--primary-color); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .site-header {
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    .main-navigation ul {
+      list-style: none;
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .main-navigation a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .main-navigation a:hover {
+      color: var(--primary-color);
+    }
+
+    .btn-login {
+      padding: 0.4rem 1rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .btn-login:hover {
+      background: rgba(255,255,255,0.22);
+    }
+
+    .page-header {
+      background: var(--primary-color);
+      padding: 2rem 2rem;
+      text-align: center;
+      color: white;
+      margin-top: 1rem;
+    }
+
+    .page-header h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      color: white;
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .content-wrapper {
+      background: white;
+      position: relative;
+      z-index: 2;
+      padding-top: 2rem;
+    }
+
+    /* References-specific styles */
+    .references-section {
+      margin-bottom: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      background: #f8f9fa;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .section-header:hover {
+      background: #e9ecef;
+    }
+
+    .section-header h2 {
+      color: var(--primary-color);
+      font-size: 1.75rem;
+      margin: 0;
+      padding: 0;
+      border: none;
+      font-weight: 600;
+    }
+
+    .toggle-icon {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .references-section.active .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+    }
+
+    .references-section.active .section-content {
+      max-height: 50000px;
+      transition: max-height 2s ease-in;
+    }
+
+    .references-list {
+      display: grid;
+      gap: 0.75rem;
+      padding: 2rem;
+      background: white;
+    }
+
+    .reference-item {
+      padding: 0.75rem 1rem;
+      background: #f8f9fa;
+      border-left: 3px solid var(--primary-color);
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .reference-item:hover {
+      background: #e9ecef;
+      border-left-width: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .reference-item p {
+      color: #000000;
+      line-height: 1.7;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .reference-item strong {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+
+    .reference-item a {
+      color: var(--primary-color);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .reference-item a:hover {
+      border-bottom-color: var(--primary-color);
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .back-to-top:hover {
+      background: #a00000;
+      transform: translateY(-5px);
+    }
+
+    .back-to-top.visible {
+      display: flex;
+    }
+
+    .social-section {
+      padding: 3rem 2rem;
+      background: rgba(0,0,0,0.9);
+      color: white;
+    }
+
+    .social-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .social-content {
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+
+    .quick-links h3 { color: white; font-size: 1.1rem; margin-bottom: 1rem; }
+    .quick-links ul { list-style: none; padding: 0; }
+    .quick-links li { margin-bottom: 0.75rem; }
+    .quick-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; }
+    .quick-links a:hover { color: white; }
+
+    .social-main { text-align: center; }
+    .social-main h2 { color: white; font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .social-main p { color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
+
+    .social-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      color: white;
+    }
+
+    .social-btn.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .social-btn.youtube { background: #FF0000; }
+    .social-btn.email { background: #0072C6; }
+
+    .copyright {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .copyright a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .copyright a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .social-content { grid-template-columns: 1fr; gap: 1rem; }
+      .header-container { padding: 1rem; flex-direction: column; gap: 1rem; }
+      .main-navigation ul { flex-direction: column; gap: 0.75rem; }
+      .page-header h1 { font-size: 2rem; }
+      .content { padding: 2rem 1rem; }
+      .references-section { padding: 1.5rem; }
+      .references-section h2 { font-size: 1.5rem; }
+    }
+
     </style>
 </head>
 <body>
-    <!-- Starfield Background -->
-    <div class="starfield">
-        <div class="stars-layer stars-layer-1"></div>
-        <div class="stars-layer stars-layer-2"></div>
-    </div>
-
-    <!-- Top Navigation -->
-    <nav class="top-nav">
-        <div class="nav-container">
-            <!-- Logo Section -->
-            <div class="logo-section">
-                <div class="logo-placeholder">
-                    <img src="logo.png" alt="The Big TOE Logo">
-                </div>
-            </div>
-            
-            <!-- Centered Navigation Links -->
-            <div class="nav-center">
-                <ul class="nav-links">
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#events">Events</a></li>
-                    <li class="dropdown">
-                        <a href="#" style="cursor: pointer;">Discussion ▾</a>
-                        <div class="dropdown-content">
-                            <a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Browse Discussions</a>
-                            <a href="index.html#membership">Create Free Account</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Right Section: Social Media + Login -->
-            <div class="nav-right">
-                <div class="nav-social">
-                    <a href="#" class="nav-social-icon" title="Instagram">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="nav-social-icon" title="YouTube">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:mkbinfo@proton.me" class="nav-social-icon" title="Email">✉</a>
-                </div>
-                <a href="login.html" class="nav-login-btn">Log In</a>
-            </div>
-            
-            <!-- Hamburger Menu -->
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <header class="site-header">
+      <div class="header-container">
+        <div class="site-logo">
+          <a href="book.html">
+            <img src="bigtoeindexlogoyel.png" alt="The Big TOE">
+          </a>
         </div>
-    </nav>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#events">Events</a></li>
-            <li><a href="https://github.com/mikeb7777/physics-framework/discussions" target="_blank">Discussion</a></li>
-            <li><a href="login.html">Log In</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
-            <li><a href="appendix.html">Appendices</a></li>
+        <nav class="main-navigation">
+          <ul>
+            <li><a href="book.html">Home</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="references.html">References</a></li>
-            <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
-            <li><a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" target="_blank">YouTube</a></li>
-            <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
-        </ul>
+            <li><a href="appendix.html">Appendix</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="login_page_complete.html" class="btn-login">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page-header">
+      <h1>References</h1>
+      <p>Comprehensive Bibliography & Citations</p>
     </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="page-header">
+    <div class="content-wrapper">
+      <div class="content">
+
+        <div class="page-header-old" style="display:none;">
             <h1>References</h1>
             <p>Comprehensive Bibliography & Citations</p>
         </div>
 
         
         <div class="references-section">
-            <h2>Introduction</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Introduction</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Patrignani, C. et al. (Particle Data Group). (2016). &quot;Review of Particle Physics.&quot; Chinese Physics C, 40(10), 100001.</p>
                 </div>
@@ -595,11 +390,16 @@
                     <p><strong>[9]</strong> Vazza, F. &amp; Feletti, A. (2020). &quot;The quantitative comparison between the neuronal network and the cosmic web.&quot; Frontiers in Physics, 8, 525731.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Reality Is Fundamentally Relational</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Reality Is Fundamentally Relational</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Griffiths, D. (2017). Introduction to Electrodynamics, 4th ed. Cambridge University Press.</p>
                 </div>
@@ -745,11 +545,16 @@
                     <p><strong>[48]</strong> Integrated Information Theory: Tononi, G. et al. (2016). &quot;Integrated information theory: from consciousness to its physical substrate.&quot; Nature Reviews Neuroscience, 17(7), 450-461.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Landauer Principle Physical Information</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Landauer Principle Physical Information</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Landauer, R. (1961). &quot;Irreversibility and heat generation in the computing process.&quot; IBM Journal of Research and Development, 5(3), 183-191.</p>
                 </div>
@@ -820,11 +625,16 @@
                     <p><strong>[23]</strong> Nielsen, M.A. &amp; Chuang, I.L. (2010). Quantum Computation and Quantum Information. Cambridge University Press.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Universe Processes Information Necessarily</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Universe Processes Information Necessarily</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Azevedo, F.A. et al. (2009). &quot;Equal numbers of neuronal and nonneuronal cells make the human brain an isometrically scaled-up primate brain.&quot; Journal of Comparative Neurology, 513(5), 532-541.</p>
                 </div>
@@ -889,11 +699,16 @@
                     <p><strong>[21]</strong> Wheeler, J.A. (1989). &quot;Information, physics, quantum: The search for links.&quot; Proceedings of the 3rd International Symposium on Foundations of Quantum Mechanics, 354-368.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Mathematical Framework For Rotation And Circular Optimization</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Mathematical Framework For Rotation And Circular Optimization</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Griffiths, D.J. (2017). Introduction to Quantum Mechanics, 3rd ed. Cambridge University Press.</p>
                 </div>
@@ -1585,11 +1400,16 @@
                     <p>CKM Matrix Sensitivity: Test transformation rate predictions for variations in mixing angles.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Four Forces As A Complete Information System</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Four Forces As A Complete Information System</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p>Gross, D.J. &amp; Wilczek, F. (1973). Physical Review Letters, 30(26), 1343.</p>
                 </div>
@@ -1606,11 +1426,16 @@
                     <p>Bekenstein, J.D. (1973). Physical Review D, 7(8), 2333-2346.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Consciousness As A Cosmic Interface</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Consciousness As A Cosmic Interface</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Kaschube, M., et al. (2010). &quot;Universality in the evolution of orientation columns in the visual cortex.&quot; Science, 330(6007), 1113-1116.</p>
                 </div>
@@ -1669,11 +1494,16 @@
                     <p><strong>[19]</strong> Radin, D. (2006). Entangled Minds: Extrasensory Experiences in a Quantum Reality. Paraview Pocket Books.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Neural Network Cosmos</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Neural Network Cosmos</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Vazza, F., &amp; Feletti, A. (2020). &quot;The quantitative comparison between the neuronal network and the cosmic web.&quot; Frontiers in Physics, 8, 525731.</p>
                 </div>
@@ -1774,11 +1604,16 @@
                     <p><strong>[33]</strong> Tononi, G., et al. (2016). &quot;Integrated information theory: from consciousness to its physical substrate.&quot; Nature Reviews Neuroscience, 17(7), 450-461.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Gravity Emerges From Information Patterns</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Gravity Emerges From Information Patterns</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Preussischen Akademie der Wissenschaften zu Berlin, 844-847.</p>
                 </div>
@@ -1885,11 +1720,16 @@
                     <p><strong>[35]</strong> Riess, A. G., et al. (2022). &quot;A comprehensive measurement of the local value of the Hubble constant with 1 km s-1 Mpc-1 uncertainty from the Hubble Space Telescope and the SH0ES team.&quot; The Astrophysical Journal Letters, 934(1), L7.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Quantization From Information Optimization</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Quantization From Information Optimization</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Dirac, P. A. M. (1930). The Principles of Quantum Mechanics. Oxford University Press.</p>
                 </div>
@@ -1987,11 +1827,16 @@
                     <p><strong>[32]</strong> Lvovsky, A. I., Sanders, B. C., &amp; Tittel, W. (2009). &quot;Optical quantum memory.&quot; Nature Photonics, 3(12), 706-714.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Cmb Mathematical Patterns</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Cmb Mathematical Patterns</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Penzias, A. A., &amp; Wilson, R. W. (1965). &quot;A measurement of excess antenna temperature at 4080 Mc/s.&quot; The Astrophysical Journal, 142, 419-421.</p>
                 </div>
@@ -2062,11 +1907,16 @@
                     <p><strong>[23]</strong> Amaro-Seoane, P., et al. (2017). &quot;Laser Interferometer Space Antenna.&quot; arXiv preprint arXiv:1702.00786.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Cross-Frequency Validation</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Cross-Frequency Validation</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Bennett, C. L., et al. (2003). &quot;First-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: Foreground emission.&quot; The Astrophysical Journal Supplement Series, 148(1), 97-117.</p>
                 </div>
@@ -2140,11 +1990,16 @@
                     <p><strong>[24]</strong> Abazajian, K., et al. (2019). &quot;CMB-S4 science case, reference design, and project plan.&quot; arXiv preprint arXiv:1907.04473.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Quantum Memory Matrix: A Theoretical Framework</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Quantum Memory Matrix: A Theoretical Framework</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Preußischen Akademie der Wissenschaften zu Berlin, 844-847.</p>
                 </div>
@@ -2194,11 +2049,16 @@
                     <p><strong>[16]</strong> Rovelli, C. (2004). Quantum Gravity. Cambridge University Press.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Mathematical Constants In Physics</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Mathematical Constants In Physics</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Nakahara, M. (2003). Geometry, Topology and Physics, 2nd Edition. Taylor &amp; Francis.</p>
                 </div>
@@ -2281,11 +2141,16 @@
                     <p><strong>[27]</strong> Antonelli, M., et al. (2023). &quot;Stochastic processes for pulsar timing noise: fluctuations in the internal and external torques.&quot; Monthly Notices of the Royal Astronomical Society, 520(2), 2813-2828.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Information And Spacetime</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Information And Spacetime</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Einstein, A. (1915). &quot;Die Feldgleichungen der Gravitation.&quot; Sitzungsberichte der Preussischen Akademie der Wissenschaften zu Berlin, 844-847.</p>
                 </div>
@@ -2344,11 +2209,16 @@
                     <p><strong>[19]</strong> Hawking, S. W. (1976). &quot;Breakdown of predictability in gravitational collapse.&quot; Physical Review D, 14(10), 2460-2473.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Universal Precision: The Fine-Tuning Mystery</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Universal Precision: The Fine-Tuning Mystery</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Kunkel, T. A. (2004). &quot;DNA replication fidelity.&quot; Annual Review of Biochemistry, 73, 681-702.</p>
                 </div>
@@ -2494,11 +2364,16 @@
                     <p><strong>[48]</strong> Ade, P.A., et al. (2016). &quot;Planck 2015 results. XX. Constraints on inflation.&quot; Astronomy &amp; Astrophysics, 594, A20.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Vision As Reality Construction</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Vision As Reality Construction</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Koch, K., et al. (2006). &quot;How much the eye tells the brain.&quot; Current Biology, 16(14), 1428-1434.</p>
                 </div>
@@ -2551,11 +2426,16 @@
                     <p><strong>[17]</strong> Roelfsema, P. R., et al. (2018). &quot;Basic neuroscience research with nonhuman primates: a small but indispensable component of biomedical research.&quot; Neuron, 100(1), 213-221.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Quantum Optimization: From Theory To Technology</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Quantum Optimization: From Theory To Technology</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Preskill, J. (2018). &quot;Quantum computing in the NISQ era and beyond.&quot; Quantum, 2, 79.</p>
                 </div>
@@ -2653,11 +2533,16 @@
                     <p><strong>[32]</strong> Engel, G. S., et al. (2007). &quot;Evidence for wavelike energy transfer through quantum coherence in photosynthetic systems.&quot; Nature, 446(7137), 782-786.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Black Hole Information: The Ultimate Test</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Black Hole Information: The Ultimate Test</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Hawking, S. W. (1974). &quot;Black hole explosions?&quot; Nature, 248(5443), 30-31.</p>
                 </div>
@@ -2689,11 +2574,16 @@
                     <p><strong>[10]</strong> Brown, A. R., et al. (2019). &quot;Quantum gravity in the lab: Teleportation by size and traversable wormholes.&quot; arXiv preprint arXiv:1911.06314.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Quantum Information Scrambling: How Fast Does Information Spread?</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Quantum Information Scrambling: How Fast Does Information Spread?</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Hosur, P., et al. (2016). &quot;Chaos in quantum channels.&quot; Journal of High Energy Physics, 2016(2), 1-49.</p>
                 </div>
@@ -2740,11 +2630,16 @@
                     <p><strong>[15]</strong> Zhu, G., et al. (2016). &quot;Measurement of many-body chaos using a quantum clock.&quot; Physical Review A, 94(6), 062329.</p>
                 </div>
             </div>
+            </div>
         </div>
 
         <div class="references-section">
-            <h2>Quantum Error Correction: Information Preservation In Practice</h2>
-            <div class="references-list">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Quantum Error Correction: Information Preservation In Practice</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="references-list">
                 <div class="reference-item">
                     <p><strong>[1]</strong> Google Quantum AI and Collaborators (2024). &quot;Quantum error correction below the surface code threshold.&quot; Nature, 595, 383-389.</p>
                 </div>
@@ -2781,45 +2676,93 @@
             </div>
         </div>
 
-    </main>
+    
+      </div>
+    </div>
 
-    <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
 
+    <section class="social-section">
+      <div class="social-container">
+        <div class="social-content">
+          <div class="quick-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="about-page.html">About</a></li>
+              <li><a href="events.html">Events</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contribute.html">Contribute</a></li>
+            </ul>
+          </div>
+
+          <div class="social-main">
+            <h2 data-aos="fade-up">Stay Connected</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Join our community to discuss the framework, ask questions, and stay updated on new developments.</p>
+
+            <div class="social-buttons" data-aos="fade-up" data-aos-delay="200">
+              <a href="#" class="social-btn instagram">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                Instagram
+              </a>
+
+              <a href="#" class="social-btn youtube">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+              </a>
+
+              <a href="/cdn-cgi/l/email-protection#f891969e97b89a919f8c979dd69b9795" class="social-btn email">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                Email Us
+              </a>
+            </div>
+          </div>
+
+          <div class="quick-links">
+            <h3>More Links</h3>
+            <ul>
+              <li><a href="https://michaelk.baines.com">Author's Website</a></li>
+              <li><a href="news.html">News</a></li>
+              <li><a href="simulations.html">Simulations</a></li>
+              <li><a href="framework.html">Framework</a></li>
+              <li><a href="legal.html">Legal</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
+        </div>
+      </div>
+    </section>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Hamburger menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
-        });
+    AOS.init();
 
-        // Back to top button
-        window.addEventListener('scroll', function() {
-            const backToTop = document.getElementById('backToTop');
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
+    // Toggle reference sections
+    function toggleSection(header) {
+        const section = header.parentElement;
+        section.classList.toggle('active');
+    }
 
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+    window.addEventListener('scroll', function() {
+        const backToTop = document.getElementById('backToTop');
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
         }
+    });
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     </script>
 </body>
 </html>
