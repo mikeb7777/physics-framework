@@ -1,618 +1,1 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legal & Policies - Ic² Research Institute</title>
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            background: #f8f9fa;
-            color: #2c3e50;
-        }
-        
-        /* Top Navigation */
-        .top-nav {
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .site-title {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #2c3e50;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .site-title .logo-mark {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: 800;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .nav-links a:hover {
-            color: #dc143c;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 140px 40px 80px;
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.05) 100%);
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            font-weight: 700;
-        }
-        
-        .hero h1 .highlight {
-            color: #dc143c;
-        }
-        
-        .hero-tagline {
-            font-size: 1.2em;
-            color: #7f8c8d;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Main Content */
-        .container {
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 0 40px;
-        }
-        
-        /* Quick Links */
-        .quick-links {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        
-        .quick-links h2 {
-            font-size: 1.8em;
-            margin-bottom: 25px;
-            color: #2c3e50;
-            text-align: center;
-        }
-        
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .link-item {
-            padding: 20px;
-            background: rgba(220, 20, 60, 0.05);
-            border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: #dc143c;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .link-item:hover {
-            background: #dc143c;
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        /* Legal Sections */
-        .legal-section {
-            background: white;
-            border-radius: 12px;
-            padding: 50px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        
-        .legal-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #2c3e50;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #dc143c;
-        }
-        
-        .legal-section .last-updated {
-            color: #7f8c8d;
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-        
-        .legal-section h3 {
-            font-size: 1.8em;
-            margin-top: 35px;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        
-        .legal-section h4 {
-            font-size: 1.3em;
-            margin-top: 25px;
-            margin-bottom: 12px;
-            color: #dc143c;
-        }
-        
-        .legal-section p {
-            margin-bottom: 20px;
-            color: #555;
-            line-height: 1.8;
-        }
-        
-        .legal-section ul {
-            margin: 20px 0;
-            padding-left: 30px;
-        }
-        
-        .legal-section li {
-            margin-bottom: 12px;
-            color: #555;
-            line-height: 1.7;
-        }
-        
-        .legal-section strong {
-            color: #2c3e50;
-        }
-        
-        .important-notice {
-            background: rgba(220, 20, 60, 0.05);
-            border-left: 4px solid #dc143c;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 4px;
-        }
-        
-        .important-notice p {
-            margin-bottom: 10px;
-        }
-        
-        .important-notice p:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* Contact Box */
-        .contact-box {
-            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 60px;
-        }
-        
-        .contact-box h3 {
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-        
-        .contact-box p {
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            opacity: 0.9;
-        }
-        
-        .contact-box a {
-            display: inline-block;
-            padding: 12px 35px;
-            background: white;
-            color: #dc143c;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-        
-        .contact-box a:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Footer */
-        .footer {
-            background: #2c3e50;
-            color: white;
-            padding: 60px 40px 30px;
-            margin-top: 80px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
-        
-        .footer-section a:hover {
-            color: #dc143c;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
-        }
-        
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            
-            .legal-section {
-                padding: 30px 25px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="top-nav">
-        <div class="nav-container">
-            <a href="index.html" class="site-title">
-                <span class="logo-mark">Ic²</span>
-                Research Institute
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="contribute.html">Support</a></li>
-                <li><a href="book.html">The Book</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1 data-aos="fade-up">Legal & <span class="highlight">Policies</span></h1>
-        <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">Our commitment to transparency extends to our legal policies and terms</p>
-    </section>
-
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Quick Links -->
-        <div class="quick-links" data-aos="fade-up">
-            <h2>Quick Navigation</h2>
-            <div class="links-grid">
-                <a href="#terms" class="link-item">Terms of Use</a>
-                <a href="#privacy" class="link-item">Privacy Policy</a>
-                <a href="#disclaimer" class="link-item">Research Disclaimer</a>
-                <a href="#copyright" class="link-item">Copyright & Licensing</a>
-            </div>
-        </div>
-
-        <!-- Terms of Use -->
-        <div id="terms" class="legal-section" data-aos="fade-up">
-            <h2>Terms of Use</h2>
-            <p class="last-updated">Last Updated: October 31, 2025</p>
-
-            <h3>1. Acceptance of Terms</h3>
-            <p>By accessing and using the Ic² Research Institute website and resources, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use our services.</p>
-
-            <h3>2. Nature of the Institute</h3>
-            <p>Ic² Research Institute is an independent research platform, not a registered legal entity or non-profit organization. We operate as a transparent, community-driven initiative focused on consciousness and computation research.</p>
-
-            <div class="important-notice">
-                <p><strong>Important:</strong> Ic² Research Institute is not a registered 501(c)(3) organization. Donations are not tax-deductible. We maintain this status to ensure complete independence and transparency.</p>
-            </div>
-
-            <h3>3. Use of Research Materials</h3>
-            <p>All research published by Ic² Research Institute is provided under open licenses unless otherwise stated. You are free to:</p>
-            <ul>
-                <li>Read, download, and share our research materials</li>
-                <li>Use our data for academic or personal research</li>
-                <li>Build upon our work with proper attribution</li>
-                <li>Reproduce content with appropriate citations</li>
-            </ul>
-
-            <h3>4. Community Standards</h3>
-            <p>When participating in discussions, events, or collaborative projects, users agree to:</p>
-            <ul>
-                <li>Engage respectfully with all community members</li>
-                <li>Provide constructive feedback and criticism</li>
-                <li>Maintain scientific rigor and intellectual honesty</li>
-                <li>Respect intellectual property and proper attribution</li>
-                <li>Refrain from harassment, discrimination, or abusive behavior</li>
-            </ul>
-
-            <h3>5. No Professional Advice</h3>
-            <p>Content on this website is for informational and educational purposes only. It does not constitute professional scientific, medical, legal, or financial advice. Always consult qualified professionals for specific guidance.</p>
-
-            <h3>6. External Links</h3>
-            <p>Our website may contain links to external sites. We are not responsible for the content, accuracy, or practices of these third-party websites.</p>
-
-            <h3>7. Modifications</h3>
-            <p>We reserve the right to modify these terms at any time. Changes will be posted on this page with an updated date. Continued use of our services constitutes acceptance of modified terms.</p>
-        </div>
-
-        <!-- Privacy Policy -->
-        <div id="privacy" class="legal-section" data-aos="fade-up">
-            <h2>Privacy Policy</h2>
-            <p class="last-updated">Last Updated: October 31, 2025</p>
-
-            <h3>1. Our Commitment to Privacy</h3>
-            <p>Ic² Research Institute is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information.</p>
-
-            <h3>2. Information We Collect</h3>
-            
-            <h4>Information You Provide</h4>
-            <ul>
-                <li>Email addresses for newsletter subscriptions</li>
-                <li>Contact information when you reach out to us</li>
-                <li>Donation information (processed through PayPal)</li>
-                <li>Research contributions and collaboration proposals</li>
-            </ul>
-
-            <h4>Automatically Collected Information</h4>
-            <ul>
-                <li>Website usage data and analytics (anonymized)</li>
-                <li>Browser type and device information</li>
-                <li>IP addresses (anonymized for security purposes)</li>
-                <li>Pages visited and time spent on site</li>
-            </ul>
-
-            <h3>3. How We Use Your Information</h3>
-            <p>We use collected information to:</p>
-            <ul>
-                <li>Send research updates and newsletters (opt-in only)</li>
-                <li>Respond to inquiries and support requests</li>
-                <li>Improve website functionality and user experience</li>
-                <li>Analyze site usage to enhance content</li>
-                <li>Process donations securely</li>
-            </ul>
-
-            <h3>4. Data Sharing and Third Parties</h3>
-            <p>We do not sell, rent, or trade your personal information. We may share data with:</p>
-            <ul>
-                <li><strong>PayPal:</strong> For secure donation processing</li>
-                <li><strong>Analytics Services:</strong> Anonymous usage data for site improvement</li>
-                <li><strong>Email Service Providers:</strong> For newsletter delivery (opt-in only)</li>
-            </ul>
-
-            <div class="important-notice">
-                <p><strong>Your Rights:</strong> You have the right to access, correct, or delete your personal information at any time. Contact us to exercise these rights.</p>
-            </div>
-
-            <h3>5. Cookies and Tracking</h3>
-            <p>We use minimal cookies for essential website functionality and anonymous analytics. You can disable cookies in your browser settings, though this may affect site functionality.</p>
-
-            <h3>6. Data Security</h3>
-            <p>We implement industry-standard security measures to protect your information. However, no internet transmission is 100% secure. Use our services at your own discretion.</p>
-
-            <h3>7. Children's Privacy</h3>
-            <p>Our website is not directed at children under 13. We do not knowingly collect information from minors.</p>
-
-            <h3>8. International Users</h3>
-            <p>By using our services, you consent to the transfer and processing of your data in the United States.</p>
-
-            <h3>9. Contact for Privacy Concerns</h3>
-            <p>For privacy-related questions or to exercise your data rights, contact us at: <strong>privacy@ic2institute.org</strong></p>
-        </div>
-
-        <!-- Research Disclaimer -->
-        <div id="disclaimer" class="legal-section" data-aos="fade-up">
-            <h2>Research Disclaimer</h2>
-            <p class="last-updated">Last Updated: October 31, 2025</p>
-
-            <h3>1. Nature of Research</h3>
-            <p>Research published by Ic² Research Institute represents theoretical and experimental work in consciousness and computation science. All findings should be understood within the context of ongoing scientific inquiry.</p>
-
-            <h3>2. Validation and Predictions</h3>
-            <p>Claims of "validated predictions" refer to experimental or observational results that appear consistent with our theoretical framework. This does not constitute definitive proof, and alternative explanations may exist.</p>
-
-            <div class="important-notice">
-                <p><strong>Scientific Method:</strong> We document all predictions with publication dates to establish scientific priority. We openly acknowledge both successes and failures in our research program.</p>
-            </div>
-
-            <h3>3. No Warranties</h3>
-            <p>Research materials are provided "as is" without warranties of any kind, either express or implied. We make no guarantees about:</p>
-            <ul>
-                <li>Accuracy or completeness of information</li>
-                <li>Fitness for any particular purpose</li>
-                <li>Non-infringement of intellectual property</li>
-                <li>Future experimental outcomes</li>
-            </ul>
-
-            <h3>4. Experimental Replication</h3>
-            <p>Users attempting to replicate our research do so at their own risk. We provide methodologies for transparency but cannot guarantee specific results.</p>
-
-            <h3>5. Peer Review Status</h3>
-            <p>Unless explicitly stated, materials may not have undergone formal peer review. We clearly mark the review status of all publications.</p>
-
-            <h3>6. Updates and Corrections</h3>
-            <p>We update research materials as new information becomes available. Users should check publication dates and version histories.</p>
-
-            <h3>7. Limitation of Liability</h3>
-            <p>Ic² Research Institute and its contributors shall not be liable for any damages arising from the use of our research, materials, or website.</p>
-        </div>
-
-        <!-- Copyright & Licensing -->
-        <div id="copyright" class="legal-section" data-aos="fade-up">
-            <h2>Copyright & Licensing</h2>
-            <p class="last-updated">Last Updated: October 31, 2025</p>
-
-            <h3>1. Open Science Commitment</h3>
-            <p>Ic² Research Institute is committed to open science. Most of our content is freely available under permissive licenses.</p>
-
-            <h3>2. Default License</h3>
-            <p>Unless otherwise specified, research publications are licensed under <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong>. This means you can:</p>
-            <ul>
-                <li>Share — copy and redistribute the material</li>
-                <li>Adapt — remix, transform, and build upon the material</li>
-                <li>For any purpose, including commercially</li>
-            </ul>
-            <p><strong>Requirement:</strong> You must provide appropriate attribution, link to the license, and indicate if changes were made.</p>
-
-            <h3>3. Code and Software</h3>
-            <p>Open-source code is typically licensed under the <strong>MIT License</strong> unless otherwise stated in individual repositories.</p>
-
-            <h3>4. Data Licensing</h3>
-            <p>Research data is generally released under <strong>CC0 1.0 Universal (CC0)</strong> — dedicated to the public domain with no restrictions.</p>
-
-            <h3>5. The Big TOE Book</h3>
-            <p>The book "A Quest for The Big TOE" has separate copyright provisions. See the book's dedicated legal page for specific terms.</p>
-
-            <h3>6. Attribution Guidelines</h3>
-            <p>When citing our work, please include:</p>
-            <ul>
-                <li>Title of the work</li>
-                <li>Author name(s)</li>
-                <li>Publication date</li>
-                <li>URL to the source material</li>
-                <li>License information</li>
-            </ul>
-
-            <h3>7. Third-Party Content</h3>
-            <p>Some content may include third-party materials with different licensing terms. These are clearly marked with appropriate attributions.</p>
-
-            <h3>8. Copyright Infringement</h3>
-            <p>If you believe content on our site infringes your copyright, contact us at <strong>legal@ic2institute.org</strong> with:</p>
-            <ul>
-                <li>Description of the copyrighted work</li>
-                <li>Location of the allegedly infringing content</li>
-                <li>Your contact information</li>
-                <li>A statement of good faith belief</li>
-            </ul>
-
-            <h3>9. Trademarks</h3>
-            <p>The Ic² name and logo are proprietary to Ic² Research Institute. Use for commentary or reference is permitted; commercial use requires permission.</p>
-        </div>
-
-        <!-- Contact Box -->
-        <div class="contact-box" data-aos="fade-up">
-            <h3>Have Questions?</h3>
-            <p>We're here to help clarify any legal or policy questions</p>
-            <a href="mailto:legal@ic2institute.org">Contact Legal Team</a>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Ic² Research Institute</h3>
-                <p>Advancing open, transparent research in consciousness and computation.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="about.html">About</a>
-                <a href="validation.html">Validation</a>
-                <a href="papers.html">Publications</a>
-                <a href="contribute.html">Support Us</a>
-            </div>
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <a href="book.html">The Big TOE Book</a>
-                <a href="faq.html">FAQ</a>
-                <a href="legal.html">Legal</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <a href="#">GitHub</a>
-                <a href="#">Twitter</a>
-                <a href="#">YouTube</a>
-                <a href="#">Email Updates</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8" />  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  <title>Legal & Policies - Ic² Research Institute</title>  <!-- AOS -->  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">  <style>    /* Basic reset */    * { margin: 0; padding: 0; box-sizing: border-box; }    :root {      --primary-red: #dc143c;      --primary-dark: #8b0000;      --text-dark: #2c3e50;      --muted: #7f8c8d;      --bg: #f8f9fa;      --max-width: 1200px;    }    body {      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;      line-height: 1.6;      background: var(--bg);      color: var(--text-dark);    }    /* Header (copied/adapted from events.html pattern) */    .site-header {      background: white;      border-bottom: 1px solid #e0e0e0;      position: sticky;      top: 0;      z-index: 1000;      box-shadow: 0 2px 5px rgba(0,0,0,0.05);    }    .header-container {      max-width: var(--max-width);      margin: 0 auto;      padding: 1rem 2rem;      display: flex;      justify-content: space-between;      align-items: center;      position: relative; /* for centered logo */    }    .header-logos {      display: flex;      align-items: center;      width: 100%;      justify-content: space-between;      gap: 1rem;    }    .header-logo { display:flex; align-items:center; }    .header-logo.left { justify-content:flex-start; }    .header-logo.right { justify-content:flex-end; }    .header-logo img { height:50px; width:auto; display:block; }    /* Center: framework logo, absolutely centered */    .header-logo.center {      position: absolute;      left: 50%;      transform: translateX(-50%);      pointer-events: auto;      text-align: center;    }    .header-logo.center img { height:60px; }    /* Hamburger & Mobile Menu */    .hamburger { display: none; flex-direction: column; gap: 4px; padding: 8px; cursor: pointer; }    .hamburger span { width: 26px; height: 3px; background: var(--primary-dark); border-radius: 3px; transition: all .3s ease; }    .mobile-menu {      display: none;      position: fixed;      top: 72px;      left: 0;      right: 0;      background: white;      border-bottom: 1px solid #e0e0e0;      box-shadow: 0 4px 12px rgba(0,0,0,0.08);      z-index: 999;      max-height: 0;      overflow: hidden;      transition: max-height .3s ease;    }    .mobile-menu.active { max-height: 600px; }    .mobile-menu ul { list-style: none; padding: 1rem; }    .mobile-menu a { display:block; padding:.75rem 1rem; color: var(--text-dark); text-decoration: none; }    /* Page Header (matched to events.html) */    .page-header {      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);      padding: 4rem 2rem;      text-align: center;      color: white;    }    .page-header h1 {      font-size: 2.5rem;      margin-bottom: 0.75rem;    }    .page-header p {      font-size: 1.05rem;      opacity: 0.95;      max-width: 900px;      margin: 0 auto;    }    /* Main content & existing styles (kept/adapted) */    .container {      max-width: 1000px;      margin: 60px auto;      padding: 0 40px;    }    .quick-links {      background: white;      border-radius: 12px;      padding: 40px;      margin-bottom: 40px;      box-shadow: 0 4px 15px rgba(0,0,0,0.08);    }    .quick-links h2 { font-size: 1.8em; margin-bottom: 25px; color: var(--text-dark); text-align:center; }    .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }    .link-item {      padding: 20px;      background: rgba(220, 20, 60, 0.05);      border-radius: 8px;      text-align: center;      color: var(--primary-red);      font-weight: 600;      text-decoration: none;      transition: all .25s;    }    .link-item:hover { background: var(--primary-red); color: white; transform: translateY(-3px); }    .legal-section {      background: white;      border-radius: 12px;      padding: 50px;      margin-bottom: 30px;      box-shadow: 0 4px 15px rgba(0,0,0,0.08);    }    .legal-section h2 {      font-size: 2.5em;      margin-bottom: 15px;      color: var(--text-dark);      padding-bottom: 15px;      border-bottom: 3px solid var(--primary-red);    }    .legal-section .last-updated { color: var(--muted); font-style: italic; margin-bottom: 30px; }    .legal-section h3 { font-size: 1.8em; margin-top: 35px; margin-bottom: 15px; color: var(--text-dark); }    .legal-section h4 { font-size: 1.3em; margin-top: 25px; margin-bottom: 12px; color: var(--primary-red); }    .legal-section p { margin-bottom: 20px; color: #555; line-height: 1.8; }    .legal-section ul { margin: 20px 0; padding-left: 30px; }    .legal-section li { margin-bottom: 12px; color: #555; line-height: 1.7; }    .important-notice {      background: rgba(220, 20, 60, 0.05);      border-left: 4px solid var(--primary-red);      padding: 20px;      margin: 25px 0;      border-radius: 4px;    }    .contact-box {      background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-dark) 100%);      color: white;      padding: 40px;      border-radius: 12px;      text-align: center;      margin-top: 60px;    }    .contact-box h3 { font-size: 2em; margin-bottom: 15px; }    .contact-box p { font-size: 1.1em; margin-bottom: 25px; opacity: 0.95; }    .contact-box a {      display: inline-block;      padding: 12px 35px;      background: white;      color: var(--primary-red);      text-decoration: none;      border-radius: 50px;      font-weight: 700;      transition: all .25s;    }    .contact-box a:hover { transform: scale(1.04); }    /* Footer (events.html style) */    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; margin-top: 60px; }    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }    .footer-section h3 { margin-bottom: 0.75rem; font-size: 1.1rem; color: white; }    .footer-section a, .footer-section p { color: rgba(255,255,255,0.8); text-decoration: none; display:block; margin-bottom: .5rem; }    .footer-section a:hover { color: white; }    .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: rgba(255,255,255,0.6); font-size: 0.9rem; }    /* Responsive rules */    @media (max-width: 968px) {      .page-header h1 { font-size: 1.8rem; }      .legal-section { padding: 30px 25px; }      .header-logos { display: none; }      .hamburger { display: flex; }      .mobile-menu { display: block; }      .footer-container { grid-template-columns: 1fr; }      /* on small screens, center logo flows inline */      .header-logo.center { position: static; transform: none; margin: 0 auto; }      .header-logo.center img { height: 50px; }    }    @media (max-width: 480px) {      .header-logo img { height: 40px; }    }  </style></head><body>  <!-- Header -->  <header class="site-header">    <div class="header-container">      <div class="header-logos">        <div class="header-logo left">          <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>        </div>        <div class="header-logo center">          <a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a>        </div>        <div class="header-logo right">          <a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a>        </div>      </div>      <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">        <span></span><span></span><span></span>      </div>    </div>  </header>  <!-- Mobile Menu -->  <div class="mobile-menu" aria-hidden="true">    <ul>      <li><a href="index.html">Home</a></li>      <li><a href="framework.html">Framework</a></li>      <li><a href="book.html">Big Toe</a></li>      <li><a href="blog.html">Blog</a></li>      <li><a href="validation.html">Validation</a></li>      <li><a href="testing-schedule.html">Testing</a></li>      <li><a href="results.html">Results</a></li>      <li><a href="discussions-page.html">Discussion</a></li>      <li><a href="about.html">About</a></li>      <li><a href="contribute.html">Contribute</a></li>      <li><a href="events.html">Events</a></li>      <li><a href="contact.html">Contact</a></li>    </ul>  </div>  <!-- Page Header (now matches events.html style) -->  <section class="page-header">    <h1 data-aos="fade-up">Legal & Policies</h1>    <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">Our commitment to transparency extends to our legal policies and terms</p>  </section>  <!-- Main Content -->  <div class="container">    <div class="quick-links" data-aos="fade-up">      <h2>Quick Navigation</h2>      <div class="links-grid">        <a href="#terms" class="link-item">Terms of Use</a>        <a href="#privacy" class="link-item">Privacy Policy</a>        <a href="#disclaimer" class="link-item">Research Disclaimer</a>        <a href="#copyright" class="link-item">Copyright & Licensing</a>      </div>    </div>    <!-- Terms of Use -->    <div id="terms" class="legal-section" data-aos="fade-up">      <h2>Terms of Use</h2>      <p class="last-updated">Last Updated: October 31, 2025</p>      <h3>1. Acceptance of Terms</h3>      <p>By accessing and using the Ic² Research Institute website and resources, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use our services.</p>      <h3>2. Nature of the Institute</h3>      <p>Ic² Research Institute is an independent research platform, not a registered legal entity or non-profit organization. We operate as a transparent, community-driven initiative focused on consciousness and computation research.</p>      <div class="important-notice">        <p><strong>Important:</strong> Ic² Research Institute is not a registered 501(c)(3) organization. Donations are not tax-deductible. We maintain this status to ensure complete independence and transparency.</p>      </div>      <h3>3. Use of Research Materials</h3>      <p>All research published by Ic² Research Institute is provided under open licenses unless otherwise stated. You are free to:</p>      <ul>        <li>Read, download, and share our research materials</li>        <li>Use our data for academic or personal research</li>        <li>Build upon our work with proper attribution</li>        <li>Reproduce content with appropriate citations</li>      </ul>      <h3>4. Community Standards</h3>      <p>When participating in discussions, events, or collaborative projects, users agree to:</p>      <ul>        <li>Engage respectfully with all community members</li>        <li>Provide constructive feedback and criticism</li>        <li>Maintain scientific rigor and intellectual honesty</li>        <li>Respect intellectual property and proper attribution</li>        <li>Refrain from harassment, discrimination, or abusive behavior</li>      </ul>      <h3>5. No Professional Advice</h3>      <p>Content on this website is for informational and educational purposes only. It does not constitute professional scientific, medical, legal, or financial advice. Always consult qualified professionals for specific guidance.</p>      <h3>6. External Links</h3>      <p>Our website may contain links to external sites. We are not responsible for the content, accuracy, or practices of these third-party websites.</p>      <h3>7. Modifications</h3>      <p>We reserve the right to modify these terms at any time. Changes will be posted on this page with an updated date. Continued use of our services constitutes acceptance of modified terms.</p>    </div>    <!-- Privacy Policy -->    <div id="privacy" class="legal-section" data-aos="fade-up">      <h2>Privacy Policy</h2>      <p class="last-updated">Last Updated: October 31, 2025</p>      <h3>1. Our Commitment to Privacy</h3>      <p>Ic² Research Institute is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information.</p>      <h3>2. Information We Collect</h3>      <h4>Information You Provide</h4>      <ul>        <li>Email addresses for newsletter subscriptions</li>        <li>Contact information when you reach out to us</li>        <li>Donation information (processed through PayPal)</li>        <li>Research contributions and collaboration proposals</li>      </ul>      <h4>Automatically Collected Information</h4>      <ul>        <li>Website usage data and analytics (anonymized)</li>        <li>Browser type and device information</li>        <li>IP addresses (anonymized for security purposes)</li>        <li>Pages visited and time spent on site</li>      </ul>      <h3>3. How We Use Your Information</h3>      <p>We use collected information to:</p>      <ul>        <li>Send research updates and newsletters (opt-in only)</li>        <li>Respond to inquiries and support requests</li>        <li>Improve website functionality and user experience</li>        <li>Analyze site usage to enhance content</li>        <li>Process donations securely</li>      </ul>      <h3>4. Data Sharing and Third Parties</h3>      <p>We do not sell, rent, or trade your personal information. We may share data with:</p>      <ul>        <li><strong>PayPal:</strong> For secure donation processing</li>        <li><strong>Analytics Services:</strong> Anonymous usage data for site improvement</li>        <li><strong>Email Service Providers:</strong> For newsletter delivery (opt-in only)</li>      </ul>      <div class="important-notice">        <p><strong>Your Rights:</strong> You have the right to access, correct, or delete your personal information at any time. Contact us to exercise these rights.</p>      </div>      <h3>5. Cookies and Tracking</h3>      <p>We use minimal cookies for essential website functionality and anonymous analytics. You can disable cookies in your browser settings, though this may affect site functionality.</p>      <h3>6. Data Security</h3>      <p>We implement industry-standard security measures to protect your information. However, no internet transmission is 100% secure. Use our services at your own discretion.</p>      <h3>7. Children's Privacy</h3>      <p>Our website is not directed at children under 13. We do not knowingly collect information from minors.</p>      <h3>8. International Users</h3>      <p>By using our services, you consent to the transfer and processing of your data in the United States.</p>      <h3>9. Contact for Privacy Concerns</h3>      <p>For privacy-related questions or to exercise your data rights, contact us at: <strong>privacy@ic2institute.org</strong></p>    </div>    <!-- Research Disclaimer -->    <div id="disclaimer" class="legal-section" data-aos="fade-up">      <h2>Research Disclaimer</h2>      <p class="last-updated">Last Updated: October 31, 2025</p>      <h3>1. Nature of Research</h3>      <p>Research published by Ic² Research Institute represents theoretical and experimental work in consciousness and computation science. All findings should be understood within the context of ongoing scientific inquiry.</p>      <h3>2. Validation and Predictions</h3>      <p>Claims of "validated predictions" refer to experimental or observational results that appear consistent with our theoretical framework. This does not constitute definitive proof, and alternative explanations may exist.</p>      <div class="important-notice">        <p><strong>Scientific Method:</strong> We document all predictions with publication dates to establish scientific priority. We openly acknowledge both successes and failures in our research program.</p>      </div>      <h3>3. No Warranties</h3>      <p>Research materials are provided "as is" without warranties of any kind, either express or implied. We make no guarantees about:</p>      <ul>        <li>Accuracy or completeness of information</li>        <li>Fitness for any particular purpose</li>        <li>Non-infringement of intellectual property</li>        <li>Future experimental outcomes</li>      </ul>      <h3>4. Experimental Replication</h3>      <p>Users attempting to replicate our research do so at their own risk. We provide methodologies for transparency but cannot guarantee specific results.</p>      <h3>5. Peer Review Status</h3>      <p>Unless explicitly stated, materials may not have undergone formal peer review. We clearly mark the review status of all publications.</p>      <h3>6. Updates and Corrections</h3>      <p>We update research materials as new information becomes available. Users should check publication dates and version histories.</p>      <h3>7. Limitation of Liability</h3>      <p>Ic² Research Institute and its contributors shall not be liable for any damages arising from the use of our research, materials, or website.</p>    </div>    <!-- Copyright & Licensing -->    <div id="copyright" class="legal-section" data-aos="fade-up">      <h2>Copyright & Licensing</h2>      <p class="last-updated">Last Updated: October 31, 2025</p>      <h3>1. Open Science Commitment</h3>      <p>Ic² Research Institute is committed to open science. Most of our content is freely available under permissive licenses.</p>      <h3>2. Default License</h3>      <p>Unless otherwise specified, research publications are licensed under <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong>. This means you can:</p>      <ul>        <li>Share — copy and redistribute the material</li>        <li>Adapt — remix, transform, and build upon the material</li>        <li>For any purpose, including commercially</li>      </ul>      <p><strong>Requirement:</strong> You must provide appropriate attribution, link to the license, and indicate if changes were made.</p>      <h3>3. Code and Software</h3>      <p>Open-source code is typically licensed under the <strong>MIT License</strong> unless otherwise stated in individual repositories.</p>      <h3>4. Data Licensing</h3>      <p>Research data is generally released under <strong>CC0 1.0 Universal (CC0)</strong> — dedicated to the public domain with no restrictions.</p>      <h3>5. The Big TOE Book</h3>      <p>The book "A Quest for The Big TOE" has separate copyright provisions. See the book's dedicated legal page for specific terms.</p>      <h3>6. Attribution Guidelines</h3>      <p>When citing our work, please include:</p>      <ul>        <li>Title of the work</li>        <li>Author name(s)</li>        <li>Publication date</li>        <li>URL to the source material</li>        <li>License information</li>      </ul>      <h3>7. Third-Party Content</h3>      <p>Some content may include third-party materials with different licensing terms. These are clearly marked with appropriate attributions.</p>      <h3>8. Copyright Infringement</h3>      <p>If you believe content on our site infringes your copyright, contact us at <strong>legal@ic2institute.org</strong> with:</p>      <ul>        <li>Description of the copyrighted work</li>        <li>Location of the allegedly infringing content</li>        <li>Your contact information</li>        <li>A statement of good faith belief</li>      </ul>      <h3>9. Trademarks</h3>      <p>The Ic² name and logo are proprietary to Ic² Research Institute. Use for commentary or reference is permitted; commercial use requires permission.</p>    </div>    <!-- Contact Box -->    <div class="contact-box" data-aos="fade-up">      <h3>Have Questions?</h3>      <p>We're here to help clarify any legal or policy questions</p>      <a href="mailto:legal@ic2institute.org">Contact Legal Team</a>    </div>  </div>  <!-- Footer (events.html style) -->  <footer>    <div class="footer-container">      <div class="footer-section">        <h3>Ic² Research Institute</h3>        <p>Advancing open, transparent research in consciousness and computation.</p>      </div>      <div class="footer-section">        <h3>Quick Links</h3>        <a href="about.html">About</a>        <a href="validation.html">Validation</a>        <a href="papers.html">Publications</a>        <a href="contribute.html">Support Us</a>      </div>      <div class="footer-section">        <h3>Resources</h3>        <a href="book.html">The Big TOE Book</a>        <a href="faq.html">FAQ</a>        <a href="legal.html">Legal</a>        <a href="contact.html">Contact</a>      </div>      <div class="footer-section">        <h3>Connect</h3>        <a href="#">GitHub</a>        <a href="#">Twitter</a>        <a href="#">YouTube</a>        <a href="#">Email Updates</a>      </div>    </div>    <div class="footer-bottom">      <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">Terms &amp; Conditions</a></p>    </div>  </footer>  <!-- Scripts -->  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  <script>    AOS.init({ duration: 800, once: true, offset: 100 });    // Hamburger menu toggle    const hamburger = document.querySelector('.hamburger');    const mobileMenu = document.querySelector('.mobile-menu');    if (hamburger && mobileMenu) {      hamburger.addEventListener('click', function() {        this.classList.toggle('active');        mobileMenu.classList.toggle('active');      });      // close mobile menu on link click      document.querySelectorAll('.mobile-menu a').forEach(link => {        link.addEventListener('click', function() {          hamburger.classList.remove('active');          mobileMenu.classList.remove('active');        });      });    }    // Smooth scroll for anchor links    document.querySelectorAll('a[href^="#"]').forEach(anchor => {      anchor.addEventListener('click', function (e) {        e.preventDefault();        const target = document.querySelector(this.getAttribute('href'));        if (target) {          target.scrollIntoView({ behavior: 'smooth', block: 'start' });        }      });    });  </script></body></html>
