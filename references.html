@@ -90,6 +90,36 @@
       background: rgba(255,255,255,0.22);
     }
 
+    /* Hamburger Menu Icon */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
     .page-header {
       background: var(--primary-color);
       padding: 2rem 2rem;
@@ -308,13 +338,78 @@
     }
 
     @media (max-width: 768px) {
-      .social-content { grid-template-columns: 1fr; gap: 1rem; }
-      .header-container { padding: 1rem; flex-direction: column; gap: 1rem; }
-      .main-navigation ul { flex-direction: column; gap: 0.75rem; }
-      .page-header h1 { font-size: 2rem; }
-      .content { padding: 2rem 1rem; }
-      .references-section { padding: 1.5rem; }
-      .references-section h2 { font-size: 1.5rem; }
+      .hamburger {
+        display: flex;
+      }
+
+      .header-container {
+        padding: 1rem;
+      }
+
+      .main-navigation {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .main-navigation.active {
+        max-height: 500px;
+      }
+
+      .main-navigation ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+      }
+
+      .main-navigation li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .main-navigation li:last-child {
+        border-bottom: none;
+      }
+
+      .main-navigation a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
+      }
+
+      .btn-login {
+        display: inline-block;
+        margin: 0.5rem auto;
+        width: calc(100% - 2rem);
+      }
+
+      .social-content { 
+        grid-template-columns: 1fr; 
+        gap: 1rem; 
+      }
+
+      .page-header h1 { 
+        font-size: 2rem; 
+      }
+
+      .content { 
+        padding: 2rem 1rem; 
+      }
+
+      .references-section { 
+        padding: 1.5rem; 
+      }
+
+      .references-section h2 { 
+        font-size: 1.5rem; 
+      }
     }
 
     </style>
@@ -327,7 +422,14 @@
             <img src="bigtoeindexlogoyel.png" alt="The Big TOE">
           </a>
         </div>
-        <nav class="main-navigation">
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        
+        <nav class="main-navigation" id="mainNav">
           <ul>
             <li><a href="book.html">Home</a></li>
             <li><a href="about-page.html">About</a></li>
@@ -2751,6 +2853,35 @@
         const section = header.parentElement;
         section.classList.toggle('active');
     }
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mainNav = document.getElementById('mainNav');
+    
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking a link
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mainNav.classList.remove('active');
+      });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const isClickInsideNav = mainNav.contains(event.target);
+      const isClickOnHamburger = hamburger.contains(event.target);
+      
+      if (!isClickInsideNav && !isClickOnHamburger && mainNav.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
 
     window.addEventListener('scroll', function() {
         const backToTop = document.getElementById('backToTop');
