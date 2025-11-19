@@ -1,1 +1,562 @@
-<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8" />  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <title>About - Ic² Research Institute</title>  <meta name="description" content="Learn about the Ic² Research Institute – Information, Consciousness, Computation and our mission for open, transparent science." />  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />  <style>    * {    margin: 0;    padding: 0;    box-sizing: border-box;    }    :root {    --primary-color: #8B0000;    --secondary-color: #2c3e50;    --accent-red: #e33d2f;    --accent-blue: #005ba5;    --accent-green: #a1cd5f;    --accent-orange: #f58b2b;    --accent-yellow: #f1e303;    --text-dark: #2c3e50;    --text-light: #666;    --bg-light: #e6eef2;    --max-width: 1200px;    }    body {    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;    line-height: 1.7;    color: var(--text-dark);    background: white;    }    /* Header */    .site-header {    background: white;    border-bottom: 1px solid #e0e0e0;    position: sticky;    top: 0;    z-index: 1000;    box-shadow: 0 2px 5px rgba(0,0,0,0.05);    }    .header-container {    max-width: var(--max-width);    margin: 0 auto;    padding: 1rem 2rem;    display: flex;    justify-content: space-between;    align-items: center;    }    .site-logo img {    height: 50px;    }    .main-navigation ul {    list-style: none;    display: flex;    gap: 2rem;    align-items: center;    }    .main-navigation a {    text-decoration: none;    color: var(--text-dark);    font-weight: 500;    transition: color 0.3s ease;    }    .main-navigation a:hover {    color: var(--primary-color);    }    /* Hero */    .page-header {    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);    padding: 4rem 2rem;    text-align: center;    color: white;    }    .page-header h1 {    font-size: 3rem;    margin-bottom: 1rem;    }    .page-header p {    font-size: 1.25rem;    opacity: 0.9;    max-width: 700px;    margin: 0 auto;    }    /* Cards and Animation */    @keyframes slideUp {    from {    opacity: 0;    transform: translateY(20px);    }    to {    opacity: 1;    transform: translateY(0);    }    }    .content-section {    padding: 5rem 2rem;    background: var(white);    }    .section-container {    max-width: var(--max-width);    margin: 0 auto;    }    .card {    background: white;    border-radius: 8px;    box-shadow: 0 4px 20px rgba(0,0,0,0.08);    margin-bottom: 3rem;    overflow: hidden;    animation: slideUp 0.7s ease forwards;    position: relative;    }    .card-header {    background: var(--primary-color);    color: white;    padding: 1.5rem 2rem;    }    .card-header h2 {    font-size: 2rem;    margin: 0;    }    .card-body {    padding: 2.5rem;    }    .card::after {    content: "";    display: block;    height: 6px;    width: 100%;    background: var(--accent-color, var(--accent-red));    }    .card p {    color: var(--text-light);    margin-bottom: 1rem;    font-size: 1.05rem;    }    /* About Elements */    .name-visual {    text-align: center;    margin: 2rem 0;    }    .name-equation {    font-size: 3.5rem;    font-family: Impact, sans-serif;    font-weight: 700;    color: var(--primary-color);    letter-spacing: 2px;    }    .name-subtitle {    font-style: italic;    color: var(--text-light);    margin-top: 0.5rem;    font-size: 1.1rem;    }    .grid {    display: grid;    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));    gap: 1.5rem;    margin-top: 2rem;    }    .name-component {    background: white;    border-radius: 8px;    padding: 0;    text-align: center;    transition: transform 0.3s ease, box-shadow 0.3s ease;    border-bottom: 4px solid var(--primary-color);    overflow: hidden;    box-shadow: 0 4px 15px rgba(0,0,0,0.08);    }    .name-component:hover {    transform: translateY(-5px);    box-shadow: 0 8px 20px rgba(0,0,0,0.12);    }    .name-component-header {    background: var(--primary-color);    color: white;    padding: 1.5rem;    }    .name-component .letter {    color: white;    font-size: 2.5rem;    font-family: Impact, sans-serif;    margin: 0;    }    .name-component-body {    padding: 1.5rem;    }    .name-component-body h3 {    margin-bottom: 0.75rem;    color: var(--text-dark);    }    .name-component-body p {    color: var(--text-light);    font-size: 0.95rem;    }    /* Core Values */    .values-grid {    display: grid;    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));    gap: 1.5rem;    margin-top: 2rem;    }    .value-card {    background: white;    border-radius: 8px;    padding: 2rem;    text-align: center;    transition: all 0.3s ease;    box-shadow: 0 2px 10px rgba(0,0,0,0.05);    border-bottom: 4px solid var(--card-accent);    }    .value-card:hover {    transform: translateY(-5px);    box-shadow: 0 8px 25px rgba(0,0,0,0.12);    }    .value-icon {    width: 60px;    height: 60px;    margin: 0 auto 1rem;    display: flex;    align-items: center;    justify-content: center;    }    .value-icon img {    width: 100%;    height: 100%;    object-fit: contain;    }    /* Icon color filters for each accent */    .icon-yellow {    filter: brightness(0) saturate(100%) invert(88%) sepia(95%) saturate(1447%) hue-rotate(359deg) brightness(104%) contrast(96%);    }    .icon-blue {    filter: brightness(0) saturate(100%) invert(21%) sepia(98%) saturate(2447%) hue-rotate(194deg) brightness(95%) contrast(101%);    }    .icon-red {    filter: brightness(0) saturate(100%) invert(35%) sepia(89%) saturate(2447%) hue-rotate(347deg) brightness(92%) contrast(88%);    }    .icon-green {    filter: brightness(0) saturate(100%) invert(78%) sepia(27%) saturate(644%) hue-rotate(29deg) brightness(92%) contrast(87%);    }    .icon-orange {    filter: brightness(0) saturate(100%) invert(64%) sepia(67%) saturate(1447%) hue-rotate(347deg) brightness(99%) contrast(93%);    }    .icon-primary-red {    filter: brightness(0) saturate(100%) invert(11%) sepia(98%) saturate(7447%) hue-rotate(0deg) brightness(88%) contrast(101%);    }    .value-card h3 {    margin-bottom: 0.75rem;    color: var(--text-dark);    font-size: 1.2rem;    }    a.cta-link {    color: var(--primary-color);    font-weight: 600;    text-decoration: none;    }    a.cta-link:hover {    text-decoration: underline;    }    /* Footer */    footer {    background: var(--secondary-color);    color: white;    padding: 2.5rem 2rem 1rem;    margin-top: 4rem;    }    footer .footer-container {    display: grid;    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));    gap: 2rem;    max-width: var(--max-width);    margin: 0 auto;    }    footer h3 {    margin-bottom: 0.75rem;    font-size: 1.1rem;    }    footer a {    color: rgba(255,255,255,0.7);    text-decoration: none;    display: block;    margin-bottom: 0.5rem;    }    footer a:hover {    color: var(--accent-red);    }    .footer-bottom {    text-align: center;    margin-top: 2rem;    border-top: 1px solid rgba(255,255,255,0.1);    padding-top: 1rem;    color: rgba(255,255,255,0.5);    }    @media (max-width: 768px) {    .page-header h1 {    font-size: 2.25rem;    }    .card-body {    padding: 2rem;    }    }  </style></head><body>  <!-- Header -->  <header class="site-header">    <div class="header-container">    <div class="site-logo">    <img src="ic2-logo.png" alt="Ic² Research Institute Logo">    </div>    <nav class="main-navigation">    <ul>    <li><a href="index.html">Institute</a></li>    <li><a href="book.html">The Big Toe</a></li>    <li><a href="about-page.html">About</a></li>    <li><a href="events.html">Events</a></li>    <li><a href="news.html">News</a></li>    <li><a href="contribute.html">Contribute</a></li>    </ul>    </nav>    </div>  </header>  <!-- Hero -->  <section class="page-header">    <h1>About <span style="color: var(white);">Ic²</span></h1>    <p>Exploring the interplay of Information, Consciousness, and Computation</p>  </section>  <!-- About Content -->  <section class="content-section">    <div class="section-container">    <!-- About Our Name -->    <div class="card" style="--accent-color: var(--accent-red);" data-aos="fade-up">    <div class="card-header">    <h2>About Our Name</h2>    </div>    <div class="card-body" style="background: var(--bg-light);">    <div class="name-visual">    <div class="name-equation">Ic²</div>    <div class="name-subtitle">Information • Consciousness • Computation</div>    </div>    <div class="grid">    <div class="name-component">    <div class="name-component-header">    <div class="letter">I</div>    </div>    <div class="name-component-body">    <h3>Information</h3>    <p>The fundamental substrate of reality. Matter and energy emerge from information, not the other way around.</p>    </div>    </div>    <div class="name-component">    <div class="name-component-header">    <div class="letter">c</div>    </div>    <div class="name-component-body">    <h3>Consciousness</h3>    <p>The observer that collapses quantum states. Consciousness drives and interprets information processing.</p>    </div>    </div>    <div class="name-component">    <div class="name-component-header">    <div class="letter">c²</div>    </div>    <div class="name-component-body">    <h3>Computation</h3>    <p>The mechanism by which information evolves — reality operates as a self-updating computational process.</p>    </div>    </div>    </div>    <div style="margin-top:2rem; padding:1.5rem; background: var(--bg-light); border-radius: 6px;">    <p><strong>About the visual similarity to E=mc²:</strong> The resemblance honors physics while redefining fundamentals. The "c" here does not reference the speed of light.</p>    <p>Instead, it encodes the three pillars — Information, Consciousness, Computation — combined into a unified representation of our theoretical foundation.</p>    <p>By invoking physics' most famous formula, we emphasize a paradigm as deep: information as the ground state of reality.</p>    </div>    </div>    </div>    <!-- Mission -->    <div class="card" style="--accent-color: var(--accent-blue);" data-aos="fade-up">    <div class="card-header">    <h2>Our Mission</h2>    </div>    <div class="card-body" style="background: var(--bg-light);">    <p>Ic² Research Institute advances open, transparent research into the fundamental nature of reality through information theory, consciousness studies, and computational frameworks.</p>    <p>We value free collaboration and data transparency — no paywalls, no gatekeeping, no hidden failures. Our ethos is open inquiry for the common understanding of existence.</p>    </div>    </div>    <!-- Core Values -->    <div class="card" style="--accent-color: var(--accent-green);" data-aos="fade-up">    <div class="card-header">    <h2>Core Values</h2>    </div>    <div class="card-body" style="background: var(--bg-light);">    <div class="values-grid">    <div class="value-card" style="--card-accent: var(--accent-yellow);">    <div class="value-icon">    <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Open Science" class="icon-yellow">    </div>    <h3>Open Science</h3>    <p>All data, hypotheses, and results are fully public — including failures and iterations.</p>    </div>    <div class="value-card" style="--card-accent: var(--accent-blue);">    <div class="value-icon">    <img src="settings_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Radical Transparency" class="icon-blue">    </div>    <h3>Radical Transparency</h3>    <p>Documented predictions and open financial records. Every step visible to the world.</p>    </div>    <div class="value-card" style="--card-accent: var(--accent-red);">    <div class="value-icon">    <img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Community-Driven" class="icon-red">    </div>    <h3>Community-Driven</h3>    <p>Collaboration transcends credentials — contributions are valued on merit and insight.</p>    </div>    <div class="value-card" style="--card-accent: var(--accent-green);">    <div class="value-icon">    <img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Testable Predictions" class="icon-green">    </div>    <h3>Testable Predictions</h3>    <p>Every theoretical claim must be falsifiable through observable prediction.</p>    </div>    <div class="value-card" style="--card-accent: var(--accent-orange);">    <div class="value-icon">    <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Intellectual Honesty" class="icon-orange">    </div>    <h3>Intellectual Honesty</h3>    <p>Acknowledging limitations and reporting all outcomes with clarity and fairness.</p>    </div>    <div class="value-card" style="--card-accent: var(--primary-color);">    <div class="value-icon">    <img src="warning_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="No Gatekeeping" class="icon-primary-red">    </div>    <h3>No Gatekeeping</h3>    <p>Knowledge belongs to everyone. No closed peer review, no artificial barriers.</p>    </div>    </div>    </div>    </div>    <!-- Team -->    <div class="card" style="--accent-color: var(--accent-orange);" data-aos="fade-up">    <div class="card-header">    <h2>The Team</h2>    </div>    <div class="card-body" style="background: var(--bg-light);">    <p><strong>Ic² Research Institute</strong> is an independent, community-driven entity that ensures complete scientific freedom.</p>    <p><strong>Founder & Principal Researcher:</strong> Michael K. Baines</p>    <p>We deliberately avoid traditional hierarchies to encourage interdisciplinary exploration and collaboration.</p>    <p><strong>Want to contribute?</strong> Visit our <a href="contribute.html" class="cta-link">Contributions page</a> to get started.</p>    </div>    </div>    </div>  </section>  <!-- Footer -->  <footer>    <div class="footer-container">    <div>    <h3>Ic² Research Institute</h3>    <p>Information • Consciousness • Computation</p>    <p>Advancing open, transparent research in fundamental physics.</p>    </div>    <div>    <h3>Explore</h3>    <a href="index.html">Home</a>    <a href="about-page.html">About</a>    <a href="validation.html">Validation</a>    <a href="results.html">Results</a>    </div>    <div>    <h3>Resources</h3>    <a href="book.html">The Big TOE Book</a>    <a href="events.html">Events</a>    <a href="contribute.html">Contribute</a>    </div>    <div>    <h3>Connect</h3>    <a href="#">GitHub</a>    <a href="#">Twitter</a>    <a href="#">YouTube</a>    </div>    </div>    <div class="footer-bottom">    © 2025 Ic² Research Institute. All rights reserved.    </div>  </footer>  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  <script>    AOS.init({    duration: 1000,    once: true,    offset: 100    });  </script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Ic² Research Institute</title>
+  <meta name="description" content="Learn about the Ic² Research Institute – Information, Consciousness, Computation and our mission for open, transparent science." />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    :root {
+    --primary-color: #8B0000;
+    --secondary-color: #2c3e50;
+    --accent-red: #e33d2f;
+    --accent-blue: #005ba5;
+    --accent-green: #a1cd5f;
+    --accent-orange: #f58b2b;
+    --accent-yellow: #f1e303;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --bg-light: #e6eef2;
+    --max-width: 1200px;
+    }
+
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.7;
+    color: var(--text-dark);
+    background: white;
+    }
+
+    /* Header */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .site-logo img {
+    height: 50px;
+    }
+
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    }
+
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
+
+    .main-navigation a:hover {
+    color: var(--primary-color);
+    }
+
+    /* Hero */
+    .page-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+    }
+
+    .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    }
+
+    .page-header p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+    }
+
+    /* Cards and Animation */
+    @keyframes slideUp {
+    from {
+    opacity: 0;
+    transform: translateY(20px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    }
+
+    .content-section {
+    padding: 5rem 2rem;
+    background: var(white);
+    }
+
+    .section-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 3rem;
+    overflow: hidden;
+    animation: slideUp 0.7s ease forwards;
+    position: relative;
+    }
+
+    .card-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem 2rem;
+    }
+
+    .card-header h2 {
+    font-size: 2rem;
+    margin: 0;
+    }
+
+    .card-body {
+    padding: 2.5rem;
+    }
+
+    .card::after {
+    content: "";
+    display: block;
+    height: 6px;
+    width: 100%;
+    background: var(--accent-color, var(--accent-red));
+    }
+
+    .card p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    }
+
+    /* About Elements */
+    .name-visual {
+    text-align: center;
+    margin: 2rem 0;
+    }
+
+    .name-equation {
+    font-size: 3.5rem;
+    font-family: Impact, sans-serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    }
+
+    .name-subtitle {
+    font-style: italic;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    }
+
+    .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    }
+
+    .name-component {
+    background: white;
+    border-radius: 8px;
+    padding: 0;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: 4px solid var(--primary-color);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .name-component:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .name-component-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    }
+
+    .name-component .letter {
+    color: white;
+    font-size: 2.5rem;
+    font-family: Impact, sans-serif;
+    margin: 0;
+    }
+
+    .name-component-body {
+    padding: 1.5rem;
+    }
+
+    .name-component-body h3 {
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+    }
+
+    .name-component-body p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    }
+
+    /* Core Values */
+    .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    }
+
+    .value-card {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 4px solid var(--card-accent);
+    }
+
+    .value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .value-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .value-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    }
+
+    /* Icon color filters for each accent */
+    .icon-yellow {
+    filter: brightness(0) saturate(100%) invert(88%) sepia(95%) saturate(1447%) hue-rotate(359deg) brightness(104%) contrast(96%);
+    }
+
+    .icon-blue {
+    filter: brightness(0) saturate(100%) invert(21%) sepia(98%) saturate(2447%) hue-rotate(194deg) brightness(95%) contrast(101%);
+    }
+
+    .icon-red {
+    filter: brightness(0) saturate(100%) invert(35%) sepia(89%) saturate(2447%) hue-rotate(347deg) brightness(92%) contrast(88%);
+    }
+
+    .icon-green {
+    filter: brightness(0) saturate(100%) invert(78%) sepia(27%) saturate(644%) hue-rotate(29deg) brightness(92%) contrast(87%);
+    }
+
+    .icon-orange {
+    filter: brightness(0) saturate(100%) invert(64%) sepia(67%) saturate(1447%) hue-rotate(347deg) brightness(99%) contrast(93%);
+    }
+
+    .icon-primary-red {
+    filter: brightness(0) saturate(100%) invert(11%) sepia(98%) saturate(7447%) hue-rotate(0deg) brightness(88%) contrast(101%);
+    }
+
+    .value-card h3 {
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+    font-size: 1.2rem;
+    }
+
+    a.cta-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    }
+
+    a.cta-link:hover {
+    text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+    background: var(--secondary-color);
+    color: white;
+    padding: 2.5rem 2rem 1rem;
+    margin-top: 4rem;
+    }
+
+    footer .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    footer h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    }
+
+    footer a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    }
+
+    footer a:hover {
+    color: var(--accent-red);
+    }
+
+    .footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+    color: rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 768px) {
+    .page-header h1 {
+    font-size: 2.25rem;
+    }
+    .card-body {
+    padding: 2rem;
+    }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+    <div class="site-logo">
+    <a href="index.html" aria-label="Ic² Research Institute home">
+      <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
+    </a>
+    </div>
+    <nav class="main-navigation">
+    <ul>
+    <li><a href="index.html">Institute</a></li>
+    <li><a href="book.html">The Big Toe</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    </ul>
+    </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="page-header">
+    <h1>About <span style="color: var(white);">Ic²</span></h1>
+    <p>Exploring the interplay of Information, Consciousness, and Computation</p>
+  </section>
+
+  <!-- About Content -->
+  <section class="content-section">
+    <div class="section-container">
+
+    <!-- About Our Name -->
+    <div class="card" style="--accent-color: var(--accent-red);" data-aos="fade-up">
+    <div class="card-header">
+    <h2>About Our Name</h2>
+    </div>
+    <div class="card-body" style="background: var(--bg-light);">
+    <div class="name-visual">
+    <div class="name-equation">Ic²</div>
+    <div class="name-subtitle">Information • Consciousness • Computation</div>
+    </div>
+
+    <div class="grid">
+    <div class="name-component">
+    <div class="name-component-header">
+    <div class="letter">I</div>
+    </div>
+    <div class="name-component-body">
+    <h3>Information</h3>
+    <p>The fundamental substrate of reality. Matter and energy emerge from information, not the other way around.</p>
+    </div>
+    </div>
+    <div class="name-component">
+    <div class="name-component-header">
+    <div class="letter">c</div>
+    </div>
+    <div class="name-component-body">
+    <h3>Consciousness</h3>
+    <p>The observer that collapses quantum states. Consciousness drives and interprets information processing.</p>
+    </div>
+    </div>
+    <div class="name-component">
+    <div class="name-component-header">
+    <div class="letter">c²</div>
+    </div>
+    <div class="name-component-body">
+    <h3>Computation</h3>
+    <p>The mechanism by which information evolves — reality operates as a self-updating computational process.</p>
+    </div>
+    </div>
+    </div>
+
+    <div style="margin-top:2rem; padding:1.5rem; background: var(--bg-light); border-radius: 6px;">
+    <p><strong>About the visual similarity to E=mc²:</strong> The resemblance honors physics while redefining fundamentals. The "c" here does not reference the speed of light.</p>
+    <p>Instead, it encodes the three pillars — Information, Consciousness, Computation — combined into a unified representation of our theoretical foundation.</p>
+    <p>By invoking physics' most famous formula, we emphasize a paradigm as deep: information as the ground state of reality.</p>
+    </div>
+    </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="card" style="--accent-color: var(--accent-blue);" data-aos="fade-up">
+    <div class="card-header">
+    <h2>Our Mission</h2>
+    </div>
+    <div class="card-body" style="background: var(--bg-light);">
+    <p>Ic² Research Institute advances open, transparent research into the fundamental nature of reality through information theory, consciousness studies, and computational frameworks.</p>
+    <p>We value free collaboration and data transparency — no paywalls, no gatekeeping, no hidden failures. Our ethos is open inquiry for the common understanding of existence.</p>
+    </div>
+    </div>
+
+    <!-- Core Values -->
+    <div class="card" style="--accent-color: var(--accent-green);" data-aos="fade-up">
+    <div class="card-header">
+    <h2>Core Values</h2>
+    </div>
+    <div class="card-body" style="background: var(--bg-light);">
+    <div class="values-grid">
+    <div class="value-card" style="--card-accent: var(--accent-yellow);">
+    <div class="value-icon">
+    <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Open Science" class="icon-yellow">
+    </div>
+    <h3>Open Science</h3>
+    <p>All data, hypotheses, and results are fully public — including failures and iterations.</p>
+    </div>
+    <div class="value-card" style="--card-accent: var(--accent-blue);">
+    <div class="value-icon">
+    <img src="settings_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Radical Transparency" class="icon-blue">
+    </div>
+    <h3>Radical Transparency</h3>
+    <p>Documented predictions and open financial records. Every step visible to the world.</p>
+    </div>
+    <div class="value-card" style="--card-accent: var(--accent-red);">
+    <div class="value-icon">
+    <img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Community-Driven" class="icon-red">
+    </div>
+    <h3>Community-Driven</h3>
+    <p>Collaboration transcends credentials — contributions are valued on merit and insight.</p>
+    </div>
+    <div class="value-card" style="--card-accent: var(--accent-green);">
+    <div class="value-icon">
+    <img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Testable Predictions" class="icon-green">
+    </div>
+    <h3>Testable Predictions</h3>
+    <p>Every theoretical claim must be falsifiable through observable prediction.</p>
+    </div>
+    <div class="value-card" style="--card-accent: var(--accent-orange);">
+    <div class="value-icon">
+    <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Intellectual Honesty" class="icon-orange">
+    </div>
+    <h3>Intellectual Honesty</h3>
+    <p>Acknowledging limitations and reporting all outcomes with clarity and fairness.</p>
+    </div>
+    <div class="value-card" style="--card-accent: var(--primary-color);">
+    <div class="value-icon">
+    <img src="warning_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="No Gatekeeping" class="icon-primary-red">
+    </div>
+    <h3>No Gatekeeping</h3>
+    <p>Knowledge belongs to everyone. No closed peer review, no artificial barriers.</p>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Team -->
+    <div class="card" style="--accent-color: var(--accent-orange);" data-aos="fade-up">
+    <div class="card-header">
+    <h2>The Team</h2>
+    </div>
+    <div class="card-body" style="background: var(--bg-light);">
+    <p><strong>Ic² Research Institute</strong> is an independent, community-driven entity that ensures complete scientific freedom.</p>
+    <p><strong>Founder & Principal Researcher:</strong> Michael K. Baines</p>
+    <p>We deliberately avoid traditional hierarchies to encourage interdisciplinary exploration and collaboration.</p>
+    <p><strong>Want to contribute?</strong> Visit our <a href="contribute.html" class="cta-link">Contributions page</a> to get started.</p>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+    <div>
+    <h3>Ic² Research Institute</h3>
+    <p>Information • Consciousness • Computation</p>
+    <p>Advancing open, transparent research in fundamental physics.</p>
+    </div>
+    <div>
+    <h3>Explore</h3>
+    <a href="index.html">Home</a>
+    <a href="about-page.html">About</a>
+    <a href="validation.html">Validation</a>
+    <a href="results.html">Results</a>
+    </div>
+    <div>
+    <h3>Resources</h3>
+    <a href="book.html">The Big TOE Book</a>
+    <a href="events.html">Events</a>
+    <a href="contribute.html">Contribute</a>
+    </div>
+    <div>
+    <h3>Connect</h3>
+    <a href="#">GitHub</a>
+    <a href="#">Twitter</a>
+    <a href="#">YouTube</a>
+    </div>
+    </div>
+    <div class="footer-bottom">
+    © 2025 Ic² Research Institute. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+    });
+  </script>
+</body>
+</html>
