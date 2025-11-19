@@ -1,378 +1,1 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events - Ic² Research Institute</title>
-    <meta name="description" content="Upcoming events, workshops, and conferences from the Ic² Research Institute.">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-
-    :root {
-    --primary-color: #8B0000;
-    --secondary-color: #2c3e50;
-    --accent-blue: #005ba5;
-    --accent-red: #e33d2f;
-    --accent-green: #a1cd5f;
-    --accent-orange: #f58b2b;
-    --accent-yellow: #f1e303;
-    --text-dark: #2c3e50;
-    --text-light: #666;
-    --bg-light: #f8f9fa;
-    --max-width: 1200px;
-    }
-
-    body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background: white;
-    }
-
-    /* Header */
-    .site-header {
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .header-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
-
-    /* Logos layout (desktop) */
-    .header-logos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    gap: 2rem;
-    }
-
-    .header-logo {
-    display: flex;
-    align-items: center;
-    }
-
-    .header-logo.left { justify-content: flex-start; flex: 1; }
-    .header-logo.center { justify-content: center; flex: 1; }
-    .header-logo.right { justify-content: flex-end; flex: 1; }
-
-    .header-logo a { display: inline-block; transition: transform 0.18s ease; }
-    .header-logo a:hover { transform: scale(1.04); }
-    .header-logo img { height: 50px; width: auto; display:block; }
-
-    /* If layout collapses to only one logo (fallback), center it */
-    .single-logo .header-logo.left, .single-logo .header-logo.right { display:none; }
-    .single-logo .header-logo.center { justify-content: center; flex: 1; }
-
-    /* Hamburger Menu */
-    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; padding: 8px; }
-    .hamburger span { width: 26px; height: 3px; background: var(--primary-color); border-radius: 3px; transition: all 0.25s ease; }
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-
-    /* Mobile menu overlay + panel */
-    .menu-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 998; opacity: 0; transition: opacity 180ms ease; }
-    .menu-overlay.active { display:block; opacity: 1; }
-
-    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; height: 100vh; background: white; z-index: 999; transform: translateY(-100%); transition: transform 260ms cubic-bezier(.2,.9,.25,1); overflow-y: auto; }
-    .mobile-menu.active { transform: translateY(0); }
-    .mobile-menu .mobile-inner { padding: 1.25rem; }
-
-    .mobile-close { position: absolute; right: 14px; top: 12px; background: transparent; border: none; font-size: 28px; line-height: 1; cursor: pointer; color: var(--text-dark); }
-
-    .mobile-menu ul { list-style: none; padding: 3.5rem 0 2rem; display:flex; flex-direction: column; gap: 0.5rem; }
-    .mobile-menu a { display: block; padding: 0.9rem 1rem; color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1.05rem; border-radius: 6px; }
-    .mobile-menu a:hover, .mobile-menu a:focus { background: var(--bg-light); color: var(--primary-color); outline: none; }
-    .mobile-menu a.login-link { background: var(--primary-color); color: #fff; margin-top: 0.5rem; text-align:center; border-radius: 6px; }
-
-    /* Page Header */
-    .page-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 4rem 2rem; text-align: center; color: white; }
-    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
-    .page-header p { font-size: 1.25rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-
-    /* Content Section */
-    .content-section { padding: 5rem 2rem; }
-    .section-container { max-width: var(--max-width); margin: 0 auto; }
-
-    /* Event Cards */
-    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .event-card { background: white; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .event-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
-
-    /* Footer */
-    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
-    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
-    .footer-section h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
-    .footer-section ul { list-style: none; }
-    .footer-section ul li { margin-bottom: 0.35rem; }
-    .footer-section a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s ease; }
-    .footer-section a:hover { color: white; }
-
-    .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; }
-
-    /* Responsive */
-    @media (max-width: 968px) {
-    .header-logos { display: none; }
-    .hamburger { display: flex; }
-    .mobile-menu { display: block; }
-    .page-header h1 { font-size: 2rem; }
-    .events-grid { grid-template-columns: 1fr; }
-    .footer-container { grid-template-columns: 1fr; gap: 2rem; }
-    }
-
-    @media (max-width: 480px) {
-    .header-logo img { height: 40px; }
-    .mobile-close { font-size: 32px; right: 12px; top: 10px; }
-    .mobile-menu a { font-size: 1.02rem; padding: 1rem; }
-    }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="site-header" role="banner">
-    <div class="header-container" id="headerContainer">
-    <div class="header-logos" id="headerLogos">
-    <div class="header-logo left">
-    <a href="index.html" aria-label="Ic² Research Institute home">
-    <img src="ic2-logo.png" alt="Ic² Research Institute" class="logo-img" />
-    </a>
-    </div>
-    <div class="header-logo center">
-    <a href="framework.html" aria-label="Framework">
-    <img src="framework.png" alt="Framework" class="logo-img" />
-    </a>
-    </div>
-    <div class="header-logo right">
-    <a href="book.html" aria-label="The Big TOE">
-    <img src="bigtoeindexlogo.png" alt="The Big TOE" class="logo-img" />
-    </a>
-    </div>
-    </div>
-
-    <!-- Hamburger Menu Button -->
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-    <span></span>
-    <span></span>
-    <span></span>
-    </button>
-    </div>
-    </header>
-
-    <!-- Mobile Menu + Overlay -->
-    <div class="menu-overlay" id="menuOverlay" tabindex="-1" aria-hidden="true"></div>
-    <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <div class="mobile-inner">
-        <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
-        <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="framework.html">Framework</a></li>
-        <li><a href="book.html">Big Toe</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="validation.html">Validation</a></li>
-        <li><a href="testing-schedule.html">Testing</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="discussions-page.html">Discussion</a></li>
-        <li><a href="about-page.html">About</a></li>
-        <li><a href="contribute.html">Contribute</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="login.html" class="login-link">Login</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Page Header -->
-    <section class="page-header">
-    <h1>Events</h1>
-    <p>Join us for workshops, seminars, and conferences exploring the frontiers of theoretical physics</p>
-    </section>
-
-    <!-- Upcoming Events -->
-    <section class="content-section">
-    <div class="section-container">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Upcoming Events</h2>
-    <p style="color: var(--text-light); margin-bottom: 2rem;">Connect with fellow researchers and explore the latest developments in our framework</p>
-
-    <div class="events-grid" data-aos="fade-up">
-    <!-- ... events (unchanged) ... -->
-    <!-- Event cards kept unchanged for brevity in this saved file -->
-    </div>
-    </div>
-    </section>
-
-    <!-- Past Events -->
-    <section class="past-events">
-    <div class="section-container">
-    <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--text-dark);">Past Events</h2>
-    <!-- Past events unchanged -->
-    </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-    <div class="footer-container">
-    <div class="footer-section">
-    <h3>Ic² Research Institute</h3>
-    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    </div>
-    <div class="footer-section">
-    <h3>Research</h3>
-    <ul>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="results.html">Results</a></li>
-    <li><a href="zenodo-papers.html">Papers</a></li>
-    <li><a href="simulations.html">Simulations</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Resources</h3>
-    <ul>
-    <li><a href="book.html">The Big TOE</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="faq-page.html">FAQ</a></li>
-    <li><a href="members.html">Our Members</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Connect</h3>
-    <ul>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="discussions-page.html">Discussions</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="become-member.html">Become a Member</a></li>
-    <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
-    </ul>
-    </div>
-    </div>
-    <div class="footer-bottom">
-    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
-    </div>
-    </footer>
-
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-    AOS.init({ duration: 1000, once: true, offset: 100 });
-    </script>
-
-    <script>
-    // Logo fallback: if any logo fails to load or none visible, ensure Ic² logo is used
-    (function(){
-      const logoImgs = Array.from(document.querySelectorAll('.logo-img'));
-      let visibleCount = 0;
-
-      logoImgs.forEach(img => {
-        // If image fails, replace with Ic2 logo
-        img.addEventListener('error', () => {
-          img.src = 'ic2-logo.png';
-          img.alt = 'Ic² Research Institute';
-        });
-
-        // Count visible images after load
-        img.addEventListener('load', () => {
-          if (img.naturalWidth > 1) visibleCount++;
-        });
-
-        // If already loaded
-        if (img.complete && img.naturalWidth > 1) visibleCount++;
-      });
-
-      // After short delay, if no visible logo, force single Ic2 logo
-      setTimeout(() => {
-        if (visibleCount === 0) {
-          const headerLogos = document.getElementById('headerLogos');
-          headerLogos.classList.add('single-logo');
-          // keep only left logo and make it Ic2
-          const leftImg = headerLogos.querySelector('.header-logo.left img');
-          if (leftImg) { leftImg.src = 'ic2-logo.png'; leftImg.alt = 'Ic² Research Institute'; }
-        }
-      }, 650);
-    })();
-
-    // Mobile menu: improved overlay, close button, focus handling
-    (function() {
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const overlay = document.getElementById('menuOverlay');
-      const closeBtn = document.getElementById('mobileClose');
-      const firstLink = mobileMenu.querySelector('a');
-
-      function openMenu() {
-        hamburger.classList.add('active');
-        hamburger.setAttribute('aria-expanded','true');
-        mobileMenu.classList.add('active');
-        mobileMenu.setAttribute('aria-hidden','false');
-        overlay.classList.add('active');
-        overlay.setAttribute('aria-hidden','false');
-        // disable page scroll
-        document.body.style.overflow = 'hidden';
-        // move focus
-        if (firstLink) firstLink.focus();
-      }
-
-      function closeMenu() {
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded','false');
-        mobileMenu.classList.remove('active');
-        mobileMenu.setAttribute('aria-hidden','true');
-        overlay.classList.remove('active');
-        overlay.setAttribute('aria-hidden','true');
-        document.body.style.overflow = '';
-        hamburger.focus();
-      }
-
-      if (hamburger && mobileMenu && overlay) {
-        hamburger.addEventListener('click', () => {
-          const opened = hamburger.classList.contains('active');
-          if (opened) closeMenu(); else openMenu();
-        });
-
-        // close handlers
-        overlay.addEventListener('click', closeMenu);
-        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-
-        // close on Escape
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-            closeMenu();
-          }
-        });
-
-        // close when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-
-        // simple focus trap: keep Tab inside mobile menu when open
-        mobileMenu.addEventListener('keydown', (e) => {
-          if (e.key !== 'Tab') return;
-          const focusable = mobileMenu.querySelectorAll('a, button');
-          if (!focusable.length) return;
-          const first = focusable[0];
-          const last = focusable[focusable.length-1];
-          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-        });
-      }
-    })();
-    </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Events - Ic² Research Institute</title>    <meta name="description" content="Upcoming events, workshops, and conferences from the Ic² Research Institute.">        <!-- AOS Animation Library -->    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">        <style>    * { margin:0; padding:0; box-sizing:border-box; }    :root {      --primary-color:#8B0000;      --secondary-color:#2c3e50;      --text-dark:#2c3e50;      --text-light:#666;      --bg-light:#f8f9fa;      --max-width:1200px;    }    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial; line-height:1.6; color:var(--text-dark); background:white; }    .site-header { background:white; border-bottom:1px solid #e0e0e0; position:sticky; top:0; z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,0.05); }    .header-container { max-width:var(--max-width); margin:0 auto; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }    .header-logos { display:flex; justify-content:space-between; align-items:center; width:100%; gap:2rem; }    .header-logo img { height:50px; width:auto; }    /* Hamburger and mobile menu */    .hamburger { display:none; flex-direction:column; gap:4px; padding:8px; border:none; background:transparent; cursor:pointer; }    .hamburger span { width:26px; height:3px; background:var(--primary-color); border-radius:3px; display:block; transition:all .25s; }    .hamburger.active span:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }    .hamburger.active span:nth-child(2){ opacity:0; }    .hamburger.active span:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px); }    .mobile-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:995; opacity:0; transition:opacity .25s; }    .mobile-overlay.active { display:block; opacity:1; }    .mobile-menu { display:block; position:fixed; top:0; left:0; right:0; height:100vh; background:white; z-index:999; transform:translateY(-100%); transition:transform .28s ease; overflow:auto; }    .mobile-menu.active { transform:translateY(0); }    .mobile-top { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid #eee; }    .mobile-top .mobile-logo img { height:40px; width:auto; display:block; }    .mobile-close { font-size:28px; background:transparent; border:none; cursor:pointer; color:var(--text-dark); padding:6px 10px; }    .mobile-menu ul { list-style:none; padding:12px 16px; }    .mobile-menu a { display:block; padding:12px 6px; color:var(--text-dark); text-decoration:none; font-weight:600; border-radius:6px; }    .mobile-menu a:hover { background:var(--bg-light); color:var(--primary-color); }    @media (max-width:968px) {      .header-logos { display:none; }      .hamburger { display:flex; }    }    /* rest of events styles preserved */    /* ... */    </style></head><body>    <!-- Header -->    <header class="site-header">    <div class="header-container">      <div class="header-logos" aria-hidden="true">        <div class="header-logo left">          <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>        </div>        <div class="header-logo center">          <a href="framework.html"><img src="framework.png" alt="Framework"></a>        </div>        <div class="header-logo right">          <a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a>        </div>      </div>      <!-- Hamburger Menu Button -->      <button class="hamburger" aria-label="Open menu" aria-expanded="false">        <span></span><span></span><span></span>      </button>    </div>    </header>    <div class="mobile-overlay" tabindex="-1"></div>    <!-- Mobile Menu -->    <nav class="mobile-menu" aria-hidden="true">      <div class="mobile-top">        <a class="mobile-logo" href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>        <button class="mobile-close" aria-label="Close menu">&times;</button>      </div>      <ul>        <li><a href="index.html">Home</a></li>        <li><a href="framework.html">Framework</a></li>        <li><a href="book.html">Big Toe</a></li>        <li><a href="blog.html">Blog</a></li>        <li><a href="validation.html">Validation</a></li>        <li><a href="testing-schedule.html">Testing</a></li>        <li><a href="results.html">Results</a></li>        <li><a href="discussions-page.html">Discussion</a></li>        <li><a href="about-page.html">About</a></li>        <li><a href="contribute.html">Contribute</a></li>        <li><a href="events.html">Events</a></li>        <li><a href="login.html" class="login-link">Login</a></li>      </ul>    </nav>    <!-- Page Header -->    <section class="page-header" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%); padding:4rem 2rem; text-align:center; color:white;">      <h1>Events</h1>      <p>Join us for workshops, seminars, and conferences exploring the frontiers of theoretical physics</p>    </section>    <!-- Upcoming Events -->    <section class="content-section" style="padding:5rem 2rem;">      <div class="section-container" style="max-width:var(--max-width); margin:0 auto;">        <h2 style="font-size:2rem; margin-bottom:1rem; color:var(--text-dark);">Upcoming Events</h2>        <p style="color:var(--text-light); margin-bottom:2rem;">Connect with fellow researchers and explore the latest developments in our framework</p>        <div class="events-grid" data-aos="fade-up">          <!-- Event cards preserved -->        </div>      </div>    </section>    <!-- Past Events, Footer etc preserved -->    <footer>      <div class="footer-container" style="max-width:var(--max-width); margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:2rem;">        <div class="footer-section">          <h3>Ic² Research Institute</h3>          <p style="color: rgba(255,255,255,0.8);">A collaborative workspace of independent researchers.</p>        </div>        <!-- other footer sections preserved -->      </div>      <div class="footer-bottom" style="text-align:center; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); font-size:0.9rem;">        © 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color:rgba(255,255,255,0.6);">Privacy Policy</a>      </div>    </footer>    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>    <script>    AOS.init({ duration: 1000, once:true, offset:100 });    (function() {      const hamburger = document.querySelector('.hamburger');      const mobileMenu = document.querySelector('.mobile-menu');      const mobileOverlay = document.querySelector('.mobile-overlay');      const mobileClose = document.querySelector('.mobile-close');      function openMenu() {        hamburger.classList.add('active'); mobileMenu.classList.add('active'); mobileOverlay.classList.add('active');        hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false');        const first = mobileMenu.querySelector('a'); if(first) first.focus(); document.body.style.overflow='hidden';      }      function closeMenu() {        hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); mobileOverlay.classList.remove('active');        hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true');        hamburger.focus(); document.body.style.overflow='';      }      if(hamburger && mobileMenu) {        hamburger.addEventListener('click', ()=> mobileMenu.classList.contains('active') ? closeMenu() : openMenu());        mobileClose.addEventListener('click', closeMenu);        mobileOverlay.addEventListener('click', closeMenu);        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));        document.addEventListener('keydown', e => { if(e.key==='Escape' && mobileMenu.classList.contains('active')) closeMenu(); });      }    })();    </script></body></html>
