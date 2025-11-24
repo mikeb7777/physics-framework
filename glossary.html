@@ -72,6 +72,10 @@
 
     .site-logo img { height: 50px; width: auto; }
 
+    /* Mobile Logo */
+    .mobile-logo { display: none; }
+    .mobile-logo img { height: 40px; width: auto; }
+
     .main-navigation ul {
     list-style: none;
     display: flex;
@@ -100,6 +104,36 @@
     }
 
     .btn-login:hover { background: rgba(255,255,255,0.22); }
+
+    /* Hamburger Menu Icon */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
 
     /* Keep conversion content visually distinct on white background */
     .content-wrapper { background: white; position: relative; z-index: 2; padding-top: 2rem; }
@@ -133,9 +167,72 @@
 
     /* Responsive tweaks */
     @media (max-width: 768px) {
-    .social-content { grid-template-columns: 1fr; gap: 1rem; }
-    .header-container { padding: 1rem; }
-    .main-navigation ul { display: none; } /* hide nav on small screens for simplicity */
+    .site-logo {
+      display: none;
+    }
+
+    .mobile-logo {
+      display: block;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .header-container {
+      padding: 1rem;
+    }
+
+    .main-navigation {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .main-navigation.active {
+      max-height: 500px;
+    }
+
+    .main-navigation ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem 0;
+    }
+
+    .main-navigation li {
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .main-navigation li:last-child {
+      border-bottom: none;
+    }
+
+    .main-navigation a {
+      display: block;
+      padding: 1rem;
+      width: 100%;
+    }
+
+    .btn-login {
+      display: inline-block;
+      margin: 0.5rem auto;
+      width: calc(100% - 2rem);
+    }
+
+    .social-content { 
+      grid-template-columns: 1fr; 
+      gap: 1rem; 
+    }
     }
 
     /* --- Glossary-specific styles (from new 1.html) --- */
@@ -175,7 +272,20 @@
     <img src="bigtoeindexlogoyel.png" alt="The Big TOE">
     </a>
     </div>
-    <nav class="main-navigation">
+    
+    <div class="mobile-logo">
+    <a href="book.html">
+    <img src="bigtoeindexlogoyel.png" alt="The Big TOE">
+    </a>
+    </div>
+    
+    <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+    </div>
+    
+    <nav class="main-navigation" id="mainNav">
     <ul>
     <li><a href="index.html">Ic² Institute</a></li>
     <li><a href="references.html">References</a></li>
@@ -1045,6 +1155,39 @@
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script> AOS.init(); </script>
+    <script>
+    AOS.init();
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mainNav = document.getElementById('mainNav');
+    
+    if (hamburger && mainNav) {
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mainNav.classList.toggle('active');
+      });
+      
+      // Close mobile menu when clicking a link
+      const navLinks = mainNav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          mainNav.classList.remove('active');
+        });
+      });
+      
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        const isClickInsideNav = mainNav.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        
+        if (!isClickInsideNav && !isClickOnHamburger && mainNav.classList.contains('active')) {
+          hamburger.classList.remove('active');
+          mainNav.classList.remove('active');
+        }
+      });
+    }
+    </script>
 </body>
 </html>

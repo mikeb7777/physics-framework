@@ -45,6 +45,10 @@
     .header-logo a:hover { transform: scale(1.05); }
     .header-logo img { height: 50px; width: auto; }
 
+    /* Mobile Logo */
+    .mobile-logo { display: none; }
+    .mobile-logo img { height: 40px; width: auto; }
+
     /* Hamburger Menu */
     .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; padding: 8px; }
     .hamburger span { width: 25px; height: 3px; background: var(--primary-color); border-radius: 3px; transition: all 0.3s ease; }
@@ -75,7 +79,13 @@
     .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; }
 
     /* Responsive from events */
-    @media (max-width: 968px) { .header-logos { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .page-header h1 { font-size: 2rem; } }
+    @media (max-width: 968px) { 
+      .header-logos { display: none; } 
+      .mobile-logo { display: block; }
+      .hamburger { display: flex; } 
+      .mobile-menu { display: block; } 
+      .page-header h1 { font-size: 2rem; } 
+    }
     @media (max-width: 480px) { .header-logo img { height: 40px; } }
 
     /* --- FAQ-specific styles (kept from original faq.html) --- */
@@ -125,6 +135,7 @@
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .header-logos { display: none; }
+      .mobile-logo { display: block; }
       .hamburger { display: flex; }
       .mobile-menu { display: block; }
       .page-header h1, .page-title { font-size: 2rem; }
@@ -148,6 +159,9 @@
         <div class="header-logo right">
           <a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a>
         </div>
+      </div>
+      <div class="mobile-logo">
+        <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
       </div>
       <div class="hamburger"><span></span><span></span><span></span></div>
     </div>
@@ -429,7 +443,7 @@
     <li><a href="discussions-page.html">Discussions</a></li>
     <li><a href="events.html">Events</a></li>
     <li><a href="become-member.html">Become a Member</a></li>
-    <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#f09d9b92999e969fb080829f849f9ede9d95">Contact</a></li>
     </ul>
     </div>
     </div>
@@ -439,7 +453,7 @@
     </footer>
 
     <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
     AOS.init({ duration: 1000, once: true, offset: 100 });
 
@@ -510,13 +524,4 @@
     const question = item.querySelector('.faq-question').textContent.toLowerCase();
     const answer = item.querySelector('.faq-answer-content').textContent.toLowerCase();
     
-    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
-    item.style.display = 'block';
-    } else {
-    item.style.display = 'none';
-    }
-    });
-    });
-    </script>
-</body>
-</html>
+    if (question.includes(searchTerm) || answer.include
