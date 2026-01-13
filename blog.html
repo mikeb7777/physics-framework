@@ -427,6 +427,81 @@
       text-decoration: underline;
     }
     
+    /* Expand/Collapse Toggle */
+    .post-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .post-toggle h2 {
+      margin: 0;
+      flex: 1;
+    }
+    
+    .toggle-button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    
+    .toggle-button:hover {
+      background: #6d0000;
+      transform: scale(1.1);
+    }
+    
+    .toggle-button.collapsed::before {
+      content: '+';
+    }
+    
+    .toggle-button.expanded::before {
+      content: '−';
+    }
+    
+    .post-content {
+      max-height: 10000px;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    
+    .post-content.collapsed {
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.3s ease;
+    }
+    
+    .expand-hint {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-top: 0.5rem;
+      display: block;
+    }
+    
+    .post-content.collapsed + .expand-hint {
+      display: block;
+    }
+    
+    .post-content.expanded + .expand-hint {
+      display: none;
+    }
+    
     .cta-box {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
@@ -638,15 +713,22 @@
     </div>
     
     <!-- Blog Post: The Veteran's Edge -->
-    <article id="veterans-edge" class="blog-post" data-aos="fade-up">
+        <article id="veterans-edge" class="blog-post" data-aos="fade-up">
       <div class="post-meta">
         <span class="post-category">Analysis</span>
         <span class="post-author">By Michael K. Baines</span>
         <span class="post-date">January 12, 2026</span>
       </div>
       
-      <h2>The Veteran's Edge: Peak Performance Through Information-First Principles</h2>
-      <p class="post-subtitle">Practical Applications for Everyday Life</p>
+      <div class="post-toggle" onclick="togglePost('veterans-edge')">
+        <div>
+          <h2>The Veteran's Edge: Peak Performance Through Information-First Principles</h2>
+          <p class="post-subtitle">Practical Applications for Everyday Life</p>
+        </div>
+        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+      </div>
+      
+      <div class="post-content collapsed" id="veterans-edge-content">
       
       <p>The principles behind elite veteran performance aren't just for athletes and champions. The same dynamics—crystallized intelligence consuming fluid capacity, the need to maintain adaptive thinking despite accumulating expertise—play out in every aspect of life.</p>
 
@@ -821,17 +903,26 @@
       <p>That's the veteran's edge. Not superhuman ability, but strategic management of the fluid-crystallized trade-off. And it's available to anyone willing to approach learning, performance, and development with this understanding in mind.</p>
 
       <p><strong>Michael K. Baines</strong> is a theoretical physicist and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Learn more at <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and <a href="https://ic2institute.org">ic2institute.org</a>.</p>
+      </div>
     </article>
     
     <!-- Blog Post: Interstellar Objects -->
-    <article id="interstellar-objects" class="blog-post" data-aos="fade-up">
+        <article id="interstellar-objects" class="blog-post" data-aos="fade-up">
       <div class="post-meta">
         <span class="post-category">Discussion</span>
         <span class="post-author">By Michael K. Baines</span>
         <span class="post-date">December 15, 2025</span>
       </div>
       
-      <h2>What Is an Interstellar Object, Really?</h2>
+      <div class="post-toggle" onclick="togglePost('interstellar-objects')">
+        <div>
+          <h2>What Is an Interstellar Object, Really?</h2>
+          
+        </div>
+        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+      </div>
+      
+      <div class="post-content collapsed" id="interstellar-objects-content">
       
       <p>When 3I/ATLAS swept through our solar system this year, headlines announced the arrival of our third "interstellar comet." The James Webb Space Telescope captured spectra showing carbon dioxide, water ice, and a telltale coma of outgassing material. It behaves like a comet, so we call it one.</p>
 
@@ -896,18 +987,26 @@
       <p>The universe has been sending us messages for billions of years, written in rock and ice and cosmic ray damage. We're only just learning to read them. Let's not pretend we already know what they say.</p>
 
       <p><strong>Michael K. Baines</strong> is a theoretical physicist and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Learn more at <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and <a href="https://ic2institute.org">ic2institute.org</a>.</p>
+      </div>
     </article>
     
     <!-- Blog Post 1: Information Velocity -->
-    <article id="information-velocity" class="blog-post" data-aos="fade-up">
+        <article id="information-velocity" class="blog-post" data-aos="fade-up">
       <div class="post-meta">
         <span class="post-category">Analysis</span>
         <span class="post-author">By Michael K. Baines</span>
         <span class="post-date">November 15, 2025</span>
       </div>
       
-      <h2>The Speed of Novelty: Why Peak Performance Happens Young (And What It Reveals About the Universe)</h2>
-      <p class="post-subtitle">How information physics explains everything from Aaron Rodgers' best years to early galaxy formation</p>
+      <div class="post-toggle" onclick="togglePost('information-velocity')">
+        <div>
+          <h2>The Speed of Novelty: Why Peak Performance Happens Young (And What It Reveals About the Universe)</h2>
+          <p class="post-subtitle">How information physics explains everything from Aaron Rodgers' best years to early galaxy formation</p>
+        </div>
+        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+      </div>
+      
+      <div class="post-content collapsed" id="information-velocity-content">
       
       <p>One success of the COSMIC Framework is that if true, it has real world applications. So let's demonstrate how this framework illuminates and connects everything from sports performance to data centers.</p>
       
@@ -1132,6 +1231,9 @@
       
       <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
       
+      </div>
+
+      
       <div class="post-footer">
         <p><em>This article draws on research from sports performance science, cognitive neuroscience, flow state research, information capitalism, and the COSMIC Framework's predictions about information efficiency in cosmology. The convergence across these domains suggests we're touching on a fundamental principle: the thermodynamics of information integration across complex systems.</em></p>
         <p><strong>What do you think? Does this principle resonate with your experience? Have you noticed the difference between creating and editing, between novelty processing and pattern refinement?</strong></p>
@@ -1139,15 +1241,22 @@
     </article>
     
     <!-- Blog Post 2: Prime Numbers -->
-    <article id="prime-numbers" class="blog-post" data-aos="fade-up">
+        <article id="prime-numbers" class="blog-post" data-aos="fade-up">
       <div class="post-meta">
         <span class="post-category">Theoretical Speculation</span>
         <span class="post-author">By Michael K. Baines</span>
         <span class="post-date">October 20, 2025</span>
       </div>
       
-      <h2>Could the Universe Use Prime Numbers as Logic Gates?</h2>
-      <p class="post-subtitle">An exploration beyond the COSMIC Framework</p>
+      <div class="post-toggle" onclick="togglePost('prime-numbers')">
+        <div>
+          <h2>Could the Universe Use Prime Numbers as Logic Gates?</h2>
+          <p class="post-subtitle">An exploration beyond the COSMIC Framework</p>
+        </div>
+        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+      </div>
+      
+      <div class="post-content collapsed" id="prime-numbers-content">
       
       <p><em>Status: Not included in the book; open for community exploration</em></p>
       
@@ -1235,6 +1344,9 @@
       
       <p>This speculation didn't make it into The Big TOE because it's not yet ready. But perhaps, through collaborative exploration, we can determine whether there's something here worth pursuing, or whether this beautiful idea is ultimately a mathematical dead end. Either way, we'll learn something profound about the relationship between mathematics, computation, and physical reality.</p>
       
+      </div>
+
+      
       <div class="post-footer">
         <p><strong>About the Author:</strong> Michael K. Baines is the developer of the COSMIC Framework presented in The Big TOE: The COSMIC Framework's Theory of Everything. This blog post represents speculative exploration beyond the book's scope, shared for community discussion and collaborative investigation.</p>
         <p><strong>Support This Research:</strong> If you find this kind of open scientific exploration valuable, consider <a href="contribute.html">supporting continued research</a>.</p>
@@ -1242,15 +1354,22 @@
     </article>
     
     <!-- Blog Post 3: Isolation -->
-        <article id="isolation" class="blog-post" data-aos="fade-up">
+            <article id="isolation" class="blog-post" data-aos="fade-up">
       <div class="post-meta">
         <span class="post-category">Discussion</span>
         <span class="post-author">By Michael K. Baines</span>
         <span class="post-date">December 21, 2025</span>
       </div>
       
-      <h2>Isolation May Be Required</h2>
-      <p class="post-subtitle">A condensed exploration of why we might be alone in the universe, and why that might be exactly what we need</p>
+      <div class="post-toggle" onclick="togglePost('isolation')">
+        <div>
+          <h2>Isolation May Be Required</h2>
+          <p class="post-subtitle">A condensed exploration of why we might be alone in the universe, and why that might be exactly what we need</p>
+        </div>
+        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+      </div>
+      
+      <div class="post-content collapsed" id="isolation-content">
       
       <h3>More Stars Than Grains of Sand</h3>
 
@@ -1712,6 +1831,9 @@
 
 <p>And in that isolation, surrounded by common minerals but starved for consciousness, perhaps we'll finally learn to value what's actually rare: each other.</p>
       
+      </div>
+
+      
       <div class="post-footer">
         <p><strong>For detailed mathematical analysis, calculations, and scientific references supporting this framework, see the complete technical document:</strong> "The Isolation Horizon: Why Cosmic Silence May Be Geometrically Inevitable"</p>
         <p><strong>Michael K. Baines</strong> is a theoretical physicist and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Learn more at <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and <a href="https://ic2institute.org">ic2institute.org</a>.</p>
@@ -1719,15 +1841,22 @@
     </article>
     
     <!-- Blog Post 3: Cosmic Conversation -->
-    <article id="cosmic-conversation" class="blog-post" data-aos="fade-up">
+        <article id="cosmic-conversation" class="blog-post" data-aos="fade-up">
       <div class="post-meta">
         <span class="post-category">Philosophy</span>
         <span class="post-author">By Michael K. Baines</span>
         <span class="post-date">August 12, 2025</span>
       </div>
       
-      <h2>You're Constantly Talking to the Universe (And It's Talking Back)</h2>
-      <p class="post-subtitle">Prove Me Wrong</p>
+      <div class="post-toggle" onclick="togglePost('cosmic-conversation')">
+        <div>
+          <h2>You're Constantly Talking to the Universe (And It's Talking Back)</h2>
+          <p class="post-subtitle">Prove Me Wrong</p>
+        </div>
+        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+      </div>
+      
+      <div class="post-content collapsed" id="cosmic-conversation-content">
       
       <p>Right now, as you read this sentence, you're engaged in the most profound conversation you'll ever have. Not with me, the author. Not even with yourself. You're in constant dialogue with the entire universe, exchanging information at every level of your existence, from the subatomic particles in your neurons to the conscious thoughts forming in your mind.</p>
       
@@ -1931,6 +2060,9 @@
       
       <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
       
+      </div>
+
+      
       <div class="post-footer">
         <p><strong>About this blog:</strong> This post is part of ongoing explorations into the COSMIC Framework's Theory of Everything. For the full technical treatment, including mathematical derivations, experimental predictions, and detailed analysis, visit <a href="index.html">www.eequalsicsquared.com</a> and download "The Big TOE."</p>
         <p>If you found this thought-provoking, challenging, or infuriating, good. That means you're processing information. That means you're alive, conscious, and engaged in the cosmic conversation.</p>
@@ -1973,6 +2105,55 @@
         });
       });
     }
+  </script>
+
+  <script>
+    // Expand/Collapse Article Toggle
+    function togglePost(articleId) {
+      const content = document.getElementById(articleId + '-content');
+      const button = event.currentTarget.querySelector('.toggle-button');
+      
+      if (content && button) {
+        if (content.classList.contains('collapsed')) {
+          // Expand
+          content.classList.remove('collapsed');
+          content.classList.add('expanded');
+          button.classList.remove('collapsed');
+          button.classList.add('expanded');
+        } else {
+          // Collapse
+          content.classList.add('collapsed');
+          content.classList.remove('expanded');
+          button.classList.add('collapsed');
+          button.classList.remove('expanded');
+          
+          // Scroll to article top smoothly
+          document.getElementById(articleId).scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }
+    }
+    
+    // Optional: Expand first article by default on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Uncomment the line below if you want the first article expanded by default
+      // togglePost('veterans-edge');
+      
+      // If navigating from index, expand the target article
+      if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetArticle = document.getElementById(targetId);
+        if (targetArticle) {
+          const content = document.getElementById(targetId + '-content');
+          const toggle = targetArticle.querySelector('.post-toggle');
+          if (content && content.classList.contains('collapsed')) {
+            toggle.click();
+          }
+        }
+      }
+    });
   </script>
 </body>
 </html>
