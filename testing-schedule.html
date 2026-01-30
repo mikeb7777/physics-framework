@@ -501,7 +501,6 @@
       <div class="header-container">
         <a href="index.html" class="site-logo">
           <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
-          <span>Ic² Research Institute</span>
         </a>
         <nav class="main-navigation">
           <ul>
@@ -1839,5 +1838,48 @@
             hamburger.classList.remove('active');
             mobileMenu.classList.remove('active');
             hamburger.setAttribute('aria-expanded', 'false');
+    <script>
+    (function() {
+      const hamburger = document.querySelector('.hamburger');
+      const mobileMenu = document.querySelector('.mobile-menu');
+
+      if (hamburger && mobileMenu) {
+        const toggleMenu = function() {
+          hamburger.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
+
+          const expanded = hamburger.classList.contains('active');
+          hamburger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+          mobileMenu.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        hamburger.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMenu();
+          }
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
             mobileMenu.setAttribute('aria-hidden', 'true');
-          })
+          });
+        });
+      }
+    })();
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+    </script>
+</body>
+</html>
