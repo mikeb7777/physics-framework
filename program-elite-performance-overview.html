@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Elite Performance Training - Program Overview - Ic² Research Institute</title>
+    <meta name="description" content="Comprehensive overview of the Elite Performance Training Program - objectives, participants, budget, timeline, and deliverables">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+    /* Base styles (same as gateway) */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    :root {
+    --primary-color: #8B0000;
+    --secondary-color: #2c3e50;
+    --accent-blue: #005ba5;
+    --accent-red: #e33d2f;
+    --accent-green: #a1cd5f;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    }
+
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: white;
+    }
+
+    /* Header styles (same as gateway) */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .site-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration: none;
+    }
+
+    .site-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+    }
+
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    }
+
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
+
+    .main-navigation a:hover {
+    color: var(--primary-color);
+    }
+
+    .main-navigation a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    padding: 8px;
+    }
+
+    .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active {
+    max-height: 600px;
+    }
+
+    .mobile-menu ul {
+    list-style: none;
+    padding: 1rem;
+    }
+
+    .mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    }
+
+    /* Program Header */
+    .program-header {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    }
+
+    .program-header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    }
+
+    .breadcrumb a {
+    color: white;
+    text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+    text-decoration: underline;
+    }
+
+    .program-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    }
+
+    .program-tagline {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    }
+
+    .program-status {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-weight: 600;
+    }
+
+    /* Quick Stats Bar */
+    .quick-stats {
+    background: white;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-top: -2rem;
+    border-radius: 12px;
+    }
+
+    .stats-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    }
+
+    .stat-box {
+    text-align: center;
+    }
+
+    .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    display: block;
+    margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    }
+
+    /* Main Content */
+    .main-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    }
+
+    .content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    }
+
+    .main-column h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    border-bottom: 3px solid var(--accent-blue);
+    padding-bottom: 0.5rem;
+    }
+
+    .main-column h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+
+    .main-column p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    }
+
+    .main-column ul, .main-column ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+    }
+
+    .main-column li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    }
+
+    .highlight-box {
+    background: var(--bg-light);
+    border-left: 4px solid var(--accent-blue);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 6px;
+    }
+
+    .highlight-box h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+
+    /* Sidebar */
+    .sidebar-box {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .sidebar-box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    border-bottom: 2px solid var(--bg-light);
+    padding-bottom: 0.5rem;
+    }
+
+    .sidebar-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    }
+
+    .sidebar-item:last-child {
+    border-bottom: none;
+    }
+
+    .sidebar-label {
+    color: var(--text-light);
+    font-weight: 500;
+    }
+
+    .sidebar-value {
+    color: var(--text-dark);
+    font-weight: 600;
+    }
+
+    .cta-box {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #6b0000 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    }
+
+    .cta-box h3 {
+    color: white;
+    margin-bottom: 1rem;
+    }
+
+    .cta-box p {
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+    }
+
+    .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: white;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Footer (same as gateway) */
+    footer {
+    background: #2c3e50;
+    color: white;
+    padding: 2.5rem 2rem 1rem;
+    }
+
+    .footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    }
+
+    .footer-section h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    }
+
+    .footer-section ul {
+    list-style: none;
+    }
+
+    .footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+    color: white;
+    }
+
+    .footer-bottom {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .main-navigation {
+            display: none;
+        }
+
+        .hamburger {
+            display: flex;
+        }
+
+        .mobile-menu {
+            display: block;
+        }
+
+        .program-header h1 {
+            font-size: 2rem;
+        }
+
+        .stats-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .content-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-container {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+    <div class="header-container">
+    <a href="index.html" class="site-logo">
+    <img src="logo-dark.png" alt="Ic² Research Institute Logo" onerror="this.style.display='none'">
+    <span>Ic² Research Institute</span>
+    </a>
+
+    <nav class="main-navigation">
+    <ul>
+    <li><a href="book.html">Big Toe</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="discussions-page.html">Discussion</a></li>
+    <li><a href="framework.html">About</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="login.html" class="login-link">Login</a></li>
+    </ul>
+    </nav>
+
+    <div class="hamburger" role="button" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+    </div>
+    </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+    <ul>
+    <li><a href="book.html">Big Toe</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="discussions-page.html">Discussion</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="login.html" class="login-link">Login</a></li>
+    </ul>
+    </div>
+
+    <!-- Program Header -->
+    <section class="program-header">
+        <div class="program-header-container">
+            <div class="breadcrumb">
+                <a href="programs-gateway.html">Programs</a>
+                <span>/</span>
+                <span>Elite Performance Training</span>
+            </div>
+            <h1>Elite Performance Training Program</h1>
+            <p class="program-tagline">Systematic autonomic nervous system optimization for competitive athletes and high-achieving students</p>
+            <span class="program-status">PILOT PHASE • ENROLLMENT OPEN</span>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+        <div class="stats-container">
+            <div class="stat-box" data-aos="fade-up">
+                <span class="stat-value">18</span>
+                <span class="stat-label">Months</span>
+            </div>
+            <div class="stat-box" data-aos="fade-up" data-aos-delay="100">
+                <span class="stat-value">20-30%</span>
+                <span class="stat-label">Performance Gain</span>
+            </div>
+            <div class="stat-box" data-aos="fade-up" data-aos-delay="200">
+                <span class="stat-value">3-5</span>
+                <span class="stat-label">Pilot Schools</span>
+            </div>
+            <div class="stat-box" data-aos="fade-up" data-aos-delay="300">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Open Source</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="content-grid">
+            <!-- Main Column -->
+            <div class="main-column">
+                <div data-aos="fade-up">
+                    <h2>Program Overview</h2>
+                    <p>
+                        The Elite Performance Training Program represents a systematic integration of neuroscience, sports psychology, and contemplative practice, designed to optimize the autonomic nervous system for peak performance. Drawing from military training protocols, Olympic athlete preparation, and validated clinical research, this program provides measurable competitive advantages in both athletic and academic domains.
+                    </p>
+                    <p>
+                        Through daily practice of breathing techniques, biofeedback training, mental rehearsal, and recovery optimization, participants develop conscious control over physiological processes that directly impact performance, stress resilience, and learning capacity.
+                    </p>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>Program Objectives</h2>
+                    
+                    <h3>Primary Objectives</h3>
+                    <ul>
+                        <li><strong>Athletic Performance Enhancement:</strong> Achieve 20-30% measurable improvement in sport-specific performance metrics through improved recovery, mental rehearsal, and autonomic regulation</li>
+                        <li><strong>Academic Excellence:</strong> Demonstrate 12-15% grade improvement and 200-300 point SAT/ACT increases through enhanced focus, reduced test anxiety, and optimized learning states</li>
+                        <li><strong>Injury Prevention:</strong> Reduce injury rates by 30-40% through enhanced body awareness, improved recovery protocols, and stress management</li>
+                        <li><strong>Autonomic Mastery:</strong> Develop measurable control over heart rate, heart rate variability, stress response, and recovery capacity</li>
+                    </ul>
+
+                    <h3>Secondary Objectives</h3>
+                    <ul>
+                        <li>Establish behavioral self-regulation capabilities (impulse control, emotional management, decision-making)</li>
+                        <li>Create sustainable daily practice habits that persist beyond program completion</li>
+                        <li>Develop interoceptive awareness and mind-body integration</li>
+                        <li>Provide competitive advantages in college recruitment and admissions processes</li>
+                        <li>Build resilience against substance abuse and self-destructive behaviors</li>
+                    </ul>
+
+                    <h3>Research Objectives</h3>
+                    <ul>
+                        <li>Collect comprehensive data on autonomic training outcomes in adolescent populations</li>
+                        <li>Validate measurement protocols for HRV, recovery metrics, and performance correlation</li>
+                        <li>Develop standardized curriculum that can be replicated across institutions</li>
+                        <li>Establish evidence base for scaling to broader educational markets</li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>Target Participants</h2>
+                    
+                    <h3>Primary Target: Elite Prep School Athletes (Ages 13-18)</h3>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Attending elite preparatory schools ($50k+ annual tuition)</li>
+                        <li>Participating in competitive athletics at state or national level</li>
+                        <li>College recruitment track (seeking D1 scholarships or elite academic institutions)</li>
+                        <li>High academic performance expectations (3.5+ GPA target)</li>
+                        <li>Demonstrated commitment and discipline</li>
+                    </ul>
+
+                    <h3>Pilot Phase Institutions</h3>
+                    <p><strong>Target Schools (3-5 for Year 1):</strong></p>
+                    <ul>
+                        <li>IMG Academy (Bradenton, FL) - 1,500 students, elite multi-sport</li>
+                        <li>Bullis School (Potomac, MD) - 800 students, strong academics + athletics</li>
+                        <li>Montverde Academy (FL) - 1,400 students, basketball powerhouse</li>
+                        <li>La Lumiere School (IN) - 200 students, elite basketball program</li>
+                        <li>Phillips Exeter Academy (NH) - 1,000 students, academic elite with strong athletics</li>
+                    </ul>
+
+                    <h3>Participant Requirements</h3>
+                    <ul>
+                        <li>Age 13-18 (grades 8-12)</li>
+                        <li>Currently participating in competitive athletics</li>
+                        <li>Parental consent and support</li>
+                        <li>Willingness to commit to daily 20-30 minute practice</li>
+                        <li>Access to smartphone for app-based training</li>
+                        <li>Medical clearance (no contraindications for breathing exercises)</li>
+                    </ul>
+
+                    <h3>Exclusion Criteria</h3>
+                    <ul>
+                        <li>Severe cardiovascular conditions requiring medical supervision</li>
+                        <li>Active psychosis or severe mental illness</li>
+                        <li>Inability to commit to minimum practice requirements</li>
+                        <li>Concurrent participation in conflicting training programs</li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>Program Structure & Timeline</h2>
+                    
+                    <h3>Duration: 18 Months (Three Semesters)</h3>
+                    
+                    <div class="highlight-box">
+                        <h4>Semester 1: Foundation & Assessment (Months 1-6)</h4>
+                        <p><strong>Focus:</strong> Autonomic nervous system basics, breathing techniques, HRV optimization</p>
+                        <p><strong>Expected Outcomes:</strong></p>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>5-8 bpm resting heart rate reduction</li>
+                            <li>20-25% HRV improvement</li>
+                            <li>15-20% athletic performance gains</li>
+                            <li>8-12% academic improvement</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Semester 2: Optimization & Specialization (Months 7-12)</h4>
+                        <p><strong>Focus:</strong> Athletic/academic integration, advanced techniques, individual specialization</p>
+                        <p><strong>Expected Outcomes:</strong></p>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>20-25% total athletic improvement</li>
+                            <li>12-15% academic improvement</li>
+                            <li>150-200 point SAT increase</li>
+                            <li>Demonstrated advanced autonomic control</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Semester 3: Mastery & Application (Months 13-18)</h4>
+                        <p><strong>Focus:</strong> College placement preparation, teaching others, independence</p>
+                        <p><strong>Expected Outcomes:</strong></p>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>25-30% total performance improvement</li>
+                            <li>Measurable college admissions advantage</li>
+                            <li>Self-directed practice mastery</li>
+                            <li>Peer mentoring capabilities</li>
+                        </ul>
+                    </div>
+
+                    <h3>Daily Practice Requirements</h3>
+                    <ul>
+                        <li><strong>Months 1-6:</strong> 20 minutes daily (10 min morning, 10 min evening)</li>
+                        <li><strong>Months 7-12:</strong> 25 minutes daily (10 min morning, 15 min pre/post athletic)</li>
+                        <li><strong>Months 13-18:</strong> 30 minutes daily (self-directed timing)</li>
+                    </ul>
+
+                    <h3>Professional Instruction</h3>
+                    <ul>
+                        <li>Weekly 60-minute group sessions (on campus)</li>
+                        <li>Monthly individual assessments (30 minutes)</li>
+                        <li>Quarterly comprehensive performance reviews</li>
+                        <li>On-demand instructor support via app</li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>Deliverables</h2>
+                    
+                    <h3>For Participants</h3>
+                    <ul>
+                        <li>Complete 18-month training curriculum (progressive, age-appropriate)</li>
+                        <li>Wearable biofeedback device (included, remains with student)</li>
+                        <li>Mobile app with guided practices and progress tracking</li>
+                        <li>Weekly professional instruction and coaching</li>
+                        <li>Monthly performance reports and progress analytics</li>
+                        <li>Completion certificate and documented performance improvements</li>
+                        <li>College admissions support documentation</li>
+                    </ul>
+
+                    <h3>For Institutions</h3>
+                    <ul>
+                        <li>Comprehensive program implementation (turnkey solution)</li>
+                        <li>Certified instructors on campus (FT or PT based on enrollment)</li>
+                        <li>Technology platform (admin dashboard, parent portal, analytics)</li>
+                        <li>Monthly program reports (participation, outcomes, trends)</li>
+                        <li>Quarterly stakeholder presentations (board, parents, faculty)</li>
+                        <li>Annual comprehensive case study with ROI analysis</li>
+                        <li>Marketing rights to program results (anonymized data)</li>
+                    </ul>
+
+                    <h3>For Research Community</h3>
+                    <ul>
+                        <li>Open-source curriculum materials (Creative Commons license)</li>
+                        <li>De-identified research data (published on Zenodo)</li>
+                        <li>Validated assessment protocols and measurement frameworks</li>
+                        <li>Peer-reviewed publications documenting outcomes</li>
+                        <li>Replication package for other institutions</li>
+                        <li>Technology specifications and integration guides</li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>Budget & Pricing</h2>
+                    
+                    <h3>Pilot Phase Pricing (Year 1)</h3>
+                    <p><strong>Standard Pricing: $5,000 per student/year</strong></p>
+                    <p><strong>Pilot Discount: $3,000 per student/year (40% off)</strong></p>
+                    
+                    <h3>What's Included</h3>
+                    <ul>
+                        <li>All instruction and curriculum delivery</li>
+                        <li>Wearable biofeedback device ($200 value)</li>
+                        <li>Technology platform access (app, dashboards, analytics)</li>
+                        <li>Weekly group sessions and monthly individual assessments</li>
+                        <li>Quarterly performance reviews</li>
+                        <li>Ongoing instructor and technical support</li>
+                        <li>All materials and resources</li>
+                    </ul>
+
+                    <h3>Institutional Investment (Example: 100 students)</h3>
+                    <ul>
+                        <li>Pilot pricing: 100 students × $3,000 = $300,000</li>
+                        <li>Payment options: Annual, semester, or monthly installments</li>
+                        <li>Minimum enrollment: 50 students per institution</li>
+                    </ul>
+
+                    <h3>Expected ROI for Schools</h3>
+                    <ul>
+                        <li><strong>Scholarship value:</strong> 10-15 additional D1 scholarships × $40k/year = $400-600k annual value</li>
+                        <li><strong>Injury cost savings:</strong> 30-40% reduction = $30-50k annual savings</li>
+                        <li><strong>Recruitment advantage:</strong> Differentiated offering worth significant enrollment premium</li>
+                        <li><strong>Academic performance:</strong> Better college placement = enhanced institutional reputation</li>
+                        <li><strong>Total estimated value:</strong> $500k-1M per year per $300k investment = 2-3x ROI</li>
+                    </ul>
+
+                    <h3>Funding Sources</h3>
+                    <p>Institutions can fund through:</p>
+                    <ul>
+                        <li>Athletic department budgets</li>
+                        <li>Academic enrichment programs</li>
+                        <li>Student activity fees</li>
+                        <li>Donor/endowment funding</li>
+                        <li>Grant applications (wellness, athletics, academic excellence)</li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>Measurement & Validation</h2>
+                    
+                    <h3>Assessment Framework</h3>
+                    <p>All participants undergo comprehensive baseline and ongoing assessments:</p>
+
+                    <h4>Physiological Metrics</h4>
+                    <ul>
+                        <li>Resting heart rate (daily via wearable)</li>
+                        <li>Heart rate variability (daily via wearable)</li>
+                        <li>Sleep quality and architecture (nightly tracking)</li>
+                        <li>Recovery scores (calculated daily)</li>
+                        <li>Body composition (quarterly if available)</li>
+                    </ul>
+
+                    <h4>Athletic Performance</h4>
+                    <ul>
+                        <li>Sport-specific skill tests (baseline, monthly, quarterly)</li>
+                        <li>Standardized physical testing (vertical jump, sprint times, agility)</li>
+                        <li>Coach performance ratings</li>
+                        <li>Injury tracking and recovery times</li>
+                        <li>Competition performance data</li>
+                    </ul>
+
+                    <h4>Academic Performance</h4>
+                    <ul>
+                        <li>GPA tracking (quarterly)</li>
+                        <li>Standardized test scores (SAT, ACT, subject tests)</li>
+                        <li>Attention and focus assessments</li>
+                        <li>Teacher observations and ratings</li>
+                    </ul>
+
+                    <h4>Psychological & Behavioral</h4>
+                    <ul>
+                        <li>Perceived stress scales (monthly)</li>
+                        <li>Test anxiety measures</li>
+                        <li>Behavioral observations (teacher/coach reports)</li>
+                        <li>Self-regulation assessments</li>
+                    </ul>
+
+                    <h3>Data Collection & Analysis</h3>
+                    <ul>
+                        <li>Continuous automated data collection via wearables and app</li>
+                        <li>Monthly formal assessments</li>
+                        <li>Quarterly comprehensive evaluations</li>
+                        <li>Comparison to historical cohorts (year-over-year)</li>
+                        <li>Control group comparisons where possible</li>
+                        <li>Statistical analysis with confidence intervals</li>
+                    </ul>
+
+                    <h3>Publication & Transparency</h3>
+                    <ul>
+                        <li>De-identified data published on Zenodo (DOI-referenced)</li>
+                        <li>Quarterly progress reports to stakeholders</li>
+                        <li>Annual comprehensive analysis</li>
+                        <li>Peer-reviewed publication upon completion</li>
+                        <li>Open methodology for replication</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar-column">
+                <div class="sidebar-box" data-aos="fade-up">
+                    <h3>Quick Facts</h3>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Start Date</span>
+                        <span class="sidebar-value">Fall 2025</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Duration</span>
+                        <span class="sidebar-value">18 Months</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Age Range</span>
+                        <span class="sidebar-value">13-18 Years</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Time Commitment</span>
+                        <span class="sidebar-value">20-30 min/day</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Pilot Schools</span>
+                        <span class="sidebar-value">3-5 Institutions</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Status</span>
+                        <span class="sidebar-value">Enrollment Open</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-box" data-aos="fade-up">
+                    <h3>Key Contacts</h3>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Program Director</span>
+                        <span class="sidebar-value">M. Coleman</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Research Lead</span>
+                        <span class="sidebar-value">Ic² Institute</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Email</span>
+                        <span class="sidebar-value" style="font-size: 0.85rem;">programs@ic2research.org</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-box" data-aos="fade-up">
+                    <h3>Important Dates</h3>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Applications Open</span>
+                        <span class="sidebar-value">Feb 2025</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">School Selection</span>
+                        <span class="sidebar-value">Apr 2025</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Instructor Training</span>
+                        <span class="sidebar-value">Jun 2025</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Program Launch</span>
+                        <span class="sidebar-value">Sep 2025</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">First Assessment</span>
+                        <span class="sidebar-value">Dec 2025</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <span class="sidebar-label">Program Completion</span>
+                        <span class="sidebar-value">Feb 2027</span>
+                    </div>
+                </div>
+
+                <div class="cta-box" data-aos="fade-up">
+                    <h3>Access Curriculum</h3>
+                    <p>View detailed curriculum materials, instructor guides, and assessment protocols</p>
+                    <a href="program-elite-performance.html" class="btn">View Full Curriculum</a>
+                </div>
+
+                <div class="sidebar-box" data-aos="fade-up">
+                    <h3>Resources</h3>
+                    <ul style="list-style: none; margin: 0;">
+                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">📄 Program Brochure (PDF)</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">📊 ROI Calculator (Excel)</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">🎥 Overview Video</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">📧 Contact for Demo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+    <div class="footer-container">
+    <div class="footer-section">
+    <h3>Ic² Research Institute</h3>
+    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+    </div>
+    <div class="footer-section">
+    <h3>Research</h3>
+    <ul>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="zenodo-papers.html">Papers</a></li>
+    </ul>
+    </div>
+    <div class="footer-section">
+    <h3>Resources</h3>
+    <ul>
+    <li><a href="book.html">The Big TOE</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="faq-page.html">FAQ</a></li>
+    </ul>
+    </div>
+    <div class="footer-section">
+    <h3>Connect</h3>
+    <ul>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="discussions-page.html">Discussions</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="footer-bottom">
+    <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
+    </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+    (function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    if (hamburger && mobileMenu) {
+    const toggleMenu = function() {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    };
+
+    hamburger.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    toggleMenu();
+    }
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    });
+    });
+    }
+    })();
+    </script>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+        duration: 600
+      });
+    </script>
+</body>
+</html>

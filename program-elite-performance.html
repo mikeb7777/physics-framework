@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Elite Performance Training - Curriculum & Materials - Ic² Research Institute</title>
+    <meta name="description" content="Complete curriculum materials, instructor guides, and downloadable resources for the Elite Performance Training Program">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+    /* Base styles (consistent with other pages) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+    --primary-color: #8B0000;
+    --accent-blue: #005ba5;
+    --accent-green: #a1cd5f;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    }
+
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: white;
+    }
+
+    /* Header (consistent with other pages) */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .site-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration: none;
+    }
+
+    .site-logo img { height: 40px; }
+
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    }
+
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
+
+    .main-navigation a:hover { color: var(--primary-color); }
+
+    .main-navigation a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-weight: 700;
+    }
+
+    /* Hamburger */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    padding: 8px;
+    }
+
+    .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    }
+
+    .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active { max-height: 600px; }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    }
+
+    /* Page Header */
+    .page-header {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);
+    color: white;
+    padding: 3rem 2rem 2rem;
+    }
+
+    .page-header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    }
+
+    .breadcrumb a { color: white; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    }
+
+    .page-header p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    }
+
+    /* Main Content */
+    .main-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    }
+
+    /* Download Section */
+    .download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    }
+
+    .download-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    }
+
+    .download-card:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    }
+
+    .download-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    }
+
+    .download-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+
+    .download-card p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    }
+
+    .file-list {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    }
+
+    .file-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    }
+
+    .file-list li:last-child { border-bottom: none; }
+
+    .download-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+    background: #004080;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Curriculum Overview */
+    .curriculum-overview {
+    background: var(--bg-light);
+    padding: 3rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    }
+
+    .curriculum-overview h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+    }
+
+    .semester-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    }
+
+    .semester-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-blue);
+    }
+
+    .semester-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+
+    .semester-card h4 {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    }
+
+    .semester-card ul {
+    margin-left: 1.5rem;
+    color: var(--text-light);
+    }
+
+    .semester-card li {
+    margin-bottom: 0.5rem;
+    }
+
+    /* License Section */
+    .license-box {
+    background: #e7f5ff;
+    border-left: 4px solid var(--accent-blue);
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 3rem 0;
+    }
+
+    .license-box h3 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+
+    .license-box p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+    background: #2c3e50;
+    color: white;
+    padding: 2.5rem 2rem 1rem;
+    }
+
+    .footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+    }
+
+    .footer-section h3 { margin-bottom: 0.75rem; }
+    .footer-section ul { list-style: none; }
+    .footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    }
+
+    .footer-bottom {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .main-navigation { display: none; }
+        .hamburger { display: flex; }
+        .mobile-menu { display: block; }
+        .page-header h1 { font-size: 1.75rem; }
+        .semester-grid { grid-template-columns: 1fr; }
+        .download-grid { grid-template-columns: 1fr; }
+        .footer-container { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+    <div class="header-container">
+    <a href="index.html" class="site-logo">
+    <img src="logo-dark.png" alt="Ic² Research Institute Logo" onerror="this.style.display='none'">
+    <span>Ic² Research Institute</span>
+    </a>
+
+    <nav class="main-navigation">
+    <ul>
+    <li><a href="book.html">Big Toe</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="discussions-page.html">Discussion</a></li>
+    <li><a href="framework.html">About</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="login.html" class="login-link">Login</a></li>
+    </ul>
+    </nav>
+
+    <div class="hamburger" role="button" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+    </div>
+    </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+    <ul>
+    <li><a href="book.html">Big Toe</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="discussions-page.html">Discussion</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="login.html" class="login-link">Login</a></li>
+    </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <div class="breadcrumb">
+                <a href="programs-gateway.html">Programs</a>
+                <span>/</span>
+                <a href="program-elite-performance-overview.html">Elite Performance</a>
+                <span>/</span>
+                <span>Curriculum</span>
+            </div>
+            <h1>Complete Curriculum & Materials</h1>
+            <p>Open-source training materials, instructor guides, and assessment protocols</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        
+        <!-- Curriculum Overview -->
+        <div class="curriculum-overview" data-aos="fade-up">
+            <h2>18-Month Curriculum Overview</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">
+                The Elite Performance Training curriculum is structured in three progressive semesters, each building upon the previous foundation. All materials are open-source and available for download, modification, and replication.
+            </p>
+
+            <div class="semester-grid">
+                <div class="semester-card">
+                    <h3>Semester 1: Foundation</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;"><strong>Months 1-6</strong></p>
+                    
+                    <h4>Core Topics</h4>
+                    <ul>
+                        <li>Autonomic nervous system fundamentals</li>
+                        <li>Diaphragmatic breathing techniques</li>
+                        <li>Heart rate awareness and control</li>
+                        <li>Progressive muscle relaxation</li>
+                        <li>Heart rate variability optimization</li>
+                        <li>Sleep and recovery protocols</li>
+                        <li>Body scan and interoception</li>
+                        <li>Stress recognition and management</li>
+                    </ul>
+
+                    <h4>Expected Outcomes</h4>
+                    <ul>
+                        <li>5-8 bpm resting HR reduction</li>
+                        <li>20-25% HRV improvement</li>
+                        <li>15-20% athletic performance gains</li>
+                        <li>8-12% academic improvement</li>
+                    </ul>
+                </div>
+
+                <div class="semester-card">
+                    <h3>Semester 2: Optimization</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;"><strong>Months 7-12</strong></p>
+                    
+                    <h4>Core Topics</h4>
+                    <ul>
+                        <li>Mental rehearsal and visualization</li>
+                        <li>Pre-competition protocols</li>
+                        <li>Performance under pressure</li>
+                        <li>Recovery optimization strategies</li>
+                        <li>Injury prevention and body awareness</li>
+                        <li>Test anxiety management</li>
+                        <li>Sustained focus training</li>
+                        <li>Memory and learning optimization</li>
+                    </ul>
+
+                    <h4>Expected Outcomes</h4>
+                    <ul>
+                        <li>20-25% total athletic improvement</li>
+                        <li>12-15% academic improvement</li>
+                        <li>150-200 point SAT increase</li>
+                        <li>Advanced autonomic control</li>
+                    </ul>
+                </div>
+
+                <div class="semester-card">
+                    <h3>Semester 3: Mastery</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1rem;"><strong>Months 13-18</strong></p>
+                    
+                    <h4>Core Topics</h4>
+                    <ul>
+                        <li>Elite performance integration</li>
+                        <li>College recruitment preparation</li>
+                        <li>Advanced techniques (pain, temperature)</li>
+                        <li>Teaching and peer mentoring</li>
+                        <li>Independent practice mastery</li>
+                        <li>Life skill integration</li>
+                        <li>Long-term sustainability</li>
+                        <li>Behavioral self-regulation mastery</li>
+                    </ul>
+
+                    <h4>Expected Outcomes</h4>
+                    <ul>
+                        <li>25-30% total performance improvement</li>
+                        <li>College admissions advantage</li>
+                        <li>Self-directed mastery</li>
+                        <li>Peer teaching capability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;" data-aos="fade-up">Downloadable Materials</h2>
+
+        <div class="download-grid">
+            <!-- Complete Curriculum Package -->
+            <div class="download-card" data-aos="fade-up">
+                <span class="download-icon">📚</span>
+                <h3>Complete Curriculum Package</h3>
+                <p>Full 18-month curriculum including all three semesters with week-by-week lesson plans, instructor guides, and student materials.</p>
+                <ul class="file-list">
+                    <li>📄 Master Curriculum Document (PDF, 250 pages)</li>
+                    <li>📊 Semester-by-Semester Breakdown</li>
+                    <li>📝 Weekly Session Plans</li>
+                    <li>🎯 Learning Objectives Matrix</li>
+                    <li>📈 Progression Framework</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (45 MB)</a>
+            </div>
+
+            <!-- Instructor Training Materials -->
+            <div class="download-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="download-icon">👨‍🏫</span>
+                <h3>Instructor Training Materials</h3>
+                <p>Complete training package for Level 1, 2, and 3 instructor certification including presentations, assessments, and teaching guides.</p>
+                <ul class="file-list">
+                    <li>📄 Level 1 Certification Guide (40 hours)</li>
+                    <li>📄 Level 2 Performance Instructor (60 hours)</li>
+                    <li>📄 Level 3 Master Instructor (100 hours)</li>
+                    <li>🎬 Training Videos (12 hours total)</li>
+                    <li>📝 Assessment Rubrics</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (2.1 GB)</a>
+            </div>
+
+            <!-- Student Practice Guides -->
+            <div class="download-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="download-icon">📖</span>
+                <h3>Student Practice Guides</h3>
+                <p>Weekly practice guides for students including technique instructions, practice logs, and progress tracking sheets.</p>
+                <ul class="file-list">
+                    <li>📄 Week 1-8: Foundation Phase Guides</li>
+                    <li>📄 Week 9-16: Athletic Integration Guides</li>
+                    <li>📄 Week 17-24: Academic Optimization Guides</li>
+                    <li>📝 Practice Log Templates</li>
+                    <li>📈 Self-Assessment Forms</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (15 MB)</a>
+            </div>
+
+            <!-- Assessment Protocols -->
+            <div class="download-card" data-aos="fade-up">
+                <span class="download-icon">📊</span>
+                <h3>Assessment Protocols</h3>
+                <p>Comprehensive measurement frameworks including baseline assessments, ongoing tracking, and outcome validation tools.</p>
+                <ul class="file-list">
+                    <li>📄 Baseline Assessment Battery</li>
+                    <li>📊 Monthly Testing Protocols</li>
+                    <li>📈 Quarterly Comprehensive Evaluations</li>
+                    <li>📉 Data Analysis Templates (Excel)</li>
+                    <li>📋 Performance Correlation Models</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (25 MB)</a>
+            </div>
+
+            <!-- Technology Integration Guide -->
+            <div class="download-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="download-icon">💻</span>
+                <h3>Technology Integration Guide</h3>
+                <p>Technical specifications for wearable devices, app development, biofeedback systems, and data management platforms.</p>
+                <ul class="file-list">
+                    <li>📄 Wearable Device Specifications</li>
+                    <li>📱 Mobile App Requirements Document</li>
+                    <li>🖥️ Biofeedback Station Setup</li>
+                    <li>🗄️ Data Architecture Guidelines</li>
+                    <li>🔌 API Integration Documentation</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (18 MB)</a>
+            </div>
+
+            <!-- Parent & Administrator Resources -->
+            <div class="download-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="download-icon">📋</span>
+                <h3>Parent & Administrator Resources</h3>
+                <p>Communication materials, presentation templates, ROI calculators, and program information for stakeholders.</p>
+                <ul class="file-list">
+                    <li>🎬 Program Overview Presentation (PPT)</li>
+                    <li>📄 Parent Information Packet</li>
+                    <li>📊 ROI Calculator (Excel)</li>
+                    <li>📈 Quarterly Report Templates</li>
+                    <li>📝 Consent and Liability Forms</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (32 MB)</a>
+            </div>
+
+            <!-- Research & Data Package -->
+            <div class="download-card" data-aos="fade-up">
+                <span class="download-icon">🔬</span>
+                <h3>Research & Data Package</h3>
+                <p>Scientific foundation, peer-reviewed research citations, pilot study data, and statistical analysis frameworks.</p>
+                <ul class="file-list">
+                    <li>📄 Scientific Foundation Document</li>
+                    <li>📚 Annotated Bibliography (150+ papers)</li>
+                    <li>📊 Pilot Study Results (De-identified)</li>
+                    <li>📈 Statistical Analysis Templates</li>
+                    <li>🔗 Zenodo Repository Links</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (85 MB)</a>
+            </div>
+
+            <!-- Marketing & Sales Materials -->
+            <div class="download-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="download-icon">📢</span>
+                <h3>Marketing & Sales Materials</h3>
+                <p>School outreach templates, pitch decks, case studies, and promotional materials for program expansion.</p>
+                <ul class="file-list">
+                    <li>🎬 Sales Pitch Deck (PPT)</li>
+                    <li>📄 One-Page Program Summary</li>
+                    <li>📊 Case Studies (Post-Pilot)</li>
+                    <li>📧 Email Outreach Templates</li>
+                    <li>🎥 Demo Videos and Testimonials</li>
+                </ul>
+                <a href="#" class="download-btn">Download Package (125 MB)</a>
+            </div>
+
+            <!-- Complete Archive -->
+            <div class="download-card" data-aos="fade-up" data-aos-delay="200" style="grid-column: 1 / -1; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                <span class="download-icon">🗂️</span>
+                <h3>Complete Program Archive</h3>
+                <p>Everything in one package - all curriculum materials, instructor training, assessments, technology specs, and supporting resources.</p>
+                <ul class="file-list" style="columns: 2; column-gap: 2rem;">
+                    <li>All Curriculum Documents</li>
+                    <li>All Instructor Materials</li>
+                    <li>All Student Guides</li>
+                    <li>All Assessment Protocols</li>
+                    <li>All Technology Documentation</li>
+                    <li>All Research Papers</li>
+                    <li>All Marketing Materials</li>
+                    <li>All Forms and Templates</li>
+                </ul>
+                <a href="#" class="download-btn" style="background: var(--primary-color); max-width: 400px; margin: 0 auto; display: block;">Download Complete Archive (2.8 GB)</a>
+            </div>
+        </div>
+
+        <!-- License Information -->
+        <div class="license-box" data-aos="fade-up">
+            <h3>📜 Open Source License</h3>
+            <p>
+                All curriculum materials are released under the <strong>Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)</strong>.
+            </p>
+            <p>
+                <strong>You are free to:</strong>
+            </p>
+            <ul style="margin-left: 2rem; color: var(--text-light);">
+                <li><strong>Share</strong> — copy and redistribute the material in any medium or format</li>
+                <li><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially</li>
+            </ul>
+            <p style="margin-top: 1rem;">
+                <strong>Under the following terms:</strong>
+            </p>
+            <ul style="margin-left: 2rem; color: var(--text-light);">
+                <li><strong>Attribution</strong> — You must give appropriate credit to the Ic² Research Institute, provide a link to the license, and indicate if changes were made</li>
+                <li><strong>ShareAlike</strong> — If you remix, transform, or build upon the material, you must distribute your contributions under the same license</li>
+            </ul>
+            <p style="margin-top: 1rem;">
+                For questions about licensing or to request alternative licensing arrangements, contact: <strong>programs@ic2research.org</strong>
+            </p>
+        </div>
+
+        <!-- Usage Guidelines -->
+        <div style="margin-top: 3rem;" data-aos="fade-up">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Implementation Guidelines</h2>
+            
+            <div style="background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Getting Started</h3>
+                <ol style="margin-left: 2rem; color: var(--text-light); line-height: 1.8;">
+                    <li><strong>Download the Complete Archive</strong> or select individual packages based on your needs</li>
+                    <li><strong>Review the Master Curriculum Document</strong> to understand the full 18-month progression</li>
+                    <li><strong>Train Instructors</strong> using the Level 1 Certification materials (minimum requirement)</li>
+                    <li><strong>Set up Technology Infrastructure</strong> following the Technology Integration Guide</li>
+                    <li><strong>Conduct Baseline Assessments</strong> using the Assessment Protocols package</li>
+                    <li><strong>Launch Program</strong> with Week 1 materials and student practice guides</li>
+                    <li><strong>Track Outcomes</strong> using monthly and quarterly assessment tools</li>
+                    <li><strong>Share Results</strong> back with the research community (de-identified data)</li>
+                </ol>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Recommended Implementation Path</h3>
+                <p style="color: var(--text-light); margin-bottom: 1rem;">For institutions implementing this program:</p>
+                <ul style="margin-left: 2rem; color: var(--text-light); line-height: 1.8;">
+                    <li><strong>3-6 months before launch:</strong> Download materials, train instructors, set up technology</li>
+                    <li><strong>2 months before:</strong> Conduct parent information sessions, recruit participants</li>
+                    <li><strong>1 month before:</strong> Baseline assessments, equipment distribution</li>
+                    <li><strong>Launch:</strong> Begin with Week 1 Foundation curriculum</li>
+                    <li><strong>Ongoing:</strong> Weekly sessions, monthly assessments, quarterly reviews</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Support & Community</h3>
+                <p style="color: var(--text-light); margin-bottom: 1rem;">
+                    Join our community of practitioners implementing this program:
+                </p>
+                <ul style="margin-left: 2rem; color: var(--text-light); line-height: 1.8;">
+                    <li><strong>Discussion Forum:</strong> Share experiences, ask questions, collaborate with other institutions</li>
+                    <li><strong>Monthly Calls:</strong> Virtual check-ins for instructors and program administrators</li>
+                    <li><strong>Data Sharing:</strong> Contribute to collective research outcomes</li>
+                    <li><strong>Continuous Improvement:</strong> Curriculum updates based on community feedback</li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--text-light);">
+                    Contact: <strong>programs@ic2research.org</strong> | Discussion: <strong><a href="discussions-page.html" style="color: var(--accent-blue);">Community Forum</a></strong>
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+    <div class="footer-container">
+    <div class="footer-section">
+    <h3>Ic² Research Institute</h3>
+    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+    </div>
+    <div class="footer-section">
+    <h3>Research</h3>
+    <ul>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="zenodo-papers.html">Papers</a></li>
+    </ul>
+    </div>
+    <div class="footer-section">
+    <h3>Resources</h3>
+    <ul>
+    <li><a href="book.html">The Big TOE</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="faq-page.html">FAQ</a></li>
+    </ul>
+    </div>
+    <div class="footer-section">
+    <h3>Connect</h3>
+    <ul>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="discussions-page.html">Discussions</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="footer-bottom">
+    <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
+    </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+    (function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    if (hamburger && mobileMenu) {
+    const toggleMenu = function() {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    };
+
+    hamburger.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    toggleMenu();
+    }
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    });
+    });
+    }
+    })();
+    </script>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+        duration: 600
+      });
+    </script>
+</body>
+</html>
