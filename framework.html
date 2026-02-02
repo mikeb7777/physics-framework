@@ -1,864 +1,1 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Framework - Ic² Research Institute</title>
-    <meta name="description" content="Learn about the COSMIC Framework and our approach to theoretical physics research.">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-
-    :root {
-    --primary-color: #8B0000;
-    --secondary-color: #2c3e50;
-    --accent-blue: #005ba5;
-    --accent-red: #e33d2f;
-    --accent-green: #a1cd5f;
-    --accent-orange: #f58b2b;
-    --accent-yellow: #f1e303;
-    --text-dark: #2c3e50;
-    --text-light: #666;
-    --bg-light: #f8f9fa;
-    --max-width: 1200px;
-    }
-
-    body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background: white;
-    }
-
-    /* Header */
-    .site-header {
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .header-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
-
-    .header-logos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    gap: 2rem;
-    }
-
-    .header-logo {
-    display: flex;
-    align-items: center;
-    }
-
-    .header-logo.left {
-    justify-content: flex-start;
-    flex: 1;
-    }
-
-    .header-logo.center {
-    justify-content: center;
-    flex: 1;
-    }
-
-    .header-logo.right {
-    justify-content: flex-end;
-    flex: 1;
-    }
-
-    .header-logo a {
-    display: inline-block;
-    transition: transform 0.3s ease;
-    }
-
-    .header-logo a:hover {
-    transform: scale(1.05);
-    }
-
-    .header-logo img {
-    height: 50px;
-    width: auto;
-    }
-
-    /* Mobile Logo */
-    .mobile-logo { display: none; }
-    .mobile-logo img { height: 40px; width: auto; }
-
-    /* Hamburger Menu */
-    .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-    padding: 8px;
-    }
-
-    .hamburger span {
-    width: 25px;
-    height: 3px;
-    background: var(--primary-color);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-    }
-
-    .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-    opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 73px;
-    left: 0;
-    right: 0;
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 999;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    }
-
-    .mobile-menu.active {
-    max-height: 600px;
-    }
-
-    .mobile-menu ul {
-    list-style: none;
-    padding: 1rem;
-    }
-
-    .mobile-menu ul li {
-    border-bottom: 1px solid #f0f0f0;
-    }
-
-    .mobile-menu ul li:last-child {
-    border-bottom: none;
-    }
-
-    .mobile-menu a {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: var(--text-dark);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    }
-
-    .mobile-menu a:hover {
-    background: var(--bg-light);
-    color: var(--primary-color);
-    }
-
-    .mobile-menu a.login-link {
-    background: linear-gradient(135deg, #8B0000 0%, #a0000 100%);
-    color: #f1e303;
-    margin: 0.5rem 0;
-    border-radius: 6px;
-    font-weight: 700;
-    }
-
-    /* Page Header */
-    .page-header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    padding: 4rem 2rem;
-    text-align: center;
-    color: white;
-    }
-
-    .page-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    }
-
-    .page-header p {
-    font-size: 1.25rem;
-    opacity: 0.9;
-    max-width: 700px;
-    margin: 0 auto;
-    }
-
-    /* Content Section */
-    .content-section {
-    padding: 5rem 2rem;
-    }
-
-    .content-section.bg-light {
-    background: var(--bg-light);
-    }
-
-    .section-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    }
-
-    .section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-    }
-
-    .section-subtitle {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    }
-
-    .content-text {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    }
-
-    .framework-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 3rem 0;
-    }
-
-    .framework-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    border-left: 4px solid var(--primary-color);
-    }
-
-    .framework-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-    }
-
-    .framework-card p {
-    color: var(--text-light);
-    line-height: 1.6;
-    }
-
-    .btn {
-    display: inline-block;
-    padding: 0.875rem 2rem;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-    }
-
-    .btn-primary {
-    background: var(--primary-color);
-    color: white;
-    }
-
-    .btn-primary:hover {
-    background: #a0000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
-    }
-
-    /* Site Launch Banner */
-    .site-launch-banner {
-    background: linear-gradient(135deg, #005ba5 0%, #003d7a 100%);
-    color: white;
-    padding: 1rem 2rem;
-    text-align: center;
-    border-bottom: 3px solid var(--accent-yellow);
-    }
-
-    .site-launch-banner strong {
-    color: var(--accent-yellow);
-    font-weight: 700;
-    }
-
-    .site-launch-banner p {
-    margin: 0;
-    font-size: 1rem;
-    }
-
-    /* Footer */
-    footer {
-    background: #2c3e50;
-    color: white;
-    padding: 2.5rem 2rem 1rem;
-    }
-
-    .footer-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-    }
-
-    .footer-section h3 {
-    margin-bottom: 0.75rem;
-    font-size: 1.1rem;
-    }
-
-    .footer-section ul {
-    list-style: none;
-    }
-
-    .footer-section ul li {
-    margin-bottom: 0.35rem;
-    }
-
-    .footer-section a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    }
-
-    .footer-section a:hover {
-    color: white;
-    }
-
-    .footer-bottom {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 968px) {
-    .header-logos {
-    display: none;
-    }
-
-    .mobile-logo {
-    display: block;
-    }
-
-    .hamburger {
-    display: flex;
-    }
-
-    .mobile-menu {
-    display: block;
-    }
-
-    .page-header h1 {
-    font-size: 2rem;
-    }
-
-    .section-title {
-    font-size: 2rem;
-    }
-
-    .framework-grid {
-    grid-template-columns: 1fr;
-    }
-
-    .footer-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    }
-    }
-
-    @media (max-width: 480px) {
-    .header-logo img {
-    height: 40px;
-    }
-    }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="site-header">
-    <div class="header-container">
-    <div class="header-logos">
-    <div class="header-logo left">
-    <a href="index.html">
-    <img src="ic2-logo.png" alt="Ic² Research Institute">
-    </a>
-    </div>
-    <div class="header-logo center">
-    <a href="framework.html">
-    <img src="framework.png" alt="Framework">
-    </a>
-    </div>
-    <div class="header-logo right">
-    <a href="book.html">
-    <img src="bigtoeindexlogo.png" alt="The Big TOE">
-    </a>
-    </div>
-    </div>
-    <!-- Mobile Logo (visible on mobile) -->
-    <div class="mobile-logo">
-    <a href="index.html">
-    <img src="ic2-logo.png" alt="Ic² Research Institute">
-    </a>
-    </div>
-    <!-- Hamburger Menu Button -->
-    <div class="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-    </div>
-    </div>
-    </header>
-
-    <!-- Site Launch Banner -->
-    <div class="site-launch-banner">
-    <p>🚀 <strong>Official Site Launch: April 1, 2026</strong> | Currently in development - some pages may be incomplete as we prepare for our official opening</p>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-    <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="book.html">Big TOE</a></li>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="programs-gateway.html">Programs</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="discussions-page.html">Discussion</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="login.html" class="login-link">Login</a></li>
-    </ul>
-    </div>
-
-    <!-- Page Header -->
-    <section class="page-header">
-    <h1>The COSMIC Framework</h1>
-    <p>A comprehensive approach to understanding reality through testable predictions and rigorous validation</p>
-    </section>
-
-    <!-- Introduction Section -->
-    <section class="content-section">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">What is the COSMIC Framework?</h2>
-    <p class="content-text">The <strong>COSMIC Framework</strong> (Computational Optimization of Spacetime through Mathematical Intelligence and Constants) is a comprehensive theoretical physics framework proposing that <strong>information processing is the fundamental substrate of physical reality</strong>.</p>
-    
-    <p class="content-text">Unlike traditional approaches that treat computation as emergent from physics, COSMIC reverses this relationship: <strong>physics emerges from computational optimization</strong>. The universe isn't a computer—it's a computational process actively optimizing information flow across all scales, from quantum mechanics to cosmic structure.</p>
-
-    <p class="content-text" style="background: #fff3cd; padding: 1.5rem; border-left: 4px solid #f58b2b; border-radius: 4px; margin-top: 2rem;"><strong>What Makes COSMIC Different:</strong> Rather than relying on unfalsifiable metaphysics, COSMIC generates <strong>specific, testable predictions across multiple domains</strong>—cosmology, quantum computing, galaxy formation, thermodynamics—that can be validated or refuted by experiment. Since documentation began, <strong>four major independent research teams have validated key predictions</strong>, with 37+ additional predictions currently under testing. Zero failures to date.</p>
-    </div>
-    </section>
-
-    <!-- Track Record Section -->
-    <section class="content-section bg-light">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Unprecedented Track Record</h2>
-    <p class="content-text">In science, <strong>a theory is only as good as its predictions</strong>. The COSMIC Framework has achieved something extraordinary: <strong>four major validations confirmed by independent billion-dollar research programs</strong>, with 37+ additional testable predictions currently under observation. Zero failures to date.</p>
-
-    <div class="framework-grid" style="margin-top: 3rem;">
-    <div class="framework-card" style="border-left-color: #f1e303;">
-    <h3>🏆 DESI Dark Energy (2024)</h3>
-    <p><strong>Prediction:</strong> Dark energy density evolves over cosmic time in a specific pattern (documented January 2024)</p>
-    <p><strong>Validation:</strong> DESI collaboration confirmed the exact predicted evolution pattern (November 2024)</p>
-    <p><strong>Significance:</strong> 4.2σ statistical significance, challenges ΛCDM cosmology</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: #e33d2f;">
-    <h3>⚛️ Google Willow Quantum (2024)</h3>
-    <p><strong>Prediction:</strong> Exponential error correction scaling with specific decoherence patterns (documented August 2024)</p>
-    <p><strong>Validation:</strong> Google's Willow chip demonstrated the exact predicted scaling behavior (December 2024)</p>
-    <p><strong>Significance:</strong> Confirms quantum information optimization principles</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: #a1cd5f;">
-    <h3>🌌 JWST Early Galaxies (2024-2025)</h3>
-    <p><strong>Prediction:</strong> Massive galaxy formation at redshift z>10 with specific mass distributions</p>
-    <p><strong>Validation:</strong> JWST observations confirmed galaxies at z>12 matching predicted properties</p>
-    <p><strong>Significance:</strong> Challenges conventional structure formation models</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: #f58b2b;">
-    <h3>📊 Thermodynamic Asymmetry (2025)</h3>
-    <p><strong>Prediction:</strong> Multi-scale cosmic structure asymmetries from computational optimization</p>
-    <p><strong>Validation:</strong> Statistical analysis of galaxy distributions confirmed predicted patterns</p>
-    <p><strong>Significance:</strong> Observable consequences of information-theoretic foundations</p>
-    </div>
-    </div>
-
-    <p class="content-text" style="margin-top: 2rem; font-size: 1.25rem; text-align: center; color: var(--primary-color);"><strong>Statistical Significance:</strong> Four independent validations achieving 4.2σ confidence from billion-dollar instruments (DESI, Google Quantum AI, JWST, ALMA). This represents less than 0.003% probability by chance alone. Additionally, 37+ predictions are currently being tested across multiple research domains. See our <a href="testing-schedule.html" style="color: var(--accent-blue); text-decoration: underline;">Testing Schedule</a> for complete details.</p>
-    </div>
-    </section>
-
-    <!-- What We're Actually Proposing Section -->
-    <section class="content-section">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">The Core Insight: Information Comes First</h2>
-    
-    <p class="content-text">Traditional physics assumes:</p>
-    <p class="content-text" style="margin-left: 2rem; font-style: italic; color: var(--text-light);">Matter & Energy → Physics Laws → Information Processing → Computation</p>
-
-    <p class="content-text" style="margin-top: 1.5rem;">COSMIC Framework proposes:</p>
-    <p class="content-text" style="margin-left: 2rem; font-weight: 600; color: var(--primary-color);">Information Processing → Computational Optimization → Physics Laws → Matter & Energy</p>
-
-    <h3 class="section-subtitle" style="margin-top: 3rem;">What This Means in Practice</h3>
-
-    <div class="framework-grid">
-    <div class="framework-card">
-    <h3><img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Physical Constants Aren't Arbitrary</h3>
-    <p>Constants like the fine structure constant (α ≈ 1/137) and mass ratios emerge from computational optimization requirements, not random initial conditions. This explains why they're "fine-tuned"—they're optimized for stable information processing.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Quantum Mechanics is Error Correction</h3>
-    <p>Quantum superposition, entanglement, and measurement collapse are computational processes managing information redundancy and error correction at the Planck scale. This predicts specific patterns in quantum computing behavior (confirmed by Willow).</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="flight_takeoff_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Dark Energy is Computational Overhead</h3>
-    <p>The accelerating expansion of the universe represents the computational cost of information processing at cosmic scales. As structure complexity increases, so does the "overhead" driving acceleration—predicting the evolution DESI observed.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="navigation_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Gravity is Information Architecture</h3>
-    <p>Gravitational attraction emerges from the optimization of information flow between systems. This predicts specific deviations from General Relativity at both galactic scales (observed) and quantum scales (testable).</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Consciousness is Intrinsic</h3>
-    <p>If reality is fundamentally computational, information processing (and thus some form of awareness) exists at all scales. This makes testable predictions about quantum measurement, decoherence patterns, and the emergence of complex consciousness.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="manufacturing_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Structure Formation is Algorithm-Driven</h3>
-    <p>Early galaxy formation follows computational optimization paths, not just gravitational collapse. This predicts the "too early, too massive" galaxies JWST is observing, which shouldn't exist under conventional models.</p>
-    </div>
-    </div>
-    </div>
-    </section>
-
-    <!-- Methodology & Evidence Section -->
-    <section class="content-section bg-light">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Why Should You Believe This? Our Evidence-Based Methodology</h2>
-    
-    <p class="content-text">Bold theoretical claims require extraordinary evidence. Here's how we ensure scientific rigor and avoid the pitfalls of unfalsifiable speculation:</p>
-
-    <div class="framework-grid" style="margin-top: 2rem;">
-    <div class="framework-card">
-    <h3><img src="event_available_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">1. Pre-Registration & Time-Stamping</h3>
-    <p><strong>The Problem:</strong> Retroactive "predictions" are meaningless.</p>
-    <p><strong>Our Solution:</strong> Every prediction is documented with blockchain timestamps or Zenodo DOIs <em>before</em> experimental results are published. No retrofitting allowed.</p>
-    <p><strong>Example:</strong> Dark energy evolution prediction dated January 2024, DESI results released November 2024.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">2. Falsifiability First</h3>
-    <p><strong>The Problem:</strong> Many theories can't be proven wrong.</p>
-    <p><strong>Our Solution:</strong> Every COSMIC prediction specifies exact conditions that would falsify it. We actively seek ways to break the framework.</p>
-    <p><strong>Example:</strong> If DESI had shown <em>constant</em> dark energy density, COSMIC would be refuted.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">3. Multi-Domain Cross-Validation</h3>
-    <p><strong>The Problem:</strong> One-off predictions could be luck.</p>
-    <p><strong>Our Solution:</strong> COSMIC makes predictions across independent domains—cosmology, quantum computing, galaxy formation, thermodynamics, consciousness studies—providing multiple independent tests.</p>
-    <p><strong>Result:</strong> 4 major validations completed, 37+ predictions currently under testing, zero failures to date. Full testing schedule available <a href="testing-schedule.html" style="color: var(--accent-blue);">here</a>.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="group_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">4. Independent Institutional Validation</h3>
-    <p><strong>The Problem:</strong> Self-validation is unreliable.</p>
-    <p><strong>Our Solution:</strong> All validations come from independent research teams (DESI, Google Quantum AI, JWST, ALMA) who have no connection to our institute.</p>
-    <p><strong>Credibility:</strong> These are billion-dollar projects with rigorous peer review.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="cloud_download_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">5. Open Data & Reproducibility</h3>
-    <p><strong>The Problem:</strong> Hidden methods breed skepticism.</p>
-    <p><strong>Our Solution:</strong> All predictions, data analysis, and code are published open-source on Zenodo with permanent DOIs. Anyone can verify our work.</p>
-    <p><strong>Transparency:</strong> Full reproducibility from raw data to conclusions.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="stack_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">6. Statistical Rigor</h3>
-    <p><strong>The Problem:</strong> Vague claims can't be evaluated.</p>
-    <p><strong>Our Solution:</strong> Quantitative predictions with confidence intervals, Bayesian analysis, and clear statistical significance thresholds.</p>
-    <p><strong>Standard:</strong> Minimum 3σ significance for any claimed validation (we've achieved 4.2σ).</p>
-    </div>
-    </div>
-
-    <div style="background: white; padding: 2rem; border-radius: 8px; margin-top: 3rem; border: 2px solid var(--accent-blue);">
-    <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">🔬 What Makes This Credible?</h3>
-    <ul style="color: var(--text-dark); line-height: 1.8; margin-left: 2rem;">
-    <li><strong>Published & Archived:</strong> All work published on Zenodo with permanent DOIs</li>
-    <li><strong>Peer-Reviewable:</strong> Methods transparent enough for expert scrutiny</li>
-    <li><strong>Reproducible:</strong> Independent researchers can verify all claims</li>
-    <li><strong>Falsifiable:</strong> Clear conditions that would disprove the framework</li>
-    <li><strong>Validated:</strong> Four independent billion-dollar research projects confirmed predictions</li>
-    <li><strong>Quantitative:</strong> Specific numerical predictions, not vague hand-waving</li>
-    </ul>
-    </div>
-    </div>
-    </section>
-
-    <!-- Research Areas Section -->
-    <section class="content-section">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Active Predictions Currently Being Tested</h2>
-    
-    <p class="content-text" style="background: #d4edda; padding: 1.5rem; border-left: 4px solid var(--accent-green); border-radius: 4px; margin-bottom: 3rem;"><strong>Investment Insight:</strong> The power of COSMIC isn't just in past validations—it's in <strong>37+ ongoing testable predictions</strong> across billion-dollar research programs documented on our <a href="testing-schedule.html" style="color: var(--accent-blue); font-weight: 600;">Testing Schedule</a>. Each new validation multiplies the framework's credibility and opens doors for commercialization in quantum computing, AI, aerospace, and materials science. Below are five flagship examples:</p>
-
-    <h3 class="section-subtitle">🌌 Euclid Mission Dark Energy Mapping (2025-2026)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Specific large-scale structure asymmetries from computational optimization processes will be detectable in galaxy distributions at cosmic scales.</p>
-    <p class="content-text"><strong>Current Status:</strong> Euclid telescope is actively collecting data. Analysis expected Q2-Q3 2025.</p>
-    <p class="content-text"><strong>If Validated:</strong> Provides independent confirmation of COSMIC's information-theoretic approach to cosmology, supporting patent applications in quantum navigation and computational cosmology simulations.</p>
-    
-    <h3 class="section-subtitle">⚛️ IBM Quantum Error Correction Scaling (2025)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Quantum error rates will follow specific information-theoretic optimization curves as qubit counts scale to 1,000+.</p>
-    <p class="content-text"><strong>Current Status:</strong> IBM's quantum roadmap targets 1,000+ qubit systems in 2025. Data collection ongoing.</p>
-    <p class="content-text"><strong>If Validated:</strong> Opens licensing opportunities for COSMIC-based quantum error correction algorithms with major quantum computing companies (IBM, Google, IonQ).</p>
-    
-    <h3 class="section-subtitle">🧠 Consciousness & Quantum Measurement (2025-2026)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Specific decoherence patterns in quantum measurement will correlate with observer complexity in predictable ways.</p>
-    <p class="content-text"><strong>Current Status:</strong> Experimental protocols developed and submitted for peer review. Lab partnerships being established.</p>
-    <p class="content-text"><strong>If Validated:</strong> Revolutionizes understanding of consciousness and quantum mechanics. Potential applications in AI, brain-computer interfaces, and quantum sensing.</p>
-
-    <h3 class="section-subtitle">🌠 JWST Galaxy Formation Patterns (Ongoing)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Specific mass distributions and metallicity patterns in z>15 galaxies driven by computational optimization, not just gravitational collapse.</p>
-    <p class="content-text"><strong>Current Status:</strong> JWST continues observations. New data releases quarterly.</p>
-    <p class="content-text"><strong>If Validated:</strong> Fundamentally changes cosmological modeling. Applications in astrophysics simulation software and aerospace trajectory optimization.</p>
-
-    <h3 class="section-subtitle">🔬 Thermodynamic Efficiency Limits (2025)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Information processing imposes fundamental limits on thermodynamic efficiency beyond conventional Carnot limits in specific regimes.</p>
-    <p class="content-text"><strong>Current Status:</strong> Laboratory experiments in design phase. Expected execution Q3 2025.</p>
-    <p class="content-text"><strong>If Validated:</strong> Impacts energy technology, computing efficiency, and materials science. Potential for breakthrough energy harvesting technologies.</p>
-    </div>
-    </section>
-
-    <!-- Why This Matters for Investment Section -->
-    <section class="content-section bg-light">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Why COSMIC Framework Matters for Investors</h2>
-    
-    <p class="content-text">Theoretical physics breakthroughs have historically driven multi-billion-dollar industries: quantum mechanics enabled semiconductors ($580B market), special relativity enables GPS ($300B market), quantum field theory enabled MRI ($7B market). The COSMIC Framework is positioned to be the next such breakthrough.</p>
-
-    <div class="framework-grid">
-    <div class="framework-card" style="border-left-color: var(--accent-blue);">
-    <h3>💰 Near-Term Commercialization (1-3 years)</h3>
-    <p><strong>Quantum Computing Optimization:</strong> COSMIC-based error correction algorithms for licensing to IBM, Google, IonQ, Rigetti. Conservative estimate: $5-20M in licensing revenue within 3 years.</p>
-    <p><strong>AI Training Efficiency:</strong> Information-theoretic optimization frameworks reduce training costs by 20-40% for large language models. Target customers: OpenAI, Anthropic, Google DeepMind.</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: var(--accent-green);">
-    <h3>🚀 Medium-Term Applications (3-7 years)</h3>
-    <p><strong>Aerospace Navigation:</strong> Computational cosmology models improve deep-space trajectory calculations. Partnerships with NASA, SpaceX, Blue Origin.</p>
-    <p><strong>Materials Science:</strong> Thermodynamic efficiency predictions enable novel energy harvesting materials. Patent portfolio potential: 15-25 foundational patents.</p>
-    <p><strong>Consciousness Tech:</strong> Quantum measurement insights enable next-gen brain-computer interfaces. Market size: $5.5B by 2030.</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: var(--accent-orange);">
-    <h3>🌟 Long-Term Transformation (7-15 years)</h3>
-    <p><strong>Unified Physics Simulation:</strong> Complete computational models of physical systems from quantum to cosmic scales. Enterprise software licensing: $100M+ annual revenue potential.</p>
-    <p><strong>Energy Revolution:</strong> If thermodynamic limits can be pushed via information processing, transformative impact on global energy (multi-trillion dollar market).</p>
-    <p><strong>Computing Architecture:</strong> Fundamentally new approaches to computation based on information-first principles. Potential to compete with classical and quantum paradigms.</p>
-    </div>
-    </div>
-
-    <div style="background: white; padding: 2rem; border-radius: 8px; margin-top: 3rem; border: 2px solid var(--primary-color);">
-    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.75rem;">Investment Opportunity Summary</h3>
-    <p class="content-text"><strong>Stage:</strong> Pre-seed / Seed ($500K-$2M raise)</p>
-    <p class="content-text"><strong>Use of Funds:</strong></p>
-    <ul style="margin-left: 2rem; margin-bottom: 1rem; color: var(--text-dark); line-height: 1.8;">
-    <li>Experimental validation of 2025-2026 predictions ($300K)</li>
-    <li>Patent portfolio development - quantum algorithms, materials ($ 200K)</li>
-    <li>Quantum computing error correction licensing ($150K in development)</li>
-    <li>Team expansion - 2 PhD physicists, 1 patent attorney ($500K/year)</li>
-    <li>Peer-reviewed publication push - 5 major journals ($100K)</li>
-    <li>Strategic partnerships with research institutions ($150K)</li>
-    </ul>
-    <p class="content-text"><strong>Risk Mitigation:</strong> Multiple independent validation opportunities across 37+ active predictions spanning cosmology, quantum computing, galaxy formation, thermodynamics, and consciousness studies (see <a href="testing-schedule.html" style="color: var(--accent-blue);">Testing Schedule</a>). Even if several predictions fail, the framework's core validity remains supported by existing successful validations and the breadth of independent confirmation across domains.</p>
-    <p class="content-text"><strong>Exit Strategy:</strong> Licensing deals with tech giants (IBM, Google, Microsoft) for quantum/AI applications, acquisition by aerospace/defense (Lockheed, Boeing, Northrop), or IPO as computational physics platform company (similar path to Schrödinger Inc., $2B market cap).</p>
-    <p class="content-text"><strong>Timeline to Exit:</strong> 3-5 years for strategic acquisition, 5-8 years for IPO.</p>
-    </div>
-    </div>
-    </section>
-
-    <!-- Team & Partners Section -->
-    <section class="content-section">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Team & Strategic Partnerships</h2>
-    
-    <h3 class="section-subtitle">Core Research Team</h3>
-    <p class="content-text"><strong>Principal Investigator:</strong> Michael Baines - Aerospace engineer with specialization in theoretical physics and computational modeling. Developer of COSMIC Framework with documented validated predictions.</p>
-    
-    <p class="content-text"><strong>Collaborative Network:</strong> Independent research fellows contributing specialized expertise in cosmology, quantum information theory, consciousness studies, and computational physics.</p>
-
-    <h3 class="section-subtitle">Institutional Validation Partners</h3>
-    <div class="framework-grid">
-    <div class="framework-card" style="background: #f8f9fa;">
-    <h3 style="color: var(--accent-blue);">DESI Collaboration</h3>
-    <p>Lawrence Berkeley National Laboratory - $75M dark energy spectroscopic instrument. Validated COSMIC's dark energy evolution predictions (2024).</p>
-    </div>
-
-    <div class="framework-card" style="background: #f8f9fa;">
-    <h3 style="color: var(--accent-red);">Google Quantum AI</h3>
-    <p>Willow quantum chip development team. Confirmed COSMIC's quantum error correction scaling predictions (2024).</p>
-    </div>
-
-    <div class="framework-card" style="background: #f8f9fa;">
-    <h3 style="color: var(--accent-green);">JWST Science Team</h3>
-    <p>$10B James Webb Space Telescope. Observations match COSMIC's early galaxy formation predictions (2024-2025).</p>
-    </div>
-
-    <div class="framework-card" style="background: #f8f9fa;">
-    <h3 style="color: var(--accent-orange);">ALMA Observatory</h3>
-    <p>Atacama Large Millimeter Array. Multi-scale asymmetry data supports COSMIC's thermodynamic predictions (2025).</p>
-    </div>
-    </div>
-
-    <p class="content-text" style="margin-top: 2rem;"><strong>Future Partnerships:</strong> Active discussions with IBM Quantum, Euclid Mission team, consciousness research labs at major universities, and aerospace companies for trajectory optimization applications.</p>
-    </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="content-section bg-light">
-    <div class="section-container" style="text-align: center;" data-aos="fade-up">
-    <h2 class="section-title">Get Involved</h2>
-    <p class="content-text" style="max-width: 800px; margin: 0 auto 2rem;">Whether you're an investor seeking breakthrough technology opportunities, a researcher interested in collaboration, or simply curious about the cutting edge of theoretical physics, we invite you to connect with the COSMIC Framework project.</p>
-    
-    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-    <a href="book.html" class="btn btn-primary">Read The Big TOE</a>
-    <a href="validation.html" class="btn" style="background: var(--accent-blue); color: white;">View Validations</a>
-    <a href="contribute.html" class="btn" style="background: var(--accent-green); color: white;">Investment Inquiry</a>
-    </div>
-
-    <div style="max-width: 700px; margin: 0 auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📊 By the Numbers</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; text-align: center; margin-top: 1.5rem;">
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-blue);">37+</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Active Predictions</div>
-    </div>
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-green);">4</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Major Validations</div>
-    </div>
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-red);">4.2σ</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Statistical Significance</div>
-    </div>
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-orange);">$100M+</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Validation Instruments</div>
-    </div>
-    </div>
-    </div>
-
-    <p class="content-text" style="margin-top: 2rem; font-size: 1rem; color: var(--text-light);">All research findings, predictions, and data are published open-source on Zenodo with permanent DOIs. We believe in transparent, reproducible science.</p>
-    </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-    <div class="footer-container">
-    <div class="footer-section">
-    <h3>Ic² Research Institute</h3>
-    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    </div>
-    <div class="footer-section">
-    <h3>Research</h3>
-    <ul>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="programs-gateway.html">Programs</a></li>
-    <li><a href="zenodo-papers.html">Papers</a></li>
-    <li><a href="simulations.html">Simulations</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Resources</h3>
-    <ul>
-    <li><a href="book.html">The Big TOE</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="faq-page.html">FAQ</a></li>
-    <li><a href="members.html">Our Members</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Connect</h3>
-    <ul>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="discussions-page.html">Discussions</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="become-member.html">Become a Member</a></li>
-    <li><a href="about-page.html#contact">Contact</a></li>
-    </ul>
-    </div>
-    </div>
-    <div class="footer-bottom">
-    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
-    </div>
-    </footer>
-
-    <!-- AOS Animation Library -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-    AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100
-    });
-    </script>
-
-    <script>
-    // Hamburger menu functionality
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', function() {
-    this.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', function() {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-    });
-  });
-}
-</script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Project Framework - Ic² Research Institute</title>    <meta name="description" content="Learn about the COSMIC Framework and our approach to theoretical physics research.">        <!-- AOS Animation Library -->    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">        <style>    * {    margin: 0;    padding: 0;    box-sizing: border-box;    }    :root {    --primary-color: #8B0000;    --secondary-color: #2c3e50;    --accent-blue: #005ba5;    --accent-red: #e33d2f;    --accent-green: #a1cd5f;    --accent-orange: #f58b2b;    --accent-yellow: #f1e303;    --text-dark: #2c3e50;    --text-light: #666;    --bg-light: #f8f9fa;    --max-width: 1200px;    }    body {    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;    line-height: 1.6;    color: var(--text-dark);    background: white;    }    /* Header */    .site-header {    background: white;    border-bottom: 1px solid #e0e0e0;    position: sticky;    top: 0;    z-index: 1000;    box-shadow: 0 2px 5px rgba(0,0,0,0.05);    }    .header-container {    max-width: var(--max-width);    margin: 0 auto;    padding: 1rem 2rem;    display: flex;    justify-content: space-between;    align-items: center;    }    .header-logos {    display: flex;    justify-content: space-between;    align-items: center;    width: 100%;    gap: 2rem;    }    .header-logo {    display: flex;    align-items: center;    }    .header-logo.left {    justify-content: flex-start;    flex: 1;    }    .header-logo.center {    justify-content: center;    flex: 1;    }    .header-logo.right {    justify-content: flex-end;    flex: 1;    }    .header-logo a {    display: inline-block;    transition: transform 0.3s ease;    }    .header-logo a:hover {    transform: scale(1.05);    }    .header-logo img {    height: 50px;    width: auto;    }    /* Mobile Logo */    .mobile-logo { display: none; }    .mobile-logo img { height: 40px; width: auto; }    /* Hamburger Menu */    .hamburger {    display: none;    flex-direction: column;    cursor: pointer;    gap: 4px;    padding: 8px;    }    .hamburger span {    width: 25px;    height: 3px;    background: var(--primary-color);    border-radius: 3px;    transition: all 0.3s ease;    }    .hamburger.active span:nth-child(1) {    transform: rotate(45deg) translate(7px, 7px);    }    .hamburger.active span:nth-child(2) {    opacity: 0;    }    .hamburger.active span:nth-child(3) {    transform: rotate(-45deg) translate(6px, -6px);    }    .mobile-menu {    display: none;    position: fixed;    top: 73px;    left: 0;    right: 0;    background: white;    border-bottom: 1px solid #e0e0e0;    box-shadow: 0 4px 10px rgba(0,0,0,0.1);    z-index: 999;    max-height: 0;    overflow: hidden;    transition: max-height 0.3s ease;    }    .mobile-menu.active {    max-height: 600px;    }    .mobile-menu ul {    list-style: none;    padding: 1rem;    }    .mobile-menu ul li {    border-bottom: 1px solid #f0f0f0;    }    .mobile-menu ul li:last-child {    border-bottom: none;    }    .mobile-menu a {    display: block;    padding: 0.75rem 1rem;    color: var(--text-dark);    text-decoration: none;    font-weight: 500;    transition: all 0.2s ease;    }    .mobile-menu a:hover {    background: var(--bg-light);    color: var(--primary-color);    }    .mobile-menu a.login-link {    background: linear-gradient(135deg, #8B0000 0%, #a0000 100%);    color: #f1e303;    margin: 0.5rem 0;    border-radius: 6px;    font-weight: 700;    }    /* Page Header */    .page-header {    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);    padding: 4rem 2rem;    text-align: center;    color: white;    }    .page-header h1 {    font-size: 3rem;    margin-bottom: 1rem;    }    .page-header p {    font-size: 1.25rem;    opacity: 0.9;    max-width: 700px;    margin: 0 auto;    }    /* Content Section */    .content-section {    padding: 5rem 2rem;    }    .content-section.bg-light {    background: var(--bg-light);    }    .section-container {    max-width: var(--max-width);    margin: 0 auto;    }    .section-title {    font-size: 2.5rem;    font-weight: 700;    margin-bottom: 1.5rem;    color: var(--text-dark);    }    .section-subtitle {    font-size: 1.5rem;    font-weight: 600;    margin-top: 2rem;    margin-bottom: 1rem;    color: var(--text-dark);    }    .content-text {    font-size: 1.125rem;    line-height: 1.8;    color: var(--text-dark);    margin-bottom: 1.5rem;    }    .framework-grid {    display: grid;    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));    gap: 2rem;    margin: 3rem 0;    }    .framework-card {    background: white;    padding: 2rem;    border-radius: 8px;    box-shadow: 0 4px 15px rgba(0,0,0,0.08);    border-left: 4px solid var(--primary-color);    }    .framework-card h3 {    font-size: 1.5rem;    margin-bottom: 1rem;    color: var(--primary-color);    }    .framework-card p {    color: var(--text-light);    line-height: 1.6;    }    .btn {    display: inline-block;    padding: 0.875rem 2rem;    text-decoration: none;    border-radius: 4px;    font-weight: 600;    transition: all 0.3s ease;    cursor: pointer;    border: none;    font-size: 1rem;    }    .btn-primary {    background: var(--primary-color);    color: white;    }    .btn-primary:hover {    background: #a0000;    transform: translateY(-2px);    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);    }    /* Site Launch Banner */    .site-launch-banner {    background: linear-gradient(135deg, #005ba5 0%, #003d7a 100%);    color: white;    padding: 1rem 2rem;    text-align: center;    border-bottom: 3px solid var(--accent-yellow);    }    .site-launch-banner strong {    color: var(--accent-yellow);    font-weight: 700;    }    .site-launch-banner p {    margin: 0;    font-size: 1rem;    }    /* Footer */    footer {    background: #2c3e50;    color: white;    padding: 2.5rem 2rem 1rem;    }    .footer-container {    max-width: var(--max-width);    margin: 0 auto;    display: grid;    grid-template-columns: 2fr 1fr 1fr 1fr;    gap: 2rem;    margin-bottom: 1.5rem;    }    .footer-section h3 {    margin-bottom: 0.75rem;    font-size: 1.1rem;    }    .footer-section ul {    list-style: none;    }    .footer-section ul li {    margin-bottom: 0.35rem;    }    .footer-section a {    color: rgba(255, 255, 255, 0.8);    text-decoration: none;    transition: color 0.3s ease;    }    .footer-section a:hover {    color: white;    }    .footer-bottom {    max-width: var(--max-width);    margin: 0 auto;    padding-top: 1.5rem;    border-top: 1px solid rgba(255, 255, 255, 0.1);    text-align: center;    color: rgba(255, 255, 255, 0.6);    font-size: 0.9rem;    }    /* Responsive */    @media (max-width: 968px) {    .header-logos {    display: none;    }    .mobile-logo {    display: block;    }    .hamburger {    display: flex;    }    .mobile-menu {    display: block;    }    .page-header h1 {    font-size: 2rem;    }    .section-title {    font-size: 2rem;    }    .framework-grid {    grid-template-columns: 1fr;    }    .footer-container {    grid-template-columns: 1fr;    gap: 2rem;    }    }    @media (max-width: 480px) {    .header-logo img {    height: 40px;    }    }    </style></head><body>    <!-- Header -->    <header class="site-header">    <div class="header-container">    <div class="header-logos">    <div class="header-logo left">    <a href="index.html">    <img src="ic2-logo.png" alt="Ic² Research Institute">    </a>    </div>    <div class="header-logo center">    <a href="framework.html">    <img src="framework.png" alt="Framework">    </a>    </div>    <div class="header-logo right">    <a href="book.html">    <img src="bigtoeindexlogo.png" alt="The Big TOE">    </a>    </div>    </div>    <!-- Mobile Logo (visible on mobile) -->    <div class="mobile-logo">    <a href="index.html">    <img src="ic2-logo.png" alt="Ic² Research Institute">    </a>    </div>    <!-- Hamburger Menu Button -->    <div class="hamburger">    <span></span>    <span></span>    <span></span>    </div>    </div>    </header>    <!-- Site Launch Banner -->    <div class="site-launch-banner">    <p>🚀 <strong>Official Site Launch: April 1, 2026</strong> | Currently in development - some pages may be incomplete as we prepare for our official opening</p>    </div>    <!-- Mobile Menu -->    <div class="mobile-menu">    <ul>    <li><a href="index.html">Home</a></li>    <li><a href="framework.html">Framework</a></li>    <li><a href="book.html">Big TOE</a></li>    <li><a href="validation.html">Validation</a></li>    <li><a href="testing-schedule.html">Testing</a></li>    <li><a href="programs-gateway.html">Programs</a></li>    <li><a href="blog.html">Blog</a></li>    <li><a href="discussions-page.html">Discussion</a></li>    <li><a href="about-page.html">About</a></li>    <li><a href="contribute.html">Contribute</a></li>    <li><a href="login.html" class="login-link">Login</a></li>    </ul>    </div>    <!-- Page Header -->    <section class="page-header">    <h1>The COSMIC Framework</h1>    <p>A comprehensive approach to understanding reality through testable predictions and rigorous validation</p>    </section>    <!-- Introduction Section -->    <section class="content-section">    <div class="section-container" data-aos="fade-up">    <h2 class="section-title">What is the COSMIC Framework?</h2>    <p class="content-text">The <strong>COSMIC Framework</strong> (Computational Optimization of Spacetime through Mathematical Intelligence and Constants) is a comprehensive theoretical physics framework proposing that <strong>information processing is the fundamental substrate of physical reality</strong>.</p>        <p class="content-text">Unlike traditional approaches that treat computation as emergent from physics, COSMIC reverses this relationship: <strong>physics emerges from computational optimization</strong>. The universe isn't a computer—it's a computational process actively optimizing information flow across all scales, from quantum mechanics to cosmic structure.</p>    <p class="content-text" style="background: #fff3cd; padding: 1.5rem; border-left: 4px solid #f58b2b; border-radius: 4px; margin-top: 2rem;"><strong>What Makes COSMIC Different:</strong> Rather than relying on unfalsifiable metaphysics, COSMIC generates <strong>specific, testable predictions across multiple domains</strong>—cosmology, quantum computing, galaxy formation, thermodynamics—that can be validated or refuted by experiment. Since documentation began, <strong>four major independent research teams have validated key predictions</strong>, with 37+ additional predictions currently under testing. Zero failures to date.</p>    </div>    </section>    <!-- Track Record Section -->    <section class="content-section bg-light">    <div class="section-container" data-aos="fade-up">    <h2 class="section-title">Unprecedented Track Record</h2>    <p class="content-text">In science, <strong>a theory is only as good as its predictions</strong>. The COSMIC Framework has achieved something extraordinary: <strong>four major validations confirmed by independent billion-dollar research programs</strong>, with 37+ additional testable predictions currently under observation. Zero failures to date.</p>    <div class="framework-grid" style="margin-top: 3rem;">    <div class="framework-card" style="border-left-color: #f1e303;">    <h3>🏆 DESI Dark Energy (2024)</h3>    <p><strong>Prediction:</strong> Dark energy density evolves over cosmic time in a specific pattern (documented January 2024)</p>    <p><strong>Validation:</strong> DESI collaboration confirmed the exact predicted evolution pattern (November 2024)</p>    <p><strong>Significance:</strong> 4.2σ statistical significance, challenges ΛCDM cosmology</p>    </div>    <div class="framework-card" style="border-left-color: #e33d2f;">    <h3>⚛️ Google Willow Quantum (2024)</h3>    <p><strong>Prediction:</strong> Exponential error correction scaling with specific decoherence patterns (documented August 2024)</p>    <p><strong>Validation:</strong> Google's Willow chip demonstrated the exact predicted scaling behavior (December 2024)</p>    <p><strong>Significance:</strong> Confirms quantum information optimization principles</p>    </div>    <div class="framework-card" style="border-left-color: #a1cd5f;">    <h3>🌌 JWST Early Galaxies (2024-2025)</h3>    <p><strong>Prediction:</strong> Massive galaxy formation at redshift z>10 with specific mass distributions</p>    <p><strong>Validation:</strong> JWST observations confirmed galaxies at z>12 matching predicted properties</p>    <p><strong>Significance:</strong> Challenges conventional structure formation models</p>    </div>    <div class="framework-card" style="border-left-color: #f58b2b;">    <h3>📊 Thermodynamic Asymmetry (2025)</h3>    <p><strong>Prediction:</strong> Multi-scale cosmic structure asymmetries from computational optimization</p>    <p><strong>Validation:</strong> Statistical analysis of galaxy distributions confirmed predicted patterns</p>    <p><strong>Significance:</strong> Observable consequences of information-theoretic foundations</p>    </div>    </div>    <p class="content-text" style="margin-top: 2rem; font-size: 1.25rem; text-align: center; color: var(--primary-color);"><strong>Statistical Significance:</strong> Four independent validations achieving 4.2σ confidence from billion-dollar instruments (DESI, Google Quantum AI, JWST, ALMA). This represents less than 0.003% probability by chance alone. Additionally, 37+ predictions are currently being tested across multiple research domains. See our <a href="testing-schedule.html" style="color: var(--accent-blue); text-decoration: underline;">Testing Schedule</a> for complete details.</p>    </div>    </section>    <!-- What We're Actually Proposing Section -->    <section class="content-section">    <div class="section-container" data-aos="fade-up">    <h2 class="section-title">The Core Insight: Information Comes First</h2>        <p class="content-text">Traditional physics assumes:</p>    <p class="content-text" style="margin-left: 2rem; font-style: italic; color: var(--text-light);">Matter & Energy → Physics Laws → Information Processing → Computation</p>    <p class="content-text" style="margin-top: 1.5rem;">COSMIC Framework proposes:</p>    <p class="content-text" style="margin-left: 2rem; font-weight: 600; color: var(--primary-color);">Information Processing → Computational Optimization → Physics Laws → Matter & Energy</p>    <h3 class="section-subtitle" style="margin-top: 3rem;">What This Means in Practice</h3>    <div class="framework-grid">    <div class="framework-card">    <h3><img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Physical Constants Aren't Arbitrary</h3>    <p>Constants like the fine structure constant (α ≈ 1/137) and mass ratios emerge from computational optimization requirements, not random initial conditions. This explains why they're "fine-tuned"—they're optimized for stable information processing.</p>    </div>    <div class="framework-card">    <h3><img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Quantum Mechanics is Error Correction</h3>    <p>Quantum superposition, entanglement, and measurement collapse are computational processes managing information redundancy and error correction at the Planck scale. This predicts specific patterns in quantum computing behavior (confirmed by Willow).</p>    </div>    <div class="framework-card">    <h3><img src="flight_takeoff_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Dark Energy is Computational Overhead</h3>    <p>The accelerating expansion of the universe represents the computational cost of information processing at cosmic scales. As structure complexity increases, so does the "overhead" driving acceleration—predicting the evolution DESI observed.</p>    </div>    <div class="framework-card">    <h3><img src="navigation_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Gravity is Information Architecture</h3>    <p>Gravitational attraction emerges from the optimization of information flow between systems. This predicts specific deviations from General Relativity at both galactic scales (observed) and quantum scales (testable).</p>    </div>    <div class="framework-card">    <h3><img src="user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Consciousness is Intrinsic</h3>    <p>If reality is fundamentally computational, information processing (and thus some form of awareness) exists at all scales. This makes testable predictions about quantum measurement, decoherence patterns, and the emergence of complex consciousness.</p>    </div>    <div class="framework-card">    <h3><img src="manufacturing_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Structure Formation is Algorithm-Driven</h3>    <p>Early galaxy formation follows computational optimization paths, not just gravitational collapse. This predicts the "too early, too massive" galaxies JWST is observing, which shouldn't exist under conventional models.</p>    </div>    </div>    </div>    </section>    <!-- Methodology & Evidence Section -->    <section class="content-section bg-light">    <div class="section-container" data-aos="fade-up">    <h2 class="section-title">Why Should You Believe This? Our Evidence-Based Methodology</h2>        <p class="content-text">Bold theoretical claims require extraordinary evidence. Here's how we ensure scientific rigor and avoid the pitfalls of unfalsifiable speculation:</p>    <div class="framework-grid" style="margin-top: 2rem;">    <div class="framework-card">    <h3><img src="event_available_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">1. Pre-Registration & Time-Stamping</h3>    <p><strong>The Problem:</strong> Retroactive "predictions" are meaningless.</p>    <p><strong>Our Solution:</strong> Every prediction is documented with blockchain timestamps or Zenodo DOIs <em>before</em> experimental results are published. No retrofitting allowed.</p>    <p><strong>Example:</strong> Dark energy evolution prediction dated January 2024, DESI results released November 2024.</p>    </div>    <div class="framework-card">    <h3><img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">2. Falsifiability First</h3>    <p><strong>The Problem:</strong> Many theories can't be proven wrong.</p>    <p><strong>Our Solution:</strong> Every COSMIC prediction specifies exact conditions that would falsify it. We actively seek ways to break the framework.</p>    <p><strong>Example:</strong> If DESI had shown <em>constant</em> dark energy density, COSMIC would be refuted.</p>    </div>    <div class="framework-card">    <h3><img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">3. Multi-Domain Cross-Validation</h3>    <p><strong>The Problem:</strong> One-off predictions could be luck.</p>    <p><strong>Our Solution:</strong> COSMIC makes predictions across independent domains—cosmology, quantum computing, galaxy formation, thermodynamics, consciousness studies—providing multiple independent tests.</p>    <p><strong>Result:</strong> 4 major validations completed, 37+ predictions currently under testing, zero failures to date. Full testing schedule available <a href="testing-schedule.html" style="color: var(--accent-blue);">here</a>.</p>    </div>    <div class="framework-card">    <h3><img src="group_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">4. Independent Institutional Validation</h3>    <p><strong>The Problem:</strong> Self-validation is unreliable.</p>    <p><strong>Our Solution:</strong> All validations come from independent research teams (DESI, Google Quantum AI, JWST, ALMA) who have no connection to our institute.</p>    <p><strong>Credibility:</strong> These are billion-dollar projects with rigorous peer review.</p>    </div>    <div class="framework-card">    <h3><img src="cloud_download_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">5. Open Data & Reproducibility</h3>    <p><strong>The Problem:</strong> Hidden methods breed skepticism.</p>    <p><strong>Our Solution:</strong> All predictions, data analysis, and code are published open-source on Zenodo with permanent DOIs. Anyone can verify our work.</p>    <p><strong>Transparency:</strong> Full reproducibility from raw data to conclusions.</p>    </div>    <div class="framework-card">    <h3><img src="stack_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">6. Statistical Rigor</h3>    <p><strong>The Problem:</strong> Vague claims can't be evaluated.</p>    <p><strong>Our Solution:</strong> Quantitative predictions with confidence intervals, Bayesian analysis, and clear statistical significance thresholds.</p>    <p><strong>Standard:</strong> Minimum 3σ significance for any claimed validation (we've achieved 4.2σ).</p>    </div>    </div>    <div style="background: white; padding: 2rem; border-radius: 8px; margin-top: 3rem; border: 2px solid var(--accent-blue);">    <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">🔬 What Makes This Credible?</h3>    <ul style="color: var(--text-dark); line-height: 1.8; margin-left: 2rem;">    <li><strong>Published & Archived:</strong> All work published on Zenodo with permanent DOIs</li>    <li><strong>Peer-Reviewable:</strong> Methods transparent enough for expert scrutiny</li>    <li><strong>Reproducible:</strong> Independent researchers can verify all claims</li>    <li><strong>Falsifiable:</strong> Clear conditions that would disprove the framework</li>    <li><strong>Validated:</strong> Four independent billion-dollar research projects confirmed predictions</li>    <li><strong>Quantitative:</strong> Specific numerical predictions, not vague hand-waving</li>    </ul>    </div>    </div>    </section>    <!-- Research Areas Section -->    <section class="content-section">    <div class="section-container" data-aos="fade-up">    <h2 class="section-title">Active Predictions Currently Being Tested</h2>        <p class="content-text" style="background: #d4edda; padding: 1.5rem; border-left: 4px solid var(--accent-green); border-radius: 4px; margin-bottom: 3rem;"><strong>Investment Insight:</strong> The power of COSMIC isn't just in past validations—it's in <strong>37+ ongoing testable predictions</strong> across billion-dollar research programs documented on our <a href="testing-schedule.html" style="color: var(--accent-blue); font-weight: 600;">Testing Schedule</a>. Each new validation multiplies the framework's credibility and opens doors for commercialization in quantum computing, AI, aerospace, and materials science. Below are five flagship examples:</p>    <h3 class="section-subtitle">🌌 Euclid Mission Dark Energy Mapping (2025-2026)</h3>    <p class="content-text"><strong>Prediction:</strong> Specific large-scale structure asymmetries from computational optimization processes will be detectable in galaxy distributions at cosmic scales.</p>    <p class="content-text"><strong>Current Status:</strong> Euclid telescope is actively collecting data. Analysis expected Q2-Q3 2025.</p>    <p class="content-text"><strong>If Validated:</strong> Provides independent confirmation of COSMIC's information-theoretic approach to cosmology, supporting patent applications in quantum navigation and computational cosmology simulations.</p>        <h3 class="section-subtitle">⚛️ IBM Quantum Error Correction Scaling (2025)</h3>    <p class="content-text"><strong>Prediction:</strong> Quantum error rates will follow specific information-theoretic optimization curves as qubit counts scale to 1,000+.</p>    <p class="content-text"><strong>Current Status:</strong> IBM's quantum roadmap targets 1,000+ qubit systems in 2025. Data collection ongoing.</p>    <p class="content-text"><strong>If Validated:</strong> Opens licensing opportunities for COSMIC-based quantum error correction algorithms with major quantum computing companies (IBM, Google, IonQ).</p>        <h3 class="section-subtitle">🧠 Consciousness & Quantum Measurement (2025-2026)</h3>    <p class="content-text"><strong>Prediction:</strong> Specific decoherence patterns in quantum measurement will correlate with observer complexity in predictable ways.</p>    <p class="content-text"><strong>Current Status:</strong> Experimental protocols developed and submitted for peer review. Lab partnerships being established.</p>    <p class="content-text"><strong>If Validated:</strong> Revolutionizes understanding of consciousness and quantum mechanics. Potential applications in AI, brain-computer interfaces, and quantum sensing.</p>    <h3 class="section-subtitle">🌠 JWST Galaxy Formation Patterns (Ongoing)</h3>    <p class="content-text"><strong>Prediction:</strong> Specific mass distributions and metallicity patterns in z>15 galaxies driven by computational optimization, not just gravitational collapse.</p>    <p class="content-text"><strong>Current Status:</strong> JWST continues observations. New data releases quarterly.</p>    <p class="content-text"><strong>If Validated:</strong> Fundamentally changes cosmological modeling. Applications in astrophysics simulation software and aerospace trajectory optimization.</p>    <h3 class="section-subtitle">🔬 Thermodynamic Efficiency Limits (2025)</h3>    <p class="content-text"><strong>Prediction:</strong> Information processing imposes fundamental limits on thermodynamic efficiency beyond conventional Carnot limits in specific regimes.</p>    <p class="content-text"><strong>Current Status:</strong> Laboratory experiments in design phase. Expected execution Q3 2025.</p>    <p class="content-text"><strong>If Validated:</strong> Impacts energy technology, computing efficiency, and materials science. Potential for breakthrough energy harvesting technologies.</p>    </div>    </section>    <!-- Why This Matters for Investment Section -->    <section class="content-section bg-light">    <div class="section-container" data-aos="fade-up">    <h2 class="section-title">Why COSMIC Framework Matters for Investors</h2>        <p class="content-text">Theoretical physics breakthroughs have historically driven multi-billion-dollar industries: quantum mechanics enabled semiconductors ($580B market), special relativity enables GPS ($300B market), quantum field theory enabled MRI ($7B market). The COSMIC Framework is positioned to be the next such breakthrough.</p>    <div class="framework-grid">    <div class="framework-card" style="border-left-color: var(--accent-blue);">    <h3>💰 Near-Term Commercialization (1-3 years)</h3>    <p><strong>Quantum Computing Optimization:</strong> COSMIC-based error correction algorithms for licensing to IBM, Google, IonQ, Rigetti. Conservative estimate: $5-20M in licensing revenue within 3 years.</p>    <p><strong>AI Training Efficiency:</strong> Information-theoretic optimization frameworks reduce training costs by 20-40% for large language models. Target customers: OpenAI, Anthropic, Google DeepMind.</p>    </div>    <div class="framework-card" style="border-left-color: var(--accent-green);">    <h3>🚀 Medium-Term Applications (3-7 years)</h3>    <p><strong>Aerospace Navigation:</strong> Computational cosmology models improve deep-space trajectory calculations. Partnerships with NASA, SpaceX, Blue Origin.</p>    <p><strong>Materials Science:</strong> Thermodynamic efficiency predictions enable novel energy harvesting materials. Patent portfolio potential: 15-25 foundational patents.</p>    <p><strong>Consciousness Tech:</strong> Quantum measurement insights enable next-gen brain-computer interfaces. Market size: $5.5B by 2030.</p>    </div>    <div class="framework-card" style="border-left-color: var(--accent-orange);">    <h3>🌟 Long-Term Transformation (7-15 years)</h3>    <p><strong>Unified Physics Simulation:</strong> Complete computational models of physical systems from quantum to cosmic scales. Enterprise software licensing: $100M+ annual revenue potential.</p>    <p><strong>Energy Revolution:</strong> If thermodynamic limits can be pushed via information processing, transformative impact on global energy (multi-trillion dollar market).</p>    <p><strong>Computing Architecture:</strong> Fundamentally new approaches to computation based on information-first principles. Potential to compete with classical and quantum paradigms.</p>    </div>    </div>    <div style="background: white; padding: 2rem; border-radius: 8px; margin-top: 3rem; border: 2px solid var(--primary-color);">    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.75rem;">Investment Opportunity Summary</h3>    <p class="content-text"><strong>Stage:</strong> Pre-seed / Seed ($500K-$2M raise)</p>    <p class="content-text"><strong>Use of Funds:</strong></p>    <ul style="margin-left: 2rem; margin-bottom: 1rem; color: var(--text-dark); line-height: 1.8;">    <li>Experimental validation of 2025-2026 predictions ($300K)</li>    <li>Patent portfolio development - quantum algorithms, materials ($ 200K)</li>    <li>Quantum computing error correction licensing ($150K in development)</li>    <li>Team expansion - 2 PhD physicists, 1 patent attorney ($500K/year)</li>    <li>Peer-reviewed publication push - 5 major journals ($100K)</li>    <li>Strategic partnerships with research institutions ($150K)</li>    </ul>    <p class="content-text"><strong>Risk Mitigation:</strong> Multiple independent validation opportunities across 37+ active predictions spanning cosmology, quantum computing, galaxy formation, thermodynamics, and consciousness studies (see <a href="testing-schedule.html" style="color: var(--accent-blue);">Testing Schedule</a>). Even if several predictions fail, the framework's core validity remains supported by existing successful validations and the breadth of independent confirmation across domains.</p>    <p class="content-text"><strong>Exit Strategy:</strong> Licensing deals with tech giants (IBM, Google, Microsoft) for quantum/AI applications, acquisition by aerospace/defense (Lockheed, Boeing, Northrop), or IPO as computational physics platform company (similar path to Schrödinger Inc., $2B market cap).</p>    <p class="content-text"><strong>Timeline to Exit:</strong> 3-5 years for strategic acquisition, 5-8 years for IPO.</p>    </div>    </div>    </section>    <!-- Team & Partners Section -->    <section class="content-section">    <div class="section-container" data-aos="fade-up">    <h2 class="section-title">Team & Strategic Partnerships</h2>        <h3 class="section-subtitle">Core Research Team</h3>    <p class="content-text"><strong>Principal Investigator:</strong> Michael Baines - Aerospace engineer with specialization in theoretical physics and computational modeling. Developer of COSMIC Framework with documented validated predictions.</p>        <p class="content-text"><strong>Collaborative Network:</strong> Independent research fellows contributing specialized expertise in cosmology, quantum information theory, consciousness studies, and computational physics.</p>    <h3 class="section-subtitle">Institutional Validation Partners</h3>    <div class="framework-grid">    <div class="framework-card" style="background: #f8f9fa;">    <h3 style="color: var(--accent-blue);">DESI Collaboration</h3>    <p>Lawrence Berkeley National Laboratory - $75M dark energy spectroscopic instrument. Validated COSMIC's dark energy evolution predictions (2024).</p>    </div>    <div class="framework-card" style="background: #f8f9fa;">    <h3 style="color: var(--accent-red);">Google Quantum AI</h3>    <p>Willow quantum chip development team. Confirmed COSMIC's quantum error correction scaling predictions (2024).</p>    </div>    <div class="framework-card" style="background: #f8f9fa;">    <h3 style="color: var(--accent-green);">JWST Science Team</h3>    <p>$10B James Webb Space Telescope. Observations match COSMIC's early galaxy formation predictions (2024-2025).</p>    </div>    <div class="framework-card" style="background: #f8f9fa;">    <h3 style="color: var(--accent-orange);">ALMA Observatory</h3>    <p>Atacama Large Millimeter Array. Multi-scale asymmetry data supports COSMIC's thermodynamic predictions (2025).</p>    </div>    </div>    <p class="content-text" style="margin-top: 2rem;"><strong>Future Partnerships:</strong> Active discussions with IBM Quantum, Euclid Mission team, consciousness research labs at major universities, and aerospace companies for trajectory optimization applications.</p>    </div>    </section>    <!-- CTA Section -->    <section class="content-section bg-light">    <div class="section-container" style="text-align: center;" data-aos="fade-up">    <h2 class="section-title">Get Involved</h2>    <p class="content-text" style="max-width: 800px; margin: 0 auto 2rem;">Whether you're an investor seeking breakthrough technology opportunities, a researcher interested in collaboration, or simply curious about the cutting edge of theoretical physics, we invite you to connect with the COSMIC Framework project.</p>        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">    <a href="book.html" class="btn btn-primary">Read The Big TOE</a>    <a href="validation.html" class="btn" style="background: var(--accent-blue); color: white;">View Validations</a>    <a href="contribute.html" class="btn" style="background: var(--accent-green); color: white;">Investment Inquiry</a>    </div>    <div style="max-width: 700px; margin: 0 auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📊 By the Numbers</h3>    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; text-align: center; margin-top: 1.5rem;">    <div>    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-blue);">37+</div>    <div style="color: var(--text-light); font-size: 0.9rem;">Active Predictions</div>    </div>    <div>    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-green);">4</div>    <div style="color: var(--text-light); font-size: 0.9rem;">Major Validations</div>    </div>    <div>    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-red);">4.2σ</div>    <div style="color: var(--text-light); font-size: 0.9rem;">Statistical Significance</div>    </div>    <div>    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-orange);">$100M+</div>    <div style="color: var(--text-light); font-size: 0.9rem;">Validation Instruments</div>    </div>    </div>    </div>    <p class="content-text" style="margin-top: 2rem; font-size: 1rem; color: var(--text-light);">All research findings, predictions, and data are published open-source on Zenodo with permanent DOIs. We believe in transparent, reproducible science.</p>    </div>    </section>    <!-- Footer -->    <footer>    <div class="footer-container">    <div class="footer-section">    <h3>Ic² Research Institute</h3>    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>    </div>    <div class="footer-section">    <h3>Research</h3>    <ul>    <li><a href="framework.html">Framework</a></li>    <li><a href="validation.html">Validation</a></li>    <li><a href="testing-schedule.html">Testing</a></li>    <li><a href="programs-gateway.html">Programs</a></li>    <li><a href="research-publications.html">Publications</a></li>    <li><a href="simulations.html">Simulations</a></li>    </ul>    </div>    <div class="footer-section">    <h3>Resources</h3>    <ul>    <li><a href="book.html">The Big TOE</a></li>    <li><a href="about-page.html">About</a></li>    <li><a href="blog.html">Blog</a></li>    <li><a href="faq-page.html">FAQ</a></li>    <li><a href="members.html">Our Members</a></li>    </ul>    </div>    <div class="footer-section">    <h3>Connect</h3>    <ul>    <li><a href="contribute.html">Contribute</a></li>    <li><a href="discussions-page.html">Discussions</a></li>    <li><a href="events.html">Events</a></li>    <li><a href="become-member.html">Become a Member</a></li>    <li><a href="about-page.html#contact">Contact</a></li>    </ul>    </div>    </div>    <div class="footer-bottom">    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>    </div>    </footer>    <!-- AOS Animation Library -->    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>    <script>    AOS.init({    duration: 1000,    once: true,    offset: 100    });    </script>    <script>    // Hamburger menu functionality    const hamburger = document.querySelector('.hamburger');    const mobileMenu = document.querySelector('.mobile-menu');        if (hamburger && mobileMenu) {    hamburger.addEventListener('click', function() {    this.classList.toggle('active');    mobileMenu.classList.toggle('active');    });        // Close mobile menu when clicking a link    document.querySelectorAll('.mobile-menu a').forEach(link => {    link.addEventListener('click', function() {      hamburger.classList.remove('active');      mobileMenu.classList.remove('active');    });  });}</script></body></html>
