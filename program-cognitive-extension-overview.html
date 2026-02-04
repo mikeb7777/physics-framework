@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI-Mediated Cognitive Extension - Ic² Research Institute</title>
+    <meta name="description" content="Engineering solutions to human substrate constraints through AI-mediated information compression">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+    /* --- Global Styles --- */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    :root {
+    --primary-color: #8B0000;
+    --secondary-color: #2c3e50;
+    --accent-blue: #005ba5;
+    --accent-red: #e33d2f;
+    --accent-green: #a1cd5f;
+    --accent-orange: #f58b2b;
+    --accent-yellow: #f1e303;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    }
+    
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: white;
+    }
+    
+    /* Header */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .site-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration: none;
+    }
+    
+    .site-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+    }
+    
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    }
+    
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
+    
+    .main-navigation a:hover {
+    color: var(--primary-color);
+    }
+    
+    .main-navigation a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+    }
+    
+    /* Page Header */
+    .page-header {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    }
+    
+    .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    }
+    
+    .page-header .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.95;
+    margin-bottom: 0.5rem;
+    }
+    
+    .page-header .meta {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-top: 1rem;
+    }
+    
+    /* Content Section */
+    .content-section {
+    padding: 4rem 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+    
+    .section-header {
+    margin-bottom: 3rem;
+    text-align: center;
+    }
+    
+    .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+    
+    .section-header p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto;
+    }
+    
+    /* Two Column Layout */
+    .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 3rem 0;
+    }
+    
+    .column h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--accent-blue);
+    }
+    
+    .column p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    }
+    
+    /* Info Box */
+    .info-box {
+    background: var(--bg-light);
+    border-left: 4px solid var(--accent-blue);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    }
+    
+    .info-box h3 {
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    }
+    
+    .info-box ul {
+    margin-left: 1.5rem;
+    color: var(--text-light);
+    }
+    
+    .info-box ul li {
+    margin: 0.5rem 0;
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+    
+    .stat-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 12px rgba(0,91,165,0.15);
+    transform: translateY(-2px);
+    }
+    
+    .stat-card .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    display: block;
+    margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .stat-label {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    }
+    
+    /* Phase Cards */
+    .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+    
+    .phase-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    }
+    
+    .phase-card:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 12px rgba(0,91,165,0.15);
+    }
+    
+    .phase-header {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);
+    color: white;
+    padding: 1.5rem;
+    }
+    
+    .phase-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    }
+    
+    .phase-body {
+    padding: 2rem;
+    }
+    
+    .phase-body p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    }
+    
+    .phase-body ul {
+    margin-left: 1.5rem;
+    color: var(--text-light);
+    }
+    
+    .phase-body ul li {
+    margin: 0.5rem 0;
+    }
+    
+    /* Button Styles */
+    .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+    background: var(--accent-blue);
+    color: white;
+    }
+    
+    .btn-primary:hover {
+    background: #004080;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,91,165,0.3);
+    }
+    
+    .btn-outline {
+    background: transparent;
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    }
+    
+    .btn-outline:hover {
+    background: var(--accent-blue);
+    color: white;
+    }
+    
+    .cta-section {
+    text-align: center;
+    margin: 4rem 0;
+    }
+    
+    .cta-section .btn {
+    margin: 0 1rem;
+    }
+    
+    /* Footer */
+    footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 3rem 2rem 1rem;
+    margin-top: 5rem;
+    }
+    
+    .footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    }
+    
+    .footer-section h3 {
+    margin-bottom: 1rem;
+    color: white;
+    }
+    
+    .footer-section ul {
+    list-style: none;
+    }
+    
+    .footer-section ul li {
+    margin: 0.5rem 0;
+    }
+    
+    .footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+    
+    .footer-section a:hover {
+    color: white;
+    }
+    
+    .footer-bottom {
+    max-width: var(--max-width);
+    margin: 2rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+    .page-header h1 {
+    font-size: 2rem;
+    }
+    
+    .two-column {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+    
+    .stats-grid {
+    grid-template-columns: 1fr;
+    }
+    
+    .main-navigation {
+    display: none;
+    }
+    }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+    <div class="header-container">
+    <a href="index.html" class="site-logo">
+    <span>Ic² Research Institute</span>
+    </a>
+    <nav class="main-navigation">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research-publications.html">Research</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+    </ul>
+    </nav>
+    </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 data-aos="fade-up">AI-Mediated Cognitive Extension</h1>
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="100">Engineering Solutions to Substrate Constraints</p>
+        <p class="meta" data-aos="fade-up" data-aos-delay="200">36-Month Research Program | Two-Phase Implementation | Pilot Phase Active</p>
+        <p class="meta" data-aos="fade-up" data-aos-delay="300" style="margin-top: 1rem;">
+            <strong>Published:</strong> DOI: <a href="https://zenodo.org/records/18452510" style="color: var(--accent-yellow); text-decoration: underline;">10.5281/zenodo.18452510</a>
+        </p>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="content-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Executive Summary</h2>
+            <p>Human cognitive capacity is fundamentally constrained by working memory limitations—approximately 4-7 items regardless of intelligence or expertise. This program develops AI-human hybrid systems that extend cognitive capacity by optimizing information compression rather than attempting to expand biological processing power.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card" data-aos="fade-up">
+                <span class="stat-value">25M:1</span>
+                <span class="stat-label">Compression Ratio</span>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="stat-value">~7</span>
+                <span class="stat-label">Working Memory Items</span>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="stat-value">36</span>
+                <span class="stat-label">Months Duration</span>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <span class="stat-value">2</span>
+                <span class="stat-label">Implementation Phases</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Problem -->
+    <section class="content-section" style="background: var(--bg-light);">
+        <div class="section-header" data-aos="fade-up">
+            <h2>The Substrate Constraint Problem</h2>
+        </div>
+
+        <div class="two-column">
+            <div class="column" data-aos="fade-right">
+                <h3>The Working Memory Bottleneck</h3>
+                <p>Human working memory maintains approximately 7 items regardless of intelligence, education, or expertise. This constraint persists across all cognitive activities and represents a fundamental architectural limitation of biological neural substrates.</p>
+                <p>The human retina samples approximately 1 billion bits per second, yet only 40-60 bits reach conscious awareness—a compression ratio of 25 million to 1. This massive information loss reflects evolutionary optimization for survival rather than comprehensive environmental modeling.</p>
+            </div>
+
+            <div class="column" data-aos="fade-left">
+                <h3>The Crystallized Intelligence Trap</h3>
+                <p>As professionals accumulate expertise, they transition from fluid intelligence (adaptive reasoning) to crystallized intelligence (pattern matching). While initially enhancing performance, this transition progressively fills working memory with stored patterns, leaving insufficient capacity for adaptive thinking.</p>
+                <p>Approximately 95% of professionals peak in their 20s-30s as expertise accumulation consumes working memory. The exceptional 5% who sustain performance employ specific strategies that preserve working memory availability.</p>
+            </div>
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <h3>Information Physics Perspective</h3>
+            <p>From the COSMIC Framework's information-theoretic perspective, consciousness represents information processing through a biological neural substrate with severe bandwidth limitations. The 25 million-to-1 compression ratio reflects optimization for rapid decision-making rather than faithful environmental rendering. Modern information-dense environments create cognitive demands orders of magnitude beyond evolutionary contexts, making augmentation not just beneficial but necessary for optimal human performance.</p>
+        </div>
+    </section>
+
+    <!-- Solution Approach -->
+    <section class="content-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>The Augmentation Strategy</h2>
+            <p>Creating composite cognitive substrates where AI handles bandwidth-intensive operations while biological cognition maintains adaptive reasoning and consciousness.</p>
+        </div>
+
+        <div class="two-column">
+            <div class="column" data-aos="fade-right">
+                <h3>AI Responsibilities</h3>
+                <ul>
+                    <li>Pattern recognition in high-dimensional sensory data</li>
+                    <li>Crystallized knowledge storage and retrieval</li>
+                    <li>Information encoding and formatting</li>
+                    <li>Predictive modeling and anomaly detection</li>
+                    <li>Cross-domain information integration</li>
+                </ul>
+            </div>
+
+            <div class="column" data-aos="fade-left">
+                <h3>Biological Cognition Maintains</h3>
+                <ul>
+                    <li>Adaptive reasoning and flexible problem-solving</li>
+                    <li>Emotional context and value assignment</li>
+                    <li>Creative insight and novel connections</li>
+                    <li>Consciousness and qualia generation</li>
+                    <li>Decision-making authority</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-box" data-aos="fade-up" style="border-left-color: var(--accent-green);">
+            <h3>Key Insight: Working With Constraints</h3>
+            <p>The augmentation doesn't bypass working memory constraints—it optimizes utilization. Rather than filling working memory with pattern recognition tasks, AI performs compression externally, presenting optimized information that preserves working memory for adaptive reasoning. Working memory capacity remains constant; performance improves dramatically.</p>
+        </div>
+    </section>
+
+    <!-- Two-Phase Implementation -->
+    <section class="content-section" style="background: var(--bg-light);">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Two-Phase Implementation Strategy</h2>
+            <p>Reducing risk through incremental validation before major hardware investment</p>
+        </div>
+
+        <div class="phase-grid">
+            <div class="phase-card" data-aos="fade-up">
+                <div class="phase-header">
+                    <h3>Phase 1: Information Encoding</h3>
+                    <p style="opacity: 0.9; margin: 0;">2026-2027 | $2-5M</p>
+                </div>
+                <div class="phase-body">
+                    <p><strong>Objective:</strong> Validate framework principles using existing display technology</p>
+                    
+                    <p><strong>Key Components:</strong></p>
+                    <ul>
+                        <li>Dynamic semantic layering systems</li>
+                        <li>Spatial-visual knowledge representation</li>
+                        <li>Context-aware information retrieval</li>
+                        <li>Adaptive complexity scaling</li>
+                    </ul>
+                    
+                    <p><strong>Success Criteria:</strong></p>
+                    <ul>
+                        <li>30%+ improvement in comprehension speed</li>
+                        <li>40-60% better long-term retention</li>
+                        <li>25-40% enhanced cross-domain integration</li>
+                        <li>Validated neuroplastic adaptation timeline</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="phase-header">
+                    <h3>Phase 2: Sensory Augmentation</h3>
+                    <p style="opacity: 0.9; margin: 0;">2027-2029 | $15-25M</p>
+                </div>
+                <div class="phase-body">
+                    <p><strong>Objective:</strong> Deploy AR-based sensory augmentation after Phase 1 validation</p>
+                    
+                    <p><strong>Key Components:</strong></p>
+                    <ul>
+                        <li>AR display systems (Vision Pro, Quest 3 class)</li>
+                        <li>Multi-modal environmental sensing</li>
+                        <li>Real-time AI processing architecture</li>
+                        <li>Adaptive information overlay</li>
+                    </ul>
+                    
+                    <p><strong>Expected Outcomes:</strong></p>
+                    <ul>
+                        <li>50-70% improved environmental awareness</li>
+                        <li>35-55% task performance enhancement</li>
+                        <li>Automatic processing within 12 months</li>
+                        <li>Maintained working memory capacity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Validation Pathways -->
+    <section class="content-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Multiple Independent Validation Pathways</h2>
+            <p>Convergent evidence from diverse methodologies strengthens framework confidence</p>
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <h3>1. Cognitive Augmentation Predictions</h3>
+            <ul>
+                <li><strong>Working Memory Enhancement:</strong> Improved performance without capacity increase</li>
+                <li><strong>Neuroplastic Adaptation:</strong> Follows sensory substitution timeline (conscious→automatic over 3-12 months)</li>
+                <li><strong>Expertise Interaction:</strong> U-shaped benefit curve (novices and veterans benefit most)</li>
+                <li><strong>Technology:</strong> Testable with current AR/AI systems</li>
+            </ul>
+        </div>
+
+        <div class="info-box" data-aos="fade-up" style="border-left-color: var(--accent-green);">
+            <h3>2. Autonomic Control Validation</h3>
+            <ul>
+                <li><strong>DMN Modulation:</strong> Real-time neurofeedback accelerates autonomic control 5-10×</li>
+                <li><strong>Substrate Access:</strong> Voluntary DMN suppression enables perception of normally filtered information</li>
+                <li><strong>Transfer Effects:</strong> Autonomic control capability predicts augmentation adaptation speed</li>
+                <li><strong>Technology:</strong> EEG, HRV biofeedback, temperature monitoring</li>
+            </ul>
+        </div>
+
+        <div class="info-box" data-aos="fade-up" style="border-left-color: var(--accent-orange);">
+            <h3>3. Information Erasure Testing</h3>
+            <ul>
+                <li><strong>Consciousness Transitions:</strong> Sleep, meditation produce measurable heat from information erasure</li>
+                <li><strong>Landauer Principle:</strong> Heat dissipation correlates with information reorganization amount</li>
+                <li><strong>Cross-Species:</strong> Sleep duration correlates with processing intensity × metabolic rate</li>
+                <li><strong>Technology:</strong> Cerebral thermometry, fNIRS, EEG complexity measures</li>
+            </ul>
+        </div>
+
+        <div class="info-box" data-aos="fade-up" style="border-left-color: var(--accent-red);">
+            <h3>4. Psychedelic Research Validation</h3>
+            <ul>
+                <li><strong>Geometric Patterns:</strong> Mathematical structures match information-optimized predictions</li>
+                <li><strong>DMN Suppression:</strong> Depth correlates with geometric complexity (Euclidean→Spherical→Hyperbolic)</li>
+                <li><strong>Cross-Cultural Consistency:</strong> Universal patterns despite cultural variation</li>
+                <li><strong>Technology:</strong> fMRI during controlled sessions, pattern documentation</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Team & Resources -->
+    <section class="content-section" style="background: var(--bg-light);">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Program Resources</h2>
+        </div>
+
+        <div class="two-column">
+            <div class="column" data-aos="fade-right">
+                <h3>Funding Requirements</h3>
+                <p><strong>Phase 1 (2026-2027):</strong> $2-5M</p>
+                <ul>
+                    <li>Information encoding system development</li>
+                    <li>Autonomic control validation studies</li>
+                    <li>Landauer principle testing</li>
+                </ul>
+                
+                <p><strong>Phase 2 (2027-2029):</strong> $15-25M</p>
+                <ul>
+                    <li>AR hardware development and integration</li>
+                    <li>Neuroplastic adaptation research</li>
+                    <li>Psychedelic integration studies</li>
+                </ul>
+                
+                <p><strong>Ongoing (2029+):</strong> $15-30M annually</p>
+                <ul>
+                    <li>Expert user longitudinal tracking</li>
+                    <li>Cross-domain validation expansion</li>
+                    <li>Next-generation system development</li>
+                </ul>
+            </div>
+
+            <div class="column" data-aos="fade-left">
+                <h3>Team Structure</h3>
+                <p><strong>Core Research Team:</strong></p>
+                <ul>
+                    <li>Principal Investigator (Theoretical Framework)</li>
+                    <li>Lead AI/ML Engineer (Information Compression)</li>
+                    <li>Neuroscience Lead (Validation Studies)</li>
+                    <li>AR/Hardware Engineer (Phase 2)</li>
+                    <li>Clinical Research Coordinator</li>
+                </ul>
+                
+                <p><strong>Extended Collaborators:</strong></p>
+                <ul>
+                    <li>University neuroscience labs (fMRI, EEG)</li>
+                    <li>Sleep research institutions</li>
+                    <li>Meditation research centers</li>
+                    <li>AR hardware partners</li>
+                    <li>Open science community contributors</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation -->
+    <section class="content-section" style="background: var(--bg-light);">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Published Research Foundation</h2>
+        </div>
+
+        <div class="info-box" data-aos="fade-up" style="border-left-color: var(--accent-blue); background: white;">
+            <h3>Full Research Paper</h3>
+            <p style="color: var(--text-dark); margin-bottom: 1rem;">
+                <strong>Baines, M. K.</strong> (2026). <em>AI-Mediated Cognitive Extension: Engineering Solutions to Substrate Constraints - The Physics of Human Sensory Augmentation.</em> Ic² Research Institute. Zenodo.
+            </p>
+            <p style="margin-bottom: 1rem;">
+                <strong>DOI:</strong> <a href="https://zenodo.org/records/18452510" style="color: var(--accent-blue); text-decoration: underline;" target="_blank">10.5281/zenodo.18452510</a>
+            </p>
+            <p style="color: var(--text-light);">
+                This comprehensive 70+ page research paper provides the complete theoretical framework, detailed experimental protocols, validation methodologies, and implementation specifications for the AI-Mediated Cognitive Extension program. The paper has been formally published with DOI assignment ensuring permanent archival and citability.
+            </p>
+            <div style="margin-top: 1.5rem;">
+                <a href="https://zenodo.org/records/18452510" class="btn btn-primary" target="_blank">Read Full Paper</a>
+                <a href="https://zenodo.org/records/18452510/files/AI-Mediated_Cognitive_Extension_-_Engineering_Solutions_to_Substrate_Constraints.pdf" class="btn btn-outline" target="_blank">Download PDF</a>
+            </div>
+        </div>
+
+        <div class="two-column" style="margin-top: 2rem;">
+            <div class="column" data-aos="fade-right">
+                <h3>Paper Highlights</h3>
+                <ul style="color: var(--text-light);">
+                    <li>Comprehensive theoretical foundation grounded in COSMIC Framework</li>
+                    <li>10 detailed, testable predictions with falsification criteria</li>
+                    <li>Complete experimental protocols for 5 validation pathways</li>
+                    <li>Two-phase implementation strategy with risk mitigation</li>
+                    <li>Budget breakdowns and resource requirements</li>
+                    <li>Integration of cognitive augmentation, autonomic control, and psychedelic research</li>
+                </ul>
+            </div>
+
+            <div class="column" data-aos="fade-left">
+                <h3>Citation Information</h3>
+                <ul style="color: var(--text-light);">
+                    <li><strong>Publication Date:</strong> January 2026</li>
+                    <li><strong>Pages:</strong> 70+</li>
+                    <li><strong>License:</strong> Open Access</li>
+                    <li><strong>Repository:</strong> Zenodo</li>
+                    <li><strong>Keywords:</strong> cognitive augmentation, working memory, information compression, AI-human hybrid systems, consciousness modulation</li>
+                    <li><strong>ORCID:</strong> 0009-0001-8084-3870</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="content-section">
+        <div class="cta-section" data-aos="fade-up">
+            <h2 style="margin-bottom: 2rem;">Ready to Begin the Pilot Phase?</h2>
+            <a href="program-cognitive-extension-pilot.html" class="btn btn-primary">Launch Pilot Phase</a>
+            <a href="programs-gateway.html" class="btn btn-outline">View All Programs</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+    <div class="footer-container">
+    <div class="footer-section">
+    <h3>Ic² Research Institute</h3>
+    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work.</p>
+    </div>
+    <div class="footer-section">
+    <h3>Research</h3>
+    <ul>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="programs-gateway.html">Programs</a></li>
+    <li><a href="research-publications.html">Publications</a></li>
+    </ul>
+    </div>
+    <div class="footer-section">
+    <h3>Resources</h3>
+    <ul>
+    <li><a href="book.html">The Big TOE</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="faq-page.html">FAQ</a></li>
+    </ul>
+    </div>
+    <div class="footer-section">
+    <h3>Connect</h3>
+    <ul>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="discussions-page.html">Discussions</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="footer-bottom">
+    <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy</a> | <a href="terms-conditions.html">Terms</a></p>
+    </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+        duration: 600
+      });
+    </script>
+</body>
+</html>

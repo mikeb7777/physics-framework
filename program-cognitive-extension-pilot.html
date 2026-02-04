@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Pilot Phase Kickoff - AI-Mediated Cognitive Extension</title>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+        --primary-color: #8B0000;
+        --accent-blue: #005ba5;
+        --accent-green: #a1cd5f;
+        --accent-orange: #f58b2b;
+        --accent-red: #e33d2f;
+        --text-dark: #2c3e50;
+        --text-light: #666;
+        --bg-light: #f8f9fa;
+        --max-width: 1200px;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+    }
+    
+    .site-header {
+        background: white;
+        border-bottom: 1px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .header-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .site-logo {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    
+    .page-header {
+        background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);
+        color: white;
+        padding: 4rem 2rem 3rem;
+        text-align: center;
+    }
+    
+    .page-header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+    
+    .page-header .subtitle {
+        font-size: 1.3rem;
+        opacity: 0.95;
+    }
+    
+    .content-section {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: var(--text-dark);
+        border-bottom: 3px solid var(--accent-blue);
+        padding-bottom: 0.5rem;
+    }
+    
+    .subsection-title {
+        font-size: 1.8rem;
+        margin: 2rem 0 1rem;
+        color: var(--accent-blue);
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin: 1rem 0;
+    }
+    
+    .status-ready { background: var(--accent-green); color: white; }
+    .status-development { background: var(--accent-orange); color: white; }
+    .status-planning { background: var(--accent-blue); color: white; }
+    .status-critical { background: var(--accent-red); color: white; }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .info-card {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .info-card:hover {
+        border-color: var(--accent-blue);
+        box-shadow: 0 4px 12px rgba(0,91,165,0.15);
+    }
+    
+    .info-card h3 {
+        color: var(--accent-blue);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .info-card ul {
+        margin-left: 1.5rem;
+        color: var(--text-light);
+    }
+    
+    .info-card ul li {
+        margin: 0.5rem 0;
+    }
+    
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--accent-blue);
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-left: 2rem;
+    }
+    
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -2rem;
+        top: 0;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: var(--accent-blue);
+        border: 3px solid white;
+        box-shadow: 0 0 0 2px var(--accent-blue);
+    }
+    
+    .timeline-item h4 {
+        color: var(--accent-blue);
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .timeline-item .phase-duration {
+        color: var(--text-light);
+        font-style: italic;
+        margin-bottom: 0.5rem;
+    }
+    
+    .budget-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .budget-table thead {
+        background: var(--accent-blue);
+        color: white;
+    }
+    
+    .budget-table th,
+    .budget-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .budget-table tbody tr:hover {
+        background: var(--bg-light);
+    }
+    
+    .budget-table .total-row {
+        font-weight: 700;
+        background: var(--bg-light);
+        font-size: 1.1rem;
+    }
+    
+    .alert-box {
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        border-left: 4px solid;
+    }
+    
+    .alert-info {
+        background: #e3f2fd;
+        border-color: var(--accent-blue);
+        color: #01579b;
+    }
+    
+    .alert-warning {
+        background: #fff3e0;
+        border-color: var(--accent-orange);
+        color: #e65100;
+    }
+    
+    .alert-success {
+        background: #e8f5e9;
+        border-color: var(--accent-green);
+        color: #1b5e20;
+    }
+    
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .team-card {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    .team-card h4 {
+        color: var(--accent-blue);
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+    
+    .team-card .role {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+    
+    .team-card .status {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        margin: 0.5rem;
+    }
+    
+    .btn-primary {
+        background: var(--accent-blue);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background: #004080;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,91,165,0.3);
+    }
+    
+    .btn-outline {
+        background: transparent;
+        color: var(--accent-blue);
+        border-color: var(--accent-blue);
+    }
+    
+    .btn-outline:hover {
+        background: var(--accent-blue);
+        color: white;
+    }
+    
+    .cta-section {
+        text-align: center;
+        margin: 4rem 0;
+        padding: 3rem;
+        background: var(--bg-light);
+        border-radius: 12px;
+    }
+    
+    footer {
+        background: var(--text-dark);
+        color: white;
+        padding: 2rem;
+        margin-top: 5rem;
+        text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+        .page-header h1 { font-size: 2rem; }
+        .info-grid { grid-template-columns: 1fr; }
+        .team-grid { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="site-logo">Ic² Research Institute</a>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <h1 data-aos="fade-up">Pilot Phase Kickoff</h1>
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="100">AI-Mediated Cognitive Extension | Phase 1 Implementation</p>
+        <p style="margin-top: 1rem; opacity: 0.9;" data-aos="fade-up" data-aos-delay="200">
+            <strong>Research Foundation:</strong> DOI: <a href="https://zenodo.org/records/18452510" style="color: var(--accent-yellow); text-decoration: underline;">10.5281/zenodo.18452510</a>
+        </p>
+        <span class="status-badge status-ready" data-aos="fade-up" data-aos-delay="300">READY TO LAUNCH</span>
+    </section>
+
+    <!-- Program Status -->
+    <section class="content-section">
+        <h2 class="section-title" data-aos="fade-up">Program Status Overview</h2>
+        
+        <div class="alert-box alert-info" data-aos="fade-up">
+            <strong>Current Status:</strong> Pilot Phase 1 ready for launch pending final resource allocation and team confirmation. Theoretical framework validated through COSMIC Framework predictions. Technology components identified and available. Timeline confirmed as feasible with appropriate resourcing.
+        </div>
+
+        <div class="alert-box alert-success" data-aos="fade-up" style="margin-top: 1rem;">
+            <strong>Published Research Foundation:</strong> This pilot phase is based on the comprehensive research paper <em>"AI-Mediated Cognitive Extension: Engineering Solutions to Substrate Constraints"</em> (DOI: <a href="https://zenodo.org/records/18452510" style="color: #1b5e20; text-decoration: underline; font-weight: 700;" target="_blank">10.5281/zenodo.18452510</a>). The 70+ page paper provides complete theoretical framework, experimental protocols, and implementation specifications. <a href="https://zenodo.org/records/18452510" style="color: #1b5e20; text-decoration: underline; font-weight: 700;" target="_blank">Read the full paper →</a>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card" data-aos="fade-up">
+                <h3>✓ What We Have</h3>
+                <ul>
+                    <li>Validated theoretical framework (COSMIC)</li>
+                    <li>Published academic foundation paper</li>
+                    <li>Clear testable predictions (5 sets)</li>
+                    <li>Two-phase implementation strategy</li>
+                    <li>Open science methodology</li>
+                    <li>Risk mitigation through phased approach</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>→ What We Need</h3>
+                <ul>
+                    <li>Funding: $2-5M for Phase 1</li>
+                    <li>Core research team (5-7 people)</li>
+                    <li>University collaboration partnerships</li>
+                    <li>Development infrastructure (AWS/cloud)</li>
+                    <li>Clinical research coordination</li>
+                    <li>Beta testing participant pool</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>⚡ Critical Path Items</h3>
+                <ul>
+                    <li>Principal Investigator confirmation</li>
+                    <li>Lead AI/ML Engineer recruitment</li>
+                    <li>IRB approval for validation studies</li>
+                    <li>University partnership agreements</li>
+                    <li>Initial funding commitment</li>
+                    <li>Development environment setup</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Budget -->
+    <section class="content-section" style="background: var(--bg-light);">
+        <h2 class="section-title" data-aos="fade-up">Phase 1 Budget Breakdown</h2>
+        
+        <p data-aos="fade-up" style="margin-bottom: 2rem; color: var(--text-light);">24-month pilot phase covering information encoding systems, autonomic control validation, and Landauer principle testing. Budget range: $2M (minimum viable) to $5M (optimal with expanded validation).</p>
+
+        <table class="budget-table" data-aos="fade-up">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Minimum</th>
+                    <th>Optimal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Personnel</strong></td>
+                    <td>Core research team salaries (24 months)</td>
+                    <td>$800,000</td>
+                    <td>$1,500,000</td>
+                </tr>
+                <tr>
+                    <td>• Principal Investigator</td>
+                    <td>Full-time, framework oversight</td>
+                    <td>$150,000/yr</td>
+                    <td>$200,000/yr</td>
+                </tr>
+                <tr>
+                    <td>• Lead AI/ML Engineer</td>
+                    <td>Information compression systems</td>
+                    <td>$140,000/yr</td>
+                    <td>$180,000/yr</td>
+                </tr>
+                <tr>
+                    <td>• Neuroscience Lead</td>
+                    <td>Validation study design/analysis</td>
+                    <td>$120,000/yr</td>
+                    <td>$150,000/yr</td>
+                </tr>
+                <tr>
+                    <td>• Clinical Research Coordinator</td>
+                    <td>Study management, IRB, recruitment</td>
+                    <td>$80,000/yr</td>
+                    <td>$100,000/yr</td>
+                </tr>
+                <tr>
+                    <td>• Software Engineers (2)</td>
+                    <td>UI/UX, system development</td>
+                    <td>$110,000/yr ea.</td>
+                    <td>$140,000/yr ea.</td>
+                </tr>
+                <tr>
+                    <td><strong>Equipment & Technology</strong></td>
+                    <td>Hardware, software licenses, cloud</td>
+                    <td>$400,000</td>
+                    <td>$800,000</td>
+                </tr>
+                <tr>
+                    <td>• EEG Systems</td>
+                    <td>High-density (128+ channels) for neurofeedback</td>
+                    <td>$80,000</td>
+                    <td>$150,000</td>
+                </tr>
+                <tr>
+                    <td>• Biofeedback Equipment</td>
+                    <td>HRV, temperature, fNIRS systems</td>
+                    <td>$60,000</td>
+                    <td>$100,000</td>
+                </tr>
+                <tr>
+                    <td>• Thermometry Systems</td>
+                    <td>Cerebral/body temperature monitoring</td>
+                    <td>$40,000</td>
+                    <td>$80,000</td>
+                </tr>
+                <tr>
+                    <td>• Computing Infrastructure</td>
+                    <td>AWS/cloud, development workstations</td>
+                    <td>$120,000</td>
+                    <td>$250,000</td>
+                </tr>
+                <tr>
+                    <td>• Software Licenses & Tools</td>
+                    <td>Development, analysis, collaboration</td>
+                    <td>$100,000</td>
+                    <td>$220,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Research Partnerships</strong></td>
+                    <td>University collaborations, fMRI access</td>
+                    <td>$300,000</td>
+                    <td>$800,000</td>
+                </tr>
+                <tr>
+                    <td>• fMRI Scanning Time</td>
+                    <td>~200 hours @ $500-1000/hr</td>
+                    <td>$100,000</td>
+                    <td>$200,000</td>
+                </tr>
+                <tr>
+                    <td>• Sleep Lab Access</td>
+                    <td>Polysomnography, controlled environment</td>
+                    <td>$80,000</td>
+                    <td>$200,000</td>
+                </tr>
+                <tr>
+                    <td>• Data Analysis Support</td>
+                    <td>Statistical consultation, specialized analysis</td>
+                    <td>$60,000</td>
+                    <td>$150,000</td>
+                </tr>
+                <tr>
+                    <td>• Partnership Overhead</td>
+                    <td>University facilities, administration</td>
+                    <td>$60,000</td>
+                    <td>$250,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Participant Compensation</strong></td>
+                    <td>Study subjects across all protocols</td>
+                    <td>$200,000</td>
+                    <td>$500,000</td>
+                </tr>
+                <tr>
+                    <td>• Cognitive Augmentation (40 subjects)</td>
+                    <td>6-month participation, intensive</td>
+                    <td>$80,000</td>
+                    <td>$150,000</td>
+                </tr>
+                <tr>
+                    <td>• Autonomic Control (60 subjects)</td>
+                    <td>6-month training, monthly assessments</td>
+                    <td>$70,000</td>
+                    <td>$150,000</td>
+                </tr>
+                <tr>
+                    <td>• Sleep Studies (40 subjects)</td>
+                    <td>Multiple night sessions</td>
+                    <td>$50,000</td>
+                    <td>$200,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Operations & Overhead</strong></td>
+                    <td>Facilities, admin, legal, dissemination</td>
+                    <td>$300,000</td>
+                    <td>$900,000</td>
+                </tr>
+                <tr>
+                    <td>• Facilities & Lab Space</td>
+                    <td>Office, testing environment</td>
+                    <td>$100,000</td>
+                    <td>$300,000</td>
+                </tr>
+                <tr>
+                    <td>• IRB & Ethics Compliance</td>
+                    <td>Review fees, monitoring, reporting</td>
+                    <td>$40,000</td>
+                    <td>$100,000</td>
+                </tr>
+                <tr>
+                    <td>• Legal & IP Protection</td>
+                    <td>Contracts, patents, open-source structuring</td>
+                    <td>$60,000</td>
+                    <td>$150,000</td>
+                </tr>
+                <tr>
+                    <td>• Publication & Dissemination</td>
+                    <td>Open access fees, conferences, outreach</td>
+                    <td>$40,000</td>
+                    <td>$120,000</td>
+                </tr>
+                <tr>
+                    <td>• Administrative Support</td>
+                    <td>HR, accounting, project management</td>
+                    <td>$60,000</td>
+                    <td>$230,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Contingency Reserve</strong></td>
+                    <td>Unexpected costs, equipment failure, delays</td>
+                    <td>$0</td>
+                    <td>$500,000</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="2"><strong>TOTAL PHASE 1 BUDGET</strong></td>
+                    <td><strong>$2,000,000</strong></td>
+                    <td><strong>$5,000,000</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert-box alert-warning" data-aos="fade-up">
+            <strong>Budget Considerations:</strong> Minimum budget enables proof-of-concept with limited validation scope. Optimal budget provides comprehensive testing across all prediction sets, larger sample sizes, and contingency for unexpected findings. Recommend securing minimum funding initially with performance milestones for additional funding tranches.
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="content-section">
+        <h2 class="section-title" data-aos="fade-up">24-Month Implementation Timeline</h2>
+        
+        <div class="timeline" data-aos="fade-up">
+            <div class="timeline-item">
+                <h4>Months 1-3: Foundation & Setup</h4>
+                <p class="phase-duration">February - April 2026</p>
+                <p><strong>Key Activities:</strong></p>
+                <ul>
+                    <li>Team recruitment and onboarding (PI, AI Lead, Neuroscience Lead)</li>
+                    <li>IRB submissions for all validation protocols</li>
+                    <li>University partnership agreements finalized</li>
+                    <li>Development environment setup (AWS, tools, repositories)</li>
+                    <li>Equipment procurement (EEG, biofeedback, thermometry)</li>
+                    <li>Initial framework refinement based on latest COSMIC updates</li>
+                </ul>
+                <p><strong>Deliverables:</strong> Fully staffed team, IRB approval, operational lab space, development infrastructure live</p>
+                <span class="status-badge status-critical">CRITICAL PATH</span>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Months 4-9: Core Development & Initial Testing</h4>
+                <p class="phase-duration">May - October 2026</p>
+                <p><strong>Key Activities:</strong></p>
+                <ul>
+                    <li>Information encoding system alpha development</li>
+                    <li>Dynamic semantic layering implementation</li>
+                    <li>Spatial-visual knowledge representation prototypes</li>
+                    <li>Context-aware retrieval algorithm development</li>
+                    <li>Autonomic control neurofeedback protocol initiation (30 subjects)</li>
+                    <li>Sleep study pilot (10 subjects)</li>
+                    <li>Internal alpha testing with research team</li>
+                </ul>
+                <p><strong>Deliverables:</strong> Functional alpha system, preliminary autonomic control data, sleep study baseline established</p>
+                <span class="status-badge status-development">DEVELOPMENT PHASE</span>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Months 10-15: Beta Testing & Validation</h4>
+                <p class="phase-duration">November 2026 - April 2027</p>
+                <p><strong>Key Activities:</strong></p>
+                <ul>
+                    <li>Public beta launch (50-100 participants)</li>
+                    <li>Cognitive augmentation RCT (40 subjects across expertise levels)</li>
+                    <li>Comprehensive sleep studies (40 subjects)</li>
+                    <li>Autonomic control validation continues (60 total subjects)</li>
+                    <li>Neuroplastic adaptation tracking (fMRI every 6 weeks)</li>
+                    <li>Working memory assessments (monthly)</li>
+                    <li>Continuous system refinement based on feedback</li>
+                </ul>
+                <p><strong>Deliverables:</strong> Beta system deployed, primary prediction datasets collecting, interim validation results</p>
+                <span class="status-badge status-planning">VALIDATION PHASE</span>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Months 16-21: Analysis & Refinement</h4>
+                <p class="phase-duration">May - October 2027</p>
+                <p><strong>Key Activities:</strong></p>
+                <ul>
+                    <li>Comprehensive data analysis across all validation pathways</li>
+                    <li>Statistical significance testing for all predictions</li>
+                    <li>System optimization based on validation findings</li>
+                    <li>Extended participant follow-up assessments</li>
+                    <li>Publication preparation (peer-reviewed papers)</li>
+                    <li>Phase 2 go/no-go decision based on success criteria</li>
+                </ul>
+                <p><strong>Deliverables:</strong> Complete validation dataset, statistical analysis, refined system, Phase 2 recommendation</p>
+                <span class="status-badge status-planning">ANALYSIS PHASE</span>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Months 22-24: Dissemination & Phase 2 Planning</h4>
+                <p class="phase-duration">November 2027 - January 2028</p>
+                <p><strong>Key Activities:</strong></p>
+                <ul>
+                    <li>Peer-reviewed publication submissions (3-5 papers)</li>
+                    <li>Open-source system release with documentation</li>
+                    <li>Conference presentations and community outreach</li>
+                    <li>Phase 2 detailed planning (if validated)</li>
+                    <li>Phase 2 funding acquisition efforts</li>
+                    <li>Commercial partnership exploration</li>
+                    <li>Final program report and recommendations</li>
+                </ul>
+                <p><strong>Deliverables:</strong> Published validation results, open-source release, Phase 2 implementation plan, funding strategy</p>
+                <span class="status-badge status-ready">COMPLETION</span>
+            </div>
+        </div>
+
+        <div class="alert-box alert-success" data-aos="fade-up">
+            <strong>Phase 1 Success Criteria for Phase 2 Advancement:</strong>
+            <ul style="margin-top: 1rem;">
+                <li>Demonstrated 30%+ improvement in at least 2 of 3 primary cognitive metrics</li>
+                <li>Neuroplastic adaptation follows predicted timeline (conscious→automatic 3-12 months)</li>
+                <li>Working memory capacity unchanged (confirms optimization vs. expansion hypothesis)</li>
+                <li>Autonomic control validation shows predicted acceleration with neurofeedback</li>
+                <li>Information erasure measurements align with Landauer principle predictions</li>
+                <li>User satisfaction >75% and voluntary continued use post-study</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Team Structure -->
+    <section class="content-section" style="background: var(--bg-light);">
+        <h2 class="section-title" data-aos="fade-up">Team Structure & Recruitment</h2>
+        
+        <h3 class="subsection-title" data-aos="fade-up">Core Research Team</h3>
+        
+        <div class="team-grid">
+            <div class="team-card" data-aos="fade-up">
+                <h4>Principal Investigator</h4>
+                <p class="role">Theoretical Framework & Program Direction</p>
+                <span class="status status-ready">IDENTIFIED</span>
+                <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">Michael K. Baines, Ic² Research Institute</p>
+            </div>
+
+            <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                <h4>Lead AI/ML Engineer</h4>
+                <p class="role">Information Compression Systems</p>
+                <span class="status status-critical">RECRUITING</span>
+                <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">Required: PhD/MS in CS, ML/AI expertise, NLP experience</p>
+            </div>
+
+            <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                <h4>Neuroscience Lead</h4>
+                <p class="role">Validation Study Design & Analysis</p>
+                <span class="status status-critical">RECRUITING</span>
+                <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">Required: PhD, fMRI/EEG expertise, clinical research experience</p>
+            </div>
+
+            <div class="team-card" data-aos="fade-up">
+                <h4>Clinical Research Coordinator</h4>
+                <p class="role">Study Management & IRB Compliance</p>
+                <span class="status status-critical">RECRUITING</span>
+                <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">Required: MS/RN, 3+ years clinical research coordination</p>
+            </div>
+
+            <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                <h4>Senior Software Engineer</h4>
+                <p class="role">UI/UX & System Development</p>
+                <span class="status status-development">RECRUITING</span>
+                <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">Required: 5+ years, React/web development, user-centered design</p>
+            </div>
+
+            <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                <h4>Software Engineer</h4>
+                <p class="role">Backend Systems & Data Pipeline</p>
+                <span class="status status-development">RECRUITING</span>
+                <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">Required: 3+ years, Python, cloud infrastructure, databases</p>
+            </div>
+        </div>
+
+        <h3 class="subsection-title" data-aos="fade-up" style="margin-top: 3rem;">Extended Collaborators & Partnerships</h3>
+        
+        <div class="info-grid">
+            <div class="info-card" data-aos="fade-up">
+                <h3>University Partnerships</h3>
+                <p><strong>Status:</strong> Preliminary discussions initiated</p>
+                <ul>
+                    <li>fMRI facility access (neuroimaging)</li>
+                    <li>Sleep research lab collaboration</li>
+                    <li>Statistical analysis support</li>
+                    <li>Student researcher involvement</li>
+                    <li>IRB coordination and oversight</li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--text-light);"><strong>Priority Targets:</strong> UC Berkeley, Stanford, UCSF, MIT</p>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Meditation Centers</h3>
+                <p><strong>Status:</strong> Outreach planned</p>
+                <ul>
+                    <li>Experienced meditator recruitment</li>
+                    <li>Autonomic control validation subjects</li>
+                    <li>Long-term practitioner studies</li>
+                    <li>DMN modulation expertise</li>
+                    <li>Integration protocol development</li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--text-light);"><strong>Priority Targets:</strong> Spirit Rock, Insight Meditation Society, local centers</p>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Technology Partners</h3>
+                <p><strong>Status:</strong> Technology identified, partnerships TBD</p>
+                <ul>
+                    <li>EEG hardware suppliers</li>
+                    <li>Cloud infrastructure (AWS/GCP)</li>
+                    <li>Biofeedback equipment manufacturers</li>
+                    <li>Software development tools</li>
+                    <li>Data security and compliance</li>
+                </ul>
+                <p style="margin-top: 1rem; color: var(--text-light);"><strong>Priority Targets:</strong> g.tec, BrainVision, AWS Research Credits</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Assessment -->
+    <section class="content-section">
+        <h2 class="section-title" data-aos="fade-up">Risk Assessment & Mitigation</h2>
+        
+        <div class="info-grid">
+            <div class="info-card" data-aos="fade-up">
+                <h3>⚠️ Technical Risks</h3>
+                <ul>
+                    <li><strong>Risk:</strong> Information encoding system doesn't achieve predicted compression benefits</li>
+                    <li><strong>Likelihood:</strong> Medium</li>
+                    <li><strong>Impact:</strong> High (Phase 2 blocked)</li>
+                    <li><strong>Mitigation:</strong> Iterative testing, multiple algorithm approaches, early user feedback loops</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>⚠️ Recruitment Risks</h3>
+                <ul>
+                    <li><strong>Risk:</strong> Difficulty recruiting specialized talent (AI Lead, Neuroscience Lead)</li>
+                    <li><strong>Likelihood:</strong> Medium-High</li>
+                    <li><strong>Impact:</strong> High (delays timeline)</li>
+                    <li><strong>Mitigation:</strong> Competitive compensation, equity options, academic collaboration pathways, flexible remote work</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>⚠️ Validation Risks</h3>
+                <ul>
+                    <li><strong>Risk:</strong> Core predictions fail validation testing</li>
+                    <li><strong>Likelihood:</strong> Low-Medium</li>
+                    <li><strong>Impact:</strong> High (framework requires revision)</li>
+                    <li><strong>Mitigation:</strong> Multiple independent validation pathways, open science approach enables rapid iteration</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up">
+                <h3>⚠️ Funding Risks</h3>
+                <ul>
+                    <li><strong>Risk:</strong> Insufficient initial funding or inability to secure Phase 2 funding</li>
+                    <li><strong>Likelihood:</strong> Medium</li>
+                    <li><strong>Impact:</strong> High (program termination)</li>
+                    <li><strong>Mitigation:</strong> Multiple funding source strategy, milestone-based tranches, commercial partnership exploration</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>⚠️ Regulatory Risks</h3>
+                <ul>
+                    <li><strong>Risk:</strong> IRB delays or protocol modifications required</li>
+                    <li><strong>Likelihood:</strong> Medium</li>
+                    <li><strong>Impact:</strong> Medium (timeline delays 2-4 months)</li>
+                    <li><strong>Mitigation:</strong> Early IRB engagement, experienced clinical coordinator, conservative protocol design</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>⚠️ Partnership Risks</h3>
+                <ul>
+                    <li><strong>Risk:</strong> University partnerships don't materialize or facilities unavailable</li>
+                    <li><strong>Likelihood:</strong> Low-Medium</li>
+                    <li><strong>Impact:</strong> High (impacts fMRI access, sleep studies)</li>
+                    <li><strong>Mitigation:</strong> Multiple university targets, commercial facility backup options, flexible protocol designs</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="alert-box alert-warning" data-aos="fade-up" style="margin-top: 2rem;">
+            <strong>Overall Risk Assessment:</strong> Moderate risk profile with good mitigation strategies. The two-phase approach itself is the primary risk mitigation, enabling validation before major hardware investment. Primary risks are recruiting specialized talent and achieving predicted performance improvements. Open science approach enables rapid pivoting if predictions fail.
+        </div>
+    </section>
+
+    <!-- Resource Requirements Detail -->
+    <section class="content-section" style="background: var(--bg-light);">
+        <h2 class="section-title" data-aos="fade-up">Detailed Resource Requirements</h2>
+        
+        <h3 class="subsection-title" data-aos="fade-up">Infrastructure & Equipment</h3>
+        
+        <div class="info-card" data-aos="fade-up">
+            <h3>Computing Infrastructure</h3>
+            <ul>
+                <li><strong>Cloud Services:</strong> AWS or GCP with GPU instances for ML training</li>
+                <li><strong>Storage:</strong> 50-100TB for neuroimaging data, recordings, backups</li>
+                <li><strong>Development Workstations:</strong> 6 high-performance machines for team</li>
+                <li><strong>Collaboration Tools:</strong> GitHub Enterprise, Slack, Notion, Zoom</li>
+                <li><strong>Security & Compliance:</strong> HIPAA-compliant infrastructure, encryption, access controls</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong>Estimated Cost:</strong> $120,000-250,000 (24 months)</p>
+        </div>
+
+        <div class="info-card" data-aos="fade-up">
+            <h3>Neuroscience Equipment</h3>
+            <ul>
+                <li><strong>High-Density EEG Systems:</strong> 128+ channel systems with real-time streaming (2 units)</li>
+                <li><strong>HRV Biofeedback:</strong> Medical-grade heart rate variability monitors (10 units)</li>
+                <li><strong>Temperature Monitoring:</strong> Infrared cerebral thermometry, surface sensors (5 systems)</li>
+                <li><strong>fNIRS Systems:</strong> Functional near-infrared spectroscopy for metabolic tracking (1 system)</li>
+                <li><strong>Polysomnography:</strong> Access through university partner sleep labs</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong>Estimated Cost:</strong> $180,000-330,000</p>
+        </div>
+
+        <div class="info-card" data-aos="fade-up">
+            <h3>Facilities Requirements</h3>
+            <ul>
+                <li><strong>Office Space:</strong> 2,000-3,000 sq ft for team workspace</li>
+                <li><strong>Testing Laboratory:</strong> 1,000 sq ft with electrical isolation, climate control</li>
+                <li><strong>Equipment Storage:</strong> Secure storage for sensitive equipment</li>
+                <li><strong>Meeting Rooms:</strong> Subject interviews, team collaboration</li>
+                <li><strong>Location:</strong> Proximity to university partners preferred (Bay Area optimal)</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong>Estimated Cost:</strong> $100,000-300,000 (24 months lease + fit-out)</p>
+        </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="content-section">
+        <h2 class="section-title" data-aos="fade-up">Immediate Next Steps (30-60 Days)</h2>
+        
+        <div class="alert-box alert-info" data-aos="fade-up">
+            <h3>Priority Action Items</h3>
+            <ol style="margin: 1rem 0 1rem 2rem; color: var(--text-dark);">
+                <li><strong>Secure Initial Funding Commitment:</strong> Target minimum $2M for Phase 1 launch</li>
+                <li><strong>Recruit Core Team:</strong> Begin search for AI Lead, Neuroscience Lead, Clinical Coordinator</li>
+                <li><strong>Formalize University Partnerships:</strong> Execute MOUs with 2-3 institutions</li>
+                <li><strong>Submit IRB Protocols:</strong> Prepare and submit all validation study protocols</li>
+                <li><strong>Establish Legal Entity:</strong> Form research entity with appropriate IP protections</li>
+                <li><strong>Procure Critical Equipment:</strong> Order long-lead-time items (EEG systems)</li>
+                <li><strong>Setup Development Infrastructure:</strong> Cloud accounts, repositories, tools</li>
+                <li><strong>Community Outreach:</strong> Begin participant recruitment pipelines</li>
+            </ol>
+        </div>
+
+        <div class="info-grid" style="margin-top: 2rem;">
+            <div class="info-card" data-aos="fade-up">
+                <h3>Week 1-2: Foundation</h3>
+                <ul>
+                    <li>Principal Investigator begins full-time</li>
+                    <li>Initial funding commitment confirmed</li>
+                    <li>Legal entity formation initiated</li>
+                    <li>Recruitment postings prepared</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Week 3-4: Team Building</h3>
+                <ul>
+                    <li>Core team job postings live</li>
+                    <li>University partnership discussions</li>
+                    <li>IRB protocol drafting begins</li>
+                    <li>Office space search initiated</li>
+                </ul>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Week 5-8: Infrastructure</h3>
+                <ul>
+                    <li>First hires onboard</li>
+                    <li>Development environment live</li>
+                    <li>University MOUs signed</li>
+                    <li>IRB submissions filed</li>
+                    <li>Equipment ordered</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" data-aos="fade-up">
+        <h2 style="margin-bottom: 1rem;">Ready to Launch Pilot Phase 1?</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            All foundational work complete. Framework validated. Technology identified. Team structure defined. Budget detailed. Timeline confirmed. Ready for funding commitment and team recruitment.
+        </p>
+        <a href="program-cognitive-extension-overview.html" class="btn btn-primary">Review Program Overview</a>
+        <a href="contribute.html" class="btn btn-outline">Support This Research</a>
+        <a href="contact.html" class="btn btn-outline">Discuss Collaboration</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ic² Research Institute | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.8);">Privacy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,0.8);">Terms</a></p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ once: true, duration: 600 });</script>
+</body>
+</html>
