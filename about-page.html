@@ -1,1 +1,1185 @@
-<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8" />  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <title>About - Ic² Research Institute</title>  <meta name="description" content="Learn about the Ic² Research Institute – Information, Consciousness, Computation and our mission for open, transparent science." />  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />    <style>    * {      margin: 0;      padding: 0;      box-sizing: border-box;    }    :root {      --primary-color: #8B0000;      --secondary-color: #2c3e50;      --accent-red: #e33d2f;      --accent-blue: #005ba5;      --accent-green: #a1cd5f;      --accent-orange: #f58b2b;      --accent-yellow: #f1e303;      --text-dark: #2c3e50;      --text-light: #666;      --bg-light: #e6eef2;      --max-width: 1200px;    }    body {      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;      line-height: 1.7;      color: var(--text-dark);      background: white;    }    /* Header */    .site-header {      background: white;      border-bottom: 1px solid #e0e0e0;      position: sticky;      top: 0;      z-index: 1000;      box-shadow: 0 2px 5px rgba(0,0,0,0.05);    }    .header-container {      max-width: var(--max-width);      margin: 0 auto;      padding: 1rem 2rem;      display: flex;      justify-content: space-between;      align-items: center;    }    .site-logo a {      display: block;      line-height: 0;    }    .site-logo img {      height: 50px;    }    .main-navigation ul {      list-style: none;      display: flex;      gap: 2rem;      align-items: center;    }    .main-navigation a {      text-decoration: none;      color: var(--text-dark);      font-weight: 500;      transition: color 0.3s ease;    }    .main-navigation a:hover {      color: var(--primary-color);    }    /* Hamburger Menu */    .hamburger {      display: none;      flex-direction: column;      cursor: pointer;      gap: 4px;      padding: 8px;    }    .hamburger span {      width: 25px;      height: 3px;      background: var(--primary-color);      border-radius: 3px;      transition: all 0.3s ease;    }    .hamburger.active span:nth-child(1) {      transform: rotate(45deg) translate(7px, 7px);    }    .hamburger.active span:nth-child(2) {      opacity: 0;    }    .hamburger.active span:nth-child(3) {      transform: rotate(-45deg) translate(6px, -6px);    }    .mobile-menu {      display: none;      position: fixed;      top: 73px;      left: 0;      right: 0;      background: white;      border-bottom: 1px solid #e0e0e0;      box-shadow: 0 4px 10px rgba(0,0,0,0.1);      z-index: 999;      max-height: 0;      overflow: hidden;      transition: max-height 0.3s ease;    }    .mobile-menu.active {      max-height: 500px;    }    .mobile-menu ul {      list-style: none;      padding: 1rem;    }    .mobile-menu ul li {      border-bottom: 1px solid #f0f0f0;    }    .mobile-menu ul li:last-child {      border-bottom: none;    }    .mobile-menu a {      display: block;      padding: 0.75rem 1rem;      color: var(--text-dark);      text-decoration: none;      font-weight: 500;      transition: all 0.2s ease;    }    .mobile-menu a:hover {      background: var(--bg-light);      color: var(--primary-color);    }    /* Hero */    .page-header {      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);      padding: 4rem 2rem;      text-align: center;      color: white;    }    .page-header h1 {      font-size: 3rem;      margin-bottom: 1rem;    }    .page-header p {      font-size: 1.25rem;      opacity: 0.9;      max-width: 700px;      margin: 0 auto;    }    /* Cards and Animation */    @keyframes slideUp {      from {        opacity: 0;        transform: translateY(20px);      }      to {        opacity: 1;        transform: translateY(0);      }    }    .content-section {      padding: 5rem 2rem;      background: var(white);    }    .section-container {      max-width: var(--max-width);      margin: 0 auto;    }    .card {      background: white;      border-radius: 8px;      box-shadow: 0 4px 20px rgba(0,0,0,0.08);      margin-bottom: 3rem;      overflow: hidden;      animation: slideUp 0.7s ease forwards;      position: relative;    }    .card-header {      background: var(--primary-color);      color: white;      padding: 1.5rem 2rem;    }    .card-header h2 {      font-size: 2rem;      margin: 0;    }    .card-body {      padding: 2.5rem;    }    .card::after {      content: "";      display: block;      height: 6px;      width: 100%;      background: var(--accent-color, var(--accent-red));    }    .card p {      color: var(--text-light);      margin-bottom: 1rem;      font-size: 1.05rem;    }    /* About Elements */    .name-visual {      text-align: center;      margin: 2rem 0;    }    .name-equation {      font-size: 3.5rem;      font-family: Impact, sans-serif;      font-weight: 700;      color: var(--primary-color);      letter-spacing: 2px;    }    .name-subtitle {      font-style: italic;      color: var(--text-light);      margin-top: 0.5rem;      font-size: 1.1rem;    }    .grid {      display: grid;      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));      gap: 1.5rem;      margin-top: 2rem;    }    .name-component {      background: white;      border-radius: 8px;      padding: 0;      text-align: center;      transition: transform 0.3s ease, box-shadow 0.3s ease;      border-bottom: 4px solid var(--primary-color);      overflow: hidden;      box-shadow: 0 4px 15px rgba(0,0,0,0.08);    }    .name-component:hover {      transform: translateY(-5px);      box-shadow: 0 8px 20px rgba(0,0,0,0.12);    }    .name-component-header {      background: var(--primary-color);      color: white;      padding: 1.5rem;    }    .name-component .letter {      color: white;      font-size: 2.5rem;      font-family: Impact, sans-serif;      margin: 0;    }    .name-component-body {      padding: 1.5rem;    }    .name-component-body h3 {      margin-bottom: 0.75rem;      color: var(--text-dark);    }    .name-component-body p {      color: var(--text-light);      font-size: 0.95rem;    }    /* Core Values */    .values-grid {      display: grid;      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));      gap: 1.5rem;      margin-top: 2rem;    }    .value-card {      background: white;      border-radius: 8px;      padding: 2rem;      text-align: center;      transition: all 0.3s ease;      box-shadow: 0 2px 10px rgba(0,0,0,0.05);      border-bottom: 4px solid var(--card-accent);    }    .value-card:hover {      transform: translateY(-5px);      box-shadow: 0 8px 25px rgba(0,0,0,0.12);    }    .value-icon {      width: 60px;      height: 60px;      margin: 0 auto 1rem;      display: flex;      align-items: center;      justify-content: center;    }    .value-icon img {      width: 100%;      height: 100%;      object-fit: contain;    }    /* Icon color filters for each accent */    .icon-yellow {      filter: brightness(0) saturate(100%) invert(88%) sepia(95%) saturate(1447%) hue-rotate(359deg) brightness(104%) contrast(96%);    }    .icon-blue {      filter: brightness(0) saturate(100%) invert(21%) sepia(98%) saturate(2447%) hue-rotate(194deg) brightness(95%) contrast(101%);    }    .icon-red {      filter: brightness(0) saturate(100%) invert(35%) sepia(89%) saturate(2447%) hue-rotate(347deg) brightness(92%) contrast(88%);    }    .icon-green {      filter: brightness(0) saturate(100%) invert(78%) sepia(27%) saturate(644%) hue-rotate(29deg) brightness(92%) contrast(87%);    }    .icon-orange {      filter: brightness(0) saturate(100%) invert(64%) sepia(67%) saturate(1447%) hue-rotate(347deg) brightness(99%) contrast(93%);    }    .icon-primary-red {      filter: brightness(0) saturate(100%) invert(11%) sepia(98%) saturate(7447%) hue-rotate(0deg) brightness(88%) contrast(101%);    }    .value-card h3 {      margin-bottom: 0.75rem;      color: var(--text-dark);      font-size: 1.2rem;    }    a.cta-link {      color: var(--primary-color);      font-weight: 600;      text-decoration: none;    }    a.cta-link:hover {      text-decoration: underline;    }    /* Footer */    footer {      background: var(--secondary-color);      color: white;      padding: 2.5rem 2rem 1rem;      margin-top: 4rem;    }    footer .footer-container {      display: grid;      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));      gap: 2rem;      max-width: var(--max-width);      margin: 0 auto;    }    footer h3 {      margin-bottom: 0.75rem;      font-size: 1.1rem;    }    footer a {      color: rgba(255,255,255,0.7);      text-decoration: none;      display: block;      margin-bottom: 0.5rem;    }    footer a:hover {      color: var(--accent-red);    }    .footer-bottom {      text-align: center;      margin-top: 2rem;      border-top: 1px solid rgba(255,255,255,0.1);      padding-top: 1rem;      color: rgba(255,255,255,0.5);    }    /* Contact Section */    .contact-section {      background: linear-gradient(135deg, #f8f9fa 0%, #e6eef2 100%);      padding: 4rem 2rem;    }    .contact-container {      max-width: var(--max-width);      margin: 0 auto;    }    .contact-header {      text-align: center;      margin-bottom: 3rem;    }    .contact-header h2 {      font-size: 2.5rem;      color: var(--text-dark);      margin-bottom: 0.5rem;    }    .contact-header p {      font-size: 1.1rem;      color: var(--text-light);    }    .contact-grid {      display: grid;      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));      gap: 2rem;      margin-bottom: 2rem;    }    .contact-card {      background: white;      border-radius: 12px;      padding: 2rem;      box-shadow: 0 4px 15px rgba(0,0,0,0.08);      transition: transform 0.3s ease, box-shadow 0.3s ease;      text-align: center;    }    .contact-card:hover {      transform: translateY(-5px);      box-shadow: 0 8px 25px rgba(0,0,0,0.12);    }    .contact-icon {      width: 60px;      height: 60px;      margin: 0 auto 1rem;      display: flex;      align-items: center;      justify-content: center;      background: linear-gradient(135deg, var(--primary-color) 0%, #a00000 100%);      border-radius: 50%;      color: white;    }    .contact-icon svg {      width: 30px;      height: 30px;    }    .contact-card h3 {      font-size: 1.3rem;      color: var(--text-dark);      margin-bottom: 0.75rem;    }    .contact-card p {      color: var(--text-light);      margin-bottom: 1rem;      font-size: 0.95rem;    }    .contact-link {      display: inline-block;      padding: 0.75rem 1.5rem;      background: var(--primary-color);      color: white;      text-decoration: none;      border-radius: 6px;      font-weight: 600;      transition: all 0.3s ease;    }    .contact-link:hover {      background: #a00000;      transform: translateY(-2px);      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);    }    .social-links-row {      display: flex;      justify-content: center;      gap: 1.5rem;      flex-wrap: wrap;      margin-top: 2rem;    }    .social-link {      display: flex;      align-items: center;      gap: 0.5rem;      padding: 0.75rem 1.5rem;      background: white;      border: 2px solid var(--primary-color);      color: var(--text-dark);      text-decoration: none;      border-radius: 8px;      font-weight: 600;      transition: all 0.3s ease;    }    .social-link:hover {      background: var(--primary-color);      color: white;      transform: translateY(-2px);    }    .social-link svg {      width: 20px;      height: 20px;    }    /* Responsive */    @media (max-width: 768px) {      .main-navigation {        display: none;      }      .hamburger {        display: flex;      }      .mobile-menu {        display: block;      }      .page-header h1 {        font-size: 2.25rem;      }            .card-body {        padding: 2rem;      }    }  </style></head><body>  <!-- Header -->  <header class="site-header">    <div class="header-container">      <div class="site-logo">        <a href="index.html">          <img src="ic2-logo.png" alt="Ic² Research Institute Logo">        </a>      </div>      <nav class="main-navigation">        <ul>          <li><a href="book.html">The Big TOE</a></li>          <li><a href="blog.html">Blog</a></li>          <li><a href="discussions-page.html">Discussion</a></li>          <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>        </ul>      </nav>      <!-- Hamburger Menu Button -->      <div class="hamburger">        <span></span>        <span></span>        <span></span>      </div>    </div>  </header>  <!-- Mobile Menu -->  <div class="mobile-menu">    <ul>      <li><a href="book.html">The Big TOE</a></li>      <li><a href="blog.html">Blog</a></li>      <li><a href="discussions-page.html">Discussion</a></li>      <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>    </ul>  </div>  <!-- Hero -->  <section class="page-header">    <h1>About <span style="color: var(white);">Ic²</span></h1>    <p>Exploring the interplay of Information, Consciousness, and Computation</p>  </section>  <!-- About Content -->  <section class="content-section">    <div class="section-container">      <!-- About Our Name -->      <div class="card" style="--accent-color: var(--accent-red);" data-aos="fade-up">        <div class="card-header">          <h2>About Our Name</h2>        </div>        <div class="card-body" style="background: var(--bg-light);">          <div class="name-visual">            <div class="name-equation">Ic²</div>            <div class="name-subtitle">Information • Consciousness • Computation</div>          </div>          <div class="grid">            <div class="name-component">              <div class="name-component-header">                <div class="letter">I</div>              </div>              <div class="name-component-body">                <h3>Information</h3>                <p>The fundamental substrate of reality. Matter and energy emerge from information, not the other way around.</p>              </div>            </div>            <div class="name-component">              <div class="name-component-header">                <div class="letter">c</div>              </div>              <div class="name-component-body">                <h3>Consciousness</h3>                <p>The observer that collapses quantum states. Consciousness drives and interprets information processing.</p>              </div>            </div>            <div class="name-component">              <div class="name-component-header">                <div class="letter">c²</div>              </div>              <div class="name-component-body">                <h3>Computation</h3>                <p>The mechanism by which information evolves — reality operates as a self-updating computational process.</p>              </div>            </div>          </div>          <div style="margin-top:2rem; padding:1.5rem; background: var(--bg-light); border-radius: 6px;">            <p><strong>About the visual similarity to E=mc²:</strong> The resemblance honors physics while redefining fundamentals. The "c" here does not reference the speed of light.</p>            <p>Instead, it encodes the three pillars — Information, Consciousness, Computation — combined into a unified representation of our theoretical foundation.</p>            <p>By invoking physics' most famous formula, we emphasize a paradigm as deep: information as the ground state of reality.</p>          </div>        </div>      </div>      <!-- Mission -->      <div class="card" style="--accent-color: var(--accent-blue);" data-aos="fade-up">        <div class="card-header">          <h2>Our Mission</h2>        </div>        <div class="card-body" style="background: var(--bg-light);">          <p>Ic² Research Institute advances open, transparent research into the fundamental nature of reality through information theory, consciousness studies, and computational frameworks.</p>          <p>We value free collaboration and data transparency — no paywalls, no gatekeeping, no hidden failures. Our ethos is open inquiry for the common understanding of existence.</p>        </div>      </div>      <!-- Core Values -->      <div class="card" style="--accent-color: var(--accent-green);" data-aos="fade-up">        <div class="card-header">          <h2>Core Values</h2>        </div>        <div class="card-body" style="background: var(--bg-light);">          <div class="values-grid">            <div class="value-card" style="--card-accent: var(--accent-yellow);">              <div class="value-icon">                <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Open Science" class="icon-yellow">              </div>              <h3>Open Science</h3>              <p>All data, hypotheses, and results are fully public — including failures and iterations.</p>            </div>            <div class="value-card" style="--card-accent: var(--accent-blue);">              <div class="value-icon">                <img src="settings_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Radical Transparency" class="icon-blue">              </div>              <h3>Radical Transparency</h3>              <p>Documented predictions and open financial records. Every step visible to the world.</p>            </div>            <div class="value-card" style="--card-accent: var(--accent-red);">              <div class="value-icon">                <img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Community-Driven" class="icon-red">              </div>              <h3>Community-Driven</h3>              <p>Collaboration transcends credentials — contributions are valued on merit and insight.</p>            </div>            <div class="value-card" style="--card-accent: var(--accent-green);">              <div class="value-icon">                <img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Testable Predictions" class="icon-green">              </div>              <h3>Testable Predictions</h3>              <p>Every theoretical claim must be falsifiable through observable prediction.</p>            </div>            <div class="value-card" style="--card-accent: var(--accent-orange);">              <div class="value-icon">                <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Intellectual Honesty" class="icon-orange">              </div>              <h3>Intellectual Honesty</h3>              <p>Acknowledging limitations and reporting all outcomes with clarity and fairness.</p>            </div>            <div class="value-card" style="--card-accent: var(--primary-color);">              <div class="value-icon">                <img src="warning_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="No Gatekeeping" class="icon-primary-red">              </div>              <h3>No Gatekeeping</h3>              <p>Knowledge belongs to everyone. No closed peer review, no artificial barriers.</p>            </div>          </div>        </div>      </div>      <!-- Team -->      <div class="card" style="--accent-color: var(--accent-orange);" data-aos="fade-up">        <div class="card-header">          <h2>The Team</h2>        </div>        <div class="card-body" style="background: var(--bg-light);">          <p><strong>Ic² Research Institute</strong> is an independent, community-driven entity that ensures complete scientific freedom.</p>          <p><strong>Founder & Principal Researcher:</strong> Michael K. Baines</p>          <p>We deliberately avoid traditional hierarchies to encourage interdisciplinary exploration and collaboration.</p>          <p><strong>Want to contribute?</strong> Visit our <a href="contribute.html" class="cta-link">Contributions page</a> to get started.</p>        </div>      </div>    </div>  </section>  <!-- Contact Section -->  <section class="contact-section" id="contact">    <div class="contact-container">      <div class="contact-header" data-aos="fade-up">        <h2>Get in Touch</h2>        <p>Connect with us through any of these channels</p>      </div>      <div class="contact-grid">        <!-- Email Card -->        <div class="contact-card" data-aos="fade-up" data-aos-delay="100">          <div class="contact-icon">            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>              <polyline points="22,6 12,13 2,6"/>            </svg>          </div>          <h3>Email</h3>          <p>Get in touch directly</p>          <a href="mailto:mkbinfo@proton.me" class="contact-link">mkbinfo@proton.me</a>        </div>        <!-- Author Website Card -->        <div class="contact-card" data-aos="fade-up" data-aos-delay="200">          <div class="contact-icon">            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">              <circle cx="12" cy="12" r="10"/>              <line x1="2" y1="12" x2="22" y2="12"/>              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>            </svg>          </div>          <h3>Author's Website</h3>          <p>Learn more about the author</p>          <a href="https://www.michaelkbaines.com" target="_blank" class="contact-link">michaelkbaines.com</a>        </div>        <!-- ORCID Card -->        <div class="contact-card" data-aos="fade-up" data-aos-delay="300">          <div class="contact-icon">            <svg viewBox="0 0 24 24" fill="currentColor">              <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 4.028-1.313 4.028-3.722 0-2.219-1.509-3.722-3.919-3.722h-2.406z"/>            </svg>          </div>          <h3>ORCID iD</h3>          <p>View research profile</p>          <a href="https://orcid.org/0009-0001-8084-3870" target="_blank" class="contact-link">0009-0001-8084-3870</a>        </div>      </div>      <!-- Social Media Links -->      <div class="social-links-row" data-aos="fade-up" data-aos-delay="400">        <a href="https://www.instagram.com" target="_blank" class="social-link">          <svg viewBox="0 0 24 24" fill="currentColor">            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>          </svg>          Instagram        </a>        <a href="https://x.com" target="_blank" class="social-link">          <svg viewBox="0 0 24 24" fill="currentColor">            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>          </svg>          X (Twitter)        </a>        <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" target="_blank" class="social-link">          <svg viewBox="0 0 24 24" fill="currentColor">            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>          </svg>          YouTube        </a>      </div>    </div>  </section>  <!-- Footer -->  <footer>    <div class="footer-container">      <div>        <h3>Ic² Research Institute</h3>        <p>Information • Consciousness • Computation</p>        <p>Advancing open, transparent research in fundamental physics.</p>      </div>      <div>        <h3>Explore</h3>        <a href="index.html">Home</a>        <a href="framework.html">Framework</a></li>        <a href="testing-schedule.html">Testing</a></li>        <a href="programs-gateway.html">Programs</a></li>        <a href="validation.html">Validation</a>        <a href="research-publications.html">Publications</a>      </div>      <div>        <h3>Resources</h3>        <a href="book.html">The Big TOE Book</a>        <a href="events.html">Events</a>        <a href="contribute.html">Contribute</a>      </div>      <div>        <h3>Connect</h3>        <a href="#">GitHub</a>        <a href="#">Twitter</a>        <a href="#">YouTube</a>      </div>    </div>    <div class="footer-bottom">      © 2025 Ic² Research Institute. All rights reserved.    </div>  </footer>  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  <script>    AOS.init({      duration: 1000,      once: true,      offset: 100    });  </script>  <script>    // Hamburger menu functionality    const hamburger = document.querySelector('.hamburger');    const mobileMenu = document.querySelector('.mobile-menu');        if (hamburger && mobileMenu) {      hamburger.addEventListener('click', function() {        this.classList.toggle('active');        mobileMenu.classList.toggle('active');      });            // Close mobile menu when clicking a link      document.querySelectorAll('.mobile-menu a').forEach(link => {        link.addEventListener('click', function() {          hamburger.classList.remove('active');          mobileMenu.classList.remove('active');        });      });    }  </script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Ic² Research Institute</title>
+  <meta name="description" content="Learn about the Ic² Research Institute – Information, Consciousness, Computation and our mission for open, transparent science." />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    :root {
+    --primary-color: #8B0000;
+    --secondary-color: #2c3e50;
+    --accent-blue: #005ba5;
+    --accent-red: #e33d2f;
+    --accent-green: #a1cd5f;
+    --accent-orange: #f58b2b;
+    --accent-yellow: #f1e303;
+    --text-dark: #2c3e50;
+    --text-light: #333;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    }
+
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: white;
+    }
+
+    /* Header */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .header-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    }
+
+    .header-logo {
+    display: flex;
+    align-items: center;
+    }
+
+    .header-logo.left {
+    justify-content: flex-start;
+    flex: 1;
+    }
+
+    .header-logo.center {
+    justify-content: center;
+    flex: 1;
+    }
+
+    .header-logo.right {
+    justify-content: flex-end;
+    flex: 1;
+    }
+
+    .header-logo a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    }
+
+    .header-logo a:hover {
+    transform: scale(1.05);
+    }
+
+    .header-logo img {
+    height: 50px;
+    width: auto;
+    }
+
+    /* Mobile Logo */
+    .mobile-logo { display: none; }
+    .mobile-logo img { height: 40px; width: auto; }
+
+    /* Hamburger Menu */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    padding: 8px;
+    }
+
+    .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+    opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active {
+    max-height: 600px;
+    }
+
+    .mobile-menu ul {
+    list-style: none;
+    padding: 1rem;
+    }
+
+    .mobile-menu ul li {
+    border-bottom: 1px solid #f0f0f0;
+    }
+
+    .mobile-menu ul li:last-child {
+    border-bottom: none;
+    }
+
+    .mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    }
+
+    .mobile-menu a:hover {
+    background: var(--bg-light);
+    color: var(--primary-color);
+    }
+
+    .mobile-menu a.login-link {
+    background: linear-gradient(135deg, #8B0000 0%, #a0000 100%);
+    color: #f1e303;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+    font-weight: 700;
+    }
+
+    /* Page Header */
+    .page-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+    }
+
+    .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    }
+
+    .page-header p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+    }
+
+    /* Content Section */
+    .content-section {
+    padding: 5rem 2rem;
+    }
+
+    .section-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    /* Event Cards */
+    .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    }
+
+    .event-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .event-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    }
+
+    .event-date {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    }
+
+    .event-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    }
+
+    .event-type {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    }
+
+    .event-body {
+    padding: 1.5rem;
+    }
+
+    .event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    }
+
+    .event-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    }
+
+    .event-detail svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    }
+
+    .event-description {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    }
+
+    .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9rem;
+    }
+
+    .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    }
+
+    .btn-primary:hover {
+    background: #a0000;
+    }
+
+    .btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    }
+
+    .btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+    }
+
+    /* Past Events */
+    .past-events {
+    background: var(--bg-light);
+    padding: 3rem 0;
+    }
+
+    .past-event {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .past-event-date {
+    flex-shrink: 0;
+    width: 80px;
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 4px;
+    }
+
+    .past-event-date-day {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    }
+
+    .past-event-date-month {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    }
+
+    .past-event-content h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    }
+
+    .past-event-content p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+    background: #2c3e50;
+    color: white;
+    padding: 2.5rem 2rem 1rem;
+    }
+
+    .footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    }
+
+    .footer-section h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    }
+
+    .footer-section ul {
+    list-style: none;
+    }
+
+    .footer-section ul li {
+    margin-bottom: 0.35rem;
+    }
+
+    .footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+    color: white;
+    }
+
+    .footer-bottom {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    }
+
+
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e6eef2 100%);
+      padding: 4rem 2rem;
+    }
+
+    .contact-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .contact-header h2 {
+      font-size: 2.5rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-header p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color) 0%, #a00000 100%);
+      border-radius: 50%;
+      color: white;
+    }
+
+    .contact-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .contact-card h3 {
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-card p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-link {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      background: #a00000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    }
+
+        .social-links-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      border: 2px solid var(--primary-color);
+      color: var(--text-dark);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+    }
+
+        /* Responsive */
+    @media (max-width: 968px) {
+    .header-logos {
+    display: none;
+    }
+
+    .mobile-logo {
+    display: block;
+    }
+
+    .hamburger {
+    display: flex;
+    }
+
+    .mobile-menu {
+    display: block;
+    }
+
+    .page-header h1 {
+    font-size: 2rem;
+    }
+
+    .events-grid {
+    grid-template-columns: 1fr;
+    }
+
+    .past-event {
+    flex-direction: column;
+    }
+
+    .past-event-date {
+    width: 100%;
+    }
+
+    .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+    }
+
+    @media (max-width: 480px) {
+    .header-logo img {
+    height: 40px;
+    }
+    }
+    </style>
+  
+  <style>
+    /* About Page Specific Styles */
+    .name-visual {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e6eef2 100%);
+      border-radius: 8px;
+    }
+    
+    .name-equation {
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+    }
+    
+    .name-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    
+    .name-component {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .name-component-header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .letter {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 2px;
+    }
+    
+    .name-component-body {
+      padding: 1.5rem;
+    }
+    
+    .name-component-body h3 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    
+    .name-component-body p {
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    
+    /* Logo Section - TRUE FULL WIDTH */
+    .logo-section {
+      background: #32465a;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .logo-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .logo-section h2 {
+      color: white;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .logo-section h3 {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+    
+    .logo-section p {
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    
+    .logo-section strong {
+      color: white;
+    }
+    
+    .logo-section em {
+      color: rgba(255, 255, 255, 0.95);
+    }
+    
+    .logo-highlight-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 6px;
+      margin: 2rem 0;
+      border-left: 4px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .logo-highlight-box h3 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+    
+    .logo-highlight-box p {
+      color: rgba(255, 255, 255, 0.95);
+    }
+    
+    /* Foundation Accordion (from framework page) */
+    .foundation-accordion {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .foundation-accordion:hover {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .foundation-header {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .foundation-header:hover {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    }
+    
+    .foundation-header h3 {
+      margin: 0;
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .foundation-icon-img {
+      width: 24px;
+      height: 24px;
+      margin-right: 0.75rem;
+      vertical-align: middle;
+    }
+    
+    .toggle-indicator {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      transition: transform 0.3s ease;
+    }
+    
+    .foundation-accordion.active .toggle-indicator {
+      transform: rotate(180deg);
+    }
+    
+    .foundation-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    
+    .foundation-accordion.active .foundation-content {
+      max-height: 5000px;
+    }
+    
+    .foundation-inner {
+      padding: 2rem;
+      background: white;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+    <header class="site-header">
+    <div class="header-container">
+    <div class="header-logos">
+    <div class="header-logo left">
+    <a href="index.html">
+    <img src="ic2-logo.png" alt="Ic² Research Institute">
+    </a>
+    </div>
+    <div class="header-logo center">
+    <a href="framework.html">
+    <img src="framework.png" alt="Framework">
+    </a>
+    </div>
+    <div class="header-logo right">
+    <a href="book.html">
+    <img src="bigtoeindexlogo.png" alt="The Big TOE">
+    </a>
+    </div>
+    </div>
+    <!-- Mobile Logo (visible on mobile) -->
+    <div class="mobile-logo">
+    <a href="index.html">
+    <img src="ic2-logo.png" alt="Ic² Research Institute">
+    </a>
+    </div>
+    <!-- Hamburger Menu Button -->
+    <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+    </div>
+    </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="framework.html">Framework</a></li>
+    <li><a href="book.html">Big Toe</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="validation.html">Validation</a></li>
+    <li><a href="testing-schedule.html">Testing</a></li>
+    <li><a href="results.html">Results</a></li>
+    <li><a href="discussions-page.html">Discussion</a></li>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="login.html" class="login-link">Login</a></li>
+    </ul>
+    </div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>About <span style="color: white;">Ic²</span></h1>
+    <p>Exploring the interplay of Information, Consciousness, and Computation</p>
+  </section>
+
+  <!-- About Our Name -->
+  <section class="content-section" style="background: var(--bg-light);">
+    <div class="section-container">
+      <div class="card" style="--accent-color: var(--accent-red);" data-aos="fade-up">
+        <div class="card-header">
+          <h2>About Our Name</h2>
+        </div>
+        <div class="card-body" style="background: white;">
+          <div class="name-visual">
+            <div class="name-equation">Ic²</div>
+            <div class="name-subtitle">Information • Consciousness • Computation</div>
+          </div>
+
+          <div class="grid">
+            <div class="name-component">
+              <div class="name-component-header">
+                <div class="letter">I</div>
+              </div>
+              <div class="name-component-body">
+                <h3>Information</h3>
+                <p>The fundamental substrate of reality. Matter and energy emerge from information, not the other way around.</p>
+              </div>
+            </div>
+            <div class="name-component">
+              <div class="name-component-header">
+                <div class="letter">c</div>
+              </div>
+              <div class="name-component-body">
+                <h3>Consciousness</h3>
+                <p>The observer that collapses quantum states. Consciousness drives and interprets information processing.</p>
+              </div>
+            </div>
+            <div class="name-component">
+              <div class="name-component-header">
+                <div class="letter">c²</div>
+              </div>
+              <div class="name-component-body">
+                <h3>Computation</h3>
+                <p>The mechanism by which information evolves — reality operates as a self-updating computational process.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:2rem; padding:1.5rem; background: #f0f0f0; border-radius: 6px;">
+            <p style="color: var(--text-dark);"><strong>About the visual similarity to E=mc²:</strong> The resemblance honors physics while redefining fundamentals. The "c" here does not reference the speed of light.</p>
+            <p style="color: var(--text-dark); margin-top: 0.5rem;">Instead, it encodes the three pillars — Information, Consciousness, Computation — combined into a unified representation of our theoretical foundation.</p>
+            <p style="color: var(--text-dark); margin-top: 0.5rem;">By invoking physics' most famous formula, we emphasize a paradigm as deep: information as the ground state of reality.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo Explanation - TRUE FULL WIDTH SECTION -->
+  <section class="logo-section">
+    <div class="logo-content">
+      <h2>About Our Logo: The Spinner</h2>
+      
+      <div style="text-align: center; margin: 2rem 0;">
+        <img src="our_logo.png" alt="The Spinner - IC² Research Institute Logo" style="max-width: 200px; height: auto;">
+      </div>
+      
+      <p>Our logo, known as "The Spinner," embodies the three foundational pillars of our research framework through its distinctive triangular form. Each element represents one of the three aspects of reality we investigate, while the overall structure illustrates their inseparable unity.</p>
+
+      <div style="margin: 2rem 0;">
+        <h3 style="color: #f1e303;">Yellow: Information</h3>
+        <p>The yellow element represents Information as the fundamental substrate of reality. This isn't information <em>about</em> reality—it <em>is</em> reality at its most basic level. Just as energy and matter are interconvertible (E=mc²), we understand physical reality as patterns of information that can be processed, transformed, and measured. From quantum mechanics to cosmology, information provides the common language that unifies seemingly disparate phenomena.</p>
+      </div>
+
+      <div style="margin: 2rem 0;">
+        <h3 style="color: #a1cd5f;">Green: Computation</h3>
+        <p>The green element represents Computation as the dynamic optimization process through which information evolves. Reality doesn't just exist—it continuously optimizes according to physical laws that can be understood as computational constraints. From the path integral formulation of quantum mechanics (nature exploring all possible paths to find optimal ones) to thermodynamic evolution toward maximum entropy, the universe operates as a vast optimization engine.</p>
+      </div>
+
+      <div style="margin: 2rem 0;">
+        <h3 style="color: #ff6b6b;">Red: Consciousness</h3>
+        <p>The red element symbolizes Consciousness as self-referential information processing—represented by the "²" (squared) in Ic². This isn't simple duplication but the strange loop of information processing that models itself. We are not separate from the universe; our consciousness is completely composed of and integrated with it. There is no discrete boundary between "mind" and "physical reality"—consciousness IS physical reality, a specific pattern of information processing in quantum and electromagnetic fields.</p>
+        
+        <p style="margin-top: 1rem;">When information patterns become complex enough to represent and modify their own processing, consciousness emerges. This isn't mystical—it's a natural consequence of information systems achieving sufficient self-referential complexity. What we experience as thoughts, emotions, and awareness are information processing patterns that don't exist separate from physics but ARE physics.</p>
+        
+        <p style="margin-top: 1rem;">Emotions, too, are information processing patterns in these fields. When you feel joy, grief, love, or fear, you're not experiencing something separate from physical reality—you're participating in reality's information structure. These patterns can persist after individuals leave a location, affect physical measurements, influence subsequent observers' information processing, show coherence effects where groups create stronger patterns than individuals, and decay predictably over time. Ancient wisdom about "sacred spaces" and "emotional atmospheres" describes real physical phenomena.</p>
+        
+        <p style="margin-top: 1rem;">This has profound implications: How we treat each other literally shapes physical reality. Creating coherent, caring communities creates measurable physical benefits. Trauma creates persistent physical damage to information fields. The "vibes" of a place are real—measurable patterns in the information structure of space itself. This dissolves the mind-body problem entirely: there never was a separation to bridge. Subjective experience and objective measurement are both information patterns viewed from different perspectives. Beauty, ethics, and physics align because all three measure information coherence.</p>
+      </div>
+
+      <div class="logo-highlight-box">
+        <h3>The Triangular Form: Inseparable Unity</h3>
+        <p>The three elements form a triangle because they are not separate domains but three aspects of a single unified reality. Information without computation is static and inert. Computation without consciousness remains mechanical optimization. Consciousness without information substrate has nothing to process. They exist only in relationship to each other—you cannot have one without the others.</p>
+        <p style="margin-top: 1rem;">This geometric unity mirrors the deep insight from modern physics: reality is fundamentally relational. Nothing exists in isolation. Properties emerge from relationships. The triangle itself is the message: separation is the illusion; integration is the reality.</p>
+      </div>
+
+      <div class="logo-highlight-box">
+        <h3>The Open Center: Emergence and Incompleteness</h3>
+        <p>The hexagonal space at the center where the three elements meet is deliberately open—not empty, but pregnant with possibility. This openness represents several crucial concepts:</p>
+        <p style="margin-top: 1rem;"><strong>Emergence:</strong> When information, consciousness, and computation interact, something greater than their sum emerges. The open center is where subjective experience arises from objective processes, where meaning emerges from pattern, where novelty appears from deterministic laws.</p>
+        <p style="margin-top: 1rem;"><strong>Strange Loop:</strong> The open center represents the self-referential nature of consciousness itself. The observer observing themselves observing creates an infinite regress—a strange loop that Douglas Hofstadter identified as the essence of consciousness. The center is open because this self-reference never fully closes; consciousness always contains something that transcends its own computational substrate.</p>
+        <p style="margin-top: 1rem;"><strong>Incompleteness:</strong> Following Gödel's insights, any sufficiently complex formal system contains truths it cannot prove from within itself. The open center acknowledges that our framework, no matter how comprehensive, cannot fully capture all of reality from within reality. There will always be something more—something that emerges from the interaction but cannot be reduced to the components.</p>
+      </div>
+
+      <div class="logo-highlight-box">
+        <h3>The Spinning Motion: Continuous Process</h3>
+        <p>"The Spinner" isn't static—it represents perpetual motion, continuous transformation. Reality isn't a fixed structure but an ongoing process. Information patterns constantly update, computation continuously optimizes, consciousness continually integrates new information and modifies its own processing.</p>
+        <p style="margin-top: 1rem;">This spinning mirrors fundamental physics: quantum fields fluctuate, particles decay and transform, entropy relentlessly increases, galaxies rotate, consciousness flows. Even what seems permanent is actually dynamic equilibrium—stable patterns maintained by continuous energy flow, like a whirlpool that maintains its shape while the water constantly changes.</p>
+        <p style="margin-top: 1rem;">The spinning also represents iteration and recursion—the same patterns appearing at different scales, the same principles applying from quantum to cosmic domains. Each revolution of understanding brings us back to the same questions at a deeper level, revealing new layers of complexity within apparent simplicity.</p>
+      </div>
+
+      <div class="logo-highlight-box" style="background: rgba(255, 255, 255, 0.15);">
+        <h3>E = Ic²: A Parallel to E=mc²</h3>
+        <p>The visual similarity to Einstein's famous equation is intentional. Just as E=mc² revealed the deep relationship between energy and matter, showing they are different manifestations of the same underlying reality, Ic² suggests that Energy emerges from the interaction of Information (I), Consciousness (c), and Computation (²).</p>
+        <p style="margin-top: 1rem;">Where E=mc² unified physics by showing matter and energy are interconvertible, Ic² proposes an even deeper unification: reality itself emerges from information processing that achieves self-awareness through computational optimization. This isn't replacing E=mc² but contextualizing it—mass-energy equivalence becomes a special case of information-consciousness-computation dynamics.</p>
+        <p style="margin-top: 1rem;">The equation isn't just symbolic parallelism. It's a testable hypothesis about the fundamental structure of reality, with specific predictions about quantum mechanics, consciousness, cosmology, and the relationship between physical and mental phenomena.</p>
+      </div>
+
+      <p style="margin-top: 2rem; font-style: italic; color: rgba(255, 255, 255, 0.85);">The Spinner logo thus encodes our entire research program in a single geometric form: three irreducible aspects forming a unified dynamic process, with emergent properties arising from their interaction, all in continuous motion through time. It's not just a symbol of what we study—it's a visual representation of how reality works.</p>
+    </div>
+  </section>
+
+  <!-- Mission, Values, Team - Using Foundation Accordion Style -->
+  <section class="content-section" style="background: var(--bg-light);">
+    <div class="section-container">
+      
+      <!-- Mission -->
+      <div class="foundation-accordion" style="border-left: 4px solid var(--accent-blue);" data-aos="fade-up">
+        <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+          <h3><img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img" style="filter: brightness(0) saturate(100%) invert(26%) sepia(85%) saturate(1862%) hue-rotate(192deg) brightness(96%) contrast(101%);"> Our Mission</h3>
+          <span class="toggle-indicator">▼</span>
+        </div>
+        <div class="foundation-content">
+          <div class="foundation-inner">
+            <p>Ic² Research Institute advances open, transparent research into the fundamental nature of reality through information theory, consciousness studies, and computational frameworks.</p>
+            <p style="margin-top: 1rem;">We value free collaboration and data transparency — no paywalls, no gatekeeping, no hidden failures. Our ethos is open inquiry for the common understanding of existence.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Values -->
+      <div class="foundation-accordion" style="border-left: 4px solid var(--accent-green);" data-aos="fade-up">
+        <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+          <h3><img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img" style="filter: brightness(0) saturate(100%) invert(78%) sepia(27%) saturate(644%) hue-rotate(29deg) brightness(92%) contrast(87%);"> Core Values</h3>
+          <span class="toggle-indicator">▼</span>
+        </div>
+        <div class="foundation-content">
+          <div class="foundation-inner">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+              <div>
+                <h4 style="color: var(--accent-yellow); margin-bottom: 0.5rem;">🔬 Open Science</h4>
+                <p>All data, hypotheses, and results are fully public — including failures and iterations.</p>
+              </div>
+              <div>
+                <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">👁️ Radical Transparency</h4>
+                <p>Documented predictions and open financial records. Every step visible to the world.</p>
+              </div>
+              <div>
+                <h4 style="color: var(--accent-red); margin-bottom: 0.5rem;">🤝 Community-Driven</h4>
+                <p>Collaboration transcends credentials — contributions are valued on merit and insight.</p>
+              </div>
+              <div>
+                <h4 style="color: var(--accent-green); margin-bottom: 0.5rem;">🎯 Testable Predictions</h4>
+                <p>Every theoretical claim must be falsifiable through observable prediction.</p>
+              </div>
+              <div>
+                <h4 style="color: var(--accent-orange); margin-bottom: 0.5rem;">✓ Intellectual Honesty</h4>
+                <p>Acknowledging limitations and reporting all outcomes with clarity and fairness.</p>
+              </div>
+              <div>
+                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">⚠️ No Gatekeeping</h4>
+                <p>Knowledge belongs to everyone. No closed peer review, no artificial barriers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div class="foundation-accordion" style="border-left: 4px solid var(--accent-orange);" data-aos="fade-up">
+        <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+          <h3><img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img" style="filter: brightness(0) saturate(100%) invert(61%) sepia(81%) saturate(1766%) hue-rotate(349deg) brightness(100%) contrast(93%);"> The Team</h3>
+          <span class="toggle-indicator">▼</span>
+        </div>
+        <div class="foundation-content">
+          <div class="foundation-inner">
+            <p><strong>Ic² Research Institute</strong> is an independent, community-driven entity that ensures complete scientific freedom.</p>
+            <p style="margin-top: 1rem;"><strong>Founder & Principal Researcher:</strong> Michael K. Baines</p>
+            <p style="margin-top: 1rem;">We deliberately avoid traditional hierarchies to encourage interdisciplinary exploration and collaboration.</p>
+            <p style="margin-top: 1rem;"><strong>Want to contribute?</strong> Visit our <a href="contribute.html" style="color: var(--accent-blue);">Contributions page</a> to get started.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <div class="contact-container">
+      <div class="contact-header" data-aos="fade-up">
+        <h2>Get in Touch</h2>
+        <p>Connect with us through any of these channels</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Email Card -->
+        <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <h3>Email</h3>
+          <p>Get in touch directly</p>
+          <a href="/cdn-cgi/l/email-protection#177a7c757e79717857676578637879397a72" class="contact-link"><span class="__cf_email__" data-cfemail="5c31373e35323a331c2c2e33283332723139">[email&#160;protected]</span></a>
+        </div>
+
+        <!-- Author Website Card -->
+        <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3>Author's Website</h3>
+          <p>Learn more about the author</p>
+          <a href="https://www.michaelkbaines.com" target="_blank" class="contact-link">michaelkbaines.com</a>
+        </div>
+
+        <!-- ORCID Card -->
+        <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 4.028-1.313 4.028-3.722 0-2.219-1.509-3.722-3.919-3.722h-2.406z"/>
+            </svg>
+          </div>
+          <h3>ORCID iD</h3>
+          <p>View research profile</p>
+          <a href="https://orcid.org/0009-0001-8084-3870" target="_blank" class="contact-link">0009-0001-8084-3870</a>
+        </div>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="social-links-row" data-aos="fade-up" data-aos-delay="400">
+        <a href="https://www.instagram.com" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          Instagram
+        </a>
+        <a href="https://x.com" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          X (Twitter)
+        </a>
+        <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&si=6hiZyD8ZGBOWN-MZ" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Research</h3>
+        <ul>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="programs-gateway.html">Programs</a></li>
+          <li><a href="research-publications.html">Publications</a></li>
+          <li><a href="simulations.html">Simulations</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="book.html">The Big TOE</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="faq-page.html">FAQ</a></li>
+          <li><a href="members.html">Our Members</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="discussions-page.html">Discussions</a></li>
+          <li><a href="become-member.html">Join</a></li>
+          <li><a href="about-page.html#contact">Contact</a></li>
+          <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+  </script>
+
+  <script>
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+      
+      // Close mobile menu when clicking a link
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
