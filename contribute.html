@@ -4,20 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contribute - Ic² Research Institute</title>
-  <meta name="description" content="Support the Ic² Research Institute by contributing your skills, resources, or funding to advance theoretical physics research." />
+  <meta name="description" content="Support the Ic² Research Institute — help keep groundbreaking theoretical physics research freely accessible to everyone." />
   
   <!-- PayPal SDK Script -->
   <script src="https://www.paypal.com/sdk/js?client-id=BAAayQDLoTF4n5_YavgkSMVahYRXeRXOuiNuvTZ7ksAa9QrWh6TnQatmfNoLDcHFb0ENu6hUyjGh94f7E8&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
   
   <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     :root {
       --primary-color: #8B0000;
       --secondary-color: #2c3e50;
+      --accent-blue: #005ba5;
+      --accent-red: #e33d2f;
+      --accent-green: #a1cd5f;
+      --accent-orange: #f58b2b;
+      --accent-yellow: #f1e303;
       --text-dark: #2c3e50;
       --text-light: #666;
       --bg-light: #f8f9fa;
@@ -28,13 +33,12 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       line-height: 1.6;
       color: var(--text-dark);
-      background: var(--bg-light);
+      background: white;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
     
-    /* Unified Header */
     .site-header {
       background: white;
       border-bottom: 1px solid #e0e0e0;
@@ -53,36 +57,25 @@
       align-items: center;
     }
     
-    .site-logo img {
-      height: 50px;
-      width: auto;
-      display: block;
-    }
-    
-    .site-logo a {
-      display: block;
-      text-decoration: none;
-    }
-    
-    .main-navigation ul {
-      list-style: none;
+    .header-logos {
       display: flex;
-      gap: 2rem;
+      justify-content: space-between;
       align-items: center;
-    }
-    
-    .main-navigation a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .main-navigation a:hover {
-      color: var(--primary-color);
+      width: 100%;
+      gap: 2rem;
     }
 
-    /* Hamburger Menu */
+    .header-logo { display: flex; align-items: center; }
+    .header-logo.left { justify-content: flex-start; flex: 1; }
+    .header-logo.center { justify-content: center; flex: 1; }
+    .header-logo.right { justify-content: flex-end; flex: 1; }
+    .header-logo a { display: inline-block; transition: transform 0.3s ease; }
+    .header-logo a:hover { transform: scale(1.05); }
+    .header-logo img { height: 50px; width: auto; }
+
+    .mobile-logo { display: none; }
+    .mobile-logo img { height: 40px; width: auto; }
+
     .hamburger {
       display: none;
       flex-direction: column;
@@ -92,31 +85,20 @@
     }
 
     .hamburger span {
-      width: 25px;
-      height: 3px;
+      width: 25px; height: 3px;
       background: var(--primary-color);
       border-radius: 3px;
       transition: all 0.3s ease;
     }
 
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(7px, 7px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 73px;
-      left: 0;
-      right: 0;
+      top: 73px; left: 0; right: 0;
       background: white;
       border-bottom: 1px solid #e0e0e0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -126,22 +108,10 @@
       transition: max-height 0.3s ease;
     }
 
-    .mobile-menu.active {
-      max-height: 500px;
-    }
-
-    .mobile-menu ul {
-      list-style: none;
-      padding: 1rem;
-    }
-
-    .mobile-menu ul li {
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .mobile-menu ul li:last-child {
-      border-bottom: none;
-    }
+    .mobile-menu.active { max-height: 600px; }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu ul li:last-child { border-bottom: none; }
 
     .mobile-menu a {
       display: block;
@@ -152,318 +122,581 @@
       transition: all 0.2s ease;
     }
 
-    .mobile-menu a:hover {
-      background: var(--bg-light);
-      color: var(--primary-color);
+    .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+
+    .mobile-menu a.login-link {
+      background: linear-gradient(135deg, #8B0000 0%, #a00000 100%);
+      color: #f1e303;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      font-weight: 700;
     }
+
+    .site-launch-banner {
+      background: linear-gradient(135deg, #005ba5 0%, #003d7a 100%);
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      border-bottom: 3px solid var(--accent-yellow);
+    }
+
+    .site-launch-banner strong { color: var(--accent-yellow); font-weight: 700; }
+    .site-launch-banner p { margin: 0; font-size: 1rem; }
     
-    /* Page Header */
     .page-header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      padding: 3rem 2rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 4rem 2rem 3.5rem;
       text-align: center;
       color: white;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(139, 0, 0, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(0, 91, 165, 0.12) 0%, transparent 60%);
+      pointer-events: none;
     }
     
-    .page-header h1 {
-      font-size: 2.25rem;
-      margin-bottom: 0.5rem;
-    }
+    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; position: relative; }
     
     .page-header p {
-      font-size: 1rem;
-      opacity: 0.95;
-      max-width: 800px;
+      font-size: 1.2rem;
+      opacity: 0.92;
+      max-width: 680px;
       margin: 0 auto;
-      color: rgba(255,255,255,0.9);
+      position: relative;
+      line-height: 1.7;
     }
-    
-    /* Main Content */
-    .content-section {
-      flex: 1;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1rem 2rem 3rem;
+
+    .content-wrapper { flex: 1; }
+
+    .section-divider {
       width: 100%;
-      text-align: center;
-    }
-    
-    .subtitle {
-      max-width: 700px;
+      max-width: 400px;
+      height: 3px;
       margin: 0 auto 2rem;
-      font-size: 1.1em;
-      line-height: 1.8;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-blue), var(--accent-green), var(--accent-orange), var(--primary-color));
+      background-size: 200% 100%;
+      animation: divider-shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes divider-shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===== THANK YOU ===== */
+    .thank-you-section {
+      text-align: center;
+      padding: 4.5rem 2rem 3.5rem;
+    }
+
+    .thank-you-container { max-width: 720px; margin: 0 auto; }
+
+    .thank-you-section h2 {
+      font-size: 2rem; font-weight: 700;
       color: var(--text-dark);
+      margin-bottom: 1.25rem;
     }
-    
-    .intro-text {
-      max-width: 650px;
-      margin: 0 auto 1rem;
-      font-size: 1em;
-      line-height: 1.8;
-      color: #1a1a1a;
+
+    .thank-you-text {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
     }
-    
-    .intro-text .bold {
-      font-weight: 700;
-      color: #1a1a1a;
+
+    .thank-you-text strong { color: var(--primary-color); }
+
+    /* ===== TWO-COLUMN CONTRIBUTE ===== */
+    .contribute-section {
+      padding: 4rem 2rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
     }
-    
-    /* Market Context - simple bottom border */
-    .market-context {
-      max-width: 650px;
-      margin: 20px auto;
-      padding-bottom: 20px;
-      border-bottom: 2px solid #e0e0e0;
+
+    .contribute-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
     }
-    
-    .market-context p {
-      font-size: 1em;
-      line-height: 1.8;
-      color: #1a1a1a;
-      margin-bottom: 15px;
+
+    .contribute-text h2 {
+      font-size: 2rem; font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
     }
-    
-    .market-context .price-range {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    .contribute-prose {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+    }
+
+    .contribute-prose strong { color: #1a1a1a; }
+
+    .market-note {
+      display: block;
+      background: var(--bg-light);
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.15rem 1.5rem;
+      margin-top: 1.25rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .market-note .price-range {
+      background: linear-gradient(135deg, var(--accent-blue), #764ba2);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-weight: 700;
+      font-size: 1.05rem;
     }
-    
-    .market-context .bold {
-      font-weight: 700;
-      color: #1a1a1a;
-    }
-    
-    /* PayPal Container */
-    #paypal-container-QTHVYSS4D3QD6 {
-      max-width: 450px;
-      margin: 20px auto;
-    }
-    
-    .paypal-note {
-      display: block;
-      margin-top: 15px;
-      font-size: 0.9em;
-      color: var(--text-light);
-      font-style: italic;
-    }
-    
-    /* CTA Buttons - matches homepage */
-    .cta-buttons {
+
+    .paypal-column {
       display: flex;
-      gap: 20px;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      margin: 30px 0;
+      background: white;
+      border-radius: 12px;
+      padding: 2.5rem 2rem 2.5rem 2.5rem;
+      border: 2px solid #d0d0d0;
+      border-left: 5px solid var(--primary-color);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
-    
-    .btn-transparent {
-      padding: 15px 40px;
-      background: transparent;
-      border: 2px solid #1a1a1a;
-      color: #1a1a1a;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.3s;
-      font-size: 1em;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .btn-transparent:hover {
-      background: #1a1a1a;
-      color: white;
-      transform: translateY(-2px);
-    }
-    
-    /* Disclaimer text */
-    .disclaimer {
-      max-width: 650px;
-      margin: 30px auto 0;
-      font-size: 0.95em;
-      line-height: 1.6;
-      color: #1a1a1a;
-      padding-top: 30px;
-      border-top: 2px solid #e0e0e0;
-    }
-    
-    .disclaimer a {
-      color: var(--primary-color);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-      font-weight: 600;
-    }
-    
-    .disclaimer a:hover {
-      border-bottom-color: var(--primary-color);
-    }
-    
-    /* Footer */
-    footer {
-      background: var(--secondary-color);
-      color: white;
-      padding: 2.5rem 2rem 1rem;
-      margin-top: auto;
+
+    .paypal-column h3 {
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
       text-align: center;
     }
-    
-    footer h3 {
-      margin-bottom: 0.75rem;
-      font-size: 1.1rem;
+
+    .paypal-column .paypal-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
-    
-    footer p, footer a {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
+
+    #paypal-container-QTHVYSS4D3QD6 { max-width: 400px; width: 100%; margin: 0 auto; }
+
+    .paypal-note {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--text-light);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ===== FOLLOW ALONG — FRAMEWORK CARDS ===== */
+    .follow-along-section {
+      padding: 4rem 2rem 5rem;
+      background: var(--bg-light);
+    }
+
+    .follow-along-container { max-width: var(--max-width); margin: 0 auto; }
+
+    .follow-along-container h2 {
+      font-size: 2rem; font-weight: 700;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .follow-along-subtitle {
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .framework-card {
+      background: #770000;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid var(--primary-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .framework-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .framework-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .framework-card p {
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.6;
+    }
+
+    .framework-card .card-icon {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+      flex-shrink: 0;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .cta-section h2 { font-size: 2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem; }
+
+    .cta-section p {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 550px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .cta-buttons { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
       text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary { background: var(--primary-color); color: white; }
+    .btn-primary:hover { background: #a00000; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3); }
+
+    .btn-outline { background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark); }
+    .btn-outline:hover { background: var(--text-dark); color: white; transform: translateY(-2px); }
+
+    .btn-blue { background: var(--accent-blue); color: white; }
+    .btn-blue:hover { background: #004a8c; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 91, 165, 0.3); }
+
+    /* ===== DISCLAIMER ===== */
+    .disclaimer-section { text-align: center; padding: 0 2rem 3rem; }
+
+    .disclaimer-text { max-width: 600px; margin: 0 auto; font-size: 0.88rem; line-height: 1.6; color: var(--text-light); }
+    .disclaimer-text a { color: var(--primary-color); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+    .disclaimer-text a:hover { border-bottom-color: var(--primary-color); }
+
+    /* ===== PAYPAL BADGE ===== */
+    .paypal-badge {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 900;
+      opacity: 0;
+      animation: badge-fade-in 1s ease 2s forwards;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .paypal-badge:hover { transform: scale(1.05); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+    .paypal-badge img { display: block; height: 50px; width: auto; }
+
+    @keyframes badge-fade-in { to { opacity: 1; } }
+    
+    /* ===== FOOTER ===== */
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; margin-top: auto; }
+
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-section h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin-bottom: 0.35rem; }
+    .footer-section a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s ease; }
+    .footer-section a:hover { color: white; }
+
+    .footer-bottom {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
     }
     
-    footer a:hover {
-      color: var(--primary-color);
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 968px) {
+      .header-logos { display: none; }
+      .mobile-logo { display: block; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .page-header h1 { font-size: 2rem; }
+      .contribute-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .framework-grid { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr; gap: 2rem; }
     }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .main-navigation {
-        display: none;
-      }
 
-      .hamburger {
-        display: flex;
-      }
-
-      .mobile-menu {
-        display: block;
-      }
-      
-      .page-header h1 {
-        font-size: 1.75rem;
-      }
-      
-      .content-section {
-        padding: 1rem 1rem 3rem;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-      }
-      
-      .btn-transparent {
-        width: 100%;
-        text-align: center;
-      }
+    @media (max-width: 480px) {
+      .header-logo img { height: 40px; }
+      .page-header { padding: 3rem 1.25rem 2.5rem; }
+      .page-header h1 { font-size: 1.75rem; }
+      .thank-you-section { padding: 3rem 1.25rem 2.5rem; }
+      .contribute-section { padding: 2.5rem 1.25rem; }
+      .paypal-column { padding: 2rem 1.25rem; }
+      .follow-along-section { padding: 3rem 1.25rem 4rem; }
+      .cta-buttons { flex-direction: column; }
+      .btn { width: 100%; text-align: center; }
+      .paypal-badge { bottom: 16px; right: 16px; }
+      .paypal-badge img { height: 40px; }
     }
   </style>
 </head>
 <body>
-  <!-- Unified Header -->
+
   <header class="site-header">
     <div class="header-container">
-      <div class="site-logo">
-        <a href="index.html">
-          <img src="ic2-logo.png" alt="Ic² Research Institute" />
-        </a>
+      <div class="header-logos">
+        <div class="header-logo left">
+          <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
+        </div>
+        <div class="header-logo center">
+          <a href="framework.html"><img src="framework.png" alt="Framework"></a>
+        </div>
+        <div class="header-logo right">
+          <a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a>
+        </div>
       </div>
-      <nav class="main-navigation" aria-label="Main navigation">
-        <ul>
-          <li><a href="book.html">The Big TOE</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="discussions-page.html">Discussion</a></li>
-          <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
-        </ul>
-      </nav>
-      <!-- Hamburger Menu Button -->
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="mobile-logo">
+        <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
       </div>
+      <div class="hamburger"><span></span><span></span><span></span></div>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
+  <div class="site-launch-banner">
+    <p>🚀 <strong>Official Site Launch: April 1, 2026</strong> | Currently in development — some pages may be incomplete as we prepare for our official opening</p>
+  </div>
+
   <div class="mobile-menu">
     <ul>
-      <li><a href="book.html">The Big TOE</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="framework.html">Framework</a></li>
+      <li><a href="book.html">Big TOE</a></li>
+      <li><a href="validation.html">Validation</a></li>
+      <li><a href="testing-schedule.html">Testing</a></li>
+      <li><a href="programs-gateway.html">Programs</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="discussions-page.html">Discussion</a></li>
-      <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+      <li><a href="about-page.html">About</a></li>
+      <li><a href="contribute.html">Contribute</a></li>
+      <li><a href="login.html" class="login-link">Login</a></li>
     </ul>
   </div>
   
-  <!-- Page Header -->
   <section class="page-header">
-    <h1>Support Open Research</h1>
-    <p>Your contributions enable us to keep knowledge freely accessible while advancing theoretical physics research.</p>
+    <h1 data-aos="fade-down" data-aos-duration="800">Support Open Research</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Your generosity fuels a mission to keep groundbreaking theoretical physics research freely accessible.<br>No paywalls, no gatekeeping, just science for everyone.</p>
   </section>
-  
-  <!-- Main Content -->
-  <main class="content-section">
-    <div class="intro-text">
-      <p>We believe in letting <span class="bold">you</span> determine the value of this work.</p>
-      <p>If you didn't find value in the book, please don't feel obligated to contribute. If you found it valuable, insightful, or useful in your own research, we welcome your support.</p>
-      <p class="bold">Your contribution helps us continue this research and keeps all our work freely accessible to everyone.</p>
-    </div>
-    
-    <div class="market-context">
-      <p>Academic and theoretical physics books of similar scope typically sell for <span class="price-range">$40-$150</span> in the commercial market.</p>
-      <p>We've made this work freely available because we believe financial circumstances shouldn't be a barrier to accessing scientific knowledge.</p>
-      <p><span class="bold">The amount you contribute is entirely up to you.</span> Contribute what feels right based on the value you received.</p>
-    </div>
-    
-    <!-- PayPal Hosted Button -->
-    <div id="paypal-container-QTHVYSS4D3QD6"></div>
-    <script>
-      paypal.HostedButtons({
-        hostedButtonId: "QTHVYSS4D3QD6",
-      }).render("#paypal-container-QTHVYSS4D3QD6")
-    </script>
-    
-    <small class="paypal-note">Enter any amount you wish when you reach PayPal</small>
-    
-    <div class="cta-buttons">
-      <a href="book.html" class="btn-transparent">Download The Big TOE</a>
-      <a href="become-member.html" class="btn-transparent">Join Discussion</a>
-    </div>
-    
-    <div class="disclaimer">
-      By signing up, you agree to receive emails from The COSMIC Framework. You can unsubscribe at any time. For details on how we handle your data, please see our <a href="privacy-policy.html">Privacy Policy</a>.
-    </div>
-  </main>
-  
-  <!-- Unified Footer -->
+
+  <div class="content-wrapper">
+
+    <!-- 1. THANK YOU -->
+    <section class="thank-you-section">
+      <div class="thank-you-container">
+        <div class="section-divider" data-aos="fade-up"></div>
+        <h2 data-aos="fade-up">Thank You for Being Here</h2>
+        <p class="thank-you-text" data-aos="fade-up" data-aos-delay="100">
+          Whether you arrived through curiosity, through a shared link, or through your own research journey, we're grateful you found your way to the COSMIC Framework. Every reader, every question asked, and every idea shared strengthens the foundation of this work.
+        </p>
+        <p class="thank-you-text" data-aos="fade-up" data-aos-delay="200">
+          The Ic² Research Institute was founded on a simple conviction: <strong>scientific knowledge should be open to everyone.</strong> We've made all of our research, predictions, and validation data freely available because financial circumstances should never be a barrier to discovery.
+        </p>
+        <p class="thank-you-text" data-aos="fade-up" data-aos-delay="300">
+          With four independently validated predictions and 37+ more under active testing, this framework is generating real results. Your support, in whatever form it takes, helps us keep pushing the boundaries of what's possible.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. CONTRIBUTE + PAYPAL — TWO COLUMN -->
+    <section class="contribute-section">
+      <div class="contribute-grid">
+        <div class="contribute-text" data-aos="fade-right">
+          <h2>Make a Contribution</h2>
+          <p class="contribute-prose">
+            We believe in letting <strong>you</strong> determine the value of this work. If the research sparked something for you — whether insight, inspiration, or new directions in your own thinking — we welcome your support.
+          </p>
+          <p class="contribute-prose">
+            If you didn't find value in the book, please don't feel obligated. But if you did, every contribution, regardless of size, directly funds continued research and keeps all of our work freely accessible to anyone, anywhere.
+          </p>
+          <p class="contribute-prose">
+            <strong>The amount you contribute is entirely up to you.</strong> Contribute what feels right based on the value you received.
+          </p>
+          <div class="market-note">
+            Academic and theoretical physics books of similar scope typically sell for <span class="price-range">$40 – $150</span> in the commercial market. We've chosen a different path — open access for everyone.
+          </div>
+        </div>
+
+        <div class="paypal-column" data-aos="fade-left" data-aos-delay="200">
+          <h3>Contribute Now</h3>
+          <p class="paypal-subtitle">Secure payment through PayPal</p>
+          <div id="paypal-container-QTHVYSS4D3QD6"></div>
+          <script>
+            paypal.HostedButtons({
+              hostedButtonId: "QTHVYSS4D3QD6",
+            }).render("#paypal-container-QTHVYSS4D3QD6")
+          </script>
+          <small class="paypal-note">Enter any amount you wish when you reach PayPal</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FOLLOW ALONG — FRAMEWORK CARDS -->
+    <section class="follow-along-section">
+      <div class="follow-along-container" data-aos="fade-up">
+        <div class="section-divider"></div>
+        <h2>Follow Along with the Discovery</h2>
+        <p class="follow-along-subtitle">This is more than a research project — it's an unfolding story of prediction and validation in real time. Here's how you can be part of what happens next.</p>
+        
+        <div class="framework-grid">
+          <div class="framework-card" style="border-left-color: var(--accent-blue);" data-aos="fade-up" data-aos-delay="100">
+            <h3><img class="card-icon" src="menu_book_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""> Read the Research</h3>
+            <p>Download "The Big TOE" and explore the entire framework for yourself — completely free, no sign-up required. See how information processing connects quantum mechanics to cosmic structure.</p>
+          </div>
+          <div class="framework-card" style="border-left-color: var(--accent-green);" data-aos="fade-up" data-aos-delay="200">
+            <h3><img class="card-icon" src="chat_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""> Join the Discussion</h3>
+            <p>Ask questions, share insights, and connect with fellow independent thinkers who care about open science. Every perspective strengthens the research.</p>
+          </div>
+          <div class="framework-card" style="border-left-color: var(--accent-orange);" data-aos="fade-up" data-aos-delay="300">
+            <h3><img class="card-icon" src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""> Watch Predictions Unfold</h3>
+            <p>Follow our testing schedule as upcoming experiments from DESI, JWST, ALMA, and others put the framework's 37+ active predictions to the test in real time.</p>
+          </div>
+          <div class="framework-card" style="border-left-color: var(--accent-red);" data-aos="fade-up" data-aos-delay="400">
+            <h3><img class="card-icon" src="public_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""> Spread the Word</h3>
+            <p>Share with someone who would appreciate transparent, testable science that's free for everyone to access. Open science grows when people share it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2 data-aos="fade-up">Ready to Explore?</h2>
+      <p data-aos="fade-up" data-aos-delay="100">Dive into the research, join the conversation, or see what predictions are being tested right now.</p>
+      <div class="cta-buttons" data-aos="fade-up" data-aos-delay="200">
+        <a href="book.html" class="btn btn-primary">Download The Big TOE</a>
+        <a href="become-member.html" class="btn btn-blue">Join the Discussion</a>
+        <a href="testing-schedule.html" class="btn btn-outline">Testing Schedule</a>
+      </div>
+    </section>
+
+    <section class="disclaimer-section">
+      <p class="disclaimer-text">
+        By signing up, you agree to receive emails from The COSMIC Framework. You can unsubscribe at any time. For details on how we handle your data, please see our <a href="privacy-policy.html">Privacy Policy</a>.
+      </p>
+    </section>
+
+  </div>
+
+  <div class="paypal-badge" title="PayPal Verified — Secure Checkout">
+    <img src="pp-secure-checkout.png" alt="PayPal Verified Secure Checkout" />
+  </div>
+
   <footer>
-    <h3>Ic² Research Institute</h3>
-    <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Research</h3>
+        <ul>
+          <li><a href="framework.html">Framework</a></li>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="programs-gateway.html">Programs</a></li>
+          <li><a href="research-publications.html">Publications</a></li>
+          <li><a href="simulations.html">Simulations</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="book.html">The Big TOE</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="faq-page.html">FAQ</a></li>
+          <li><a href="members.html">Our Members</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="discussions-page.html">Discussions</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="become-member.html">Become a Member</a></li>
+          <li><a href="about-page.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
+    </div>
   </footer>
-  
-  <!-- AOS Animation Library -->
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 800, once: true, offset: 80 });
+    AOS.init({ duration: 1000, once: true, offset: 100 });
   </script>
 
   <script>
-    // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
-    
     if (hamburger && mobileMenu) {
       hamburger.addEventListener('click', function() {
         this.classList.toggle('active');
         mobileMenu.classList.toggle('active');
       });
-      
-      // Close mobile menu when clicking a link
       document.querySelectorAll('.mobile-menu a').forEach(link => {
         link.addEventListener('click', function() {
           hamburger.classList.remove('active');
