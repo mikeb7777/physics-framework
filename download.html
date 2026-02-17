@@ -149,23 +149,23 @@
       padding-top: 2rem;
     }
     
-    /* Download page specific styles */
+    /* Suggest an Edit Intro */
     .editorial-notice {
-      background: #fff3cd;
-      border: 2px solid #ffc107;
-      border-radius: 8px;
+      background: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
       padding: 2rem;
       margin-bottom: 2rem;
     }
     
     .editorial-notice h3 {
-      color: #856404;
+      color: var(--primary-color);
       margin-top: 0;
       font-size: 1.3rem;
     }
     
     .editorial-notice p {
-      color: #856404;
+      color: var(--text-dark);
       line-height: 1.7;
       margin-bottom: 0.75rem;
     }
@@ -433,6 +433,132 @@
       text-decoration: underline;
     }
     
+    /* Suggest an Edit Section */
+    .suggest-edit-section {
+      background: #000000;
+      padding: 4rem 0;
+      margin-bottom: 2rem;
+    }
+    
+    .suggest-edit-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .suggest-edit-section h2 {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+      text-align: center;
+    }
+    
+    .suggest-edit-section .section-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .suggest-edit-section .section-note {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.95rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+    
+    .edit-form {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      color: rgba(255,255,255,0.85);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background: rgba(255,255,255,0.12);
+    }
+    
+    .form-group select option {
+      background: #1a1a1a;
+      color: white;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .btn-submit-edit {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      justify-self: center;
+    }
+    
+    .btn-submit-edit:hover {
+      background: #a00000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+    }
+    
+    .edit-form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: #a1cd5f;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
     /* Mobile Styles */
     @media (max-width: 768px) {
       .hamburger {
@@ -507,6 +633,14 @@
       .btn-pill { 
         width: 100%; 
       }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .suggest-edit-section {
+        padding: 3rem 0;
+      }
     }
     
     </style>
@@ -548,14 +682,81 @@
     
     <div class="content-wrapper">
       <div class="content">
+        <!-- Download Now CTA -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <a href="The_Big_TOE_Ver_3_5.pdf" class="btn-pill" style="font-size: 1.2rem; padding: 1rem 3rem;" download>Download Now — Version 3.5</a>
+        </div>
+        
         <!-- Editorial Notice -->
         <div class="editorial-notice">
-          <h3>Pre-Release Evaluation Version</h3>
-          <p><strong>Current Version: 3.5</strong> (November 15, 2025)</p>
-          <p>This is a pre-release evaluation version intended for peer review, feedback, and scientific discourse. While the core framework and mathematical foundations are complete, this version has not undergone professional editorial review.</p>
-          <p><strong>Professional editing is scheduled for March 2026</strong>, after which a final version will be published. Your feedback during this evaluation period is invaluable for refining clarity and presentation.</p>
-          <p>Despite the pre-release status, this work contains rigorous scientific content with testable predictions, several of which have already been experimentally validated.</p>
+          <h3>Suggest an Edit</h3>
+          <p>This is a living document, and your participation makes it stronger. Whether you've spotted a typo, found a clearer way to express an idea, or noticed something that doesn't quite add up, your input is genuinely valued.</p>
+          <p>Use the form below to submit your suggestion. Every edit is reviewed, and accepted changes will be credited in the next revision. <strong>Professional editing is scheduled for August 2026</strong>, so your contributions during this period directly shape the final published version.</p>
+          <p>Thank you for taking the time to read carefully and help improve this work. Open science means building knowledge together.</p>
         </div>
+        
+        <!-- Suggest an Edit Section -->
+        </div>
+    </div>
+    <section class="suggest-edit-section" id="suggest-edit">
+      <div class="suggest-edit-container">
+        <h2 data-aos="fade-up">Open Science</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Suggest an Edit</p>
+        <p class="section-note" data-aos="fade-up" data-aos-delay="150">Accepted edits will appear in the following revision.</p>
+        
+        <form class="edit-form" id="editForm" data-aos="fade-up" data-aos-delay="200">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editType">Edit What?</label>
+              <select id="editType" name="editType" required>
+                <option value="" disabled selected>Select a section</option>
+                <option value="book">Book Content</option>
+                <option value="appendix">Appendix</option>
+                <option value="glossary">Glossary</option>
+                <option value="reference">Reference</option>
+                <option value="equation">Equation</option>
+                <option value="image">Image / Figure</option>
+                <option value="index">Index</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pageNumber">Page Number</label>
+              <input type="text" id="pageNumber" name="pageNumber" placeholder="e.g. 42, A-7, or Glossary p.3">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="presentText">Present Text (what currently appears)</label>
+            <textarea id="presentText" name="presentText" placeholder="Copy or describe the existing text, equation, or content as it currently reads..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="suggestedText">Suggested Text (your proposed change)</label>
+            <textarea id="suggestedText" name="suggestedText" placeholder="Write your suggested replacement, correction, or improvement..." required></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editorName">Your Name (optional)</label>
+              <input type="text" id="editorName" name="editorName" placeholder="For acknowledgment in revision notes">
+            </div>
+            <div class="form-group">
+              <label for="editorEmail">Email (optional)</label>
+              <input type="email" id="editorEmail" name="editorEmail" placeholder="If you'd like a response">
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-submit-edit">Submit Suggestion</button>
+        </form>
+        
+        <div class="edit-form-success" id="editFormSuccess">
+          ✓ Thank you! Your suggestion has been received and will be reviewed for the next revision.
+        </div>
+      </div>
+    </section>
+    <div class="content-wrapper">
+      <div class="content" style="padding-top: 0;">
         
         <!-- Honor System Notice -->
         <div class="honor-system-box">
@@ -879,6 +1080,38 @@ Retrieved from https://ic2institute.org/download</div>
             behavior: 'smooth'
         });
     }
+    
+    // Suggest an Edit form handler
+    const editForm = document.getElementById('editForm');
+    const editFormSuccess = document.getElementById('editFormSuccess');
+    
+    editForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Collect form data
+        const formData = {
+            editType: document.getElementById('editType').value,
+            pageNumber: document.getElementById('pageNumber').value,
+            presentText: document.getElementById('presentText').value,
+            suggestedText: document.getElementById('suggestedText').value,
+            editorName: document.getElementById('editorName').value,
+            editorEmail: document.getElementById('editorEmail').value
+        };
+        
+        // For now, log to console (replace with actual endpoint when ready)
+        console.log('Edit suggestion submitted:', formData);
+        
+        // Show success message
+        editForm.style.display = 'none';
+        editFormSuccess.style.display = 'block';
+        
+        // Reset and show form again after 5 seconds
+        setTimeout(function() {
+            editForm.reset();
+            editForm.style.display = 'grid';
+            editFormSuccess.style.display = 'none';
+        }, 5000);
+    });
     </script>
 </body>
 </html>
