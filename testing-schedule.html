@@ -465,6 +465,132 @@
       color: white;
       animation: pulse 2s ease-in-out infinite;
     }
+
+    /* Collapsible functionality */
+    .prediction-card {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .prediction-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+
+    .prediction-header {
+      position: relative;
+    }
+
+    .expand-toggle {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      width: 32px;
+      height: 32px;
+      background: rgba(139, 0, 0, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .expand-toggle img {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease;
+      opacity: 0.7;
+    }
+
+    .prediction-card:hover .expand-toggle {
+      background: rgba(139, 0, 0, 0.15);
+    }
+
+    .prediction-card:hover .expand-toggle img {
+      opacity: 1;
+    }
+
+    .prediction-card.expanded .expand-toggle img {
+      transform: rotate(180deg);
+    }
+
+    .prediction-body {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .prediction-card.expanded .prediction-body {
+      max-height: 5000px;
+      padding: 1.5rem;
+    }
+
+    /* Navigation Guide */
+    .nav-guide {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border: 2px solid #f0f0f0;
+    }
+
+    .category-filters {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .filter-btn {
+      background: white;
+      border: 2px solid #e0e0e0;
+      padding: 0.65rem 1.25rem;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      color: var(--text-dark);
+      font-family: inherit;
+    }
+
+    .filter-btn img {
+      margin-right: 6px;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.15);
+    }
+
+    .filter-btn:hover img {
+      opacity: 1;
+    }
+
+    .filter-btn.active {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    }
+
+    .filter-btn.active img {
+      filter: brightness(0) invert(1);
+      opacity: 1;
+    }
+
+    /* Hide filtered items */
+    section.hidden {
+      display: none;
+    }
     
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -957,8 +1083,52 @@
       </div>
     </section>
 
+    <!-- Quick Navigation Guide -->
+    <section class="content-section" style="padding: 2rem 2rem 1rem;">
+      <div class="section-container">
+        <div class="nav-guide" data-aos="fade-up">
+          <h3 style="text-align: center; margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--text-dark);">Quick Navigation</h3>
+          <p style="text-align: center; color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">Filter predictions by category or view all at once</p>
+          
+          <div class="category-filters">
+            <button class="filter-btn active" data-filter="all">
+              <img src="stack_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="20" height="20">
+              All Predictions
+            </button>
+            <button class="filter-btn" data-filter="validated">
+              <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="20" height="20">
+              Validated (4)
+            </button>
+            <button class="filter-btn" data-filter="near-term">
+              <img src="calendar_month_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="20" height="20">
+              Near-Term (1-5 Yrs)
+            </button>
+            <button class="filter-btn" data-filter="cymatics">
+              <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="20" height="20">
+              3D Cymatics
+            </button>
+            <button class="filter-btn" data-filter="medium-term">
+              <img src="edit_calendar_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="20" height="20">
+              Medium-Term (5-15 Yrs)
+            </button>
+            <button class="filter-btn" data-filter="long-term">
+              <img src="event_list_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="20" height="20">
+              Long-Term (15+ Yrs)
+            </button>
+          </div>
+
+          <div style="text-align: center; margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+            <p style="color: var(--text-light); font-size: 0.9rem; margin: 0;">
+              <img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="18" height="18" style="vertical-align: middle; margin-right: 4px; opacity: 0.7;">
+              <strong>Click any prediction card to expand/collapse details</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- VALIDATED PREDICTIONS -->
-    <section class="content-section bg-light">
+    <section class="content-section bg-light" data-category="validated">
       <div class="section-container">
         <div class="category-header">
           <h2>✓ Validated Predictions (4)</h2>
@@ -1118,7 +1288,7 @@
     </section>
 
     <!-- NEAR-TERM PREDICTIONS (1-5 years) -->
-    <section class="content-section">
+    <section class="content-section" data-category="near-term">
       <div class="section-container">
         <div class="category-header">
           <h2>Near-Term Predictions (1-5 Years)</h2>
@@ -1651,8 +1821,118 @@
       </div>
     </section>
 
+    <!-- 3D CYMATICS / NBI PREDICTIONS -->
+    <section class="content-section" id="cymatics-prediction" data-category="cymatics">
+      <div class="section-container">
+        <div class="category-header">
+          <h2>3D Acoustic Field &amp; NBI Program Predictions</h2>
+          <p>Two independent prediction sets from the NBI Research Program — one standalone physics experiment, one COSMIC Framework interpretation logged separately</p>
+        </div>
+
+        <!-- Prediction: 3D Cymatics Physics -->
+        <div class="prediction-card near-term" data-aos="fade-up">
+          <div class="prediction-header">
+            <div class="prediction-title">
+              <h3>Three-Dimensional Acoustic Node Geometry in Microgravity</h3>
+              <span class="status-badge near-term">PHASE 1 NOW · PHASE 2: 1-3 YEARS</span>
+            </div>
+            <div class="prediction-meta">
+              <span>📅 Documented: February 2026</span>
+              <span>🔬 Standalone Physics Experiment</span>
+              <span>📄 Preprint: <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: var(--accent-blue);">Download</a> | Zenodo DOI: pending</span>
+            </div>
+          </div>
+          <div class="prediction-body">
+            <p><strong>Background:</strong> Every cymatic experiment in the published literature is gravity-compromised. The particle medium settles toward flat surfaces under gravitational force, preventing observation of the actual three-dimensional acoustic field geometry. The two-dimensional Chladni figures produced since 1787 are cross-sections of richer three-dimensional structures. No experiment has visualized the complete three-dimensional node surface topology in an unbiased medium.</p>
+
+            <p><strong>Specific Claims (Standard Acoustic Physics — No Framework Required):</strong></p>
+
+            <div class="prediction-details">
+              <div class="detail-box">
+                <h4>Prediction 1: Spherical Shell Modes</h4>
+                <p>At the fundamental frequency of a spherical resonant cavity, positive-contrast particles will cluster on a single spherical nodal shell concentric with the container — a geometry with no two-dimensional analogue. Shell radius predicted by: r = c/(2f₁) where c is speed of sound and f₁ is the fundamental frequency.</p>
+              </div>
+
+              <div class="detail-box">
+                <h4>Prediction 2: Nested Shell Structures at Harmonics</h4>
+                <p>At the n-th harmonic frequency, n concentric spherical nodal shells will appear, with radii r_k = kc/(2nf₁) for k = 1…n. These nested shell structures have no two-dimensional analogue and would directly confirm that standard cymatics provides an incomplete picture of acoustic field geometry.</p>
+              </div>
+
+              <div class="detail-box">
+                <h4>Prediction 3: Platonic Solid Node-Point Geometries</h4>
+                <p>At frequencies corresponding to acoustic modes with the symmetry of the Platonic solids (Td, Oh, Ih symmetry groups), intersection points of nodal surfaces will form configurations matching the vertices of the tetrahedron (4 nodes), cube/octahedron (6/8 nodes), and dodecahedron/icosahedron (12/20 nodes). These are minimum-energy node configurations for systems with those symmetries — predicted by standard acoustic theory but never directly observed in three dimensions.</p>
+              </div>
+
+              <div class="detail-box">
+                <h4>Prediction 4: Toroidal and Quasicrystalline Structures</h4>
+                <p>Under simultaneous excitation at frequencies with irrational ratio (e.g., the golden ratio φ), the superposed field produces quasiperiodic node geometry with non-crystallographic symmetries (5-fold, 8-fold, 10-fold) never before observed in acoustic fields. At two harmonic frequencies, toroidal node surfaces are predicted by the topology of the superposed pressure field.</p>
+              </div>
+            </div>
+
+            <div class="detail-box" style="margin-top: 1.5rem; border-left: 4px solid var(--accent-blue); background: #f0f6ff; padding: 1.25rem; border-radius: 6px;">
+              <h4>Experimental Approach</h4>
+              <ul>
+                <li><strong>Phase 1 (now, &lt;$1,000):</strong> Transparent acrylic sphere, tetrahedral transducer array, particle medium, three orthogonal cameras — ground-based baseline</li>
+                <li><strong>Phase 2 (~$95,000–$155,000):</strong> Self-contained apparatus on parabolic flight — 30 arcs × 22 seconds of microgravity, systematic frequency protocol</li>
+                <li><strong>Phase 3 (ISS):</strong> Complete systematic characterization — sustained microgravity, full frequency sweep, multiple media and container geometries</li>
+              </ul>
+            </div>
+
+            <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text-light);">
+              <strong>Falsifiability:</strong> Each prediction is independently falsifiable. Null results — particles distributing uniformly rather than clustering at predicted node locations — would invalidate specific claims while preserving others. Complete absence of structured organization in microgravity would falsify the foundational acoustic theory predictions, which would itself be a significant result warranting publication.
+            </p>
+
+            <div style="margin-top: 1.25rem;">
+              <a href="program-nbi.html" style="color: var(--accent-blue); font-weight: 600; text-decoration: none;">→ Full NBI Program Details</a>
+              &nbsp;&nbsp;
+              <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: var(--accent-blue); font-weight: 600; text-decoration: none;" download>→ Download Preprint</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prediction: COSMIC Framework NBI Interpretation -->
+        <div class="prediction-card speculative" data-aos="fade-up" style="border-left: 4px solid var(--accent-orange);">
+          <div class="prediction-header">
+            <div class="prediction-title">
+              <h3>COSMIC Framework Interpretation: 3D Field Geometry and NBI Field Patterns</h3>
+              <span class="status-badge" style="background: var(--accent-orange); color: white;">FRAMEWORK PREDICTION · LOGGED SEPARATELY</span>
+            </div>
+            <div class="prediction-meta">
+              <span>📅 Documented: February 2026</span>
+              <span>⚠️ Note: This prediction is independent of the physics experiment above. The experiment is evaluated on physics merits alone.</span>
+            </div>
+          </div>
+          <div class="prediction-body">
+            <p><strong>Important Separation:</strong> The physics experiment described above will be designed, conducted, and evaluated entirely on its own merits, without reference to any theoretical framework. The predictions below represent the COSMIC Framework's interpretation of what those physics results would mean for the NBI hypothesis <em>if confirmed</em>. They are logged here to establish prior claim before experimental results are known.</p>
+
+            <div class="prediction-details">
+              <div class="detail-box">
+                <h4>NBI Field Pattern Prediction</h4>
+                <p>Three-dimensional cymatic patterns observed in microgravity will reveal geometric structures that, when cross-sectioned along a horizontal plane, correspond to geometric forms documented in authenticated crop formations. The formations represent ground-level intersections of three-dimensional field structures — the cross-section of a larger geometry — exactly as two-dimensional Chladni figures represent cross-sections of three-dimensional acoustic fields.</p>
+              </div>
+
+              <div class="detail-box">
+                <h4>Geometric Communication Mechanism</h4>
+                <p>If NBI entities process information through electromagnetic field configurations and communicate through geometry, the actual communication occurs in three-dimensional field space. Ground formations are shadows of the message — the intersection of a three-dimensional geometric structure with a physical medium. The three-dimensional structure visible in microgravity cymatics is the complete geometry of which crop formations are cross-sections.</p>
+              </div>
+
+              <div class="detail-box">
+                <h4>Phoenix Lights Connection</h4>
+                <p>The nine visible nodes of the Phoenix Lights formation (observed 13 March 1997, firsthand testimony: Michael K. Baines, West Phoenix) represent nine intersection points of a three-dimensional field pattern with the luminosity threshold of the lower atmosphere — cross-sections of a much larger three-dimensional structure. The fading termination (not departing) is consistent with field coherence dissolution rather than physical departure.</p>
+              </div>
+            </div>
+
+            <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text-light);">
+              <strong>Prediction Confidence:</strong> High for physics geometry results. Speculative for NBI interpretation. | <strong>Physical Basis:</strong> Acoustic field theory, nodal surface geometry | <strong>Framework Basis:</strong> COSMIC Framework NBI hypothesis | <strong>Independent Experiment:</strong> <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: var(--accent-orange);">Preprint</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- MEDIUM-TERM PREDICTIONS (5-15 years) -->
-    <section class="content-section bg-light">
+    <section class="content-section bg-light" data-category="medium-term">
       <div class="section-container">
         <div class="category-header">
           <h2>Medium-Term Predictions (5-15 Years)</h2>
@@ -1819,7 +2099,7 @@
     </section>
 
     <!-- LONG-TERM & SPECULATIVE PREDICTIONS (15+ years) -->
-    <section class="content-section">
+    <section class="content-section" data-category="long-term">
       <div class="section-container">
         <div class="category-header">
           <h2>Long-Term & Speculative Predictions (15+ Years)</h2>
@@ -2092,6 +2372,68 @@
           });
         });
       }
+    })();
+    </script>
+
+    <script>
+    // Add expand/collapse functionality to prediction cards
+    (function() {
+      // Add expand toggle to each prediction card
+      document.querySelectorAll('.prediction-card').forEach(card => {
+        const header = card.querySelector('.prediction-header');
+        if (header) {
+          // Create expand toggle
+          const toggle = document.createElement('div');
+          toggle.className = 'expand-toggle';
+          toggle.innerHTML = '<img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="Expand" width="24" height="24">';
+          header.appendChild(toggle);
+          
+          // Make card clickable to expand/collapse
+          card.addEventListener('click', function(e) {
+            // Don't toggle if clicking on a link
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+              return;
+            }
+            card.classList.toggle('expanded');
+          });
+        }
+      });
+
+      // Filter functionality
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const sections = document.querySelectorAll('section[data-category]');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const filter = this.getAttribute('data-filter');
+          
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Show/hide sections
+          if (filter === 'all') {
+            sections.forEach(section => section.classList.remove('hidden'));
+          } else {
+            sections.forEach(section => {
+              const category = section.getAttribute('data-category');
+              if (category === filter) {
+                section.classList.remove('hidden');
+              } else {
+                section.classList.add('hidden');
+              }
+            });
+          }
+
+          // Scroll to first visible section
+          setTimeout(() => {
+            const firstVisible = document.querySelector('section[data-category]:not(.hidden)');
+            if (firstVisible && filter !== 'all') {
+              firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        });
+      });
     })();
     </script>
 
