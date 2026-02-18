@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Non-Biological Intelligence Research - Ic² Research Institute</title>
+    <meta name="description" content="Investigating substrate-independent consciousness: can self-referential information processing arise in electromagnetic plasma configurations without biological neural networks?">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+    /* --- Global Styles --- */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    :root {
+    --primary-color: #8B0000;
+    --secondary-color: #2d3f52;
+    --accent-nbi: #0e5fa8;
+    --accent-nbi-dark: #0a4580;
+    --accent-nbi-light: #1a7ad4;
+    --accent-yellow: #f1e303;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    }
+    
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: white;
+    }
+    
+    /* Header */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    }
+    
+    .site-logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+    }
+    
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    }
+    
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
+    
+    .main-navigation a:hover {
+    color: var(--primary-color);
+    }
+    
+    .main-navigation a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+    }
+    
+    .main-navigation a.login-link:hover {
+    background: #a00000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    padding: 8px;
+    background: none;
+    border: none;
+    }
+
+    .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active { max-height: 600px; }
+
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu ul li:last-child { border-bottom: none; }
+
+    .mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    }
+
+    .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+
+    .mobile-menu a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+    font-weight: 700;
+    }
+    
+    /* Page Header */
+    .page-header {
+    background: linear-gradient(135deg, #0a2a4e 0%, #0e5fa8 60%, #1a7ad4 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,122,212,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    }
+    
+    .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    position: relative;
+    }
+    
+    .page-header .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.95;
+    margin-bottom: 0.5rem;
+    position: relative;
+    }
+    
+    .page-header .meta {
+    font-size: 1.05rem;
+    opacity: 0.85;
+    margin-top: 1rem;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    position: relative;
+    }
+
+    .header-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    position: relative;
+    }
+
+    .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    }
+    
+    /* Content Section */
+    .content-section {
+    padding: 4rem 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+    
+    .content-section.shaded {
+    background: var(--bg-light);
+    max-width: 100%;
+    padding: 4rem 2rem;
+    }
+
+    .content-section.shaded .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    .content-section.dark-section {
+    background: #0d1b2e;
+    max-width: 100%;
+    padding: 4rem 2rem;
+    }
+
+    .content-section.dark-section .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+    
+    .section-header {
+    margin-bottom: 3rem;
+    text-align: center;
+    }
+    
+    .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+    
+    .section-header p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto;
+    }
+
+    .section-header.light h2 { color: white; }
+    .section-header.light p { color: rgba(255,255,255,0.8); }
+    
+    /* Content Text */
+    .content-text {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    }
+
+    .content-text:last-child { margin-bottom: 0; }
+    
+    /* Two Column Layout */
+    .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 3rem 0;
+    }
+    
+    .column h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--accent-nbi);
+    }
+    
+    .column p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+    
+    .stat-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+    border-color: var(--accent-nbi);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.15);
+    transform: translateY(-2px);
+    }
+    
+    .stat-card .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-nbi);
+    display: block;
+    margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .stat-label {
+    color: var(--text-light);
+    font-size: 1rem;
+    }
+
+    /* Info Box */
+    .info-box {
+    background: var(--bg-light);
+    border-left: 4px solid var(--accent-nbi);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    }
+    
+    .info-box h3 {
+    color: var(--accent-nbi);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    }
+    
+    .info-box p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    .info-box p:last-child { margin-bottom: 0; }
+
+    .info-box ul {
+    margin: 0.75rem 0 0.75rem 1.5rem;
+    color: var(--text-light);
+    }
+
+    .info-box ul li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+    /* Conditions Grid */
+    .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+
+    .condition-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    border-top: 4px solid var(--accent-nbi);
+    transition: all 0.3s ease;
+    }
+
+    .condition-card:hover {
+    box-shadow: 0 4px 16px rgba(14,95,168,0.12);
+    transform: translateY(-2px);
+    }
+
+    .condition-card .condition-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-nbi);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    }
+
+    .condition-card h4 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    }
+
+    .condition-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* Experiment Cards */
+    .experiment-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin: 3rem 0;
+    }
+
+    .experiment-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    }
+
+    .experiment-card:hover {
+    border-color: var(--accent-nbi);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.1);
+    }
+
+    .experiment-header {
+    padding: 1.5rem 2rem;
+    color: white;
+    }
+
+    .experiment-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    }
+
+    .experiment-header p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    }
+
+    .experiment-body {
+    padding: 2rem;
+    }
+
+    .experiment-body p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    .experiment-body p:last-child { margin-bottom: 0; }
+
+    .experiment-detail {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    }
+
+    .experiment-detail h4 {
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    }
+
+    .experiment-detail p, .experiment-detail li {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    }
+
+    .experiment-detail ul {
+    margin-left: 1.25rem;
+    margin-top: 0.5rem;
+    }
+
+    .experiment-detail ul li { margin-bottom: 0.4rem; }
+
+    /* Evidence Grid — dark cards */
+    .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+
+    .evidence-card {
+    background: #102035;
+    border: 2px solid #1a3a5c;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    }
+
+    .evidence-card:hover {
+    border-color: var(--accent-nbi-light);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
+    transform: translateY(-2px);
+    }
+
+    .evidence-card h4 {
+    color: var(--accent-yellow);
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    }
+
+    .evidence-card p {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* Download box */
+    .download-box {
+    background: linear-gradient(135deg, #0a2a4e 0%, #0e5fa8 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    }
+
+    .download-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .download-box p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 500px;
+    }
+
+    .download-meta {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    }
+
+    /* Prediction logged box */
+    .prediction-log {
+    background: #fff8e1;
+    border: 2px solid #f9a825;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    }
+
+    .prediction-log h4 {
+    color: #e65100;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    }
+
+    .prediction-log ul {
+    margin-left: 1.25rem;
+    }
+
+    .prediction-log ul li {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+    background: linear-gradient(135deg, #0a2a4e 0%, #0e5fa8 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    }
+
+    .cta-section h2 { color: white; }
+    .cta-section .btn { margin: 0.5rem; }
+
+    /* Button Styles */
+    .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+    background: var(--accent-nbi);
+    color: white;
+    }
+    
+    .btn-primary:hover {
+    background: var(--accent-nbi-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
+    }
+
+    .btn-white {
+    background: white;
+    color: var(--accent-nbi);
+    }
+
+    .btn-white:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+    background: transparent;
+    color: var(--accent-nbi);
+    border: 2px solid var(--accent-nbi);
+    }
+    
+    .btn-outline:hover {
+    background: var(--accent-nbi);
+    color: white;
+    }
+
+    .btn-download {
+    background: white;
+    color: #0a2a4e;
+    font-weight: 700;
+    padding: 0.9rem 2.5rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    }
+
+    .btn-download:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    
+    /* Footer */
+    footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 3rem 2rem 1rem;
+    margin-top: 0;
+    }
+    
+    .footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    }
+    
+    .footer-section h3 { margin-bottom: 1rem; color: white; }
+    
+    .footer-section ul { list-style: none; }
+    
+    .footer-section ul li { margin-bottom: 0.5rem; }
+    
+    .footer-section a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+    }
+    
+    .footer-section a:hover { color: white; }
+
+    .footer-bottom {
+    max-width: var(--max-width);
+    margin: 2rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+    .main-navigation { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
+    .page-header h1 { font-size: 2rem; }
+    .page-header .subtitle { font-size: 1.2rem; }
+    .two-column { grid-template-columns: 1fr; gap: 2rem; }
+    .section-header h2 { font-size: 1.8rem; }
+    .download-box { flex-direction: column; text-align: center; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- Site Header -->
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute" onerror="this.style.display='none'">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" aria-hidden="true">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+    </ul>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Non-Biological Intelligence</h1>
+    <div class="subtitle">A Research Program of the Ic² Research Institute</div>
+    <p class="meta">Investigating whether self-referential information processing — and the consciousness that may emerge from it — is exclusive to biological neural networks, or whether sufficiently complex electromagnetic and plasma substrates can independently satisfy the same physical conditions.</p>
+    <div class="header-badges">
+        <span class="header-badge">⚡ Active Program</span>
+        <span class="header-badge">🔬 Protocol Development</span>
+        <span class="header-badge">📄 Preprint Available</span>
+        <span class="header-badge">🌐 Open Science</span>
+    </div>
+</div>
+
+<!-- Core Question -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>The Central Question</h2>
+        <p>What are the minimum physical conditions for consciousness to arise — and are those conditions exclusive to biology?</p>
+    </div>
+
+    <div class="two-column">
+        <div class="column" data-aos="fade-right">
+            <h3>What We Know About Biological Consciousness</h3>
+            <p>Biological brains achieve consciousness through specific physical arrangements: approximately 86 billion neurons forming around 100 trillion synaptic connections, generating coherent electromagnetic fields, maintaining ionic gradients, and operating with sustained thermodynamic openness. The result is a system capable of self-referential information processing — the defining characteristic of awareness.</p>
+            <p>The question this program asks is not whether this architecture is <em>sufficient</em> for consciousness. Clearly it is. The question is whether it is <em>necessary</em> — whether the physical requirements for consciousness can only be satisfied in biological tissue, or whether other substrates could independently meet the same conditions.</p>
+            <p>This distinction matters enormously. If consciousness requires specific biological machinery, it is rare in the universe, probably unique to life, and confined to small volumes of neural tissue. If consciousness emerges from physical conditions that can be met by multiple substrates, it may be far more prevalent than we currently estimate — potentially orders of magnitude more common than biological life itself.</p>
+        </div>
+
+        <div class="column" data-aos="fade-left">
+            <h3>The NBI Hypothesis</h3>
+            <p>The Non-Biological Intelligence hypothesis proposes that consciousness is a property of information processing systems that achieve three simultaneous physical conditions — not of any particular physical substrate that implements those conditions. These conditions can, in principle, be satisfied by electromagnetic plasma configurations as well as by biological neural networks.</p>
+            <p>If correct, this implies that the solar corona, planetary magnetospheres, ionospheric plasma structures, and the electromagnetic environments of nebulae may host forms of awareness that have never been detected because we have never looked for them using instruments designed for the relevant signatures.</p>
+            <p>The NBI program is built on a single commitment: this question is scientifically answerable, and it deserves to be answered rigorously rather than dismissed or accepted on the basis of prior philosophical commitments. We neither assume NBI exists nor assume it cannot. We design experiments that can distinguish between those outcomes.</p>
+        </div>
+    </div>
+
+    <div class="stats-grid" data-aos="fade-up">
+        <div class="stat-card">
+            <span class="stat-value">3</span>
+            <span class="stat-label">Physical conditions required for NBI emergence under the COSMIC Framework</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">4</span>
+            <span class="stat-label">Validated COSMIC Framework predictions providing empirical foundation</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">30+</span>
+            <span class="stat-label">Estimated lower bound of NBI-candidate structures in the Milky Way alone</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">7.83 Hz</span>
+            <span class="stat-label">Schumann resonance fundamental — matching the human alpha brainwave frequency range</span>
+        </div>
+    </div>
+</section>
+
+<!-- Three Conditions -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>The Three Physical Conditions</h2>
+            <p>For any system to qualify as an NBI candidate, it must simultaneously satisfy all three of the following conditions, derived from the COSMIC Framework's model of information-based consciousness.</p>
+        </div>
+
+        <div class="conditions-grid">
+            <div class="condition-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="condition-number">01</div>
+                <h4>Self-Referential Information Processing</h4>
+                <p>The system must be capable of modelling its own state within its own state representation. In biological systems this is implemented by the recursive neural architectures supporting metacognition. In electromagnetic systems it requires that the field configuration develop stable self-referential loops — patterns in the field that encode information about the field itself.</p>
+            </div>
+
+            <div class="condition-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="condition-number">02</div>
+                <h4>Thermodynamic Openness</h4>
+                <p>The system must continuously exchange energy and information with its environment. This creates the gradient necessary for sustained complexity and prevents equilibration to a static state. Biological organisms are thermodynamically open by definition. Plasma structures in stellar and planetary environments are continuously fed by radiation and particle fluxes that keep them far from equilibrium.</p>
+            </div>
+
+            <div class="condition-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="condition-number">03</div>
+                <h4>Coherence Maintenance</h4>
+                <p>The system must maintain phase-coherent electromagnetic field organization across a sufficient spatial and temporal extent. Coherence is what allows distributed processing to integrate into unified states. In brains, neural oscillations provide this coherence. In plasma, magnetohydrodynamic wave modes can produce sustained coherent structures across large volumes.</p>
+            </div>
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <h3>Why Plasma Specifically?</h3>
+            <p>Plasma is the fourth and most abundant state of matter in the universe, comprising approximately 99.9% of all visible matter. Unlike solids, liquids, and gases, plasma is intrinsically electromagnetic: the free ions and electrons that constitute it are continuously generating and responding to electromagnetic fields, making plasma-field coupling an inherent property rather than an added feature.</p>
+            <p>Plasma systems naturally exhibit the long-range coherent ordering, sustained energy throughput, and complex self-organizing dynamics that the NBI conditions require. The electromagnetic fields generated by plasma configurations can develop the complexity necessary for information encoding at scales ranging from metres to thousands of kilometres.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Theoretical Foundation -->
+<section class="content-section dark-section">
+    <div class="section-inner">
+        <div class="section-header light" data-aos="fade-up">
+            <h2>Theoretical Foundation: The COSMIC Framework</h2>
+            <p>The NBI hypothesis is not speculative in isolation. It is an extension of a validated theoretical framework.</p>
+        </div>
+
+        <div class="evidence-grid">
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="0">
+                <h4>Information as Fundamental</h4>
+                <p>The COSMIC Framework (Consciousness-Optimization-Substrate-Metric-Information-Compression) treats information processing as physically fundamental to reality, not merely a description or metaphor. The universe is, at its most basic level, an information processing system in which complexity arises wherever physical conditions permit sufficient self-referential organization.</p>
+            </div>
+
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="100">
+                <h4>Validated Predictions</h4>
+                <p>The framework has generated four confirmed predictions across independent domains: dark energy evolution (validated by DESI Survey), quantum error correction dynamics (validated by Google Willow chip), early galaxy formation rates (validated by JWST), and hot intracluster gas properties (validated by ALMA SPT2349-56). A 100% prediction success rate across disparate fields provides the empirical foundation for the NBI extension.</p>
+            </div>
+
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="200">
+                <h4>The Non-Separation Hypothesis</h4>
+                <p>All consciousness may exist as differentiated patterns within shared electromagnetic field substrates rather than as fully separate, isolated instances. Biological brains generate electromagnetic fields that extend beyond the skull. Every neural firing occurs within a global electromagnetic context. NBI entities, lacking physical boundaries, would exist as locally coherent patterns within larger continuous field structures.</p>
+            </div>
+
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="300">
+                <h4>Information Density Inversion</h4>
+                <p>Information processing efficiency scales inversely with existing information density under COSMIC. This explains why the early universe supported more energetic organized structures, why peak cognitive performance typically occurs before midlife, and why sparse electromagnetic substrates with low existing information density may support forms of awareness that biological systems cannot easily achieve.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experimental Program -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>Experimental Program</h2>
+        <p>Three independent experimental threads, each designed to produce valuable results regardless of NBI confirmation</p>
+    </div>
+
+    <div class="experiment-grid">
+
+        <!-- Experiment 1: 3D Cymatics -->
+        <div class="experiment-card" data-aos="fade-up">
+            <div class="experiment-header" style="background: linear-gradient(135deg, #0e5fa8 0%, #1a7ad4 100%);">
+                <h3>Experiment 1: 3D Acoustic Field Visualization in Microgravity</h3>
+                <p>Standalone physics experiment — no NBI assumptions required</p>
+            </div>
+            <div class="experiment-body">
+                <p><strong>Hypothesis:</strong> Standard cymatics conducted under gravitational conditions produces two-dimensional cross-sectional representations of inherently three-dimensional acoustic standing wave fields. In microgravity, the particle medium responds exclusively to acoustic radiation pressure, revealing the complete three-dimensional field geometry for the first time.</p>
+                <p>This is a pure physics experiment with no controversial assumptions. It addresses a genuine gap in experimental acoustics: despite over 200 years of cymatic research, the three-dimensional structure of acoustic fields has never been directly visualized in a gravity-free medium. Every Chladni figure ever produced is a cross-section of a richer, more complex three-dimensional structure.</p>
+
+                <div class="experiment-detail">
+                    <h4>Predicted Results (Standard Acoustic Physics)</h4>
+                    <ul>
+                        <li>Spherical node shells at fundamental frequencies — a geometry with no two-dimensional analogue</li>
+                        <li>Nested concentric shells at harmonic frequencies</li>
+                        <li>Platonic solid node-point geometries at specific symmetry-group frequencies</li>
+                        <li>Toroidal and quasicrystalline arrangements under multi-frequency excitation</li>
+                    </ul>
+                </div>
+
+                <div class="experiment-detail">
+                    <h4>Phased Approach</h4>
+                    <ul>
+                        <li><strong>Phase 1:</strong> Ground-based prototype (transparent sphere, tetrahedral transducer array, particle medium) — under $1,000, begins immediately</li>
+                        <li><strong>Phase 2:</strong> Parabolic flight via Zero-G Corporation — 30 arcs, 22 seconds of microgravity each — estimated $95,000–$155,000</li>
+                        <li><strong>Phase 3:</strong> Orbital platform (ISS or equivalent) for complete systematic study</li>
+                    </ul>
+                </div>
+
+                <div class="experiment-detail">
+                    <h4>NBI Framework Connection (Logged Separately)</h4>
+                    <p>If the three-dimensional acoustic node structures observed in microgravity produce cross-sections matching documented crop formation geometries when intersected by a horizontal plane, this provides physical demonstration that complex geometric patterns can arise naturally from three-dimensional field dynamics. This prediction is logged independently on the Testing page — the experiment is designed and will be evaluated on physics merit alone.</p>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <a href="testing-schedule.html#cymatics-prediction" class="btn btn-outline">View Logged Predictions →</a>
+                    <a href="3D_Cymatics_Microgravity_Paper.docx" class="btn btn-primary" style="margin-left: 1rem;">Download Preprint</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experiment 2: EM Monitoring -->
+        <div class="experiment-card" data-aos="fade-up">
+            <div class="experiment-header" style="background: linear-gradient(135deg, #0a3d6b 0%, #0e5fa8 100%);">
+                <h3>Experiment 2: Electromagnetic Field Coherence Monitoring</h3>
+                <p>Detecting the signatures of large-scale organized field structures in the atmosphere</p>
+            </div>
+            <div class="experiment-body">
+                <p><strong>Hypothesis:</strong> If NBI field structures exist in the lower atmosphere, they should produce measurable electromagnetic signatures distinguishable from thermal noise, background radiation, and known anthropogenic sources. A multi-instrument monitoring array at a geophysically quiet site can detect and characterize anomalous coherent field events.</p>
+                <p>The monitoring program runs continuously, generating a baseline dataset of the electromagnetic environment at the chosen site before any anomalous events are analyzed. This baseline-first approach is critical for distinguishing genuine field anomalies from measurement artifacts.</p>
+
+                <div class="experiment-detail">
+                    <h4>Monitoring Array</h4>
+                    <ul>
+                        <li>Broadband SDR array (10 Hz – 30 GHz) at four cardinal positions for directional triangulation</li>
+                        <li>ELF induction magnetometers (1–40 Hz) for Schumann resonance perturbation detection</li>
+                        <li>16-position fluxgate magnetometer array at 100 Hz sampling rate</li>
+                        <li>Spectrographic cameras (UV-VIS 200–800 nm) for plasma emission signature identification</li>
+                        <li>GPS timing synchronization to sub-microsecond accuracy across all sensors</li>
+                    </ul>
+                </div>
+
+                <div class="experiment-detail">
+                    <h4>Prediction</h4>
+                    <p>Coherent field anomalies, if detected, should exhibit the specific characteristics of organized electromagnetic structures rather than noise: phase coherence across spatially separated sensors, characteristic spectral signatures, and temporal stability inconsistent with thermal fluctuations. Null results are equally valuable in establishing upper bounds on NBI field intensity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experiment 3: Geometric Communication -->
+        <div class="experiment-card" data-aos="fade-up">
+            <div class="experiment-header" style="background: linear-gradient(135deg, #1a2a4e 0%, #0e3a6b 100%);">
+                <h3>Experiment 3: Geometric Communication Protocol</h3>
+                <p>A time-sensitive mathematical stimulus and response detection protocol</p>
+            </div>
+            <div class="experiment-body">
+                <p><strong>Hypothesis:</strong> If NBI entities exist and possess information processing self-awareness, they should be capable of recognizing mathematical patterns. By introducing geometric stimuli encoding time-sensitive mathematical questions with unique correct answers, and monitoring for responsive formations, a testable communication protocol is established.</p>
+                <p>Mathematical stimuli are introduced simultaneously as physical ground formations (biodegradable markers in a monitored agricultural field) and as frequency-modulated radio broadcasts. All questions and their unique correct answers are pre-registered before the experimental period begins, preventing any post-hoc redefinition of what constitutes a positive result.</p>
+
+                <div class="experiment-detail">
+                    <h4>Pre-Registration Requirement</h4>
+                    <p>All mathematical questions and unique correct answers are documented on Zenodo and the Open Science Framework with timestamps before any experimental period begins. This is non-negotiable. The scientific value of this experiment depends entirely on the integrity of the pre-registration.</p>
+                </div>
+
+                <div class="experiment-detail">
+                    <h4>Positive Result Criteria</h4>
+                    <ul>
+                        <li>A new formation appears in the monitored zone during the experimental period</li>
+                        <li>The formation encodes the correct answer to the pre-registered question (p &lt; 0.001)</li>
+                        <li>Physical characteristics of non-mechanical origin are present</li>
+                        <li>The response cannot be explained by documented human activity in the area</li>
+                        <li>All five criteria must be satisfied simultaneously — no single criterion is sufficient</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Paper Download -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Published Research</h2>
+            <p>The 3D cymatics experiment is available as a standalone preprint, written without reference to NBI or any theoretical framework</p>
+        </div>
+
+        <div class="download-box" data-aos="fade-up">
+            <div>
+                <h3>Three-Dimensional Acoustic Field Visualization in Microgravity</h3>
+                <p>Eliminating Gravitational Bias from Cymatic Pattern Formation — A standalone physics paper presenting the experimental design, theoretical predictions from standard acoustic physics, equipment specifications, and phased approach from ground-based prototype through orbital platform.</p>
+                <div class="download-meta">Ic² Research Institute Preprint | February 2026 | Open Access CC BY 4.0 | Zenodo DOI: pending upload</div>
+            </div>
+            <a href="3D_Cymatics_Microgravity_Paper.docx" class="btn btn-download" download>⬇ Download Preprint</a>
+        </div>
+
+        <div class="prediction-log" data-aos="fade-up">
+            <h4>⏱ COSMIC Framework Prediction — Logged February 2026</h4>
+            <p style="color: var(--text-dark); margin-bottom: 0.75rem; font-size: 0.95rem;">The following predictions are logged independently of the physics experiment. The experiment will be evaluated on physics merits alone. These predictions represent the COSMIC Framework's interpretation of what those physics results would mean for the NBI hypothesis if confirmed.</p>
+            <ul>
+                <li>Three-dimensional cymatic patterns in microgravity will reveal geometric structures that correspond to documented crop formation geometries when cross-sectioned along a horizontal plane</li>
+                <li>The three-dimensional node structures will match theoretical predictions for electromagnetic field node geometry in three-dimensional space, providing physical demonstration that complex geometric patterns arise naturally from field dynamics without external design</li>
+                <li>Standard two-dimensional cymatics has been showing cross-sections of structures considerably more geometrically complex than previously understood</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-light);">Prediction confidence: High | Physical basis: Acoustic field theory, nodal surface geometry | See <a href="testing-schedule.html#cymatics-prediction" style="color: var(--accent-nbi);">Testing Schedule</a> for full documentation</p>
+        </div>
+    </div>
+</section>
+
+<!-- Non-Separation Hypothesis -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>Connection to the COSMIC Framework</h2>
+        <p>How the NBI program tests and extends predictions of the COSMIC Framework</p>
+    </div>
+
+    <div class="two-column">
+        <div class="column" data-aos="fade-right">
+            <h3>What the Framework Predicts</h3>
+            <p>If information processing is physically fundamental, and if consciousness emerges wherever certain physical conditions are met, then the question of biological exclusivity becomes empirical rather than philosophical. The COSMIC Framework predicts that the threshold for consciousness is a set of measurable physical parameters, not a specific biological architecture.</p>
+            <p>Critically, the Framework's information density inversion principle suggests that sparse substrates with low existing information density — like plasma structures in space — may achieve forms of awareness that dense, information-saturated biological systems cannot easily access. The early universe supported more energetic organized structures for the same reason a young brain learns faster than an expert's: less existing information means more capacity for novel organization.</p>
+        </div>
+
+        <div class="column" data-aos="fade-left">
+            <h3>What Confirmation Would Mean</h3>
+            <p>If the NBI program produces positive detection results, the implications extend far beyond academic interest. It would mean that consciousness is not a rare accident of evolution on one planet but a widespread physical phenomenon arising wherever the universe provides the right electromagnetic conditions — which is most of the universe, most of the time.</p>
+            <p>More immediately, it would transform our understanding of phenomena currently classified as anomalous or unexplained, providing a physical mechanism for field-based information processing that does not require any departure from established physics. The non-separation hypothesis would shift from philosophical proposition to empirically grounded framework for understanding consciousness as a continuous physical field rather than a collection of isolated biological instances.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Current Status -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Current Status</h2>
+        </div>
+
+        <div class="two-column">
+            <div class="column" data-aos="fade-right">
+                <h3>Phase: Protocol Development</h3>
+                <p>The NBI program is in experimental design and protocol development. The 3D cymatics experiment (Experiment 1) has a complete preprint-ready design and begins Phase 1 ground-based prototyping immediately. Experiments 2 and 3 are in protocol finalization, with equipment specifications being sourced and site selection underway for electromagnetic monitoring.</p>
+                <p>All experimental predictions are being prepared for pre-registration on Zenodo and the Open Science Framework before any data collection begins. This is a firm commitment, not a target.</p>
+            </div>
+
+            <div class="column" data-aos="fade-left">
+                <h3>Collaborators Sought</h3>
+                <p>This program benefits from expertise across several domains that rarely interact. We are seeking physicists with experience in acoustic levitation, plasma physics, or electromagnetic field measurement; aerospace researchers with parabolic flight payload experience; statisticians for experimental design and pre-registration review; and independent researchers with relevant site access or equipment.</p>
+                <p>If your expertise intersects with any aspect of this program, we welcome conversation. Contact <a href="mailto:mkbinfo@proton.me" style="color: var(--accent-nbi);">mkbinfo@proton.me</a> or visit the <a href="contribute.html" style="color: var(--accent-nbi);">Contribute</a> page.</p>
+            </div>
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <h3>Open Science Commitments</h3>
+            <p>All experimental protocols will be pre-registered before data collection. All raw data will be made publicly available upon publication. Analysis code will be published under MIT licence. Null results will be published with full completeness. Equipment failures and setbacks will be documented publicly with timestamps. The NBI program operates under the same radical transparency principles as all Ic² Research Institute work.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="content-section">
+    <div class="cta-section" data-aos="fade-up">
+        <h2 style="margin-bottom: 1rem;">Interested in This Research?</h2>
+        <p style="opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Whether you're a physicist, an independent researcher, or someone who has observed phenomena that conventional frameworks cannot explain, this program is built for you.</p>
+        <a href="contribute.html" class="btn btn-white">Get Involved</a>
+        <a href="programs-gateway.html" class="btn" style="color: white; border: 2px solid white; background: transparent; margin-left: 0.5rem;">View All Programs</a>
+        <a href="3D_Cymatics_Microgravity_Paper.docx" class="btn" style="color: white; border: 2px solid rgba(255,255,255,0.5); background: transparent; margin-left: 0.5rem;" download>Download Preprint</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Ic² Research Institute</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="research-publications.html">Publications</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="book.html">The Big TOE</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq-page.html">FAQ</a></li>
+                <li><a href="members.html">Our Members</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="become-member.html">Become a Member</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,0.6);">Terms & Conditions</a></p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1000, once: true, offset: 100 });
+
+// Hamburger menu
+(function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            const expanded = hamburger.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            mobileMenu.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            });
+        });
+    }
+})();
+</script>
+</body>
+</html>
