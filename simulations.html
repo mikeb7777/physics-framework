@@ -8,6 +8,12 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
     <style>
     /* ── Site-wide styles (matching events.html exactly) ── */
     *{margin:0;padding:0;box-sizing:border-box;}
@@ -95,7 +101,7 @@
     .visualization .highlight{background:linear-gradient(90deg,rgba(79,195,247,.06) 0%,rgba(129,199,132,.06) 100%);border-radius:8px;padding:12px;margin:12px 0;border-left:4px solid #4fc3f7;}
     .visualization .highlight ul{padding-left:1.2em;}
     .visualization .highlight li{margin-bottom:.4em;}
-    .visualization .plot-container>div{width:100%;min-height:320px;}
+    .visualization .plot-container>div{width:100%;height:380px;}
 
     /* ── 3D sim wrappers ── */
     .sim-wrap{position:relative;width:100%;height:420px;border-radius:8px;overflow:hidden;background:#020408;cursor:grab;margin:8px 0;touch-action:none;}
@@ -406,7 +412,7 @@
 <script>
 (function(){
   const PL={responsive:true};
-  const dark={plot_bgcolor:'rgba(0,0,0,0)',paper_bgcolor:'rgba(0,0,0,0)',font:{color:'#fff'},margin:{t:48,l:56,r:24,b:50}};
+  const dark={plot_bgcolor:'rgba(0,0,0,0)',paper_bgcolor:'rgba(0,0,0,0)',font:{color:'#fff'},height:380,margin:{t:48,l:56,r:24,b:50},autosize:true};
   const grid={gridcolor:'rgba(255,255,255,.18)'};
 
   /* Fig 1 — π evolution */
@@ -450,7 +456,7 @@
     px.push(xi);py.push(yj);pz.push(Math.exp(-(xi*xi+yj*yj)/8)*Math.cos(xi)*Math.sin(yj));
   }
   Plotly.newPlot('peg-field',[{x:px,y:py,z:pz,type:'mesh3d',colorscale:[[0,'#0f0f23'],[.3,'#4fc3f7'],[.7,'#81c784'],[1,'#ffeb3b']],opacity:.85,showscale:true}],
-    Object.assign({},dark,{title:{text:'Information Pattern Density Field P(x,t)',font:{size:16,color:'#fff'}},scene:{xaxis:{title:'X',color:'#fff'},yaxis:{title:'Y',color:'#fff'},zaxis:{title:'P(x,t)',color:'#fff'},bgcolor:'rgba(0,0,0,0)'},margin:{t:48,l:0,r:0,b:0}}),PL);
+    Object.assign({},dark,{title:{text:'Information Pattern Density Field P(x,t)',font:{size:16,color:'#fff'}},scene:{xaxis:{title:'X',color:'#fff'},yaxis:{title:'Y',color:'#fff'},zaxis:{title:'P(x,t)',color:'#fff'},bgcolor:'rgba(0,0,0,0)'},height:420,margin:{t:48,l:0,r:0,b:0}}),PL);
 
   /* Fig 4 — Planck scale */
   const fs=[],pm=[];
@@ -524,29 +530,47 @@ function orbit(cam,el){
 }
 
 /* ─── shared: renderer setup ─── */
-function mkRend(cid,wid){
+function mkRend(cid,wid,bloom){
+  bloom=bloom||{strength:1.2,radius:0.55,threshold:0.18};
   const wrap=document.getElementById(wid),canvas=document.getElementById(cid);
   const W=wrap.clientWidth,H=wrap.clientHeight;
-  const rend=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});
+
+  const rend=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
   rend.setPixelRatio(Math.min(devicePixelRatio,2));
   rend.setSize(W,H);
   rend.setClearColor(0x020408);
+  rend.toneMapping=THREE.ACESFilmicToneMapping;
+  rend.toneMappingExposure=1.1;
+
   const cam=new THREE.PerspectiveCamera(45,W/H,.01,1000);
+
+  const composer=new THREE.EffectComposer(rend);
+  const bloomPass=new THREE.UnrealBloomPass(new THREE.Vector2(W,H),bloom.strength,bloom.radius,bloom.threshold);
+
+  function setScene(sc){
+    composer.passes=[];
+    composer.addPass(new THREE.RenderPass(sc,cam));
+    composer.addPass(bloomPass);
+  }
+
   window.addEventListener('resize',()=>{
     const w2=wrap.clientWidth,h2=wrap.clientHeight;
-    rend.setSize(w2,h2);cam.aspect=w2/h2;cam.updateProjectionMatrix();
+    rend.setSize(w2,h2);composer.setSize(w2,h2);
+    cam.aspect=w2/h2;cam.updateProjectionMatrix();
   });
-  return{rend,cam};
+
+  return{rend,cam,composer,setScene,bloomPass};
 }
 
 /* ═══════════════════════════════════════════
    SIM A — PEG GRAVITY
 ════════════════════════════════════════════ */
 (function(){
-  const {rend,cam}=mkRend('c-peg','w-peg');
+  const {rend,cam,composer,setScene}=mkRend('c-peg','w-peg',{strength:1.4,radius:0.6,threshold:0.15});
   cam.position.set(9,8,9);
   const sc=new THREE.Scene();
   const orb=orbit(cam,document.getElementById('w-peg'));
+  setScene(sc);
 
   sc.add(new THREE.AmbientLight(0x0a1020,5));
   const dl=new THREE.DirectionalLight(0x4fc3f7,3);dl.position.set(6,10,6);sc.add(dl);
@@ -566,7 +590,7 @@ function mkRend(cid,wid){
   /* wells */
   const wells=[{x:0,z:0,s:3,ph:0},{x:4,z:-3,s:2,ph:2.1},{x:-3,z:4,s:2.2,ph:4.2}];
   wells.forEach(w=>{
-    const m=new THREE.Mesh(new THREE.SphereGeometry(.28,14,14),new THREE.MeshStandardMaterial({color:0xffd700,emissive:0xffd700,emissiveIntensity:1.2,roughness:.1}));
+    const m=new THREE.Mesh(new THREE.SphereGeometry(.28,14,14),new THREE.MeshStandardMaterial({color:0xffd700,emissive:0xffd700,emissiveIntensity:2.5,roughness:.05}));
     m.position.set(w.x,.3,w.z);sc.add(m);
     const lp=new THREE.PointLight(0xffd700,4,7);lp.position.copy(m.position);sc.add(lp);
   });
@@ -592,7 +616,7 @@ function mkRend(cid,wid){
       clr.setXYZ(i,h*.9+.05,h*.55+.35,1-h*.5);
     }
     pos.needsUpdate=true;clr.needsUpdate=true;geo.computeVertexNormals();
-    orb.spin(.0025);rend.render(sc,cam);
+    orb.spin(.0025);composer.render();
   }tick();
 })();
 
@@ -600,10 +624,11 @@ function mkRend(cid,wid){
    SIM B — ENTANGLEMENT AS SPACETIME
 ════════════════════════════════════════════ */
 (function(){
-  const {rend,cam}=mkRend('c-ent','w-ent');
+  const {rend,cam,composer,setScene}=mkRend('c-ent','w-ent',{strength:1.8,radius:0.7,threshold:0.12});
   cam.position.set(0,7,18);
   const sc=new THREE.Scene();
   const orb=orbit(cam,document.getElementById('w-ent'));
+  setScene(sc);
 
   sc.add(new THREE.AmbientLight(0x040410,5));
   const dl=new THREE.DirectionalLight(0xa855f7,3);dl.position.set(-6,8,8);sc.add(dl);
@@ -615,7 +640,7 @@ function mkRend(cid,wid){
     const th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1),r=3+Math.random()*4;
     const pos=new THREE.Vector3(r*Math.sin(ph)*Math.cos(th),r*Math.sin(ph)*Math.sin(th),r*Math.cos(ph));
     const mesh=new THREE.Mesh(new THREE.SphereGeometry(.18,12,12),
-      new THREE.MeshStandardMaterial({color:0xa855f7,emissive:0xa855f7,emissiveIntensity:.6,roughness:.2,metalness:.5}));
+      new THREE.MeshStandardMaterial({color:0xa855f7,emissive:0xa855f7,emissiveIntensity:1.4,roughness:.15,metalness:.6}););
     mesh.position.copy(pos);sc.add(mesh);
     nodes.push({mesh,pos:pos.clone(),ph:Math.random()*Math.PI*2});
   }
@@ -645,11 +670,11 @@ function mkRend(cid,wid){
       nd.mesh.position.x=nd.pos.x+Math.sin(t*.25+nd.ph)*.25;
       nd.mesh.position.y=nd.pos.y+Math.cos(t*.3+nd.ph)*.25;
       nd.mesh.position.z=nd.pos.z+Math.sin(t*.2+nd.ph+1)*.25;
-      nd.mesh.material.emissiveIntensity=.35+Math.sin(t+nd.ph)*.3;
+      nd.mesh.material.emissiveIntensity=1.0+Math.sin(t+nd.ph)*.7;
     });
     links.forEach(l=>{l.lm.opacity=Math.max(.04,l.S*(.2+Math.sin(t*1.4+l.ph)*.15));});
     pl.position.set(Math.sin(t*.3)*6,5,Math.cos(t*.3)*6);
-    orb.spin(.002);rend.render(sc,cam);
+    orb.spin(.002);composer.render();
   }tick();
 })();
 
@@ -657,10 +682,11 @@ function mkRend(cid,wid){
    SIM C — ROTATION AS OPTIMIZATION
 ════════════════════════════════════════════ */
 (function(){
-  const {rend,cam}=mkRend('c-rot','w-rot');
+  const {rend,cam,composer,setScene}=mkRend('c-rot','w-rot',{strength:1.5,radius:0.65,threshold:0.14});
   cam.position.set(0,10,18);
   const sc=new THREE.Scene();
   const orb=orbit(cam,document.getElementById('w-rot'));
+  setScene(sc);
 
   sc.add(new THREE.AmbientLight(0x040420,5));
   const dl=new THREE.DirectionalLight(0x81c784,2);dl.position.set(8,10,5);sc.add(dl);
@@ -668,7 +694,7 @@ function mkRend(cid,wid){
 
   /* QUANTUM scale — inner torus + orbiting spin marker */
   const tor1=new THREE.Mesh(new THREE.TorusGeometry(.9,.14,10,50),
-    new THREE.MeshStandardMaterial({color:0xa855f7,emissive:0xa855f7,emissiveIntensity:.65,roughness:.2,metalness:.5}));
+    new THREE.MeshStandardMaterial({color:0xa855f7,emissive:0xa855f7,emissiveIntensity:1.6,roughness:.1,metalness:.6}));
   sc.add(tor1);
   const spinMk=new THREE.Mesh(new THREE.SphereGeometry(.17,12,12),
     new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xffffff,emissiveIntensity:.9}));
@@ -698,7 +724,7 @@ function mkRend(cid,wid){
   const apm=new THREE.PointsMaterial({color:0xffeb3b,size:.08,transparent:true,opacity:.4});
   const arms=new THREE.Points(apg,apm);sc.add(arms);
   sc.add(new THREE.Mesh(new THREE.SphereGeometry(.5,16,16),
-    new THREE.MeshStandardMaterial({color:0xffd700,emissive:0xffd700,emissiveIntensity:1.2,roughness:.1})));
+    new THREE.MeshStandardMaterial({color:0xffd700,emissive:0xffd700,emissiveIntensity:3.0,roughness:.05})));
 
   /* background stars */
   const bg=new THREE.BufferGeometry();const bp=new Float32Array(2400);for(let i=0;i<2400;i++)bp[i]=(Math.random()-.5)*65;
@@ -711,14 +737,14 @@ function mkRend(cid,wid){
     /* quantum */
     tor1.rotation.y+=.055;tor1.rotation.x=Math.sin(t*.5)*.4;
     spinMk.position.set(Math.cos(t*3)*.9,Math.sin(t*3)*.9*Math.sin(tor1.rotation.x+.3),Math.sin(t*3)*.9*Math.cos(tor1.rotation.x+.3));
-    spinMk.material.emissiveIntensity=.65+Math.sin(t*6)*.4;
+    spinMk.material.emissiveIntensity=1.8+Math.sin(t*6)*.9;
     /* vortex */
     rings.forEach((r2,i)=>{r2.rotation.y+=.018+i*.003;});
     vpm.opacity=.45+Math.sin(t*.8)*.1;
     /* galaxy */
     arms.rotation.y+=.004;apm.opacity=.35+Math.sin(t*.3)*.08;
     pl.position.set(Math.sin(t*.4)*5,6,Math.cos(t*.4)*5);
-    orb.spin(.002);rend.render(sc,cam);
+    orb.spin(.002);composer.render();
   }tick();
 })();
 
@@ -726,10 +752,11 @@ function mkRend(cid,wid){
    SIM D — FOUR FORCES
 ════════════════════════════════════════════ */
 (function(){
-  const {rend,cam}=mkRend('c-four','w-four');
+  const {rend,cam,composer,setScene}=mkRend('c-four','w-four',{strength:1.3,radius:0.55,threshold:0.16});
   cam.position.set(0,8,20);
   const sc=new THREE.Scene();
   const orb=orbit(cam,document.getElementById('w-four'));
+  setScene(sc);
 
   sc.add(new THREE.AmbientLight(0x050510,4));
   const dl=new THREE.DirectionalLight(0xffffff,1);dl.position.set(5,10,5);sc.add(dl);
@@ -742,7 +769,7 @@ function mkRend(cid,wid){
   ];
   const cores=FORCES.map(f=>{
     const m=new THREE.Mesh(new THREE.SphereGeometry(f.r,18,18),
-      new THREE.MeshStandardMaterial({color:f.col,emissive:f.col,emissiveIntensity:.7,roughness:.2,metalness:.6}));
+      new THREE.MeshStandardMaterial({color:f.col,emissive:f.col,emissiveIntensity:1.8,roughness:.1,metalness:.7}));
     m.position.copy(f.pos);sc.add(m);
     const lp=new THREE.PointLight(f.col,5,9);lp.position.copy(f.pos);sc.add(lp);
     return{mesh:m,lp,...f};
@@ -765,7 +792,7 @@ function mkRend(cid,wid){
     const grp=[];const N=fi===1?14:7;
     for(let k=0;k<N;k++){
       const m=new THREE.Mesh(new THREE.SphereGeometry(.09,8,8),
-        new THREE.MeshStandardMaterial({color:f.pCol,emissive:f.pCol,emissiveIntensity:.8}));
+        new THREE.MeshStandardMaterial({color:f.pCol,emissive:f.pCol,emissiveIntensity:2.0}));
       sc.add(m);
       const ti=(fi+1+Math.floor(Math.random()*3))%4;
       grp.push({mesh:m,t:Math.random(),spd:.5+Math.random()*.7,from:f.pos,to:FORCES[ti].pos,fi});
@@ -776,12 +803,12 @@ function mkRend(cid,wid){
   let t=0;
   function tick(){
     requestAnimationFrame(tick);t+=.012;
-    cores.forEach((c,i)=>{const s=1+Math.sin(t*1.5+i*1.5)*.1;c.mesh.scale.set(s,s,s);c.lp.intensity=4+Math.sin(t+i)*2;});
+    cores.forEach((c,i)=>{const s=1+Math.sin(t*1.5+i*1.5)*.1;c.mesh.scale.set(s,s,s);c.lp.intensity=6+Math.sin(t+i)*3;});
     carriers.forEach(grp=>grp.forEach(p=>{
       p.t=(p.t+p.spd*.008)%1;
       const pos=new THREE.Vector3().lerpVectors(p.from,p.to,p.t);
       if(p.fi===1)pos.y+=Math.sin(p.t*Math.PI)*2.2;/* EM arcs */
-      if(p.fi===2&&p.t>.47&&p.t<.53){p.mesh.material.emissiveIntensity=3.5;p.mesh.scale.setScalar(2);}
+      if(p.fi===2&&p.t>.47&&p.t<.53){p.mesh.material.emissiveIntensity=6.0;p.mesh.scale.setScalar(2.2);}
       else{p.mesh.material.emissiveIntensity=.8;p.mesh.scale.setScalar(1);}
       p.mesh.position.copy(pos);
     }));
@@ -789,7 +816,7 @@ function mkRend(cid,wid){
       const a=cores[i].mesh.position,b=cores[j].mesh.position,arr=lg.attributes.position.array;
       arr[0]=a.x;arr[1]=a.y;arr[2]=a.z;arr[3]=b.x;arr[4]=b.y;arr[5]=b.z;lg.attributes.position.needsUpdate=true;
     });
-    orb.spin(.002);rend.render(sc,cam);
+    orb.spin(.002);composer.render();
   }tick();
 })();
 
@@ -797,10 +824,11 @@ function mkRend(cid,wid){
    SIM E — QUANTUM SCRAMBLING
 ════════════════════════════════════════════ */
 (function(){
-  const {rend,cam}=mkRend('c-scram','w-scram');
+  const {rend,cam,composer,setScene}=mkRend('c-scram','w-scram',{strength:1.6,radius:0.6,threshold:0.10});
   cam.position.set(0,10,16);
   const sc=new THREE.Scene();
   const orb=orbit(cam,document.getElementById('w-scram'));
+  setScene(sc);
 
   sc.add(new THREE.AmbientLight(0x030310,5));
   const dl=new THREE.DirectionalLight(0x81c784,2);dl.position.set(5,8,5);sc.add(dl);
@@ -821,7 +849,7 @@ function mkRend(cid,wid){
 
   HEX.forEach(({ring,q})=>q.forEach(([x,z])=>{
     const geo=new THREE.SphereGeometry(ring===0?.26:.18,12,12);
-    const mat=new THREE.MeshStandardMaterial({color:ring===0?0xffffff:0x334488,emissive:ring===0?0xffffff:0x334488,emissiveIntensity:ring===0?1.5:.2,roughness:.35});
+    const mat=new THREE.MeshStandardMaterial({color:ring===0?0xffffff:0x334488,emissive:ring===0?0xffffff:0x334488,emissiveIntensity:ring===0?3.5:.25,roughness:.25});
     const mesh=new THREE.Mesh(geo,mat);
     mesh.position.set(x,0,z);sc.add(mesh);
     qubits.push({mesh,pos:new THREE.Vector3(x,0,z),ring});
@@ -846,12 +874,12 @@ function mkRend(cid,wid){
       const d=q.pos.length(),atF=Math.abs(d-front)<1.1,inF=d<=Math.max(0,front);
       if(atF){
         q.mesh.material.color.setHex(0xffffff);q.mesh.material.emissive.setHex(0x81c784);
-        q.mesh.material.emissiveIntensity=3.5;q.mesh.scale.setScalar(1.6);
+        q.mesh.material.emissiveIntensity=6.0;q.mesh.scale.setScalar(1.7);
       }else if(inF){
         const lv=Math.max(0,1-(front-d)/maxR);
         const c=new THREE.Color().setHSL(.6-lv*.4,1,.5+lv*.2);
         q.mesh.material.color.copy(c);q.mesh.material.emissive.copy(c);
-        q.mesh.material.emissiveIntensity=.55+lv*.5;q.mesh.scale.setScalar(1);
+        q.mesh.material.emissiveIntensity=1.2+lv*1.0;q.mesh.scale.setScalar(1);
       }else{
         q.mesh.material.color.setHex(0x334488);q.mesh.material.emissive.setHex(0x334488);
         q.mesh.material.emissiveIntensity=.18;q.mesh.scale.setScalar(1);
@@ -862,7 +890,7 @@ function mkRend(cid,wid){
       lm.opacity=mid<=Math.max(0,front)?.28:.06;
     });
     pl.position.set(Math.sin(fr*.04)*5,6,Math.cos(fr*.04)*5);
-    orb.spin(.002);rend.render(sc,cam);
+    orb.spin(.002);composer.render();
   }tick();
 })();
 
@@ -870,10 +898,11 @@ function mkRend(cid,wid){
    SIM F — PHASE TRANSITION BIG BANG
 ════════════════════════════════════════════ */
 (function(){
-  const {rend,cam}=mkRend('c-bang','w-bang');
+  const {rend,cam,composer,setScene}=mkRend('c-bang','w-bang',{strength:2.0,radius:0.75,threshold:0.10});
   cam.position.set(0,10,18);
   const sc=new THREE.Scene();
   const orb=orbit(cam,document.getElementById('w-bang'));
+  setScene(sc);
 
   sc.add(new THREE.AmbientLight(0x050505,4));
   const pl=new THREE.PointLight(0xffd700,16,32);pl.position.set(0,3,0);sc.add(pl);
@@ -931,7 +960,7 @@ function mkRend(cid,wid){
       else if(f<.38){
         const tf=(f-.25)/.13;
         sMat.color.setRGB(.25+tf*.75,.25+tf*.45,1);sMat.opacity=.5+tf*.45;sMat.size=.13+tf*.08;
-        tGlow.visible=true;tGlow.material.emissiveIntensity=tf*5;pl.intensity=16+tf*30;
+        tGlow.visible=true;tGlow.material.emissiveIntensity=tf*8;pl.intensity=16+tf*45;
       }else{
         sMat.opacity=Math.max(0,.95-(f-.38)/.27);tGlow.visible=false;pl.intensity=Math.max(16,46-(f-.38)/.27*30);
       }
@@ -943,7 +972,7 @@ function mkRend(cid,wid){
       lattice.forEach(node=>{
         const show=node.dist<=maxD;node.m.visible=show;
         if(show){const mat=Math.max(0,Math.min(1,(maxD-node.dist)/2));
-          node.m.material.emissiveIntensity=.3+mat*.7;const s=.4+mat*.6;node.m.scale.setScalar(s);
+          node.m.material.emissiveIntensity=1.0+mat*1.5;const s=.4+mat*.6;node.m.scale.setScalar(s);
           node.m.position.copy(node.op);}
       });
       pl.intensity=Math.max(16,46-cf*30);pl2.intensity=8+cf*6;
@@ -954,7 +983,7 @@ function mkRend(cid,wid){
       const ef=(f-.7)/.3;
       lattice.forEach(node=>{
         node.m.visible=true;
-        node.m.material.emissiveIntensity=Math.max(0,.9*(1-ef));
+        node.m.material.emissiveIntensity=Math.max(0,2.0*(1-ef));
         node.m.material.transparent=true;node.m.material.opacity=1-ef*.75;
         node.m.position.set(node.op.x*(1+ef*1.8),node.op.y*(1+ef*1.8),node.op.z*(1+ef*1.8));
       });
@@ -965,7 +994,7 @@ function mkRend(cid,wid){
     if(f<.38) lattice.forEach(n=>{n.m.visible=false;n.m.position.copy(n.op);});
 
     pl.position.set(Math.sin(fr*.03)*2.5,3,Math.cos(fr*.03)*2.5);
-    orb.spin(.002);rend.render(sc,cam);
+    orb.spin(.002);composer.render();
   }tick();
 })();
 
