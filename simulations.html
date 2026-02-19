@@ -6,14 +6,9 @@
     <title>Simulations - Ic² Research Institute</title>
     <meta name="description" content="Interactive simulations and visualizations from the Ic² Research Institute (COSMIC Framework).">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
     <style>
     /* ── Site-wide styles (matching events.html exactly) ── */
     *{margin:0;padding:0;box-sizing:border-box;}
@@ -106,7 +101,7 @@
     /* ── 3D sim wrappers ── */
     .sim-wrap{position:relative;width:100%;height:420px;border-radius:8px;overflow:hidden;background:#020408;cursor:grab;margin:8px 0;touch-action:none;}
     .sim-wrap:active{cursor:grabbing;}
-    .sim-wrap canvas{display:block;width:100%!important;height:100%!important;}
+    .sim-wrap canvas{display:block;}  /* Three.js owns canvas dimensions — no CSS override */
     .sim-tl{position:absolute;top:10px;left:10px;pointer-events:none;}
     .sim-tr{position:absolute;top:10px;right:10px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:none;}
     .sim-live{display:flex;align-items:center;gap:5px;font-size:.68em;color:#81c784;font-family:'Courier New',monospace;}
@@ -174,7 +169,7 @@
     <h2>1. Mathematical Constant Evolution Across WMAP Frequencies</h2>
     <div class="figure-container">
       <div class="figure-title">Figure 1: π Evolution and Critical Frequency Detection</div>
-      <div class="plot-container"><div id="pi-evolution"></div></div>
+      <div class="plot-container"><div id="pi-evolution" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">Statistical detection of π evolution across WMAP frequency bands (23–94 GHz) showing systematic progression from −0.68σ to +0.21σ with correlation r=0.91. The 61 GHz critical frequency marks the zero-crossing point.</div>
     </div>
 
@@ -182,12 +177,12 @@
     <div class="grid">
       <div class="figure-container">
         <div class="figure-title">Figure 2A: Mathematical Constant Resonance Patterns</div>
-        <div class="plot-container"><div id="constant-resonance"></div></div>
+        <div class="plot-container"><div id="constant-resonance" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">Frequency-dependent behaviour of mathematical constants showing φ resonance peak at the 61 GHz critical frequency.</div>
       </div>
       <div class="figure-container">
         <div class="figure-title">Figure 2B: Inter-Constant Coupling Matrix</div>
-        <div class="plot-container"><div id="coupling-matrix"></div></div>
+        <div class="plot-container"><div id="coupling-matrix" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">Coupling strength matrix between mathematical constants showing strongest interactions between φ and √5.</div>
       </div>
     </div>
@@ -195,14 +190,14 @@
     <h2>3. Pattern-Emergent Gravity Field Visualization</h2>
     <div class="figure-container">
       <div class="figure-title">Figure 3: Information Pattern Density and Gravitational Effects</div>
-      <div class="plot-container"><div id="peg-field"></div></div>
+      <div class="plot-container"><div id="peg-field" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">3D visualization of information pattern density P(x,t) and resulting gravitational field modifications. PEG theory: g_μν = η_μν + α∇_μ∇_νP(x,t)</div>
     </div>
 
     <h2>4. TransPlanck Dynamics Scale Modification</h2>
     <div class="figure-container">
       <div class="figure-title">Figure 4: Dynamic Planck Scale vs. Mathematical Field Strength</div>
-      <div class="plot-container"><div id="planck-scale"></div></div>
+      <div class="plot-container"><div id="planck-scale" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">Effective Planck length modification by mathematical constant fields. Red dashed line = traditional Planck limit; blue filled area = field-enhanced sub-Planck accessibility.</div>
     </div>
 
@@ -210,12 +205,12 @@
     <div class="grid">
       <div class="figure-container">
         <div class="figure-title">Figure 5A: Cosmic Quantization Timeline</div>
-        <div class="plot-container"><div id="quantization-timeline"></div></div>
+        <div class="plot-container"><div id="quantization-timeline" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">Evolution from continuous to discrete optimization showing 61 GHz phase transition.</div>
       </div>
       <div class="figure-container">
         <div class="figure-title">Figure 5B: Energy Level Optimization</div>
-        <div class="plot-container"><div id="energy-optimization"></div></div>
+        <div class="plot-container"><div id="energy-optimization" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">Quantum energy levels as optimization solutions with adaptive spacing based on efficiency.</div>
       </div>
     </div>
@@ -223,14 +218,14 @@
     <h2>6. Dual-Process Energy Dynamics</h2>
     <div class="figure-container">
       <div class="figure-title">Figure 6: E = mc² vs. E = Ic² Energy Contributions</div>
-      <div class="plot-container"><div id="dual-energy"></div></div>
+      <div class="plot-container"><div id="dual-energy" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">Comparison of classical mass-energy (Einstein) vs. information-energy (COSMIC) showing opposing entropy dynamics and net efficiency optimization.</div>
     </div>
 
     <h2>7. Cosmic Scale Information Processing</h2>
     <div class="figure-container">
       <div class="figure-title">Figure 7: Universe–Brain Network Topology</div>
-      <div class="plot-container"><div id="cosmic-network"></div></div>
+      <div class="plot-container"><div id="cosmic-network" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">Network analysis of cosmic web structure (100M–1B light-year scales) showing brain-like topology with mathematical constant signatures in filament curvatures and node distributions.</div>
     </div>
 
@@ -407,599 +402,858 @@
 </script>
 
 <!-- ══════════════════════════════════════════════
-     PLOTLY CHARTS
+     CHARTS  (Chart.js + pure canvas)
 ══════════════════════════════════════════════ -->
 <script>
-(function(){
-  const PL={responsive:true};
-  const dark={plot_bgcolor:'rgba(0,0,0,0)',paper_bgcolor:'rgba(0,0,0,0)',font:{color:'#fff'},height:380,margin:{t:48,l:56,r:24,b:50},autosize:true};
-  const grid={gridcolor:'rgba(255,255,255,.18)'};
+window.addEventListener('load', function() {
 
-  /* Fig 1 — π evolution */
-  Plotly.newPlot('pi-evolution',[{
-    x:[23,33,41,61,94],y:[-0.68,-0.28,-0.18,0.04,0.21],
-    error_y:{type:'data',array:[0.05,0.04,0.04,0.03,0.05],visible:true,color:'#ff6b6b'},
-    type:'scatter',mode:'lines+markers',name:'π Evolution',
-    marker:{size:12,color:'#4fc3f7',line:{width:2,color:'#fff'}},
-    line:{width:3,color:'#4fc3f7'}
-  },{
-    x:[61,61],y:[-0.85,0.35],type:'scatter',mode:'lines',name:'Critical 61 GHz',
-    line:{width:3,color:'#ffeb3b',dash:'dash'}
-  }],Object.assign({},dark,{
-    title:{text:'π Statistical Evolution Across WMAP Frequencies',font:{size:16,color:'#fff'}},
-    xaxis:{title:'Frequency (GHz)',color:'#fff',...grid},
-    yaxis:{title:'Statistical Deviation (σ)',color:'#fff',...grid},showlegend:true
-  }),PL);
+  /* ── Shared theme ── */
+  var C = {
+    teal:   '#4fc3f7',
+    green:  '#81c784',
+    gold:   '#ffeb3b',
+    orange: '#ffb74d',
+    red:    '#ff6b6b',
+    purple: '#ce93d8',
+    bg:     'rgba(0,0,0,0)',
+    grid:   'rgba(255,255,255,0.15)',
+    text:   '#ffffff',
+    label:  '#b0c4de'
+  };
 
-  /* Fig 2A — constant resonance */
-  const fr=[],pi=[],phi=[],sq5=[];
-  for(let i=0;i<=100;i++){const f=20+80*i/100;fr.push(f);pi.push(Math.tanh((f-61)/10));phi.push(Math.exp(-((f-61)/15)**2));sq5.push(.5+.5*Math.tanh((f-61)/20));}
-  Plotly.newPlot('constant-resonance',[
-    {x:fr,y:pi, type:'scatter',mode:'lines',name:'π Field', line:{width:3,color:'#4fc3f7'}},
-    {x:fr,y:phi,type:'scatter',mode:'lines',name:'φ Field (Golden Ratio)',line:{width:3,color:'#ffeb3b'}},
-    {x:fr,y:sq5,type:'scatter',mode:'lines',name:'√5 Field',line:{width:3,color:'#81c784'}}
-  ],Object.assign({},dark,{title:{text:'Mathematical Constant Field Resonance Patterns',font:{size:16,color:'#fff'}},xaxis:{title:'Frequency (GHz)',color:'#fff',...grid},yaxis:{title:'Field Strength (normalized)',color:'#fff',...grid}}),PL);
+  Chart.defaults.color          = C.text;
+  Chart.defaults.borderColor    = C.grid;
+  Chart.defaults.backgroundColor = C.bg;
 
-  /* Fig 2B — coupling matrix */
-  const consts=['π','φ','√5','e','√3'];
-  Plotly.newPlot('coupling-matrix',[{
-    z:[[1,.8,.6,.4,.3],[.8,1,.9,.5,.4],[.6,.9,1,.7,.8],[.4,.5,.7,1,.6],[.3,.4,.8,.6,1]],
-    x:consts,y:consts,type:'heatmap',
-    colorscale:[[0,'#0f0f23'],[.5,'#4fc3f7'],[1,'#ffeb3b']],showscale:true,
-    colorbar:{title:'Coupling',titlefont:{color:'#fff'},tickfont:{color:'#fff'}}
-  }],Object.assign({},dark,{title:{text:'Mathematical Constant Inter-Coupling Matrix',font:{size:16,color:'#fff'}},xaxis:{color:'#fff'},yaxis:{color:'#fff'}}),PL);
-
-  /* Fig 3 — PEG field */
-  const px=[],py=[],pz=[];
-  for(let i=0;i<20;i++)for(let j=0;j<20;j++){
-    const xi=-5+10*i/19,yj=-5+10*j/19;
-    px.push(xi);py.push(yj);pz.push(Math.exp(-(xi*xi+yj*yj)/8)*Math.cos(xi)*Math.sin(yj));
+  function darkAxes(extra) {
+    return Object.assign({
+      ticks: { color: C.label },
+      grid:  { color: C.grid  }
+    }, extra || {});
   }
-  Plotly.newPlot('peg-field',[{x:px,y:py,z:pz,type:'mesh3d',colorscale:[[0,'#0f0f23'],[.3,'#4fc3f7'],[.7,'#81c784'],[1,'#ffeb3b']],opacity:.85,showscale:true}],
-    Object.assign({},dark,{title:{text:'Information Pattern Density Field P(x,t)',font:{size:16,color:'#fff'}},scene:{xaxis:{title:'X',color:'#fff'},yaxis:{title:'Y',color:'#fff'},zaxis:{title:'P(x,t)',color:'#fff'},bgcolor:'rgba(0,0,0,0)'},height:420,margin:{t:48,l:0,r:0,b:0}}),PL);
 
-  /* Fig 4 — Planck scale */
-  const fs=[],pm=[];
-  for(let i=0;i<=50;i++){const f=i/10;fs.push(f);pm.push(1/Math.sqrt(1+f));}
-  Plotly.newPlot('planck-scale',[
-    {x:fs,y:pm,type:'scatter',mode:'lines',fill:'tozeroy',fillcolor:'rgba(79,195,247,.25)',line:{width:4,color:'#4fc3f7'},name:'Effective Planck Scale'},
-    {x:[0,5],y:[1,1],type:'scatter',mode:'lines',line:{width:3,color:'#ff6b6b',dash:'dash'},name:'Traditional Planck Limit'}
-  ],Object.assign({},dark,{title:{text:'Dynamic Planck Scale Modification',font:{size:16,color:'#fff'}},xaxis:{title:'Mathematical Field Strength',color:'#fff',...grid},yaxis:{title:'ℓ_P,eff / ℓ_P,0',color:'#fff',...grid}}),PL);
-
-  /* Fig 5A — quantization timeline */
-  const tlabels=['Big Bang','Critical Transition','Particle Formation','Nucleosynthesis','Present'];
-  const qlvl=[0,.5,.8,.95,1.0];
-  Plotly.newPlot('quantization-timeline',[{
-    x:[0,1e-12,1e-6,1,1e10],y:qlvl,type:'scatter',mode:'lines+markers',
-    marker:{size:12,color:qlvl,colorscale:[[0,'#ff6b6b'],[.5,'#ffeb3b'],[1,'#81c784']],showscale:true,
-      colorbar:{title:'Quantization Level',titlefont:{color:'#fff'},tickfont:{color:'#fff'}}},
-    line:{width:4,color:'#4fc3f7'},text:tlabels,textposition:'top center'
-  }],Object.assign({},dark,{title:{text:'Cosmic Quantization Evolution',font:{size:16,color:'#fff'}},xaxis:{title:'Time (seconds)',type:'log',color:'#fff',...grid},yaxis:{title:'Quantization Degree',color:'#fff',...grid},margin:{t:48,l:56,r:88,b:50}}),PL);
-
-  /* Fig 5B — energy optimization */
-  const el=[],ef=[];
-  for(let n=1;n<=10;n++){el.push(n*(n+1)/2);ef.push(1/Math.sqrt(n));}
-  Plotly.newPlot('energy-optimization',[{x:el,y:ef,type:'scatter',mode:'markers',
-    marker:{size:15,color:ef,colorscale:[[0,'#ff6b6b'],[1,'#81c784']],showscale:false,line:{width:2,color:'#fff'}},name:'Quantum Energy Levels'}],
-    Object.assign({},dark,{title:{text:'Energy Level Optimization Efficiency',font:{size:16,color:'#fff'}},xaxis:{title:'Energy Level',color:'#fff',...grid},yaxis:{title:'Optimization Efficiency',color:'#fff',...grid}}),PL);
-
-  /* Fig 6 — dual energy */
-  const procs=['Standard Metabolism','Information Processing','Net System'];
-  Plotly.newPlot('dual-energy',[
-    {x:procs,y:[.8,-.6,.2],type:'bar',name:'Entropy Change (ΔS)',marker:{color:['#ff6b6b','#81c784','#4fc3f7']}},
-    {x:procs,y:[.3,.85,.6],type:'bar',name:'Energy Efficiency',yaxis:'y2',marker:{color:['rgba(255,107,107,.5)','rgba(129,199,132,.5)','rgba(79,195,247,.5)']}}
-  ],Object.assign({},dark,{title:{text:'Dual-Process Energy Dynamics: E = mc² + Ic²',font:{size:16,color:'#fff'}},
-    xaxis:{title:'Process Type',color:'#fff'},yaxis:{title:'Entropy Change',color:'#fff',...grid},
-    yaxis2:{title:'Energy Efficiency',overlaying:'y',side:'right',color:'#fff'},margin:{t:48,l:56,r:80,b:60}}),PL);
-
-  /* Fig 7 — cosmic network */
-  const nX=[],nY=[];
-  for(let i=0;i<50;i++){nX.push(Math.random()*10-5);nY.push(Math.random()*10-5);}
-  const netT=[{x:nX,y:nY,type:'scatter',mode:'markers',marker:{size:12,color:'#ffeb3b',line:{width:2,color:'#fff'}},name:'Galaxy Clusters'}];
-  for(let i=0;i<50;i++)for(let j=i+1;j<50;j++){
-    if(Math.hypot(nX[i]-nX[j],nY[i]-nY[j])<2.5&&Math.random()>.6)
-      netT.push({x:[nX[i],nX[j],null],y:[nY[i],nY[j],null],type:'scatter',mode:'lines',line:{width:2,color:'rgba(79,195,247,.6)'},showlegend:false});
+  /* inject a canvas into a div and return its 2d context */
+  function ctx(id) {
+    var wrap  = document.getElementById(id);
+    var canvas = document.createElement('canvas');
+    canvas.style.display = 'block';
+    wrap.appendChild(canvas);
+    return canvas.getContext('2d');
   }
-  Plotly.newPlot('cosmic-network',netT,Object.assign({},dark,{title:{text:'Cosmic Web Network Topology (100M–1B ly scales)',font:{size:16,color:'#fff'}},xaxis:{title:'Cosmic X',color:'#fff',...{gridcolor:'rgba(255,255,255,.1)'}},yaxis:{title:'Cosmic Y',color:'#fff',...{gridcolor:'rgba(255,255,255,.1)'}}}),PL);
-})();
+
+  /* ── Fig 1: π Evolution (line + error bars) ── */
+  (function() {
+    var c = ctx('pi-evolution');
+    var freqs = [23,33,41,61,94];
+    var vals  = [-0.68,-0.28,-0.18,0.04,0.21];
+    var errs  = [0.05,0.04,0.04,0.03,0.05];
+
+    /* custom error-bar plugin */
+    var errPlugin = {
+      id: 'errorbars',
+      afterDatasetsDraw: function(chart) {
+        var ctx2 = chart.ctx;
+        chart.data.datasets[0].data.forEach(function(val, i) {
+          var meta = chart.getDatasetMeta(0);
+          var pt   = meta.data[i];
+          if (!pt) return;
+          var e = errs[i], yTop = chart.scales.y.getPixelForValue(vals[i]+e),
+              yBot = chart.scales.y.getPixelForValue(vals[i]-e), x = pt.x;
+          ctx2.save();
+          ctx2.strokeStyle = C.red; ctx2.lineWidth = 2;
+          ctx2.beginPath(); ctx2.moveTo(x, yTop); ctx2.lineTo(x, yBot); ctx2.stroke();
+          ctx2.beginPath(); ctx2.moveTo(x-6, yTop); ctx2.lineTo(x+6, yTop); ctx2.stroke();
+          ctx2.beginPath(); ctx2.moveTo(x-6, yBot); ctx2.lineTo(x+6, yBot); ctx2.stroke();
+          ctx2.restore();
+        });
+      }
+    };
+
+    new Chart(c, {
+      type: 'line',
+      plugins: [errPlugin],
+      data: {
+        labels: freqs.map(function(f){ return f+' GHz'; }),
+        datasets: [{
+          label: 'π Evolution',
+          data: vals,
+          borderColor: C.teal, backgroundColor: 'rgba(79,195,247,0.15)',
+          pointBackgroundColor: C.teal, pointRadius: 7, pointBorderColor: '#fff', pointBorderWidth: 2,
+          borderWidth: 3, tension: 0.3, fill: false
+        },{
+          label: 'Critical 61 GHz',
+          data: [{x:'61 GHz',y:-0.85},{x:'61 GHz',y:0.35}],
+          borderColor: C.gold, borderWidth: 3, borderDash: [8,4],
+          pointRadius: 0, fill: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels:{ color: C.text }},
+          title: { display: true, text: 'π Statistical Evolution Across WMAP Frequencies', color: C.teal, font:{size:15} }},
+        scales: { x: darkAxes({ title:{display:true,text:'Frequency (GHz)',color:C.label} }),
+                  y: darkAxes({ title:{display:true,text:'Statistical Deviation (σ)',color:C.label} }) }
+      }
+    });
+  }());
+
+  /* ── Fig 2A: Constant Resonance (multi-line) ── */
+  (function() {
+    var c = ctx('constant-resonance');
+    var freqs = [], piD = [], phiD = [], sq5D = [];
+    for (var i = 0; i <= 80; i++) {
+      var f = 20 + 80*i/80;
+      freqs.push(Math.round(f));
+      piD.push(Math.tanh((f-61)/10));
+      phiD.push(Math.exp(-Math.pow((f-61)/15,2)));
+      sq5D.push(0.5+0.5*Math.tanh((f-61)/20));
+    }
+    new Chart(c, {
+      type: 'line',
+      data: {
+        labels: freqs,
+        datasets: [
+          { label:'π Field',       data: piD,  borderColor: C.teal,   borderWidth:2.5, pointRadius:0, fill:false, tension:0.4 },
+          { label:'φ (Golden Ratio)',data:phiD, borderColor: C.gold,   borderWidth:2.5, pointRadius:0, fill:false, tension:0.4 },
+          { label:'√5 Field',      data: sq5D, borderColor: C.green,  borderWidth:2.5, pointRadius:0, fill:false, tension:0.4 }
+        ]
+      },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        plugins: { legend:{labels:{color:C.text}}, title:{display:true,text:'Mathematical Constant Resonance Patterns',color:C.teal,font:{size:14}} },
+        scales: { x: darkAxes({title:{display:true,text:'Frequency (GHz)',color:C.label}, ticks:{maxTicksLimit:8,color:C.label}}),
+                  y: darkAxes({title:{display:true,text:'Field Strength',color:C.label}}) }
+      }
+    });
+  }());
+
+  /* ── Fig 2B: Coupling Matrix (pure canvas heatmap) ── */
+  (function() {
+    var wrap = document.getElementById('coupling-matrix');
+    var canvas = document.createElement('canvas');
+    canvas.width  = wrap.offsetWidth  || 500;
+    canvas.height = wrap.offsetHeight || 380;
+    canvas.style.display='block';
+    wrap.appendChild(canvas);
+    var cx = canvas.getContext('2d');
+    var labels = ['π','φ','√5','e','√3'];
+    var matrix = [[1,.8,.6,.4,.3],[.8,1,.9,.5,.4],[.6,.9,1,.7,.8],[.4,.5,.7,1,.6],[.3,.4,.8,.6,1]];
+    var pad=55, cw=(canvas.width-pad*2)/5, ch=(canvas.height-pad*2)/5;
+    cx.fillStyle='#0f0f1a'; cx.fillRect(0,0,canvas.width,canvas.height);
+    for (var r=0;r<5;r++) for (var col2=0;col2<5;col2++) {
+      var v=matrix[r][col2];
+      var g=cx.createLinearGradient(0,0,0,1);
+      /* colour: low = dark blue, high = gold */
+      var ri=Math.round(v*240), gi=Math.round(v*200+55), bi=Math.round((1-v)*220+35);
+      cx.fillStyle='rgb('+ri+','+gi+','+bi+')';
+      cx.fillRect(pad+col2*cw, pad+r*ch, cw-2, ch-2);
+      cx.fillStyle='rgba(0,0,0,0.55)'; cx.font='bold '+(cw*0.28)+'px monospace';
+      cx.textAlign='center'; cx.textBaseline='middle';
+      cx.fillText(v.toFixed(1), pad+col2*cw+cw/2, pad+r*ch+ch/2);
+    }
+    cx.fillStyle=C.label; cx.font='13px sans-serif'; cx.textAlign='center';
+    labels.forEach(function(l,i){
+      cx.fillText(l, pad+i*cw+cw/2, pad-14);
+      cx.save(); cx.translate(pad-14, pad+i*ch+ch/2); cx.rotate(-Math.PI/2); cx.fillText(l,0,0); cx.restore();
+    });
+    cx.fillStyle=C.teal; cx.font='bold 14px sans-serif'; cx.textAlign='center';
+    cx.fillText('Mathematical Constant Coupling Matrix', canvas.width/2, 18);
+  }());
+
+  /* ── Fig 3: PEG Field (canvas heatmap with contours) ── */
+  (function() {
+    var wrap = document.getElementById('peg-field');
+    var canvas = document.createElement('canvas');
+    canvas.width  = wrap.offsetWidth  || 700;
+    canvas.height = wrap.offsetHeight || 380;
+    canvas.style.display='block';
+    wrap.appendChild(canvas);
+    var cx = canvas.getContext('2d');
+    var W=canvas.width, H=canvas.height, pad=50;
+    var pw=W-pad*2, ph=H-pad-30;
+    cx.fillStyle='#0a0a1a'; cx.fillRect(0,0,W,H);
+    /* draw heatmap */
+    var res=80;
+    var cellW=pw/res, cellH=ph/res;
+    for (var iy=0;iy<res;iy++) for (var ix=0;ix<res;ix++) {
+      var nx=(ix/res)*10-5, ny=(iy/res)*10-5;
+      var v=Math.exp(-(nx*nx+ny*ny)/8)*Math.cos(nx)*Math.sin(ny);
+      var norm=(v+0.6)/1.2; norm=Math.max(0,Math.min(1,norm));
+      /* teal-to-gold gradient */
+      var r2=Math.round(norm*240+15), g2=Math.round(norm*180+75), b2=Math.round((1-norm)*210+45);
+      cx.fillStyle='rgb('+r2+','+g2+','+b2+')';
+      cx.fillRect(pad+ix*cellW, 30+iy*cellH, cellW+1, cellH+1);
+    }
+    /* axes */
+    cx.strokeStyle=C.grid; cx.lineWidth=1;
+    cx.strokeRect(pad,30,pw,ph);
+    cx.fillStyle=C.label; cx.font='12px sans-serif'; cx.textAlign='center';
+    [-4,-2,0,2,4].forEach(function(v,i){
+      var x=pad+((v+5)/10)*pw;
+      cx.fillText(v,x,30+ph+16);
+      cx.beginPath(); cx.moveTo(x,30+ph); cx.lineTo(x,30+ph+4); cx.stroke();
+    });
+    cx.save(); cx.translate(14,30+ph/2); cx.rotate(-Math.PI/2);
+    cx.fillText('Y position',0,0); cx.restore();
+    cx.fillText('X position',pad+pw/2,H-4);
+    cx.fillStyle=C.teal; cx.font='bold 14px sans-serif';
+    cx.fillText('Information Pattern Density P(x,t) — PEG Field',W/2,18);
+    /* colourbar */
+    var cbX=W-28, cbH=ph;
+    var grad=cx.createLinearGradient(0,30+cbH,0,30);
+    grad.addColorStop(0,'rgb(15,75,55)'); grad.addColorStop(0.5,'rgb(79,195,247)'); grad.addColorStop(1,'rgb(255,215,0)');
+    cx.fillStyle=grad; cx.fillRect(cbX,30,12,cbH);
+    cx.strokeStyle=C.grid; cx.strokeRect(cbX,30,12,cbH);
+    cx.fillStyle=C.label; cx.font='10px sans-serif'; cx.textAlign='left';
+    cx.fillText('High',cbX+15,34); cx.fillText('Low',cbX+15,30+cbH);
+  }());
+
+  /* ── Fig 4: Planck Scale (line + fill) ── */
+  (function() {
+    var c = ctx('planck-scale');
+    var xs=[], ys=[];
+    for (var i=0;i<=50;i++){ var f=i/10; xs.push(f.toFixed(1)); ys.push(1/Math.sqrt(1+f)); }
+    new Chart(c, {
+      type:'line',
+      data:{
+        labels:xs,
+        datasets:[
+          { label:'Effective Planck Scale', data:ys,
+            borderColor:C.teal, backgroundColor:'rgba(79,195,247,0.2)',
+            borderWidth:3, fill:true, tension:0.4, pointRadius:0 },
+          { label:'Traditional Planck Limit', data:xs.map(function(){return 1;}),
+            borderColor:C.red, borderDash:[8,5], borderWidth:2.5, fill:false, pointRadius:0 }
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:C.text}},
+          title:{display:true,text:'Dynamic Planck Scale Modification',color:C.teal,font:{size:14}}},
+        scales:{
+          x:darkAxes({title:{display:true,text:'Mathematical Field Strength',color:C.label},ticks:{maxTicksLimit:6,color:C.label}}),
+          y:darkAxes({title:{display:true,text:'ℓ_eff / ℓ₀',color:C.label}})
+        }
+      }
+    });
+  }());
+
+  /* ── Fig 5A: Quantization Timeline ── */
+  (function() {
+    var c = ctx('quantization-timeline');
+    var labels=['Big Bang','Critical\nTransition','Particle\nFormation','Nucleosynthesis','Present'];
+    var vals=[0,0.5,0.8,0.95,1.0];
+    new Chart(c, {
+      type:'line',
+      data:{
+        labels:labels,
+        datasets:[{
+          label:'Quantization Degree',
+          data:vals,
+          borderColor:C.teal,
+          segment:{ borderColor:function(ctx2){ return 'hsl('+(180+ctx2.p0DataIndex*40)+',90%,60%)'; } },
+          backgroundColor:'rgba(79,195,247,0.1)', fill:true,
+          pointBackgroundColor:[C.red,C.orange,C.gold,C.green,C.teal],
+          pointRadius:9, pointBorderColor:'#fff', pointBorderWidth:2,
+          borderWidth:3, tension:0.4
+        }]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false},
+          title:{display:true,text:'Cosmic Quantization Evolution Timeline',color:C.teal,font:{size:14}} },
+        scales:{ x:darkAxes(), y:darkAxes({title:{display:true,text:'Quantization Degree',color:C.label},min:0,max:1.05}) }
+      }
+    });
+  }());
+
+  /* ── Fig 5B: Energy Optimization ── */
+  (function() {
+    var c = ctx('energy-optimization');
+    var xs=[], ys=[];
+    for (var n=1;n<=10;n++){ xs.push(n*(n+1)/2); ys.push(1/Math.sqrt(n)); }
+    new Chart(c, {
+      type:'scatter',
+      data:{
+        datasets:[{
+          label:'Quantum Energy Levels',
+          data:xs.map(function(x,i){return {x:x,y:ys[i]};}),
+          backgroundColor:ys.map(function(y){ return 'hsl('+(y*180+120)+',80%,55%)'; }),
+          borderColor:'#fff', borderWidth:1.5, pointRadius:10
+        }]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false},
+          title:{display:true,text:'Energy Level Optimization Efficiency',color:C.teal,font:{size:14}} },
+        scales:{
+          x:darkAxes({title:{display:true,text:'Energy Level',color:C.label}}),
+          y:darkAxes({title:{display:true,text:'Optimization Efficiency',color:C.label}})
+        }
+      }
+    });
+  }());
+
+  /* ── Fig 6: Dual Energy (grouped bar) ── */
+  (function() {
+    var c = ctx('dual-energy');
+    new Chart(c, {
+      type:'bar',
+      data:{
+        labels:['Standard\nMetabolism','Information\nProcessing','Net System'],
+        datasets:[
+          { label:'Entropy Change (ΔS)', data:[0.8,-0.6,0.2],
+            backgroundColor:['rgba(255,107,107,0.8)','rgba(129,199,132,0.8)','rgba(79,195,247,0.8)'],
+            borderColor:['#ff6b6b','#81c784','#4fc3f7'], borderWidth:2 },
+          { label:'Energy Efficiency',   data:[0.3,0.85,0.6],
+            backgroundColor:['rgba(255,107,107,0.35)','rgba(129,199,132,0.35)','rgba(79,195,247,0.35)'],
+            borderColor:['#ff6b6b','#81c784','#4fc3f7'], borderWidth:2 }
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{labels:{color:C.text}},
+          title:{display:true,text:'Dual-Process Energy Dynamics: E = mc² + Ic²',color:C.teal,font:{size:14}} },
+        scales:{
+          x:darkAxes(),
+          y:darkAxes({title:{display:true,text:'Value',color:C.label}})
+        }
+      }
+    });
+  }());
+
+  /* ── Fig 7: Cosmic Network (pure canvas) ── */
+  (function() {
+    var wrap = document.getElementById('cosmic-network');
+    var canvas = document.createElement('canvas');
+    canvas.width  = wrap.offsetWidth  || 700;
+    canvas.height = wrap.offsetHeight || 380;
+    canvas.style.display='block';
+    wrap.appendChild(canvas);
+    var cx = canvas.getContext('2d'), W=canvas.width, H=canvas.height;
+    cx.fillStyle='#07070f'; cx.fillRect(0,0,W,H);
+
+    /* generate galaxy-cluster nodes */
+    var nodes=[];
+    var rng = function(seed){ return (Math.sin(seed*127.1+311.7)*43758.5453)%1; };
+    for (var i=0;i<55;i++){
+      nodes.push({ x: (rng(i*2)*0.8+0.1)*W, y:(rng(i*2+1)*0.7+0.15)*H,
+                   r:2+rng(i*3)*5 });
+    }
+    /* draw filaments */
+    cx.strokeStyle='rgba(79,195,247,0.35)'; cx.lineWidth=0.8;
+    for (var i=0;i<nodes.length;i++) {
+      for (var j=i+1;j<nodes.length;j++) {
+        var dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if (dist < W*0.18 && rng(i*j+7)>0.4) {
+          cx.globalAlpha=Math.max(0.05,0.5-dist/(W*0.18));
+          cx.beginPath(); cx.moveTo(nodes[i].x,nodes[i].y); cx.lineTo(nodes[j].x,nodes[j].y); cx.stroke();
+        }
+      }
+    }
+    cx.globalAlpha=1;
+    /* draw nodes */
+    nodes.forEach(function(n){
+      var grd=cx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*2);
+      grd.addColorStop(0,'rgba(255,215,0,0.95)');
+      grd.addColorStop(0.5,'rgba(79,195,247,0.5)');
+      grd.addColorStop(1,'rgba(0,0,0,0)');
+      cx.beginPath(); cx.arc(n.x,n.y,n.r*2,0,Math.PI*2);
+      cx.fillStyle=grd; cx.fill();
+      cx.beginPath(); cx.arc(n.x,n.y,n.r*0.6,0,Math.PI*2);
+      cx.fillStyle='#ffd700'; cx.fill();
+    });
+    /* background stars */
+    cx.fillStyle='rgba(255,255,255,0.6)';
+    for (var k=0;k<200;k++){
+      cx.beginPath(); cx.arc(rng(k*4)*W,rng(k*4+2)*H,0.5,0,Math.PI*2); cx.fill();
+    }
+    cx.fillStyle=C.teal; cx.font='bold 14px sans-serif'; cx.textAlign='center';
+    cx.fillText('Cosmic Web Network Topology  (100M–1B light-year scales)',W/2,18);
+    cx.fillStyle=C.label; cx.font='11px sans-serif';
+    cx.fillText('Galaxy clusters (gold nodes) connected by dark-matter filaments',W/2,H-6);
+  }());
+
+}); /* end charts load */
 </script>
 
-<!-- ══════════════════════════════════════════════
-     THREE.JS SIMULATIONS
-══════════════════════════════════════════════ -->
+
 <script>
-(function(){
-'use strict';
+/* Three.js sims — initialised on window load so layout dimensions are guaranteed */
+window.addEventListener('load', function() {
 
-/* ─── shared: orbit drag control ─── */
-function orbit(cam,el){
-  let drag=false,ox=0,oy=0;
-  const r=cam.position.length();
-  let th=Math.atan2(cam.position.x,cam.position.z);
-  let ph=Math.acos(Math.max(-1,Math.min(1,cam.position.y/r)));
-  function apply(){cam.position.set(r*Math.sin(ph)*Math.sin(th),r*Math.cos(ph),r*Math.sin(ph)*Math.cos(th));cam.lookAt(0,0,0);}
-  apply();
-  function mv(dx,dy){th-=dx*.007;ph=Math.max(.08,Math.min(Math.PI-.08,ph+dy*.007));apply();}
-  el.addEventListener('mousedown', e=>{drag=true;ox=e.clientX;oy=e.clientY;});
-  window.addEventListener('mouseup',()=>drag=false);
-  el.addEventListener('mousemove',e=>{if(!drag)return;mv(e.clientX-ox,e.clientY-oy);ox=e.clientX;oy=e.clientY;});
-  el.addEventListener('touchstart',e=>{drag=true;ox=e.touches[0].clientX;oy=e.touches[0].clientY;},{passive:true});
-  window.addEventListener('touchend',()=>drag=false);
-  el.addEventListener('touchmove',e=>{if(!drag)return;mv(e.touches[0].clientX-ox,e.touches[0].clientY-oy);ox=e.touches[0].clientX;oy=e.touches[0].clientY;},{passive:true});
-  return {spin(s){th+=s;apply();}};
-}
-
-/* ─── shared: renderer setup ─── */
-function mkRend(cid,wid,bloom){
-  bloom=bloom||{strength:1.2,radius:0.55,threshold:0.18};
-  const wrap=document.getElementById(wid),canvas=document.getElementById(cid);
-  const W=wrap.clientWidth,H=wrap.clientHeight;
-
-  const rend=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
-  rend.setPixelRatio(Math.min(devicePixelRatio,2));
-  rend.setSize(W,H);
-  rend.setClearColor(0x020408);
-  rend.toneMapping=THREE.ACESFilmicToneMapping;
-  rend.toneMappingExposure=1.1;
-
-  const cam=new THREE.PerspectiveCamera(45,W/H,.01,1000);
-
-  const composer=new THREE.EffectComposer(rend);
-  const bloomPass=new THREE.UnrealBloomPass(new THREE.Vector2(W,H),bloom.strength,bloom.radius,bloom.threshold);
-
-  function setScene(sc){
-    composer.passes=[];
-    composer.addPass(new THREE.RenderPass(sc,cam));
-    composer.addPass(bloomPass);
-  }
-
-  window.addEventListener('resize',()=>{
-    const w2=wrap.clientWidth,h2=wrap.clientHeight;
-    rend.setSize(w2,h2);composer.setSize(w2,h2);
-    cam.aspect=w2/h2;cam.updateProjectionMatrix();
-  });
-
-  return{rend,cam,composer,setScene,bloomPass};
-}
-
-/* ═══════════════════════════════════════════
-   SIM A — PEG GRAVITY
-════════════════════════════════════════════ */
-(function(){
-  const {rend,cam,composer,setScene}=mkRend('c-peg','w-peg',{strength:1.4,radius:0.6,threshold:0.15});
-  cam.position.set(9,8,9);
-  const sc=new THREE.Scene();
-  const orb=orbit(cam,document.getElementById('w-peg'));
-  setScene(sc);
-
-  sc.add(new THREE.AmbientLight(0x0a1020,5));
-  const dl=new THREE.DirectionalLight(0x4fc3f7,3);dl.position.set(6,10,6);sc.add(dl);
-  const pl=new THREE.PointLight(0xffcc00,6,20);pl.position.set(0,4,0);sc.add(pl);
-
-  /* deformable grid */
-  const RES=50;
-  const geo=new THREE.PlaneGeometry(14,14,RES,RES);
-  geo.rotateX(-Math.PI/2);
-  const n=geo.attributes.position.count;
-  const col=new Float32Array(n*3);
-  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
-  const mat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.4,metalness:.3,transparent:true,opacity:.88,side:THREE.DoubleSide});
-  sc.add(new THREE.Mesh(geo,mat));
-  sc.add(new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0x4fc3f7,wireframe:true,transparent:true,opacity:.07})));
-
-  /* wells */
-  const wells=[{x:0,z:0,s:3,ph:0},{x:4,z:-3,s:2,ph:2.1},{x:-3,z:4,s:2.2,ph:4.2}];
-  wells.forEach(w=>{
-    const m=new THREE.Mesh(new THREE.SphereGeometry(.28,14,14),new THREE.MeshStandardMaterial({color:0xffd700,emissive:0xffd700,emissiveIntensity:2.5,roughness:.05}));
-    m.position.set(w.x,.3,w.z);sc.add(m);
-    const lp=new THREE.PointLight(0xffd700,4,7);lp.position.copy(m.position);sc.add(lp);
-  });
-
-  /* starfield */
-  const sg=new THREE.BufferGeometry();const sp=new Float32Array(1200);for(let i=0;i<1200;i++)sp[i]=(Math.random()-.5)*30;
-  sg.setAttribute('position',new THREE.BufferAttribute(sp,3));
-  sc.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0x4fc3f7,size:.06,transparent:true,opacity:.2})));
-
-  const pos=geo.attributes.position;
-  const origY=Array.from({length:n},(_,i)=>pos.getY(i));
-  const clr=geo.attributes.color;
-  let t=0;
-  function tick(){
-    requestAnimationFrame(tick);t+=.013;
-    for(let i=0;i<n;i++){
-      let def=0;
-      const px=pos.getX(i),pz=pos.getZ(i);
-      wells.forEach(w=>{const d2=(px-w.x)**2+(pz-w.z)**2+.1;def-=w.s/d2*(.8+.2*Math.cos(t*.7+w.ph));});
-      def=Math.max(-3.5,def);
-      pos.setY(i,origY[i]+def);
-      const h=Math.max(0,Math.min(1,(-def+.3)/4));
-      clr.setXYZ(i,h*.9+.05,h*.55+.35,1-h*.5);
+  /* ── orbit drag control ── */
+  function Orbit(camera, el) {
+    var dragging = false, ox = 0, oy = 0;
+    var dist = camera.position.length();
+    var theta = Math.atan2(camera.position.x, camera.position.z);
+    var phi   = Math.acos(Math.max(-1, Math.min(1, camera.position.y / dist)));
+    function sync() {
+      camera.position.set(
+        dist * Math.sin(phi) * Math.sin(theta),
+        dist * Math.cos(phi),
+        dist * Math.sin(phi) * Math.cos(theta)
+      );
+      camera.lookAt(0, 0, 0);
     }
-    pos.needsUpdate=true;clr.needsUpdate=true;geo.computeVertexNormals();
-    orb.spin(.0025);composer.render();
-  }tick();
-})();
-
-/* ═══════════════════════════════════════════
-   SIM B — ENTANGLEMENT AS SPACETIME
-════════════════════════════════════════════ */
-(function(){
-  const {rend,cam,composer,setScene}=mkRend('c-ent','w-ent',{strength:1.8,radius:0.7,threshold:0.12});
-  cam.position.set(0,7,18);
-  const sc=new THREE.Scene();
-  const orb=orbit(cam,document.getElementById('w-ent'));
-  setScene(sc);
-
-  sc.add(new THREE.AmbientLight(0x040410,5));
-  const dl=new THREE.DirectionalLight(0xa855f7,3);dl.position.set(-6,8,8);sc.add(dl);
-  const pl=new THREE.PointLight(0x4fc3f7,8,32);pl.position.set(0,5,0);sc.add(pl);
-
-  /* nodes */
-  const N=32,nodes=[];
-  for(let i=0;i<N;i++){
-    const th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1),r=3+Math.random()*4;
-    const pos=new THREE.Vector3(r*Math.sin(ph)*Math.cos(th),r*Math.sin(ph)*Math.sin(th),r*Math.cos(ph));
-    const mesh=new THREE.Mesh(new THREE.SphereGeometry(.18,12,12),
-      new THREE.MeshStandardMaterial({color:0xa855f7,emissive:0xa855f7,emissiveIntensity:1.4,roughness:.15,metalness:.6}););
-    mesh.position.copy(pos);sc.add(mesh);
-    nodes.push({mesh,pos:pos.clone(),ph:Math.random()*Math.PI*2});
+    sync();
+    function move(dx, dy) {
+      theta -= dx * 0.007;
+      phi = Math.max(0.08, Math.min(Math.PI - 0.08, phi + dy * 0.007));
+      sync();
+    }
+    el.addEventListener('mousedown',  function(e){ dragging=true; ox=e.clientX; oy=e.clientY; });
+    window.addEventListener('mouseup', function(){ dragging=false; });
+    el.addEventListener('mousemove',  function(e){ if(!dragging) return; move(e.clientX-ox, e.clientY-oy); ox=e.clientX; oy=e.clientY; });
+    el.addEventListener('touchstart', function(e){ dragging=true; ox=e.touches[0].clientX; oy=e.touches[0].clientY; }, {passive:true});
+    window.addEventListener('touchend', function(){ dragging=false; });
+    el.addEventListener('touchmove',  function(e){ if(!dragging) return; move(e.touches[0].clientX-ox, e.touches[0].clientY-oy); ox=e.touches[0].clientX; oy=e.touches[0].clientY; }, {passive:true});
+    this.spin = function(s){ theta += s; sync(); };
   }
 
-  /* entanglement filaments */
-  const links=[];
-  for(let k=0;k<30;k++){
-    const a=Math.floor(Math.random()*N);let b=Math.floor(Math.random()*N);while(b===a)b=Math.floor(Math.random()*N);
-    const S=.3+Math.random()*.7;
-    const mid=nodes[a].pos.clone().add(nodes[b].pos).multiplyScalar(.5)
-      .add(new THREE.Vector3(Math.random()-.5,Math.random()-.5,Math.random()-.5).normalize().multiplyScalar(nodes[a].pos.distanceTo(nodes[b].pos)*.28));
-    const pts=new THREE.QuadraticBezierCurve3(nodes[a].pos,mid,nodes[b].pos).getPoints(22);
-    const lg=new THREE.BufferGeometry().setFromPoints(pts);
-    const lm=new THREE.LineBasicMaterial({color:S>.6?0x4fc3f7:0xa855f7,transparent:true,opacity:.15+S*.45});
-    sc.add(new THREE.Line(lg,lm));links.push({lm,S,ph:Math.random()*Math.PI*2});
-  }
+  /* ── renderer factory ── */
+  function makeR(canvasId, wrapperId) {
+    var wrap   = document.getElementById(wrapperId);
+    var canvas = document.getElementById(canvasId);
+    var rect   = wrap.getBoundingClientRect();
+    var W = Math.floor(rect.width)  || 800;
+    var H = Math.floor(rect.height) || 420;
 
-  /* stars */
-  const bg=new THREE.BufferGeometry();const bp=new Float32Array(3000);for(let i=0;i<3000;i++)bp[i]=(Math.random()-.5)*55;
-  bg.setAttribute('position',new THREE.BufferAttribute(bp,3));
-  sc.add(new THREE.Points(bg,new THREE.PointsMaterial({color:0xffffff,size:.04,transparent:true,opacity:.25})));
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(W, H, false); /* false = don't touch CSS */
+    renderer.setClearColor(0x020408, 1);
+    renderer.toneMapping         = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
 
-  let t=0;
-  function tick(){
-    requestAnimationFrame(tick);t+=.01;
-    nodes.forEach(nd=>{
-      nd.mesh.position.x=nd.pos.x+Math.sin(t*.25+nd.ph)*.25;
-      nd.mesh.position.y=nd.pos.y+Math.cos(t*.3+nd.ph)*.25;
-      nd.mesh.position.z=nd.pos.z+Math.sin(t*.2+nd.ph+1)*.25;
-      nd.mesh.material.emissiveIntensity=1.0+Math.sin(t+nd.ph)*.7;
+    var camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 1000);
+    window.addEventListener('resize', function() {
+      var r2 = wrap.getBoundingClientRect();
+      var w2 = Math.floor(r2.width) || 800;
+      var h2 = Math.floor(r2.height) || 420;
+      renderer.setSize(w2, h2, false);
+      camera.aspect = w2 / h2;
+      camera.updateProjectionMatrix();
     });
-    links.forEach(l=>{l.lm.opacity=Math.max(.04,l.S*(.2+Math.sin(t*1.4+l.ph)*.15));});
-    pl.position.set(Math.sin(t*.3)*6,5,Math.cos(t*.3)*6);
-    orb.spin(.002);composer.render();
-  }tick();
-})();
-
-/* ═══════════════════════════════════════════
-   SIM C — ROTATION AS OPTIMIZATION
-════════════════════════════════════════════ */
-(function(){
-  const {rend,cam,composer,setScene}=mkRend('c-rot','w-rot',{strength:1.5,radius:0.65,threshold:0.14});
-  cam.position.set(0,10,18);
-  const sc=new THREE.Scene();
-  const orb=orbit(cam,document.getElementById('w-rot'));
-  setScene(sc);
-
-  sc.add(new THREE.AmbientLight(0x040420,5));
-  const dl=new THREE.DirectionalLight(0x81c784,2);dl.position.set(8,10,5);sc.add(dl);
-  const pl=new THREE.PointLight(0x4fc3f7,8,26);pl.position.set(0,6,0);sc.add(pl);
-
-  /* QUANTUM scale — inner torus + orbiting spin marker */
-  const tor1=new THREE.Mesh(new THREE.TorusGeometry(.9,.14,10,50),
-    new THREE.MeshStandardMaterial({color:0xa855f7,emissive:0xa855f7,emissiveIntensity:1.6,roughness:.1,metalness:.6}));
-  sc.add(tor1);
-  const spinMk=new THREE.Mesh(new THREE.SphereGeometry(.17,12,12),
-    new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xffffff,emissiveIntensity:.9}));
-  sc.add(spinMk);
-
-  /* VORTEX scale — three rings */
-  const rings=[];
-  [2.8,3.4,4.0].forEach((r,i)=>{
-    const t2=new THREE.Mesh(new THREE.TorusGeometry(r,.06,6,64),
-      new THREE.MeshStandardMaterial({color:0x4fc3f7,emissive:0x4fc3f7,emissiveIntensity:.35,roughness:.3,transparent:true,opacity:.7-i*.15}));
-    t2.rotation.x=.3+i*.08;sc.add(t2);rings.push(t2);
-  });
-  /* vortex particles */
-  const vp=[];
-  for(let i=0;i<140;i++){const a=i/140*Math.PI*2,r=2.5+Math.random()*1.5;vp.push(r*Math.cos(a),(Math.random()-.5)*.4,r*Math.sin(a));}
-  const vpg=new THREE.BufferGeometry();vpg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(vp),3));
-  const vpm=new THREE.PointsMaterial({color:0x4fc3f7,size:.1,transparent:true,opacity:.5});
-  sc.add(new THREE.Points(vpg,vpm));
-
-  /* GALAXY scale — spiral arms */
-  const armP=[];
-  for(let arm=0;arm<2;arm++)for(let i=0;i<420;i++){
-    const a0=i/420*Math.PI*3,r=4.5+a0*.55,ph0=arm*Math.PI;
-    armP.push(r*Math.cos(a0+ph0),(Math.random()-.5)*.3,r*Math.sin(a0+ph0));
-  }
-  const apg=new THREE.BufferGeometry();apg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(armP),3));
-  const apm=new THREE.PointsMaterial({color:0xffeb3b,size:.08,transparent:true,opacity:.4});
-  const arms=new THREE.Points(apg,apm);sc.add(arms);
-  sc.add(new THREE.Mesh(new THREE.SphereGeometry(.5,16,16),
-    new THREE.MeshStandardMaterial({color:0xffd700,emissive:0xffd700,emissiveIntensity:3.0,roughness:.05})));
-
-  /* background stars */
-  const bg=new THREE.BufferGeometry();const bp=new Float32Array(2400);for(let i=0;i<2400;i++)bp[i]=(Math.random()-.5)*65;
-  bg.setAttribute('position',new THREE.BufferAttribute(bp,3));
-  sc.add(new THREE.Points(bg,new THREE.PointsMaterial({color:0xffffff,size:.05,transparent:true,opacity:.2})));
-
-  let t=0;
-  function tick(){
-    requestAnimationFrame(tick);t+=.012;
-    /* quantum */
-    tor1.rotation.y+=.055;tor1.rotation.x=Math.sin(t*.5)*.4;
-    spinMk.position.set(Math.cos(t*3)*.9,Math.sin(t*3)*.9*Math.sin(tor1.rotation.x+.3),Math.sin(t*3)*.9*Math.cos(tor1.rotation.x+.3));
-    spinMk.material.emissiveIntensity=1.8+Math.sin(t*6)*.9;
-    /* vortex */
-    rings.forEach((r2,i)=>{r2.rotation.y+=.018+i*.003;});
-    vpm.opacity=.45+Math.sin(t*.8)*.1;
-    /* galaxy */
-    arms.rotation.y+=.004;apm.opacity=.35+Math.sin(t*.3)*.08;
-    pl.position.set(Math.sin(t*.4)*5,6,Math.cos(t*.4)*5);
-    orb.spin(.002);composer.render();
-  }tick();
-})();
-
-/* ═══════════════════════════════════════════
-   SIM D — FOUR FORCES
-════════════════════════════════════════════ */
-(function(){
-  const {rend,cam,composer,setScene}=mkRend('c-four','w-four',{strength:1.3,radius:0.55,threshold:0.16});
-  cam.position.set(0,8,20);
-  const sc=new THREE.Scene();
-  const orb=orbit(cam,document.getElementById('w-four'));
-  setScene(sc);
-
-  sc.add(new THREE.AmbientLight(0x050510,4));
-  const dl=new THREE.DirectionalLight(0xffffff,1);dl.position.set(5,10,5);sc.add(dl);
-
-  const FORCES=[
-    {col:0xff3030,pCol:0xff8888,pos:new THREE.Vector3(-5,0, 0),r:.55},
-    {col:0x4fc3f7,pCol:0x80d8ff,pos:new THREE.Vector3( 5,0, 0),r:.55,nPart:14},
-    {col:0xf58b2b,pCol:0xffcc80,pos:new THREE.Vector3( 0,0,-5),r:.55},
-    {col:0xffd700,pCol:0xffeea0,pos:new THREE.Vector3( 0,0, 5),r:.8},
-  ];
-  const cores=FORCES.map(f=>{
-    const m=new THREE.Mesh(new THREE.SphereGeometry(f.r,18,18),
-      new THREE.MeshStandardMaterial({color:f.col,emissive:f.col,emissiveIntensity:1.8,roughness:.1,metalness:.7}));
-    m.position.copy(f.pos);sc.add(m);
-    const lp=new THREE.PointLight(f.col,5,9);lp.position.copy(f.pos);sc.add(lp);
-    return{mesh:m,lp,...f};
-  });
-
-  /* gravity grid */
-  const gg=new THREE.PlaneGeometry(22,22,22,22);gg.rotateX(-Math.PI/2);gg.translate(0,-3.2,0);
-  sc.add(new THREE.Mesh(gg,new THREE.MeshBasicMaterial({color:0xffd700,wireframe:true,transparent:true,opacity:.07})));
-
-  /* connection lines */
-  const connL=[];
-  for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){
-    const pa=new Float32Array(6);const lg=new THREE.BufferGeometry();lg.setAttribute('position',new THREE.BufferAttribute(pa,3));
-    const lm=new THREE.LineBasicMaterial({color:0x1a1a44,transparent:true,opacity:.35});
-    sc.add(new THREE.Line(lg,lm));connL.push({lg,i,j});
+    return { renderer: renderer, camera: camera };
   }
 
-  /* carrier particles */
-  const carriers=FORCES.map((f,fi)=>{
-    const grp=[];const N=fi===1?14:7;
-    for(let k=0;k<N;k++){
-      const m=new THREE.Mesh(new THREE.SphereGeometry(.09,8,8),
-        new THREE.MeshStandardMaterial({color:f.pCol,emissive:f.pCol,emissiveIntensity:2.0}));
-      sc.add(m);
-      const ti=(fi+1+Math.floor(Math.random()*3))%4;
-      grp.push({mesh:m,t:Math.random(),spd:.5+Math.random()*.7,from:f.pos,to:FORCES[ti].pos,fi});
-    }
-    return grp;
-  });
+  /* helper — starfield */
+  function stars(n, spread) {
+    var g = new THREE.BufferGeometry();
+    var p = new Float32Array(n * 3);
+    for (var i = 0; i < n * 3; i++) p[i] = (Math.random() - 0.5) * spread;
+    g.setAttribute('position', new THREE.BufferAttribute(p, 3));
+    return new THREE.Points(g, new THREE.PointsMaterial({ color: 0xffffff, size: 0.05, transparent: true, opacity: 0.22 }));
+  }
 
-  let t=0;
-  function tick(){
-    requestAnimationFrame(tick);t+=.012;
-    cores.forEach((c,i)=>{const s=1+Math.sin(t*1.5+i*1.5)*.1;c.mesh.scale.set(s,s,s);c.lp.intensity=6+Math.sin(t+i)*3;});
-    carriers.forEach(grp=>grp.forEach(p=>{
-      p.t=(p.t+p.spd*.008)%1;
-      const pos=new THREE.Vector3().lerpVectors(p.from,p.to,p.t);
-      if(p.fi===1)pos.y+=Math.sin(p.t*Math.PI)*2.2;/* EM arcs */
-      if(p.fi===2&&p.t>.47&&p.t<.53){p.mesh.material.emissiveIntensity=6.0;p.mesh.scale.setScalar(2.2);}
-      else{p.mesh.material.emissiveIntensity=.8;p.mesh.scale.setScalar(1);}
-      p.mesh.position.copy(pos);
-    }));
-    connL.forEach(({lg,i,j})=>{
-      const a=cores[i].mesh.position,b=cores[j].mesh.position,arr=lg.attributes.position.array;
-      arr[0]=a.x;arr[1]=a.y;arr[2]=a.z;arr[3]=b.x;arr[4]=b.y;arr[5]=b.z;lg.attributes.position.needsUpdate=true;
+  /* ╔══════════════════════════════════════╗
+     ║  SIM A — PEG GRAVITY                ║
+     ╚══════════════════════════════════════╝ */
+  (function() {
+    var x = makeR('c-peg', 'w-peg');
+    var renderer = x.renderer, camera = x.camera;
+    camera.position.set(10, 9, 10);
+    var scene = new THREE.Scene();
+    var orb = new Orbit(camera, document.getElementById('w-peg'));
+
+    scene.add(new THREE.AmbientLight(0x0d1525, 5));
+    var dl = new THREE.DirectionalLight(0x4fc3f7, 2); dl.position.set(8, 12, 6); scene.add(dl);
+    var pl = new THREE.PointLight(0xffd700, 8, 22);   pl.position.set(0, 3, 0);  scene.add(pl);
+
+    var RES = 48;
+    var geo = new THREE.PlaneGeometry(14, 14, RES, RES);
+    geo.rotateX(-Math.PI / 2);
+    var n   = geo.attributes.position.count;
+    var col = new Float32Array(n * 3);
+    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    var mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.4, metalness: 0.3, side: THREE.DoubleSide });
+    scene.add(new THREE.Mesh(geo, mat));
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ wireframe: true, color: 0x1a3a5c, transparent: true, opacity: 0.2 })));
+
+    var wells = [{ x: 0, z: 0, s: 3.2, ph: 0 }, { x: 3.8, z: -2.8, s: 2.0, ph: 2.1 }, { x: -2.8, z: 3.8, s: 2.2, ph: 4.2 }];
+    wells.forEach(function(w) {
+      var m = new THREE.Mesh(new THREE.SphereGeometry(0.28, 14, 14),
+        new THREE.MeshStandardMaterial({ color: 0xffd700, emissive: 0xffd700, emissiveIntensity: 2.5, roughness: 0.05 }));
+      m.position.set(w.x, 0.3, w.z); scene.add(m);
+      var lp = new THREE.PointLight(0xffd700, 5, 8); lp.position.set(w.x, 0.5, w.z); scene.add(lp);
     });
-    orb.spin(.002);composer.render();
-  }tick();
-})();
+    scene.add(stars(600, 40));
 
-/* ═══════════════════════════════════════════
-   SIM E — QUANTUM SCRAMBLING
-════════════════════════════════════════════ */
-(function(){
-  const {rend,cam,composer,setScene}=mkRend('c-scram','w-scram',{strength:1.6,radius:0.6,threshold:0.10});
-  cam.position.set(0,10,16);
-  const sc=new THREE.Scene();
-  const orb=orbit(cam,document.getElementById('w-scram'));
-  setScene(sc);
+    var pos  = geo.attributes.position;
+    var cBuf = geo.attributes.color;
+    var origY = [];
+    for (var i = 0; i < n; i++) origY.push(pos.getY(i));
+    var t = 0;
 
-  sc.add(new THREE.AmbientLight(0x030310,5));
-  const dl=new THREE.DirectionalLight(0x81c784,2);dl.position.set(5,8,5);sc.add(dl);
-  const pl=new THREE.PointLight(0x4fc3f7,10,26);pl.position.set(0,6,0);sc.add(pl);
-
-  /* hexagonal qubit lattice */
-  const qubits=[];
-  const HEX=[{ring:0,q:[[0,0]]}];
-  function addRing(r){
-    const pts=[];
-    for(let s=0;s<6;s++)for(let k=0;k<r;k++){
-      const a=(s/6)*Math.PI*2+Math.PI/6,na=((s+1)/6)*Math.PI*2+Math.PI/6,f=k/r;
-      pts.push([r*2.15*(Math.cos(a)*(1-f)+Math.cos(na)*f),r*2.15*(Math.sin(a)*(1-f)+Math.sin(na)*f)]);
-    }
-    HEX.push({ring:r,q:pts});
-  }
-  for(let r=1;r<=3;r++)addRing(r);
-
-  HEX.forEach(({ring,q})=>q.forEach(([x,z])=>{
-    const geo=new THREE.SphereGeometry(ring===0?.26:.18,12,12);
-    const mat=new THREE.MeshStandardMaterial({color:ring===0?0xffffff:0x334488,emissive:ring===0?0xffffff:0x334488,emissiveIntensity:ring===0?3.5:.25,roughness:.25});
-    const mesh=new THREE.Mesh(geo,mat);
-    mesh.position.set(x,0,z);sc.add(mesh);
-    qubits.push({mesh,pos:new THREE.Vector3(x,0,z),ring});
-  }));
-
-  /* connections */
-  const conns=[];
-  for(let i=0;i<qubits.length;i++)for(let j=i+1;j<qubits.length;j++){
-    if(qubits[i].pos.distanceTo(qubits[j].pos)<2.3){
-      const lg=new THREE.BufferGeometry().setFromPoints([qubits[i].pos,qubits[j].pos]);
-      const lm=new THREE.LineBasicMaterial({color:0x4fc3f7,transparent:true,opacity:.07});
-      sc.add(new THREE.Line(lg,lm));conns.push({lm,i,j});
-    }
-  }
-  sc.add(new THREE.GridHelper(22,22,0x0a1828,0x061018));
-
-  const PERIOD=220;let fr=0;
-  function tick(){
-    requestAnimationFrame(tick);fr=(fr+1)%PERIOD;
-    const frac=fr/PERIOD,maxR=7.5,front=frac*maxR*2-.5;
-    qubits.forEach(q=>{
-      const d=q.pos.length(),atF=Math.abs(d-front)<1.1,inF=d<=Math.max(0,front);
-      if(atF){
-        q.mesh.material.color.setHex(0xffffff);q.mesh.material.emissive.setHex(0x81c784);
-        q.mesh.material.emissiveIntensity=6.0;q.mesh.scale.setScalar(1.7);
-      }else if(inF){
-        const lv=Math.max(0,1-(front-d)/maxR);
-        const c=new THREE.Color().setHSL(.6-lv*.4,1,.5+lv*.2);
-        q.mesh.material.color.copy(c);q.mesh.material.emissive.copy(c);
-        q.mesh.material.emissiveIntensity=1.2+lv*1.0;q.mesh.scale.setScalar(1);
-      }else{
-        q.mesh.material.color.setHex(0x334488);q.mesh.material.emissive.setHex(0x334488);
-        q.mesh.material.emissiveIntensity=.18;q.mesh.scale.setScalar(1);
+    (function tick() {
+      requestAnimationFrame(tick);
+      t += 0.013;
+      for (var i = 0; i < n; i++) {
+        var px = pos.getX(i), pz = pos.getZ(i), def = 0;
+        wells.forEach(function(w) { var d2 = (px-w.x)*(px-w.x)+(pz-w.z)*(pz-w.z)+0.15; def -= w.s/d2*(0.8+0.2*Math.cos(t*0.7+w.ph)); });
+        def = Math.max(-3.5, def);
+        pos.setY(i, origY[i] + def);
+        var h = Math.max(0, Math.min(1, (-def + 0.3) / 4));
+        cBuf.setXYZ(i, h * 0.9 + 0.05, h * 0.55 + 0.35, 1 - h * 0.5);
       }
-    });
-    conns.forEach(({lm,i,j})=>{
-      const mid=(qubits[i].pos.length()+qubits[j].pos.length())/2;
-      lm.opacity=mid<=Math.max(0,front)?.28:.06;
-    });
-    pl.position.set(Math.sin(fr*.04)*5,6,Math.cos(fr*.04)*5);
-    orb.spin(.002);composer.render();
-  }tick();
-})();
+      pos.needsUpdate  = true;
+      cBuf.needsUpdate = true;
+      geo.computeVertexNormals();
+      orb.spin(0.0025);
+      renderer.render(scene, camera);
+    }());
+  }());
 
-/* ═══════════════════════════════════════════
-   SIM F — PHASE TRANSITION BIG BANG
-════════════════════════════════════════════ */
-(function(){
-  const {rend,cam,composer,setScene}=mkRend('c-bang','w-bang',{strength:2.0,radius:0.75,threshold:0.10});
-  cam.position.set(0,10,18);
-  const sc=new THREE.Scene();
-  const orb=orbit(cam,document.getElementById('w-bang'));
-  setScene(sc);
+  /* ╔══════════════════════════════════════╗
+     ║  SIM B — ENTANGLEMENT AS SPACETIME  ║
+     ╚══════════════════════════════════════╝ */
+  (function() {
+    var x = makeR('c-ent', 'w-ent');
+    var renderer = x.renderer, camera = x.camera;
+    camera.position.set(0, 7, 18);
+    var scene = new THREE.Scene();
+    var orb = new Orbit(camera, document.getElementById('w-ent'));
 
-  sc.add(new THREE.AmbientLight(0x050505,4));
-  const pl=new THREE.PointLight(0xffd700,16,32);pl.position.set(0,3,0);sc.add(pl);
-  const pl2=new THREE.PointLight(0x4fc3f7,8,22);pl2.position.set(-4,6,4);sc.add(pl2);
+    scene.add(new THREE.AmbientLight(0x040410, 5));
+    var dl = new THREE.DirectionalLight(0xa855f7, 2); dl.position.set(-5, 8, 8); scene.add(dl);
+    var pl = new THREE.PointLight(0x4fc3f7, 7, 30); scene.add(pl);
 
-  /* substrate noise cloud */
-  const SN=500,sPos=new Float32Array(SN*3),sVel=[];
-  for(let i=0;i<SN;i++){
-    const th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1),r=Math.random()*5;
-    sPos[i*3]=r*Math.sin(ph)*Math.cos(th);sPos[i*3+1]=r*Math.sin(ph)*Math.sin(th);sPos[i*3+2]=r*Math.cos(ph);
-    sVel.push({vx:(Math.random()-.5)*.04,vy:(Math.random()-.5)*.04,vz:(Math.random()-.5)*.04});
-  }
-  const sGeo=new THREE.BufferGeometry();sGeo.setAttribute('position',new THREE.BufferAttribute(sPos,3));
-  const sMat=new THREE.PointsMaterial({color:0x4444bb,size:.13,transparent:true,opacity:.5});
-  const subCloud=new THREE.Points(sGeo,sMat);sc.add(subCloud);
+    var nodes = [];
+    for (var i = 0; i < 30; i++) {
+      var th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1), rv = 3+Math.random()*4;
+      var p  = new THREE.Vector3(rv*Math.sin(ph)*Math.cos(th), rv*Math.sin(ph)*Math.sin(th), rv*Math.cos(ph));
+      var m  = new THREE.Mesh(new THREE.SphereGeometry(0.18, 10, 10),
+        new THREE.MeshStandardMaterial({ color: 0xa855f7, emissive: 0xa855f7, emissiveIntensity: 1.6, roughness: 0.15, metalness: 0.5 }));
+      m.position.copy(p); scene.add(m);
+      nodes.push({ mesh: m, pos: p.clone(), ph: Math.random()*Math.PI*2 });
+    }
 
-  /* threshold glow */
-  const tGlow=new THREE.Mesh(new THREE.SphereGeometry(.55,20,20),
-    new THREE.MeshStandardMaterial({color:0xffd700,emissive:0xffd700,emissiveIntensity:0,roughness:.1}));
-  tGlow.visible=false;sc.add(tGlow);
+    var links = [];
+    for (var k = 0; k < 28; k++) {
+      var a = Math.floor(Math.random()*nodes.length), b;
+      do { b = Math.floor(Math.random()*nodes.length); } while (b === a);
+      var S   = 0.3 + Math.random()*0.7;
+      var mid = nodes[a].pos.clone().add(nodes[b].pos).multiplyScalar(0.5)
+        .add(new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5)
+          .normalize().multiplyScalar(nodes[a].pos.distanceTo(nodes[b].pos)*0.3));
+      var pts = new THREE.QuadraticBezierCurve3(nodes[a].pos, mid, nodes[b].pos).getPoints(20);
+      var lg  = new THREE.BufferGeometry().setFromPoints(pts);
+      var lm  = new THREE.LineBasicMaterial({ color: S > 0.6 ? 0x4fc3f7 : 0xa855f7, transparent: true, opacity: 0.15 + S*0.45 });
+      scene.add(new THREE.Line(lg, lm));
+      links.push({ lm: lm, S: S, ph: Math.random()*Math.PI*2 });
+    }
+    scene.add(stars(800, 55));
 
-  /* crystal lattice */
-  const LRES=6,lattice=[];
-  for(let ix=-LRES;ix<=LRES;ix++)for(let iy=-LRES;iy<=LRES;iy++)for(let iz=-LRES;iz<=LRES;iz++){
-    if(ix*ix+iy*iy+iz*iz>LRES*LRES)continue;
-    const m=new THREE.Mesh(new THREE.SphereGeometry(.1,6,6),
-      new THREE.MeshStandardMaterial({color:0x4fc3f7,emissive:0x4fc3f7,emissiveIntensity:.4,roughness:.3}));
-    const op=new THREE.Vector3(ix*1.05,iy*1.05,iz*1.05);
-    m.position.copy(op);m.visible=false;sc.add(m);
-    lattice.push({m,op:op.clone(),dist:Math.sqrt(ix*ix+iy*iy+iz*iz)});
-  }
-  lattice.sort((a,b)=>a.dist-b.dist);
-
-  /* background stars */
-  const bg=new THREE.BufferGeometry();const bp=new Float32Array(4500);for(let i=0;i<4500;i++)bp[i]=(Math.random()-.5)*85;
-  bg.setAttribute('position',new THREE.BufferAttribute(bp,3));
-  sc.add(new THREE.Points(bg,new THREE.PointsMaterial({color:0xffffff,size:.04,transparent:true,opacity:.2})));
-
-  const PERIOD=260;let fr=0;
-  function tick(){
-    requestAnimationFrame(tick);fr=(fr+1)%PERIOD;
-    const f=fr/PERIOD;
-
-    /* — SUBSTRATE (0–0.65) — */
-    subCloud.visible=f<.65;
-    if(f<.65){
-      const sp=sGeo.attributes.position;
-      for(let i=0;i<SN;i++){
-        sp.array[i*3]+=sVel[i].vx;sp.array[i*3+1]+=sVel[i].vy;sp.array[i*3+2]+=sVel[i].vz;
-        const rr=Math.sqrt(sp.array[i*3]**2+sp.array[i*3+1]**2+sp.array[i*3+2]**2);
-        if(rr>6){sVel[i].vx*=-.8;sVel[i].vy*=-.8;sVel[i].vz*=-.8;}
-      }
-      sp.needsUpdate=true;
-      if(f<.25){sMat.color.setHex(0x4444bb);sMat.opacity=.5;sMat.size=.13;tGlow.visible=false;pl.intensity=16;}
-      else if(f<.38){
-        const tf=(f-.25)/.13;
-        sMat.color.setRGB(.25+tf*.75,.25+tf*.45,1);sMat.opacity=.5+tf*.45;sMat.size=.13+tf*.08;
-        tGlow.visible=true;tGlow.material.emissiveIntensity=tf*8;pl.intensity=16+tf*45;
-      }else{
-        sMat.opacity=Math.max(0,.95-(f-.38)/.27);tGlow.visible=false;pl.intensity=Math.max(16,46-(f-.38)/.27*30);
-      }
-    }else{tGlow.visible=false;}
-
-    /* — CRYSTAL GROWTH (0.38–0.70) — */
-    if(f>=.38&&f<.7){
-      const cf=(f-.38)/.32,maxD=cf*LRES*1.08;
-      lattice.forEach(node=>{
-        const show=node.dist<=maxD;node.m.visible=show;
-        if(show){const mat=Math.max(0,Math.min(1,(maxD-node.dist)/2));
-          node.m.material.emissiveIntensity=1.0+mat*1.5;const s=.4+mat*.6;node.m.scale.setScalar(s);
-          node.m.position.copy(node.op);}
+    var t = 0;
+    (function tick() {
+      requestAnimationFrame(tick);
+      t += 0.01;
+      nodes.forEach(function(nd) {
+        nd.mesh.position.x = nd.pos.x + Math.sin(t*0.25+nd.ph)*0.25;
+        nd.mesh.position.y = nd.pos.y + Math.cos(t*0.3 +nd.ph)*0.25;
+        nd.mesh.position.z = nd.pos.z + Math.sin(t*0.2 +nd.ph+1)*0.25;
+        nd.mesh.material.emissiveIntensity = 1.0 + Math.sin(t+nd.ph)*0.7;
       });
-      pl.intensity=Math.max(16,46-cf*30);pl2.intensity=8+cf*6;
-    }
+      links.forEach(function(l) { l.lm.opacity = Math.max(0.04, l.S*(0.2+Math.sin(t*1.4+l.ph)*0.15)); });
+      pl.position.set(Math.sin(t*0.3)*6, 5, Math.cos(t*0.3)*6);
+      orb.spin(0.002);
+      renderer.render(scene, camera);
+    }());
+  }());
 
-    /* — EXPANSION (0.70–1.0) — */
-    if(f>=.7){
-      const ef=(f-.7)/.3;
-      lattice.forEach(node=>{
-        node.m.visible=true;
-        node.m.material.emissiveIntensity=Math.max(0,2.0*(1-ef));
-        node.m.material.transparent=true;node.m.material.opacity=1-ef*.75;
-        node.m.position.set(node.op.x*(1+ef*1.8),node.op.y*(1+ef*1.8),node.op.z*(1+ef*1.8));
+  /* ╔══════════════════════════════════════╗
+     ║  SIM C — ROTATION AS OPTIMIZATION   ║
+     ╚══════════════════════════════════════╝ */
+  (function() {
+    var x = makeR('c-rot', 'w-rot');
+    var renderer = x.renderer, camera = x.camera;
+    camera.position.set(0, 10, 18);
+    var scene = new THREE.Scene();
+    var orb = new Orbit(camera, document.getElementById('w-rot'));
+
+    scene.add(new THREE.AmbientLight(0x040420, 5));
+    var dl = new THREE.DirectionalLight(0x81c784, 2); dl.position.set(8, 10, 5); scene.add(dl);
+    var pl = new THREE.PointLight(0x4fc3f7, 8, 26); scene.add(pl);
+
+    var tor = new THREE.Mesh(new THREE.TorusGeometry(0.9, 0.14, 10, 50),
+      new THREE.MeshStandardMaterial({ color: 0xa855f7, emissive: 0xa855f7, emissiveIntensity: 2.0, roughness: 0.1, metalness: 0.5 }));
+    scene.add(tor);
+    var spk = new THREE.Mesh(new THREE.SphereGeometry(0.16, 10, 10),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 2.5 }));
+    scene.add(spk);
+
+    var rings = [];
+    [2.8, 3.4, 4.0].forEach(function(rv, i) {
+      var r2 = new THREE.Mesh(new THREE.TorusGeometry(rv, 0.06, 6, 64),
+        new THREE.MeshStandardMaterial({ color: 0x4fc3f7, emissive: 0x4fc3f7, emissiveIntensity: 0.9, roughness: 0.2, transparent: true, opacity: 0.65-i*0.15 }));
+      r2.rotation.x = 0.3 + i*0.08; scene.add(r2); rings.push(r2);
+    });
+
+    var armP = [];
+    for (var arm = 0; arm < 2; arm++) {
+      for (var j = 0; j < 420; j++) {
+        var a0 = j/420*Math.PI*3, rv2 = 4.5+a0*0.55, ph0 = arm*Math.PI;
+        armP.push(rv2*Math.cos(a0+ph0), (Math.random()-0.5)*0.3, rv2*Math.sin(a0+ph0));
+      }
+    }
+    var apg = new THREE.BufferGeometry(); apg.setAttribute('position', new THREE.BufferAttribute(new Float32Array(armP), 3));
+    var apm = new THREE.PointsMaterial({ color: 0xffeb3b, size: 0.09, transparent: true, opacity: 0.45 });
+    var arms = new THREE.Points(apg, apm); scene.add(arms);
+    scene.add(new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16),
+      new THREE.MeshStandardMaterial({ color: 0xffd700, emissive: 0xffd700, emissiveIntensity: 3.5, roughness: 0.05 })));
+    scene.add(stars(700, 65));
+
+    var t = 0;
+    (function tick() {
+      requestAnimationFrame(tick);
+      t += 0.012;
+      tor.rotation.y += 0.055; tor.rotation.x = Math.sin(t*0.5)*0.4;
+      spk.position.set(Math.cos(t*3)*0.9, Math.sin(t*3)*0.9*Math.sin(tor.rotation.x+0.3), Math.sin(t*3)*0.9*Math.cos(tor.rotation.x+0.3));
+      spk.material.emissiveIntensity = 2.0 + Math.sin(t*6)*0.8;
+      rings.forEach(function(r2, i) { r2.rotation.y += 0.018 + i*0.003; });
+      arms.rotation.y += 0.004;
+      pl.position.set(Math.sin(t*0.4)*5, 6, Math.cos(t*0.4)*5);
+      orb.spin(0.002);
+      renderer.render(scene, camera);
+    }());
+  }());
+
+  /* ╔══════════════════════════════════════╗
+     ║  SIM D — FOUR FORCES                ║
+     ╚══════════════════════════════════════╝ */
+  (function() {
+    var x = makeR('c-four', 'w-four');
+    var renderer = x.renderer, camera = x.camera;
+    camera.position.set(0, 8, 20);
+    var scene = new THREE.Scene();
+    var orb = new Orbit(camera, document.getElementById('w-four'));
+
+    scene.add(new THREE.AmbientLight(0x050510, 4));
+    var dl = new THREE.DirectionalLight(0xffffff, 1); dl.position.set(5, 10, 5); scene.add(dl);
+
+    var FD = [
+      { col: 0xff3030, pCol: 0xff8888, pos: new THREE.Vector3(-5, 0,  0) },
+      { col: 0x4fc3f7, pCol: 0x80d8ff, pos: new THREE.Vector3( 5, 0,  0) },
+      { col: 0xf58b2b, pCol: 0xffcc80, pos: new THREE.Vector3( 0, 0, -5) },
+      { col: 0xffd700, pCol: 0xffeea0, pos: new THREE.Vector3( 0, 0,  5) },
+    ];
+    var cores = FD.map(function(f) {
+      var m = new THREE.Mesh(new THREE.SphereGeometry(0.58, 18, 18),
+        new THREE.MeshStandardMaterial({ color: f.col, emissive: f.col, emissiveIntensity: 2.0, roughness: 0.1, metalness: 0.6 }));
+      m.position.copy(f.pos); scene.add(m);
+      var lp = new THREE.PointLight(f.col, 6, 10); lp.position.copy(f.pos); scene.add(lp);
+      return { mesh: m, lp: lp, pos: f.pos };
+    });
+
+    var gg = new THREE.PlaneGeometry(22, 22, 22, 22); gg.rotateX(-Math.PI/2); gg.translate(0, -3.2, 0);
+    scene.add(new THREE.Mesh(gg, new THREE.MeshBasicMaterial({ color: 0xffd700, wireframe: true, transparent: true, opacity: 0.07 })));
+
+    var carriers = FD.map(function(f, fi) {
+      var grp = [], N = fi === 1 ? 14 : 7;
+      for (var k = 0; k < N; k++) {
+        var m = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8),
+          new THREE.MeshStandardMaterial({ color: f.pCol, emissive: f.pCol, emissiveIntensity: 2.2 }));
+        scene.add(m);
+        var ti = (fi + 1 + Math.floor(Math.random()*3)) % 4;
+        grp.push({ mesh: m, t: Math.random(), spd: 0.5+Math.random()*0.7, from: f.pos, to: FD[ti].pos, fi: fi });
+      }
+      return grp;
+    });
+
+    var t = 0;
+    (function tick() {
+      requestAnimationFrame(tick);
+      t += 0.012;
+      cores.forEach(function(c, i) { var s = 1+Math.sin(t*1.5+i*1.5)*0.1; c.mesh.scale.set(s,s,s); c.lp.intensity = 5+Math.sin(t+i)*2.5; });
+      carriers.forEach(function(grp) {
+        grp.forEach(function(p) {
+          p.t = (p.t + p.spd*0.008) % 1;
+          var v = new THREE.Vector3().lerpVectors(p.from, p.to, p.t);
+          if (p.fi === 1) v.y += Math.sin(p.t*Math.PI)*2.2;
+          if (p.fi === 2 && p.t > 0.47 && p.t < 0.53) { p.mesh.material.emissiveIntensity = 6; p.mesh.scale.setScalar(2.2); }
+          else { p.mesh.material.emissiveIntensity = 2.2; p.mesh.scale.setScalar(1); }
+          p.mesh.position.copy(v);
+        });
       });
-      pl.intensity=Math.max(4,16-ef*12);pl2.intensity=Math.max(2,14-ef*10);
+      orb.spin(0.002);
+      renderer.render(scene, camera);
+    }());
+  }());
+
+  /* ╔══════════════════════════════════════╗
+     ║  SIM E — QUANTUM SCRAMBLING         ║
+     ╚══════════════════════════════════════╝ */
+  (function() {
+    var x = makeR('c-scram', 'w-scram');
+    var renderer = x.renderer, camera = x.camera;
+    camera.position.set(0, 10, 16);
+    var scene = new THREE.Scene();
+    var orb = new Orbit(camera, document.getElementById('w-scram'));
+
+    scene.add(new THREE.AmbientLight(0x030310, 5));
+    var dl = new THREE.DirectionalLight(0x81c784, 2); dl.position.set(5, 8, 5); scene.add(dl);
+    var pl = new THREE.PointLight(0x4fc3f7, 10, 26); scene.add(pl);
+
+    var qubits = [];
+    function addNode(x2, y2, z2, ring) {
+      var m = new THREE.Mesh(
+        new THREE.SphereGeometry(ring === 0 ? 0.26 : 0.17, 10, 10),
+        new THREE.MeshStandardMaterial({ color: ring===0?0xffffff:0x334488, emissive: ring===0?0xffffff:0x334488, emissiveIntensity: ring===0?3.5:0.25, roughness: 0.3 })
+      );
+      m.position.set(x2, y2, z2); scene.add(m);
+      qubits.push({ mesh: m, pos: new THREE.Vector3(x2, y2, z2), ring: ring });
     }
+    addNode(0, 0, 0, 0);
+    for (var ring = 1; ring <= 3; ring++) {
+      for (var s = 0; s < 6; s++) {
+        for (var k = 0; k < ring; k++) {
+          var a  = (s/6)*Math.PI*2 + Math.PI/6;
+          var na = ((s+1)/6)*Math.PI*2 + Math.PI/6;
+          var f2 = k / ring;
+          var qx = ring*2.15*(Math.cos(a)*(1-f2)+Math.cos(na)*f2);
+          var qz = ring*2.15*(Math.sin(a)*(1-f2)+Math.sin(na)*f2);
+          addNode(qx, 0, qz, ring);
+        }
+      }
+    }
+    var conns = [];
+    for (var i = 0; i < qubits.length; i++) {
+      for (var j = i+1; j < qubits.length; j++) {
+        if (qubits[i].pos.distanceTo(qubits[j].pos) < 2.3) {
+          var lg = new THREE.BufferGeometry().setFromPoints([qubits[i].pos, qubits[j].pos]);
+          var lm = new THREE.LineBasicMaterial({ color: 0x4fc3f7, transparent: true, opacity: 0.07 });
+          scene.add(new THREE.Line(lg, lm));
+          conns.push({ lm: lm, i: i, j: j });
+        }
+      }
+    }
+    scene.add(new THREE.GridHelper(22, 22, 0x0a1828, 0x061018));
 
-    /* reset before substrate phase */
-    if(f<.38) lattice.forEach(n=>{n.m.visible=false;n.m.position.copy(n.op);});
+    var PERIOD = 220, fr = 0;
+    (function tick() {
+      requestAnimationFrame(tick);
+      fr = (fr + 1) % PERIOD;
+      var front = (fr/PERIOD)*15 - 0.5;
+      qubits.forEach(function(q) {
+        var d = q.pos.length(), atF = Math.abs(d-front) < 1.1, inF = d <= Math.max(0, front);
+        if (atF) {
+          q.mesh.material.color.setHex(0xffffff); q.mesh.material.emissive.setHex(0x81c784);
+          q.mesh.material.emissiveIntensity = 6.0; q.mesh.scale.setScalar(1.7);
+        } else if (inF) {
+          var lv = Math.max(0, 1-(front-d)/7.5);
+          var c2 = new THREE.Color().setHSL(0.6-lv*0.4, 1, 0.5+lv*0.2);
+          q.mesh.material.color.copy(c2); q.mesh.material.emissive.copy(c2);
+          q.mesh.material.emissiveIntensity = 1.2 + lv; q.mesh.scale.setScalar(1);
+        } else {
+          q.mesh.material.color.setHex(0x334488); q.mesh.material.emissive.setHex(0x334488);
+          q.mesh.material.emissiveIntensity = 0.2; q.mesh.scale.setScalar(1);
+        }
+      });
+      conns.forEach(function(c) { c.lm.opacity = qubits[c.i].pos.length() <= Math.max(0, front) ? 0.28 : 0.06; });
+      pl.position.set(Math.sin(fr*0.04)*5, 6, Math.cos(fr*0.04)*5);
+      orb.spin(0.002);
+      renderer.render(scene, camera);
+    }());
+  }());
 
-    pl.position.set(Math.sin(fr*.03)*2.5,3,Math.cos(fr*.03)*2.5);
-    orb.spin(.002);composer.render();
-  }tick();
-})();
+  /* ╔══════════════════════════════════════╗
+     ║  SIM F — PHASE TRANSITION BIG BANG  ║
+     ╚══════════════════════════════════════╝ */
+  (function() {
+    var x = makeR('c-bang', 'w-bang');
+    var renderer = x.renderer, camera = x.camera;
+    camera.position.set(0, 10, 18);
+    var scene = new THREE.Scene();
+    var orb = new Orbit(camera, document.getElementById('w-bang'));
 
-})(); // end IIFE
+    scene.add(new THREE.AmbientLight(0x050505, 4));
+    var pl  = new THREE.PointLight(0xffd700, 16, 32); pl.position.set(0, 3, 0);  scene.add(pl);
+    var pl2 = new THREE.PointLight(0x4fc3f7,  8, 22); pl2.position.set(-4, 6, 4); scene.add(pl2);
+
+    var SN = 500, sPos = new Float32Array(SN*3), sVel = [];
+    for (var i = 0; i < SN; i++) {
+      var th2 = Math.random()*Math.PI*2, ph3 = Math.acos(2*Math.random()-1), rv3 = Math.random()*5;
+      sPos[i*3]   = rv3*Math.sin(ph3)*Math.cos(th2);
+      sPos[i*3+1] = rv3*Math.sin(ph3)*Math.sin(th2);
+      sPos[i*3+2] = rv3*Math.cos(ph3);
+      sVel.push({ vx:(Math.random()-0.5)*0.04, vy:(Math.random()-0.5)*0.04, vz:(Math.random()-0.5)*0.04 });
+    }
+    var sGeo = new THREE.BufferGeometry(); sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
+    var sMat = new THREE.PointsMaterial({ color: 0x4444bb, size: 0.13, transparent: true, opacity: 0.5 });
+    var subCloud = new THREE.Points(sGeo, sMat); scene.add(subCloud);
+
+    var tGlow = new THREE.Mesh(new THREE.SphereGeometry(0.55, 20, 20),
+      new THREE.MeshStandardMaterial({ color: 0xffd700, emissive: 0xffd700, emissiveIntensity: 0, roughness: 0.1 }));
+    tGlow.visible = false; scene.add(tGlow);
+
+    var LRES = 6, lattice = [];
+    for (var ix = -LRES; ix <= LRES; ix++) {
+      for (var iy = -LRES; iy <= LRES; iy++) {
+        for (var iz = -LRES; iz <= LRES; iz++) {
+          if (ix*ix+iy*iy+iz*iz > LRES*LRES) continue;
+          var nm = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6),
+            new THREE.MeshStandardMaterial({ color: 0x4fc3f7, emissive: 0x4fc3f7, emissiveIntensity: 1.5, roughness: 0.2 }));
+          var op = new THREE.Vector3(ix*1.05, iy*1.05, iz*1.05);
+          nm.position.copy(op); nm.visible = false; scene.add(nm);
+          lattice.push({ m: nm, op: op.clone(), dist: Math.sqrt(ix*ix+iy*iy+iz*iz) });
+        }
+      }
+    }
+    lattice.sort(function(a,b){ return a.dist - b.dist; });
+    scene.add(stars(1000, 85));
+
+    var PERIOD = 260, fr = 0;
+    (function tick() {
+      requestAnimationFrame(tick);
+      fr = (fr+1) % PERIOD;
+      var f = fr / PERIOD;
+
+      subCloud.visible = f < 0.65;
+      if (f < 0.65) {
+        var sp = sGeo.attributes.position;
+        for (var i = 0; i < SN; i++) {
+          sp.array[i*3]   += sVel[i].vx; sp.array[i*3+1] += sVel[i].vy; sp.array[i*3+2] += sVel[i].vz;
+          var rr = Math.sqrt(sp.array[i*3]*sp.array[i*3]+sp.array[i*3+1]*sp.array[i*3+1]+sp.array[i*3+2]*sp.array[i*3+2]);
+          if (rr > 6) { sVel[i].vx *= -0.8; sVel[i].vy *= -0.8; sVel[i].vz *= -0.8; }
+        }
+        sp.needsUpdate = true;
+        if (f < 0.25) { sMat.color.setHex(0x4444bb); sMat.opacity=0.5; tGlow.visible=false; pl.intensity=16; }
+        else if (f < 0.38) {
+          var tf=(f-0.25)/0.13;
+          sMat.color.setRGB(0.25+tf*0.75, 0.25+tf*0.45, 1); sMat.opacity=0.5+tf*0.45;
+          tGlow.visible=true; tGlow.material.emissiveIntensity=tf*8; pl.intensity=16+tf*45;
+        } else { sMat.opacity=Math.max(0,0.95-(f-0.38)/0.27); tGlow.visible=false; }
+      } else { tGlow.visible=false; }
+
+      if (f >= 0.38 && f < 0.7) {
+        var cf=(f-0.38)/0.32, maxD=cf*LRES*1.08;
+        lattice.forEach(function(node){
+          var show = node.dist <= maxD; node.m.visible = show;
+          if (show) { var mat2=Math.max(0,Math.min(1,(maxD-node.dist)/2)); node.m.material.emissiveIntensity=1.0+mat2*1.5; node.m.scale.setScalar(0.4+mat2*0.6); node.m.position.copy(node.op); }
+        });
+        pl.intensity = Math.max(16, 46-cf*30);
+      }
+      if (f >= 0.7) {
+        var ef=(f-0.7)/0.3;
+        lattice.forEach(function(node){
+          node.m.visible=true; node.m.material.emissiveIntensity=Math.max(0,2.0*(1-ef));
+          node.m.material.transparent=true; node.m.material.opacity=1-ef*0.75;
+          node.m.position.set(node.op.x*(1+ef*1.8), node.op.y*(1+ef*1.8), node.op.z*(1+ef*1.8));
+        });
+        pl.intensity=Math.max(4,16-ef*12);
+      }
+      if (f < 0.38) lattice.forEach(function(node){ node.m.visible=false; node.m.position.copy(node.op); });
+
+      pl.position.set(Math.sin(fr*0.03)*2.5, 3, Math.cos(fr*0.03)*2.5);
+      orb.spin(0.002);
+      renderer.render(scene, camera);
+    }());
+  }());
+
+}); /* end window.load */
 </script>
+
 
 </body>
 </html>
