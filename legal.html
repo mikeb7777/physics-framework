@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Legal & Policies - Ic² Research Institute</title>
-
-  <!-- AOS -->
+  <title>Legal &amp; Policies - Ic² Research Institute</title>
+  <meta name="description" content="Legal policies, terms of use, privacy policy, and research disclaimer for Ic² Research Institute / The COSMIC Framework." />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
-    /* Basic reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
       --primary-red: #dc143c;
       --primary-dark: #8b0000;
@@ -20,238 +17,111 @@
       --bg: #f8f9fa;
       --max-width: 1200px;
     }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; background: var(--bg); color: var(--text-dark); }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      background: var(--bg);
-      color: var(--text-dark);
-    }
-
-    /* Header (copied/adapted from events.html pattern) */
-    .site-header {
-      background: white;
-      border-bottom: 1px solid #e0e0e0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .header-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative; /* for centered logo */
-    }
-
-    .header-logos {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .header-logo { display:flex; align-items:center; }
-    .header-logo.left { justify-content:flex-start; }
-    .header-logo.right { justify-content:flex-end; }
-
-    .header-logo img { height:50px; width:auto; display:block; }
-
-    /* Center: framework logo, absolutely centered */
-    .header-logo.center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: auto;
-      text-align: center;
-    }
-    .header-logo.center img { height:60px; }
-
-    /* Hamburger & Mobile Menu */
+    /* Header */
+    .site-header { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .header-logos { display: flex; align-items: center; width: 100%; justify-content: space-between; gap: 1rem; }
+    .header-logo { display: flex; align-items: center; }
+    .header-logo.left  { justify-content: flex-start; }
+    .header-logo.right { justify-content: flex-end; }
+    .header-logo img   { height: 50px; width: auto; display: block; }
+    .header-logo.center { position: absolute; left: 50%; transform: translateX(-50%); pointer-events: auto; text-align: center; }
+    .header-logo.center img { height: 60px; }
     .hamburger { display: none; flex-direction: column; gap: 4px; padding: 8px; cursor: pointer; }
-    .hamburger span { width: 26px; height: 3px; background: var(--primary-dark); border-radius: 3px; transition: all .3s ease; }
-
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 72px;
-      left: 0;
-      right: 0;
-      background: white;
-      border-bottom: 1px solid #e0e0e0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      z-index: 999;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s ease;
-    }
+    .hamburger span { width: 26px; height: 3px; background: var(--primary-dark); border-radius: 3px; transition: all .3s; }
+    .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); z-index: 999; max-height: 0; overflow: hidden; transition: max-height .3s ease; }
     .mobile-menu.active { max-height: 600px; }
     .mobile-menu ul { list-style: none; padding: 1rem; }
-    .mobile-menu a { display:block; padding:.75rem 1rem; color: var(--text-dark); text-decoration: none; }
+    .mobile-menu a { display: block; padding: .75rem 1rem; color: var(--text-dark); text-decoration: none; }
 
-    /* Page Header (matched to events.html) */
-    .page-header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      padding: 4rem 2rem;
-      text-align: center;
-      color: white;
-    }
+    /* Page Header */
+    .page-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 4rem 2rem; text-align: center; color: white; }
+    .page-header h1 { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .page-header p  { font-size: 1.05rem; opacity: 0.95; max-width: 900px; margin: 0 auto; }
 
-    .page-header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .page-header p {
-      font-size: 1.05rem;
-      opacity: 0.95;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* Main content & existing styles (kept/adapted) */
-    .container {
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 0 40px;
-    }
-
-    .quick-links {
-      background: white;
-      border-radius: 12px;
-      padding: 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-    .quick-links h2 { font-size: 1.8em; margin-bottom: 25px; color: var(--text-dark); text-align:center; }
-    .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-    .link-item {
-      padding: 20px;
-      background: rgba(220, 20, 60, 0.05);
-      border-radius: 8px;
-      text-align: center;
-      color: var(--primary-red);
-      font-weight: 600;
-      text-decoration: none;
-      transition: all .25s;
-    }
+    /* Content */
+    .container { max-width: 1000px; margin: 60px auto; padding: 0 40px; }
+    .quick-links { background: white; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    .quick-links h2 { font-size: 1.8em; margin-bottom: 25px; color: var(--text-dark); text-align: center; }
+    .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; }
+    .link-item { padding: 18px 12px; background: rgba(220,20,60,0.05); border-radius: 8px; text-align: center; color: var(--primary-red); font-weight: 600; text-decoration: none; transition: all .25s; font-size: 0.95rem; }
     .link-item:hover { background: var(--primary-red); color: white; transform: translateY(-3px); }
 
-    .legal-section {
-      background: white;
-      border-radius: 12px;
-      padding: 50px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-    .legal-section h2 {
-      font-size: 2.5em;
-      margin-bottom: 15px;
-      color: var(--text-dark);
-      padding-bottom: 15px;
-      border-bottom: 3px solid var(--primary-red);
-    }
+    .legal-section { background: white; border-radius: 12px; padding: 50px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    .legal-section h2 { font-size: 2em; margin-bottom: 15px; color: var(--text-dark); padding-bottom: 15px; border-bottom: 3px solid var(--primary-red); }
     .legal-section .last-updated { color: var(--muted); font-style: italic; margin-bottom: 30px; }
-    .legal-section h3 { font-size: 1.8em; margin-top: 35px; margin-bottom: 15px; color: var(--text-dark); }
-    .legal-section h4 { font-size: 1.3em; margin-top: 25px; margin-bottom: 12px; color: var(--primary-red); }
-    .legal-section p { margin-bottom: 20px; color: #555; line-height: 1.8; }
-    .legal-section ul { margin: 20px 0; padding-left: 30px; }
-    .legal-section li { margin-bottom: 12px; color: #555; line-height: 1.7; }
-    .important-notice {
-      background: rgba(220, 20, 60, 0.05);
-      border-left: 4px solid var(--primary-red);
-      padding: 20px;
-      margin: 25px 0;
-      border-radius: 4px;
-    }
+    .legal-section h3 { font-size: 1.2em; margin-top: 32px; margin-bottom: 10px; color: var(--text-dark); }
+    .legal-section h4 { font-size: 1.05em; margin-top: 20px; margin-bottom: 8px; color: var(--primary-red); }
+    .legal-section p  { margin-bottom: 15px; color: #555; line-height: 1.8; }
+    .legal-section ul { margin: 14px 0; padding-left: 26px; }
+    .legal-section li { margin-bottom: 9px; color: #555; line-height: 1.7; }
+    .legal-section a  { color: var(--primary-dark); }
 
-    .contact-box {
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-dark) 100%);
-      color: white;
-      padding: 40px;
-      border-radius: 12px;
-      text-align: center;
-      margin-top: 60px;
-    }
+    .important-notice { background: rgba(220,20,60,0.05); border-left: 4px solid var(--primary-red); padding: 18px 22px; margin: 18px 0; border-radius: 4px; }
+    .important-notice p { margin-bottom: 0; color: #444; }
+    .warning-notice { background: rgba(230,130,10,0.08); border-left: 4px solid #e6820a; padding: 18px 22px; margin: 18px 0; border-radius: 4px; }
+    .warning-notice p { margin-bottom: 0; color: #7a4800; }
+
+    .contact-box { background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-dark) 100%); color: white; padding: 40px; border-radius: 12px; text-align: center; margin-top: 60px; }
     .contact-box h3 { font-size: 2em; margin-bottom: 15px; }
-    .contact-box p { font-size: 1.1em; margin-bottom: 25px; opacity: 0.95; }
-    .contact-box a {
-      display: inline-block;
-      padding: 12px 35px;
-      background: white;
-      color: var(--primary-red);
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 700;
-      transition: all .25s;
-    }
+    .contact-box p  { font-size: 1.1em; margin-bottom: 25px; opacity: 0.95; }
+    .contact-box a  { display: inline-block; padding: 12px 35px; background: white; color: var(--primary-red); text-decoration: none; border-radius: 50px; font-weight: 700; transition: all .25s; }
     .contact-box a:hover { transform: scale(1.04); }
 
-    /* Footer (events.html style) */
+    /* Footer */
     footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; margin-top: 60px; }
     .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
-    .footer-section h3 { margin-bottom: 0.75rem; font-size: 1.1rem; color: white; }
-    .footer-section a, .footer-section p { color: rgba(255,255,255,0.8); text-decoration: none; display:block; margin-bottom: .5rem; }
+    .footer-section h3 { margin-bottom: .75rem; font-size: 1.1rem; color: white; }
+    .footer-section a, .footer-section p { color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: .5rem; font-size: 0.9rem; }
     .footer-section a:hover { color: white; }
-    .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 1.5rem 0 1rem; border-top: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem; }
-    .footer-bottom p { color: white !important; opacity: 0.7; }
-    .footer-bottom a { color: white !important; opacity: 0.7; text-decoration: none; }
-    .footer-bottom a:hover { opacity: 1; }
+    .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 1.5rem 0 1rem; border-top: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem; color: rgba(255,255,255,0.65); }
+    .footer-bottom a { color: rgba(255,255,255,0.65); text-decoration: none; }
+    .footer-bottom a:hover { color: white; }
 
-    /* Responsive rules */
     @media (max-width: 968px) {
       .page-header h1 { font-size: 1.8rem; }
-      .legal-section { padding: 30px 25px; }
-      .header-logos { display: none; }
-      .hamburger { display: flex; }
-      .mobile-menu { display: block; }
+      .legal-section  { padding: 28px 22px; }
+      .header-logos   { display: none; }
+      .hamburger      { display: flex; }
+      .mobile-menu    { display: block; }
       .footer-container { grid-template-columns: 1fr; }
-      /* on small screens, center logo flows inline */
       .header-logo.center { position: static; transform: none; margin: 0 auto; }
       .header-logo.center img { height: 50px; }
     }
-
     @media (max-width: 480px) {
+      .container { padding: 0 18px; }
       .header-logo img { height: 40px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="site-header">
     <div class="header-container">
       <div class="header-logos">
         <div class="header-logo left">
           <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
         </div>
-
         <div class="header-logo center">
           <a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a>
         </div>
-
         <div class="header-logo right">
           <a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a>
         </div>
       </div>
-
       <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
         <span></span><span></span><span></span>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" aria-hidden="true">
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="framework.html">Framework</a></li>
-      <li><a href="book.html">Big Toe</a></li>
+      <li><a href="book.html">Big TOE</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="validation.html">Validation</a></li>
       <li><a href="testing-schedule.html">Testing</a></li>
@@ -264,25 +134,27 @@
     </ul>
   </div>
 
-  <!-- Page Header (now matches events.html style) -->
   <section class="page-header">
-    <h1 data-aos="fade-up">Legal & Policies</h1>
-    <p class="hero-tagline" data-aos="fade-up" data-aos-delay="100">Our commitment to transparency extends to our legal policies and terms</p>
+    <h1 data-aos="fade-up">Legal &amp; Policies</h1>
+    <p data-aos="fade-up" data-aos-delay="100">Our commitment to transparency extends to every aspect of how we operate — including legal policies, financial practices, and your rights as a user.</p>
   </section>
 
-  <!-- Main Content -->
   <div class="container">
+
     <div class="quick-links" data-aos="fade-up">
       <h2>Quick Navigation</h2>
       <div class="links-grid">
-        <a href="#terms" class="link-item">Terms of Use</a>
-        <a href="#privacy" class="link-item">Privacy Policy</a>
+        <a href="#terms"      class="link-item">Terms of Use</a>
+        <a href="#community"  class="link-item">Community &amp; Forum</a>
+        <a href="#privacy"    class="link-item">Privacy Policy</a>
+        <a href="#financial"  class="link-item">Financial Disclosures</a>
+        <a href="#commerce"   class="link-item">Commerce &amp; Sales</a>
         <a href="#disclaimer" class="link-item">Research Disclaimer</a>
-        <a href="#copyright" class="link-item">Copyright & Licensing</a>
+        <a href="#copyright"  class="link-item">Copyright &amp; Licensing</a>
       </div>
     </div>
 
-    <!-- Terms of Use -->
+    <!-- ══ TERMS OF USE ══ -->
     <div id="terms" class="legal-section" data-aos="fade-up">
       <h2>Terms of Use</h2>
       <p class="last-updated">Last Updated: March 2026</p>
@@ -291,20 +163,13 @@
       <p>By accessing and using the Ic² Research Institute website and resources, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use our services.</p>
 
       <h3>2. Nature of the Institute</h3>
-      <p>Ic² Research Institute is an independent research platform, not a registered legal entity or non-profit organization. We operate as a transparent, community-driven initiative focused on consciousness and computation research.</p>
-
+      <p>Ic² Research Institute is an independent research platform operated by Michael K. Baines as a sole proprietor. It is not a registered corporation, LLC, partnership, or non-profit organization. We operate as a transparent, community-driven initiative focused on consciousness and computation research. Legal entity formation is planned for a future date as the platform grows.</p>
       <div class="important-notice">
-        <p><strong>Important:</strong> Ic² Research Institute is not a registered 501(c)(3) organization. Donations are not tax-deductible. We maintain this status to ensure complete independence and transparency.</p>
+        <p><strong>Important:</strong> Ic² Research Institute is NOT a registered 501(c)(3) or any other tax-exempt organization. Financial contributions are not charitable donations and are not tax-deductible. See the Financial Disclosures section for full details.</p>
       </div>
 
       <h3>3. Use of Research Materials</h3>
-      <p>All research published by Ic² Research Institute is provided under open licenses unless otherwise stated. You are free to:</p>
-      <ul>
-        <li>Read, download, and share our research materials</li>
-        <li>Use our data for academic or personal research</li>
-        <li>Build upon our work with proper attribution</li>
-        <li>Reproduce content with appropriate citations</li>
-      </ul>
+      <p>All research published by Ic² Research Institute is provided under open licenses unless otherwise stated. You are free to read, download, and share our research materials; use our data for academic or personal research; and build upon our work with proper attribution. You may not use our content for commercial purposes without prior written consent.</p>
 
       <h3>4. Contributor Intellectual Property Rights</h3>
       <div class="important-notice">
@@ -313,15 +178,7 @@
       <p>By contributing content, you grant the Ic² Research Institute a non-exclusive, royalty-free license to display and share that content within the platform for collaborative research purposes. You may revoke this license at any time by requesting removal of your content. The institute will not use contributor work for commercial purposes without explicit written consent.</p>
 
       <h3>5. Community Standards</h3>
-      <p>When participating in discussions, events, or collaborative projects, users agree to:</p>
-      <ul>
-        <li>Engage respectfully with all community members</li>
-        <li>Provide constructive feedback and criticism</li>
-        <li>Maintain scientific rigor and intellectual honesty</li>
-        <li>Respect intellectual property and proper attribution</li>
-        <li>Refrain from harassment, discrimination, or abusive behavior</li>
-        <li>Disclose conflicts of interest relevant to scientific claims</li>
-      </ul>
+      <p>When participating in discussions, events, or collaborative projects, users agree to engage respectfully with all community members; provide constructive feedback and criticism; maintain scientific rigor and intellectual honesty; respect intellectual property and proper attribution; refrain from harassment, discrimination, or abusive behavior; and disclose conflicts of interest relevant to scientific claims.</p>
 
       <h3>6. No Professional Advice</h3>
       <p>Content on this website is for informational and educational purposes only. It does not constitute professional scientific, medical, legal, or financial advice. Always consult qualified professionals for specific guidance.</p>
@@ -330,227 +187,300 @@
       <p>Our website may contain links to external sites. We are not responsible for the content, accuracy, or practices of these third-party websites.</p>
 
       <h3>8. DMCA Copyright Policy</h3>
-      <p>The Ic² Research Institute respects intellectual property rights and complies with the Digital Millennium Copyright Act (DMCA). If you believe content on this website infringes your copyright, please submit a written notice to our designated agent containing:</p>
-      <ul>
-        <li>A description of the copyrighted work you claim has been infringed</li>
-        <li>The specific URL or location of the allegedly infringing content</li>
-        <li>Your contact information (name, address, phone, email)</li>
-        <li>A statement of good faith belief that the use is not authorized</li>
-        <li>A statement, under penalty of perjury, that the information is accurate and you are authorized to act</li>
-        <li>Your physical or electronic signature</li>
-      </ul>
-      <p><strong>Designated DMCA Agent:</strong> Michael K. Baines, Ic² Research Institute, 35 N. Lake Avenue, Suite [TBD], Pasadena, CA 91101 | <a href="/cdn-cgi/l/email-protection#8de0e6efe4e3ebe2cdfdffe2f9e2e3a3e0e8"><span class="__cf_email__" data-cfemail="1b76707972757d745b6b69746f747535767e">[email&#160;protected]</span></a></p>
+      <p>The Ic² Research Institute respects intellectual property rights and complies with the Digital Millennium Copyright Act (DMCA). If you believe content on this website infringes your copyright, please submit a written notice to our designated agent at <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> containing: a description of the copyrighted work claimed to have been infringed; the specific URL of the allegedly infringing content; your contact information; a statement of good faith belief that the use is not authorized; and a statement, under penalty of perjury, that the information is accurate and you are authorized to act.</p>
 
-      <h3>9. Modifications</h3>
+      <h3>9. Modifications to Terms</h3>
       <p>We reserve the right to modify these terms at any time. Material changes will be communicated to subscribers via email. Continued use of our services after changes are posted constitutes acceptance of the modified terms.</p>
 
       <h3>10. Governing Law</h3>
       <p>These Terms of Use are governed by and construed in accordance with the laws of the State of California, United States, without regard to conflict of law provisions. Any disputes shall be subject to the exclusive jurisdiction of the state and federal courts located in Los Angeles County, California.</p>
     </div>
 
-    <!-- Privacy Policy -->
+    <!-- ══ COMMUNITY FORUM ══ -->
+    <div id="community" class="legal-section" data-aos="fade-up">
+      <h2>Community Forum &amp; Collaboration</h2>
+      <p class="last-updated">Last Updated: March 2026</p>
+
+      <h3>1. About the Community Forum</h3>
+      <p>The Ic² Research Institute operates a community discussion forum powered by PeepSo, accessible to registered members of the website. The forum is currently in development and not yet fully active. These terms apply from the moment any member accesses or posts to the forum, including during the soft-launch or beta period.</p>
+
+      <div class="important-notice">
+        <p><strong>Open Science Community:</strong> The forum is intended to be a serious, welcoming space for researchers, independent scientists, and curious minds to discuss the COSMIC Framework, open physics, consciousness research, and related subjects. Intellectual honesty and respectful engagement are non-negotiable expectations.</p>
+      </div>
+
+      <h3>2. Registration and Accounts</h3>
+      <p>To participate in the forum, you must register for an account using a valid email address and create a display name. You are responsible for maintaining the confidentiality of your credentials. Each person may maintain only one account. Accounts found to be duplicates or created to evade prior sanctions may be removed without notice.</p>
+
+      <h3>3. Acceptable Use</h3>
+      <p>By posting in the community forum, you agree to: engage respectfully with all community members, including those whose views differ from your own; keep discussions relevant to science, research, and the subjects of this community; clearly distinguish speculation, opinion, and established fact from one another; provide attribution when referencing or building on others' work; disclose any conflicts of interest relevant to a scientific claim you are making; and accept constructive criticism of your ideas without personal offense.</p>
+
+      <h3>4. Prohibited Content and Behavior</h3>
+      <p>The following are strictly prohibited and may result in content removal or account suspension:</p>
+      <ul>
+        <li>Harassment, bullying, personal attacks, or discriminatory language of any kind</li>
+        <li>Spam, unsolicited commercial promotion, or affiliate link posting</li>
+        <li>Posting content that infringes the intellectual property rights of others</li>
+        <li>Deliberate scientific misinformation presented as established fact</li>
+        <li>Content that is illegal under applicable law, including defamatory statements</li>
+        <li>Impersonating other researchers, members, or public figures</li>
+        <li>Sharing another member's personal information without their consent</li>
+        <li>Coordinated efforts to disrupt discussions or damage the community's reputation</li>
+      </ul>
+
+      <h3>5. Intellectual Property in Forum Posts</h3>
+      <p>You retain full ownership of original content you post in the forum. By posting, you grant the Ic² Research Institute a non-exclusive, royalty-free license to display your content within the platform. You may request removal of your content at any time by contacting <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a>. The institute will not republish or commercially exploit your forum contributions without your explicit written consent. Do not post content that you do not have the right to share.</p>
+
+      <h3>6. Moderation</h3>
+      <p>The forum is moderated by Michael K. Baines and any designated community moderators. Moderation decisions are made in good faith and in accordance with these guidelines. If your content is removed or your account is suspended, you may appeal by contacting <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> with a clear explanation. Appeals will be reviewed and responded to within 14 days.</p>
+
+      <h3>7. No Guarantee of Service</h3>
+      <p>The forum is provided on a best-effort basis. We reserve the right to modify, suspend, or discontinue the forum at any time without liability. We do not guarantee uninterrupted access or indefinite retention of posted content, and we recommend members keep copies of significant contributions.</p>
+
+      <h3>8. Research Collaboration Inquiries</h3>
+      <div class="important-notice">
+        <p><strong>Interested in collaborating?</strong> The Ic² Research Institute welcomes researchers, independent scientists, writers, and technically skilled contributors. Collaborators retain 100% ownership of their original work and may publish under the institute's auspices or independently. There are no fees, no gatekeeping, and no institutional barriers to participation.</p>
+      </div>
+      <p>To inquire about research collaboration, joining as a contributing member, or proposing a joint project, contact:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> — use the subject line "Collaboration Inquiry"</li>
+        <li><strong>Forum:</strong> Once active, the Community Forum will include a dedicated Collaboration board for open discussion of joint research projects</li>
+      </ul>
+      <p>We aim to respond to all collaboration inquiries within 7 days. Please include a brief description of your background, the nature of your proposed contribution, and any relevant links to prior work or publications.</p>
+
+      <h3>9. Community Privacy</h3>
+      <p>Your forum activity — display name, posts, and profile information you choose to share — is visible to other registered members. We do not publish or sell member information to third parties. Your email address is never displayed publicly in the forum. For full details on how member data is handled, see the Privacy Policy section of this page.</p>
+    </div>
+
+    <!-- ══ PRIVACY POLICY ══ -->
     <div id="privacy" class="legal-section" data-aos="fade-up">
       <h2>Privacy Policy</h2>
-      <p class="last-updated">Last Updated: March 2026</p>
+      <p class="last-updated">Last Updated: March 2026 &nbsp;|&nbsp; Effective Date: March 1, 2026</p>
 
       <h3>1. Our Philosophy on Data</h3>
       <div class="important-notice">
-        <p><strong>Our founding principle:</strong> We collect only what is strictly necessary to operate the platform and enable genuine human connection. We do not sell, rent, trade, or monetize your information in any form. We do not use your data to profile you, target you with advertising, or derive commercial value from it.</p>
+        <p><strong>Core Principle:</strong> We collect only what is strictly necessary to operate the platform. We do not sell, rent, trade, license, share, or monetize your personal information in any form — ever. We do not use your data to build behavioral profiles, target you with advertising, or derive commercial value from it.</p>
       </div>
 
       <h3>2. Who We Are</h3>
-      <p>This Privacy Policy applies to the Ic² Research Institute website operated by Michael K. Baines. Our physical mailing address is:</p>
-      <p><strong>Ic² Research Institute</strong><br>
-      35 N. Lake Avenue, Suite [TBD]<br>
-      Pasadena, CA 91101<br>
-      Email: <a href="/cdn-cgi/l/email-protection#8ae7e1e8e3e4ece5cafaf8e5fee5e4a4e7ef"><span class="__cf_email__" data-cfemail="214c4a43484f474e6151534e554e4f0f4c44">[email&#160;protected]</span></a></p>
+      <p>This Privacy Policy applies to the Ic² Research Institute website (eequalsicsquared.com) operated by Michael K. Baines. For privacy-related inquiries, contact us at <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a>.</p>
 
       <h3>3. Information We Collect</h3>
-      <p>We collect only what is necessary to provide the services you request:</p>
-
-      <h4>Information You Provide</h4>
+      <h4>Information You Provide Directly</h4>
       <ul>
-        <li>Email addresses for newsletter subscriptions (opt-in only)</li>
+        <li>Email address, if you subscribe to our newsletter or create an account (opt-in only)</li>
         <li>Name or display name, if you choose to provide it</li>
-        <li>Contact information when you reach out to us</li>
+        <li>Contact information when you reach out to us directly</li>
         <li>Research contributions and collaboration proposals, which you retain full ownership of</li>
-        <li>Donation information (processed securely through PayPal — we do not store payment details)</li>
+        <li>Financial contribution information, processed securely through PayPal — we do not store payment card or banking details on our servers</li>
       </ul>
-
-      <h4>Automatically Collected Information</h4>
+      <h4>Information Collected Automatically</h4>
       <ul>
-        <li>Basic technical data: browser type, device information, and IP address (used for security and site functionality only)</li>
-        <li>Anonymous usage analytics to understand how the site is being used</li>
+        <li>Basic technical data: browser type, device type, and IP address — used only for security and site functionality</li>
+        <li>Anonymous usage analytics to understand aggregate site usage patterns — not tied to individual identity</li>
       </ul>
-      <p>We do not build behavioral profiles, track you across other websites, or collect sensitive personal categories.</p>
+      <p>We do not build behavioral profiles, track you across other websites, use pixel tracking, or collect sensitive personal categories such as health data, biometrics, or precise location.</p>
 
       <h3>4. How We Use Your Information</h3>
-      <p>Your information is used only for the following purposes:</p>
+      <p>Your information is used only for the following purposes: sending newsletters, research updates, and event information you have subscribed to; enabling community features such as discussions and member profiles; responding to your direct inquiries; processing voluntary financial contributions through PayPal; maintaining security and technical operation of the website; and complying with legal obligations. We will never use your information for purposes beyond those listed without first obtaining your explicit consent.</p>
+
+      <h3>5. We Do Not Sell Your Information</h3>
+      <div class="important-notice">
+        <p><strong>We do not sell, rent, trade, license, or share your personal information with any third party for commercial purposes.</strong> This is a foundational principle — not merely a legal formality. There are no data licensing arrangements, advertising partnerships, or data broker relationships associated with this website.</p>
+      </div>
+
+      <h3>6. Limited Third-Party Data Sharing</h3>
+      <p>We may share data only in the following narrow circumstances:</p>
       <ul>
-        <li>Sending newsletters, research updates, and event information you have subscribed to</li>
-        <li>Enabling community features such as discussions and member profiles</li>
-        <li>Responding to your direct inquiries</li>
-        <li>Processing donations through PayPal</li>
-        <li>Maintaining the security and technical operation of the website</li>
-        <li>Complying with legal obligations</li>
+        <li><strong>PayPal:</strong> For secure processing of voluntary contributions, under PayPal's own privacy policy. We receive only confirmation of contribution amount.</li>
+        <li><strong>Email Service Provider:</strong> For newsletter delivery only. Our provider is contractually prohibited from using subscriber data for their own purposes.</li>
+        <li><strong>Legal Requirements:</strong> When compelled by valid legal process, and only to the minimum extent required by law. We will notify you if legally permitted to do so.</li>
       </ul>
+      <p>We will never share your data with data brokers, advertising networks, analytics companies that profile users, or any commercial third party beyond those listed above.</p>
 
-      <h3>5. Data Retention</h3>
-      <p>We retain your data only as long as necessary for its stated purpose. Newsletter subscriber data is retained until you unsubscribe. Account data is retained until you request deletion. Basic technical logs are retained for no longer than 90 days. You may request deletion at any time by contacting <a href="/cdn-cgi/l/email-protection#84e9efe6edeae2ebc4f4f6ebf0ebeaaae9e1"><span class="__cf_email__" data-cfemail="c3aea8a1aaada5ac83b3b1acb7acadedaea6">[email&#160;protected]</span></a>.</p>
+      <h3>7. Data Retention</h3>
+      <p>We retain your data only as long as necessary for its stated purpose. Newsletter subscriber data is retained until you unsubscribe. Account data is retained until you request deletion. Basic server logs are retained for no longer than 90 days. You may request deletion at any time by contacting <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a>.</p>
 
-      <h3>6. Data Sharing and Third Parties</h3>
-      <p>We do not sell, rent, or trade your personal information to any third party under any circumstances. We may share data only with:</p>
-      <ul>
-        <li><strong>PayPal:</strong> For secure donation processing, under their own privacy policy</li>
-        <li><strong>Email Service Providers:</strong> For newsletter delivery only, prohibited from using your data for their own purposes</li>
-        <li><strong>Legal Requirements:</strong> When compelled by law, and only to the extent required</li>
-      </ul>
-      <p>We will never share your data with data brokers, advertising networks, or any commercial third party for purposes beyond those listed above.</p>
-
-      <h3>7. Your Rights — All Users</h3>
+      <h3>8. Your Rights — All Users</h3>
       <ul>
         <li><strong>Access:</strong> Request a copy of the personal information we hold about you</li>
         <li><strong>Correction:</strong> Request correction of inaccurate information</li>
         <li><strong>Deletion:</strong> Request that we delete your personal information</li>
-        <li><strong>Unsubscribe:</strong> Opt out of newsletter communications at any time via the unsubscribe link in any email or by <a href="unsubscribe.html">clicking here</a></li>
-        <li><strong>Objection:</strong> Object to processing of your information</li>
+        <li><strong>Unsubscribe:</strong> Opt out of email communications at any time via the unsubscribe link in any email or by contacting us directly</li>
+        <li><strong>Objection:</strong> Object to any processing of your information</li>
       </ul>
-      <p>To exercise these rights, contact us at <a href="/cdn-cgi/l/email-protection#93fef8f1fafdf5fcd3e3e1fce7fcfdbdfef6"><span class="__cf_email__" data-cfemail="bad7d1d8d3d4dcd5facac8d5ced5d494d7df">[email&#160;protected]</span></a>. We will respond within 30 days.</p>
+      <p>To exercise these rights, contact us at <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a>. We will respond within 30 days.</p>
 
-      <h3>8. California Residents — CCPA / CPRA Rights</h3>
-      <p>If you are a California resident, you have the following additional rights under the California Consumer Privacy Act (CCPA) as amended by the California Privacy Rights Act (CPRA):</p>
+      <h3>9. California Residents — CCPA / CPRA Rights</h3>
+      <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA) as amended by the California Privacy Rights Act (CPRA):</p>
       <ul>
-        <li><strong>Right to Know:</strong> Request disclosure of the categories and specific pieces of personal information we have collected about you, and the purposes for which it was collected</li>
-        <li><strong>Right to Delete:</strong> Request deletion of personal information we have collected from you</li>
+        <li><strong>Right to Know:</strong> Request disclosure of the categories and specific pieces of personal information we have collected about you and the purposes for which it was collected</li>
+        <li><strong>Right to Delete:</strong> Request deletion of your personal information, subject to limited exceptions</li>
         <li><strong>Right to Correct:</strong> Request correction of inaccurate personal information</li>
-        <li><strong>Right to Opt Out of Sale or Sharing:</strong> We do not sell or share your personal information. We have no financial arrangements or data licensing agreements involving your personal data.</li>
-        <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising any of your CCPA rights</li>
+        <li><strong>Right to Opt Out of Sale or Sharing:</strong> We do not sell or share your personal information. There are no financial arrangements or data licensing agreements involving your personal data.</li>
+        <li><strong>Right to Limit Use of Sensitive Personal Information:</strong> We do not collect sensitive personal information as defined by CPRA.</li>
+        <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising any CCPA/CPRA rights.</li>
       </ul>
-      <p>To submit a verifiable consumer request, contact us at <a href="/cdn-cgi/l/email-protection#94f9fff6fdfaf2fbd4e4e6fbe0fbfabaf9f1"><span class="__cf_email__" data-cfemail="274a4c454e49414867575548534849094a42">[email&#160;protected]</span></a>. We will respond within 45 days as required by California law.</p>
+      <p>To submit a verifiable consumer request, contact <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a>. We will respond within 45 days as required by California law.</p>
 
-      <h3>9. European Users — GDPR Rights</h3>
-      <p>If you are located in the European Economic Area (EEA), United Kingdom, or Switzerland, the GDPR or equivalent legislation applies. We process your personal data on the following lawful bases: <strong>Consent</strong> for newsletter subscriptions (which you may withdraw at any time); <strong>Legitimate Interests</strong> for basic website security; and <strong>Legal Obligation</strong> when required by law.</p>
-      <p>In addition to the rights listed above, EEA/UK residents have the right to data portability, the right to restrict processing, and the right to lodge a complaint with your local supervisory authority. Contact us at <a href="/cdn-cgi/l/email-protection#d5b8beb7bcbbb3ba95a5a7baa1babbfbb8b0"><span class="__cf_email__" data-cfemail="432e28212a2d252c0333312c372c2d6d2e26">[email&#160;protected]</span></a> to exercise these rights.</p>
+      <h3>10. European and UK Users — GDPR / UK GDPR Rights</h3>
+      <p>If you are located in the European Economic Area (EEA), the United Kingdom, or Switzerland, the GDPR or equivalent legislation applies. We process your personal data on the following lawful bases: <strong>Consent</strong> for newsletter subscriptions (which you may withdraw at any time); <strong>Legitimate Interests</strong> for basic website security; and <strong>Legal Obligation</strong> when required by law.</p>
+      <p>EEA/UK residents also have the right to data portability, the right to restrict processing, and the right to lodge a complaint with your local supervisory authority. Contact <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> to exercise these rights.</p>
 
-      <h3>10. Cookies and Tracking</h3>
-      <p>We use a minimal set of cookies necessary for the site to function, including session and security cookies. If we use analytics, it will be configured to anonymize IP addresses and disable data sharing. A cookie consent notice will appear on your first visit. You may also manage cookies at any time through your browser settings.</p>
+      <h3>11. Cookies and Tracking</h3>
+      <p>We use only the minimal set of cookies necessary for the site to function, including session and security cookies. If we use analytics, it is configured to anonymize IP addresses and disable cross-site data sharing. You may manage cookies at any time through your browser settings.</p>
 
-      <h3>11. Data Security</h3>
-      <p>We implement appropriate technical and organizational measures to protect your information, including encrypted connections (HTTPS) and access controls. No internet transmission is 100% secure.</p>
+      <h3>12. Data Security</h3>
+      <p>We implement appropriate technical and organizational measures to protect your information, including encrypted connections (HTTPS) and access controls. No internet transmission is 100% secure, and we cannot guarantee absolute security.</p>
 
-      <h3>12. Children's Privacy</h3>
-      <p>Our website is not directed at children under 13. We do not knowingly collect information from minors. If you believe we have inadvertently done so, contact us immediately.</p>
+      <h3>13. Children's Privacy (COPPA)</h3>
+      <p>Our website is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us immediately at <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> and we will promptly delete it.</p>
 
-      <h3>13. Contact for Privacy Concerns</h3>
-      <p>For privacy-related questions or to exercise your rights, contact us at: <strong><a href="/cdn-cgi/l/email-protection#c4a9afa6adaaa2ab84b4b6abb0abaaeaa9a1"><span class="__cf_email__" data-cfemail="94f9fff6fdfaf2fbd4e4e6fbe0fbfabaf9f1">[email&#160;protected]</span></a></strong> or by mail at 35 N. Lake Avenue, Suite [TBD], Pasadena, CA 91101.</p>
+      <h3>14. Changes to This Policy</h3>
+      <p>We may update this Privacy Policy from time to time. Significant changes will be communicated to registered users via email. The effective date at the top of this section reflects when the policy was last revised.</p>
+
+      <h3>15. Contact for Privacy Concerns</h3>
+      <p>For privacy-related questions or to exercise your rights, contact: <strong><a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a></strong></p>
     </div>
 
-    <!-- Research Disclaimer -->
+    <!-- ══ FINANCIAL DISCLOSURES ══ -->
+    <div id="financial" class="legal-section" data-aos="fade-up">
+      <h2>Financial Disclosures</h2>
+      <p class="last-updated">Last Updated: March 2026</p>
+
+      <h3>1. Non-Charitable Status — Important Tax Notice</h3>
+      <div class="warning-notice">
+        <p><strong>Contributions to Ic² Research Institute are NOT tax-deductible charitable donations.</strong> Ic² Research Institute is not a registered 501(c)(3) organization, a charitable trust, or any other form of tax-exempt entity under U.S. federal or state law. Any financial contribution you make is treated as ordinary income to Michael K. Baines personally and does not qualify as a charitable deduction on your federal or state tax return. You should not treat any contribution as a deductible gift without first consulting a qualified tax professional.</p>
+      </div>
+      <p>We disclose this transparently because your financial decisions deserve accurate information. We have not sought 501(c)(3) status in order to preserve full independence and operational flexibility during the institute's current phase of development. Legal entity formation is planned for a future date. If and when our tax status changes, we will update this disclosure immediately and notify all registered users and subscribers.</p>
+
+      <h3>2. Nature of Financial Contributions</h3>
+      <p>Any monetary contributions made through the website are voluntary support payments to Michael K. Baines as the sole operator of the institute. They are not: charitable gifts eligible for tax deduction; investments in any company or venture; membership fees conferring legal ownership rights; or payments for guaranteed goods or services (unless a specific product purchase is made through a future commerce platform — see Commerce &amp; Sales section).</p>
+      <p>We are deeply grateful for every contribution and use all funds to advance open science research, website development, and the expansion of the Ic² Research Institute community.</p>
+
+      <h3>3. No Investment Solicitation</h3>
+      <p>Nothing on this website constitutes a solicitation of investment or an offer to sell securities. Contributions are purely voluntary support and confer no ownership interest, equity stake, or financial return.</p>
+
+      <h3>4. Financial Transparency</h3>
+      <p>In keeping with our commitment to radical transparency, we aim to publicly document how contributions are used to support research operations. Contribution summaries may be published periodically on the website.</p>
+
+      <h3>5. IRS and Tax Reporting</h3>
+      <p>Contributions received are reportable income to Michael K. Baines under applicable U.S. tax law. Contributors who provide personal information during a contribution transaction should be aware that we may be required to collect and report certain information to tax authorities if applicable thresholds are met, consistent with IRS regulations.</p>
+    </div>
+
+    <!-- ══ COMMERCE & SALES ══ -->
+    <div id="commerce" class="legal-section" data-aos="fade-up">
+      <h2>Commerce &amp; Sales</h2>
+      <p class="last-updated">Last Updated: March 2026</p>
+
+      <h3>1. Current Commerce Status</h3>
+      <div class="important-notice">
+        <p><strong>We do not currently sell any products or services.</strong> As of March 2026, no items, subscriptions, or services are available for purchase through this website. Voluntary financial contributions processed through PayPal are support payments, not product purchases.</p>
+      </div>
+
+      <h3>2. Future Merchandise &amp; Branded Products</h3>
+      <p>We may in the future offer branded merchandise and physical products (such as apparel, books, or other Ic² Research Institute branded items) through this website or a linked storefront. When any commerce capability is activated, the following terms will apply:</p>
+      <ul>
+        <li>A clearly designated storefront or checkout page will be created and identified as a commercial sales area</li>
+        <li>All prices will be displayed in U.S. dollars and will be inclusive of applicable taxes where required</li>
+        <li>Payment processing will be handled through established, secure payment processors (such as PayPal, Stripe, or similar)</li>
+        <li>A return and refund policy will be published before any sales begin</li>
+        <li>Sales tax will be collected in jurisdictions where we are legally required to do so</li>
+        <li>Product descriptions will accurately represent all items offered, consistent with FTC guidelines</li>
+        <li>We will notify all subscribers before launching any commerce features</li>
+      </ul>
+
+      <h3>3. Book Sales and Digital Downloads</h3>
+      <p>The book "A Quest for The Big TOE" is currently offered as a free PDF download for personal, non-commercial use. Any future commercial sale of physical or digital editions will be clearly disclosed with separate purchase terms. Free downloads do not constitute a commercial transaction and are provided as a contribution to open science.</p>
+
+      <h3>4. Sales Tax and International Transactions</h3>
+      <p>For any future product sales, we will collect and remit sales tax as required by applicable U.S. state and local laws. International buyers are responsible for any applicable customs duties, import taxes, or VAT that may apply in their jurisdiction. International shipping and tax information will be clearly disclosed at the time of purchase.</p>
+
+      <h3>5. Consumer Protection Compliance</h3>
+      <p>Any future sales will comply with applicable consumer protection laws, including the FTC's rules on advertising and endorsements, California consumer protection statutes, and applicable international consumer protection regulations. All product claims will be truthful and substantiated.</p>
+
+      <h3>6. No Third-Party Advertising or Sponsored Content</h3>
+      <p>We do not sell advertising space on this website. Any content we publish represents our genuine views. If we ever publish sponsored content or affiliate-linked recommendations in the future, it will be clearly labeled as such in accordance with FTC disclosure requirements.</p>
+    </div>
+
+    <!-- ══ RESEARCH DISCLAIMER ══ -->
     <div id="disclaimer" class="legal-section" data-aos="fade-up">
       <h2>Research Disclaimer</h2>
       <p class="last-updated">Last Updated: March 2026</p>
 
       <h3>1. Nature of Research</h3>
-      <p>Research published by Ic² Research Institute represents theoretical and experimental work in consciousness and computation science. All findings should be understood within the context of ongoing scientific inquiry.</p>
+      <p>Research published by Ic² Research Institute represents theoretical and experimental work in consciousness, computation, and physics. All findings should be understood within the context of ongoing scientific inquiry and are subject to revision as new evidence emerges.</p>
 
       <h3>2. Validation and Predictions</h3>
-      <p>Claims of "validated predictions" refer to experimental or observational results that appear consistent with our theoretical framework. This does not constitute definitive proof, and alternative explanations may exist.</p>
+      <p>Claims of "validated predictions" refer to experimental or observational results that appear consistent with our theoretical framework. This does not constitute definitive proof, and alternative explanations may exist. We maintain cryptographic timestamps on all predictions to establish scientific priority transparently.</p>
 
       <div class="important-notice">
-        <p><strong>Scientific Method:</strong> We document all predictions with publication dates to establish scientific priority. We openly acknowledge both successes and failures in our research program.</p>
+        <p><strong>Scientific Method:</strong> We document all predictions with publication dates to establish scientific priority. We openly acknowledge both successes and failures in our research program. Radical transparency is a core operating principle.</p>
       </div>
 
-      <h3>3. No Warranties</h3>
-      <p>Research materials are provided "as is" without warranties of any kind, either express or implied. We make no guarantees about:</p>
-      <ul>
-        <li>Accuracy or completeness of information</li>
-        <li>Fitness for any particular purpose</li>
-        <li>Non-infringement of intellectual property</li>
-        <li>Future experimental outcomes</li>
-      </ul>
+      <h3>3. Peer Review Status</h3>
+      <p>Unless explicitly stated, materials may not have undergone formal peer review through traditional academic channels. We clearly mark the review status of all publications. Preprints and working papers are labeled as such.</p>
 
-      <h3>4. Experimental Replication</h3>
-      <p>Users attempting to replicate our research do so at their own risk. We provide methodologies for transparency but cannot guarantee specific results.</p>
+      <h3>4. No Warranties</h3>
+      <p>Research materials are provided "as is" without warranties of any kind, either express or implied. We make no guarantees about the accuracy or completeness of information, fitness for any particular purpose, non-infringement of intellectual property, or future experimental outcomes.</p>
 
-      <h3>5. Peer Review Status</h3>
-      <p>Unless explicitly stated, materials may not have undergone formal peer review. We clearly mark the review status of all publications.</p>
+      <h3>5. Experimental Replication</h3>
+      <p>Users attempting to replicate our research do so at their own risk. We provide methodologies for transparency but cannot guarantee specific results. Replication attempts should follow standard safety protocols applicable to the experiment type.</p>
 
       <h3>6. Updates and Corrections</h3>
-      <p>We update research materials as new information becomes available. Users should check publication dates and version histories.</p>
+      <p>We update research materials as new information becomes available. Users should check publication dates and version histories. Significant corrections are logged and publicly noted.</p>
 
       <h3>7. Limitation of Liability</h3>
-      <p>Ic² Research Institute and its contributors shall not be liable for any damages arising from the use of our research, materials, or website.</p>
+      <p>Ic² Research Institute and Michael K. Baines shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use of our research, materials, or website.</p>
     </div>
 
-    <!-- Copyright & Licensing -->
+    <!-- ══ COPYRIGHT & LICENSING ══ -->
     <div id="copyright" class="legal-section" data-aos="fade-up">
       <h2>Copyright &amp; Licensing</h2>
       <p class="last-updated">Last Updated: March 2026</p>
 
       <h3>1. Open Science Commitment</h3>
-      <p>Ic² Research Institute is committed to open science. Most of our content is freely available under permissive licenses.</p>
+      <p>Ic² Research Institute is committed to open science. Most of our content is freely available under permissive licenses to enable the widest possible dissemination and building upon of research.</p>
 
-      <h3>2. Default License</h3>
-      <p>Unless otherwise specified, research publications are licensed under <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong>. This means you can:</p>
-      <ul>
-        <li>Share — copy and redistribute the material</li>
-        <li>Adapt — remix, transform, and build upon the material</li>
-        <li>For any purpose, including commercially</li>
-      </ul>
-      <p><strong>Requirement:</strong> You must provide appropriate attribution, link to the license, and indicate if changes were made.</p>
+      <h3>2. Default Research License</h3>
+      <p>Unless otherwise specified, research publications are licensed under <strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong>. You may share, adapt, and use the material for any purpose including commercially — provided you give appropriate attribution, link to the license, and indicate if changes were made.</p>
 
       <h3>3. Code and Software</h3>
-      <p>Open-source code is typically licensed under the <strong>MIT License</strong> unless otherwise stated in individual repositories.</p>
+      <p>Open-source code repositories are typically licensed under the <strong>MIT License</strong> unless otherwise stated in individual repositories on GitHub.</p>
 
-      <h3>4. Data Licensing</h3>
-      <p>Research data is generally released under <strong>CC0 1.0 Universal (CC0)</strong> — dedicated to the public domain with no restrictions.</p>
+      <h3>4. Research Data</h3>
+      <p>Research data is generally released under <strong>CC0 1.0 Universal (CC0)</strong>, dedicated to the public domain with no restrictions, to maximize scientific reuse.</p>
 
       <h3>5. The Big TOE Book</h3>
-      <p>The book "A Quest for The Big TOE" has separate copyright provisions. See the book's dedicated legal page for specific terms.</p>
+      <p>The book "A Quest for The Big TOE" is copyrighted material by Michael K. Baines. The PDF is provided for free personal and educational use only. Redistribution, resale, or commercial use requires prior written permission.</p>
 
-      <h3>6. Attribution Guidelines</h3>
-      <p>When citing our work, please include:</p>
-      <ul>
-        <li>Title of the work</li>
-        <li>Author name(s)</li>
-        <li>Publication date</li>
-        <li>URL to the source material</li>
-        <li>License information</li>
-      </ul>
+      <h3>6. Website Content</h3>
+      <p>Website design elements, logos, graphics, and editorial content not covered by a CC license are the exclusive property of Michael K. Baines / Ic² Research Institute, all rights reserved. The Ic² name and logo are proprietary. Use for commentary, citation, or reference is permitted; commercial use requires prior written permission.</p>
 
-      <h3>7. Third-Party Content</h3>
-      <p>Some content may include third-party materials with different licensing terms. These are clearly marked with appropriate attributions.</p>
+      <h3>7. Attribution Guidelines</h3>
+      <p>When citing our work, please include the title of the work, author name(s), publication date, URL to the source material, and applicable license information.</p>
 
-      <h3>8. Copyright Infringement</h3>
-      <p>If you believe content on our site infringes your copyright, contact our designated DMCA agent at <strong><a href="/cdn-cgi/l/email-protection#0865636a61666e6748787a677c676626656d"><span class="__cf_email__" data-cfemail="016c6a63686f676e4171736e756e6f2f6c64">[email&#160;protected]</span></a></strong> or by mail at Ic² Research Institute, 35 N. Lake Avenue, Suite [TBD], Pasadena, CA 91101, with:</p>
-      <ul>
-        <li>Description of the copyrighted work</li>
-        <li>Location of the allegedly infringing content</li>
-        <li>Your contact information</li>
-        <li>A statement of good faith belief</li>
-      </ul>
+      <h3>8. DMCA — Copyright Infringement Claims</h3>
+      <p>If you believe content on our site infringes your copyright, contact our designated DMCA agent at <strong><a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a></strong> with: a description of the copyrighted work; the location of the allegedly infringing content; your contact information; and a statement of good faith belief that the use is not authorized.</p>
 
-      <h3>9. Trademarks</h3>
-      <p>The Ic² name and logo are proprietary to Ic² Research Institute. Use for commentary or reference is permitted; commercial use requires permission.</p>
+      <h3>9. Third-Party Content</h3>
+      <p>Some content may include third-party materials with different licensing terms. These are clearly marked with appropriate attributions where applicable.</p>
     </div>
 
-    <!-- Contact Box -->
     <div class="contact-box" data-aos="fade-up">
       <h3>Have Questions?</h3>
-      <p>We're here to help clarify any legal or policy questions</p>
-      <a href="/cdn-cgi/l/email-protection#3b56505952555d547b4b49544f545515565e">Contact Legal Team</a>
+      <p>We're here to help clarify any legal or policy questions.</p>
+      <a href="mailto:mkb.info@proton.me">Contact Us</a>
     </div>
+
   </div>
 
-  <!-- Footer (events.html style) -->
   <footer>
     <div class="footer-container">
       <div class="footer-section">
         <h3>Ic² Research Institute</h3>
         <p>The Ic² Research Institute is an independent platform advancing theoretical physics through open science, radical transparency, and community-driven inquiry. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research — and we publish our failures alongside our successes.</p>
-        <p style="margin-top: 0.5rem;">Every contributor retains full ownership of their work. All findings are freely available to the global scientific community. No gatekeeping. No institutional barriers. Just honest pursuit of knowledge.</p>
+        <p style="margin-top:0.5rem;">Every contributor retains full ownership of their work. All findings are freely available to the global scientific community. No gatekeeping. No institutional barriers. Just honest pursuit of knowledge.</p>
       </div>
-
       <div class="footer-section">
         <h3>Quick Links</h3>
         <a href="about.html">About</a>
@@ -558,23 +488,42 @@
         <a href="papers.html">Publications</a>
         <a href="contribute.html">Support Us</a>
       </div>
-
       <div class="footer-section">
         <h3>Resources</h3>
         <a href="book.html">The Big TOE Book</a>
-        <a href="faq.html">FAQ</a>
+        <a href="faq-page.html">FAQ</a>
         <a href="legal.html">Legal</a>
         <a href="contact.html">Contact</a>
       </div>
-
       <div class="footer-section">
         <h3>Connect</h3>
         <a href="#">GitHub</a>
-        <a href="#">Twitter</a>
         <a href="#">YouTube</a>
-        <a href="#">Email Updates</a>
+        <a href="#">Instagram</a>
+        <a href="contribute.html">Email Updates</a>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <p>© 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">Legal</a> | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,
+      <p>&copy; 2026 Ic&sup2; Research Institute. All rights reserved. |
+        <a href="legal.html">Legal</a> |
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-conditions.html">Terms &amp; Conditions</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 900, once: true, offset: 80 });
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        mobileMenu.setAttribute('aria-hidden', !mobileMenu.classList.contains('active'));
+      });
+    }
+  </script>
+</body>
+</html>
