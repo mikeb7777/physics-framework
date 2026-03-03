@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unsubscribe - Ic² Research Institute</title>
+
+  <!-- AOS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary-red: #dc143c;
+      --primary-dark: #8b0000;
+      --text-dark: #2c3e50;
+      --muted: #7f8c8d;
+      --bg: #f8f9fa;
+      --max-width: 1200px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text-dark);
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .header-logos {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .header-logo { display: flex; align-items: center; }
+    .header-logo.left  { justify-content: flex-start; }
+    .header-logo.right { justify-content: flex-end; }
+    .header-logo img   { height: 50px; width: auto; display: block; }
+
+    .header-logo.center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+    .header-logo.center img { height: 60px; }
+
+    /* ── Hamburger ── */
+    .hamburger { display: none; flex-direction: column; gap: 4px; padding: 8px; cursor: pointer; }
+    .hamburger span { width: 26px; height: 3px; background: var(--primary-dark); border-radius: 3px; transition: all .3s ease; }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      z-index: 999;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .mobile-menu.active { max-height: 600px; }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu a { display: block; padding: .75rem 1rem; color: var(--text-dark); text-decoration: none; }
+
+    /* ── Page Header ── */
+    .page-header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .page-header h1 { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .page-header p  { font-size: 1.05rem; opacity: 0.95; max-width: 700px; margin: 0 auto; }
+
+    /* ── Container ── */
+    .container {
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 40px;
+    }
+
+    /* ── Card (matches .legal-section) ── */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 50px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: var(--text-dark);
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--primary-red);
+    }
+
+    .card p { color: #555; line-height: 1.8; margin-bottom: 20px; }
+    .card p:last-child { margin-bottom: 0; }
+
+    .important-notice {
+      background: rgba(220, 20, 60, 0.05);
+      border-left: 4px solid var(--primary-red);
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 4px;
+    }
+    .important-notice p { margin-bottom: 0; color: #555; }
+
+    /* ── Form ── */
+    .form-group { margin-bottom: 24px; }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .form-group input[type="email"] {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text-dark);
+      background: #fafafa;
+      transition: border-color .25s, box-shadow .25s;
+      outline: none;
+    }
+
+    .form-group input[type="email"]:focus {
+      border-color: var(--primary-red);
+      box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.08);
+      background: white;
+    }
+
+    .form-group input[type="email"]::placeholder { color: #bbb; }
+
+    /* Reason checkboxes */
+    .reasons-label {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      display: block;
+    }
+
+    .reason-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .reason-option:hover { border-color: #ccc; background: #fafafa; }
+
+    .reason-option input[type="radio"] {
+      accent-color: var(--primary-red);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .reason-option.selected {
+      border-color: var(--primary-red);
+      background: rgba(220, 20, 60, 0.03);
+    }
+
+    .reason-option span { color: #555; font-size: 0.95rem; line-height: 1.4; }
+
+    /* Submit button */
+    .btn-unsubscribe {
+      display: block;
+      width: 100%;
+      padding: 16px 30px;
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-dark) 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all .25s;
+      margin-top: 8px;
+      letter-spacing: 0.3px;
+    }
+    .btn-unsubscribe:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 0, 0, 0.35);
+    }
+    .btn-unsubscribe:active { transform: translateY(0); }
+    .btn-unsubscribe:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ── State panels ── */
+    .state-panel { display: none; }
+    .state-panel.active { display: block; }
+
+    /* Loading */
+    .loading-indicator {
+      text-align: center;
+      padding: 20px 0 10px;
+    }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid #f0f0f0;
+      border-top-color: var(--primary-red);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success */
+    .success-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    }
+    .success-icon svg { width: 36px; height: 36px; stroke: white; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+    .success-panel {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .success-panel h2 {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 16px;
+      color: var(--text-dark);
+    }
+    .success-panel p { max-width: 480px; margin: 0 auto 20px; }
+    .success-panel .confirmed-email {
+      display: inline-block;
+      background: #f0f9f4;
+      border: 1px solid #a9dfbf;
+      color: #1e8449;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .btn-return {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--text-dark);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all .25s;
+      font-size: 0.95rem;
+    }
+    .btn-return:hover { background: #1a252f; transform: translateY(-2px); }
+
+    /* Error */
+    .error-notice {
+      background: #fff5f5;
+      border-left: 4px solid #e74c3c;
+      padding: 16px 20px;
+      border-radius: 4px;
+      margin-top: 16px;
+      display: none;
+    }
+    .error-notice p { color: #c0392b; margin-bottom: 0; font-size: 0.95rem; }
+
+    /* ── Info box ── */
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .info-row-icon {
+      width: 36px; height: 36px;
+      background: rgba(220, 20, 60, 0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .info-row-icon svg { width: 18px; height: 18px; stroke: var(--primary-red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .info-row-text strong { display: block; color: var(--text-dark); font-size: 0.95rem; margin-bottom: 3px; }
+    .info-row-text span  { color: var(--muted); font-size: 0.9rem; }
+
+    /* ── Contact box (matches legal.html) ── */
+    .contact-box {
+      background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .contact-box h3 { font-size: 1.6em; margin-bottom: 12px; }
+    .contact-box p  { font-size: 1rem; margin-bottom: 22px; opacity: 0.95; }
+    .contact-box a {
+      display: inline-block;
+      padding: 12px 35px;
+      background: white;
+      color: var(--primary-red);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all .25s;
+    }
+    .contact-box a:hover { transform: scale(1.04); }
+
+    /* ── Footer ── */
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 2rem; margin-top: 60px; }
+    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
+    .footer-section h3 { margin-bottom: 0.75rem; font-size: 1.1rem; color: white; }
+    .footer-section a, .footer-section p { color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: .5rem; }
+    .footer-section a:hover { color: white; }
+    .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 1.5rem 0 1rem; border-top: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem; }
+    .footer-bottom p { color: white !important; opacity: 0.7; }
+    .footer-bottom a { color: white !important; opacity: 0.7; text-decoration: none; }
+    .footer-bottom a:hover { opacity: 1; }
+
+    /* ── Responsive ── */
+    @media (max-width: 968px) {
+      .page-header h1 { font-size: 1.8rem; }
+      .card { padding: 30px 25px; }
+      .header-logos { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .footer-container { grid-template-columns: 1fr; }
+      .header-logo.center { position: static; transform: none; margin: 0 auto; }
+      .header-logo.center img { height: 50px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 20px; }
+      .header-logo img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="header-logos">
+        <div class="header-logo left">
+          <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
+        </div>
+        <div class="header-logo center">
+          <a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a>
+        </div>
+        <div class="header-logo right">
+          <a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a>
+        </div>
+      </div>
+      <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="framework.html">Framework</a></li>
+      <li><a href="book.html">Big TOE</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="validation.html">Validation</a></li>
+      <li><a href="testing-schedule.html">Testing</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="discussions-page.html">Discussion</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contribute.html">Contribute</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1 data-aos="fade-up">Manage Your Subscriptions</h1>
+    <p data-aos="fade-up" data-aos-delay="100">We respect your inbox. Unsubscribing is immediate, permanent, and no questions are required.</p>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Form State -->
+    <div id="state-form" class="state-panel active" data-aos="fade-up">
+
+      <div class="card">
+        <h2>Unsubscribe</h2>
+        <p>Enter the email address you subscribed with and we will remove it from all Ic² Research Institute mailing lists. You will no longer receive newsletters, research updates, or event announcements.</p>
+
+        <div class="important-notice">
+          <p>We will never sell, share, or misuse your data. We only keep your email address long enough to send communications you have asked for — nothing more.</p>
+        </div>
+
+        <div class="form-group" style="margin-top: 32px;">
+          <label for="unsub-email">Your Email Address</label>
+          <input type="email" id="unsub-email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <span class="reasons-label">Reason for unsubscribing <span style="font-weight:400; color: var(--muted);">(optional — helps us improve)</span></span>
+
+          <label class="reason-option">
+            <input type="radio" name="unsub-reason" value="too-frequent"> 
+            <span>Emails arrive too frequently</span>
+          </label>
+          <label class="reason-option">
+            <input type="radio" name="unsub-reason" value="not-relevant">
+            <span>Content is no longer relevant to me</span>
+          </label>
+          <label class="reason-option">
+            <input type="radio" name="unsub-reason" value="didnt-subscribe">
+            <span>I don't remember subscribing</span>
+          </label>
+          <label class="reason-option">
+            <input type="radio" name="unsub-reason" value="too-much-email">
+            <span>I'm reducing all email subscriptions</span>
+          </label>
+          <label class="reason-option">
+            <input type="radio" name="unsub-reason" value="other">
+            <span>Other reason</span>
+          </label>
+        </div>
+
+        <div class="error-notice" id="error-notice">
+          <p id="error-message">Please enter a valid email address.</p>
+        </div>
+
+        <button class="btn-unsubscribe" id="unsub-btn" onclick="handleUnsubscribe()">
+          Unsubscribe Me
+        </button>
+
+        <p style="text-align: center; font-size: 0.85rem; color: var(--muted); margin-top: 16px; margin-bottom: 0;">
+          Changed your mind? You can always <a href="index.html#newsletter" style="color: var(--primary-red); text-decoration: none;">resubscribe</a> at any time.
+        </p>
+      </div>
+
+      <!-- What you'll stop receiving -->
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h2>What You'll Stop Receiving</h2>
+
+        <div class="info-row">
+          <div class="info-row-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="info-row-text">
+            <strong>Research Newsletter</strong>
+            <span>Monthly updates on COSMIC Framework developments, new predictions, and theoretical advances</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-row-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="info-row-text">
+            <strong>Validation Announcements</strong>
+            <span>Notifications when predictions are confirmed or refuted by independent experiments</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-row-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="info-row-text">
+            <strong>Event Invitations</strong>
+            <span>Announcements for webinars, community discussions, and research collaboration opportunities</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-row-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="info-row-text">
+            <strong>Publication Alerts</strong>
+            <span>Notifications when new papers, book updates, or open-access content is published</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="state-loading" class="state-panel" data-aos="fade-up">
+      <div class="card" style="text-align: center; padding: 60px 50px;">
+        <div class="loading-indicator">
+          <div class="spinner"></div>
+          <p style="color: var(--muted); font-size: 1.05rem;">Processing your request…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success State -->
+    <div id="state-success" class="state-panel">
+      <div class="card success-panel" data-aos="fade-up">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>You've Been Unsubscribed</h2>
+        <p>We've removed <span class="confirmed-email" id="confirmed-email-display"></span> from all Ic² Research Institute mailing lists.</p>
+        <p style="color: var(--muted); font-size: 0.95rem;">It may take up to 48 hours for all queued emails to stop. We appreciate the time you spent with us and wish you well in your own research journey.</p>
+        <a href="index.html" class="btn-return">Return to Home</a>
+      </div>
+
+      <div class="contact-box" data-aos="fade-up">
+        <h3>Unsubscribed by Mistake?</h3>
+        <p>If you'd like to stay connected with the institute's research, you can always resubscribe on the homepage or reach out directly.</p>
+        <a href="index.html#newsletter">Resubscribe</a>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p>The Ic² Research Institute is an independent platform advancing theoretical physics through open science, radical transparency, and community-driven inquiry. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research — and we publish our failures alongside our successes.</p>
+        <p style="margin-top: 0.5rem;">Every contributor retains full ownership of their work. All findings are freely available to the global scientific community. No gatekeeping. No institutional barriers. Just honest pursuit of knowledge.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="about.html">About</a>
+        <a href="validation.html">Validation</a>
+        <a href="papers.html">Publications</a>
+        <a href="contribute.html">Support Us</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <a href="book.html">The Big TOE Book</a>
+        <a href="faq-page.html">FAQ</a>
+        <a href="legal.html">Legal</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <a href="#">GitHub</a>
+        <a href="#">Twitter</a>
+        <a href="#">YouTube</a>
+        <a href="index.html#newsletter">Email Updates</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Ic² Research Institute. All rights reserved. |
+        <a href="legal.html">Legal</a> |
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-conditions.html">Terms &amp; Conditions</a> |
+        <a href="unsubscribe.html">Unsubscribe</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    try { AOS.init({ duration: 800, once: true, offset: 100 }); } catch(e) {}
+
+    // Hamburger menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+    }
+
+    // Highlight selected reason
+    document.querySelectorAll('.reason-option input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        document.querySelectorAll('.reason-option').forEach(el => el.classList.remove('selected'));
+        this.closest('.reason-option').classList.add('selected');
+      });
+    });
+
+    // Pre-fill email from URL param ?email=...
+    const urlParams = new URLSearchParams(window.location.search);
+    const prefilledEmail = urlParams.get('email');
+    if (prefilledEmail) {
+      document.getElementById('unsub-email').value = decodeURIComponent(prefilledEmail);
+    }
+
+    function setState(name) {
+      document.querySelectorAll('.state-panel').forEach(el => el.classList.remove('active'));
+      document.getElementById('state-' + name).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showError(msg) {
+      const notice = document.getElementById('error-notice');
+      document.getElementById('error-message').textContent = msg;
+      notice.style.display = 'block';
+    }
+
+    function hideError() {
+      document.getElementById('error-notice').style.display = 'none';
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function handleUnsubscribe() {
+      hideError();
+      const emailInput = document.getElementById('unsub-email');
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        showError('Please enter your email address.');
+        emailInput.focus();
+        return;
+      }
+      if (!isValidEmail(email)) {
+        showError('That doesn\'t look like a valid email address. Please double-check and try again.');
+        emailInput.focus();
+        return;
+      }
+
+      const btn = document.getElementById('unsub-btn');
+      btn.disabled = true;
+
+      // Show loading state
+      setState('loading');
+
+      // ─────────────────────────────────────────────────────────────────────
+      // INTEGRATION NOTE:
+      // Replace the setTimeout below with your actual email provider API call.
+      // Most providers (Mailchimp, ConvertKit, Buttondown, etc.) have an
+      // unsubscribe endpoint. Example for a generic POST:
+      //
+      //   fetch('/api/unsubscribe', {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json' },
+      //     body: JSON.stringify({ email, reason })
+      //   })
+      //   .then(res => res.ok ? showSuccess(email) : showError('...'))
+      //   .catch(() => showError('...'));
+      //
+      // Until then, this simulates the request and shows the success state.
+      // ─────────────────────────────────────────────────────────────────────
+
+      const reason = document.querySelector('input[name="unsub-reason"]:checked');
+      const reasonValue = reason ? reason.value : 'not-provided';
+
+      // Log for debugging / future webhook integration
+      console.log('Unsubscribe request:', { email, reason: reasonValue });
+
+      setTimeout(function() {
+        document.getElementById('confirmed-email-display').textContent = email;
+        setState('success');
+      }, 1400);
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('unsub-email').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleUnsubscribe();
+    });
+  </script>
+
+</body>
+</html>

@@ -7,7 +7,7 @@
   <meta name="description" content="Explore cutting-edge theoretical physics research, speculative ideas, and collaborative discussions from the Ic² Research Institute." />
   
   <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -539,26 +539,53 @@
     
     /* Footer */
     footer {
-      background: var(--secondary-color);
+      background: #2c3e50;
       color: white;
       padding: 2.5rem 2rem 1rem;
       margin-top: auto;
-      text-align: center;
     }
-    
-    footer h3 {
+
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-section h3 {
       margin-bottom: 0.75rem;
       font-size: 1.1rem;
+      color: white;
     }
-    
-    footer p, footer a {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
+
+    .footer-section a,
+    .footer-section p {
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
     }
-    
-    footer a:hover {
-      color: var(--primary-color);
+
+    .footer-section a:hover { color: white; }
+
+    .footer-bottom {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 0 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom p { color: white !important; opacity: 0.7; }
+    .footer-bottom a { color: white !important; opacity: 0.7; text-decoration: none; }
+    .footer-bottom a:hover { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .footer-container { grid-template-columns: 1fr; }
     }
     
     @media (max-width: 768px) {
@@ -662,6 +689,15 @@
     <!-- Blog Index -->
     <div class="blog-index" data-aos="fade-up">
       <h2>Recent Articles</h2>
+
+      <div class="index-item">
+        <div class="index-meta">
+          <span class="index-category">Philosophy of Science</span>
+          <span class="index-date">February 18, 2026</span>
+        </div>
+        <h3><a href="#seeing-clearly">Fuzzy Logic: We Live in an Ocean of Fields, and Our Textbooks Forgot to Mention It</a></h3>
+        <p>In the 1980s, fuzzy logic challenged the assumption that every truth was binary. We face the same kind of reckoning now, but with geometry. Our cross-sectional maps of physical reality — from Chladni figures to the textbook magnetic field — served us well when we didn't need to interact with what they were leaving out. Like entropy before the rocket age, the missing dimensions were always there. We just didn't need to care yet.</p>
+      </div>
       
       <div class="index-item">
         <div class="index-meta">
@@ -718,6 +754,87 @@
       </div>
     </div>
     
+    <!-- Blog Post: Seeing Clearly -->
+    <article id="seeing-clearly" class="blog-post" data-aos="fade-up">
+      <div class="post-meta">
+        <span class="post-category">Philosophy of Science</span>
+        <span class="post-author">By Michael K. Baines</span>
+        <span class="post-date">February 18, 2026</span>
+      </div>
+
+      <div class="post-toggle">
+        <div>
+          <h2>Fuzzy Logic: We Live in an Ocean of Fields, and Our Textbooks Forgot to Mention It</h2>
+          <p class="post-subtitle">Every field diagram you have ever seen shows you a frozen slice of something that never stops moving.</p>
+        </div>
+        <button type="button" class="toggle-button collapsed" aria-label="Expand article"></button>
+      </div>
+
+      <div class="post-content collapsed" id="seeing-clearly-content">
+
+        <p>Pull any physics textbook off the shelf and open it to the chapter on electromagnetic fields. You will find diagrams showing neat lines radiating from a point charge, smooth arcs looping between poles, tidy arrows indicating direction and magnitude. They are clean. They are static. They are, in almost every meaningful sense, misleading. Not in their mathematics, which is usually correct, but in the picture of reality they leave in your head.</p>
+
+        <p>Fields are not lines on a page. They are not frozen. They do not exist in isolation from one another. Every point in the space you currently occupy is threaded simultaneously by a gravitational field, an electromagnetic field, the Schumann resonances humming in the Earth-ionosphere cavity at 7.83 Hz and harmonics, the 60 Hz field of the power grid, acoustic pressure fluctuations, thermal radiation, and quantum fields at every scale. These are not separate phenomena taking turns. They are all there, all the time, interacting, coupling, and producing effects that no single-field diagram can show.</p>
+
+        <p>We live in an ocean of fields. That analogy is not poetic license. It is physically accurate. The real ocean is never flat, never static, never describable by a single wave. Surface gravity waves interact with subsurface thermoclines, tidal forces, Coriolis effects, wind-driven currents, and seismic activity from below. The behavior at any point in the ocean at any moment is the product of all of those things operating simultaneously. A cross-section at a single depth, at a single instant, showing a single phenomenon, is useful for certain purposes and systematically misleading for others. The ocean does not come in slices. Physical space works the same way.</p>
+
+        <h3>What the Textbook Diagrams Actually Show</h3>
+
+        <p>The standard Chladni figure has appeared in physics textbooks and classroom demonstrations for 235 years. Sand organized into geometric patterns on a vibrating plate, the patterns are beautiful, reproducible, and genuinely informative about the resonant structure of the plate. What the diagram does not show, and what is almost never mentioned, is that the sand pattern is a cross-section of a three-dimensional acoustic field at the surface of the plate. The field continues above the plate in a complete geometry. Vertical planes, nested cylindrical shells, compound ribbons. The sand cannot reveal any of this structure, and it has never been directly visualized.</p>
+
+        <figure style="margin: 2rem 0; text-align: center;">
+          <img src="fig1-chladni-crosssection.png" alt="Figure 1: The Cross-Section Problem. Left: the standard Chladni pattern as taught. Right: the predicted 3D nodal surface rising above the plate." style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+          <figcaption style="margin-top: 0.75rem; font-size: 0.9rem; color: #666; font-style: italic;">The 2D sand pattern on the left has been presented as the phenomenon for 235 years. The teal structure on the right is the predicted 3D nodal surface rising above the plate. The pattern is a cross-section of the structure, not the structure itself.</figcaption>
+        </figure>
+
+        <p>The two-dimensional pattern is not the phenomenon. It is where the phenomenon intersects the plate surface. The rest of the field extends right above it, following the same wave equation that produces the pattern below. Apply the Helmholtz equation with the boundary conditions the sand pattern provides and the full three-dimensional structure falls out of the mathematics immediately. It has always been mathematically accessible. Nobody asked for it because the cross-section was satisfying enough that the question stopped there.</p>
+
+        <p>Multiply this across the full library of physics diagrams and the pattern becomes hard to ignore. Electric field lines drawn between two point charges show the field in the plane of the page and imply, without saying so, that this slice is representative of the whole. Hydrogen orbital diagrams show probability density cross-sections of single quantum states, not the coupled geometry of a real atom interacting with its environment. Earth's magnetic field is drawn as a toroid. A smooth, symmetrical shape the field has never actually been, because the solar wind has been deforming the magnetosphere continuously since long before the first diagram was drawn. Every one of these images is a legitimate mathematical tool for understanding part of a system and a misleading portrait of the full system, simultaneously.</p>
+
+        <figure style="margin: 2rem 0; text-align: center;">
+          <img src="fig2-magnetic-field.png" alt="Figure 2: The toroid taught in every classroom versus the actual coupled magnetosphere under solar wind interaction." style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+          <figcaption style="margin-top: 0.75rem; font-size: 0.9rem; color: #666; font-style: italic;">Left: the textbook toroid, taught with complete authority for 150 years. Right: the actual coupled magnetosphere. The aurora bands visible at the Earth's edge are the 3D nodal structure of magnetohydrodynamic waves made visible by ionospheric plasma. Nature has been displaying the real field geometry every night. We classified it as a light show.</figcaption>
+        </figure>
+
+        <p>The aurora borealis is the exception. It is the full coupled field geometry made visible by its interaction with ionospheric plasma. The bright curtains are antinodal regions of a magnetohydrodynamic wave structure. The dark spaces between them trace the nodal surfaces where the parallel field component reaches zero. Nature has been displaying this every night in high latitudes. We filed it under "beautiful" and kept drawing the toroid.</p>
+
+        <h3>Fields Are Not Empty Space With Lines Drawn Through It</h3>
+
+        <p>There is a subtle but consequential habit of mind that standard field diagrams encourage: the idea that the space between the field lines is, in some sense, empty. It is not. The lines are a visualization convention for indicating direction and relative strength. They are not the field itself. The field fills space continuously. It is present at every point in the region it occupies, which for most fundamental fields means everywhere. The diagram is trying to show you something real using a technique that implies the opposite of what is actually happening.</p>
+
+        <p>The second habit the diagrams build is treating fields as separate from one another. Electrostatics diagrams show only the electric field. Magnetostatics diagrams show only the magnetic field. Acoustic diagrams show only pressure. This is necessary pedagogy. You have to introduce one concept at a time. But if it is never followed up with a picture of what all the fields look like simultaneously, students are left with a model of physical space as a collection of isolated phenomena that happen to occupy the same address, rather than a coupled system in which all fields interact and the behavior at any point is determined by all of them together.</p>
+
+        <figure style="margin: 2rem 0; text-align: center;">
+          <img src="fig3-ocean-of-fields.png" alt="Figure 3: The ocean of fields we inhabit simultaneously. Every physics diagram shows one field, in isolation, in two dimensions." style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+          <figcaption style="margin-top: 0.75rem; font-size: 0.9rem; color: #666; font-style: italic;">The actual field structure of the space you occupy right now. Thermal EM, Schumann resonance at 7.83 Hz, the 60 Hz power grid field, the 62.64 Hz 8th Schumann harmonic, and your own acoustic field are all present simultaneously. The gold stars mark points where multiple field nodal surfaces intersect. None of these fields exist in isolation. Their coupled 3D nodal topology has never been mapped.</figcaption>
+        </figure>
+
+        <p>This gap has real consequences. The North American power grid runs at 60 Hz. The 8th harmonic of the Schumann resonance sits at 62.64 Hz, within 2.64 Hz of the grid frequency, overlapping spatially with it across an entire continent, continuously. A location that shows zero field strength in either the Schumann analysis or the 60 Hz analysis, taken separately, may sit at a point of maximum gradient stress in the coupled system. A single-field analysis sees a null. A systems analysis finds a stress concentration. Decades of inconsistent results in EMF biological research may partly reflect this gap. The question of biological field effects has been asked in a framework that treats fields as separate and static, in a physical reality where they are coupled and dynamic.</p>
+
+        <h3>The Tools Served Well, For the Applications of Their Time</h3>
+
+        <p>None of this is an argument that standard field diagrams are wrong or should be replaced. They are excellent tools for what they were designed to do: introduce the mathematical structure of individual fields in a tractable way. The dipole field diagram is genuinely useful for understanding how a magnet behaves. The Chladni figure is genuinely useful for understanding resonant modes. These tools earned their place in the curriculum and they continue to earn it within their domains.</p>
+
+        <p>The issue is the gap between the static, isolated picture those tools leave in your head and the reality of the systems we are now trying to understand. Living systems evolved in the full multi-field environment of Earth's surface. Not in the isolated single-field conditions of a physics laboratory. As technology adds more field sources to that environment, the interactions between those sources and the natural background become physically significant in ways that a single-field snapshot cannot model. The ocean got more complicated, and we are still teaching one layer at a time.</p>
+
+        <p>The mathematics for handling the full coupled geometry has been available all along. The Helmholtz equation that generates a Chladni pattern generates the complete three-dimensional structure above it with the same calculation. Coupled field superposition is standard wave physics. What is missing is not the theory. It is the habit of applying it. The practice of asking what the full system looks like instead of stopping at the cross-section that fits neatly on the page.</p>
+
+        <h3>Moving From Cross-Sections to Systems</h3>
+
+        <p>This work is currently being investigated at the Ic² Research Institute. The goal is straightforward: move from the cross-section to the full geometry, starting with the most accessible entry point in experimental physics, and build the methodology for visualizing coupled field topology that the standard diagrams have never provided.</p>
+
+        <p>The fields are there. They have always been there, permeating every point in the space you occupy, interacting with each other and with every material structure they encounter, dynamic as the ocean and considerably harder to step back from. The diagrams in the textbooks are a starting point. The system is the destination.</p>
+
+        <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
+
+      <div class="post-footer">
+        <p><strong>Related research:</strong> This post draws on the preprint <em>Beyond Cross-Sections: Three-Dimensional Field Topology and the Multi-Field Structure of Physical Space</em> (Baines, 2026), available on Zenodo with six pre-registered predictions and full experimental protocols. For the broader theoretical context, see <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and <em>The Big TOE</em>.</p>
+        <p>Contact: <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a></p>
+        <p>The institute welcomes collaborators and welcomes correspondence at <a href="mailto:mkbinfo@proton.me">mkbinfo@proton.me</a>.</p>
+      </div>
+    </article>
+
+
     <!-- Blog Post: The Veteran's Edge -->
         <article id="veterans-edge" class="blog-post" data-aos="fade-up">
       <div class="post-meta">
@@ -726,12 +843,12 @@
         <span class="post-date">January 12, 2026</span>
       </div>
       
-      <div class="post-toggle" onclick="togglePost('veterans-edge')">
+      <div class="post-toggle">
         <div>
           <h2>The Veteran's Edge: Peak Performance Through Information-First Principles</h2>
           <p class="post-subtitle">Practical Applications for Everyday Life</p>
         </div>
-        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+        <button type="button" class="toggle-button collapsed" aria-label="Expand article"></button>
       </div>
       
       <div class="post-content collapsed" id="veterans-edge-content">
@@ -908,7 +1025,7 @@
 
       <p>That's the veteran's edge. Not superhuman ability, but strategic management of the fluid-crystallized trade-off. And it's available to anyone willing to approach learning, performance, and development with this understanding in mind.</p>
 
-      <p><strong>Michael K. Baines</strong> is an independent researcher and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Contact: <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
+      <p><strong>Michael K. Baines</strong> is an independent researcher and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Contact: <a href="/cdn-cgi/l/email-protection#b7dadcd599ded9d1d8f7c7c5d8c3d8d999dad2"><span class="__cf_email__" data-cfemail="761b1d14581f18101936060419021918581b13">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
       </div>
     </article>
     
@@ -920,12 +1037,12 @@
         <span class="post-date">December 15, 2025</span>
       </div>
       
-      <div class="post-toggle" onclick="togglePost('interstellar-objects')">
+      <div class="post-toggle">
         <div>
           <h2>What Is an Interstellar Object, Really?</h2>
           
         </div>
-        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+        <button type="button" class="toggle-button collapsed" aria-label="Expand article"></button>
       </div>
       
       <div class="post-content collapsed" id="interstellar-objects-content">
@@ -992,7 +1109,7 @@
 
       <p>The universe has been sending us messages for billions of years, written in rock and ice and cosmic ray damage. We're only just learning to read them. Let's not pretend we already know what they say.</p>
 
-      <p><strong>Michael K. Baines</strong> is an independent researcher and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Contact: <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
+      <p><strong>Michael K. Baines</strong> is an independent researcher and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Contact: <a href="/cdn-cgi/l/email-protection#abc6c0c985c2c5cdc4ebdbd9c4dfc4c585c6ce"><span class="__cf_email__" data-cfemail="95f8fef7bbfcfbf3fad5e5e7fae1fafbbbf8f0">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
       </div>
     </article>
     
@@ -1004,12 +1121,12 @@
         <span class="post-date">November 15, 2025</span>
       </div>
       
-      <div class="post-toggle" onclick="togglePost('information-velocity')">
+      <div class="post-toggle">
         <div>
           <h2>The Speed of Novelty: Why Peak Performance Happens Young (And What It Reveals About the Universe)</h2>
           <p class="post-subtitle">How information physics explains everything from Aaron Rodgers' best years to early galaxy formation</p>
         </div>
-        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+        <button type="button" class="toggle-button collapsed" aria-label="Expand article"></button>
       </div>
       
       <div class="post-content collapsed" id="information-velocity-content">
@@ -1243,7 +1360,7 @@
       <div class="post-footer">
         <p><em>This article draws on research from sports performance science, cognitive neuroscience, flow state research, information capitalism, and the COSMIC Framework's predictions about information efficiency in cosmology. The convergence across these domains suggests we're touching on a fundamental principle: the thermodynamics of information integration across complex systems.</em></p>
         <p><strong>What do you think? Does this principle resonate with your experience? Have you noticed the difference between creating and editing, between novelty processing and pattern refinement?</strong></p>
-      <p><em>Michael K. Baines is an independent researcher and author. Contact: <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></em></p>
+      <p><em>Michael K. Baines is an independent researcher and author. Contact: <a href="/cdn-cgi/l/email-protection#90fdfbf2bef9fef6ffd0e0e2ffe4fffebefdf5"><span class="__cf_email__" data-cfemail="f29f9990dc9b9c949db282809d869d9cdc9f97">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></em></p>
       </div>
     </article>
     
@@ -1255,12 +1372,12 @@
         <span class="post-date">October 20, 2025</span>
       </div>
       
-      <div class="post-toggle" onclick="togglePost('prime-numbers')">
+      <div class="post-toggle">
         <div>
           <h2>Could the Universe Use Prime Numbers as Logic Gates?</h2>
           <p class="post-subtitle">An exploration beyond the COSMIC Framework</p>
         </div>
-        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+        <button type="button" class="toggle-button collapsed" aria-label="Expand article"></button>
       </div>
       
       <div class="post-content collapsed" id="prime-numbers-content">
@@ -1355,7 +1472,7 @@
 
       
       <div class="post-footer">
-        <p><strong>About the Author:</strong> Michael K. Baines is an independent researcher and developer of the COSMIC Framework presented in <em>The Big TOE: The COSMIC Framework's Theory of Everything</em>. This post represents speculative exploration beyond the book's scope, shared for community discussion and collaborative investigation. Contact: <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
+        <p><strong>About the Author:</strong> Michael K. Baines is an independent researcher and developer of the COSMIC Framework presented in <em>The Big TOE: The COSMIC Framework's Theory of Everything</em>. This post represents speculative exploration beyond the book's scope, shared for community discussion and collaborative investigation. Contact: <a href="/cdn-cgi/l/email-protection#eb868089c582858d84ab9b99849f8485c5868e"><span class="__cf_email__" data-cfemail="b8d5d3da96d1d6ded7f8c8cad7ccd7d696d5dd">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
         <p><strong>Support This Research:</strong> If you find this kind of open scientific exploration valuable, consider <a href="contribute.html">supporting continued research</a>.</p>
       </div>
     </article>
@@ -1368,12 +1485,12 @@
         <span class="post-date">December 21, 2025</span>
       </div>
       
-      <div class="post-toggle" onclick="togglePost('isolation')">
+      <div class="post-toggle">
         <div>
           <h2>Isolation May Be Required</h2>
           <p class="post-subtitle">A condensed exploration of why we might be alone in the universe, and why that might be exactly what we need</p>
         </div>
-        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+        <button type="button" class="toggle-button collapsed" aria-label="Expand article"></button>
       </div>
       
       <div class="post-content collapsed" id="isolation-content">
@@ -1843,7 +1960,7 @@
       
       <div class="post-footer">
         <p><strong>For detailed mathematical analysis, calculations, and scientific references supporting this framework, see the complete technical document:</strong> "The Isolation Horizon: Why Cosmic Silence May Be Geometrically Inevitable"</p>
-        <p><strong>Michael K. Baines</strong> is an independent researcher and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Contact: <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
+        <p><strong>Michael K. Baines</strong> is an independent researcher and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Contact: <a href="/cdn-cgi/l/email-protection#dab7b1b8f4b3b4bcb59aaaa8b5aeb5b4f4b7bf"><span class="__cf_email__" data-cfemail="fc91979ed295929a93bc8c8e93889392d29199">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
       </div>
     </article>
     
@@ -1855,12 +1972,12 @@
         <span class="post-date">August 12, 2025</span>
       </div>
       
-      <div class="post-toggle" onclick="togglePost('cosmic-conversation')">
+      <div class="post-toggle">
         <div>
           <h2>You're Constantly Talking to the Universe (And It's Talking Back)</h2>
           <p class="post-subtitle">Prove Me Wrong</p>
         </div>
-        <button class="toggle-button collapsed" aria-label="Expand article"></button>
+        <button type="button" class="toggle-button collapsed" aria-label="Expand article"></button>
       </div>
       
       <div class="post-content collapsed" id="cosmic-conversation-content">
@@ -2065,7 +2182,7 @@
 
       
       <div class="post-footer">
-        <p><strong>About this blog:</strong> This post is part of ongoing explorations into the COSMIC Framework's Theory of Everything. For the full technical treatment, including mathematical derivations, experimental predictions, and detailed analysis, visit <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and download <em>The Big TOE</em>. Contact: <a href="mailto:mkb.info@proton.me">mkb.info@proton.me</a></p>
+        <p><strong>About this blog:</strong> This post is part of ongoing explorations into the COSMIC Framework's Theory of Everything. For the full technical treatment, including mathematical derivations, experimental predictions, and detailed analysis, visit <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and download <em>The Big TOE</em>. Contact: <a href="/cdn-cgi/l/email-protection#315c5a531f585f575e7141435e455e5f1f5c54"><span class="__cf_email__" data-cfemail="1f72747d31767179705f6f6d706b707131727a">[email&#160;protected]</span></a></p>
         <p>If you found this thought-provoking, challenging, or infuriating, good. That means you're processing information. That means you're alive, conscious, and engaged in the cosmic conversation.</p>
         <p><strong>Welcome to the dialogue.</strong> You've always been part of it; now you're just aware of it.</p>
         <p>And that awareness? That's the universe waking up to itself, one mind at a time.</p>
@@ -2076,15 +2193,55 @@
   
   <!-- Unified Footer -->
   <footer>
-    <h3>Ic² Research Institute</h3>
-    <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p>The Ic² Research Institute is an independent platform advancing theoretical physics through open science, radical transparency, and community-driven inquiry. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research — and we publish our failures alongside our successes.</p>
+        <p style="margin-top: 0.5rem;">Every contributor retains full ownership of their work. All findings are freely available to the global scientific community. No gatekeeping. No institutional barriers. Just honest pursuit of knowledge.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Research</h3>
+        <a href="framework.html">Framework</a>
+        <a href="validation.html">Validation</a>
+        <a href="testing-schedule.html">Testing</a>
+        <a href="programs-gateway.html">Programs</a>
+        <a href="research-publications.html">Publications</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <a href="book.html">The Big TOE</a>
+        <a href="about-page.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq-page.html">FAQ</a>
+        <a href="legal.html">Legal</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <a href="contribute.html">Contribute</a>
+        <a href="discussions-page.html">Discussions</a>
+        <a href="events.html">Events</a>
+        <a href="become-member.html">Become a Member</a>
+        <a href="/cdn-cgi/l/email-protection#e885838a81868e87a8989a879c8786c6858d">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Ic² Research Institute. All rights reserved. |
+        <a href="legal.html">Legal</a> |
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-conditions.html">Terms &amp; Conditions</a> |
+        <a href="unsubscribe.html">Unsubscribe</a>
+      </p>
+    </div>
   </footer>
   
   <!-- AOS Animation Library -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    AOS.init({ duration: 800, once: true, offset: 80 });
+    try { AOS.init({ duration: 800, once: true, offset: 80 }); } catch(e) {}
   </script>
 
   <script>
@@ -2108,53 +2265,35 @@
     }
   </script>
 
+
   <script>
-    // Expand/Collapse Article Toggle
-    function togglePost(articleId) {
-      const content = document.getElementById(articleId + '-content');
-      const button = event.currentTarget.querySelector('.toggle-button');
-      
-      if (content && button) {
-        if (content.classList.contains('collapsed')) {
-          // Expand
-          content.classList.remove('collapsed');
-          content.classList.add('expanded');
-          button.classList.remove('collapsed');
-          button.classList.add('expanded');
-        } else {
-          // Collapse
-          content.classList.add('collapsed');
-          content.classList.remove('expanded');
-          button.classList.add('collapsed');
-          button.classList.remove('expanded');
-          
-          // Scroll to article top smoothly
-          document.getElementById(articleId).scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
-        }
-      }
-    }
-    
-    // Optional: Expand first article by default on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      // Uncomment the line below if you want the first article expanded by default
-      // togglePost('veterans-edge');
-      
-      // If navigating from index, expand the target article
-      if (window.location.hash) {
-        const targetId = window.location.hash.substring(1);
-        const targetArticle = document.getElementById(targetId);
-        if (targetArticle) {
-          const content = document.getElementById(targetId + '-content');
-          const toggle = targetArticle.querySelector('.post-toggle');
-          if (content && content.classList.contains('collapsed')) {
-            toggle.click();
+    // Expand/Collapse Article Toggle — attached via DOMContentLoaded, not inline onclick
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.post-toggle').forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          var article = this.closest('article');
+          if (!article) return;
+          var articleId = article.id;
+          var content = document.getElementById(articleId + '-content');
+          var button = this.querySelector('.toggle-button');
+          if (!content || !button) return;
+
+          if (content.classList.contains('collapsed')) {
+            content.classList.remove('collapsed');
+            content.classList.add('expanded');
+            button.classList.remove('collapsed');
+            button.classList.add('expanded');
+          } else {
+            content.classList.add('collapsed');
+            content.classList.remove('expanded');
+            button.classList.add('collapsed');
+            button.classList.remove('expanded');
+            article.scrollIntoView({ behavior: 'smooth' });
           }
-        }
-      }
+        });
+      });
     });
   </script>
+
 </body>
 </html>
