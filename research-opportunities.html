@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Research Opportunities - Ic² Research Institute</title>
+    <meta name="description" content="Understanding how the universe organizes matter at its deepest level opens application pathways in materials science, quantum computing, self-healing structures, and directed assembly. An honest account of where the science is and where it points.">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+        --primary-color: #8B0000;
+        --secondary-color: #2d3f52;
+        --accent-blue: #005ba5;
+        --accent-red: #e33d2f;
+        --accent-green: #a1cd5f;
+        --accent-orange: #f58b2b;
+        --accent-yellow: #f1e303;
+        --text-dark: #2c3e50;
+        --text-light: #666;
+        --bg-light: #f8f9fa;
+        --max-width: 1200px;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: white;
+    }
+
+    /* Header */
+    .site-header {
+        background: white;
+        border-bottom: 1px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .site-logo { display: flex; align-items: center; gap: 12px; }
+    .site-logo img { height: 50px; width: auto; display: block; }
+
+    .main-navigation ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+    .main-navigation a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.3s ease; }
+    .main-navigation a:hover { color: var(--primary-color); }
+    .main-navigation a.login-link {
+        background: var(--primary-color);
+        color: #f1e303;
+        padding: 0.5rem 1.25rem;
+        border-radius: 25px;
+        font-weight: 700;
+        box-shadow: 0 2px 8px rgba(139,0,0,0.3);
+    }
+    .main-navigation a.login-link:hover {
+        background: #a00000;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+    }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; padding: 8px; }
+    .hamburger span { width: 25px; height: 3px; background: var(--primary-color); border-radius: 3px; transition: all 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px,7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+
+    .mobile-menu {
+        display: none; position: fixed; top: 61px; left: 0; right: 0;
+        background: white; border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 999;
+        max-height: 0; overflow: hidden; transition: max-height 0.3s;
+    }
+    .mobile-menu.active { max-height: 600px; }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu ul li:last-child { border-bottom: none; }
+    .mobile-menu a { display: block; padding: 0.75rem 1rem; color: var(--text-dark); text-decoration: none; font-weight: 500; }
+    .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+
+    /* Page Header */
+    .page-header {
+        background: linear-gradient(135deg, var(--secondary-color) 0%, #1a2b3d 100%);
+        color: white;
+        padding: 4rem 2rem 3rem;
+        text-align: center;
+    }
+    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; }
+    .page-header p { font-size: 1.25rem; opacity: 0.95; max-width: 700px; margin: 0 auto; }
+
+    /* Content Section */
+    .content-section { padding: 4rem 2rem; background: white; }
+    .content-section.bg-light { background: var(--bg-light); }
+    .section-container { max-width: var(--max-width); margin: 0 auto; }
+
+    /* Opportunity Cards — same structure as program-card */
+    .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .program-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+    .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .program-header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #6b0000 100%);
+        color: white;
+        padding: 2rem;
+    }
+    .program-badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    .program-header h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .program-meta { font-size: 0.9rem; opacity: 0.9; }
+
+    .program-body { padding: 2rem; }
+    .program-description { color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.8; }
+
+    .program-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e0e0e0;
+    }
+    .stat-item { text-align: center; }
+    .stat-label { display: block; color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.25rem; }
+    .stat-value { display: block; color: var(--text-dark); font-weight: 700; font-size: 1.1rem; }
+
+    .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .status-research { background: #e3f2fd; color: #1565c0; }
+    .status-open { background: #e8f5e9; color: #1a5c2a; }
+    .status-planned { background: #f3e5f5; color: #6a1b9a; }
+    .status-active { background: #fff3e0; color: #7a4f00; }
+
+    .program-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    .program-links.single { grid-template-columns: 1fr; }
+
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    .btn-primary { background: var(--primary-color); color: white; }
+    .btn-primary:hover { background: #a00000; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139,0,0,0.3); }
+    .btn-outline { background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+    .btn-outline:hover { background: var(--primary-color); color: white; }
+
+    /* Honest position box */
+    .honest-box {
+        margin-top: 5rem;
+        padding: 3rem;
+        background: linear-gradient(rgba(10,10,30,0.80), rgba(15,15,40,0.87)), url('namdesert.jpg') center/cover no-repeat;
+        border-radius: 12px;
+        color: white;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+    .honest-box h2 { font-size: 2rem; margin-bottom: 1rem; line-height: 1.3; }
+    .honest-box p { color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 1rem; font-size: 1rem; }
+    .honest-box p:last-child { margin-bottom: 0; }
+    .honest-label {
+        font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
+        color: var(--accent-yellow); font-weight: 600; margin-bottom: 0.75rem;
+    }
+    .honest-stats { border-left: 1px solid rgba(255,255,255,0.15); padding-left: 3rem; }
+    .honest-stat { margin-bottom: 1.75rem; }
+    .honest-stat-number { font-size: 2.5rem; font-weight: 700; color: var(--accent-yellow); line-height: 1; margin-bottom: 0.25rem; }
+    .honest-stat-label { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.5; }
+
+    /* Philosophy section */
+    .philosophy-box {
+        margin-top: 5rem;
+        padding: 3rem;
+        background: var(--bg-light);
+        border-radius: 12px;
+    }
+    .philosophy-box h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+    .philosophy-box p { color: var(--text-light); margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+    .philosophy-box ul { color: var(--text-light); margin-left: 2rem; margin-bottom: 1rem; max-width: 800px; margin-left: auto; padding-left: 2rem; }
+    .philosophy-box li { margin: 0.6rem 0; line-height: 1.7; }
+
+    /* Footer */
+    footer { background: var(--text-dark); color: white; padding: 3rem 2rem 1rem; margin-top: 5rem; }
+    .footer-container {
+        max-width: var(--max-width); margin: 0 auto;
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;
+    }
+    .footer-section h3 { margin-bottom: 1rem; color: white; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin: 0.5rem 0; }
+    .footer-section a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
+    .footer-section a:hover { color: white; }
+    .footer-section p { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+    .footer-bottom {
+        max-width: var(--max-width); margin: 2rem auto 0;
+        padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);
+        text-align: center; color: rgba(255,255,255,0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .page-header h1 { font-size: 2rem; }
+        .programs-grid { grid-template-columns: 1fr; }
+        .main-navigation { display: none; }
+        .hamburger { display: flex; }
+        .mobile-menu { display: block; }
+        .honest-box { grid-template-columns: 1fr; }
+        .honest-stats { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 2rem; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+    <div class="header-container">
+    <a href="index.html" class="site-logo">
+        <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
+    </a>
+    <nav class="main-navigation">
+    <ul>
+        <li><a href="framework.html">Framework</a></li>
+        <li><a href="book.html">Big TOE</a></li>
+        <li><a href="research-publications.html">Research</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about-page.html">About</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+    </ul>
+    </nav>
+    <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+    </div>
+    </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+    <ul>
+        <li><a href="framework.html">Framework</a></li>
+        <li><a href="book.html">Big TOE</a></li>
+        <li><a href="research-publications.html">Research</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about-page.html">About</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+    </ul>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 data-aos="fade-up">Research Opportunities</h1>
+        <p data-aos="fade-up" data-aos-delay="100">
+            What the framework points toward, what the science currently supports,
+            and where additional resources would change the pace of discovery
+        </p>
+    </section>
+
+    <!-- Opportunities Section -->
+    <section class="content-section">
+    <div class="section-container">
+
+        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Application Directions</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 0.75rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+            Understanding how the universe organizes matter at its deepest level does not improve existing technology incrementally.
+            It changes the basis on which manufacturing and materials science operate.
+        </p>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+            Each direction below is grounded in published science. The framework provides the conceptual vocabulary
+            and research program for characterizing the organizing principles precisely enough to direct them.
+            The gap between current science and the applications described is a research gap, not a physical impossibility.
+        </p>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; line-height: 1.8;">
+            <strong>Established findings are marked clearly. What requires further research is stated plainly.</strong>
+        </p>
+
+        <div class="programs-grid">
+
+            <!-- New Materials -->
+            <div class="program-card" data-aos="fade-up">
+                <div class="program-header" style="background: linear-gradient(135deg, var(--primary-color) 0%, #6b0000 100%);">
+                    <span class="program-badge">MATERIALS SCIENCE</span>
+                    <h3>New Materials</h3>
+                    <div class="program-meta">Metamaterials · Quantum Materials · Substrate-Optimized Design</div>
+                </div>
+                <div class="program-body">
+                    <p class="program-description">
+                        Current materials science works by searching: trying atomic combinations, measuring outcomes, iterating.
+                        This is slow and expensive because the organizing principles operating below atomic arrangement are not understood.
+                        If the substrate organizes matter according to information-theoretic optimization constraints,
+                        material properties are not arbitrary outcomes. They are expressions of those constraints.
+                        Understanding them means designing toward them rather than searching.
+                    </p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0.5rem 0 1.5rem; font-style: italic; border-left: 3px solid var(--accent-green); padding-left: 0.75rem; line-height: 1.7;">
+                        <strong style="color: #1a5c2a;">Established:</strong> Quantum biology demonstrates biological systems exploit substrate-level quantum effects
+                        for near-perfect energy transfer efficiency. The organizing principles exist and operate in living systems now.
+                    </p>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Sector</span>
+                            <span class="stat-value">Manufacturing</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Also Applies</span>
+                            <span class="stat-value">Aerospace</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Foundation</span>
+                            <span class="stat-value">Quantum Biology</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value status-badge status-research">Research Stage</span>
+                        </div>
+                    </div>
+                    <div class="program-links single">
+                        <a href="validation.html" class="btn btn-outline">See Framework Predictions</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self-Healing Structures -->
+            <div class="program-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="program-header" style="background: linear-gradient(135deg, #005ba5 0%, #003d73 100%);">
+                    <span class="program-badge">STRUCTURAL ENGINEERING</span>
+                    <h3>Self-Healing Structures</h3>
+                    <div class="program-meta">Defense · Aerospace · Civil Infrastructure · Medical Implants</div>
+                </div>
+                <div class="program-body">
+                    <p class="program-description">
+                        Living tissue repairs itself because it maintains information about its intended configuration
+                        and that information actively drives repair. The repair is not random chemical reassembly.
+                        It is information-directed reconstruction. Replicating that mechanism in synthetic materials
+                        produces structures that maintain themselves against damage through the same substrate-level processes
+                        that maintain biological form.
+                    </p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0.5rem 0 1.5rem; font-style: italic; border-left: 3px solid #005ba5; padding-left: 0.75rem; line-height: 1.7;">
+                        <strong style="color: #005ba5;">Established:</strong> Michael Levin's bioelectric field research at Tufts demonstrates organisms
+                        maintain large-scale positional information fields above the genetic level.
+                        Disrupting those fields scrambles body plans even when DNA is intact.
+                    </p>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Sector</span>
+                            <span class="stat-value">Defense</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Also Applies</span>
+                            <span class="stat-value">Infrastructure</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Foundation</span>
+                            <span class="stat-value">Bioelectrics</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value status-badge status-research">Research Stage</span>
+                        </div>
+                    </div>
+                    <div class="program-links single">
+                        <a href="https://drmichaellevin.org" target="_blank" class="btn btn-outline" style="color: #005ba5; border-color: #005ba5;">Levin Lab Research</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room-Temperature Quantum Coherence -->
+            <div class="program-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="program-header" style="background: linear-gradient(135deg, #1a5c2a 0%, #0d3317 100%);">
+                    <span class="program-badge">QUANTUM COMPUTING</span>
+                    <h3>Room-Temperature Quantum Coherence</h3>
+                    <div class="program-meta">Quantum Computing · Quantum Sensing · Cryptography · Simulation</div>
+                </div>
+                <div class="program-body">
+                    <p class="program-description">
+                        Biological systems maintain quantum coherence in warm, noisy environments far beyond what physics predicts they should.
+                        Something at the substrate level protects these states. Identifying that mechanism does not improve quantum computing.
+                        It removes the primary cost barrier separating current cryogenic systems from practical quantum computation at scale.
+                        The Google Willow confirmation of quantum error correction scaling is one step.
+                        Understanding the substrate mechanism that biology already exploits is the next.
+                    </p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0.5rem 0 1.5rem; font-style: italic; border-left: 3px solid #1a5c2a; padding-left: 0.75rem; line-height: 1.7;">
+                        <strong style="color: #1a5c2a;">Established:</strong> Quantum coherence in photosynthesis, enzyme catalysis, and avian navigation
+                        are published results in mainstream journals. Biological systems exploit these effects functionally.
+                    </p>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Sector</span>
+                            <span class="stat-value">Quantum Tech</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Confirmed</span>
+                            <span class="stat-value">Google Willow</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Prediction</span>
+                            <span class="stat-value">Aug 2024</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value status-badge status-active">Active Research</span>
+                        </div>
+                    </div>
+                    <div class="program-links">
+                        <a href="validation.html" class="btn btn-primary" style="background: #1a5c2a;">View Prediction</a>
+                        <a href="testing-schedule.html" class="btn btn-outline" style="color: #1a5c2a; border-color: #1a5c2a;">Testing Schedule</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Directed Assembly -->
+            <div class="program-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="program-header" style="background: linear-gradient(135deg, #f58b2b 0%, #b85f0d 100%);">
+                    <span class="program-badge">MANUFACTURING</span>
+                    <h3>Directed Assembly</h3>
+                    <div class="program-meta">Nanoscale Manufacturing · Programmable Matter · Biological Fabrication</div>
+                </div>
+                <div class="program-body">
+                    <p class="program-description">
+                        Every living cell builds extraordinary three-dimensional structures by following information encoded
+                        at multiple scales simultaneously. Synthetic manufacturing cannot do this not because it is physically prohibited
+                        but because the organizing principles are not yet understood.
+                        Assembly systems that build toward a specification by guiding substrate-level organizing processes
+                        rather than mechanically placing components would transform manufacturing at every scale
+                        from nanoscale fabrication to large structural assembly.
+                    </p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0.5rem 0 1.5rem; font-style: italic; border-left: 3px solid #f58b2b; padding-left: 0.75rem; line-height: 1.7;">
+                        <strong style="color: #b85f0d;">Established:</strong> Jeremy England's dissipation-driven adaptation framework shows matter under
+                        certain energy flows spontaneously organizes toward complexity without selection or reproduction.
+                        The substrate does this already. Directing it is the open question.
+                    </p>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Sector</span>
+                            <span class="stat-value">Manufacturing</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Also Applies</span>
+                            <span class="stat-value">Nanotech</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Foundation</span>
+                            <span class="stat-value">England (MIT)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value status-badge status-planned">Theoretical</span>
+                        </div>
+                    </div>
+                    <div class="program-links single">
+                        <a href="book.html" class="btn btn-outline" style="color: #b85f0d; border-color: #b85f0d;">Framework Details in Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-Planck Dynamics -->
+            <div class="program-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="program-header" style="background: linear-gradient(135deg, #1a1a2e 0%, #0e0e1a 100%);">
+                    <span class="program-badge">FOUNDATIONAL PHYSICS</span>
+                    <h3>Sub-Planck Substrate Dynamics</h3>
+                    <div class="program-meta">Fundamental Physics · Cosmology · All Application Domains</div>
+                </div>
+                <div class="program-body">
+                    <p class="program-description">
+                        The Planck scale is typically treated as the floor of the describable. The framework proposes it is the surface
+                        of something deeper: the threshold at which the pre-geometric substrate crystallizes into the spacetime we can measure.
+                        Understanding what organizes that substrate would mean understanding why the physical constants have the values they do,
+                        why the universe permits complexity rather than featureless equilibrium, and why the applications above are possible at all.
+                        This is the research direction all others converge on.
+                    </p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0.5rem 0 1.5rem; font-style: italic; border-left: 3px solid #555; padding-left: 0.75rem; line-height: 1.7;">
+                        <strong style="color: #333;">No competing program</strong> is currently aimed at sub-Planck dynamics in these terms.
+                        The CMB analysis on Zenodo is the first published attempt to extract pre-geometric transition signatures from observational data.
+                        The Ic² Research Institute is the institutional home for this direction.
+                    </p>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Published</span>
+                            <span class="stat-value">Zenodo</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Competing Programs</span>
+                            <span class="stat-value">None</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">DOI</span>
+                            <span class="stat-value" style="font-size: 0.85rem;">10.5281/zenodo<br>.16376121</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value status-badge status-active">Active</span>
+                        </div>
+                    </div>
+                    <div class="program-links">
+                        <a href="https://zenodo.org/records/16376121" target="_blank" class="btn btn-primary" style="background: #1a1a2e;">CMB Paper</a>
+                        <a href="book.html" class="btn btn-outline" style="color: #1a1a2e; border-color: #1a1a2e;">Element 13</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Honest Position Box -->
+        <div class="honest-box" data-aos="fade-up">
+            <div>
+                <p class="honest-label">Honest Position</p>
+                <h2>Early stage. Real ceiling. Consequential direction.</h2>
+                <p>
+                    The Ic² Research Institute is an independent research program with limited budget and manpower.
+                    That is stated plainly because obscuring it would undermine everything else.
+                </p>
+                <p>
+                    What can be said honestly: the direction is identified with precision.
+                    Three predictions have preceded experimental confirmation with documented timestamps.
+                    No competing program is aimed at sub-Planck substrate dynamics in these terms.
+                    The people who help build this foundation will be part of defining how the question is asked,
+                    which is a different and more consequential position than arriving after the framework is established.
+                </p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">
+                    The motivation is understanding. The applications are consequences of understanding.
+                    We are not offering deliverables on a schedule. We are inviting participation in the work.
+                </p>
+                <a href="mailto:info@eequalsicsquared.com" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-block;">Contact the Institute</a>
+            </div>
+            <div class="honest-stats">
+                <div class="honest-stat">
+                    <div class="honest-stat-number">3</div>
+                    <div class="honest-stat-label">Predictions confirmed before experimental results arrived, with documented timestamps</div>
+                </div>
+                <div class="honest-stat">
+                    <div class="honest-stat-number">0</div>
+                    <div class="honest-stat-label">Competing research programs aimed at sub-Planck substrate dynamics in these terms</div>
+                </div>
+                <div class="honest-stat">
+                    <div class="honest-stat-number">4</div>
+                    <div class="honest-stat-label">Independent platforms that have confirmed framework predictions: DESI, Google Quantum AI, JWST, ALMA</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investment Section -->
+        <div style="margin-top: 5rem; padding: 3.5rem; background: linear-gradient(135deg, #1c2b1c 0%, #0f1a0f 100%); border-radius: 12px; color: white;" data-aos="fade-up">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #a1cd5f; font-weight: 700; margin-bottom: 0.75rem; text-align: center;">For Investors and Funding Partners</p>
+                <h2 style="font-size: 2.2rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; line-height: 1.3;">The Earliest Viable Stage of a Consequential Direction</h2>
+
+                <p style="color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 1.25rem;">
+                    The applications described on this page, new materials, self-healing structures, room-temperature quantum coherence, and directed assembly, are not distant possibilities contingent on speculative breakthroughs. They follow logically from characterizing substrate-level organizing processes that are already demonstrably real in biological systems. The science establishing this is published. The framework for pursuing it is documented and has produced three confirmed advance predictions. The gap between where the research currently is and where these applications become accessible is a resource gap, not a conceptual one.
+                </p>
+
+                <p style="color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 1.25rem;">
+                    The Ic² Research Institute is not a startup. There is no equity on offer and no product roadmap with delivery dates. What exists is a foundational research program at its earliest viable stage, with documented evidence of predictive accuracy, no competing program aimed at the same substrate-level questions, and application directions whose value, if the research develops as the framework predicts, would be genuinely difficult to overstate.
+                </p>
+
+                <p style="color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 2rem;">
+                    Investment here is not venture capital. It is patronage of foundational science with identified application pathways. The people and institutions who fund this work at this stage will be part of its origin, not its commercialisation. That is a different and more consequential position. The motivation is understanding. The applications are consequences. Both are real.
+                </p>
+
+                <!-- What investment enables -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid rgba(161,205,95,0.3);">
+                    <div>
+                        <div style="color: #a1cd5f; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Research Pace</div>
+                        <p style="color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.6; margin: 0;">The current ceiling is budget and manpower. Investment directly changes how fast the sub-Planck characterization work can proceed.</p>
+                    </div>
+                    <div>
+                        <div style="color: #a1cd5f; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Experimental Access</div>
+                        <p style="color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.6; margin: 0;">Several framework predictions require experimental validation that needs lab access and instrumentation. Funding opens those doors.</p>
+                    </div>
+                    <div>
+                        <div style="color: #a1cd5f; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Collaborative Capacity</div>
+                        <p style="color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.6; margin: 0;">Independent researchers and theorists who want to contribute need infrastructure. Investment builds the platform for that collaboration.</p>
+                    </div>
+                    <div>
+                        <div style="color: #a1cd5f; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Formalization</div>
+                        <p style="color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.6; margin: 0;">The framework needs mathematical formalization to generate the quantitative predictions that experimental physics requires. That is skilled theoretical work.</p>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid rgba(161,205,95,0.3); padding-top: 2rem; text-align: center;">
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        No pitch deck. No term sheet. A conversation about what the science points toward and what it would take to get there faster.
+                    </p>
+                    <a href="mailto:info@eequalsicsquared.com?subject=Investment%20Inquiry%20%E2%80%94%20Ic%C2%B2%20Research%20Institute" class="btn btn-primary" style="background: #a1cd5f; color: #0f1a0f; font-weight: 700; margin-right: 1rem; border: none;">Start the Conversation</a>
+                    <a href="validation.html" class="btn btn-outline" style="color: #a1cd5f; border-color: #a1cd5f;">View Confirmed Predictions</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Philosophy -->
+        <div class="philosophy-box" data-aos="fade-up">
+            <h2>How We Work</h2>
+            <p>
+                The Ic² Research Institute is an open platform. Members retain full ownership of their work and may publish
+                under the institute's auspices or independently. All findings are freely available to the global scientific community.
+                The book is distributed free via the honor system. The science is not behind a paywall.
+            </p>
+            <ul>
+                <li><strong>Falsifiable predictions first:</strong> Every framework claim generates testable predictions documented before testing begins.</li>
+                <li><strong>Honest limits:</strong> What we cannot yet say is stated as clearly as what we can. Uncertainty is not minimized.</li>
+                <li><strong>Open science:</strong> CMB analysis and data are published on Zenodo with permanent DOIs. No gatekeeping.</li>
+                <li><strong>Independent:</strong> No institutional affiliation means no agenda to protect and no constraints on where the evidence leads.</li>
+                <li><strong>Collaborative:</strong> The ceiling on current progress is resources and manpower, not ideas. Collaboration changes the pace.</li>
+            </ul>
+            <p style="margin-top: 1.5rem;">
+                If you are a researcher, theorist, experimentalist, or institution interested in any of the directions above,
+                the conversation starts with an email.
+            </p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="mailto:info@eequalsicsquared.com" class="btn btn-primary" style="margin-right: 1rem;">Get in Touch</a>
+                <a href="book.html" class="btn btn-outline">Read the Framework</a>
+            </div>
+        </div>
+
+    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+    <div class="footer-container">
+    <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+    </div>
+    <div class="footer-section">
+        <h3>Research</h3>
+        <ul>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="research-publications.html">Publications</a></li>
+            <li><a href="research-opportunities.html">Opportunities</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq-page.html">FAQ</a></li>
+            <li><a href="members.html">Our Members</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="discussions-page.html">Discussions</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="become-member.html">Become a Member</a></li>
+            <li><a href="mailto:info@eequalsicsquared.com">Contact</a></li>
+        </ul>
+    </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. |
+        <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> |
+        <a href="terms-conditions.html" style="color: rgba(255,255,255,0.6);">Terms &amp; Conditions</a></p>
+    </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 80 });
+
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

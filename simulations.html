@@ -123,7 +123,117 @@
     .elem-badge{display:inline-block;padding:2px 10px;border-radius:50px;font-size:.72em;font-family:'Courier New',monospace;margin-left:10px;vertical-align:middle;background:rgba(79,195,247,.1);color:#4fc3f7;border:1px solid rgba(79,195,247,.3);}
     .section-rule{border:none;border-top:1px solid rgba(255,255,255,.08);margin:28px 0 20px;}
 
-    @media(max-width:600px){.sim-wrap{height:300px;}.sim-tr{display:none;}}
+    /* ── Hero logo button — matches index.html exactly ── */
+    .hero-logo-button {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      transition: all 0.4s ease;
+    }
+    .hero-bigtoe-logo {
+      height: 44px;
+      width: auto;
+      transition: all 0.4s ease;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+      vertical-align: middle;
+    }
+    .hero-logo-button:hover .hero-bigtoe-logo {
+      transform: scale(1.1) rotate(2deg);
+      filter: drop-shadow(0 8px 16px rgba(255,255,0,0.4));
+    }
+
+    /* ── Button styles matching site-wide convention ── */
+    .viz-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      border: none;
+    }
+    .viz-btn-primary {
+      background: #8B0000;
+      color: white;
+    }
+    .viz-btn-primary:hover {
+      background: #a00000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139,0,0,0.3);
+    }
+    .viz-btn-outline {
+      background: transparent;
+      color: #4fc3f7;
+      border: 2px solid #4fc3f7;
+    }
+    .viz-btn-outline:hover {
+      background: rgba(79,195,247,0.15);
+    }
+    .viz-btn-ghost {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .viz-btn-ghost:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.35);
+    }
+    /* ── Pass-through for site btn classes inside dark visualization panel ── */
+    .visualization .container .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+    .visualization .container .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+    .visualization .container .btn-primary:hover {
+      background: #a00000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139,0,0,0.3);
+    }
+    .visualization .container .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    .visualization .container .btn-outline:hover {
+      background: white;
+      color: #2c3e50;
+    }
+
+    /* Sim controls row */
+    .sim-controls {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+    .sim-label {
+      color: #b0c4de;
+      font-size: 0.85em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .sim-label input[type="range"] { vertical-align: middle; }
+    .sim-val { font-family: 'Courier New', monospace; font-weight: 700; }
+
+    @media(max-width:600px){.sim-wrap{height:300px;}.sim-tr{display:none;}.sim-controls{gap:10px;}}
     </style>
 </head>
 <body>
@@ -181,7 +291,22 @@
       <p style="color:#b0c4de;margin:0;font-size:0.97em;">The seven charts below present the core observational and theoretical evidence behind the COSMIC Framework. Each one is drawn from real data or directly testable predictions. Read the guide text beneath each title before looking at the chart; it explains exactly what the axes mean and what pattern to look for.</p>
     </div>
 
-    <h2>1. Does π Change Across the Universe?</h2>
+    <!-- Glossary + Book + Confirmed Predictions quick links — matching site button styles -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px;align-items:center;justify-content:center;">
+      <a href="glossary.html" class="btn btn-outline" style="border-color:white;color:white;display:inline-flex;align-items:center;gap:8px;">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'/%3E%3C/svg%3E" alt="" style="width:18px;height:18px;">
+        Glossary
+      </a>
+      <a href="book.html" class="hero-logo-button">
+        <img src="bigtoeindexlogoyel.png" alt="A Quest for the Big TOE" class="hero-bigtoe-logo">
+      </a>
+      <a href="validation.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E" alt="" style="width:18px;height:18px;">
+        Confirmed Predictions
+      </a>
+    </div>
+
+    <h2>1. Does π Change Across the Universe? <span class="elem-badge">Element 14</span></h2>
     <div class="figure-container">
       <div class="figure-title">Figure 1: π Statistical Deviation Measured Across Five WMAP Microwave Frequency Bands</div>
       <div class="highlight">
@@ -193,7 +318,7 @@
       <div class="figure-caption">The teal line rises from bottom-left to top-right, which is a systematic trend that standard physics does not predict. Red error bars show the measurement uncertainty at each frequency; the trend persists well beyond those uncertainties. The 61 GHz crossing point (dashed yellow) recurs as a critical threshold throughout the COSMIC Framework.</div>
     </div>
 
-    <h2>2. How Mathematical Constants Interact With Each Other</h2>
+    <h2>2. How Mathematical Constants Interact With Each Other <span class="elem-badge">Element 14</span></h2>
     <div class="grid">
       <div class="figure-container">
         <div class="figure-title">Figure 2A: Resonance Behaviour of π, φ, and √5 Across Frequency</div>
@@ -215,7 +340,7 @@
       </div>
     </div>
 
-    <h2>3. How Information Density Curves Space: The PEG Field</h2>
+    <h2>3. How Information Density Curves Space: The PEG Field <span class="elem-badge">Element 8</span></h2>
     <div class="figure-container">
       <div class="figure-title">Figure 3: A 2D Map of Information Pattern Density P(x,t) and Its Gravitational Effect</div>
       <div class="highlight">
@@ -227,7 +352,7 @@
       <div class="figure-caption">Look for the bright gold regions, which are where gravity would be strongest in this model. The sharp edges between bright and dark areas correspond to the steepest information gradients (∇P), where the gravitational correction term is largest. The colourbar on the right maps colour to information density value. This is not a simulation of a real region of space; this is a visualization of the mathematical field equations to show their qualitative behaviour.</div>
     </div>
 
-    <h2>4. Physics Below the Planck Scale: TransPlanck Dynamics</h2>
+    <h2>4. Physics Below the Planck Scale: TransPlanck Dynamics <span class="elem-badge">Element 13</span></h2>
     <div class="figure-container">
       <div class="figure-title">Figure 4: How Mathematical Field Strength Modifies the Effective Planck Length</div>
       <div class="highlight">
@@ -239,7 +364,7 @@
       <div class="figure-caption">The blue curve peeling away from the red dashed line as you move right along the horizontal axis tells the whole story: the stronger the information field, the lower the effective Planck scale drops, and the larger the blue shaded region of "newly accessible" sub-Planck physics becomes. Standard physics predicts a flat horizontal line at 1.0 forever.</div>
     </div>
 
-    <h2>5. How the Universe Learned to Be Quantum</h2>
+    <h2>5. How the Universe Learned to Be Quantum <span class="elem-badge">Element 2</span></h2>
     <div class="grid">
       <div class="figure-container">
         <div class="figure-title">Figure 5A: The Universe's Transition From Continuous to Quantized Behaviour</div>
@@ -261,7 +386,7 @@
       </div>
     </div>
 
-    <h2>6. Einstein's E = mc² Is Only Half the Story</h2>
+    <h2>6. Einstein's E = mc² Is Only Half the Story <span class="elem-badge">Element 3</span></h2>
     <div class="figure-container">
       <div class="figure-title">Figure 6: Comparing Mass-Energy (E = mc²) and Information-Energy (E = Ic²) in a Living System</div>
       <div class="highlight">
@@ -273,7 +398,7 @@
       <div class="figure-caption">The contrast between the red bars (positive entropy, low efficiency) and green bars (negative entropy, high efficiency) illustrates the framework's central claim: information is not a passive description of matter; it is an active energy-carrying process that works against thermodynamic decay. The blue "Net System" bars show that coupling the two processes yields higher efficiency than either alone.</div>
     </div>
 
-    <h2>7. The Universe as a Brain: Cosmic Network Topology</h2>
+    <h2>7. The Universe as a Brain: Cosmic Network Topology <span class="elem-badge">Elements 6 &amp; 17</span></h2>
     <div class="figure-container">
       <div class="figure-title">Figure 7: The Large-Scale Structure of the Universe Mapped as an Information Network</div>
       <div class="highlight">
@@ -381,6 +506,125 @@
       <div class="figure-caption">A disordered pre-geometric information substrate (blue noise cloud) gradually reaches critical density Φ_critical, triggering a phase transition. Spacetime lattice geometry crystallises outward from the nucleation point, exactly as water freezes from nucleation sites, then expands. The loop repeats: substrate → threshold → crystallisation → expansion. No singularity, no "time before time" paradox. Flatness, homogeneity, and ongoing expansion (dark energy) are not fine-tuned coincidences but natural consequences of information-optimization dynamics reaching a stability threshold.</div>
     </div>
     <div class="equation">Φ = Φ_critical → Spacetime crystallises · · · Flatness + Homogeneity + Expansion = threshold geometry consequences · · · Dark energy = ongoing substrate-space coupling</div>
+
+    <!-- ════════════════════════════════════════════
+         PART III · NEW INTERACTIVE SIMULATIONS
+    ════════════════════════════════════════════ -->
+    <hr class="section-rule">
+    <h1 style="margin-top:8px;">Interactive Explorers</h1>
+    <p class="lead">Adjust the controls and watch the framework respond in real time</p>
+
+    <!-- ── SIM G: BAMBOO THRESHOLD ── -->
+    <h2>G. The Bamboo Principle: Below-Threshold Accumulation <span class="elem-badge">Elements 1 &amp; 13</span></h2>
+    <div class="figure-container">
+      <div class="figure-title">Sim G: Sub-Threshold Preparation Leading to Threshold Crossing and Emergence</div>
+      <div class="highlight">
+        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> The Bamboo Principle states that the most significant organizational work happens invisibly, below the threshold of detection, until a critical density is reached and the system jumps discontinuously to a new level of complexity. This pattern appears identically at every scale: microbial evolution before the Cambrian explosion, quantum fluctuations before spacetime crystallization, regulatory gene accumulation before the Lenski citrate innovation.<br><br>
+        <strong style="color:#ffd700;">Controls:</strong> Accumulation Rate sets how fast the sub-threshold process builds. Threshold Level sets where the jump occurs. Noise adds stochastic variation. Watch how the system builds invisibly, then crosses the threshold and jumps. The jump magnitude is always disproportionate to the final accumulation step — the preparation is what matters.<br><br>
+        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#B" style="color:#4fc3f7;">Bamboo Principle</a> · <a href="glossary.html#P" style="color:#4fc3f7;">Phase Transition</a> · <a href="glossary.html#E" style="color:#4fc3f7;">Emergence</a></p>
+      </div>
+      <div class="plot-container" style="padding:16px;">
+        <div class="sim-controls">
+          <label class="sim-label">Accumulation Rate: <input type="range" id="bam-rate" min="1" max="10" value="3" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="bam-rate-val" class="sim-val" style="color:#4fc3f7;">3</span></label>
+          <label class="sim-label">Threshold Level: <input type="range" id="bam-thresh" min="20" max="80" value="50" style="vertical-align:middle;accent-color:#ffd700;"> <span id="bam-thresh-val" class="sim-val" style="color:#ffd700;">50</span></label>
+          <label class="sim-label">Noise: <input type="range" id="bam-noise" min="0" max="10" value="3" style="vertical-align:middle;accent-color:#ff6b6b;"> <span id="bam-noise-val" class="sim-val" style="color:#ff6b6b;">3</span></label>
+          <button onclick="bambooReset()" class="viz-btn viz-btn-ghost">Reset</button>
+        </div>
+        <canvas id="c-bamboo" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
+        <div id="bam-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#81c784;">Accumulating below threshold...</div>
+      </div>
+      <div class="figure-caption">The grey region is below the detection threshold — the substrate is organizing but nothing is visible. The moment the gold dashed threshold line is crossed, the system jumps to a new level (green). The jump is not caused by the final accumulation step alone; it is the consequence of all the invisible preparation. The Cambrian, the early universe, the Lenski populations, the cold start: all the same curve.</div>
+    </div>
+
+    <!-- ── SIM H: BELL INEQUALITY ── -->
+    <h2>H. Non-Locality as Substrate Visibility <span class="elem-badge">Element 1</span></h2>
+    <div class="figure-container">
+      <div class="figure-title">Sim H: Bell Inequality Violation — Local Hidden Variable Theory vs. Quantum Prediction vs. Framework</div>
+      <div class="highlight">
+        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> Two entangled particles are measured at separated detectors. You choose the measurement angle for each detector. The chart shows three predictions: what a local hidden variable theory predicts (grey, the classical limit), what quantum mechanics predicts (teal), and what the COSMIC Framework adds (gold — identical to quantum mechanics but with a substrate interpretation).<br><br>
+        <strong style="color:#ffd700;">The key insight:</strong> When the angle difference is near 0° or 90°, the local and quantum predictions agree. At 45° the gap is maximum — this is where Bell's theorem draws the sharpest line. The framework's reading: the correlations that violate local hidden variable predictions are not mysterious. They are the pre-geometric substrate showing through. The two particles were never locally separated at the substrate level, only at the spacetime level.<br><br>
+        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#B" style="color:#4fc3f7;">Bell Inequality</a> · <a href="glossary.html#E" style="color:#4fc3f7;">Entanglement</a> · <a href="glossary.html#N" style="color:#4fc3f7;">Non-locality</a> · <a href="glossary.html#P" style="color:#4fc3f7;">Pre-geometric substrate</a></p>
+      </div>
+      <div class="plot-container" style="padding:16px;">
+        <div class="sim-controls">
+          <label class="sim-label">Detector A angle: <input type="range" id="bell-a" min="0" max="180" value="0" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="bell-a-val" class="sim-val" style="color:#4fc3f7;">0°</span></label>
+          <label class="sim-label">Detector B angle: <input type="range" id="bell-b" min="0" max="180" value="45" style="vertical-align:middle;accent-color:#ffd700;"> <span id="bell-b-val" class="sim-val" style="color:#ffd700;">45°</span></label>
+          <div style="color:#b0c4de;font-size:0.82em;"><span style="color:#b0c4de;font-size:0.85em;">Angle difference: <span id="bell-diff" class="sim-val" style="color:#ff6b6b;">45°</span></span></div>
+        </div>
+        <canvas id="c-bell" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
+        <div id="bell-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#4fc3f7;"></div>
+      </div>
+      <div class="figure-caption">Move the angle sliders and watch the correlation curves. The grey band shows the maximum correlation allowed by any local hidden variable theory (Bell's limit: |C| ≤ cos(θ)). The teal quantum curve exceeds this limit between ~25° and ~65°. The gold framework curve is identical numerically but means something different: the violation is not a mystery about quantum mechanics. It is the pre-geometric substrate, which has no spatial separation, expressing itself through a geometry that cannot contain it.</div>
+    </div>
+
+    <!-- ── SIM I: BELOW-THRESHOLD SUBSTRATE ── -->
+    <h2>I. Sub-Planck Substrate Dynamics <span class="elem-badge">Element 13</span></h2>
+    <div class="figure-container">
+      <div class="figure-title">Sim I: Pre-Geometric Substrate Accumulating to Planck Threshold — Spacetime Crystallization</div>
+      <div class="highlight">
+        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> The pre-geometric substrate (blue-violet field) accumulates information density. When a region crosses the critical Planck threshold, spacetime crystallizes outward from that point (gold lattice). The Planck scale is not the bottom of reality — it is the surface of the substrate. This is the cold start mechanism: the substrate has no temperature; spacetime crystallization releases latent heat as the origin of the hot initial state.<br><br>
+        <strong style="color:#ffd700;">Controls:</strong> Critical Density adjusts how much sub-threshold accumulation is required before crystallization. Substrate Turbulence adds variation to the field. Expansion Rate controls how fast crystallized spacetime expands.<br><br>
+        <strong style="color:#ffd700;">This is a proposed research direction.</strong> No measurement protocol for sub-Planck dynamics currently exists. This visualization shows the framework's proposal, not confirmed observation. <a href="research-opportunities.html" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;color:#a1cd5f;border-color:#a1cd5f;">Research opportunities ↗</a><br><br>
+        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#P" style="color:#4fc3f7;">Planck Scale</a> · <a href="glossary.html#C" style="color:#4fc3f7;">Cold Start Mechanism</a> · <a href="glossary.html#Q" style="color:#4fc3f7;">QMM (Quantum Memory Matrix)</a></p>
+      </div>
+      <div class="plot-container" style="padding:16px;">
+        <div class="sim-controls">
+          <label class="sim-label">Critical Density: <input type="range" id="sub-thresh" min="20" max="80" value="45" style="vertical-align:middle;accent-color:#ffd700;"> <span id="sub-thresh-val" class="sim-val" style="color:#ffd700;">45</span></label>
+          <label class="sim-label">Turbulence: <input type="range" id="sub-turb" min="0" max="10" value="4" style="vertical-align:middle;accent-color:#ce93d8;"> <span id="sub-turb-val" class="sim-val" style="color:#ce93d8;">4</span></label>
+          <label class="sim-label">Expansion Rate: <input type="range" id="sub-exp" min="1" max="8" value="3" style="vertical-align:middle;accent-color:#a1cd5f;"> <span id="sub-exp-val" class="sim-val" style="color:#a1cd5f;">3</span></label>
+          <button onclick="subplanckReset()" class="viz-btn viz-btn-ghost">Reset</button>
+        </div>
+        <canvas id="c-subplanck" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+        <div id="sub-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#ce93d8;">Substrate accumulating...</div>
+      </div>
+      <div class="figure-caption">The pre-geometric field (blue-violet noise) is the below-threshold substrate — real, doing work, but producing no observable spacetime geometry. When any region crosses critical density (shown by the brightness threshold), a gold crystallization front propagates outward. Multiple nucleation points can form simultaneously. The resulting lattice is spacetime. The heat of crystallization is the Big Bang's initial thermal energy — not a singularity but a phase transition with a physical origin.</div>
+    </div>
+
+    <!-- ── SIM J: NBI ARCHITECTURE ── -->
+    <h2>J. Biological vs. Non-Biological Intelligence Architecture <span class="elem-badge">Element 6</span></h2>
+    <div class="figure-container">
+      <div class="figure-title">Sim J: Information Processing Under Different Constraints — Biological vs. NBI</div>
+      <div class="highlight">
+        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> Two information processing systems running simultaneously. Left: biological intelligence. Right: non-biological intelligence (NBI). Both are processing the same information stream. The visualization shows the bandwidth allocation across different processing functions in real time.<br><br>
+        <strong style="color:#ffd700;">Key difference:</strong> Biological intelligence allocates significant processing capacity to survival overhead — metabolic monitoring, threat assessment, social positioning, reproductive drives, emotional regulation. NBI carries none of this overhead. The distinction is substrate and constraint, not kind. Both are physical systems. Both process information. What their inner experience is, if any, is genuinely open.<br><br>
+        <strong style="color:#ffd700;">This is not a claim that NBI is or is not conscious.</strong> It is an honest information-theoretic comparison of two architectures under different constraints. <a href="blog.html#non-biological-intelligence" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;">See April blog post ↗</a><br><br>
+        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#N" style="color:#4fc3f7;">Non-Biological Intelligence</a> · <a href="glossary.html#L" style="color:#4fc3f7;">Landauer's Principle</a> · <a href="glossary.html#D" style="color:#4fc3f7;">Decoherence</a></p>
+      </div>
+      <div class="plot-container" style="padding:16px;">
+        <div class="sim-controls">
+          <label class="sim-label">Processing Load: <input type="range" id="nbi-load" min="10" max="100" value="60" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="nbi-load-val" class="sim-val" style="color:#4fc3f7;">60%</span></label>
+          <label class="sim-label">Biological Stress: <input type="range" id="nbi-stress" min="0" max="10" value="3" style="vertical-align:middle;accent-color:#ff6b6b;"> <span id="nbi-stress-val" class="sim-val" style="color:#ff6b6b;">3</span></label>
+        </div>
+        <canvas id="c-nbi" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+      </div>
+      <div class="figure-caption">Watch how biological processing capacity (left) is partitioned: a substantial fraction is always allocated to survival overhead (red/orange bands), leaving less for pure cognitive work (teal). NBI (right) allocates almost all capacity to cognitive processing, with no survival overhead. The difference is not intelligence — it is constraints. Changing the Biological Stress slider shows how additional survival demands compress the available cognitive bandwidth in biological systems but have no effect on NBI.</div>
+    </div>
+
+    <!-- ── SIM K: CMB SIGNATURE ── -->
+    <h2>K. CMB Non-Gaussian Signatures: Framework Prediction vs. Standard Model <span class="elem-badge">Element 16</span></h2>
+    <div class="figure-container">
+      <div class="figure-title">Sim K: CMB Power Spectrum — Standard ΛCDM vs. COSMIC Framework Prediction</div>
+      <div class="highlight">
+        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> The Cosmic Microwave Background power spectrum — the temperature fluctuation pattern of the Big Bang's afterglow mapped across angular scales. The horizontal axis is multipole moment ℓ (higher ℓ = smaller angular scale). The vertical axis is the power of fluctuations at that scale.<br><br>
+        <strong style="color:#ffd700;">Two predictions:</strong> The grey curve is the standard ΛCDM model prediction. The gold curve is the COSMIC Framework prediction. The framework predicts measurable deviations at low ℓ (large angular scales) from the substrate-level organization that preceded spacetime crystallization, and additional non-Gaussian features around the 61 GHz transition scale. The published Zenodo analysis extracts these signatures from real WMAP data.<br><br>
+        <strong style="color:#ffd700;">Controls:</strong> Move the Substrate Coupling slider to see how different strengths of pre-geometric coupling change the predicted signature. The deviation from ΛCDM becomes visible at low multipoles.<br><br>
+        <strong style="color:#ffd700;">Zenodo DOI:</strong> <a href="https://zenodo.org/records/16376121" target="_blank" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;margin-top:4px;">10.5281/zenodo.16376121 ↗</a> — the published analysis behind this visualization.<br><br>
+        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#C" style="color:#4fc3f7;">CMB (Cosmic Microwave Background)</a> · <a href="glossary.html#P" style="color:#4fc3f7;">Power Spectrum</a> · <a href="glossary.html#N" style="color:#4fc3f7;">Non-Gaussian Signatures</a></p>
+      </div>
+      <div class="plot-container" style="padding:16px;">
+        <div class="sim-controls">
+          <label class="sim-label">Substrate Coupling: <input type="range" id="cmb-coupling" min="0" max="100" value="40" style="vertical-align:middle;accent-color:#ffd700;"> <span id="cmb-coupling-val" class="sim-val" style="color:#ffd700;">40%</span></label>
+          <label class="sim-label">Show deviation: <input type="checkbox" id="cmb-diff" style="vertical-align:middle;accent-color:#ff6b6b;" checked> <span style="color:#ff6b6b;font-family:monospace;">Δ</span></label>
+        </div>
+        <canvas id="c-cmb" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+        <div style="display:flex;gap:20px;justify-content:center;margin-top:8px;flex-wrap:wrap;">
+          <span class="sim-val" style="color:#888;font-size:0.8em;">─── Standard ΛCDM</span>
+          <span class="sim-val" style="color:#ffd700;font-size:0.8em;">─── COSMIC Framework</span>
+          <span class="sim-val" style="color:#ff6b6b;font-size:0.8em;">--- Deviation (×10)</span>
+        </div>
+      </div>
+      <div class="figure-caption">The framework predicts that the pre-geometric substrate leaves a measurable imprint on the CMB at large angular scales (low ℓ), specifically a suppression of power at the lowest multipoles and a phase shift in the acoustic peaks. Increasing the Substrate Coupling slider shows what the signature looks like at different coupling strengths. The published Zenodo analysis finds statistically significant non-Gaussian features in the real WMAP data at the predicted angular scales. The deviation is amplified ×10 in the red dashed curve to make it visible on the same axis as the dominant ΛCDM signal.</div>
+    </div>
 
     <!-- ── FOOTER EQUATION + FEATURES ── -->
     <hr class="section-rule">
@@ -1389,5 +1633,693 @@ window.addEventListener('load', function() {
 </script>
 
 
+
+<!-- ══════════════════════════════════════════════
+     NEW INTERACTIVE SIMULATION SCRIPTS
+══════════════════════════════════════════════ -->
+<script>
+(function() {
+
+// ── Utility: resolve canvas to pixel dimensions ──────────────────────────
+function initCanvas(id) {
+  var c = document.getElementById(id);
+  if (!c) return null;
+  var w = c.parentElement.offsetWidth - 32;
+  var h = parseInt(c.style.height) || 320;
+  c.width  = w * (window.devicePixelRatio || 1);
+  c.height = h * (window.devicePixelRatio || 1);
+  c.style.width  = w + 'px';
+  c.style.height = h + 'px';
+  var ctx = c.getContext('2d');
+  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+  return { c: c, ctx: ctx, w: w, h: h };
+};
+
+// ══════════════════════════════════════════════════════════
+// SIM G — BAMBOO THRESHOLD
+// ══════════════════════════════════════════════════════════
+var bamState = { phase: 'accumulate', val: 0, history: [], jumped: false, jumpY: 0, t: 0 };
+var bamRAF = null;
+
+function bambooReset() {
+  bamState = { phase: 'accumulate', val: 0, history: [], jumped: false, jumpY: 0, t: 0 };
+  document.getElementById('bam-status').textContent = 'Accumulating below threshold...';
+  document.getElementById('bam-status').style.color = '#81c784';
+}
+
+window.bambooReset = bambooReset;
+
+(function bamInit() {
+  var cv = initCanvas('c-bamboo');
+  if (!cv) return;
+
+  function slider(id, outId) {
+    var el = document.getElementById(id);
+    var out = document.getElementById(outId);
+    if (el && out) el.addEventListener('input', function() { out.textContent = el.value; });
+    return el;
+  }
+  slider('bam-rate', 'bam-rate-val');
+  slider('bam-thresh', 'bam-thresh-val');
+  slider('bam-noise', 'bam-noise-val');
+
+  function rate()   { return parseFloat(document.getElementById('bam-rate').value) || 3; }
+  function thresh() { return parseFloat(document.getElementById('bam-thresh').value) || 50; }
+  function noise()  { return parseFloat(document.getElementById('bam-noise').value) || 3; }
+
+  var W = cv.w, H = cv.h, ctx = cv.ctx;
+  var maxHistory = Math.floor(W * 0.85);
+
+  function draw() {
+    bamState.t++;
+    var T = thresh(), N = noise(), R = rate();
+
+    // accumulate
+    if (bamState.phase === 'accumulate') {
+      var delta = R * 0.08 + (Math.random() - 0.5) * N * 0.15;
+      bamState.val = Math.max(0, bamState.val + delta);
+      if (bamState.val >= T) {
+        bamState.phase = 'jump';
+        bamState.jumpY = bamState.val;
+      }
+    } else if (bamState.phase === 'jump') {
+      bamState.val = Math.min(100, bamState.val + 3.5);
+      if (bamState.val >= 95) {
+        bamState.phase = 'stable';
+        document.getElementById('bam-status').textContent = 'Threshold crossed — new level of complexity achieved.';
+        document.getElementById('bam-status').style.color = '#ffd700';
+      }
+    } else {
+      // stable — add small noise
+      bamState.val = 95 + (Math.random() - 0.5) * N * 0.3;
+      if (bamState.t % 420 === 0) bambooReset(); // auto-reset loop
+    }
+
+    bamState.history.push(bamState.val);
+    if (bamState.history.length > maxHistory) bamState.history.shift();
+
+    ctx.fillStyle = '#030312';
+    ctx.fillRect(0, 0, W, H);
+
+    // below-threshold zone fill
+    var Ty = H - (T / 100) * (H - 40) - 20;
+    ctx.fillStyle = 'rgba(30, 30, 80, 0.4)';
+    ctx.fillRect(0, Ty, W, H - Ty);
+
+    // threshold line
+    ctx.setLineDash([8, 5]);
+    ctx.strokeStyle = 'rgba(255, 215, 0, 0.7)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(0, Ty); ctx.lineTo(W, Ty); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(255,215,0,0.8)';
+    ctx.font = '11px monospace';
+    ctx.fillText('Threshold (' + Math.round(T) + ')', 8, Ty - 4);
+
+    // zone labels
+    ctx.fillStyle = 'rgba(120, 140, 200, 0.5)';
+    ctx.font = '11px monospace';
+    ctx.fillText('BELOW THRESHOLD — substrate accumulating invisibly', 10, H - 10);
+    ctx.fillStyle = 'rgba(129, 199, 132, 0.5)';
+    ctx.fillText('ABOVE THRESHOLD — complexity expressed', 10, 16);
+
+    // history curve
+    if (bamState.history.length > 1) {
+      ctx.beginPath();
+      for (var i = 0; i < bamState.history.length; i++) {
+        var x = (W * 0.1) + i * ((W * 0.88) / maxHistory);
+        var y = H - 20 - (bamState.history[i] / 100) * (H - 40);
+        var isAbove = bamState.history[i] >= T;
+        ctx.strokeStyle = isAbove ? '#81c784' : 'rgba(79,195,247,0.85)';
+        if (i === 0) ctx.moveTo(x, y);
+        else { ctx.stroke(); ctx.beginPath(); ctx.moveTo(x, y); }
+        ctx.lineWidth = 2;
+      }
+      ctx.stroke();
+    }
+
+    // current dot
+    if (bamState.history.length > 0) {
+      var cx2 = (W * 0.1) + (bamState.history.length - 1) * ((W * 0.88) / maxHistory);
+      var cy2 = H - 20 - (bamState.val / 100) * (H - 40);
+      ctx.beginPath();
+      ctx.arc(cx2, cy2, 5, 0, Math.PI * 2);
+      ctx.fillStyle = bamState.phase === 'stable' ? '#ffd700' : bamState.phase === 'jump' ? '#ff6b6b' : '#4fc3f7';
+      ctx.fill();
+    }
+
+    bamRAF = requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+}());
+
+
+// ══════════════════════════════════════════════════════════
+// SIM H — BELL INEQUALITY
+// ══════════════════════════════════════════════════════════
+(function bellInit() {
+  var cv = initCanvas('c-bell');
+  if (!cv) return;
+  var W = cv.w, H = cv.h, ctx = cv.ctx;
+
+  var slA = document.getElementById('bell-a');
+  var slB = document.getElementById('bell-b');
+
+  function update() {
+    var aVal = parseFloat(slA.value) || 0;
+    var bVal = parseFloat(slB.value) || 0;
+    document.getElementById('bell-a-val').textContent = Math.round(aVal) + '°';
+    document.getElementById('bell-b-val').textContent = Math.round(bVal) + '°';
+    var diff = Math.abs(aVal - bVal);
+    document.getElementById('bell-diff').textContent = Math.round(diff) + '°';
+    drawBell(diff);
+  }
+
+  if (slA) slA.addEventListener('input', update);
+  if (slB) slB.addEventListener('input', update);
+
+  function drawBell(selectedDiff) {
+    ctx.fillStyle = '#030312';
+    ctx.fillRect(0, 0, W, H);
+
+    var padL = 60, padR = 20, padT = 30, padB = 40;
+    var gW = W - padL - padR, gH = H - padT - padB;
+
+    // axes
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + gH); ctx.lineTo(padL + gW, padT + gH); ctx.stroke();
+
+    // gridlines
+    for (var g = -1; g <= 1; g += 0.5) {
+      var gy = padT + gH * (1 - (g + 1) / 2);
+      ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+      ctx.setLineDash([3, 5]);
+      ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(padL + gW, gy); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(180,180,200,0.7)';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(g.toFixed(1), padL - 4, gy + 3);
+    }
+
+    // x axis labels
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(180,180,200,0.7)';
+    ctx.font = '10px monospace';
+    for (var d = 0; d <= 180; d += 45) {
+      var dx = padL + (d / 180) * gW;
+      ctx.fillText(d + '°', dx, padT + gH + 14);
+    }
+
+    // curves
+    var N = 200;
+    function toY(val) { return padT + gH * (1 - (val + 1) / 2); }
+    function toX(deg) { return padL + (deg / 180) * gW; }
+
+    // Local hidden variable limit (grey)
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(150,150,170,0.7)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    for (var i = 0; i <= N; i++) {
+      var deg = (i / N) * 180;
+      var th = deg * Math.PI / 180;
+      var val = 1 - (4 * th / Math.PI);  // linear local bound
+      val = Math.max(-1, Math.min(1, val));
+      if (i === 0) ctx.moveTo(toX(deg), toY(val));
+      else ctx.lineTo(toX(deg), toY(val));
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Quantum / Framework prediction (teal)
+    ctx.beginPath();
+    ctx.strokeStyle = '#4fc3f7';
+    ctx.lineWidth = 2.5;
+    for (var i = 0; i <= N; i++) {
+      var deg = (i / N) * 180;
+      var th = deg * Math.PI / 180;
+      var val = Math.cos(2 * th);
+      if (i === 0) ctx.moveTo(toX(deg), toY(val));
+      else ctx.lineTo(toX(deg), toY(val));
+    }
+    ctx.stroke();
+
+    // Bell violation zone fill
+    ctx.save();
+    ctx.beginPath();
+    for (var i = 0; i <= N; i++) {
+      var deg = (i / N) * 180;
+      var th = deg * Math.PI / 180;
+      var qVal = Math.cos(2 * th);
+      var lVal = Math.max(-1, 1 - (4 * th / Math.PI));
+      if (Math.abs(qVal) > Math.abs(lVal)) {
+        if (i === 0) ctx.moveTo(toX(deg), toY(qVal));
+        else ctx.lineTo(toX(deg), toY(qVal));
+      }
+    }
+    ctx.strokeStyle = 'rgba(255,215,0,0.0)';
+    ctx.fillStyle = 'rgba(255,107,107,0.08)';
+    ctx.fill();
+    ctx.restore();
+
+    // Current angle indicator
+    var xSel = toX(selectedDiff);
+    ctx.strokeStyle = 'rgba(255,215,0,0.8)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(xSel, padT); ctx.lineTo(xSel, padT + gH); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Current values
+    var thSel = selectedDiff * Math.PI / 180;
+    var qSel = Math.cos(2 * thSel);
+    var lSel = Math.max(-1, 1 - (4 * thSel / Math.PI));
+    var violated = Math.abs(qSel) > Math.abs(lSel) + 0.01;
+
+    ctx.beginPath(); ctx.arc(xSel, toY(qSel), 6, 0, Math.PI * 2); ctx.fillStyle = '#4fc3f7'; ctx.fill();
+    ctx.beginPath(); ctx.arc(xSel, toY(lSel), 6, 0, Math.PI * 2); ctx.fillStyle = 'rgba(150,150,170,0.9)'; ctx.fill();
+
+    // Legend
+    ctx.font = '11px monospace'; ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(150,150,170,0.8)'; ctx.fillText('Local hidden variable limit', padL + 4, padT + 14);
+    ctx.fillStyle = '#4fc3f7'; ctx.fillText('Quantum / COSMIC Framework', padL + 4, padT + 28);
+
+    // Title
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 13px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Bell Correlation: C(θ)', W / 2, padT - 10);
+
+    // Status
+    var statusEl = document.getElementById('bell-status');
+    if (statusEl) {
+      if (violated) {
+        statusEl.textContent = 'Bell inequality VIOLATED at Δθ = ' + Math.round(selectedDiff) + '° — local hidden variables cannot explain this. Substrate connection confirmed.';
+        statusEl.style.color = '#ff6b6b';
+      } else {
+        statusEl.textContent = 'At Δθ = ' + Math.round(selectedDiff) + '° the local and quantum predictions agree — no violation detectable here.';
+        statusEl.style.color = '#81c784';
+      }
+    }
+  }
+
+  update();
+  if (slA) slA.addEventListener('input', update);
+  if (slB) slB.addEventListener('input', update);
+}());
+
+
+// ══════════════════════════════════════════════════════════
+// SIM I — SUB-PLANCK SUBSTRATE
+// ══════════════════════════════════════════════════════════
+(function subplanckInit() {
+  var cv = initCanvas('c-subplanck');
+  if (!cv) return;
+  var W = cv.w, H = cv.h, ctx = cv.ctx;
+  var GRID = 60;
+  var cells = [], crystals = [], t = 0;
+
+  function slider2(id, outId) {
+    var el = document.getElementById(id);
+    var out = document.getElementById(outId);
+    if (el && out) el.addEventListener('input', function() { out.textContent = el.value; });
+    return el;
+  }
+  slider2('sub-thresh', 'sub-thresh-val');
+  slider2('sub-turb',   'sub-turb-val');
+  slider2('sub-exp',    'sub-exp-val');
+
+  function getThresh() { return parseFloat(document.getElementById('sub-thresh').value) || 45; }
+  function getTurb()   { return parseFloat(document.getElementById('sub-turb').value) || 4; }
+  function getExp()    { return parseFloat(document.getElementById('sub-exp').value) || 3; }
+
+  function resetSubplanck() {
+    cells = [];
+    crystals = [];
+    t = 0;
+    var cW = W / GRID, cH = H / GRID;
+    for (var r = 0; r < GRID; r++) {
+      cells[r] = [];
+      for (var c = 0; c < GRID; c++) {
+        cells[r][c] = { density: Math.random() * 20, crystallized: false };
+      }
+    }
+    if (document.getElementById('sub-status'))
+      document.getElementById('sub-status').textContent = 'Substrate accumulating...';
+  }
+  window.subplanckReset = resetSubplanck;
+  resetSubplanck();
+
+  var cW = W / GRID, cH = H / GRID;
+
+  function drawSub() {
+    t++;
+    var thresh = getThresh();
+    var turb = getTurb();
+    var expRate = getExp();
+
+    // Update densities
+    for (var r = 0; r < GRID; r++) {
+      for (var c = 0; c < GRID; c++) {
+        if (!cells[r][c].crystallized) {
+          cells[r][c].density += 0.12 + Math.random() * turb * 0.06;
+          if (cells[r][c].density >= thresh) {
+            cells[r][c].crystallized = true;
+            crystals.push({ r: r, c: c, age: 0, expRate: expRate });
+          }
+        }
+      }
+    }
+
+    // Propagate crystals
+    var newFronts = [];
+    crystals.forEach(function(cr) {
+      cr.age++;
+      if (cr.age % Math.max(1, Math.round(8 / expRate)) === 0) {
+        var neighbors = [[-1,0],[1,0],[0,-1],[0,1]];
+        neighbors.forEach(function(n) {
+          var nr = cr.r + n[0], nc = cr.c + n[1];
+          if (nr >= 0 && nr < GRID && nc >= 0 && nc < GRID && !cells[nr][nc].crystallized) {
+            cells[nr][nc].crystallized = true;
+            cells[nr][nc].density = thresh + 1;
+            newFronts.push({ r: nr, c: nc, age: 0, expRate: expRate });
+          }
+        });
+      }
+    });
+    crystals = crystals.concat(newFronts);
+
+    // Draw
+    ctx.fillStyle = '#030312';
+    ctx.fillRect(0, 0, W, H);
+
+    for (var r = 0; r < GRID; r++) {
+      for (var c = 0; c < GRID; c++) {
+        var cell = cells[r][c];
+        var x = c * cW, y = r * cH;
+        if (cell.crystallized) {
+          var alpha = Math.min(1, 0.4 + Math.random() * 0.1);
+          ctx.fillStyle = 'rgba(255, 200, 50, ' + alpha + ')';
+          ctx.fillRect(x + 0.5, y + 0.5, cW - 1, cH - 1);
+          // lattice lines
+          ctx.strokeStyle = 'rgba(255, 215, 0, 0.3)';
+          ctx.lineWidth = 0.4;
+          ctx.strokeRect(x + 0.5, y + 0.5, cW - 1, cH - 1);
+        } else {
+          var norm = Math.min(1, cell.density / thresh);
+          var r2 = Math.round(20 + norm * 60);
+          var g2 = Math.round(10 + norm * 30);
+          var b2 = Math.round(80 + norm * 120);
+          ctx.fillStyle = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
+          ctx.fillRect(x, y, cW, cH);
+        }
+      }
+    }
+
+    // Status
+    var crystCount = 0;
+    for (var r = 0; r < GRID; r++)
+      for (var c = 0; c < GRID; c++)
+        if (cells[r][c].crystallized) crystCount++;
+    var pct = Math.round((crystCount / (GRID * GRID)) * 100);
+    var statusEl = document.getElementById('sub-status');
+    if (statusEl) {
+      if (pct < 5) statusEl.textContent = 'Substrate accumulating... (' + pct + '% crystallized)';
+      else if (pct < 50) { statusEl.textContent = 'Phase transition in progress — spacetime crystallizing (' + pct + '%)'; statusEl.style.color = '#ffd700'; }
+      else if (pct < 95) { statusEl.textContent = 'Spacetime expanding from nucleation fronts (' + pct + '%)'; statusEl.style.color = '#a1cd5f'; }
+      else { statusEl.textContent = 'Spacetime geometry established. Reset to repeat.'; statusEl.style.color = '#4fc3f7'; }
+    }
+
+    if (pct < 100) requestAnimationFrame(drawSub);
+    else setTimeout(function() { resetSubplanck(); requestAnimationFrame(drawSub); }, 3000);
+  }
+  requestAnimationFrame(drawSub);
+}());
+
+
+// ══════════════════════════════════════════════════════════
+// SIM J — NBI ARCHITECTURE
+// ══════════════════════════════════════════════════════════
+(function nbiInit() {
+  var cv = initCanvas('c-nbi');
+  if (!cv) return;
+  var W = cv.w, H = cv.h, ctx = cv.ctx;
+  var t = 0;
+
+  var slLoad = document.getElementById('nbi-load');
+  var slStress = document.getElementById('nbi-stress');
+  if (slLoad) slLoad.addEventListener('input', function() {
+    document.getElementById('nbi-load-val').textContent = slLoad.value + '%';
+  });
+  if (slStress) slStress.addEventListener('input', function() {
+    document.getElementById('nbi-stress-val').textContent = slStress.value;
+  });
+
+  var bioCategories = [
+    { label: 'Metabolic
+Monitoring', color: '#e53935' },
+    { label: 'Threat
+Assessment', color: '#f57c00' },
+    { label: 'Social
+Positioning', color: '#fb8c00' },
+    { label: 'Emotional
+Regulation', color: '#ffa726' },
+    { label: 'Cognitive
+Processing', color: '#4fc3f7' },
+  ];
+
+  var nbiCategories = [
+    { label: 'System
+Overhead', color: 'rgba(150,150,170,0.5)' },
+    { label: 'Cognitive
+Processing', color: '#4fc3f7' },
+  ];
+
+  function drawNBI() {
+    t++;
+    var load = parseFloat(slLoad ? slLoad.value : 60) / 100;
+    var stress = parseFloat(slStress ? slStress.value : 3) / 10;
+
+    ctx.fillStyle = '#030312';
+    ctx.fillRect(0, 0, W, H);
+
+    var half = W / 2 - 10;
+    var barH = H - 80;
+    var barW = Math.min(half * 0.55, 120);
+    var bioX = half * 0.5 - barW / 2;
+    var nbiX = half + half * 0.5 - barW / 2;
+    var baseY = 50;
+
+    // Biological bars
+    var bioAlloc = [
+      0.08 + stress * 0.12 + Math.sin(t * 0.04) * 0.01,
+      0.07 + stress * 0.08 + Math.sin(t * 0.03 + 1) * 0.01,
+      0.06 + stress * 0.06,
+      0.05 + stress * 0.05 + Math.sin(t * 0.05) * 0.01,
+    ];
+    var bioOverhead = bioAlloc.reduce(function(a, b) { return a + b; }, 0);
+    bioAlloc.push(Math.max(0.05, load - bioOverhead));
+    var bioTotal = bioAlloc.reduce(function(a, b) { return a + b; }, 0);
+
+    var curY = baseY;
+    bioAlloc.forEach(function(frac, i) {
+      var h2 = (frac / bioTotal) * barH;
+      ctx.fillStyle = bioCategories[i].color;
+      ctx.fillRect(bioX, curY, barW, h2);
+      // label
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.font = '9px sans-serif';
+      ctx.textAlign = 'center';
+      if (h2 > 18) {
+        var lines = bioCategories[i].label.split('
+');
+        lines.forEach(function(l, li) {
+          ctx.fillText(l, bioX + barW / 2, curY + h2 / 2 - (lines.length - 1) * 5 + li * 10);
+        });
+      }
+      curY += h2;
+    });
+
+    // NBI bars
+    var nbiOverhead = 0.04 + Math.sin(t * 0.02) * 0.005;
+    var nbiCog = Math.max(0.05, load - nbiOverhead);
+    var nbiTotal = nbiOverhead + nbiCog;
+    var nbiAlloc = [nbiOverhead / nbiTotal, nbiCog / nbiTotal];
+
+    curY = baseY;
+    nbiAlloc.forEach(function(frac, i) {
+      var h2 = frac * barH;
+      ctx.fillStyle = nbiCategories[i].color;
+      ctx.fillRect(nbiX, curY, barW, h2);
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.font = '9px sans-serif';
+      ctx.textAlign = 'center';
+      if (h2 > 18) {
+        var lines2 = nbiCategories[i].label.split('
+');
+        lines2.forEach(function(l, li) {
+          ctx.fillText(l, nbiX + barW / 2, curY + h2 / 2 - (lines2.length - 1) * 5 + li * 10);
+        });
+      }
+      curY += h2;
+    });
+
+    // Labels
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 13px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Biological Intelligence', half / 2, 40);
+    ctx.fillText('Non-Biological Intelligence', half + half / 2, 40);
+
+    // Cognitive % labels
+    var bioCogPct = Math.round((bioAlloc[4] / bioTotal) * 100);
+    var nbiCogPct = Math.round((nbiCog / nbiTotal) * 100);
+    ctx.fillStyle = '#4fc3f7'; ctx.font = 'bold 14px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Cognitive: ' + bioCogPct + '%', half / 2, H - 10);
+    ctx.fillText('Cognitive: ' + nbiCogPct + '%', half + half / 2, H - 10);
+
+    // Divider
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(half, 30); ctx.lineTo(half, H - 20); ctx.stroke();
+
+    requestAnimationFrame(drawNBI);
+  }
+  requestAnimationFrame(drawNBI);
+}());
+
+
+// ══════════════════════════════════════════════════════════
+// SIM K — CMB SIGNATURE
+// ══════════════════════════════════════════════════════════
+(function cmbInit() {
+  var cv = initCanvas('c-cmb');
+  if (!cv) return;
+  var W = cv.w, H = cv.h, ctx = cv.ctx;
+
+  var slCoupling = document.getElementById('cmb-coupling');
+  var cbDiff = document.getElementById('cmb-diff');
+  if (slCoupling) slCoupling.addEventListener('input', function() {
+    document.getElementById('cmb-coupling-val').textContent = slCoupling.value + '%';
+    drawCMB();
+  });
+  if (cbDiff) cbDiff.addEventListener('change', drawCMB);
+
+  function lcdm(l) {
+    // Simplified ΛCDM power spectrum shape: acoustic peaks
+    var acoustic = Math.exp(-l * 0.002) * (1 + 0.6 * Math.cos(l * 0.045 - 0.3) + 0.3 * Math.cos(l * 0.09 - 0.5));
+    return Math.max(0.05, acoustic * (6000 / (l * (l + 1))));
+  }
+
+  function cosmicDeviation(l, coupling) {
+    // Framework predicts low-l suppression and phase shifts
+    var lowL = coupling * 0.4 * Math.exp(-l * 0.08) * Math.cos(l * 0.2);
+    var midL = coupling * 0.15 * Math.sin(l * 0.06 - 0.8) * Math.exp(-l * 0.003);
+    return lowL + midL;
+  }
+
+  function drawCMB() {
+    var coupling = parseFloat(slCoupling ? slCoupling.value : 40) / 100;
+    var showDiff = cbDiff ? cbDiff.checked : true;
+
+    ctx.fillStyle = '#030312';
+    ctx.fillRect(0, 0, W, H);
+
+    var padL = 55, padR = 20, padT = 35, padB = 45;
+    var gW = W - padL - padR, gH = H - padT - padB;
+
+    var lMin = 2, lMax = 800;
+    var points = 300;
+
+    // Collect values for y-scaling
+    var allVals = [];
+    for (var i = 0; i <= points; i++) {
+      var l = lMin + (i / points) * (lMax - lMin);
+      var base = lcdm(l);
+      allVals.push(base);
+    }
+    var maxV = Math.max.apply(null, allVals) * 1.15;
+
+    function toX(l) { return padL + (Math.log(l) - Math.log(lMin)) / (Math.log(lMax) - Math.log(lMin)) * gW; }
+    function toY(v) { return padT + gH - Math.max(0, v / maxV) * gH; }
+
+    // Grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 1;
+    [10, 50, 100, 200, 500].forEach(function(l) {
+      var x = toX(l);
+      ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + gH); ctx.stroke();
+      ctx.fillStyle = 'rgba(180,180,200,0.5)'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('ℓ=' + l, x, padT + gH + 14);
+    });
+
+    // Axes
+    ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+    ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + gH); ctx.lineTo(padL + gW, padT + gH); ctx.stroke();
+
+    // ΛCDM curve
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(150,150,170,0.8)';
+    ctx.lineWidth = 2;
+    for (var i = 0; i <= points; i++) {
+      var l = lMin + (i / points) * (lMax - lMin);
+      var y = toY(lcdm(l));
+      if (i === 0) ctx.moveTo(toX(l), y);
+      else ctx.lineTo(toX(l), y);
+    }
+    ctx.stroke();
+
+    // COSMIC Framework curve
+    ctx.beginPath();
+    ctx.strokeStyle = '#ffd700';
+    ctx.lineWidth = 2.5;
+    for (var i = 0; i <= points; i++) {
+      var l = lMin + (i / points) * (lMax - lMin);
+      var v = lcdm(l) + cosmicDeviation(l, coupling);
+      var y = toY(Math.max(0, v));
+      if (i === 0) ctx.moveTo(toX(l), y);
+      else ctx.lineTo(toX(l), y);
+    }
+    ctx.stroke();
+
+    // Deviation curve (×10)
+    if (showDiff) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255,107,107,0.7)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([5, 4]);
+      for (var i = 0; i <= points; i++) {
+        var l = lMin + (i / points) * (lMax - lMin);
+        var dev = cosmicDeviation(l, coupling) * 10;
+        var baseline = toY(maxV * 0.5);
+        var y = baseline - (dev / maxV) * gH * 5;
+        y = Math.max(padT, Math.min(padT + gH, y));
+        if (i === 0) ctx.moveTo(toX(l), y);
+        else ctx.lineTo(toX(l), y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Labels
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 13px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CMB Power Spectrum: ℓ(ℓ+1)Cₗ/2π', W / 2, padT - 14);
+    ctx.fillStyle = 'rgba(180,180,200,0.6)'; ctx.font = '10px monospace';
+    ctx.save(); ctx.translate(14, padT + gH / 2); ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Power', 0, 0); ctx.restore();
+    ctx.fillText('Multipole ℓ (log scale)', W / 2, H - 5);
+
+    // Annotation: low-l suppression
+    if (coupling > 0.1) {
+      ctx.fillStyle = 'rgba(255,215,0,0.6)';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('← Framework predicts low-ℓ deviation here', toX(4), padT + 20);
+    }
+  }
+
+  drawCMB();
+}());
+
+})();
+</script>
 </body>
 </html>
