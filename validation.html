@@ -1066,7 +1066,11 @@
       <h2 style="color:#2c3e50; font-size:1.6rem;">Predictions Documented Before Confirmation</h2>
       <p style="color:#666; margin-top:.5rem;">Each bar shows the gap between documentation date and independent experimental confirmation.</p>
     </div>
-    <div id="pred-timeline" data-aos="fade-up" style="width:100%; max-width:800px; margin:0 auto;">
+    <div id="pred-timeline" data-aos="fade-up" style="width:100%; max-width:800px; margin:0 auto; position:relative;">
+      <div id="timeline-loader" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f8f9fa;border-radius:8px;z-index:10;">
+        <div style="width:40px;height:40px;border:3px solid rgba(44,62,80,0.1);border-top-color:#005ba5;border-radius:50%;animation:loaderSpin 0.9s linear infinite;margin-bottom:10px;"></div>
+        <div style="font-size:0.75rem;color:#999;letter-spacing:1px;animation:loaderPulse 1.8s ease-in-out infinite;">LOADING TIMELINE</div>
+      </div>
       <canvas id="timeline-canvas" style="width:100%; height:320px; display:block; border-radius:8px; background:#fff;"></canvas>
     </div>
     <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:1rem;">
@@ -1077,12 +1081,16 @@
 
 <style>
 #pred-timeline { position: relative; }
+@keyframes loaderSpin { to { transform: rotate(360deg); } }
+@keyframes loaderPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 </style>
 
 <script>
 (function() {
   var canvas = document.getElementById('timeline-canvas');
+  var loader = document.getElementById('timeline-loader');
   if (!canvas) return;
+  function hideLoader() { if (loader) loader.style.display = 'none'; }
 
   var predictions = [
     {
@@ -1117,8 +1125,11 @@
   var W_CSS, H_CSS;
 
   function resize() {
-    var p = canvas.parentElement;
-    W_CSS = (p && p.offsetWidth > 100) ? p.offsetWidth : Math.min(window.innerWidth - 40, 800);
+    // Walk up to the section container for reliable width
+    var p = canvas.parentElement && canvas.parentElement.parentElement;
+    var w = p ? p.offsetWidth : 0;
+    if (w < 100) w = Math.min(window.innerWidth - 48, 800);
+    W_CSS = w;
     H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
     canvas.width  = W_CSS * DPR;
     canvas.height = H_CSS * DPR;
@@ -1126,7 +1137,6 @@
     canvas.style.height = H_CSS + 'px';
   }
 
-  resize();
   window.addEventListener('resize', function() { resize(); draw(1); });
 
   var progress = 0;
@@ -1277,34 +1287,31 @@
     if (prog < 1) requestAnimationFrame(animate);
   }
 
-  // Draw immediately (static) then animate when scrolled into view
-  draw(0.01); // render a minimal frame so canvas is never blank
-
+  // Use IntersectionObserver for reliable init when canvas enters viewport
   var started = false;
-  function checkVisible() {
+  function startAnim() {
     if (started) return;
-    var rect = canvas.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 200) { // generous threshold
-      started = true;
-      startTime = null;
-      requestAnimationFrame(animate);
-    }
+    started = true;
+    resize();
+    hideLoader();
+    startTime = null;
+    requestAnimationFrame(animate);
   }
-  window.addEventListener('scroll', checkVisible, { passive: true });
 
-  // Also trigger on load and after a short delay
-  window.addEventListener('load', function() {
-    resize();
-    draw(0.01);
-    checkVisible();
-    setTimeout(function() { if (!started) { started = true; startTime = null; requestAnimationFrame(animate); } }, 600);
-  });
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        obs.disconnect();
+        requestAnimationFrame(function() { requestAnimationFrame(startAnim); });
+      }
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+  } else {
+    setTimeout(startAnim, 400);
+  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    resize();
-    draw(0.01);
-    setTimeout(checkVisible, 100);
-  });
+  // Safety net: start after 2s regardless
+  setTimeout(function() { if (!started) startAnim(); }, 2000);
 })();
 </script>
 

@@ -214,6 +214,34 @@
       color: #2c3e50;
     }
 
+    /* ── Canvas loader overlay ── */
+    .canvas-wrap { position: relative; display: block; }
+    .canvas-loader {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #030312; border-radius: 6px;
+      z-index: 10; pointer-events: none;
+    }
+    .canvas-loader.hidden { display: none; }
+    .loader-ring {
+      width: 48px; height: 48px;
+      border: 3px solid rgba(255,255,255,0.08);
+      border-top-color: #4fc3f7;
+      border-radius: 50%;
+      animation: loaderSpin 0.9s linear infinite;
+      margin-bottom: 12px;
+    }
+    .loader-text {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1px;
+      animation: loaderPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes loaderSpin { to { transform: rotate(360deg); } }
+    @keyframes loaderPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
     /* Sim controls row */
     .sim-controls {
       display: flex;
@@ -530,8 +558,14 @@
           <label class="sim-label">Noise: <input type="range" id="bam-noise" min="0" max="10" value="3" style="vertical-align:middle;accent-color:#ff6b6b;"> <span id="bam-noise-val" class="sim-val" style="color:#ff6b6b;">3</span></label>
           <button onclick="bambooReset()" class="viz-btn viz-btn-ghost">Reset</button>
         </div>
-        <canvas id="c-bamboo" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
-        <div id="bam-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#81c784;">Accumulating below threshold...</div>
+        <div class="canvas-wrap" style="position:relative;">
+          <div class="canvas-loader" id="c-bamboo-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-text">INITIALIZING</div>
+          </div>
+          <canvas id="c-bamboo" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
+        </div>
+        <div id="bam-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#4fc3f7;">Initializing simulation...</div>
       </div>
       <div class="figure-caption">The gray region is below the detection threshold. the substrate is organizing but nothing is visible. The moment the gold dashed threshold line is crossed, the system jumps to a new level (green). The jump is not caused by the final accumulation step alone; it is the consequence of all the invisible preparation. The Cambrian, the early universe, the Lenski populations, the cold start: all the same curve.</div>
     </div>
@@ -551,8 +585,14 @@
           <label class="sim-label">Detector B angle: <input type="range" id="bell-b" min="0" max="180" value="45" style="vertical-align:middle;accent-color:#ffd700;"> <span id="bell-b-val" class="sim-val" style="color:#ffd700;">45°</span></label>
           <div style="color:#b0c4de;font-size:0.82em;"><span style="color:#b0c4de;font-size:0.85em;">Angle difference: <span id="bell-diff" class="sim-val" style="color:#ff6b6b;">45°</span></span></div>
         </div>
-        <canvas id="c-bell" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
-        <div id="bell-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#4fc3f7;"></div>
+        <div class="canvas-wrap" style="position:relative;">
+          <div class="canvas-loader" id="c-bell-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-text">INITIALIZING</div>
+          </div>
+          <canvas id="c-bell" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
+        </div>
+        <div id="bell-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#4fc3f7;">Adjust the angle sliders to explore Bell inequality violations.</div>
       </div>
       <div class="figure-caption">Move the angle sliders and watch the correlation curves. The gray band shows the maximum correlation allowed by any local hidden variable theory (Bell's limit: |C| ≤ cos(θ)). The teal quantum curve exceeds this limit between ~25° and ~65°. The gold framework curve is identical numerically but means something different: the violation is not a mystery about quantum mechanics. It is the pre-geometric substrate, which has no spatial separation, expressing itself through a geometry that cannot contain it.</div>
     </div>
@@ -574,8 +614,14 @@
           <label class="sim-label">Expansion Rate: <input type="range" id="sub-exp" min="1" max="8" value="3" style="vertical-align:middle;accent-color:#a1cd5f;"> <span id="sub-exp-val" class="sim-val" style="color:#a1cd5f;">3</span></label>
           <button onclick="subplanckReset()" class="viz-btn viz-btn-ghost">Reset</button>
         </div>
-        <canvas id="c-subplanck" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
-        <div id="sub-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#ce93d8;">Substrate accumulating...</div>
+        <div class="canvas-wrap" style="position:relative;">
+          <div class="canvas-loader" id="c-subplanck-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-text">INITIALIZING</div>
+          </div>
+          <canvas id="c-subplanck" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+        </div>
+        <div id="sub-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#ce93d8;">Initializing substrate simulation...</div>
       </div>
       <div class="figure-caption">The pre-geometric field (blue-violet noise) is the below-threshold substrate. real, doing work, but producing no observable spacetime geometry. When any region crosses critical density (shown by the brightness threshold), a gold crystallization front propagates outward. Multiple nucleation points can form simultaneously. The resulting lattice is spacetime. The heat of crystallization is the Big Bang's initial thermal energy. not a singularity but a phase transition with a physical origin.</div>
     </div>
@@ -595,7 +641,13 @@
           <label class="sim-label">Processing Load: <input type="range" id="nbi-load" min="10" max="100" value="60" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="nbi-load-val" class="sim-val" style="color:#4fc3f7;">60%</span></label>
           <label class="sim-label">Biological Stress: <input type="range" id="nbi-stress" min="0" max="10" value="3" style="vertical-align:middle;accent-color:#ff6b6b;"> <span id="nbi-stress-val" class="sim-val" style="color:#ff6b6b;">3</span></label>
         </div>
-        <canvas id="c-nbi" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+        <div class="canvas-wrap" style="position:relative;">
+          <div class="canvas-loader" id="c-nbi-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-text">INITIALIZING</div>
+          </div>
+          <canvas id="c-nbi" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+        </div>
       </div>
       <div class="figure-caption">Watch how biological processing capacity (left) is partitioned: a substantial fraction is always allocated to survival overhead (red/orange bands), leaving less for pure cognitive work (teal). NBI (right) allocates almost all capacity to cognitive processing, with no survival overhead. The difference is not intelligence. it is constraints. Changing the Biological Stress slider shows how additional survival demands compress the available cognitive bandwidth in biological systems but have no effect on NBI.</div>
     </div>
@@ -616,7 +668,13 @@
           <label class="sim-label">Substrate Coupling: <input type="range" id="cmb-coupling" min="0" max="100" value="40" style="vertical-align:middle;accent-color:#ffd700;"> <span id="cmb-coupling-val" class="sim-val" style="color:#ffd700;">40%</span></label>
           <label class="sim-label">Show deviation: <input type="checkbox" id="cmb-diff" style="vertical-align:middle;accent-color:#ff6b6b;" checked> <span style="color:#ff6b6b;font-family:monospace;">Δ</span></label>
         </div>
-        <canvas id="c-cmb" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+        <div class="canvas-wrap" style="position:relative;">
+          <div class="canvas-loader" id="c-cmb-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-text">INITIALIZING</div>
+          </div>
+          <canvas id="c-cmb" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
+        </div>
         <div style="display:flex;gap:20px;justify-content:center;margin-top:8px;flex-wrap:wrap;">
           <span class="sim-val" style="color:#888;font-size:0.8em;">─── Standard ΛCDM</span>
           <span class="sim-val" style="color:#ffd700;font-size:0.8em;">─── COSMIC Framework</span>
@@ -698,7 +756,6 @@
   if(!h||!m)return;
   h.addEventListener('click',function(){this.classList.toggle('active');m.classList.toggle('active');});
   m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{h.classList.remove('active');m.classList.remove('active');}));
-}); // end load listener
 })();
 </script>
 
@@ -1640,24 +1697,48 @@ window.addEventListener('load', function() {
 ══════════════════════════════════════════════ -->
 <script>
 (function() {
-window.addEventListener('load', function() {
 
-// ── Utility: resolve canvas to pixel dimensions ──────────────────────────
-function initCanvas(id) {
+// ── Hide loader for a canvas ──────────────────────────────────────────────
+function hideLoader(id) {
+  var el = document.getElementById(id + '-loader');
+  if (el) el.classList.add('hidden');
+}
+
+// ── Reliable canvas sizing: waits until offsetWidth > 0 ──────────────────
+function initCanvas(id, callback) {
   var c = document.getElementById(id);
-  if (!c) return null;
-  var parent = c.parentElement;
-  var w = (parent ? parent.offsetWidth : 0) - 32;
-  if (w < 100) w = (window.innerWidth || 600) - 64; // fallback if layout not complete
-  var h = parseInt(c.style.height) || 320;
-  c.width  = w * (window.devicePixelRatio || 1);
-  c.height = h * (window.devicePixelRatio || 1);
-  c.style.width  = w + 'px';
-  c.style.height = h + 'px';
-  var ctx = c.getContext('2d');
-  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
-  return { c: c, ctx: ctx, w: w, h: h };
-};
+  if (!c) return;
+  function tryInit() {
+    var parent = c.parentElement && c.parentElement.parentElement; // .canvas-wrap -> .plot-container
+    var w = parent ? parent.offsetWidth - 32 : 0;
+    if (w < 100) w = (window.innerWidth || 700) - 80;
+    var h = parseInt(c.style.height) || 320;
+    c.width  = w * (window.devicePixelRatio || 1);
+    c.height = h * (window.devicePixelRatio || 1);
+    c.style.width  = w + 'px';
+    c.style.height = h + 'px';
+    var ctx = c.getContext('2d');
+    ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+    hideLoader(id);
+    callback({ c: c, ctx: ctx, w: w, h: h });
+  }
+  // Use IntersectionObserver so we init exactly when visible
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          // One rAF delay ensures CSS layout is applied
+          requestAnimationFrame(function() { requestAnimationFrame(tryInit); });
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(c);
+  } else {
+    // Fallback for older browsers
+    setTimeout(tryInit, 500);
+  }
+}
 
 // ══════════════════════════════════════════════════════════
 // SIM G — BAMBOO THRESHOLD
@@ -1667,15 +1748,14 @@ var bamRAF = null;
 
 function bambooReset() {
   bamState = { phase: 'accumulate', val: 0, history: [], jumped: false, jumpY: 0, t: 0 };
-  document.getElementById('bam-status').textContent = 'Accumulating below threshold...';
-  document.getElementById('bam-status').style.color = '#81c784';
+  var s = document.getElementById('bam-status');
+  if (s) { s.textContent = 'Accumulating below threshold...'; s.style.color = '#81c784'; }
 }
 
 window.bambooReset = bambooReset;
 
 (function bamInit() {
-  var cv = initCanvas('c-bamboo');
-  if (!cv) return;
+  initCanvas('c-bamboo', function(cv) {
 
   function slider(id, outId) {
     var el = document.getElementById(id);
@@ -1775,6 +1855,7 @@ window.bambooReset = bambooReset;
     bamRAF = requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
+  }); // end initCanvas callback
 }());
 
 
@@ -1782,8 +1863,7 @@ window.bambooReset = bambooReset;
 // SIM H — BELL INEQUALITY
 // ══════════════════════════════════════════════════════════
 (function bellInit() {
-  var cv = initCanvas('c-bell');
-  if (!cv) return;
+  initCanvas('c-bell', function(cv) {
   var W = cv.w, H = cv.h, ctx = cv.ctx;
 
   var slA = document.getElementById('bell-a');
@@ -1930,6 +2010,7 @@ window.bambooReset = bambooReset;
   update();
   if (slA) slA.addEventListener('input', update);
   if (slB) slB.addEventListener('input', update);
+  }); // end initCanvas callback
 }());
 
 
@@ -1937,8 +2018,7 @@ window.bambooReset = bambooReset;
 // SIM I — SUB-PLANCK SUBSTRATE
 // ══════════════════════════════════════════════════════════
 (function subplanckInit() {
-  var cv = initCanvas('c-subplanck');
-  if (!cv) return;
+  initCanvas('c-subplanck', function(cv) {
   var W = cv.w, H = cv.h, ctx = cv.ctx;
   var GRID = 60;
   var cells = [], crystals = [], t = 0;
@@ -2058,6 +2138,7 @@ window.bambooReset = bambooReset;
     else setTimeout(function() { resetSubplanck(); requestAnimationFrame(drawSub); }, 3000);
   }
   requestAnimationFrame(drawSub);
+  }); // end initCanvas callback
 }());
 
 
@@ -2065,8 +2146,7 @@ window.bambooReset = bambooReset;
 // SIM J — NBI ARCHITECTURE
 // ══════════════════════════════════════════════════════════
 (function nbiInit() {
-  var cv = initCanvas('c-nbi');
-  if (!cv) return;
+  initCanvas('c-nbi', function(cv) {
   var W = cv.w, H = cv.h, ctx = cv.ctx;
   var t = 0;
 
@@ -2188,6 +2268,7 @@ Processing', color: '#4fc3f7' },
     requestAnimationFrame(drawNBI);
   }
   requestAnimationFrame(drawNBI);
+  }); // end initCanvas callback
 }());
 
 
@@ -2195,8 +2276,7 @@ Processing', color: '#4fc3f7' },
 // SIM K — CMB SIGNATURE
 // ══════════════════════════════════════════════════════════
 (function cmbInit() {
-  var cv = initCanvas('c-cmb');
-  if (!cv) return;
+  initCanvas('c-cmb', function(cv) {
   var W = cv.w, H = cv.h, ctx = cv.ctx;
 
   var slCoupling = document.getElementById('cmb-coupling');
@@ -2321,6 +2401,7 @@ Processing', color: '#4fc3f7' },
   }
 
   drawCMB();
+  }); // end initCanvas callback
 }());
 
 })();
