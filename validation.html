@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iterative Refinement Validation System — Ic² Research Institute</title>
+    <title>Iterative Refinement Validation System | Ic² Research Institute</title>
     <meta name="description" content="Live validation dashboard tracking COSMIC Framework predictions, results, and iterative refinement toward 5-sigma confidence.">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
@@ -390,7 +390,7 @@
     .sec-dark   { background:var(--dark); }
     .sec-mid    { background:var(--mid); }
     .sec-card   { background:var(--card-dark); }
-    .sec-grey   { background:#f0f2f6; }
+    .sec-gray   { background:#f0f2f6; }
     .sec-white  { background:white; }
     .sec-slate  { background:#e8ecf1; }
 
@@ -894,7 +894,7 @@
     <div class="hero-topbar">
       <div class="hero-title">
         <h1>Iterative Refinement<br>Validation System</h1>
-        <p>COSMIC Framework &nbsp;·&nbsp; Open science telemetry &nbsp;·&nbsp; <span id="lastUpd">—</span></p>
+        <p>COSMIC Framework &nbsp;·&nbsp; Open science telemetry &nbsp;·&nbsp; <span id="lastUpd">. </span></p>
       </div>
       <div class="live-badge-wrap"><div class="live-badge"><span class="live-dot"></span>LIVE TRACKING</div></div>
     </div>
@@ -962,9 +962,9 @@
         <div class="kpi-sub">current</div>
       </div>
       <div class="kpi">
-        <div class="kpi-val dim">TBD</div>
+        <div class="kpi-val dim">0</div>
         <div class="kpi-lbl">Peer Reviews</div>
-        <div class="kpi-sub">in progress</div>
+        <div class="kpi-sub">seeking reviewers</div>
       </div>
     </div>
 
@@ -1047,6 +1047,239 @@
     </div>
   </div>
 </section>
+
+
+<!-- ══════════════ PREDICTION TIMELINE ══════════════ -->
+<section class="sec" style="background:#fff; padding: 3rem 2rem;">
+  <div class="inner">
+    <div class="section-label" data-aos="fade-up" style="margin-bottom:2rem;">
+      <h2 style="color:#2c3e50; font-size:1.6rem;">Predictions Documented Before Confirmation</h2>
+      <p style="color:#666; margin-top:.5rem;">Each bar shows the gap between documentation date and independent experimental confirmation.</p>
+    </div>
+    <div id="pred-timeline" data-aos="fade-up" style="width:100%; max-width:800px; margin:0 auto;">
+      <canvas id="timeline-canvas" style="width:100%; display:block; border-radius:8px;"></canvas>
+    </div>
+    <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:1rem;">
+      Documentation dates are independently timestamped. Confirmation dates are from published results by DESI, Google Quantum AI, and JWST.
+    </p>
+  </div>
+</section>
+
+<style>
+#pred-timeline { position: relative; }
+</style>
+
+<script>
+(function() {
+  var canvas = document.getElementById('timeline-canvas');
+  if (!canvas) return;
+
+  var predictions = [
+    {
+      label: 'Dark Energy Evolution',
+      platform: 'DESI Survey',
+      docDate: new Date('2024-01-09'),
+      confDate: new Date('2025-01-01'),
+      color: '#005ba5',
+      accent: '#4fc3f7'
+    },
+    {
+      label: 'Quantum Error Correction',
+      platform: 'Google Willow Chip',
+      docDate: new Date('2024-08-01'),
+      confDate: new Date('2024-12-01'),
+      color: '#8B0000',
+      accent: '#e57373'
+    },
+    {
+      label: 'Early Galaxy Formation',
+      platform: 'JWST',
+      docDate: new Date('2024-03-01'),
+      confDate: new Date('2024-10-01'),
+      color: '#1a5c2a',
+      accent: '#81c784'
+    }
+  ];
+
+  var DPR = window.devicePixelRatio || 1;
+  var ROW_H = 90;
+  var PAD_L = 180, PAD_R = 40, PAD_T = 40, PAD_B = 30;
+  var W_CSS, H_CSS;
+
+  function resize() {
+    W_CSS = canvas.parentElement.offsetWidth;
+    H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
+    canvas.width  = W_CSS * DPR;
+    canvas.height = H_CSS * DPR;
+    canvas.style.width  = W_CSS + 'px';
+    canvas.style.height = H_CSS + 'px';
+  }
+
+  resize();
+  window.addEventListener('resize', function() { resize(); draw(1); });
+
+  var progress = 0;
+  var startTime = null;
+  var DURATION = 1400;
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function draw(prog) {
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W_CSS, H_CSS);
+
+    var gW = W_CSS - PAD_L - PAD_R;
+    var allDates = predictions.reduce(function(a, p) {
+      return a.concat([p.docDate, p.confDate]);
+    }, []);
+    var minD = new Date('2024-01-01');
+    var maxD = new Date('2025-04-01');
+    var span = maxD - minD;
+
+    function dateX(d) {
+      return PAD_L + ((d - minD) / span) * gW;
+    }
+
+    // Axis
+    ctx.strokeStyle = '#e0e0e0';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(PAD_L, PAD_T);
+    ctx.lineTo(PAD_L, PAD_T + predictions.length * ROW_H);
+    ctx.stroke();
+
+    // Month ticks
+    var tickDate = new Date('2024-01-01');
+    ctx.font = '10px -apple-system, sans-serif';
+    ctx.fillStyle = '#999';
+    ctx.textAlign = 'center';
+    while (tickDate <= maxD) {
+      var tx = dateX(tickDate);
+      ctx.strokeStyle = '#f0f0f0';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(tx, PAD_T);
+      ctx.lineTo(tx, PAD_T + predictions.length * ROW_H + 8);
+      ctx.stroke();
+      if (tickDate.getMonth() % 3 === 0) {
+        var label = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][tickDate.getMonth()] + ' '' + String(tickDate.getFullYear()).slice(2);
+        ctx.fillText(label, tx, PAD_T + predictions.length * ROW_H + 22);
+      }
+      tickDate = new Date(tickDate.getFullYear(), tickDate.getMonth() + 1, 1);
+    }
+
+    // Predictions
+    predictions.forEach(function(p, i) {
+      var y = PAD_T + i * ROW_H + ROW_H * 0.5;
+      var docX = dateX(p.docDate);
+      var confX = dateX(p.confDate);
+      var gapW = (confX - docX) * prog;
+
+      // Label
+      ctx.fillStyle = '#2c3e50';
+      ctx.font = 'bold 13px -apple-system, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(p.label, PAD_L - 12, y - 8);
+      ctx.fillStyle = '#666';
+      ctx.font = '11px -apple-system, sans-serif';
+      ctx.fillText(p.platform, PAD_L - 12, y + 8);
+
+      // Gap bar (the advance prediction period)
+      var barH = 20;
+      ctx.fillStyle = p.color + '22';
+      ctx.fillRect(docX, y - barH/2, gapW, barH);
+
+      // Colored fill
+      var grad = ctx.createLinearGradient(docX, 0, docX + gapW, 0);
+      grad.addColorStop(0, p.color);
+      grad.addColorStop(1, p.accent);
+      ctx.fillStyle = grad;
+      ctx.fillRect(docX, y - barH/2 + 4, gapW, barH - 8);
+
+      // Doc marker (circle)
+      ctx.beginPath();
+      ctx.arc(docX, y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = '#2c3e50';
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Conf marker (appears when bar reaches it)
+      if (prog > 0.98) {
+        ctx.beginPath();
+        ctx.arc(confX, y, 9, 0, Math.PI * 2);
+        ctx.fillStyle = p.accent;
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+        // Checkmark inside
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(confX - 4, y);
+        ctx.lineTo(confX - 1, y + 3);
+        ctx.lineTo(confX + 4, y - 3);
+        ctx.stroke();
+      }
+
+      // Gap label
+      if (gapW > 60) {
+        var months = Math.round((p.confDate - p.docDate) / (1000 * 60 * 60 * 24 * 30));
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 10px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(months + ' mo. advance', docX + gapW * 0.5, y + 1);
+      }
+    });
+
+    // Legend
+    ctx.textAlign = 'left';
+    var lx = PAD_L + 4;
+    var ly = H_CSS - 10;
+    ctx.fillStyle = '#2c3e50';
+    ctx.beginPath(); ctx.arc(lx + 6, ly - 4, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.fillStyle = '#555';
+    ctx.fillText('Documentation date', lx + 16, ly);
+
+    ctx.fillStyle = '#4fc3f7';
+    ctx.beginPath(); ctx.arc(lx + 140, ly - 4, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#555';
+    ctx.fillText('Confirmation date', lx + 150, ly);
+
+    ctx.fillStyle = '#005ba5' + '44';
+    ctx.fillRect(lx + 270, ly - 9, 24, 10);
+    ctx.fillStyle = '#555';
+    ctx.fillText('Advance prediction window', lx + 300, ly);
+  }
+
+  function animate(ts) {
+    if (!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+    var prog = easeOut(Math.min(elapsed / DURATION, 1));
+    draw(prog);
+    if (prog < 1) requestAnimationFrame(animate);
+  }
+
+  // Start when scrolled into view
+  var started = false;
+  function checkVisible() {
+    if (started) return;
+    var rect = canvas.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92) {
+      started = true;
+      requestAnimationFrame(animate);
+    }
+  }
+  window.addEventListener('scroll', checkVisible, { passive: true });
+  checkVisible();
+})();
+</script>
 
 <!-- ══════════════ SECTION 2B: ITERATIVE REFINEMENT ══════════════ -->
 <section class="sec sec-dark" style="padding-top:0; padding-bottom:0;">
@@ -1452,7 +1685,7 @@
 </section>
 
 <!-- ══════════════ REVISION + PRIORITY NOTICES ══════════════ -->
-<section class="sec sec-grey" style="padding-top:2rem; padding-bottom:2rem;">
+<section class="sec sec-gray" style="padding-top:2rem; padding-bottom:2rem;">
   <div class="inner">
     <div class="notice-row" data-aos="fade-up">
       <div class="notice-box amber">
