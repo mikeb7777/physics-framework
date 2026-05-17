@@ -1704,25 +1704,15 @@ function hideLoader(id) {
   if (el) el.classList.add('hidden');
 }
 
-// ── Polling init: checks every 100ms until parent has real width ──────────
+// ── Canvas init: uses window.innerWidth directly, no DOM traversal ───────
 function initCanvas(id, callback) {
   var c = document.getElementById(id);
   if (!c) return;
-  var attempts = 0;
-  function tryInit() {
-    attempts++;
-    // Walk up: canvas -> .canvas-wrap -> .plot-container -> section
-    var parent = c.parentElement;
-    while (parent && parent.offsetWidth < 100 && parent.parentElement) {
-      parent = parent.parentElement;
-    }
-    var w = parent ? parent.offsetWidth - 40 : 0;
-    if (w < 100) {
-      if (attempts < 50) { setTimeout(tryInit, 100); return; } // retry up to 5s
-      w = Math.min((window.innerWidth || 700) - 60, 860);
-    }
-    var h = parseInt(c.style.height) || 320;
+  function doInit() {
     var DPR = window.devicePixelRatio || 1;
+    // Use innerWidth minus typical sidebar/padding. Cap at 900px.
+    var w = Math.min(Math.floor((window.innerWidth || 800) * 0.88), 900);
+    var h = parseInt(c.style.height) || 320;
     c.width  = w * DPR;
     c.height = h * DPR;
     c.style.width  = w + 'px';
@@ -1732,8 +1722,8 @@ function initCanvas(id, callback) {
     hideLoader(id);
     callback({ c: c, ctx: ctx, w: w, h: h });
   }
-  // Small initial delay so DOM is painted, then poll
-  setTimeout(tryInit, 200);
+  // 400ms gives the page and any CDN scripts time to finish painting
+  setTimeout(doInit, 400);
 }
 
 // ══════════════════════════════════════════════════════════

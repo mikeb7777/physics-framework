@@ -1126,11 +1126,7 @@
   var W_CSS, H_CSS;
 
   function resize() {
-    var p = canvas.parentElement;
-    while (p && p.offsetWidth < 100 && p.parentElement) { p = p.parentElement; }
-    var w = p ? p.offsetWidth - 40 : Math.min(window.innerWidth - 48, 800);
-    if (w < 100) w = Math.min(window.innerWidth - 48, 800);
-    W_CSS = w;
+    W_CSS = Math.min(Math.floor((window.innerWidth || 800) * 0.82), 800);
     H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
     canvas.width  = W_CSS * DPR;
     canvas.height = H_CSS * DPR;
@@ -1288,49 +1284,19 @@
     if (prog < 1) requestAnimationFrame(animate);
   }
 
-  // Polling init: check every 100ms until parent has real width
+  // Simple timed start - uses window.innerWidth directly
   var started = false;
-  var attempts = 0;
-
-  function getWidth() {
-    var p = canvas.parentElement;
-    while (p && p.offsetWidth < 100 && p.parentElement) { p = p.parentElement; }
-    return p ? p.offsetWidth - 40 : 0;
-  }
 
   function startAnim() {
     if (started) return;
     started = true;
-    // Final resize with real width
-    var w = getWidth();
-    if (w > 100) {
-      W_CSS = w;
-      H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
-      canvas.width  = W_CSS * DPR;
-      canvas.height = H_CSS * DPR;
-      canvas.style.width  = W_CSS + 'px';
-      canvas.style.height = H_CSS + 'px';
-      var ctx2 = canvas.getContext('2d');
-      ctx2.scale(DPR, DPR);
-    }
+    resize();
     hideLoader();
     startTime = null;
     requestAnimationFrame(animate);
   }
 
-  function poll() {
-    attempts++;
-    var w = getWidth();
-    if (w > 100) {
-      startAnim();
-    } else if (attempts < 60) {
-      setTimeout(poll, 100);
-    } else {
-      startAnim(); // give up waiting, start with whatever we have
-    }
-  }
-
-  setTimeout(poll, 300);
+  setTimeout(startAnim, 400);
 })();
 </script>
 
