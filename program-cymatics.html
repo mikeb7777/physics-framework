@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>3D Acoustic Field Visualization in Microgravity - Ic² Research Institute</title>
+    <meta name="description" content="Every Chladni figure ever produced is a cross-section of a three-dimensional structure nobody has seen. This experiment removes gravity and reveals the complete 3D acoustic field geometry for the first time.">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --primary-color: #8B0000;
+        --secondary-color: #2d3f52;
+        --accent: #006064;
+        --accent-mid: #00838f;
+        --accent-light: #00bcd4;
+        --accent-yellow: #f1e303;
+        --text-dark: #2c3e50;
+        --text-light: #666;
+        --bg-light: #f8f9fa;
+        --max-width: 1200px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: var(--text-dark); background: white; }
+
+    /* Header */
+    .site-header { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: 0.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .site-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .site-logo img { height: 50px; width: auto; display: block; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+    .main-navigation a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.3s ease; }
+    .main-navigation a:hover { color: var(--accent); }
+    .main-navigation a.login-link { background: var(--primary-color); color: #f1e303; padding: 0.5rem 1.25rem; border-radius: 25px; font-weight: 700; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 4px; padding: 8px; }
+    .hamburger span { display: block; width: 25px; height: 3px; background: var(--primary-color); border-radius: 3px; transition: all 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px,7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+    .mobile-menu { display: none; position: fixed; top: 61px; left: 0; right: 0; background: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 999; max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+    .mobile-menu.active { max-height: 600px; }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu a { display: block; padding: 0.75rem 1rem; color: var(--text-dark); text-decoration: none; font-weight: 500; }
+
+    /* Page Header */
+    .page-header {
+        background: linear-gradient(135deg, #003740 0%, #006064 100%);
+        color: white;
+        padding: 3.5rem 2rem 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .page-header::before {
+        content: "";
+        position: absolute; top: -80px; right: -80px;
+        width: 500px; height: 500px; border-radius: 50%;
+        border: 1px solid rgba(0,188,212,0.1);
+        pointer-events: none;
+    }
+    .page-header::after {
+        content: "";
+        position: absolute; top: -30px; right: -30px;
+        width: 300px; height: 300px; border-radius: 50%;
+        border: 1px solid rgba(0,188,212,0.07);
+        pointer-events: none;
+    }
+    .page-header-inner { max-width: var(--max-width); margin: 0 auto; position: relative; z-index: 2; }
+    .page-header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.2; }
+    .page-header .subtitle { font-size: 1rem; opacity: 0.75; margin-bottom: 0.5rem; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 600; color: #80deea; }
+    .page-header .meta { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin-bottom: 2rem; line-height: 1.75; }
+    .header-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .header-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+
+    /* Content */
+    .content-section { padding: 4rem 2rem; }
+    .content-section.shaded { background: var(--bg-light); }
+    .content-section.dark-section { background: linear-gradient(135deg, #003740 0%, #005060 100%); color: white; }
+    .section-inner { max-width: var(--max-width); margin: 0 auto; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-header h2 { font-size: 2rem; color: var(--text-dark); margin-bottom: 0.5rem; padding-bottom: 0.75rem; border-bottom: 3px solid var(--accent); }
+    .section-header.light h2 { color: white; border-bottom-color: var(--accent-light); }
+    .section-header p { color: var(--text-light); font-size: 1.05rem; margin-top: 0.75rem; }
+    .section-header.light p { color: rgba(255,255,255,0.8); }
+
+    /* Two column */
+    .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .column h3 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--accent); }
+    .dark-section .column h3 { color: var(--accent-light); }
+    .column p { color: var(--text-light); margin-bottom: 1rem; line-height: 1.8; }
+    .dark-section .column p { color: rgba(255,255,255,0.85); }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .stat-card { background: white; border-radius: 8px; padding: 1.75rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-bottom: 4px solid var(--accent); }
+    .stat-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+    .stat-label { display: block; color: var(--text-light); font-size: 0.9rem; }
+
+    /* Conditions / phases grid */
+    .phases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem; margin-top: 1.5rem; }
+    .phase-card { background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-left: 4px solid var(--accent); }
+    .phase-number { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; }
+    .phase-card h4 { font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--text-dark); }
+    .phase-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.5rem; }
+    .phase-card p:last-child { margin-bottom: 0; }
+    .phase-cost { display: inline-block; background: #e0f7f4; color: #00695c; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 700; margin-top: 0.5rem; }
+
+    /* Predictions box */
+    .predictions-box { background: rgba(0,188,212,0.06); border: 1px solid rgba(0,188,212,0.2); border-radius: 8px; padding: 1.75rem 2rem; margin-top: 2rem; }
+    .predictions-box h4 { font-size: 1rem; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+    .predictions-box ul { list-style: none; padding: 0; }
+    .predictions-box ul li { padding: 0.5rem 0; border-bottom: 1px solid rgba(0,188,212,0.1); color: var(--text-light); font-size: 0.95rem; line-height: 1.6; padding-left: 1.25rem; position: relative; }
+    .predictions-box ul li:last-child { border-bottom: none; }
+    .predictions-box ul li::before { content: "—"; position: absolute; left: 0; color: var(--accent-light); }
+
+    /* Evidence cards */
+    .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .evidence-card { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 1.75rem; border: 1px solid rgba(255,255,255,0.1); }
+    .evidence-card h4 { color: var(--accent-light); font-size: 1.05rem; margin-bottom: 0.75rem; }
+    .evidence-card p { color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.75; }
+
+    /* Info box */
+    .info-box { background: #e0f7f4; border-radius: 8px; padding: 1.75rem 2rem; margin: 2rem 0; border-left: 4px solid var(--accent); }
+    .info-box h3 { color: var(--accent); margin-bottom: 0.75rem; font-size: 1.15rem; }
+    .info-box p { color: var(--text-dark); font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.75rem; }
+    .info-box p:last-child { margin-bottom: 0; }
+
+    /* Preliminary notice */
+    .preliminary-box { background: #fff8e1; border: 1px solid #f9a825; border-left: 4px solid #f9a825; border-radius: 8px; padding: 1.25rem 1.75rem; margin: 1.5rem 0; }
+    .preliminary-box p { color: #6d4c00; font-size: 0.9rem; line-height: 1.7; margin: 0; }
+    .preliminary-box strong { color: #5d3900; }
+
+    /* Download box */
+    .download-box { display: flex; align-items: center; justify-content: space-between; gap: 2rem; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .download-box h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-dark); }
+    .download-box p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
+    .download-meta { font-size: 0.8rem; color: #999; margin-top: 0.5rem; }
+    .btn-download { background: var(--accent); color: white; padding: 0.85rem 1.75rem; border-radius: 6px; text-decoration: none; font-weight: 700; white-space: nowrap; transition: background 0.3s; }
+    .btn-download:hover { background: var(--accent-mid); }
+
+    /* Prediction log */
+    .prediction-log { background: #f8f9fa; border-radius: 8px; padding: 1.75rem 2rem; margin-top: 1.75rem; border: 1px solid #e0e0e0; }
+    .prediction-log h4 { color: var(--accent); margin-bottom: 1rem; font-size: 1rem; }
+    .prediction-log ul { padding-left: 1.5rem; }
+    .prediction-log ul li { color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.6rem; line-height: 1.6; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, #003740 0%, #006064 100%); color: white; padding: 4rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .cta-section p { opacity: 0.9; max-width: 600px; margin: 0 auto 2rem; }
+    .btn { display: inline-block; padding: 0.85rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+    .btn-white { background: white; color: var(--accent); }
+    .btn-white:hover { background: #e0f7f4; transform: translateY(-2px); }
+    .btn-outline-white { background: transparent; color: white; border: 2px solid white; margin-left: 0.75rem; }
+    .btn-outline-white:hover { background: white; color: var(--accent); }
+
+    /* Footer */
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
+    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
+    .footer-section h3 { margin-bottom: 0.75rem; font-size: 1rem; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin-bottom: 0.35rem; }
+    .footer-section a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .footer-section a:hover { color: white; }
+    .footer-section p { color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.6; }
+    .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+        .main-navigation { display: none; }
+        .hamburger { display: flex; }
+        .mobile-menu { display: block; }
+        .page-header h1 { font-size: 2rem; }
+        .two-column { grid-template-columns: 1fr; }
+        .footer-container { grid-template-columns: 1fr 1fr; }
+        .download-box { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+        .footer-container { grid-template-columns: 1fr; }
+        .phases-grid { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- Site Header -->
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute" onerror="this.style.display='none'">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="simulations.html">Simulations</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+    </ul>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="page-header-inner">
+        <div class="subtitle">A Research Program of the Ic² Research Institute</div>
+        <h1>3D Acoustic Field Visualization in Microgravity</h1>
+        <p class="meta">Every Chladni figure ever produced is a cross-section of a three-dimensional structure that has never been seen. Gravity pulls the particle medium flat. Remove gravity and the complete field geometry reveals itself for the first time in 200 years of cymatic research.</p>
+        <div class="header-badges">
+            <span class="header-badge">&#x1F4CA; Experimental Physics</span>
+            <span class="header-badge">&#x1F4C4; Preprint Available</span>
+            <span class="header-badge">&#x1F52C; Preliminary Methodology</span>
+            <span class="header-badge">&#x1F310; Open Science</span>
+        </div>
+    </div>
+</div>
+
+<!-- Core Argument -->
+<section class="content-section">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>The Gap in 200 Years of Cymatic Research</h2>
+            <p>The observation is simple. The oversight has been hiding in plain sight.</p>
+        </div>
+
+        <div class="two-column">
+            <div class="column" data-aos="fade-right">
+                <h3>What Cymatics Has Always Shown</h3>
+                <p>Ernst Chladni discovered in 1787 that sand sprinkled on a vibrating plate organizes into patterns at resonant frequencies. These patterns, now called Chladni figures, have been studied, catalogued, and reproduced for over two centuries. They are among the most reproduced experiments in acoustics.</p>
+                <p>What they actually show is a cross-section. The plate constrains the particle medium to a flat surface. Gravity holds it there. The patterns that appear are the intersections of three-dimensional acoustic node structures with a horizontal plane. The structures themselves have never been seen because every experiment has been conducted under gravity.</p>
+                <p>The acoustic fields are three-dimensional. The representations have always been two-dimensional. The gap between those two facts is what this experiment addresses.</p>
+            </div>
+
+            <div class="column" data-aos="fade-left">
+                <h3>What Microgravity Changes</h3>
+                <p>In microgravity, the particle medium is no longer constrained to a surface. Particles respond exclusively to acoustic radiation pressure, the force exerted by the sound field itself. They distribute throughout the three-dimensional volume of the field, settling at nodal surfaces where the acoustic pressure is zero.</p>
+                <p>The result, for the first time, is a direct visualization of the complete three-dimensional geometry of the acoustic standing wave field. Not a cross-section. Not an inference. The actual structure.</p>
+                <p>This is a pure physics experiment. It requires no theoretical framework, no controversial assumptions, and no departure from established acoustics. The predictions follow directly from standard acoustic physics. The gap it fills is observational, not theoretical.</p>
+            </div>
+        </div>
+
+        <div class="stats-grid" data-aos="fade-up">
+            <div class="stat-card">
+                <span class="stat-value">200+</span>
+                <span class="stat-label">Years of cymatic research, all conducted under gravity</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">0</span>
+                <span class="stat-label">Prior experiments visualizing 3D acoustic fields in a gravity-free medium</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">3</span>
+                <span class="stat-label">Phased approach from ground prototype to orbital platform</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">&lt;$1k</span>
+                <span class="stat-label">Phase 1 cost to begin ground-based prototype work</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Predicted Results -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Predicted Results</h2>
+            <p>Predictions derived from standard acoustic field theory, independent of any broader theoretical framework</p>
+        </div>
+
+        <div class="two-column" data-aos="fade-up">
+            <div>
+                <h3 style="color: var(--accent); margin-bottom: 1rem;">Geometries with No 2D Analogue</h3>
+                <p style="color: var(--text-light); margin-bottom: 1rem;">The three-dimensional node structures of acoustic fields include geometries that a flat plate simply cannot express. These are not refinements of known Chladni patterns. They are qualitatively different structures that have been invisible because the instrument has always been the wrong dimension.</p>
+                <div class="predictions-box">
+                    <h4>Standard Acoustic Physics Predictions</h4>
+                    <ul>
+                        <li>Spherical node shells at fundamental frequencies, a geometry with no two-dimensional analogue</li>
+                        <li>Nested concentric shells at harmonic frequencies</li>
+                        <li>Platonic solid node-point geometries at specific symmetry-group frequencies</li>
+                        <li>Toroidal and quasicrystalline arrangements under multi-frequency excitation</li>
+                        <li>Cross-sections of these structures, when intersected by a horizontal plane, should reproduce known Chladni figures, confirming the relationship between 3D structure and 2D representation</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h3 style="color: var(--accent); margin-bottom: 1rem;">What Confirmation Implies</h3>
+                <p style="color: var(--text-light); margin-bottom: 1rem;">If the predicted geometries are observed, the result establishes that standard two-dimensional cymatics has been producing cross-sections of structures considerably more geometrically complex than the patterns themselves suggest. Two centuries of cymatic research becomes a dataset of projections rather than complete descriptions.</p>
+                <p style="color: var(--text-light); margin-bottom: 1rem;">Beyond cymatics, the result has implications for acoustic levitation, acoustic trapping, and the engineering of three-dimensional sound fields. The complete node geometry is the design space for all of these applications. Currently it can only be calculated. This experiment makes it directly observable and verifiable against theory.</p>
+                <div class="info-box">
+                    <h3>Independent of Broader Framework</h3>
+                    <p>This experiment stands entirely on acoustic physics. The COSMIC Framework makes additional predictions about what these results would mean if confirmed, and those predictions are logged separately on the Testing Schedule. The experiment itself is designed and will be evaluated on physics merits alone. Confirmation or disconfirmation of framework predictions does not affect the validity of the acoustic physics results.</p>
+                    <a href="testing-schedule.html#cymatics-prediction" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;">View logged framework predictions on Testing Schedule</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Phased Approach -->
+<section class="content-section">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Phased Experimental Approach</h2>
+            <p>Three phases from immediate ground-based prototype through orbital platform</p>
+        </div>
+
+        <div class="preliminary-box" data-aos="fade-up">
+            <p><strong>Methodology note:</strong> The experimental approach described here is preliminary. The core hypothesis is sound and the physics is well established, but the specific instrumentation, particle medium, and transducer configuration are under review. Improvements to the methodology are actively sought. If you have relevant expertise in acoustic levitation, microgravity payload design, or particle visualization, contributions to refining this approach are welcome before Phase 1 begins.</p>
+        </div>
+
+        <div class="phases-grid" data-aos="fade-up">
+            <div class="phase-card">
+                <div class="phase-number">Phase 1</div>
+                <h4>Ground-Based Prototype</h4>
+                <p>A transparent sphere with a tetrahedral transducer array and a particle medium, designed to test the visualization approach and establish baseline measurements under gravity. This phase validates the instrumentation and identifies any design issues before committing to microgravity testing.</p>
+                <p>Phase 1 results will produce the 2D cross-sections expected from standard cymatics, confirming the setup is functioning correctly before microgravity removes the gravitational constraint.</p>
+                <span class="phase-cost">Under $1,000 &mdash; begins immediately</span>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">Phase 2</div>
+                <h4>Parabolic Flight</h4>
+                <p>Parabolic flight via Zero-G Corporation or equivalent provider delivers approximately 22 seconds of true microgravity per arc. A 30-arc session provides sufficient time to capture particle distribution across multiple frequencies and confirm the emergence of three-dimensional nodal structures.</p>
+                <p>Each arc is independent, allowing systematic frequency sweeps across a predetermined range. Video capture and particle tracking software record the three-dimensional distributions for subsequent analysis.</p>
+                <span class="phase-cost">Estimated $95,000&mdash;$155,000</span>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">Phase 3</div>
+                <h4>Orbital Platform</h4>
+                <p>An extended microgravity environment, via ISS or a commercial orbital platform, allows the complete systematic study of acoustic field geometry across the full frequency range. Phase 2 provides proof of concept and identifies the most scientifically productive frequency ranges to study in depth.</p>
+                <p>Phase 3 produces the comprehensive dataset that fully characterizes the three-dimensional structure of acoustic standing wave fields across frequencies and multi-frequency combinations.</p>
+                <span class="phase-cost">Cost: subject to Phase 2 results</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Theoretical Context -->
+<section class="content-section dark-section">
+    <div class="section-inner">
+        <div class="section-header light" data-aos="fade-up">
+            <h2>Scientific Context</h2>
+            <p>Why this gap has persisted and what fills it</p>
+        </div>
+        <div class="evidence-grid">
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="0">
+                <h4>200 Years of Correct Results, Wrong Dimension</h4>
+                <p>Chladni figures are not wrong. They are accurate descriptions of what a sound field looks like when intersected by a flat surface. The error is not in the experiment but in what the experiment was taken to show. The field is three-dimensional. The representation has always been two-dimensional. That gap has simply never been closed because the experiment has never been run in an environment where closing it was possible.</p>
+            </div>
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="100">
+                <h4>Acoustic Levitation as Partial Evidence</h4>
+                <p>Acoustic levitation, which suspends small objects at the nodal points of acoustic fields, already demonstrates that three-dimensional acoustic structures exist and are physically accessible. Objects levitated at nodal points are occupying positions in a three-dimensional field. This is established technology. The visualization of the complete nodal surface, rather than just the trapping points, is the missing step.</p>
+            </div>
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="200">
+                <h4>Applications Beyond Visualization</h4>
+                <p>Complete knowledge of three-dimensional acoustic field geometry has direct applications in acoustic trapping, acoustic manufacturing, and the design of ultrasonic transducer arrays. Currently these applications rely on calculated field geometries. Direct experimental verification of the calculated structures against the theory that produces them is the foundational validation this field has not yet had.</p>
+            </div>
+            <div class="evidence-card" data-aos="fade-up" data-aos-delay="300">
+                <h4>Open Science Commitment</h4>
+                <p>All experimental protocols will be pre-registered before data collection. All raw data will be made publicly available. Analysis code will be published under MIT license. Null results will be published with full completeness. The experiment will be evaluated on acoustic physics merits. Framework-related predictions are logged separately and evaluated independently.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Published Research -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Published Research</h2>
+            <p>Preprint available. Written as a standalone physics paper with no reference to NBI or any broader theoretical framework.</p>
+        </div>
+
+        <div class="download-box" data-aos="fade-up">
+            <div>
+                <h3>Three-Dimensional Acoustic Field Visualization in Microgravity</h3>
+                <p>Eliminating Gravitational Bias from Cymatic Pattern Formation. A standalone physics paper presenting the core argument, theoretical predictions from standard acoustic physics, preliminary equipment specifications, and the phased approach from ground-based prototype through orbital platform. Methodology is described as preliminary and open to improvement.</p>
+                <div class="download-meta">Ic² Research Institute Preprint &nbsp;|&nbsp; February 2026 &nbsp;|&nbsp; Open Access CC BY 4.0 &nbsp;|&nbsp; Zenodo DOI: pending upload</div>
+            </div>
+            <a href="3D_Cymatics_Microgravity_Paper.docx" class="btn-download" download>&#x2B07; Download Preprint</a>
+        </div>
+
+        <div class="prediction-log" data-aos="fade-up">
+            <h4>&#x23F1; COSMIC Framework Predictions &mdash; Logged February 2026</h4>
+            <p style="color: var(--text-light); margin-bottom: 0.75rem; font-size: 0.9rem;">These predictions are logged independently of the physics experiment. The experiment will be evaluated on acoustic physics merits alone. These represent the COSMIC Framework&rsquo;s interpretation of what the physics results would mean for the NBI hypothesis if confirmed. Confirmation or disconfirmation of these predictions does not affect the validity of the acoustic physics findings.</p>
+            <ul>
+                <li>Three-dimensional cymatic patterns in microgravity will reveal geometric structures that correspond to documented crop formation geometries when cross-sectioned along a horizontal plane</li>
+                <li>The three-dimensional node structures will match theoretical predictions for electromagnetic field node geometry in three-dimensional space, providing physical demonstration that complex geometric patterns arise naturally from field dynamics without external design</li>
+                <li>Standard two-dimensional cymatics has been showing cross-sections of structures considerably more geometrically complex than previously understood</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: #999;">Prediction confidence: High &nbsp;|&nbsp; Physical basis: Acoustic field theory, nodal surface geometry &nbsp;|&nbsp; <a href="testing-schedule.html#cymatics-prediction" style="color: var(--accent);">Testing Schedule</a></p>
+        </div>
+    </div>
+</section>
+
+<!-- Status and Collaboration -->
+<section class="content-section shaded" style="padding-top: 0;">
+    <div class="section-inner">
+        <div class="two-column" data-aos="fade-up">
+            <div class="column">
+                <h3>Current Status</h3>
+                <p>The experiment is in the preprint and methodology review stage. The core hypothesis and physics predictions are fully documented. Phase 1 ground-based prototype work can begin immediately at low cost. The methodology for Phase 1 is preliminary and the transducer configuration and particle medium are open to revision before prototyping begins.</p>
+                <p>All experimental predictions for Phases 2 and 3 will be pre-registered on Zenodo and the Open Science Framework before any microgravity data collection begins. This is a firm commitment.</p>
+            </div>
+            <div class="column">
+                <h3>Collaborators Sought</h3>
+                <p>This experiment benefits from expertise in acoustic engineering, specifically transducer array design and acoustic levitation; microgravity payload engineering for parabolic flight and orbital platforms; particle visualization and high-speed imaging; and statisticians for experimental design review.</p>
+                <p>Improvements to the preliminary Phase 1 methodology are actively welcomed. If you have relevant expertise and want to contribute to the experimental design before prototyping begins, contact us at <a href="mailto:info@eequalsicsquared.com" style="color: var(--accent);">info@eequalsicsquared.com</a> or visit the <a href="contribute.html" style="color: var(--accent);">Contribute</a> page.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-inner" style="max-width: 800px; margin: 0 auto;">
+        <h2>Interested in This Research?</h2>
+        <p>Whether you are an acoustic physicist, a microgravity payload engineer, or someone who wants to help fund Phase 2, this experiment is at an early enough stage that contributions now shape how it is done.</p>
+        <a href="contribute.html" class="btn btn-white">Get Involved</a>
+        <a href="programs-gateway.html" class="btn btn-outline-white">All Programs</a>
+        <a href="3D_Cymatics_Microgravity_Paper.docx" class="btn btn-outline-white" download>Download Preprint</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Ic² Research Institute</h3>
+            <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+                <li><a href="research-publications.html">Publications</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="book.html">The Big TOE</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq-page.html">FAQ</a></li>
+                <li><a href="legal.html">Legal</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+                <li><a href="become-member.html">Become a Member</a></li>
+                <li><a href="mailto:info@eequalsicsquared.com">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. |
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true, offset: 80 });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+</script>
+</body>
+</html>
