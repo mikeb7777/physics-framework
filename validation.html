@@ -1126,9 +1126,9 @@
   var W_CSS, H_CSS;
 
   function resize() {
-    // Walk up to the section container for reliable width
-    var p = canvas.parentElement && canvas.parentElement.parentElement;
-    var w = p ? p.offsetWidth : 0;
+    var p = canvas.parentElement;
+    while (p && p.offsetWidth < 100 && p.parentElement) { p = p.parentElement; }
+    var w = p ? p.offsetWidth - 40 : Math.min(window.innerWidth - 48, 800);
     if (w < 100) w = Math.min(window.innerWidth - 48, 800);
     W_CSS = w;
     H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
@@ -1138,7 +1138,7 @@
     canvas.style.height = H_CSS + 'px';
   }
 
-  window.addEventListener('resize', function() { resize(); draw(1); });
+  window.addEventListener('resize', function() { if (started) { resize(); draw(1); } });
 
   var progress = 0;
   var startTime = null;
@@ -1288,31 +1288,49 @@
     if (prog < 1) requestAnimationFrame(animate);
   }
 
-  // Use IntersectionObserver for reliable init when canvas enters viewport
+  // Polling init: check every 100ms until parent has real width
   var started = false;
+  var attempts = 0;
+
+  function getWidth() {
+    var p = canvas.parentElement;
+    while (p && p.offsetWidth < 100 && p.parentElement) { p = p.parentElement; }
+    return p ? p.offsetWidth - 40 : 0;
+  }
+
   function startAnim() {
     if (started) return;
     started = true;
-    resize();
+    // Final resize with real width
+    var w = getWidth();
+    if (w > 100) {
+      W_CSS = w;
+      H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
+      canvas.width  = W_CSS * DPR;
+      canvas.height = H_CSS * DPR;
+      canvas.style.width  = W_CSS + 'px';
+      canvas.style.height = H_CSS + 'px';
+      var ctx2 = canvas.getContext('2d');
+      ctx2.scale(DPR, DPR);
+    }
     hideLoader();
     startTime = null;
     requestAnimationFrame(animate);
   }
 
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting) {
-        obs.disconnect();
-        requestAnimationFrame(function() { requestAnimationFrame(startAnim); });
-      }
-    }, { threshold: 0.1 });
-    obs.observe(canvas);
-  } else {
-    setTimeout(startAnim, 400);
+  function poll() {
+    attempts++;
+    var w = getWidth();
+    if (w > 100) {
+      startAnim();
+    } else if (attempts < 60) {
+      setTimeout(poll, 100);
+    } else {
+      startAnim(); // give up waiting, start with whatever we have
+    }
   }
 
-  // Safety net: start after 2s regardless
-  setTimeout(function() { if (!started) startAnim(); }, 2000);
+  setTimeout(poll, 300);
 })();
 </script>
 

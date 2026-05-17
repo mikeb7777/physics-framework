@@ -1698,46 +1698,42 @@ window.addEventListener('load', function() {
 <script>
 (function() {
 
-// ── Hide loader for a canvas ──────────────────────────────────────────────
+// ── Hide loader for a canvas ─────────────────────────────────────────────
 function hideLoader(id) {
   var el = document.getElementById(id + '-loader');
   if (el) el.classList.add('hidden');
 }
 
-// ── Reliable canvas sizing: waits until offsetWidth > 0 ──────────────────
+// ── Polling init: checks every 100ms until parent has real width ──────────
 function initCanvas(id, callback) {
   var c = document.getElementById(id);
   if (!c) return;
+  var attempts = 0;
   function tryInit() {
-    var parent = c.parentElement && c.parentElement.parentElement; // .canvas-wrap -> .plot-container
-    var w = parent ? parent.offsetWidth - 32 : 0;
-    if (w < 100) w = (window.innerWidth || 700) - 80;
+    attempts++;
+    // Walk up: canvas -> .canvas-wrap -> .plot-container -> section
+    var parent = c.parentElement;
+    while (parent && parent.offsetWidth < 100 && parent.parentElement) {
+      parent = parent.parentElement;
+    }
+    var w = parent ? parent.offsetWidth - 40 : 0;
+    if (w < 100) {
+      if (attempts < 50) { setTimeout(tryInit, 100); return; } // retry up to 5s
+      w = Math.min((window.innerWidth || 700) - 60, 860);
+    }
     var h = parseInt(c.style.height) || 320;
-    c.width  = w * (window.devicePixelRatio || 1);
-    c.height = h * (window.devicePixelRatio || 1);
+    var DPR = window.devicePixelRatio || 1;
+    c.width  = w * DPR;
+    c.height = h * DPR;
     c.style.width  = w + 'px';
     c.style.height = h + 'px';
     var ctx = c.getContext('2d');
-    ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+    ctx.scale(DPR, DPR);
     hideLoader(id);
     callback({ c: c, ctx: ctx, w: w, h: h });
   }
-  // Use IntersectionObserver so we init exactly when visible
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          obs.disconnect();
-          // One rAF delay ensures CSS layout is applied
-          requestAnimationFrame(function() { requestAnimationFrame(tryInit); });
-        }
-      });
-    }, { threshold: 0.1 });
-    obs.observe(c);
-  } else {
-    // Fallback for older browsers
-    setTimeout(tryInit, 500);
-  }
+  // Small initial delay so DOM is painted, then poll
+  setTimeout(tryInit, 200);
 }
 
 // ══════════════════════════════════════════════════════════
