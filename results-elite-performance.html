@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Elite Performance Program Results — Ic² Research Institute</title>
+    <meta name="description" content="Internal result log for the Elite Performance Training program.">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+        --accent:#8B0000;
+        --accent-dark:#5a0000;
+        --text:#2c3e50;
+        --muted:#666;
+        --bg:#f8f9fa;
+        --max:1400px;
+    }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.6; color:var(--text); background:white; font-size:14px; }
+
+    /* Header */
+    .site-header { background:white; border-bottom:1px solid #e0e0e0; position:sticky; top:0; z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,.05); }
+    .header-container { max-width:var(--max); margin:0 auto; padding:.5rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+    .site-logo img { height:50px; width:auto; }
+    .main-navigation ul { list-style:none; display:flex; gap:1.5rem; align-items:center; }
+    .main-navigation a { text-decoration:none; color:var(--text); font-weight:500; font-size:0.9rem; transition:color .3s; }
+    .main-navigation a:hover { color:var(--accent); }
+    .main-navigation a.login-link { background:#8B0000; color:#f1e303; padding:.4rem 1rem; border-radius:25px; font-weight:700; }
+    .hamburger { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:4px; padding:8px; }
+    .hamburger span { display:block; width:25px; height:3px; background:#8B0000; border-radius:3px; transition:all .3s; }
+    .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(7px,7px); }
+    .hamburger.active span:nth-child(2) { opacity:0; }
+    .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
+    .mobile-menu { display:none; position:fixed; top:61px; left:0; right:0; background:white; border-bottom:1px solid #e0e0e0; z-index:999; max-height:0; overflow:hidden; transition:max-height .3s; }
+    .mobile-menu.active { max-height:600px; }
+    .mobile-menu ul { list-style:none; padding:1rem; }
+    .mobile-menu ul li { border-bottom:1px solid #f0f0f0; }
+    .mobile-menu a { display:block; padding:.75rem 1rem; color:var(--text); text-decoration:none; font-weight:500; }
+
+    /* Page header */
+    .page-header { background:linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%); color:white; padding:2.5rem 2rem 2rem; }
+    .page-header-inner { max-width:var(--max); margin:0 auto; }
+    .breadcrumb { font-size:.8rem; color:rgba(255,255,255,.65); margin-bottom:.75rem; }
+    .breadcrumb a { color:rgba(255,255,255,.65); text-decoration:none; }
+    .breadcrumb a:hover { color:white; }
+    .page-header h1 { font-size:2rem; font-weight:700; margin-bottom:.5rem; }
+    .page-header p { font-size:.95rem; opacity:.85; max-width:700px; line-height:1.75; }
+    .header-meta { display:flex; gap:2rem; margin-top:1.25rem; flex-wrap:wrap; }
+    .header-meta span { font-size:.8rem; color:rgba(255,255,255,.7); }
+    .header-meta strong { color:white; }
+
+    /* Content */
+    .content { max-width:var(--max); margin:0 auto; padding:2.5rem 2rem; }
+
+    /* Protocol note */
+    .protocol-note { background:#fff8e1; border-left:4px solid #f9a825; border-radius:0 6px 6px 0; padding:1rem 1.5rem; margin-bottom:2rem; font-size:.88rem; color:#4a3000; line-height:1.7; }
+    .protocol-note strong { color:#3a2000; }
+
+    /* Table container */
+    .table-wrap { overflow-x:auto; margin-bottom:3rem; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,.08); border:1px solid #e0e0e0; }
+
+    /* Spreadsheet table */
+    .results-table { width:100%; border-collapse:collapse; min-width:1200px; }
+    .results-table thead tr th {
+        background:var(--accent-dark);
+        color:white;
+        font-size:.7rem;
+        text-transform:uppercase;
+        letter-spacing:.8px;
+        padding:.7rem .9rem;
+        text-align:left;
+        font-weight:600;
+        white-space:nowrap;
+        border-right:1px solid rgba(255,255,255,.1);
+        position:sticky;
+        top:0;
+    }
+    .results-table thead tr th:last-child { border-right:none; }
+    .results-table tbody tr { border-bottom:1px solid #e8e8e8; }
+    .results-table tbody tr:nth-child(even) { background:#fafafa; }
+    .results-table tbody tr:hover { background:#f0f6ff; }
+    .results-table td {
+        padding:.7rem .9rem;
+        vertical-align:top;
+        font-size:.82rem;
+        line-height:1.55;
+        border-right:1px solid #f0f0f0;
+        color:var(--muted);
+    }
+    .results-table td:last-child { border-right:none; }
+    .results-table td.id-cell {
+        font-family:'Courier New',monospace;
+        font-size:.75rem;
+        font-weight:700;
+        color:var(--accent);
+        white-space:nowrap;
+        width:90px;
+    }
+    .results-table td.name-cell {
+        font-weight:600;
+        color:var(--text);
+        min-width:200px;
+        max-width:260px;
+    }
+    .results-table td.pred-cell {
+        min-width:280px;
+        max-width:360px;
+    }
+    .results-table td.narrow { width:100px; white-space:nowrap; }
+    .results-table td.medium { min-width:160px; max-width:220px; }
+    .results-table td.wide { min-width:220px; max-width:300px; }
+    .results-table td.blank { color:#ccc; font-style:italic; font-size:.75rem; }
+
+    /* Badges */
+    .badge {
+        display:inline-block; padding:.18rem .55rem; border-radius:3px;
+        font-size:.65rem; font-weight:700; text-transform:uppercase;
+        letter-spacing:.4px; white-space:nowrap;
+    }
+    .b-internal    { background:#e8f5e9; color:#1a5c2a; }
+    .b-combination { background:#f3e5f5; color:#6a1b9a; }
+    .b-thought     { background:#fce4ec; color:#c62828; }
+    .b-external    { background:#e3f2fd; color:#1565c0; }
+    .b-pending     { background:#fff8e1; color:#7a4f00; }
+    .b-active      { background:#e3f2fd; color:#1565c0; }
+    .b-planned     { background:#f3e5f5; color:#6a1b9a; }
+    .b-confirmed   { background:#e8f5e9; color:#1a5c2a; }
+    .b-null        { background:#fce4ec; color:#c62828; }
+
+    /* Column header tooltip hint */
+    th[title] { cursor:help; border-bottom:1px dotted rgba(255,255,255,.4); }
+
+    /* Legend */
+    .legend { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .legend-item { display:flex; align-items:center; gap:.35rem; font-size:.78rem; color:var(--muted); }
+    .legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+
+    /* Back link */
+    .back-link { display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; color:var(--accent); text-decoration:none; font-weight:600; margin-bottom:1.5rem; }
+    .back-link:hover { text-decoration:underline; }
+
+    /* Footer */
+    footer { background:#2c3e50; color:white; padding:2rem 2rem 1rem; margin-top:4rem; }
+    .footer-bottom { max-width:var(--max); margin:.5rem auto 0; padding-top:1rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:rgba(255,255,255,.45); font-size:.8rem; }
+    .footer-bottom a { color:rgba(255,255,255,.45); text-decoration:none; }
+    .footer-inner { max-width:var(--max); margin:0 auto; display:flex; gap:3rem; flex-wrap:wrap; justify-content:space-between; margin-bottom:1rem; }
+    .footer-col h4 { color:white; font-size:.9rem; margin-bottom:.5rem; }
+    .footer-col a { display:block; color:rgba(255,255,255,.7); text-decoration:none; font-size:.85rem; margin-bottom:.25rem; }
+    .footer-col a:hover { color:white; }
+
+    @media(max-width:768px) {
+        .main-navigation { display:none; }
+        .hamburger { display:flex; }
+        .mobile-menu { display:block; }
+        .page-header h1 { font-size:1.5rem; }
+    }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+            <img src="ic2-logo.png" alt="Ic² Research Institute" onerror="this.style.display='none'">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="results.html">Results Registry</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="results.html">Results Registry</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+    </ul>
+</nav>
+
+<div class="page-header">
+    <div class="page-header-inner">
+        <div class="breadcrumb">
+            <a href="programs-gateway.html">Programs</a> &rsaquo;
+            <a href="program-elite-performance-overview.html">Elite Performance Training Program</a> &rsaquo;
+            Results
+        </div>
+        <h1>Elite Performance Program Results</h1>
+        <p>Internal result log for the Elite Performance Training program.</p>
+        <div class="header-meta">
+            <span><strong>Program ID:</strong> ELITE</span>
+            <span><strong>Status:</strong> PILOT PHASE</span>
+            <span><strong>Pre-registration:</strong> Required before any data collection</span>
+            <span><strong>Open Science:</strong> All protocols and raw data published on completion</span>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <a href="program-elite-performance-overview.html" class="back-link" data-aos="fade-up">&#8592; Back to Elite Performance Training Program</a>
+
+    <div class="protocol-note" data-aos="fade-up">
+        <strong>How this log works:</strong> Each row is one test. Rows with blank Outcome and Compliance fields have not yet been run. Predictions are documented before any data collection begins. Results, delta, and lessons learned are filled in after a test is completed. This log is the program's internal record. Externally confirmed predictions are also logged on the main <a href="results.html" style="color:#7a4f00;font-weight:600;">Results Registry</a>.
+    </div>
+
+    <div class="legend" data-aos="fade-up">
+        <div class="legend-item"><div class="legend-dot" style="background:#1a5c2a;"></div> Confirmed</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1565c0;"></div> Active</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7a4f00;"></div> Pending</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6a1b9a;"></div> Planned</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c62828;"></div> Null Result</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#555;"></div> Not yet run</div>
+    </div>
+
+    <div class="table-wrap" data-aos="fade-up">
+    <table class="results-table">
+        <thead>
+            <tr>
+                <th title="Test identifier">ID</th>
+                <th title="Name of the test or experiment">Test Name</th>
+                <th title="Internal, External, Combination, Thought Experiment, or Lab">Type</th>
+                <th title="Exactly what was predicted, stated before any data collection">Prediction</th>
+                <th title="Date the prediction was documented">Doc. Date</th>
+                <th title="Date the test was or will be run">Run Date</th>
+                <th title="What the test actually found">Outcome</th>
+                <th title="Null hypothesis and alternative explanations">Control</th>
+                <th title="Full / Partial / Null / Pending">Compliance</th>
+                <th title="Number of independent tests or replications">N Tests</th>
+                <th title="Quantitative gap between predicted and observed value">Delta</th>
+                <th title="What to do next based on this result">Next Steps</th>
+                <th title="What this result changed about how we formulate the next prediction">Lessons Learned</th>
+                <th title="Additional context">Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="id-cell">EP-001</td>
+                <td class="name-cell">Pilot: Information Encoding in Peripheral Sensory Channels</td>
+                <td class="narrow"><span class="badge b-internal">Internal / Lab</span></td>
+                <td class="pred-cell">Participants trained to encode information through a peripheral sensory channel (non-visual, non-auditory) will show measurable improvement in working memory throughput and fluid intelligence task performance compared to control group.</td>
+                <td class="narrow">January 31, 2026</td>
+                <td class="narrow"><span class="blank">&mdash;</span></td>
+                <td class="medium"><span class="blank">&mdash;</span></td>
+                <td class="wide">Matched control group receiving equivalent training time without the information encoding component. Pre/post testing on standardized fluid intelligence battery.</td>
+                <td class="narrow"><span class="badge b-pending">Pending</span></td>
+                <td class="narrow">Not yet run. Target Q3 2026.</td>
+                <td class="narrow"><span class="blank">&mdash;</span></td>
+                <td class="wide">Finalize participant recruitment protocol. Ethics review. Pre-register analysis plan including primary outcome measures and statistical thresholds.</td>
+                <td class="medium"><span class="blank">&mdash;</span></td>
+                <td class="medium">Pre-registration on OSF required before any data collection.</td>
+            </tr>
+            <tr>
+                <td class="id-cell">EP-002</td>
+                <td class="name-cell">Pilot: Below-Threshold Preparation and Peak Performance Timing</td>
+                <td class="narrow"><span class="badge b-internal">Internal / Observational</span></td>
+                <td class="pred-cell">Elite performers who use the program's preparation protocol will show a measurable improvement in the timing and magnitude of peak performance states, consistent with the Bamboo Principle: preparation below threshold followed by threshold crossing at the right moment.</td>
+                <td class="narrow"><span class="blank">&mdash;</span></td>
+                <td class="narrow"><span class="blank">&mdash;</span></td>
+                <td class="medium"><span class="blank">&mdash;</span></td>
+                <td class="wide"><span class="blank">&mdash;</span></td>
+                <td class="narrow"><span class="badge b-planned">Planned</span></td>
+                <td class="narrow">Not yet designed</td>
+                <td class="narrow"><span class="blank">&mdash;</span></td>
+                <td class="wide">Design outcome measures. Determine appropriate performance domains for initial testing.</td>
+                <td class="medium"><span class="blank">&mdash;</span></td>
+                <td class="medium">Protocol not yet designed. Space reserved.</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div style="text-align:center; margin-top:1rem;" data-aos="fade-up">
+        <a href="program-elite-performance-overview.html" style="display:inline-block;padding:.75rem 1.75rem;background:var(--accent);color:white;text-decoration:none;border-radius:6px;font-weight:600;font-size:.9rem;margin-right:.75rem;">Back to Program Page</a>
+        <a href="results.html" style="display:inline-block;padding:.75rem 1.75rem;background:transparent;color:var(--accent);border:2px solid var(--accent);text-decoration:none;border-radius:6px;font-weight:600;font-size:.9rem;">Main Results Registry</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h4>Programs</h4>
+            <a href="programs-gateway.html">All Programs</a>
+            <a href="program-elite-performance-overview.html">Elite Performance Training Program</a>
+            <a href="testing-schedule.html">Testing Schedule</a>
+            <a href="results.html">Results Registry</a>
+        </div>
+        <div class="footer-col">
+            <h4>Institute</h4>
+            <a href="index.html">Home</a>
+            <a href="validation.html">Validation</a>
+            <a href="book.html">The Big TOE</a>
+            <a href="blog.html">Blog</a>
+        </div>
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <a href="contribute.html">Contribute</a>
+            <a href="mailto:info@eequalsicsquared.com">Contact</a>
+            <a href="become-member.html">Become a Member</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. |
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({duration:800,once:true,offset:60});
+    const h = document.getElementById('hamburger');
+    const m = document.getElementById('mobileMenu');
+    if (h && m) {
+        h.addEventListener('click', function() {
+            this.classList.toggle('active');
+            m.classList.toggle('active');
+        });
+        m.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                h.classList.remove('active');
+                m.classList.remove('active');
+            });
+        });
+    }
+</script>
+</body>
+</html>
