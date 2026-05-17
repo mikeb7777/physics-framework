@@ -698,6 +698,7 @@
   if(!h||!m)return;
   h.addEventListener('click',function(){this.classList.toggle('active');m.classList.toggle('active');});
   m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{h.classList.remove('active');m.classList.remove('active');}));
+}); // end load listener
 })();
 </script>
 
@@ -1639,12 +1640,15 @@ window.addEventListener('load', function() {
 ══════════════════════════════════════════════ -->
 <script>
 (function() {
+window.addEventListener('load', function() {
 
 // ── Utility: resolve canvas to pixel dimensions ──────────────────────────
 function initCanvas(id) {
   var c = document.getElementById(id);
   if (!c) return null;
-  var w = c.parentElement.offsetWidth - 32;
+  var parent = c.parentElement;
+  var w = (parent ? parent.offsetWidth : 0) - 32;
+  if (w < 100) w = (window.innerWidth || 600) - 64; // fallback if layout not complete
   var h = parseInt(c.style.height) || 320;
   c.width  = w * (window.devicePixelRatio || 1);
   c.height = h * (window.devicePixelRatio || 1);

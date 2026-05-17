@@ -1067,7 +1067,7 @@
       <p style="color:#666; margin-top:.5rem;">Each bar shows the gap between documentation date and independent experimental confirmation.</p>
     </div>
     <div id="pred-timeline" data-aos="fade-up" style="width:100%; max-width:800px; margin:0 auto;">
-      <canvas id="timeline-canvas" style="width:100%; display:block; border-radius:8px;"></canvas>
+      <canvas id="timeline-canvas" style="width:100%; height:320px; display:block; border-radius:8px; background:#fff;"></canvas>
     </div>
     <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:1rem;">
       Documentation dates are independently timestamped. Confirmation dates are from published results by DESI, Google Quantum AI, and JWST.
@@ -1117,7 +1117,8 @@
   var W_CSS, H_CSS;
 
   function resize() {
-    W_CSS = canvas.parentElement.offsetWidth;
+    var p = canvas.parentElement;
+    W_CSS = (p && p.offsetWidth > 100) ? p.offsetWidth : Math.min(window.innerWidth - 40, 800);
     H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
     canvas.width  = W_CSS * DPR;
     canvas.height = H_CSS * DPR;
@@ -1276,18 +1277,34 @@
     if (prog < 1) requestAnimationFrame(animate);
   }
 
-  // Start when scrolled into view
+  // Draw immediately (static) then animate when scrolled into view
+  draw(0.01); // render a minimal frame so canvas is never blank
+
   var started = false;
   function checkVisible() {
     if (started) return;
     var rect = canvas.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92) {
+    if (rect.top < window.innerHeight + 200) { // generous threshold
       started = true;
+      startTime = null;
       requestAnimationFrame(animate);
     }
   }
   window.addEventListener('scroll', checkVisible, { passive: true });
-  checkVisible();
+
+  // Also trigger on load and after a short delay
+  window.addEventListener('load', function() {
+    resize();
+    draw(0.01);
+    checkVisible();
+    setTimeout(function() { if (!started) { started = true; startTime = null; requestAnimationFrame(animate); } }, 600);
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    resize();
+    draw(0.01);
+    setTimeout(checkVisible, 100);
+  });
 })();
 </script>
 
