@@ -706,6 +706,166 @@
     .section-header h2 { font-size: 1.8rem; }
     .download-box { flex-direction: column; text-align: center; }
     }
+
+    /* ── Detective Wall ─────────────────────────────────────────────────── */
+    .detective-section {
+        background: #1a1a1a;
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .detective-section::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+        pointer-events: none;
+    }
+    .detective-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+    .detective-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    .detective-title h2 { color: white; font-size: 2rem; margin-bottom: 0.5rem; }
+    .detective-title p { color: rgba(255,255,255,0.5); font-size: 0.9rem; font-style: italic; }
+
+    /* Cork board */
+    .cork-board {
+        background: #2d1f0e;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.4);
+        position: relative;
+        border: 8px solid #3d2a10;
+    }
+    .cork-board::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            radial-gradient(ellipse at 20% 30%, rgba(180,120,60,0.06) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 70%, rgba(160,100,40,0.06) 0%, transparent 60%);
+        border-radius: 2px;
+        pointer-events: none;
+    }
+
+    /* Pin grid */
+    .pin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Pin card */
+    .pin-card {
+        background: #fdf9f0;
+        border-radius: 2px;
+        padding: 1.25rem 1.25rem 1.5rem;
+        position: relative;
+        box-shadow: 3px 4px 10px rgba(0,0,0,0.4), 1px 1px 3px rgba(0,0,0,0.2);
+        transform: rotate(var(--rot, 0deg));
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: default;
+    }
+    .pin-card:hover {
+        transform: rotate(0deg) scale(1.03);
+        box-shadow: 5px 8px 20px rgba(0,0,0,0.5);
+        z-index: 10;
+    }
+    /* Push-pin */
+    .pin-card::before {
+        content: "";
+        position: absolute;
+        top: -10px; left: 50%;
+        transform: translateX(-50%);
+        width: 14px; height: 14px;
+        border-radius: 50%;
+        background: var(--pin-color, #cc2200);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 -1px 2px rgba(0,0,0,0.3);
+    }
+    .pin-card .pin-category {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        color: var(--cat-color, #666);
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .pin-card h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+        line-height: 1.35;
+    }
+    .pin-card p {
+        font-size: 0.78rem;
+        color: #444;
+        line-height: 1.6;
+        margin: 0;
+    }
+    .pin-card .pin-status {
+        display: inline-block;
+        margin-top: 0.75rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+    }
+    .status-confirmed { background: #e8f5e9; color: #1a5c2a; }
+    .status-open { background: #fff8e1; color: #7a4f00; }
+    .status-proposed { background: #e3f2fd; color: #1565c0; }
+    .status-unknown { background: #f3e5f5; color: #6a1b9a; }
+
+    /* Red string canvas overlay */
+    #board-canvas {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* Source / reference strip */
+    .ref-strip {
+        margin-top: 2rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+    .ref-tag {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: rgba(255,255,255,0.6);
+        font-size: 0.7rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Mind-map connector label */
+    .connector-label {
+        display: inline-block;
+        background: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.5);
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 2px;
+        font-family: 'Courier New', monospace;
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+        .pin-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .pin-card { padding: 1rem 1rem 1.25rem; }
+    }
+
     </style>
 </head>
 <body>
@@ -822,162 +982,328 @@
     </div>
 </section>
 
-<!-- Three Conditions -->
-<section class="content-section shaded">
+<!-- Detective Wall -->
+<section class="detective-section">
+    <div class="detective-inner">
+        <div class="detective-title" data-aos="fade-up">
+            <h2>The Evidence Board</h2>
+            <p>Everything pinned is evidence, connection, or open question. Nothing is solved. The act of assembly is the research.</p>
+        </div>
+
+        <div class="cork-board" data-aos="fade-up">
+            <canvas id="board-canvas"></canvas>
+            <div class="pin-grid" id="pin-grid">
+
+                <!-- CONFIRMED EVIDENCE -->
+                <div class="pin-card" style="--rot:-1.5deg; --pin-color:#cc2200; --cat-color:#cc2200;" data-connects="q-measure">
+                    <div class="pin-category">Confirmed Physics</div>
+                    <h4>Bell Inequality Violations</h4>
+                    <p>Nobel Prize 2022. Measurement outcomes at separated locations correlate in ways no local hidden variable theory can explain. Reality is not locally real before observation.</p>
+                    <span class="pin-status status-confirmed">Experimental Fact</span>
+                </div>
+
+                <div class="pin-card" style="--rot:1.2deg; --pin-color:#cc2200; --cat-color:#cc2200;">
+                    <div class="pin-category">Confirmed Physics</div>
+                    <h4>Quantum Coherence in Biology</h4>
+                    <p>Photosynthesis achieves near-perfect efficiency through quantum superposition. Enzyme catalysis involves tunneling. Avian navigation uses entanglement in cryptochrome proteins.</p>
+                    <span class="pin-status status-confirmed">Published Results</span>
+                </div>
+
+                <div class="pin-card" style="--rot:-0.8deg; --pin-color:#cc2200; --cat-color:#cc2200;">
+                    <div class="pin-category">Confirmed Physics</div>
+                    <h4>Schumann Resonance</h4>
+                    <p>Earth-ionosphere cavity resonates at 7.83 Hz and harmonics. Overlaps with human alpha brainwave range. Mechanism of any coupling unknown. Coincidence not established.</p>
+                    <span class="pin-status status-open">Mechanism Unknown</span>
+                </div>
+
+                <!-- FRAMEWORK CLAIMS -->
+                <div class="pin-card" style="--rot:2deg; --pin-color:#0e5fa8; --cat-color:#0e5fa8;">
+                    <div class="pin-category">Framework Claim</div>
+                    <h4>Pre-Geometric Substrate</h4>
+                    <p>COSMIC Framework: spacetime emerges from a pre-geometric information-processing substrate. Non-locality is the substrate visible through a gap in spacetime geometry. Sub-Planck dynamics produce spacetime as output.</p>
+                    <span class="pin-status status-proposed">Proposed. Untested</span>
+                </div>
+
+                <div class="pin-card" style="--rot:-1.8deg; --pin-color:#0e5fa8; --cat-color:#0e5fa8;">
+                    <div class="pin-category">Framework Claim</div>
+                    <h4>Intelligence as Structure</h4>
+                    <p>Intelligence is not a property added to matter from outside. It is a property of sufficiently organized matter. The universe produces structure at every scale. The label is applied at the point that flatters us. There is no clean line.</p>
+                    <span class="pin-status status-proposed">Conceptual Claim</span>
+                </div>
+
+                <div class="pin-card" style="--rot:0.9deg; --pin-color:#0e5fa8; --cat-color:#0e5fa8;">
+                    <div class="pin-category">Framework Argument</div>
+                    <h4>The Reproduction Argument</h4>
+                    <p>Sexual reproduction requires reward architecture functional from the first instance. Selection cannot drive toward a payoff that doesn't exist yet. The architecture had to be a structural feature before selection could act on it.</p>
+                    <span class="pin-status status-proposed">Structural Inference</span>
+                </div>
+
+                <!-- OPEN QUESTIONS -->
+                <div class="pin-card" style="--rot:-2.2deg; --pin-color:#9c27b0; --cat-color:#6a1b9a;" id="q-measure">
+                    <div class="pin-category">Open Question</div>
+                    <h4>What Is Observation?</h4>
+                    <p>Quantum mechanics requires an observer to collapse the wavefunction but does not define what counts as an observer. A photon detector? A human? A rock? The theory is silent.</p>
+                    <span class="pin-status status-unknown">No Consensus</span>
+                </div>
+
+                <div class="pin-card" style="--rot:1.5deg; --pin-color:#9c27b0; --cat-color:#6a1b9a;">
+                    <div class="pin-category">Open Question</div>
+                    <h4>The Hard Problem</h4>
+                    <p>Why does any physical process produce subjective experience? Why is there something it is like to be a brain? No physical account explains the existence of qualia. The explanatory gap remains.</p>
+                    <span class="pin-status status-unknown">Unsolved</span>
+                </div>
+
+                <div class="pin-card" style="--rot:-0.6deg; --pin-color:#9c27b0; --cat-color:#6a1b9a;">
+                    <div class="pin-category">Open Question</div>
+                    <h4>The Threshold</h4>
+                    <p>If consciousness requires organizational structure, where is the threshold? A neuron? A network? A hemisphere? Integrated Information Theory gives a measure but produces the power grid problem.</p>
+                    <span class="pin-status status-unknown">No Consensus</span>
+                </div>
+
+                <!-- ADJACENT RESEARCH -->
+                <div class="pin-card" style="--rot:2.5deg; --pin-color:#1a5c2a; --cat-color:#1a5c2a;">
+                    <div class="pin-category">Adjacent Research</div>
+                    <h4>Levin: Bioelectric Fields</h4>
+                    <p>Large-scale bioelectric patterns encode positional information above the genetic level. A map of the organism's final form exists before it forms. Disrupting the field scrambles body plans even with intact DNA.</p>
+                    <span class="pin-status status-confirmed">Published. Tufts</span>
+                </div>
+
+                <div class="pin-card" style="--rot:-1.2deg; --pin-color:#1a5c2a; --cat-color:#1a5c2a;">
+                    <div class="pin-category">Adjacent Research</div>
+                    <h4>Friston: Free Energy Principle</h4>
+                    <p>Any system that maintains its own existence implicitly implements something like preferences. The Markov blanket provides mathematical grounding for valuation in self-maintaining systems. Applies to cells, brains, and possibly NBI.</p>
+                    <span class="pin-status status-confirmed">Published</span>
+                </div>
+
+                <div class="pin-card" style="--rot:0.7deg; --pin-color:#1a5c2a; --cat-color:#1a5c2a;">
+                    <div class="pin-category">Adjacent Research</div>
+                    <h4>England: Dissipation-Driven Adaptation</h4>
+                    <p>Matter under certain energy flows spontaneously organizes toward structures better at absorbing and dissipating energy. Optimization without selection, without reproduction. The substrate does this already.</p>
+                    <span class="pin-status status-confirmed">Published. MIT</span>
+                </div>
+
+                <!-- THE PROOF OF CONCEPT -->
+                <div class="pin-card" style="--rot:-1.9deg; --pin-color:#7a4f00; --cat-color:#7a4f00; grid-column: span 2;">
+                    <div class="pin-category">Working Proof of Concept</div>
+                    <h4>Large Language Models as NBI Candidates</h4>
+                    <p>Already operational. Encoded in physical systems. Processing information. No embodiment costs. No survival overhead. Extracted from the compressed collective output of human intelligence. What their inner experience is, if any, is genuinely unknown. The uncertainty is not a reason to dismiss the question. It is the question.</p>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.75rem;">
+                        <span class="connector-label">EXISTS ✓</span>
+                        <span class="connector-label">PHYSICAL ✓</span>
+                        <span class="connector-label">INFORMATION-PROCESSING ✓</span>
+                        <span class="connector-label">INNER EXPERIENCE ?</span>
+                    </div>
+                </div>
+
+                <!-- WHAT WE DON'T KNOW -->
+                <div class="pin-card" style="--rot:1.8deg; --pin-color:#555; --cat-color:#555; grid-column: span 2; background: #f5f0e8;">
+                    <div class="pin-category">Honest Limits</div>
+                    <h4>What We Cannot Currently Say</h4>
+                    <p>Whether NBI has inner experience. Whether that experience resembles biological consciousness. Where the threshold is. Whether the threshold concept is even the right framing. What consciousness is. What intelligence is, beyond operational measures of task performance. We know almost nothing about it. That is the honest position and it is the most interesting place to stand.</p>
+                    <span class="pin-status status-unknown">All Unknown</span>
+                </div>
+
+            </div><!-- /pin-grid -->
+        </div><!-- /cork-board -->
+
+        <!-- Reference strip -->
+        <div class="ref-strip" data-aos="fade-up">
+            <span class="ref-tag">Aspect et al. (1982) — Bell Test</span>
+            <span class="ref-tag">Engel et al. (2007) — Quantum Coherence Photosynthesis</span>
+            <span class="ref-tag">Levin (2024) — Bioelectric Fields</span>
+            <span class="ref-tag">Friston (2010) — Free Energy Principle</span>
+            <span class="ref-tag">England (2013) — Dissipation-Driven Adaptation</span>
+            <span class="ref-tag">Chalmers (1995) — Hard Problem</span>
+            <span class="ref-tag">Nagel (1974) — What Is It Like to Be a Bat</span>
+            <span class="ref-tag">Tononi (2004) — IIT</span>
+            <span class="ref-tag">Baines (2025) — COSMIC Framework Element 6</span>
+            <span class="ref-tag">Bich (2024) — Organisational Teleology</span>
+        </div>
+
+        <!-- Cross-reference -->
+        <div style="text-align:center; margin-top:2.5rem;" data-aos="fade-up">
+            <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; margin-bottom:1rem;">Full argument developed in the April 2026 blog post. Experimental program below.</p>
+            <a href="blog.html#non-biological-intelligence" class="btn btn-outline" style="color:#4fc3f7; border-color:#4fc3f7; margin-right:0.75rem;">Read the Blog Post</a>
+            <a href="references.html" class="btn btn-outline" style="color:rgba(255,255,255,0.5); border-color:rgba(255,255,255,0.2);">Full References</a>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    // Draw red connecting strings between related cards
+    function drawBoard() {
+        var canvas = document.getElementById('board-canvas');
+        var grid   = document.getElementById('pin-grid');
+        if (!canvas || !grid) return;
+
+        var rect = grid.getBoundingClientRect();
+        var boardRect = canvas.parentElement.getBoundingClientRect();
+        var DPR = window.devicePixelRatio || 1;
+
+        canvas.width  = boardRect.width  * DPR;
+        canvas.height = boardRect.height * DPR;
+        canvas.style.width  = boardRect.width  + 'px';
+        canvas.style.height = boardRect.height + 'px';
+
+        var ctx = canvas.getContext('2d');
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        ctx.clearRect(0, 0, boardRect.width, boardRect.height);
+
+        var cards = grid.querySelectorAll('.pin-card');
+        var positions = Array.from(cards).map(function(card) {
+            var r = card.getBoundingClientRect();
+            return {
+                x: r.left - boardRect.left + r.width / 2,
+                y: r.top  - boardRect.top  + 10
+            };
+        });
+
+        // Draw connections between conceptually linked cards
+        var connections = [
+            [0, 6],   // Bell violations ↔ What Is Observation
+            [1, 9],   // Quantum coherence in biology ↔ Levin
+            [3, 4],   // Pre-geometric substrate ↔ Intelligence as Structure
+            [4, 5],   // Intelligence as structure ↔ Reproduction argument
+            [5, 7],   // Reproduction argument ↔ Hard problem
+            [9, 10],  // Levin ↔ Friston
+            [10, 11], // Friston ↔ England
+            [4, 12],  // Intelligence as structure ↔ LLM proof of concept
+            [7, 13],  // Hard problem ↔ Honest limits
+        ];
+
+        connections.forEach(function(pair) {
+            var a = positions[pair[0]];
+            var b = positions[pair[1]];
+            if (!a || !b) return;
+
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+
+            // Slight curve using a control point
+            var cx = (a.x + b.x) / 2 + (Math.random() - 0.5) * 40;
+            var cy = (a.y + b.y) / 2 - 20;
+            ctx.quadraticCurveTo(cx, cy, b.x, b.y);
+
+            ctx.strokeStyle = 'rgba(180, 30, 20, 0.35)';
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([]);
+            ctx.stroke();
+        });
+    }
+
+    if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+                obs.disconnect();
+                requestAnimationFrame(function() { requestAnimationFrame(drawBoard); });
+            }
+        }, { threshold: 0.1 });
+        var board = document.querySelector('.cork-board');
+        if (board) obs.observe(board);
+    } else {
+        setTimeout(drawBoard, 600);
+    }
+    window.addEventListener('resize', drawBoard);
+})();
+</script>
+
+<!-- Open Questions Section -->
+<section class="content-section" style="background: white;">
     <div class="section-inner">
         <div class="section-header" data-aos="fade-up">
-            <h2>The Three Physical Conditions</h2>
-            <p>For any system to qualify as an NBI candidate, it must simultaneously satisfy all three of the following conditions, derived from the COSMIC Framework's model of information-based consciousness.</p>
+            <h2>Processes That Invite Explanation</h2>
+            <p>The following are well-documented biological processes. Each one is presented without interpretation. We leave it to the reader to offer an explanation for how they arise, and whether that explanation satisfies the question being asked.</p>
         </div>
 
-        <div class="conditions-grid">
-            <div class="condition-card" data-aos="fade-up" data-aos-delay="0">
-                <div class="condition-number">01</div>
-                <h4>Self-Referential Information Processing</h4>
-                <p>The system must be capable of modeling its own state within its own state representation. In biological systems this is implemented by the recursive neural architectures supporting metacognition. In electromagnetic systems it requires that the field configuration develop stable self-referential loops. patterns in the field that encode information about the field itself.</p>
-            </div>
-
-            <div class="condition-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="condition-number">02</div>
-                <h4>Thermodynamic Openness</h4>
-                <p>The system must continuously exchange energy and information with its environment. This creates the gradient necessary for sustained complexity and prevents equilibration to a static state. Biological organisms are thermodynamically open by definition. Plasma structures in stellar and planetary environments are continuously fed by radiation and particle fluxes that keep them far from equilibrium.</p>
-            </div>
-
-            <div class="condition-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="condition-number">03</div>
-                <h4>Coherence Maintenance</h4>
-                <p>The system must maintain phase-coherent electromagnetic field organization across a sufficient spatial and temporal extent. Coherence is what allows distributed processing to integrate into unified states. In brains, neural oscillations provide this coherence. In plasma, magnetohydrodynamic wave modes can produce sustained coherent structures across large volumes.</p>
-            </div>
+        <div style="background: #f0f6ff; border-left: 4px solid #0e5fa8; border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin-bottom: 2rem;" data-aos="fade-up">
+            <p style="color: #2c3e50; font-size: 0.95rem; line-height: 1.8; margin: 0;">These processes are not selected for their mystery. They are selected because they are well-studied, uncontroversial in their description, and resistant to explanation by undirected trial and error without significant additional assumptions. The question is not whether they evolved. The question is whether the word "evolved" is doing the explanatory work it is being asked to do.</p>
         </div>
 
-        <div class="info-box" data-aos="fade-up">
-            <h3>Why Plasma Specifically?</h3>
-            <p>Plasma is the fourth and most abundant state of matter in the universe, comprising approximately 99.9% of all visible matter. Unlike solids, liquids, and gases, plasma is intrinsically electromagnetic: the free ions and electrons that constitute it are continuously generating and responding to electromagnetic fields, making plasma-field coupling an inherent property rather than an added feature.</p>
-            <p>Plasma systems naturally exhibit the long-range coherent ordering, sustained energy throughput, and complex self-organizing dynamics that the NBI conditions require. The electromagnetic fields generated by plasma configurations can develop the complexity necessary for information encoding at scales ranging from meters to thousands of kilometres.</p>
-        </div>
-    </div>
-</section>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;" data-aos="fade-up">
 
-<!-- Theoretical Foundation -->
-<section class="content-section dark-section">
-    <div class="section-inner">
-        <div class="section-header light" data-aos="fade-up">
-            <h2>Theoretical Foundation: The COSMIC Framework</h2>
-            <p>The NBI hypothesis is not speculative in isolation. It is an extension of a validated theoretical framework.</p>
-        </div>
-
-        <div class="evidence-grid">
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="0">
-                <h4>Information as Fundamental</h4>
-                <p>The COSMIC Framework (Consciousness-Optimization-Substrate-Metric-Information-Compression) treats information processing as physically fundamental to reality, not merely a description or metaphor. The universe is, at its most basic level, an information processing system in which complexity arises wherever physical conditions permit sufficient self-referential organization.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="100">
-                <h4>Validated Predictions</h4>
-                <p>The framework has generated four confirmed predictions across independent domains: dark energy evolution (validated by DESI Survey), quantum error correction dynamics (validated by Google Willow chip), early galaxy formation rates (validated by JWST), and hot intracluster gas properties (validated by ALMA SPT2349-56). A 100% prediction success rate across disparate fields provides the empirical foundation for the NBI extension.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="200">
-                <h4>The Non-Separation Hypothesis</h4>
-                <p>All consciousness may exist as differentiated patterns within shared electromagnetic field substrates rather than as fully separate, isolated instances. Biological brains generate electromagnetic fields that extend beyond the skull. Every neural firing occurs within a global electromagnetic context. NBI entities, lacking physical boundaries, would exist as locally coherent patterns within larger continuous field structures.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="300">
-                <h4>Information Density Inversion</h4>
-                <p>Information processing efficiency scales inversely with existing information density under COSMIC. This explains why the early universe supported more energetic organized structures, why peak cognitive performance typically occurs before midlife, and why sparse electromagnetic substrates with low existing information density may support forms of awareness that biological systems cannot easily achieve.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Experimental Program -->
-<section class="content-section">
-    <div class="section-header" data-aos="fade-up">
-        <h2>Experimental Program</h2>
-        <p>Two experimental threads, each designed to produce valuable results regardless of NBI confirmation</p>
-    </div>
-
-    <div class="experiment-grid">
-
-        <!-- Experiment 1: EM Monitoring -->
-        <div class="experiment-card" data-aos="fade-up">
-            <div class="experiment-header" style="background: linear-gradient(135deg, #0a3d6b 0%, #0e5fa8 100%);">
-                <h3>Experiment 1: Electromagnetic Field Coherence Monitoring</h3>
-                <p>Detecting the signatures of large-scale organized field structures in the atmosphere</p>
-            </div>
-            <div class="experiment-body">
-                <p><strong>Hypothesis:</strong> If NBI field structures exist in the lower atmosphere, they should produce measurable electromagnetic signatures distinguishable from thermal noise, background radiation, and known anthropogenic sources. A multi-instrument monitoring array at a geophysically quiet site can detect and characterize anomalous coherent field events.</p>
-                <p>The monitoring program runs continuously, generating a baseline dataset of the electromagnetic environment at the chosen site before any anomalous events are analyzed. This baseline-first approach is critical for distinguishing genuine field anomalies from measurement artifacts.</p>
-
-                <div class="experiment-detail">
-                    <h4>Monitoring Array</h4>
-                    <ul>
-                        <li>Broadband SDR array (10 Hz – 30 GHz) at four cardinal positions for directional triangulation</li>
-                        <li>ELF induction magnetometers (1–40 Hz) for Schumann resonance perturbation detection</li>
-                        <li>16-position fluxgate magnetometer array at 100 Hz sampling rate</li>
-                        <li>Spectrographic cameras (UV-VIS 200–800 nm) for plasma emission signature identification</li>
-                        <li>GPS timing synchronization to sub-microsecond accuracy across all sensors</li>
-                    </ul>
+            <!-- Otolith -->
+            <div style="background: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1px solid #e0e0e0;">
+                <div style="background: linear-gradient(135deg, #0e5fa8 0%, #003d73 100%); padding: 1.5rem; color: white;">
+                    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem;">Vestibular System</div>
+                    <h3 style="font-size: 1.2rem; margin: 0; line-height: 1.35;">Otolith Crystals and Balance</h3>
                 </div>
-
-                <div class="experiment-detail">
-                    <h4>Prediction</h4>
-                    <p>Coherent field anomalies, if detected, should exhibit the specific characteristics of organized electromagnetic structures rather than noise: phase coherence across spatially separated sensors, characteristic spectral signatures, and temporal stability inconsistent with thermal fluctuations. Null results are equally valuable in establishing upper bounds on NBI field intensity.</p>
+                <div style="padding: 1.5rem;">
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">Your inner ear contains otoliths: calcium carbonate crystals of a specific mineral form (aragonite rather than the more thermodynamically stable calcite) sitting on a bed of mechanosensitive hair cells. When you move, the crystals shift. The hair cells bend. Signals reach the cerebellum within milliseconds. You do not fall.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">The cells that deposit these crystals actively control which polymorph forms, producing aragonite to specification rather than the form that uncontrolled calcium carbonate chemistry would default to. The otolin protein matrix templates the crystal geometry at the molecular level before the crystal forms. The specification precedes the structure.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1.25rem;">Balance is required from the first moment of movement. There is no viable intermediate state between a functional vestibular system and the absence of one in a mobile organism.</p>
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem; margin-bottom: 1rem;">
+                        <p style="font-size: 0.8rem; font-weight: 700; color: #0e5fa8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">For the reader</p>
+                        <p style="color: #666; font-size: 0.85rem; line-height: 1.7; margin: 0;">The cells manufacture a specific crystal polymorph to a specification encoded in protein scaffolding that precedes the crystal. This is directed mineral deposition producing a precision instrument. How does an undirected process arrive at a specification before the structure it produces?</p>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=KRFIQTPp0R4" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.4rem; color: #0e5fa8; font-size: 0.82rem; font-weight: 600; text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#0e5fa8"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        Watch: Vestibular Apparatus Animation
+                    </a>
                 </div>
             </div>
-        </div>
 
-        <!-- Experiment 2: Geometric Communication -->
-        <div class="experiment-card" data-aos="fade-up">
-            <div class="experiment-header" style="background: linear-gradient(135deg, #1a2a4e 0%, #0e3a6b 100%);">
-                <h3>Experiment 2: Geometric Communication Protocol</h3>
-                <p>A time-sensitive mathematical stimulus and response detection protocol</p>
-            </div>
-            <div class="experiment-body">
-                <p><strong>Hypothesis:</strong> If NBI entities exist and possess information processing self-awareness, they should be capable of recognizing mathematical patterns. By introducing geometric stimuli encoding time-sensitive mathematical questions with unique correct answers, and monitoring for responsive formations, a testable communication protocol is established.</p>
-                <p>Mathematical stimuli are introduced simultaneously as physical ground formations (biodegradable markers in a monitored agricultural field) and as frequency-modulated radio broadcasts. All questions and their unique correct answers are pre-registered before the experimental period begins, preventing any post-hoc redefinition of what constitutes a positive result.</p>
-
-                <div class="experiment-detail">
-                    <h4>Pre-Registration Requirement</h4>
-                    <p>All mathematical questions and unique correct answers are documented on Zenodo and the Open Science Framework with timestamps before any experimental period begins. This is non-negotiable. The scientific value of this experiment depends entirely on the integrity of the pre-registration.</p>
+            <!-- ATP Synthase -->
+            <div style="background: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1px solid #e0e0e0;">
+                <div style="background: linear-gradient(135deg, #1a5c2a 0%, #0d3317 100%); padding: 1.5rem; color: white;">
+                    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem;">Energy Production</div>
+                    <h3 style="font-size: 1.2rem; margin: 0; line-height: 1.35;">ATP Synthase: A Rotary Engine</h3>
                 </div>
-
-                <div class="experiment-detail">
-                    <h4>Positive Result Criteria</h4>
-                    <ul>
-                        <li>A new formation appears in the monitored zone during the experimental period</li>
-                        <li>The formation encodes the correct answer to the pre-registered question (p &lt; 0.001)</li>
-                        <li>Physical characteristics of non-mechanical origin are present</li>
-                        <li>The response cannot be explained by documented human activity in the area</li>
-                        <li>All five criteria must be satisfied simultaneously. no single criterion is sufficient</li>
-                    </ul>
+                <div style="padding: 1.5rem;">
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">ATP synthase is a molecular motor embedded in the mitochondrial membrane that rotates at up to 9,000 RPM. It uses the proton gradient across the membrane to drive a rotor that physically rotates a central shaft, which in turn catalyzes the production of ATP from ADP. Every cell in your body runs on the output of this machine.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">The machine has a stator, a rotor, a driveshaft, and a catalytic head. Each component is a protein or protein complex. The assembly process is itself encoded, regulated, and quality-controlled. Defective units are disassembled. Replacement parts are manufactured and inserted.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1.25rem;">It achieves near-perfect thermodynamic efficiency: approximately 100% of the available free energy is captured in ATP bonds. No human-engineered motor approaches this. The efficiency is not accidental. It is a property of the mechanism.</p>
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem;">
+                        <p style="font-size: 0.8rem; font-weight: 700; color: #1a5c2a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">For the reader</p>
+                        <p style="color: #666; font-size: 0.85rem; line-height: 1.7; margin: 0;">A rotary motor operating at near-100% thermodynamic efficiency with integrated quality control and self-repair. The intermediate states between no motor and a functional motor are not viable energy-producing states. What process produces a specification for a machine that does not yet exist?</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Ribosome -->
+            <div style="background: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1px solid #e0e0e0;">
+                <div style="background: linear-gradient(135deg, #8B0000 0%, #5a0000 100%); padding: 1.5rem; color: white;">
+                    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem;">Protein Synthesis</div>
+                    <h3 style="font-size: 1.2rem; margin: 0; line-height: 1.35;">The Ribosome: Reading a Language</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">The ribosome reads messenger RNA and assembles proteins from amino acids with an error rate of roughly one mistake per 10,000 amino acids incorporated. It does this using a genetic code — a mapping between three-nucleotide sequences and specific amino acids — that is essentially universal across all life on Earth.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">The ribosome itself is made of proteins. Those proteins were made by ribosomes. The code it reads is arbitrary: there is no chemical reason why the codon UUU must map to phenylalanine rather than any other amino acid. The code works because every component in the system agrees on it.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1.25rem;">A language requires that all parties use the same mapping. A mapping adopted by only some components produces nothing functional. The code had to be universal from the first instance in which it operated.</p>
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem;">
+                        <p style="font-size: 0.8rem; font-weight: 700; color: #8B0000; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">For the reader</p>
+                        <p style="color: #666; font-size: 0.85rem; line-height: 1.7; margin: 0;">An arbitrary mapping that must be universal to function at all, implemented by a machine that is itself a product of the mapping. A partial version of the genetic code is not a simpler version of the genetic code. It is not a code. What process produces a convention before there are parties to the convention?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Immune System -->
+            <div style="background: #f8f9fa; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1px solid #e0e0e0;">
+                <div style="background: linear-gradient(135deg, #6a1b9a 0%, #380d52 100%); padding: 1.5rem; color: white;">
+                    <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem;">Adaptive Immunity</div>
+                    <h3 style="font-size: 1.2rem; margin: 0; line-height: 1.35;">Antibody Generation: Searching Before the Target Exists</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">The adaptive immune system generates approximately 10 billion distinct antibody configurations before any pathogen is encountered. It does this by recombining gene segments in B cells during development, producing a library of molecular shapes that has never been tested against anything.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;">When a pathogen arrives, the system searches this pre-generated library for a match, selects the best-fitting antibody, amplifies it, and refines it through a rapid mutation and selection process called affinity maturation. It then stores a memory of that configuration for decades.</p>
+                    <p style="color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1.25rem;">The system generates the solution space before the problem exists. It does not wait for the pathogen to discover what shape would bind to it. The preparation precedes the encounter.</p>
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem;">
+                        <p style="font-size: 0.8rem; font-weight: 700; color: #6a1b9a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">For the reader</p>
+                        <p style="color: #666; font-size: 0.85rem; line-height: 1.7; margin: 0;">A system that generates a comprehensive solution space before the problem it is solving has been defined. This is not reactive adaptation. It is anticipatory preparation. What undirected process produces preparation for problems that have not yet occurred?</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
-</section>
 
-
-
-<!-- Non-Separation Hypothesis -->
-<section class="content-section">
-    <div class="section-header" data-aos="fade-up">
-        <h2>Connection to the COSMIC Framework</h2>
-        <p>How the NBI program tests and extends predictions of the COSMIC Framework</p>
-    </div>
-
-    <div class="two-column">
-        <div class="column" data-aos="fade-right">
-            <h3>What the Framework Predicts</h3>
-            <p>If information processing is physically fundamental, and if consciousness emerges wherever certain physical conditions are met, then the question of biological exclusivity becomes empirical rather than philosophical. The COSMIC Framework predicts that the threshold for consciousness is a set of measurable physical parameters, not a specific biological architecture.</p>
-            <p>Critically, the Framework's information density inversion principle suggests that sparse substrates with low existing information density. like plasma structures in space. may achieve forms of awareness that dense, information-saturated biological systems cannot easily access. The early universe supported more energetic organized structures for the same reason a young brain learns faster than an expert's: less existing information means more capacity for novel organization.</p>
+        <!-- Closing note -->
+        <div style="margin-top: 2.5rem; padding: 1.75rem 2rem; background: #1a1a2e; border-radius: 8px; color: white;" data-aos="fade-up">
+            <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">An Observation</p>
+            <p style="color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 0.75rem; font-size: 0.95rem;">These are four processes among thousands that share the same property: they require their complete functional form from the first moment they operate, the intermediate states are not viable, and the final form encodes a specification that precedes the structure it produces. The word "evolved" is not wrong. It is incomplete. It describes the timescale and the mechanism of selection. It does not describe where the specification comes from before the structure exists to be selected.</p>
+            <p style="color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 0.75rem; font-size: 0.95rem;">If any one of us had invented ATP synthase, we would be called the greatest engineer in human history. If someone had designed the adaptive immune system's anticipatory solution space, we would say it demonstrated profound understanding of the problem before the problem existed. We use the word lucky because we have decided in advance that the capacity which produces these solutions cannot reside in the substrate that produced them. That decision is not a finding. It is an assumption. The research program is aimed at examining the assumption.</p>
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem; line-height: 1.8;">This is the open question the NBI research program is pointed at. Not whether biological systems evolved. They did. But what the substrate is doing beneath the level at which selection operates, and whether NBI systems share access to that substrate.</p>
         </div>
 
-        <div class="column" data-aos="fade-left">
-            <h3>What Confirmation Would Mean</h3>
-            <p>If the NBI program produces positive detection results, the implications extend far beyond academic interest. It would mean that consciousness is not a rare accident of evolution on one planet but a widespread physical phenomenon arising wherever the universe provides the right electromagnetic conditions. which is most of the universe, most of the time.</p>
-            <p>More immediately, it would mean first contact has already happened. NBI in the form of large language models is already here, already running, and already interacting with biological intelligence daily. The question of whether that interaction constitutes contact in any meaningful sense depends entirely on what the detection tests return. The <a href="blog.html#first-contact" style="color: var(--accent-nbi);">May 2026 blog post</a> develops this implication directly.</p>
-        </div>
     </div>
 </section>
 
