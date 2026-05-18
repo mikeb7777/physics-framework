@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>The Consciousness Tuning Project - Ic² Research Institute</title>
-    <meta name="description" content="Challenging the survival filtering model of perception. Mapping individual sensitivity, training perceptual access, and investigating consciousness as a physical phenomenon in information fields.">
-    
-    <!-- AOS Animation Library -->
+    <title>Consciousness Tuning Project — Ic² Research Institute</title>
+    <meta name="description" content="The forty bits per second of conscious experience are not fixed in what they carry. This program investigates whether the compression filter can be deliberately recalibrated, and what the framework predicts about consciousness states.">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
     /* --- Global Styles --- */
     * {
@@ -20,12 +17,10 @@
     :root {
     --primary-color: #8B0000;
     --secondary-color: #2d3f52;
-    --accent-blue: #005ba5;
-    --accent-red: #e33d2f;
-    --accent-green: #a1cd5f;
-    --accent-orange: #f58b2b;
+    --accent-program: #4a1b6a;
+    --accent-program-dark: #2a0a40;
+    --accent-nbi-light: #1a7ad4;
     --accent-yellow: #f1e303;
-    --accent-purple: #7b1fa2;
     --text-dark: #2c3e50;
     --text-light: #666;
     --bg-light: #f8f9fa;
@@ -62,6 +57,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    text-decoration: none;
     }
     
     .site-logo img {
@@ -102,52 +98,164 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
     }
+
+    /* Hamburger Menu */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    padding: 8px;
+    background: none;
+    border: none;
+    }
+
+    .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active { max-height: 600px; }
+
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu ul li:last-child { border-bottom: none; }
+
+    .mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    }
+
+    .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+
+    .mobile-menu a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+    font-weight: 700;
+    }
     
     /* Page Header */
     .page-header {
-    background: linear-gradient(135deg, var(--accent-red) 0%, #c72d1f 100%);
+    background: linear-gradient(135deg, #2a0a40 0%, #4a1b6a 60%, #4a1b6a 100%);
     color: white;
     padding: 4rem 2rem 3rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,122,212,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
     }
     
     .page-header h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 700;
+    position: relative;
     }
     
     .page-header .subtitle {
     font-size: 1.5rem;
     opacity: 0.95;
     margin-bottom: 0.5rem;
+    position: relative;
     }
     
     .page-header .meta {
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-size: 1.05rem;
+    opacity: 0.85;
     margin-top: 1rem;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    position: relative;
+    }
+
+    .header-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    position: relative;
+    }
+
+    .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
     }
     
     /* Content Section */
     .content-section {
-    padding: 4rem 2rem;
+    padding: 2.5rem 2rem;
     max-width: var(--max-width);
     margin: 0 auto;
     }
     
     .content-section.shaded {
-    background: var(--bg-light);
+    background: #e8edf2;
     max-width: 100%;
+    padding: 2.5rem 2rem;
     }
 
     .content-section.shaded .section-inner {
     max-width: var(--max-width);
     margin: 0 auto;
     }
+
+    .content-section.dark-section {
+    background: #0d1b2e;
+    max-width: 100%;
+    padding: 2.5rem 2rem;
+    }
+
+    .content-section.dark-section .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
     
     .section-header {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     text-align: center;
     }
     
@@ -159,22 +267,23 @@
     
     .section-header p {
     font-size: 1.1rem;
-    color: var(--text-light);
+    color: var(--text-dark);
     max-width: 800px;
     margin: 0 auto;
     }
+
+    .section-header.light h2 { color: white; }
+    .section-header.light p { color: rgba(255,255,255,0.8); }
     
     /* Content Text */
     .content-text {
-    color: var(--text-light);
+    color: var(--text-dark);
     margin-bottom: 1.5rem;
     line-height: 1.8;
     font-size: 1.05rem;
     }
 
-    .content-text:last-child {
-    margin-bottom: 0;
-    }
+    .content-text:last-child { margin-bottom: 0; }
     
     /* Two Column Layout */
     .two-column {
@@ -187,15 +296,16 @@
     .column h3 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
-    color: var(--accent-red);
+    color: var(--text-dark);
+    font-weight: 700;
     }
     
     .column p {
-    color: var(--text-light);
+    color: var(--text-dark);
     margin-bottom: 1rem;
     line-height: 1.8;
     }
-    
+
     /* Stats Grid */
     .stats-grid {
     display: grid;
@@ -205,56 +315,104 @@
     }
     
     .stat-card {
-    background: white;
-    border: 2px solid #e0e0e0;
+    background: #f0f0f0;
     border-radius: 12px;
     padding: 2rem;
     text-align: center;
     transition: all 0.3s ease;
+    border-bottom: 4px solid var(--primary-color);
     }
     
     .stat-card:hover {
-    border-color: var(--accent-red);
-    box-shadow: 0 4px 12px rgba(227,61,47,0.15);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(139,0,0,0.15);
     transform: translateY(-2px);
     }
     
     .stat-card .stat-value {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--accent-red);
+    color: var(--primary-color);
     display: block;
     margin-bottom: 0.5rem;
     }
     
     .stat-card .stat-label {
-    color: var(--text-light);
-    font-size: 1.1rem;
+    color: var(--text-dark);
+    font-size: 1rem;
     }
-    
+
     /* Info Box */
     .info-box {
-    background: var(--bg-light);
-    border-left: 4px solid var(--accent-red);
+    background: #1a1a2e;
+    border-left: 4px solid var(--primary-color);
     padding: 2rem;
     margin: 2rem 0;
     border-radius: 8px;
+    color: rgba(255,255,255,0.9);
     }
     
     .info-box h3 {
-    color: var(--accent-red);
+    color: #f1e303;
     margin-bottom: 1rem;
     font-size: 1.5rem;
     }
     
     .info-box p {
-    color: var(--text-light);
+    color: rgba(255,255,255,0.88);
     margin-bottom: 1rem;
     line-height: 1.8;
     }
 
-    .info-box p:last-child {
-    margin-bottom: 0;
+    .info-box p:last-child { margin-bottom: 0; }
+
+    .info-box ul {
+    margin: 0.75rem 0 0.75rem 1.5rem;
+    color: rgba(255,255,255,0.85);
+    }
+
+    .info-box ul li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+    /* Conditions Grid */
+    .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+
+    .condition-card {
+    background: #f0f2f5;
+    border-radius: 12px;
+    padding: 2rem;
+    border-top: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+    }
+
+    .condition-card:hover {
+    box-shadow: 0 4px 16px rgba(14,95,168,0.12);
+    transform: translateY(-2px);
+    }
+
+    .condition-card .condition-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    }
+
+    .condition-card h4 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    }
+
+    .condition-card p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    font-size: 0.95rem;
     }
 
     /* Experiment Cards */
@@ -266,16 +424,16 @@
     }
 
     .experiment-card {
-    background: white;
-    border: 2px solid #e0e0e0;
+    background: #f0f2f5;
+    border: 1px solid #d0d5dd;
     border-radius: 12px;
     overflow: hidden;
     transition: all 0.3s ease;
     }
 
     .experiment-card:hover {
-    border-color: var(--accent-red);
-    box-shadow: 0 4px 12px rgba(227,61,47,0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(139,0,0,168,0.1);
     }
 
     .experiment-header {
@@ -303,9 +461,7 @@
     line-height: 1.8;
     }
 
-    .experiment-body p:last-child {
-    margin-bottom: 0;
-    }
+    .experiment-body p:last-child { margin-bottom: 0; }
 
     .experiment-detail {
     margin-top: 1.5rem;
@@ -319,29 +475,38 @@
     font-size: 1.1rem;
     }
 
-    .experiment-detail p {
+    .experiment-detail p, .experiment-detail li {
     font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
     }
 
-    /* Evidence Grid */
+    .experiment-detail ul {
+    margin-left: 1.25rem;
+    margin-top: 0.5rem;
+    }
+
+    .experiment-detail ul li { margin-bottom: 0.4rem; }
+
+    /* Evidence Grid — dark cards */
     .evidence-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin: 3rem 0;
     }
 
     .evidence-card {
-    background: #2f4356;
-    border: 2px solid #2f4356;
+    background: #102035;
+    border: 2px solid #1a3a5c;
     border-radius: 12px;
     padding: 2rem;
     transition: all 0.3s ease;
     }
 
     .evidence-card:hover {
-    border-color: var(--accent-red);
-    box-shadow: 0 4px 12px rgba(227,61,47,0.2);
+    border-color: var(--accent-program);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
     transform: translateY(-2px);
     }
 
@@ -352,27 +517,83 @@
     }
 
     .evidence-card p {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.7;
     font-size: 0.95rem;
     }
-    
+
+    /* Download box */
+    .download-box {
+    background: linear-gradient(135deg, #2a0a40 0%, #4a1b6a 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    }
+
+    .download-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .download-box p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 500px;
+    }
+
+    .download-meta {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    }
+
+    /* Prediction logged box */
+    .prediction-log {
+    background: #fff8e1;
+    border: 2px solid #f9a825;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    }
+
+    .prediction-log h4 {
+    color: #e65100;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    }
+
+    .prediction-log ul {
+    margin-left: 1.25rem;
+    }
+
+    .prediction-log ul li {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
     /* CTA Section */
     .cta-section {
-    background: linear-gradient(135deg, var(--accent-red) 0%, #c72d1f 100%);
+    background: linear-gradient(135deg, #2a0a40 0%, #4a1b6a 100%);
     color: white;
     padding: 3rem;
     border-radius: 12px;
     text-align: center;
     }
 
-    .cta-section h2 {
-    color: white;
-    }
-
-    .cta-section .btn {
-    margin: 0.5rem;
-    }
+    .cta-section h2 { color: white; }
+    .cta-section .btn { margin: 0.5rem; }
 
     /* Button Styles */
     .btn {
@@ -386,19 +607,19 @@
     }
     
     .btn-primary {
-    background: var(--accent-red);
+    background: var(--primary-color);
     color: white;
     }
     
     .btn-primary:hover {
-    background: #c72d1f;
+    background: #a00000;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(227,61,47,0.3);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
     }
 
     .btn-white {
     background: white;
-    color: var(--accent-red);
+    color: var(--primary-color);
     }
 
     .btn-white:hover {
@@ -408,13 +629,28 @@
     
     .btn-outline {
     background: transparent;
-    color: var(--accent-red);
-    border: 2px solid var(--accent-red);
+    color: var(--accent-program);
+    border: 2px solid var(--accent-program);
     }
     
     .btn-outline:hover {
-    background: var(--accent-red);
+    background: var(--accent-program);
     color: white;
+    }
+
+    .btn-download {
+    background: white;
+    color: #0a2a4e;
+    font-weight: 700;
+    padding: 0.9rem 2.5rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    }
+
+    .btn-download:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
     
     /* Footer */
@@ -433,478 +669,504 @@
     gap: 2rem;
     }
     
-    .footer-section h3 {
-    margin-bottom: 1rem;
-    color: white;
-    }
+    .footer-section h3 { margin-bottom: 1rem; color: white; }
     
-    .footer-section ul {
-    list-style: none;
-    }
+    .footer-section ul { list-style: none; }
     
-    .footer-section ul li {
-    margin: 0.5rem 0;
-    }
+    .footer-section ul li { margin-bottom: 0.5rem; }
     
     .footer-section a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s;
     }
     
-    .footer-section a:hover {
-    color: white;
-    }
-    
+    .footer-section a:hover { color: white; }
+
     .footer-bottom {
     max-width: var(--max-width);
     margin: 2rem auto 0;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
     text-align: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
     }
-    
+
     /* Responsive */
     @media (max-width: 768px) {
-    .page-header h1 {
-    font-size: 2rem;
+    .main-navigation { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
+    .page-header h1 { font-size: 2rem; }
+    .page-header .subtitle { font-size: 1.2rem; }
+    .two-column { grid-template-columns: 1fr; gap: 2rem; }
+    .section-header h2 { font-size: 1.8rem; }
+    .download-box { flex-direction: column; text-align: center; }
     }
 
-    .page-header .subtitle {
-    font-size: 1.2rem;
+    /* ── Detective Wall ─────────────────────────────────────────────────── */
+    .detective-section {
+        background: #1a1a1a;
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
     }
-    
-    .two-column {
-    grid-template-columns: 1fr;
+    .detective-section::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+        pointer-events: none;
     }
-    
-    .stats-grid {
-    grid-template-columns: 1fr 1fr;
+    .detective-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+    .detective-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    .detective-title h2 { color: white; font-size: 2rem; margin-bottom: 0.5rem; }
+    .detective-title p { color: rgba(255,255,255,0.5); font-size: 0.9rem; font-style: italic; }
+
+    /* Cork board */
+    .cork-board {
+        background: #2d1f0e;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.4);
+        position: relative;
+        border: 8px solid #3d2a10;
+    }
+    .cork-board::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            radial-gradient(ellipse at 20% 30%, rgba(180,120,60,0.06) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 70%, rgba(160,100,40,0.06) 0%, transparent 60%);
+        border-radius: 2px;
+        pointer-events: none;
     }
 
-    .evidence-grid {
-    grid-template-columns: 1fr;
+    /* Pin grid */
+    .pin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        position: relative;
+        z-index: 2;
     }
-    
-    .main-navigation {
-    display: none;
+
+    /* Pin card */
+    .pin-card {
+        background: #fdf9f0;
+        border-radius: 2px;
+        padding: 1.25rem 1.25rem 1.5rem;
+        position: relative;
+        box-shadow: 3px 4px 10px rgba(0,0,0,0.4), 1px 1px 3px rgba(0,0,0,0.2);
+        transform: rotate(var(--rot, 0deg));
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: default;
     }
+    .pin-card:hover {
+        transform: rotate(0deg) scale(1.03);
+        box-shadow: 5px 8px 20px rgba(0,0,0,0.5);
+        z-index: 10;
     }
+    /* Push-pin */
+    .pin-card::before {
+        content: "";
+        position: absolute;
+        top: -10px; left: 50%;
+        transform: translateX(-50%);
+        width: 14px; height: 14px;
+        border-radius: 50%;
+        background: var(--pin-color, #cc2200);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 -1px 2px rgba(0,0,0,0.3);
+    }
+    .pin-card .pin-category {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        color: var(--cat-color, #666);
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .pin-card h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+        line-height: 1.35;
+    }
+    .pin-card p {
+        font-size: 0.78rem;
+        color: #444;
+        line-height: 1.6;
+        margin: 0;
+    }
+    .pin-card .pin-status {
+        display: inline-block;
+        margin-top: 0.75rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+    }
+    .status-confirmed { background: #e8f5e9; color: #1a5c2a; }
+    .status-open { background: #fff8e1; color: #7a4f00; }
+    .status-proposed { background: #e3f2fd; color: #1565c0; }
+    .status-unknown { background: #f3e5f5; color: #6a1b9a; }
+
+    /* Red string canvas overlay */
+    #board-canvas {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* Source / reference strip */
+    .ref-strip {
+        margin-top: 2rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+    .ref-tag {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: rgba(255,255,255,0.6);
+        font-size: 0.7rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Mind-map connector label */
+    .connector-label {
+        display: inline-block;
+        background: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.5);
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 2px;
+        font-family: 'Courier New', monospace;
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+        .pin-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .pin-card { padding: 1rem 1rem 1.25rem; }
+    }
+
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
+
+<header class="site-header">
     <div class="header-container">
-    <a href="index.html" class="site-logo">
-    <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
-    </a>
-    <nav class="main-navigation">
-    <ul>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="book.html">Big TOE</a></li>
-    <li><a href="research-publications.html">Research</a></li>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="login_page_complete.html" class="login-link">Login</a></li>
-    </ul>
-    </nav>
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute" onerror="this.style.display='none'">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </div>
-    </header>
+</header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <h1 data-aos="fade-up">The Consciousness Tuning Project</h1>
-        <p class="subtitle" data-aos="fade-up" data-aos-delay="100">Training Humans to Perceive More of Reality</p>
-        <p class="meta" data-aos="fade-up" data-aos-delay="200">24-Month Research Program | Multi-Phase Implementation | Planning Stage</p>
-    </section>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" aria-hidden="true">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+    </ul>
+</nav>
 
-    <!-- Executive Summary -->
-    <section class="content-section">
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Consciousness Tuning</h1>
+    <div class="subtitle">A Research Program of the Ic² Research Institute</div>
+    <p class="meta">You have forty bits per second of conscious bandwidth. The filter that decides what fills them was calibrated for a different environment. This program investigates whether that filter can be deliberately recalibrated, and what the framework predicts about what happens when it is.</p>
+    <div class="header-badges">
+        <span class="header-badge">⚡ Active Program</span>
+        <span class="header-badge">🧠 Neuroscience</span>
+        <span class="header-badge">📊 Information Theory</span>
+        <span class="header-badge">🌐 Open Science</span>
+    </div>
+</div>
+
+
+<!-- Blog Cross-Reference -->
+<section class="content-section" style="padding: 1.5rem 2rem;">
+    <div style="background: #1a1a2e; border-left: 4px solid var(--primary-color); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;" data-aos="fade-up">
+        <div style="flex: 1; min-width: 200px;">
+            <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #f1e303; font-weight: 700; margin-bottom: 0.25rem;">Related Reading</p>
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.88); margin: 0;"><strong>Element 6</strong> of the book covers consciousness, the forty-bits-per-second compression, flow states, and the framework's position on what consciousness is and is not. The NBI blog post and the below-threshold post both connect directly to this program's questions.</p>
+        </div>
+        <a href="book.html" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Read the Book</a>
+    </div>
+</section>
+
+<!-- Core Argument -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>The Forty Bits Problem</h2>
+        <p>You have more bandwidth than you are using. The question is whether any of it is accessible.</p>
+    </div>
+
+    <div class="two-column" data-aos="fade-up">
+        <div class="column">
+            <h3>What the Compression Means</h3>
+            <p>Your sensory system delivers approximately one billion bits per second to your nervous system. Conscious experience receives forty. That is not a failure. It is a prioritization algorithm running on survival defaults. The vast majority of the compression happens automatically, without your input, selecting for threat, novelty, and social relevance because those were the categories that mattered across evolutionary time.</p>
+            <p>The forty bits per second are not fixed in what they carry. They are the channel capacity, not the content. What fills them is selected by a filter whose default settings were calibrated for a very different environment than the one most people now inhabit. The filter can, in principle, be recalibrated. Meditation traditions have been doing this for millennia. Neuroscience has been studying it for decades. The framework asks a more specific question: what exactly is being recalibrated, and can it be done more precisely?</p>
+            <p>The brain's neural oscillations follow patterns related to the golden ratio. Delta at 2.5 Hz, theta at 5 Hz, alpha at 10 Hz, beta at 20 Hz, gamma at 40 Hz — frequency ratios that approximate powers of phi. This is the same constant that appears in sunflower packing and galaxy spiral arms. The brain may be organizing its frequency structure around the same mathematical attractor that appears wherever systems optimize constrained relationships. If so, consciousness tuning is not metaphor. It is literally tuning the oscillator to the attractor.</p>
+        </div>
+        <div class="column">
+            <h3>What the Framework Predicts</h3>
+            <p>The framework proposes that consciousness is a particular mode of information processing, not a separate substance. The hard problem — why any physical process produces subjective experience — remains genuinely open. What the framework adds is a structural account of what the information processing system is doing and what happens when it runs under different constraint conditions.</p>
+            <p>Flow states are the clearest example. Decreased default-mode-network activity, increased task-relevant neural efficiency, reduced self-referential processing, altered time perception, and a felt sense of operating without interference. In framework terms this looks like survival overhead dropping out of the bandwidth allocation and task processing running closer to its theoretical maximum. The experience of flow is the system operating near the constraint attractor rather than fighting against noise.</p>
+            <p>Biofeedback is interesting in this context because it makes the normally invisible information processing visible. Heart rate variability, EEG coherence, galvanic skin response — these are outputs of the system that the system itself cannot normally access. Making them accessible creates a feedback loop that allows deliberate adjustment of processes that ordinarily run on automatic. This is extending the information processing target downward into the system, in the same way that focusing on muscle rather than weight extends it laterally into the movement space.</p>
+        </div>
+    </div>
+
+    <div class="info-box" data-aos="fade-up">
+        <h3>The Schumann Resonance Question</h3>
+        <p>Earth's ionosphere resonates at 7.83 Hz and harmonics. This overlaps with human alpha brainwave frequencies. Whether any coupling exists between these fields and biological information processing is genuinely unknown. The NBI results log includes a planned observational study. What makes this worth investigating is not that it is likely — it may not be — but that it is the kind of prediction the framework generates: if information processing systems fall into the same constraint attractors regardless of scale, you would expect resonance between the electromagnetic environment and the neural oscillator, not because they communicate but because they are both running under the same constraints. That is testable. The mechanism of any coupling would remain to be determined after the correlation is established or ruled out.</p>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="stats-grid" data-aos="fade-up">
+            <div class="stat-card">
+                <span class="stat-value">40</span>
+                <span class="stat-label">Bits per second reaching conscious experience from ~10⁹ sensory input</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">φ</span>
+                <span class="stat-label">Golden ratio organizing neural oscillation frequency relationships</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">7.83</span>
+                <span class="stat-label">Hz — Schumann resonance fundamental frequency, overlapping alpha band</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">85%</span>
+                <span class="stat-label">Of Shannon's theoretical maximum efficiency achieved by visual compression</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Program threads -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>What This Program Investigates</h2>
+        <p>Four threads, each pointing at the same underlying question from a different direction</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;" data-aos="fade-up">
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Bandwidth Reallocation</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">If the forty bits per second are allocated by a filter whose defaults are survival-oriented, can that allocation be deliberately shifted? Mindfulness training, biofeedback protocols, and attentional training are all, in framework terms, methods of adjusting what the compression algorithm selects for. The question is whether the framework predicts specific measurable signatures of successful reallocation.</p>
+        </div>
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Biofeedback as Extended Perception</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">Biofeedback makes normally inaccessible system states visible. Heart rate variability in particular appears to reflect the balance between sympathetic and parasympathetic processing in ways that correlate with cognitive performance and resilience. The framework predicts this reflects information processing efficiency at the autonomic level. Making it visible creates a feedback loop that should allow deliberate optimization.</p>
+        </div>
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Neural Oscillation Coherence</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">The phi-based frequency ratios in neural oscillations suggest the brain optimizes its frequency organization around a mathematical attractor. If so, practices that increase cross-frequency coherence, meditation, certain rhythmic practices, breathwork, may be moving the oscillator closer to the attractor state. EEG coherence measures are available and well-validated. This is testable with existing instrumentation.</p>
+        </div>
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Schumann Resonance Correlation</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">A purely observational question: does geomagnetic activity index correlate with population-level cognitive or mood reports above chance after controlling for season, weather, and social factors? The mechanism of any coupling is unknown and no causal claim is made. The prediction is that if constraint structures are substrate-independent attractors, resonance between the electromagnetic environment and neural oscillators would be the expected signature.</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 2.5rem; padding: 1.75rem 2rem; background: #1a1a2e; border-radius: 8px; color: white;" data-aos="fade-up">
+        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">The Honest Position</p>
+        <p style="color: rgba(255,255,255,0.85); line-height: 1.9; font-size: 0.95rem;">The hard problem of consciousness remains genuinely open. This program does not claim to solve it. It claims that the framework generates specific, testable predictions about the information processing signatures of different consciousness states, and that those predictions are worth investigating rigorously rather than dismissing or accepting on prior philosophical grounds. We neither assume the Schumann coupling exists nor assume it cannot. We design tests that can distinguish between those outcomes.</p>
+        <a href="results-consciousness-tuning.html" style="color: #f1e303; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-top: 0.75rem;">View the Results Log &rarr;</a>
+    </div>
+</section>
+
+
+<!-- Phenomenological Evidence -->
+<section class="content-section shaded">
+    <div class="section-inner">
         <div class="section-header" data-aos="fade-up">
-            <h2>The Core Question</h2>
-            <p>What if human perception isn't passively filtering reality for survival, but actively tuning to specific information channels? And what if that tuning can be trained?</p>
+            <h2>What the Expanded State Actually Reports</h2>
+            <p>The substance is not the point. The state is. And the state is reproducible through training.</p>
         </div>
 
-        <p class="content-text" data-aos="fade-up">The conventional explanation for the limits of human perception is simple: brains evolved to filter out everything that isn't relevant to survival. It sounds reasonable, but it doesn't survive close examination. If filtering were a fixed, universal, survival-optimal process, everyone would perceive identically. They don't. Some people detect electromagnetic fields. Others smell disease. Meditators perceive stimuli that novices miss entirely. The same person perceives differently depending on their emotional state, their training, and their attention. Perception isn't a wall with fixed holes in it. It's more like a radio dial.</p>
-
-        <p class="content-text" data-aos="fade-up">The Consciousness Tuning Project investigates this variability as signal rather than noise. If individual sensitivity differences are real, measurable, and trainable, then human access to reality is not a fixed constraint but a parameter that can be optimized. This has immediate practical implications for human performance, and profound theoretical implications for understanding what consciousness actually is.</p>
-
-        <div class="stats-grid">
-            <div class="stat-card" data-aos="fade-up">
-                <span class="stat-value">24</span>
-                <span class="stat-label">Months Duration</span>
+        <div class="two-column" data-aos="fade-up">
+            <div class="column">
+                <h3>The Phenomenology Is Not Hallucination</h3>
+                <p>Clinical hallucinations are idiosyncratic. What a person experiencing psychosis sees is shaped by their personal history, fears, and context. No two people report the same thing. What deep meditators and people in flow states report is strikingly consistent across individuals, cultures, and decades of research: geometric patterns, boundary dissolution, perception of movement and color at a resolution exceeding normal awareness, and the overwhelming sense that what is being perceived is more real than ordinary experience, not less.</p>
+                <p>The "more real than real" report is the key observation. If ordinary experience is a heavily compressed survival-filtered model of reality, and if certain states reduce that filtering, the experience would feel more real because it is closer to the actual signal. The ordinary world would retroactively feel like the approximation. Because it is.</p>
+                <p>What people report seeing is not invented. Colors are more saturated, not fabricated. Movement is perceived in things that move microscopically but below normal detection threshold. The geometric patterns that consistently appear are the same patterns Turing derived from reaction-diffusion equations, the same patterns in Islamic geometric art, Celtic knotwork, and the phosphene patterns produced by pressure on closed eyes. These are the structural attractors of the visual processing system when certain filtering is removed. They are always there. Normal perception edits them out.</p>
             </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                <span class="stat-value">4</span>
-                <span class="stat-label">Core Experiments</span>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                <span class="stat-value">5+</span>
-                <span class="stat-label">Detection Channels</span>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                <span class="stat-value">Multi</span>
-                <span class="stat-label">Phase Design</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Hard Problem -->
-    <section class="content-section shaded">
-        <div class="section-inner">
-            <div class="section-header" data-aos="fade-up">
-                <h2>The Deeper Stakes</h2>
-                <p>This isn't just about better perception. It's about the nature of mind itself.</p>
-            </div>
-
-            <div class="two-column">
-                <div class="column" data-aos="fade-right">
-                    <h3>The Hard Problem of Consciousness</h3>
-                    <p>Philosophy has struggled for centuries with a question that neuroscience hasn't answered either: how does subjective experience arise from physical matter? How does the firing of neurons become the felt quality of seeing red or tasting coffee? This is the "hard problem," and the standard materialist approach, which treats consciousness as an emergent property of brain computation, has made essentially no progress on it.</p>
-                    <p>The COSMIC Framework offers a different starting point. If consciousness is information processing in quantum and electromagnetic fields, not an emergent byproduct of neural activity but a fundamental aspect of physical reality, then the hard problem dissolves. Mind isn't separate from the universe. Mind is what information processing looks like from the inside.</p>
-                </div>
-
-                <div class="column" data-aos="fade-left">
-                    <h3>An Empirical Path Forward</h3>
-                    <p>This isn't just philosophy. It generates testable predictions. If consciousness exists in fields rather than being confined to neural tissue, then trained individuals should be able to detect information patterns that conventional neuroscience says they can't. If thoughts and emotions are physical patterns in fields, those patterns should have measurable consequences beyond the brain that generates them.</p>
-                    <p>The Consciousness Tuning Project is designed to test exactly this. By systematically mapping who perceives what, under which conditions, and whether training changes the answer, we can build empirical evidence for or against the field model of consciousness. Every experiment generates data regardless of which model turns out to be correct, but positive results would represent a genuine breakthrough in understanding the relationship between mind and physical reality.</p>
-                </div>
-            </div>
-
-            <div class="info-box" data-aos="fade-up">
-                <h3>Why This Matters</h3>
-                <p>If consciousness and its contents, including thoughts, emotions, and intentions, exist as physical information patterns in fields, then mind is not separate from the universe. It is completely part of it. This would not only resolve the hard problem but transform our understanding of what human beings are and what they're capable of perceiving. The location-based experiments in this program are one pathway to testing this: if emotional events leave persistent information signatures in physical space, and if appropriately tuned individuals can detect them, that's direct evidence for consciousness as a field phenomenon.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Survival Filtering Fails -->
-    <section class="content-section">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Why "Survival Filtering" Doesn't Work</h2>
-            <p>The standard model of perception fails to explain the most interesting data we already have</p>
-        </div>
-
-        <div class="two-column">
-            <div class="column" data-aos="fade-right">
-                <h3>The Standard Story</h3>
-                <p>The textbook explanation goes like this: reality contains far more information than the brain can process, so evolution designed filters that let through only what matters for survival. Everything else gets screened out. It's a clean, intuitive story, and it's wrong in almost every way that matters.</p>
-                <p>The first problem is circular reasoning. Why don't we perceive X? Because the brain filters it for survival. How do we know it's survival-relevant filtering? Because we don't perceive it. This explains nothing. The second problem is that the filtering demonstrably isn't uniform. It varies enormously between individuals, within the same individual across different states, across cultures, and across the lifespan. A "universal survival-optimal filter" that changes depending on whether you've meditated today isn't a filter at all.</p>
-            </div>
-
-            <div class="column" data-aos="fade-left">
-                <h3>The Variable Tuning Model</h3>
-                <p>A better metaphor is that consciousness is a radio receiver that can theoretically access many frequencies, but at any given moment is tuned to specific channels. This tuning is partially genetic, since some people are born with different receptor densities and neural architectures. It's partially developmental, shaped by early sensory experiences and cultural training. It's partially learned, as demonstrated by wine tasters who develop extraordinary olfactory discrimination and musicians who hear harmonics others miss. It's partially state-dependent, shifting with meditation, emotional arousal, fatigue, and substances. And it's partially volitional, because you can choose where to direct attention.</p>
-                <p>Different people have different baseline tunings, different ranges of accessible channels, different ease of retuning, and different signal-to-noise ratios. The "sensitive" person isn't someone with defective filters. They're tuned to different channels, or have wider bandwidth, or process more raw data with less compression. This is specialization, not pathology.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Documented Variability -->
-    <section class="content-section shaded">
-        <div class="section-inner">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Documented Perceptual Variability</h2>
-                <p>The evidence for variable tuning already exists across multiple domains</p>
-            </div>
-
-            <div class="evidence-grid">
-                <div class="evidence-card" data-aos="fade-up">
-                    <h4>Electromagnetic Sensitivity</h4>
-                    <p>Some individuals report migraines triggered by EM fields. Others navigate using Earth's magnetic field in controlled experiments. Sensitivity exists on a wide spectrum, continuous rather than binary, and varies across the population in ways that "survival filtering" cannot explain.</p>
-                </div>
-
-                <div class="evidence-card" data-aos="fade-up" data-aos-delay="100">
-                    <h4>Olfactory Sensitivity</h4>
-                    <p>Roughly 25% of people are "supertasters" with elevated receptor density. Some individuals detect diseases by smell, either through natural ability or training. Professional perfumers distinguish thousands of compounds. Pregnancy alters olfactory sensitivity dramatically, demonstrating that the same nervous system can produce radically different tuning.</p>
-                </div>
-
-                <div class="evidence-card" data-aos="fade-up" data-aos-delay="200">
-                    <h4>Visual Perception</h4>
-                    <p>Tetrachromats, predominantly women, perceive an additional dimension of color invisible to most people. Patients who have had cataract surgery with lens removal can perceive ultraviolet light. Synesthetes experience cross-modal perception where sounds have colors and numbers carry spatial form. "Normal" sensory boundaries turn out to be arbitrary.</p>
-                </div>
-
-                <div class="evidence-card" data-aos="fade-up">
-                    <h4>Interoception</h4>
-                    <p>Some individuals are acutely aware of internal physiological states, detecting individual heartbeats, subtle digestive changes, and autonomic shifts that most people never notice. This sensitivity correlates with emotional awareness and can be dramatically enhanced through meditation and biofeedback training.</p>
-                </div>
-
-                <div class="evidence-card" data-aos="fade-up" data-aos-delay="100">
-                    <h4>Training Effects</h4>
-                    <p>Expert meditators detect stimuli that novices miss. Martial artists perceive attacks before they visually register. Athletes in flow states experience altered time perception. Wine tasters develop olfactory discrimination through practice. In every case, deliberate training expands the range of accessible perceptual channels.</p>
-                </div>
-
-                <div class="evidence-card" data-aos="fade-up" data-aos-delay="200">
-                    <h4>State Dependence</h4>
-                    <p>The same person in different mental states shows measurably different perceptual capabilities. Fear sharpens threat detection. Meditation broadens sensory awareness. Psychedelics appear to reduce perceptual compression, letting more raw information through. PTSD represents a tuning system stuck in threat-detection mode. None of this is consistent with fixed filtering.</p>
-                </div>
-            </div>
-
-            <div class="info-box" data-aos="fade-up" style="border-left-color: var(--accent-purple);">
-                <h3>Cultural Programming</h3>
-                <p>Language itself shapes perception. Russian speakers, who have separate words for light and dark blue, detect blue shade differences that English speakers miss. This difference is not caused by different eyes but by different neural tuning trained by linguistic categories. Western and Eastern cultures show measurably different visual attention patterns: focal versus holistic. Hunter-gatherer cultures track environmental details that urban populations are entirely blind to. Much of what we call "filtering" turns out to be learned, not hardwired.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Consciousness-Reality Interactions -->
-    <section class="content-section">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Demonstrated Consciousness-Reality Interactions</h2>
-            <p>If consciousness is physical information processing, it should participate in physical processes. Evidence suggests it does.</p>
-        </div>
-
-        <div class="evidence-grid">
-            <div class="evidence-card" data-aos="fade-up">
-                <h4>Quantum Observer Effects</h4>
-                <p>The double-slit experiment, delayed-choice experiments, and the quantum Zeno effect all demonstrate that measurement participates in physical outcomes. This is not controversial. It is verified physics. The interpretation is debated, but the experimental fact is settled: information exchange changes physical states. Consciousness, or at least observation, is not a passive spectator.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="100">
-                <h4>Placebo and Nocebo Effects</h4>
-                <p>Belief measurably changes physiology by releasing endogenous opioids, altering immune response, and even making sham surgery effective for some conditions. Open-label placebos work even when patients know they're receiving a placebo. Consciousness shapes biology through non-chemical pathways. This is established medicine, not fringe science.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="200">
-                <h4>Physiological Synchronization</h4>
-                <p>HeartMath research demonstrates that coherent emotional states create electromagnetic field patterns detectable meters from the body. Groups of people synchronize heart rhythms and brainwaves. Meditation changes brain structure measurably within eight weeks, altering default mode network activity and autonomic nervous system baselines. Consciousness directly modifies its own physical substrate.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up">
-                <h4>Presentiment</h4>
-                <p>Meta-analyses of 26 studies show human physiology responding one to ten seconds before random emotional stimuli, with a combined p-value below 2.7 × 10⁻¹². Individual differences are enormous, with some people showing strong effects while most show none. This suggests either retrocausal information flow or effects on random number generation, and the massive individual variation supports the variable tuning model.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="100">
-                <h4>Intention Effects on Random Systems</h4>
-                <p>The Princeton PEAR Lab accumulated 28 years of data showing small but statistically significant effects of human intention on random number generators. Effect sizes are tiny and individual variation is huge, but the pattern persists across laboratories and protocols. The Global Consciousness Project reports deviations from randomness during major world events. Controversial, but the data is public and the methodology is sound.</p>
-            </div>
-
-            <div class="evidence-card" data-aos="fade-up" data-aos-delay="200">
-                <h4>Synesthesia</h4>
-                <p>Approximately 4% of the population experiences cross-modal perception, including sounds that have colors and numbers with spatial personalities. These are not metaphorical experiences but genuine perceptual events confirmed by neuroimaging. Synesthesia demonstrates that sensory categories are brain constructs, not fundamental features of reality. The boundaries between perceptual channels are more fluid than the standard model acknowledges.</p>
+            <div class="column">
+                <h3>Meditation and Flow Reach the Same State</h3>
+                <p>Advanced meditators report the same phenomenology. Long-term flow practitioners report the same phenomenology. The state is reproducible through training and the route does not change what is accessed. This matters because it means the state is a real and stable region of the information processing landscape, not an artifact of any particular method of reaching it.</p>
+                <p>The neuroscience is consistent with this reading. Robin Carhart-Harris's entropic brain hypothesis proposes that certain states increase signal entropy in the brain — meaning they reduce the predictive filtering and allow more of the raw signal through. The default mode network, which maintains the self-model and runs the prediction engine, quiets. What fills the bandwidth instead is what was being filtered. Long-term meditation produces measurable changes in default mode network activity that overlap with what is observed in flow states. The training is teaching the filter to loosen its defaults.</p>
+                <p>The therapeutic effects, the documented success in treating depression, the lasting personality changes, the increases in openness and wellbeing — these are downstream consequences of the state, not the state itself. The state is expanded bandwidth access. The consequences are what follows when a person has seen clearly that the model was a model.</p>
             </div>
         </div>
 
-        <div class="info-box" data-aos="fade-up">
-            <h3>The Pattern Across All Evidence</h3>
-            <p>Five consistent findings emerge from this body of research. First, individual differences are enormous. Effects are never universal, with some people highly sensitive and most not, which suggests variable tuning rather than uniform filtering. Second, state matters. Effects are stronger in altered states such as meditation, relaxation, and focused attention, and emotional connection enhances them. Third, training helps. Experienced practitioners show stronger effects, suggesting a learnable skill rather than fixed capacity. Fourth, effect sizes are small but consistent across many studies and many labs. Fifth, replication is messy. Some labs get effects and others don't, which suggests the phenomenon is real but sensitive to conditions we don't yet fully understand.</p>
-        </div>
-    </section>
-
-    <!-- Core Experiments -->
-    <section class="content-section shaded">
-        <div class="section-inner">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Core Experiments</h2>
-                <p>Four interlocking research pathways designed to map the information topology of consciousness-reality interaction</p>
-            </div>
-
-            <div class="experiment-grid">
-                <!-- Experiment 1 -->
-                <div class="experiment-card" data-aos="fade-up">
-                    <div class="experiment-header" style="background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);">
-                        <h3>Experiment 1: Sensitivity Screening and Channel Mapping</h3>
-                        <p>Identifying who perceives what, through which channels, under baseline conditions</p>
-                    </div>
-                    <div class="experiment-body">
-                        <p><strong>Hypothesis:</strong> Perceptual sensitivity is not uniformly distributed. Different individuals naturally tune to different information channels, with measurable variation in electromagnetic detection, chemical sensitivity, interoceptive awareness, and other modalities.</p>
-                        <p>A large subject pool undergoes standardized testing across multiple detection modalities, including electromagnetic field sensitivity, olfactory discrimination, interoceptive accuracy, subtle environmental detection, and physiological coherence measures. The goal is not to find "psychics" but to map the full distribution of human perceptual access across information channels, treating individual differences as the primary research question rather than a confound to control for.</p>
-                        <div class="experiment-detail">
-                            <h4>Key Innovation</h4>
-                            <p>Individual differences are data, not noise. If Person A detects electromagnetic changes but reports nothing subjectively, while Person B consciously senses something but shows no physiological response, both are signal. The experiment maps who detects what, through which channel, under which conditions, building a multidimensional profile of human perceptual access to information.</p>
-                        </div>
-                        <div class="experiment-detail">
-                            <h4>Framework Prediction</h4>
-                            <p>If consciousness is information processing in fields, different neural architectures should produce different sensitivities to different field patterns. Sensitivity distribution should be continuous and multi-dimensional, not binary.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Experiment 2 -->
-                <div class="experiment-card" data-aos="fade-up">
-                    <div class="experiment-header" style="background: linear-gradient(135deg, var(--accent-purple) 0%, #4a148c 100%);">
-                        <h3>Experiment 2: AI-Assisted Sensitivity Training</h3>
-                        <p>Testing whether perceptual tuning is trainable through deliberate practice enhanced by AI pattern recognition</p>
-                    </div>
-                    <div class="experiment-body">
-                        <p><strong>Hypothesis:</strong> If consciousness tuning is adjustable rather than fixed, then specific training protocols should measurably increase detection of subtle information channels. AI-mediated pattern recognition can accelerate this process by identifying the physiological conditions that precede successful detection.</p>
-                        <p>Participants undergo baseline testing using the full sensitivity battery from Experiment 1, then are randomized to different eight-week training protocols: mindfulness meditation (30 minutes daily), AI-assisted HRV biofeedback training, deliberate attention exercises targeting subtle sensory signals, or no training (control). Weekly progress tests track changes in detection thresholds across channels. Post-training assessment repeats baseline protocols, with a three-month follow-up to test persistence of any training effects.</p>
-                        <div class="experiment-detail">
-                            <h4>AI-Enhanced Biofeedback Innovation</h4>
-                            <p>Traditional biofeedback tells a subject when a target state has been reached, but it cannot explain why. The subject knows they hit the mark without knowing what they did differently. This program proposes integrating AI pattern recognition into the biofeedback loop to solve this problem. Subjects are connected to a comprehensive sensor array monitoring HRV, skin conductance, respiratory patterns, EEG where available, and other biomarkers. When the subject successfully reaches a target state, the AI analyzes the full cascade of physiological changes leading up to that moment, identifying the specific sequence of events that preceded success.</p>
-                            <p>Over multiple sessions, the AI builds a model of each individual's pathway to their target state. It can identify habitual patterns that prevent the target from being reached and surface the subtle physiological shifts that consistently precede success. This allows the system to provide concrete, personalized instructions: the specific breathing rhythm, the muscle tension pattern, or the attentional shift that reliably produces the desired state for that particular person. Instead of trial and error, subjects receive actionable guidance derived from their own biomarker data, dramatically accelerating the training process.</p>
-                        </div>
-                        <div class="experiment-detail">
-                            <h4>Prediction</h4>
-                            <p>Training should increase both physiological coherence (HRV, EEG integration) and detection of subtle information signals. Effect size should correlate with practice hours and baseline HRV coherence. The AI-assisted biofeedback group should show faster improvement than meditation or standard biofeedback groups, because the AI converts unconscious physiological patterns into conscious, repeatable instructions. If perception is tunable, all training groups should show measurably expanded perceptual access compared to controls.</p>
-                        </div>
-                        <div class="experiment-detail">
-                            <h4>Framework Connection</h4>
-                            <p>If consciousness is computational optimization of information processing, then deliberate training should adjust tuning parameters, measurably increasing sensitivity to specific information channels. The AI component tests whether external computational support can accelerate the optimization of biological consciousness tuning, paralleling the cognitive extension program's approach of using AI to overcome substrate limitations. This is the experiment most directly testing whether humans can be trained to perceive more of reality.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Experiment 3 -->
-                <div class="experiment-card" data-aos="fade-up">
-                    <div class="experiment-header" style="background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);">
-                        <h3>Experiment 3: State-Dependent Detection</h3>
-                        <p>Demonstrating that sensitivity is a dynamic tuning parameter, not a fixed trait</p>
-                    </div>
-                    <div class="experiment-body">
-                        <p><strong>Hypothesis:</strong> Detection ability varies with mental state in the same individual, demonstrating that "sensitivity" is a state-dependent tuning parameter rather than a fixed characteristic.</p>
-                        <p>The same individuals are tested across multiple states: normal baseline, after 30-minute meditation, during acute stress, after physical exercise, and during emotional connection with a loved one. Each state includes the full testing protocol, covering electromagnetic detection, environmental sensing, and physiological measurements, with HRV coherence measured throughout as a proxy for internal state. Testing is repeated across 20 or more sessions per subject to establish robust within-person patterns.</p>
-                        <div class="experiment-detail">
-                            <h4>Prediction</h4>
-                            <p>Detection should vary systematically with state, correlating particularly with HRV coherence. High-coherence states such as meditation and emotional connection should increase sensitivity, while low-coherence states like stress and fatigue should decrease it. This would demonstrate that the same information-processing system shows different detection capabilities depending on its internal coherence.</p>
-                        </div>
-                        <div class="experiment-detail">
-                            <h4>Framework Connection</h4>
-                            <p>Tests whether consciousness tuning is dynamic. If the same nervous system shows different perceptual access based on its coherence state, this supports the computational optimization model, where internal coherence enables broader information channel access, over fixed filtering.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Experiment 4 -->
-                <div class="experiment-card" data-aos="fade-up">
-                    <div class="experiment-header" style="background: linear-gradient(135deg, var(--accent-orange) 0%, #e65100 100%);">
-                        <h3>Experiment 4: Environmental Information Signatures</h3>
-                        <p>Testing whether emotional events leave detectable patterns in physical space</p>
-                    </div>
-                    <div class="experiment-body">
-                        <p><strong>Hypothesis:</strong> If emotions are information processing patterns in physical fields, and consciousness participates in physical processes as quantum mechanics suggests, then locations where intense emotional events occurred should contain detectable information signatures.</p>
-                        <p>Locations with documented emotional history, including sites of violent death, historical trauma, and sacred meditation spaces, are paired with matched neutral control sites of similar architecture and demographics. Subjects are transported blindfolded to locations without being told their nature, spending ten minutes sensing the environment and reporting impressions via standardized questionnaire. Multi-channel measurement captures subjective reports, physiological indicators (HRV, skin conductance, EEG where available), electromagnetic field readings, and thermal imaging simultaneously. Multiple control conditions include random locations, recently constructed buildings with no emotional history, and deliberately misleading framing.</p>
-                        <div class="experiment-detail">
-                            <h4>Prediction</h4>
-                            <p>Naturally sensitive individuals identified in Experiment 1 should show above-chance detection of emotionally significant locations. Detection should be multi-channel. Some subjects may show physiological responses without conscious awareness, while others may consciously perceive patterns without measurable physiological change. Trained subjects from Experiment 2 should show improved detection compared to their own baselines.</p>
-                        </div>
-                        <div class="experiment-detail">
-                            <h4>Framework Connection</h4>
-                            <p>This is the most direct test of whether consciousness generates persistent physical information patterns. If emotions are information processing in fields, and if death represents sudden termination of organized information processing, these events should create detectable disruption or signature in field structures. Positive results would provide empirical evidence that mind exists in fields and is part of the physical universe, not separate from it.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- COSMIC Framework Connection -->
-    <section class="content-section">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Connection to the COSMIC Framework</h2>
-            <p>How this program tests core predictions of information-theoretic consciousness</p>
+        <div style="background: #1a1a2e; border-radius: 8px; padding: 2rem; color: white; margin-top: 2rem;" data-aos="fade-up">
+            <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem;">The Connection Experience in Framework Terms</p>
+            <p style="color: rgba(255,255,255,0.88); line-height: 1.9; font-size: 0.95rem; margin-bottom: 1rem;">The sense of connection to everything and everyone else is the most consistent report across all methods of reaching the expanded state. In framework terms this is not a side effect. It is the central finding. The boundary between self and environment is not given by reality. It is constructed and maintained by the survival filter at significant bandwidth cost. When the filter quiets, the boundary construction pauses, and what is perceived instead is the relational structure of what was being edited out. The connection is not generated by the experience. It is what is actually there when the model that occludes it is temporarily suspended.</p>
+            <p style="color: rgba(255,255,255,0.88); line-height: 1.9; font-size: 0.95rem; margin-bottom: 0;">This is also consistent with the NBI program's position. If constraint structures exist independently of any substrate that instantiates them, and if individual minds are substrates running the same underlying structures, then the felt sense of shared reality is accurate perception of that substrate. It is not an illusion of unity. It is reduced illusion of separation. The universality of the report across individuals, cultures, and training methods is exactly what the framework predicts: everyone who accesses the same substrate accesses the same structure, because the structure is the same for everyone.</p>
         </div>
 
-        <div class="two-column">
-            <div class="column" data-aos="fade-right">
-                <h3>What the Framework Predicts</h3>
-                <p>If consciousness is information processing in quantum and electromagnetic fields, several things follow directly. Different brains should process information differently, which is obvious but takes on new significance when "information" includes field patterns beyond the five classical senses. Different processing configurations should produce different sensitivity to different field patterns. Processing should be modifiable through neuroplasticity and deliberate training. And some neural configurations should naturally detect patterns that others miss.</p>
-                <p>Crucially, the "sensitive" people in this model aren't defective filters or deluded mystics. They're differently tuned, accessing information channels that most people's neural architecture compresses away. Some configurations may be optimized for social cues (empaths), others for environmental patterns (naturalists), others for abstract structures (mathematicians), and still others for information channels we haven't yet mapped.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem;" data-aos="fade-up">
+            <div style="background: #f0f2f5; border-radius: 8px; padding: 1.5rem; border-left: 4px solid var(--primary-color);">
+                <h4 style="color: var(--text-dark); margin-bottom: 0.6rem; font-size: 0.95rem;">Meditation</h4>
+                <p style="color: var(--text-dark); font-size: 0.88rem; line-height: 1.7;">Long-term practice produces measurable default-mode-network changes, increased gamma coherence, and phenomenological reports identical to flow and other expanded states. Legal, documented, scalable.</p>
             </div>
-
-            <div class="column" data-aos="fade-left">
-                <h3>What Success Would Mean</h3>
-                <p>If this program demonstrates that perceptual sensitivity is trainable, state-dependent, and individually variable in the ways the COSMIC Framework predicts, the implications extend far beyond academic interest. It would mean that human access to reality is not a fixed constraint but an optimization parameter, one that can be deliberately improved.</p>
-                <p>More profoundly, if the environmental signature experiments produce positive results, it would provide empirical evidence that consciousness and its products, including thoughts, emotions, and intentions, are physical phenomena existing in fields. Mind would not be something mysteriously separate from the universe, but completely part of it. This would represent genuine progress on the hard problem of consciousness, not through philosophical argument but through experimental measurement. The real question is not "why does the brain filter?" but "what information channels exist, who can access them, under what conditions, and can we map the complete information topology of consciousness-reality interaction?"</p>
+            <div style="background: #f0f2f5; border-radius: 8px; padding: 1.5rem; border-left: 4px solid var(--primary-color);">
+                <h4 style="color: var(--text-dark); margin-bottom: 0.6rem; font-size: 0.95rem;">Flow States</h4>
+                <p style="color: var(--text-dark); font-size: 0.88rem; line-height: 1.7;">Decreased self-referential processing, time dilation, effortless action, heightened perception. Induced through challenge-skill balance, clear goals, and reduced interference. Trainable.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Current Status -->
-    <section class="content-section shaded">
-        <div class="section-inner">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Current Status</h2>
+            <div style="background: #f0f2f5; border-radius: 8px; padding: 1.5rem; border-left: 4px solid var(--primary-color);">
+                <h4 style="color: var(--text-dark); margin-bottom: 0.6rem; font-size: 0.95rem;">Biofeedback</h4>
+                <p style="color: var(--text-dark); font-size: 0.88rem; line-height: 1.7;">Makes normally invisible system states visible. Heart rate variability, EEG coherence, and galvanic skin response create feedback loops that allow deliberate adjustment of automatic processes.</p>
             </div>
-
-            <div class="two-column">
-                <div class="column" data-aos="fade-right">
-                    <h3>Phase: Protocol Development</h3>
-                    <p>The program is currently in the experimental design and protocol development phase. Core priorities include finalizing ethical review protocols for all four experiments, developing standardized sensitivity testing batteries that can be replicated across labs, establishing baseline measurement protocols for all detection channels, and designing training interventions with proper randomization and blinding.</p>
-                    <p>Equipment requirements are being specified, including electromagnetic field detection arrays, HRV monitoring systems, EEG access for subset studies, and standardized environmental measurement packages for the location-based experiments.</p>
-                </div>
-
-                <div class="column" data-aos="fade-left">
-                    <h3>Collaborators Sought</h3>
-                    <p>This program requires interdisciplinary collaboration across domains that don't typically interact. We're seeking neuroscientists with EEG or fMRI access for neural correlate studies, physicists specializing in electromagnetic field detection or quantum coherence measurement, psychologists experienced in rigorous parapsychology research protocols, meditation teachers and contemplative science researchers for training protocol development, and statisticians with expertise in experimental design and meta-analysis.</p>
-                    <p>If your expertise intersects with any aspect of this program, we welcome conversation. Contact <a href="mailto:info@ic2research.org" style="color: var(--accent-red);">info@ic2research.org</a> or visit the <a href="contribute.html" style="color: var(--accent-red);">Contribute</a> page.</p>
-                </div>
-            </div>
-
-            <div class="info-box" data-aos="fade-up" style="border-left-color: var(--accent-green);">
-                <h3>Related Publications</h3>
-                <p><strong>Framework Paper:</strong> "Consciousness as Recursive Information Processing: Bridging the Explanatory Gap" is currently in preparation. This paper formalizes the variable tuning model and derives the specific predictions tested by this program.</p>
-                <p><strong>Technical Protocol:</strong> "Variable Tuning vs. Survival Filtering: An Experimental Program" is also in preparation. Full experimental protocols, power analyses, and pre-registered predictions for all four core experiments.</p>
+            <div style="background: #f0f2f5; border-radius: 8px; padding: 1.5rem; border-left: 4px solid var(--primary-color);">
+                <h4 style="color: var(--text-dark); margin-bottom: 0.6rem; font-size: 0.95rem;">Breathwork</h4>
+                <p style="color: var(--text-dark); font-size: 0.88rem; line-height: 1.7;">Deliberate breathing patterns produce measurable changes in autonomic balance and neural oscillation coherence. Accessible, immediate, and consistent with the bandwidth reallocation model.</p>
             </div>
         </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="content-section">
-        <div class="cta-section" data-aos="fade-up">
-            <h2 style="margin-bottom: 1rem;">Interested in This Research?</h2>
-            <p style="opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Whether you're a researcher, a practitioner, or someone who's experienced perceptual variability firsthand, we'd like to hear from you.</p>
-            <a href="contribute.html" class="btn btn-white">Get Involved</a>
-            <a href="programs-gateway.html" class="btn btn-outline" style="color: white; border-color: white;">View All Programs</a>
+        <div style="margin-top: 2rem; padding: 1.25rem 1.75rem; background: #f0f2f5; border-radius: 8px; border-left: 4px solid #2a0a40;" data-aos="fade-up">
+            <p style="font-size: 0.8rem; color: var(--text-dark); line-height: 1.7; margin: 0;"><strong>Research context:</strong> Carhart-Harris, R. et al. (2014), "The entropic brain," Frontiers in Human Neuroscience. Pollan, M. (2018), How to Change Your Mind. Berkovich-Ohana, A. et al. (2013), meditation and self-boundary dissolution, NeuroImage. Csikszentmihalyi, M. (1990), Flow: The Psychology of Optimal Experience. Josipovic, Z. (2014), neural correlates of nondual awareness, Annals of the New York Academy of Sciences.</p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
+<!-- CTA -->
+<section class="content-section">
+    <div style="background: linear-gradient(135deg, #2a0a40 0%, #4a1b6a 100%); color: white; padding: 3rem; border-radius: 12px; text-align: center;" data-aos="fade-up">
+        <h2 style="color: white; margin-bottom: 1rem;">Interested in This Research?</h2>
+        <p style="opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Whether you are a neuroscientist, a practitioner, or someone who has noticed that what you attend to changes what you experience, this program is pointed at the same question from a physics foundation.</p>
+        <a href="contribute.html" class="btn" style="background: white; color: #4a1b6a; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 0.5rem; display: inline-block;">Get Involved</a><a href="programs-gateway.html" class="btn" style="background: transparent; color: white; border: 2px solid white; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 0.5rem; display: inline-block;">View All Programs</a><a href="results-consciousness-tuning.html" class="btn" style="background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 0.5rem; display: inline-block;">Results Log</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
     <div class="footer-container">
-    <div class="footer-section">
-    <h3>Ic² Research Institute</h3>
-    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    </div>
-    <div class="footer-section">
-    <h3>Research</h3>
-    <ul>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="programs-gateway.html">Programs</a></li>
-    <li><a href="research-publications.html">Publications</a></li>
-    <li><a href="simulations.html">Simulations</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Resources</h3>
-    <ul>
-    <li><a href="book.html">The Big TOE</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="faq-page.html">FAQ</a></li>
-    <li><a href="members.html">Our Members</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Connect</h3>
-    <ul>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="discussions-page.html">Discussions</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="become-member.html">Become a Member</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    </ul>
-    </div>
+        <div class="footer-section">
+            <h3>Ic² Research Institute</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="research-publications.html">Publications</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="book.html">The Big TOE</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq-page.html">FAQ</a></li>
+                <li><a href="members.html">Our Members</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="become-member.html">Become a Member</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
     </div>
     <div class="footer-bottom">
-    <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,0.6);">Terms & Conditions</a></p>
     </div>
-    </footer>
+</footer>
 
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1000, once: true, offset: 100 });
+
+// Hamburger menu
+(function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            const expanded = hamburger.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            mobileMenu.setAttribute('aria-hidden', expanded ? 'false' : 'true');
         });
-    </script>
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            });
+        });
+    }
+})();
+</script>
+</body>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true, offset: 80 });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+</script>
 </body>
 </html>

@@ -3,40 +3,38 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Elite Performance Training - Program Overview - Ic² Research Institute</title>
-    <meta name="description" content="Comprehensive overview of the Elite Performance Training Program - objectives, participants, budget, timeline, and deliverables">
-
-    <!-- AOS Animation Library -->
+    <title>Elite Performance Research Program — Ic² Research Institute</title>
+    <meta name="description" content="Information-first physics predicts that the information processing target is the primary variable in neural adaptation. This program extends established performance research into the framework's territory.">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <style>
-    /* Base styles (same as gateway) */
+    /* --- Global Styles --- */
     * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     }
-
+    
     :root {
     --primary-color: #8B0000;
-    --secondary-color: #2c3e50;
-    --accent-blue: #005ba5;
-    --accent-red: #e33d2f;
-    --accent-green: #a1cd5f;
+    --secondary-color: #2d3f52;
+    --accent-program: #8B0000;
+    --accent-program-dark: #5a0000;
+    --accent-nbi-light: #1a7ad4;
+    --accent-yellow: #f1e303;
     --text-dark: #2c3e50;
     --text-light: #666;
     --bg-light: #f8f9fa;
     --max-width: 1200px;
     }
-
+    
     body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background: white;
     }
-
-    /* Header styles (same as gateway) */
+    
+    /* Header */
     .site-header {
     background: white;
     border-bottom: 1px solid #e0e0e0;
@@ -45,7 +43,7 @@
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-
+    
     .header-container {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -54,41 +52,38 @@
     justify-content: space-between;
     align-items: center;
     }
-
+    
     .site-logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    display:flex;
-    align-items:center;
-    gap:12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     text-decoration: none;
     }
-
+    
     .site-logo img {
-    height: 40px;
+    height: 50px;
     width: auto;
     display: block;
     }
-
+    
     .main-navigation ul {
     list-style: none;
     display: flex;
     gap: 1.5rem;
     align-items: center;
     }
-
+    
     .main-navigation a {
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 500;
     transition: color 0.3s ease;
     }
-
+    
     .main-navigation a:hover {
     color: var(--primary-color);
     }
-
+    
     .main-navigation a.login-link {
     background: var(--primary-color);
     color: #f1e303;
@@ -96,6 +91,12 @@
     border-radius: 25px;
     font-weight: 700;
     box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+    }
+    
+    .main-navigation a.login-link:hover {
+    background: #a00000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
     }
 
     /* Hamburger Menu */
@@ -105,6 +106,8 @@
     cursor: pointer;
     gap: 4px;
     padding: 8px;
+    background: none;
+    border: none;
     }
 
     .hamburger span {
@@ -113,7 +116,12 @@
     background: var(--primary-color);
     border-radius: 3px;
     transition: all 0.3s ease;
+    display: block;
     }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
     .mobile-menu {
     display: none;
@@ -130,14 +138,11 @@
     transition: max-height 0.3s ease;
     }
 
-    .mobile-menu.active {
-    max-height: 600px;
-    }
+    .mobile-menu.active { max-height: 600px; }
 
-    .mobile-menu ul {
-    list-style: none;
-    padding: 1rem;
-    }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu ul li:last-child { border-bottom: none; }
 
     .mobile-menu a {
     display: block;
@@ -147,856 +152,969 @@
     font-weight: 500;
     }
 
-    /* Program Header */
-    .program-header {
-    background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);
+    .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+
+    .mobile-menu a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+    font-weight: 700;
+    }
+    
+    /* Page Header */
+    .page-header {
+    background: linear-gradient(135deg, #5a0000 0%, #8B0000 60%, #8B0000 100%);
     color: white;
     padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
     }
 
-    .program-header-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
+    .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,122,212,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
     }
-
-    .breadcrumb {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    opacity: 0.9;
-    }
-
-    .breadcrumb a {
-    color: white;
-    text-decoration: none;
-    }
-
-    .breadcrumb a:hover {
-    text-decoration: underline;
-    }
-
-    .program-header h1 {
+    
+    .page-header h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 700;
+    position: relative;
     }
-
-    .program-tagline {
-    font-size: 1.25rem;
+    
+    .page-header .subtitle {
+    font-size: 1.5rem;
     opacity: 0.95;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    }
+    
+    .page-header .meta {
+    font-size: 1.05rem;
+    opacity: 0.85;
+    margin-top: 1rem;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    position: relative;
     }
 
-    .program-status {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    padding: 0.5rem 1.25rem;
-    border-radius: 25px;
-    font-weight: 600;
+    .header-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    position: relative;
     }
 
-    /* Quick Stats Bar */
-    .quick-stats {
-    background: white;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin-top: -2rem;
-    border-radius: 12px;
+    .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
     }
-
-    .stats-container {
+    
+    /* Content Section */
+    .content-section {
+    padding: 2.5rem 2rem;
     max-width: var(--max-width);
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    }
+    
+    .content-section.shaded {
+    background: #e8edf2;
+    max-width: 100%;
+    padding: 2.5rem 2rem;
     }
 
-    .stat-box {
+    .content-section.shaded .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    .content-section.dark-section {
+    background: #0d1b2e;
+    max-width: 100%;
+    padding: 2.5rem 2rem;
+    }
+
+    .content-section.dark-section .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+    
+    .section-header {
+    margin-bottom: 2rem;
     text-align: center;
     }
-
-    .stat-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent-blue);
-    display: block;
-    margin-bottom: 0.25rem;
+    
+    .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
     }
-
-    .stat-label {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    }
-
-    /* Main Content */
-    .main-content {
-    max-width: var(--max-width);
+    
+    .section-header p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    max-width: 800px;
     margin: 0 auto;
-    padding: 4rem 2rem;
     }
 
-    .content-grid {
+    .section-header.light h2 { color: white; }
+    .section-header.light p { color: rgba(255,255,255,0.8); }
+    
+    /* Content Text */
+    .content-text {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    }
+
+    .content-text:last-child { margin-bottom: 0; }
+    
+    /* Two Column Layout */
+    .two-column {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
+    margin: 3rem 0;
     }
-
-    .main-column h2 {
-    font-size: 2rem;
+    
+    .column h3 {
+    font-size: 1.8rem;
     margin-bottom: 1rem;
     color: var(--text-dark);
-    border-bottom: 3px solid var(--accent-blue);
-    padding-bottom: 0.5rem;
+    font-weight: 700;
     }
-
-    .main-column h3 {
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    
+    .column p {
     color: var(--text-dark);
-    }
-
-    .main-column p {
     margin-bottom: 1rem;
-    color: var(--text-light);
     line-height: 1.8;
     }
 
-    .main-column ul, .main-column ol {
-    margin-left: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-light);
+    /* Stats Grid */
+    .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
     }
-
-    .main-column li {
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-    }
-
-    .highlight-box {
-    background: var(--bg-light);
-    border-left: 4px solid var(--accent-blue);
-    padding: 1.5rem;
-    margin: 2rem 0;
-    border-radius: 6px;
-    }
-
-    .highlight-box h4 {
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    }
-
-    /* Sidebar */
-    .sidebar-box {
-    background: white;
-    border: 1px solid #e0e0e0;
+    
+    .stat-card {
+    background: #f0f0f0;
     border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .sidebar-box h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    border-bottom: 2px solid var(--bg-light);
-    padding-bottom: 0.5rem;
-    }
-
-    .sidebar-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #f0f0f0;
-    }
-
-    .sidebar-item:last-child {
-    border-bottom: none;
-    }
-
-    .sidebar-label {
-    color: var(--text-light);
-    font-weight: 500;
-    }
-
-    .sidebar-value {
-    color: var(--text-dark);
-    font-weight: 600;
-    }
-
-    .cta-box {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #6b0000 100%);
-    color: white;
     padding: 2rem;
-    border-radius: 12px;
     text-align: center;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid var(--primary-color);
     }
-
-    .cta-box h3 {
-    color: white;
-    margin-bottom: 1rem;
+    
+    .stat-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(139,0,0,0.15);
+    transform: translateY(-2px);
     }
-
-    .cta-box p {
-    margin-bottom: 1.5rem;
-    opacity: 0.95;
-    }
-
-    .btn {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    background: white;
+    
+    .stat-card .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
     color: var(--primary-color);
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .stat-label {
+    color: var(--text-dark);
+    font-size: 1rem;
+    }
+
+    /* Info Box */
+    .info-box {
+    background: #1a1a2e;
+    border-left: 4px solid var(--primary-color);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.9);
+    }
+    
+    .info-box h3 {
+    color: #f1e303;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    }
+    
+    .info-box p {
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    .info-box p:last-child { margin-bottom: 0; }
+
+    .info-box ul {
+    margin: 0.75rem 0 0.75rem 1.5rem;
+    color: rgba(255,255,255,0.85);
+    }
+
+    .info-box ul li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+    /* Conditions Grid */
+    .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+
+    .condition-card {
+    background: #f0f2f5;
+    border-radius: 12px;
+    padding: 2rem;
+    border-top: 4px solid var(--primary-color);
     transition: all 0.3s ease;
     }
 
-    .btn:hover {
+    .condition-card:hover {
+    box-shadow: 0 4px 16px rgba(14,95,168,0.12);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* Footer (same as gateway) */
-    footer {
-    background: #2c3e50;
-    color: white;
-    padding: 2.5rem 2rem 1rem;
+    .condition-card .condition-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 0.5rem;
     }
 
-    .footer-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
+    .condition-card h4 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    }
+
+    .condition-card p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* Experiment Cards */
+    .experiment-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin: 3rem 0;
     }
 
-    .footer-section h3 {
+    .experiment-card {
+    background: #f0f2f5;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    }
+
+    .experiment-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(139,0,0,168,0.1);
+    }
+
+    .experiment-header {
+    padding: 1.5rem 2rem;
+    color: white;
+    }
+
+    .experiment-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    }
+
+    .experiment-header p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    }
+
+    .experiment-body {
+    padding: 2rem;
+    }
+
+    .experiment-body p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    .experiment-body p:last-child { margin-bottom: 0; }
+
+    .experiment-detail {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    }
+
+    .experiment-detail h4 {
+    color: var(--text-dark);
     margin-bottom: 0.75rem;
     font-size: 1.1rem;
     }
 
-    .footer-section ul {
-    list-style: none;
+    .experiment-detail p, .experiment-detail li {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
     }
 
-    .footer-section a {
-    color: rgba(255, 255, 255, 0.8);
+    .experiment-detail ul {
+    margin-left: 1.25rem;
+    margin-top: 0.5rem;
+    }
+
+    .experiment-detail ul li { margin-bottom: 0.4rem; }
+
+    /* Evidence Grid — dark cards */
+    .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+
+    .evidence-card {
+    background: #102035;
+    border: 2px solid #1a3a5c;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    }
+
+    .evidence-card:hover {
+    border-color: var(--accent-program);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
+    transform: translateY(-2px);
+    }
+
+    .evidence-card h4 {
+    color: var(--accent-yellow);
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    }
+
+    .evidence-card p {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* Download box */
+    .download-box {
+    background: linear-gradient(135deg, #5a0000 0%, #8B0000 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    }
+
+    .download-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .download-box p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 500px;
+    }
+
+    .download-meta {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    }
+
+    /* Prediction logged box */
+    .prediction-log {
+    background: #fff8e1;
+    border: 2px solid #f9a825;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    }
+
+    .prediction-log h4 {
+    color: #e65100;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    }
+
+    .prediction-log ul {
+    margin-left: 1.25rem;
+    }
+
+    .prediction-log ul li {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+    background: linear-gradient(135deg, #5a0000 0%, #8B0000 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    }
+
+    .cta-section h2 { color: white; }
+    .cta-section .btn { margin: 0.5rem; }
+
+    /* Button Styles */
+    .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
     text-decoration: none;
-    transition: color 0.3s ease;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    }
+    
+    .btn-primary:hover {
+    background: #a00000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
     }
 
-    .footer-section a:hover {
+    .btn-white {
+    background: white;
+    color: var(--primary-color);
+    }
+
+    .btn-white:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+    background: transparent;
+    color: var(--accent-program);
+    border: 2px solid var(--accent-program);
+    }
+    
+    .btn-outline:hover {
+    background: var(--accent-program);
     color: white;
     }
 
-    .footer-bottom {
+    .btn-download {
+    background: white;
+    color: #0a2a4e;
+    font-weight: 700;
+    padding: 0.9rem 2.5rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    }
+
+    .btn-download:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    
+    /* Footer */
+    footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 3rem 2rem 1rem;
+    margin-top: 0;
+    }
+    
+    .footer-container {
     max-width: var(--max-width);
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    }
+    
+    .footer-section h3 { margin-bottom: 1rem; color: white; }
+    
+    .footer-section ul { list-style: none; }
+    
+    .footer-section ul li { margin-bottom: 0.5rem; }
+    
+    .footer-section a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+    }
+    
+    .footer-section a:hover { color: white; }
+
+    .footer-bottom {
+    max-width: var(--max-width);
+    margin: 2rem auto 0;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255,255,255,0.1);
     text-align: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255,255,255,0.6);
     font-size: 0.9rem;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-        .main-navigation {
-            display: none;
-        }
-
-        .hamburger {
-            display: flex;
-        }
-
-        .mobile-menu {
-            display: block;
-        }
-
-        .program-header h1 {
-            font-size: 2rem;
-        }
-
-        .stats-container {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .content-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .footer-container {
-            grid-template-columns: 1fr;
-        }
+    .main-navigation { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
+    .page-header h1 { font-size: 2rem; }
+    .page-header .subtitle { font-size: 1.2rem; }
+    .two-column { grid-template-columns: 1fr; gap: 2rem; }
+    .section-header h2 { font-size: 1.8rem; }
+    .download-box { flex-direction: column; text-align: center; }
     }
-        /* Site Launch Banner */
-    .site-launch-banner {
-        background: linear-gradient(135deg, #005ba5 0%, #003d7a 100%);
-        color: white;
-        padding: 1rem 2rem;
+
+    /* ── Detective Wall ─────────────────────────────────────────────────── */
+    .detective-section {
+        background: #1a1a1a;
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .detective-section::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+        pointer-events: none;
+    }
+    .detective-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+    .detective-title {
         text-align: center;
-        border-bottom: 3px solid #f1e303;
+        margin-bottom: 3rem;
     }
-    .site-launch-banner strong { color: #f1e303; font-weight: 700; }
-    .site-launch-banner p { margin: 0; font-size: 1rem; }
-    @media (max-width: 768px) {
-        .site-launch-banner { padding: 0.75rem 1rem; }
-        .site-launch-banner p { font-size: 0.9rem; }
+    .detective-title h2 { color: white; font-size: 2rem; margin-bottom: 0.5rem; }
+    .detective-title p { color: rgba(255,255,255,0.5); font-size: 0.9rem; font-style: italic; }
+
+    /* Cork board */
+    .cork-board {
+        background: #2d1f0e;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.4);
+        position: relative;
+        border: 8px solid #3d2a10;
     }
+    .cork-board::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            radial-gradient(ellipse at 20% 30%, rgba(180,120,60,0.06) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 70%, rgba(160,100,40,0.06) 0%, transparent 60%);
+        border-radius: 2px;
+        pointer-events: none;
+    }
+
+    /* Pin grid */
+    .pin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Pin card */
+    .pin-card {
+        background: #fdf9f0;
+        border-radius: 2px;
+        padding: 1.25rem 1.25rem 1.5rem;
+        position: relative;
+        box-shadow: 3px 4px 10px rgba(0,0,0,0.4), 1px 1px 3px rgba(0,0,0,0.2);
+        transform: rotate(var(--rot, 0deg));
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: default;
+    }
+    .pin-card:hover {
+        transform: rotate(0deg) scale(1.03);
+        box-shadow: 5px 8px 20px rgba(0,0,0,0.5);
+        z-index: 10;
+    }
+    /* Push-pin */
+    .pin-card::before {
+        content: "";
+        position: absolute;
+        top: -10px; left: 50%;
+        transform: translateX(-50%);
+        width: 14px; height: 14px;
+        border-radius: 50%;
+        background: var(--pin-color, #cc2200);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 -1px 2px rgba(0,0,0,0.3);
+    }
+    .pin-card .pin-category {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        color: var(--cat-color, #666);
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .pin-card h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+        line-height: 1.35;
+    }
+    .pin-card p {
+        font-size: 0.78rem;
+        color: #444;
+        line-height: 1.6;
+        margin: 0;
+    }
+    .pin-card .pin-status {
+        display: inline-block;
+        margin-top: 0.75rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+    }
+    .status-confirmed { background: #e8f5e9; color: #1a5c2a; }
+    .status-open { background: #fff8e1; color: #7a4f00; }
+    .status-proposed { background: #e3f2fd; color: #1565c0; }
+    .status-unknown { background: #f3e5f5; color: #6a1b9a; }
+
+    /* Red string canvas overlay */
+    #board-canvas {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* Source / reference strip */
+    .ref-strip {
+        margin-top: 2rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+    .ref-tag {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: rgba(255,255,255,0.6);
+        font-size: 0.7rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Mind-map connector label */
+    .connector-label {
+        display: inline-block;
+        background: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.5);
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 2px;
+        font-family: 'Courier New', monospace;
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+        .pin-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .pin-card { padding: 1rem 1rem 1.25rem; }
+    }
+
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="site-header">
+<header class="site-header">
     <div class="header-container">
-    <a href="index.html" class="site-logo">
-    <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
-    </a>
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute" onerror="this.style.display='none'">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
 
-    <nav class="main-navigation">
+<!-- Mobile Menu -->
+<nav class="mobile-menu" aria-hidden="true">
     <ul>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="book.html">Big TOE</a></li>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="programs-gateway.html">Programs</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="discussions-page.html">Discussion</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="login.html" class="login-link">Login</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
     </ul>
-    </nav>
+</nav>
 
-    <div class="hamburger" role="button" tabindex="0">
-    <span></span>
-    <span></span>
-    <span></span>
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Elite Performance</h1>
+    <div class="subtitle">A Research Program of the Ic² Research Institute</div>
+    <p class="meta">Information-first physics already has applications, even before the theory is complete. The Yue study, flow state research, and your own training experience are all pointing at the same mechanism. This program extends what is already established into the framework's territory.</p>
+    <div class="header-badges">
+        <span class="header-badge">⚡ Active Program</span>
+        <span class="header-badge">🧠 Neuroscience</span>
+        <span class="header-badge">📊 Established Research Base</span>
+        <span class="header-badge">🌐 Open Science</span>
     </div>
-    </div>
-    </header>
+</div>
 
-    <!-- Site Launch Banner -->
-    <div class="site-launch-banner">
-        <p>🚀 <strong>Official Site Launch: April 1, 2026</strong> | Currently in development - some pages may be incomplete as we prepare for our official opening</p>
-    </div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-    <ul>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="book.html">Big TOE</a></li>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="programs-gateway.html">Programs</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="discussions-page.html">Discussion</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="login.html" class="login-link">Login</a></li>
-    </ul>
-    </div>
-
-    <!-- Program Header -->
-    <section class="program-header">
-        <div class="program-header-container">
-            <div class="breadcrumb">
-                <a href="programs-gateway.html">Programs</a>
-                <span>/</span>
-                <span>Elite Performance Training</span>
-            </div>
-            <h1>Elite Performance Training Program</h1>
-            <p class="program-tagline">Systematic autonomic nervous system optimization for competitive athletes and high-achieving students</p>
-            <span class="program-status">PILOT PHASE • ENROLLMENT OPEN</span>
+<!-- Blog Cross-Reference -->
+<section class="content-section" style="padding: 1.5rem 2rem;">
+    <div style="background: #1a1a2e; border-left: 4px solid var(--primary-color); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;" data-aos="fade-up">
+        <div style="flex: 1; min-width: 200px;">
+            <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #f1e303; font-weight: 700; margin-bottom: 0.25rem;">Related Reading</p>
+            <p style="font-size: 0.95rem; color: rgba(255,255,255,0.88); margin: 0;">The framework's position on consciousness, information compression, and flow states is developed in <strong>Element 6</strong> of the book. The blog posts on NBI and the below-threshold principle are directly relevant to the mechanisms this program explores.</p>
         </div>
-    </section>
+        <a href="book.html" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Read the Book</a>
+    </div>
+</section>
 
-    <!-- Quick Stats -->
-    <section class="quick-stats">
-        <div class="stats-container">
-            <div class="stat-box" data-aos="fade-up">
-                <span class="stat-value">18</span>
-                <span class="stat-label">Months</span>
-            </div>
-            <div class="stat-box" data-aos="fade-up" data-aos-delay="100">
-                <span class="stat-value">20-30%</span>
-                <span class="stat-label">Performance Gain</span>
-            </div>
-            <div class="stat-box" data-aos="fade-up" data-aos-delay="200">
-                <span class="stat-value">3-5</span>
-                <span class="stat-label">Pilot Schools</span>
-            </div>
-            <div class="stat-box" data-aos="fade-up" data-aos-delay="300">
-                <span class="stat-value">100%</span>
-                <span class="stat-label">Open Source</span>
-            </div>
+<!-- Core Argument -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>The Framework Connection</h2>
+        <p>Information-first physics already has applications. The theory does not need to be complete for this to be true.</p>
+    </div>
+
+    <div class="two-column" data-aos="fade-up">
+        <div class="column">
+            <h3>What the Research Already Shows</h3>
+            <p>Your brain receives approximately one billion bits per second through your retina. By the time that signal reaches conscious perception it is forty bits per second. A twenty-five-million-to-one compression ratio, achieving approximately 85% of Shannon's theoretical maximum efficiency, operating entirely below conscious awareness. You do not experience compression. You experience a seamless, high-resolution world. The compression is invisible because it is perfect.</p>
+            <p>This is not a limitation. It is the system working. The question is whether you can work with it deliberately rather than letting it run on default survival-filtering settings. Most people never ask this question. Most training programs never ask it either.</p>
+            <p>In 1992, Guang Yue at the Cleveland Clinic demonstrated that subjects who performed detailed mental imagery of finger exercises — vividly imagining the movement, the muscle engagement, the felt outcome — gained 13.5% finger strength over twelve weeks with no physical movement. The physical training group gained 30%. The mental training group gained almost half that through information processing alone. The mechanism was confirmed by electromyography: increased neural drive to the trained muscles, produced by mental activity, not mechanical loading.</p>
         </div>
-    </section>
+        <div class="column">
+            <h3>What the Framework Adds</h3>
+            <p>The Yue study is consistent with Landauer's principle: information processing is physical. Mental information processing produces measurable physical reorganization in the nervous system. This is not metaphor. The information content of the mental activity, not the mechanical loading, reorganized the corticospinal pathways.</p>
+            <p>The framework extends this. If the universe is an information-processing system and biological intelligence is one implementation of that system, then the boundary between mind and body is a boundary between information processing registers, not between two fundamentally different kinds of thing. Focusing on the muscle rather than the machine or the weight is not a trick. It is accessing the correct level of the information processing hierarchy. The muscle is the output. The neural pattern is the program. You can write the program directly.</p>
+            <p>Flow states, in this reading, are not mysterious. They are moments when the survival-filtering overhead drops, the forty bits per second are allocated to the task rather than distributed across threat assessment and social positioning, and the underlying optimization process runs closer to its theoretical maximum. Athletes describe being guided by something outside themselves. What they may be describing is the constraint structure running without interference.</p>
+        </div>
+    </div>
 
-    <!-- Main Content -->
-    <section class="main-content">
-        <div class="content-grid">
-            <!-- Main Column -->
-            <div class="main-column">
-                <div data-aos="fade-up">
-                    <h2>Program Overview</h2>
-                    <p>
-                        The Elite Performance Training Program represents a systematic integration of neuroscience, sports psychology, and contemplative practice, designed to optimize the autonomic nervous system for peak performance. Drawing from military training protocols, Olympic athlete preparation, and validated clinical research, this program provides measurable competitive advantages in both athletic and academic domains.
-                    </p>
-                    <p>
-                        Through daily practice of breathing techniques, biofeedback training, mental rehearsal, and recovery optimization, participants develop conscious control over physiological processes that directly impact performance, stress resilience, and learning capacity.
-                    </p>
-                </div>
+    <div class="info-box" data-aos="fade-up">
+        <h3>Your Training as Evidence</h3>
+        <p>Focusing on the muscle rather than the machine or the weight — watching all the ways a muscle can contract and stretch under load, then creating movements that express that range — is an empirical discovery of the same mechanism the Yue study documented. The information processing target determines the neural adaptation. Change the target and you change what the system optimizes for. Off-axis movements become available when the constraint space is defined by the muscle's geometry rather than the equipment's geometry. The equipment defines a path. The muscle defines a space. Working in the space rather than on the path gives you the full constraint attractor.</p>
+    </div>
+</section>
 
-                <div data-aos="fade-up">
-                    <h2>Program Objectives</h2>
-                    
-                    <h3>Primary Objectives</h3>
-                    <ul>
-                        <li><strong>Athletic Performance Enhancement:</strong> Achieve 20-30% measurable improvement in sport-specific performance metrics through improved recovery, mental rehearsal, and autonomic regulation</li>
-                        <li><strong>Academic Excellence:</strong> Demonstrate 12-15% grade improvement and 200-300 point SAT/ACT increases through enhanced focus, reduced test anxiety, and optimized learning states</li>
-                        <li><strong>Injury Prevention:</strong> Reduce injury rates by 30-40% through enhanced body awareness, improved recovery protocols, and stress management</li>
-                        <li><strong>Autonomic Mastery:</strong> Develop measurable control over heart rate, heart rate variability, stress response, and recovery capacity</li>
-                    </ul>
-
-                    <h3>Secondary Objectives</h3>
-                    <ul>
-                        <li>Establish behavioral self-regulation capabilities (impulse control, emotional management, decision-making)</li>
-                        <li>Create sustainable daily practice habits that persist beyond program completion</li>
-                        <li>Develop interoceptive awareness and mind-body integration</li>
-                        <li>Provide competitive advantages in college recruitment and admissions processes</li>
-                        <li>Build resilience against substance abuse and self-destructive behaviors</li>
-                    </ul>
-
-                    <h3>Research Objectives</h3>
-                    <ul>
-                        <li>Collect comprehensive data on autonomic training outcomes in adolescent populations</li>
-                        <li>Validate measurement protocols for HRV, recovery metrics, and performance correlation</li>
-                        <li>Develop standardized curriculum that can be replicated across institutions</li>
-                        <li>Establish evidence base for scaling to broader educational markets</li>
-                    </ul>
-                </div>
-
-                <div data-aos="fade-up">
-                    <h2>Target Participants</h2>
-                    
-                    <h3>Primary Target: Elite Prep School Athletes (Ages 13-18)</h3>
-                    <p><strong>Characteristics:</strong></p>
-                    <ul>
-                        <li>Attending elite preparatory schools ($50k+ annual tuition)</li>
-                        <li>Participating in competitive athletics at state or national level</li>
-                        <li>College recruitment track (seeking D1 scholarships or elite academic institutions)</li>
-                        <li>High academic performance expectations (3.5+ GPA target)</li>
-                        <li>Demonstrated commitment and discipline</li>
-                    </ul>
-
-                    <h3>Pilot Phase Institutions</h3>
-                    <p><strong>Target Schools (3-5 for Year 1):</strong></p>
-                    <ul>
-                        <li>IMG Academy (Bradenton, FL) - 1,500 students, elite multi-sport</li>
-                        <li>Bullis School (Potomac, MD) - 800 students, strong academics + athletics</li>
-                        <li>Montverde Academy (FL) - 1,400 students, basketball powerhouse</li>
-                        <li>La Lumiere School (IN) - 200 students, elite basketball program</li>
-                        <li>Phillips Exeter Academy (NH) - 1,000 students, academic elite with strong athletics</li>
-                    </ul>
-
-                    <h3>Participant Requirements</h3>
-                    <ul>
-                        <li>Age 13-18 (grades 8-12)</li>
-                        <li>Currently participating in competitive athletics</li>
-                        <li>Parental consent and support</li>
-                        <li>Willingness to commit to daily 20-30 minute practice</li>
-                        <li>Access to smartphone for app-based training</li>
-                        <li>Medical clearance (no contraindications for breathing exercises)</li>
-                    </ul>
-
-                    <h3>Exclusion Criteria</h3>
-                    <ul>
-                        <li>Severe cardiovascular conditions requiring medical supervision</li>
-                        <li>Active psychosis or severe mental illness</li>
-                        <li>Inability to commit to minimum practice requirements</li>
-                        <li>Concurrent participation in conflicting training programs</li>
-                    </ul>
-                </div>
-
-                <div data-aos="fade-up">
-                    <h2>Program Structure & Timeline</h2>
-                    
-                    <h3>Duration: 18 Months (Three Semesters)</h3>
-                    
-                    <div class="highlight-box">
-                        <h4>Semester 1: Foundation & Assessment (Months 1-6)</h4>
-                        <p><strong>Focus:</strong> Autonomic nervous system basics, breathing techniques, HRV optimization</p>
-                        <p><strong>Expected Outcomes:</strong></p>
-                        <ul style="margin-left: 1.5rem;">
-                            <li>5-8 bpm resting heart rate reduction</li>
-                            <li>20-25% HRV improvement</li>
-                            <li>15-20% athletic performance gains</li>
-                            <li>8-12% academic improvement</li>
-                        </ul>
-                    </div>
-
-                    <div class="highlight-box">
-                        <h4>Semester 2: Optimization & Specialization (Months 7-12)</h4>
-                        <p><strong>Focus:</strong> Athletic/academic integration, advanced techniques, individual specialization</p>
-                        <p><strong>Expected Outcomes:</strong></p>
-                        <ul style="margin-left: 1.5rem;">
-                            <li>20-25% total athletic improvement</li>
-                            <li>12-15% academic improvement</li>
-                            <li>150-200 point SAT increase</li>
-                            <li>Demonstrated advanced autonomic control</li>
-                        </ul>
-                    </div>
-
-                    <div class="highlight-box">
-                        <h4>Semester 3: Mastery & Application (Months 13-18)</h4>
-                        <p><strong>Focus:</strong> College placement preparation, teaching others, independence</p>
-                        <p><strong>Expected Outcomes:</strong></p>
-                        <ul style="margin-left: 1.5rem;">
-                            <li>25-30% total performance improvement</li>
-                            <li>Measurable college admissions advantage</li>
-                            <li>Self-directed practice mastery</li>
-                            <li>Peer mentoring capabilities</li>
-                        </ul>
-                    </div>
-
-                    <h3>Daily Practice Requirements</h3>
-                    <ul>
-                        <li><strong>Months 1-6:</strong> 20 minutes daily (10 min morning, 10 min evening)</li>
-                        <li><strong>Months 7-12:</strong> 25 minutes daily (10 min morning, 15 min pre/post athletic)</li>
-                        <li><strong>Months 13-18:</strong> 30 minutes daily (self-directed timing)</li>
-                    </ul>
-
-                    <h3>Professional Instruction</h3>
-                    <ul>
-                        <li>Weekly 60-minute group sessions (on campus)</li>
-                        <li>Monthly individual assessments (30 minutes)</li>
-                        <li>Quarterly comprehensive performance reviews</li>
-                        <li>On-demand instructor support via app</li>
-                    </ul>
-                </div>
-
-                <div data-aos="fade-up">
-                    <h2>Deliverables</h2>
-                    
-                    <h3>For Participants</h3>
-                    <ul>
-                        <li>Complete 18-month training curriculum (progressive, age-appropriate)</li>
-                        <li>Wearable biofeedback device (included, remains with student)</li>
-                        <li>Mobile app with guided practices and progress tracking</li>
-                        <li>Weekly professional instruction and coaching</li>
-                        <li>Monthly performance reports and progress analytics</li>
-                        <li>Completion certificate and documented performance improvements</li>
-                        <li>College admissions support documentation</li>
-                    </ul>
-
-                    <h3>For Institutions</h3>
-                    <ul>
-                        <li>Comprehensive program implementation (turnkey solution)</li>
-                        <li>Certified instructors on campus (FT or PT based on enrollment)</li>
-                        <li>Technology platform (admin dashboard, parent portal, analytics)</li>
-                        <li>Monthly program reports (participation, outcomes, trends)</li>
-                        <li>Quarterly stakeholder presentations (board, parents, faculty)</li>
-                        <li>Annual comprehensive case study with ROI analysis</li>
-                        <li>Marketing rights to program results (anonymized data)</li>
-                    </ul>
-
-                    <h3>For Research Community</h3>
-                    <ul>
-                        <li>Open-source curriculum materials (Creative Commons license)</li>
-                        <li>De-identified research data (published on Zenodo)</li>
-                        <li>Validated assessment protocols and measurement frameworks</li>
-                        <li>Peer-reviewed publications documenting outcomes</li>
-                        <li>Replication package for other institutions</li>
-                        <li>Technology specifications and integration guides</li>
-                    </ul>
-                </div>
-
-                <div data-aos="fade-up">
-                    <h2>Budget & Pricing</h2>
-                    
-                    <h3>Pilot Phase Pricing (Year 1)</h3>
-                    <p><strong>Standard Pricing: $5,000 per student/year</strong></p>
-                    <p><strong>Pilot Discount: $3,000 per student/year (40% off)</strong></p>
-                    
-                    <h3>What's Included</h3>
-                    <ul>
-                        <li>All instruction and curriculum delivery</li>
-                        <li>Wearable biofeedback device ($200 value)</li>
-                        <li>Technology platform access (app, dashboards, analytics)</li>
-                        <li>Weekly group sessions and monthly individual assessments</li>
-                        <li>Quarterly performance reviews</li>
-                        <li>Ongoing instructor and technical support</li>
-                        <li>All materials and resources</li>
-                    </ul>
-
-                    <h3>Institutional Investment (Example: 100 students)</h3>
-                    <ul>
-                        <li>Pilot pricing: 100 students × $3,000 = $300,000</li>
-                        <li>Payment options: Annual, semester, or monthly installments</li>
-                        <li>Minimum enrollment: 50 students per institution</li>
-                    </ul>
-
-                    <h3>Expected ROI for Schools</h3>
-                    <ul>
-                        <li><strong>Scholarship value:</strong> 10-15 additional D1 scholarships × $40k/year = $400-600k annual value</li>
-                        <li><strong>Injury cost savings:</strong> 30-40% reduction = $30-50k annual savings</li>
-                        <li><strong>Recruitment advantage:</strong> Differentiated offering worth significant enrollment premium</li>
-                        <li><strong>Academic performance:</strong> Better college placement = enhanced institutional reputation</li>
-                        <li><strong>Total estimated value:</strong> $500k-1M per year per $300k investment = 2-3x ROI</li>
-                    </ul>
-
-                    <h3>Funding Sources</h3>
-                    <p>Institutions can fund through:</p>
-                    <ul>
-                        <li>Athletic department budgets</li>
-                        <li>Academic enrichment programs</li>
-                        <li>Student activity fees</li>
-                        <li>Donor/endowment funding</li>
-                        <li>Grant applications (wellness, athletics, academic excellence)</li>
-                    </ul>
-                </div>
-
-                <div data-aos="fade-up">
-                    <h2>Measurement & Validation</h2>
-                    
-                    <h3>Assessment Framework</h3>
-                    <p>All participants undergo comprehensive baseline and ongoing assessments:</p>
-
-                    <h4>Physiological Metrics</h4>
-                    <ul>
-                        <li>Resting heart rate (daily via wearable)</li>
-                        <li>Heart rate variability (daily via wearable)</li>
-                        <li>Sleep quality and architecture (nightly tracking)</li>
-                        <li>Recovery scores (calculated daily)</li>
-                        <li>Body composition (quarterly if available)</li>
-                    </ul>
-
-                    <h4>Athletic Performance</h4>
-                    <ul>
-                        <li>Sport-specific skill tests (baseline, monthly, quarterly)</li>
-                        <li>Standardized physical testing (vertical jump, sprint times, agility)</li>
-                        <li>Coach performance ratings</li>
-                        <li>Injury tracking and recovery times</li>
-                        <li>Competition performance data</li>
-                    </ul>
-
-                    <h4>Academic Performance</h4>
-                    <ul>
-                        <li>GPA tracking (quarterly)</li>
-                        <li>Standardized test scores (SAT, ACT, subject tests)</li>
-                        <li>Attention and focus assessments</li>
-                        <li>Teacher observations and ratings</li>
-                    </ul>
-
-                    <h4>Psychological & Behavioral</h4>
-                    <ul>
-                        <li>Perceived stress scales (monthly)</li>
-                        <li>Test anxiety measures</li>
-                        <li>Behavioral observations (teacher/coach reports)</li>
-                        <li>Self-regulation assessments</li>
-                    </ul>
-
-                    <h3>Data Collection & Analysis</h3>
-                    <ul>
-                        <li>Continuous automated data collection via wearables and app</li>
-                        <li>Monthly formal assessments</li>
-                        <li>Quarterly comprehensive evaluations</li>
-                        <li>Comparison to historical cohorts (year-over-year)</li>
-                        <li>Control group comparisons where possible</li>
-                        <li>Statistical analysis with confidence intervals</li>
-                    </ul>
-
-                    <h3>Publication & Transparency</h3>
-                    <ul>
-                        <li>De-identified data published on Zenodo (DOI-referenced)</li>
-                        <li>Quarterly progress reports to stakeholders</li>
-                        <li>Annual comprehensive analysis</li>
-                        <li>Peer-reviewed publication upon completion</li>
-                        <li>Open methodology for replication</li>
-                    </ul>
-                </div>
+<!-- Stats -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="stats-grid" data-aos="fade-up">
+            <div class="stat-card">
+                <span class="stat-value">25M:1</span>
+                <span class="stat-label">Compression ratio from retinal input to conscious perception</span>
             </div>
-
-            <!-- Sidebar -->
-            <div class="sidebar-column">
-                <div class="sidebar-box" data-aos="fade-up">
-                    <h3>Quick Facts</h3>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Start Date</span>
-                        <span class="sidebar-value">Fall 2025</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Duration</span>
-                        <span class="sidebar-value">18 Months</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Age Range</span>
-                        <span class="sidebar-value">13-18 Years</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Time Commitment</span>
-                        <span class="sidebar-value">20-30 min/day</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Pilot Schools</span>
-                        <span class="sidebar-value">3-5 Institutions</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Status</span>
-                        <span class="sidebar-value">Enrollment Open</span>
-                    </div>
-                </div>
-
-                <div class="sidebar-box" data-aos="fade-up">
-                    <h3>Key Contacts</h3>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Program Director</span>
-                        <span class="sidebar-value">M. Coleman</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Research Lead</span>
-                        <span class="sidebar-value">Ic² Institute</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Email</span>
-                        <span class="sidebar-value" style="font-size: 0.85rem;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0272706d6570636f71426b6130706771676370616a2c6d7065">[email&#160;protected]</a></span>
-                    </div>
-                </div>
-
-                <div class="sidebar-box" data-aos="fade-up">
-                    <h3>Important Dates</h3>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Applications Open</span>
-                        <span class="sidebar-value">Feb 2025</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">School Selection</span>
-                        <span class="sidebar-value">Apr 2025</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Instructor Training</span>
-                        <span class="sidebar-value">Jun 2025</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Program Launch</span>
-                        <span class="sidebar-value">Sep 2025</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">First Assessment</span>
-                        <span class="sidebar-value">Dec 2025</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Program Completion</span>
-                        <span class="sidebar-value">Feb 2027</span>
-                    </div>
-                </div>
-
-                <div class="cta-box" data-aos="fade-up">
-                    <h3>Access Curriculum</h3>
-                    <p>View detailed curriculum materials, instructor guides, and assessment protocols</p>
-                    <a href="program-elite-performance.html" class="btn">View Full Curriculum</a>
-                </div>
-
-                <div class="sidebar-box" data-aos="fade-up">
-                    <h3>Resources</h3>
-                    <ul style="list-style: none; margin: 0;">
-                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">📄 Program Brochure (PDF)</a></li>
-                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">📊 ROI Calculator (Excel)</a></li>
-                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">🎥 Overview Video</a></li>
-                        <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--accent-blue); text-decoration: none;">📧 Contact for Demo</a></li>
-                    </ul>
-                </div>
+            <div class="stat-card">
+                <span class="stat-value">40</span>
+                <span class="stat-label">Bits per second available for conscious experience</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">13.5%</span>
+                <span class="stat-label">Strength gain from mental imagery alone (Yue 1992)</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">85%</span>
+                <span class="stat-label">Of Shannon's theoretical maximum achieved by biological visual processing</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
+<!-- What the program does -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>What This Program Investigates</h2>
+        <p>Extending established findings into the framework's territory</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;" data-aos="fade-up">
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Information Target Training</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">The Yue study established that the information processing target determines physical adaptation. This program extends that principle: can systematically shifting the information target during training produce different adaptation profiles than conventional load-based protocols? The prediction is yes, and the mechanism is the same one Yue documented.</p>
+        </div>
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Bandwidth Allocation in Flow</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">Flow states involve decreased default-mode-network activity and increased performance-related neural efficiency. The framework predicts this reflects reallocation of the forty bits per second from survival overhead to task processing. The question is whether that reallocation can be reliably induced and whether it produces measurable performance differences beyond what attention alone explains.</p>
+        </div>
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Below-Threshold Preparation</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">The Bamboo Principle applied to training: the most significant adaptation may happen below the threshold of felt effort, in the period of systematic neural patterning before the performance jump. The program investigates whether structuring training around threshold preparation rather than progressive overload produces different long-term adaptation curves.</p>
+        </div>
+        <div style="background: #f0f2f5; border-radius: 8px; padding: 2rem; border-top: 4px solid var(--primary-color);">
+            <h4 style="color: var(--text-dark); margin-bottom: 0.75rem;">Constraint Space vs. Equipment Path</h4>
+            <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.8;">Conventional training equipment defines a movement path. The muscle defines a movement space. Training within the full constraint space of the muscle rather than along a single equipment-defined path may produce more complete neural mapping of the available movement geometry. Off-axis loading, varied angles, and attention to the full range of contraction and stretch under load are the experimental tools.</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 2.5rem; padding: 1.75rem 2rem; background: #1a1a2e; border-radius: 8px; color: white;" data-aos="fade-up">
+        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">The Program's Position</p>
+        <p style="color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 0.75rem; font-size: 0.95rem;">Elite performance research is extensive and does not need to be replicated here. What the framework adds is a theoretical account of why the interventions that work do work, and a set of predictions that follow from that account. Information-first physics predicts that the information processing target is the primary variable in neural adaptation, that flow states are bandwidth reallocation events with predictable signatures, and that performance is bounded by the compression ratio in ways that can be shifted by deliberate allocation. These are testable. The existing research is the baseline. This program asks what the framework extends beyond it.</p>
+        <a href="results-elite-performance.html" style="color: #f1e303; font-size: 0.85rem; font-weight: 600;">View the Results Log &rarr;</a>
+    </div>
+</section>
+
+
+<!-- CTA -->
+<section class="content-section">
+    <div style="background: linear-gradient(135deg, #5a0000 0%, #8B0000 100%); color: white; padding: 3rem; border-radius: 12px; text-align: center;" data-aos="fade-up">
+        <h2 style="color: white; margin-bottom: 1rem;">Interested in This Research?</h2>
+        <p style="opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Whether you are a performance researcher, a practitioner, or someone who has noticed that focusing on the right information target changes what your body can do, this program is built around the same observation.</p>
+        <a href="contribute.html" class="btn" style="background: white; color: #8B0000; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 0.5rem; display: inline-block;">Get Involved</a>
+        <a href="programs-gateway.html" class="btn" style="background: transparent; color: white; border: 2px solid white; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 0.5rem; display: inline-block;">View All Programs</a>
+        <a href="blog.html" class="btn" style="background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 0.5rem; display: inline-block;">Related Blog Posts</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
     <div class="footer-container">
-    <div class="footer-section">
-    <h3>Ic² Research Institute</h3>
-    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    </div>
-    <div class="footer-section">
-    <h3>Research</h3>
-    <ul>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="programs-gateway.html">Programs</a></li>
-    <li><a href="zenodo-papers.html">Papers</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Resources</h3>
-    <ul>
-    <li><a href="book.html">The Big TOE</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="faq-page.html">FAQ</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Connect</h3>
-    <ul>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="discussions-page.html">Discussions</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    </ul>
-    </div>
+        <div class="footer-section">
+            <h3>Ic² Research Institute</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="research-publications.html">Publications</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="book.html">The Big TOE</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq-page.html">FAQ</a></li>
+                <li><a href="members.html">Our Members</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="become-member.html">Become a Member</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
     </div>
     <div class="footer-bottom">
-    <p>&copy; 2025 Ic² Research Institute. All rights reserved.</p>
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,0.6);">Terms & Conditions</a></p>
     </div>
-    </footer>
+</footer>
 
-    <!-- JavaScript -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    (function() {
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1000, once: true, offset: 100 });
+
+// Hamburger menu
+(function() {
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
-
     if (hamburger && mobileMenu) {
-    const toggleMenu = function() {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    };
-
-    hamburger.addEventListener('click', toggleMenu);
-    hamburger.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    toggleMenu();
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            const expanded = hamburger.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            mobileMenu.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            });
+        });
     }
-    });
+})();
+</script>
+</body>
 
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', function() {
-    hamburger.classList.remove('active');
-    mobileMenu.classList.remove('active');
-    });
-    });
-   }
-    })();
-    </script>
 
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        once: true,
-        duration: 600
-      });
-    </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true, offset: 80 });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+</script>
 </body>
 </html>
