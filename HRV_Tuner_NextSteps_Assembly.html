@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRV Tuner — Next Steps & Prototype Assembly</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --ink: #1a1a1a;
+    --mid: #6b6b6b;
+    --light: #e8e4dc;
+    --accent: #8B0000;
+    --accent-light: #f0e8e8;
+    --rule: #d4cfc6;
+    --green: #1a5c2a;
+    --green-light: #e8f2eb;
+    --blue: #1a3a5c;
+    --blue-light: #e8eef5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+    padding: 40px 20px;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; }
+
+  header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  h1 { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .subtitle { color: var(--mid); font-size: 14px; font-weight: 300; }
+
+  /* PHASE BLOCKS */
+  .phase {
+    margin-bottom: 40px;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .badge-buy { background: var(--blue-light); color: var(--blue); }
+  .badge-build { background: var(--green-light); color: var(--green); }
+  .badge-test { background: #f5f0e8; color: #5c3d1a; }
+  .badge-market { background: var(--accent-light); color: var(--accent); }
+
+  .phase-title { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .phase-sub { font-size: 13px; color: var(--mid); margin-top: 2px; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+
+  .step {
+    display: flex;
+    gap: 14px;
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid var(--rule);
+  }
+
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    min-width: 24px;
+    margin-top: 1px;
+  }
+
+  .step-content { flex: 1; }
+  .step-title { font-weight: 500; font-size: 14px; margin-bottom: 3px; }
+  .step-detail { font-size: 13px; color: var(--mid); line-height: 1.55; }
+
+  /* ASSEMBLY SECTION */
+  .assembly-section {
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .assembly-header {
+    background: var(--ink);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .assembly-header .eyebrow { color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .assembly-header h2 { font-size: 17px; font-weight: 600; color: white; }
+
+  .assembly-steps { padding: 8px 0; }
+
+  .asm-step {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .asm-step:last-child { border-bottom: none; }
+
+  .asm-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: white;
+    background: var(--accent);
+    padding: 16px 14px;
+    min-width: 44px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  .asm-body { padding: 14px 18px; flex: 1; }
+  .asm-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .asm-detail { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+  .asm-warning {
+    background: #fff8e8;
+    border-left: 3px solid #c8860a;
+    padding: 8px 12px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #7a5000;
+  }
+
+  .asm-tip {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    padding: 8px 12px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--green);
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin: 24px 0;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .callout strong {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 36px 0;
+  }
+
+  footer {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--mid);
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  @media print {
+    body { background: white; padding: 20px; }
+    .assembly-section { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Ic² Research Institute — HRV Tuner</div>
+    <h1>Next Steps & Prototype Assembly</h1>
+    <div class="subtitle">Simple version — piezo contact mic, amp circuit, 3.5mm cable output</div>
+  </header>
+
+  <!-- PHASE 1: PURCHASE -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-badge badge-buy">Phase 1 — Purchase</span>
+      <div>
+        <div class="phase-title">Source components and reference device</div>
+        <div class="phase-sub">Bangkok local + Lazada. One week to gather everything.</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1.1</div>
+        <div class="step-content">
+          <div class="step-title">Buy a reference medical stethoscope</div>
+          <div class="step-detail">Stemoscope (~฿1,500–2,500 on Lazada) or similar electronic stethoscope. Listen to it. Study the cup geometry and acoustic seal. This is your quality benchmark and your design reference in one purchase.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">1.2</div>
+        <div class="step-content">
+          <div class="step-title">Buy a cheap donor stethoscope</div>
+          <div class="step-detail">Any basic medical stethoscope from a pharmacy (~฿100–200). You will disassemble the chest piece to study the cup dimensions and potentially use it as the housing for your first prototype.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">1.3</div>
+        <div class="step-content">
+          <div class="step-title">Source electronic components</div>
+          <div class="step-detail">Ban Mo (Chinatown) or Pantip Plaza for: piezo discs (27mm), MAX4466 amp module, breadboard, jumper wires, 3.5mm audio jacks, CR2032 battery + holder, small slide switch, assorted resistors and capacitors. See build list for full spec.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">1.4</div>
+        <div class="step-content">
+          <div class="step-title">Source tools if not already owned</div>
+          <div class="step-detail">Soldering iron, multimeter, wire stripper, helping hands clamp, hot glue gun. Most available at Pantip or any hardware store.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">1.5</div>
+        <div class="step-content">
+          <div class="step-title">Pharmacy: gel and spare cups</div>
+          <div class="step-detail">Ultrasound gel (cleaner than vaseline, same effect) and a second cheap stethoscope for its cup. Also pick up medical-grade silicone sheet if available.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PHASE 2: BUILD -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-badge badge-build">Phase 2 — Build</span>
+      <div>
+        <div class="phase-title">Breadboard prototype</div>
+        <div class="phase-sub">One session, approximately 2–3 hours. No soldering yet.</div>
+      </div>
+    </div>
+
+    <!-- ASSEMBLY INSTRUCTIONS -->
+    <div class="assembly-section">
+      <div class="assembly-header">
+        <div>
+          <div class="eyebrow">Step by step</div>
+          <h2>Breadboard Assembly Instructions</h2>
+        </div>
+      </div>
+
+      <div class="assembly-steps">
+
+        <div class="asm-step">
+          <div class="asm-num">01</div>
+          <div class="asm-body">
+            <div class="asm-title">Prepare the piezo disc</div>
+            <div class="asm-detail">
+              The piezo disc has two terminals — the brass back plate (negative) and the silver ceramic face (positive). If leads are not already attached, solder a short wire to each terminal. Use the helping hands clamp to hold the disc steady. Keep heat brief on the ceramic face — piezos are heat sensitive.<br><br>
+              Brass back = GND. Ceramic centre = signal out.
+            </div>
+            <div class="asm-warning">⚠ Do not bend the disc. Piezo ceramics are brittle. Hold flat at all times.</div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">02</div>
+          <div class="asm-body">
+            <div class="asm-title">Place MAX4466 module on breadboard</div>
+            <div class="asm-detail">
+              The MAX4466 breakout module (common on AliExpress/Lazada) has 3 pins: VCC, GND, OUT. Place it near the centre of the breadboard. Connect:<br><br>
+              VCC → positive rail<br>
+              GND → negative rail<br>
+              OUT → a free row (this is your amplified signal)
+            </div>
+            <div class="asm-tip">✓ The MAX4466 module has a small gain potentiometer (tiny screw). Leave it at midpoint for now — you will adjust it during testing.</div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">03</div>
+          <div class="asm-body">
+            <div class="asm-title">Connect piezo to MAX4466 input</div>
+            <div class="asm-detail">
+              The MAX4466 breakout has an onboard MEMS mic which you bypass by connecting directly to its input pads — or more simply, connect the piezo signal wire to the same row as the module's input trace. Check your specific module's pinout — some expose an IN pad separately.<br><br>
+              If no IN pad is accessible: connect piezo signal (ceramic) to OUT row via 10kΩ resistor, and piezo GND to the negative rail. This feeds the signal before amplification.
+            </div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">04</div>
+          <div class="asm-body">
+            <div class="asm-title">Add DC blocking capacitor on output</div>
+            <div class="asm-detail">
+              Connect a 10µF electrolytic capacitor between the OUT row and a new row — positive leg toward OUT, negative leg toward the new row. This new row is your audio signal output. The capacitor blocks any DC voltage from reaching the headphones, which protects both the headphones and your ears.
+            </div>
+            <div class="asm-warning">⚠ Electrolytic capacitors are polarised. Positive leg faces the signal. Reversed connection will damage the cap.</div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">05</div>
+          <div class="asm-body">
+            <div class="asm-title">Connect 3.5mm audio jack</div>
+            <div class="asm-detail">
+              A standard 3.5mm stereo jack has three connections: Tip (left channel), Ring (right channel), Sleeve (ground).<br><br>
+              Connect: audio signal row → Tip<br>
+              Connect: audio signal row → Ring (same signal to both ears)<br>
+              Connect: negative rail → Sleeve<br><br>
+              Use a panel-mount jack with wire leads for breadboard testing, or alligator clip directly to a cut cable end.
+            </div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">06</div>
+          <div class="asm-body">
+            <div class="asm-title">Connect power — CR2032 + switch</div>
+            <div class="asm-detail">
+              CR2032 holder: positive → one terminal of slide switch → positive rail. Negative → negative rail directly. The switch breaks the positive supply line — simplest possible on/off.<br><br>
+              Add a 100µF capacitor across the power rails (positive to positive rail, negative to negative rail) to filter any hum from the battery.
+            </div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">07</div>
+          <div class="asm-body">
+            <div class="asm-title">Prepare the cup</div>
+            <div class="asm-detail">
+              Take the chest piece from the donor stethoscope and remove the diaphragm. The remaining cup shell is your housing. Hot-glue the piezo disc flat against the inside face of the cup — ceramic face toward the skin side, brass back facing inward. Centre it as precisely as you can.<br><br>
+              Run the piezo leads out through the tubing hole or a small notch in the rim.
+            </div>
+            <div class="asm-tip">✓ The stethoscope cup already has the correct geometry for a cardiac acoustic seal. This is why you buy the donor unit — free industrial design.</div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">08</div>
+          <div class="asm-body">
+            <div class="asm-title">First test — signal check</div>
+            <div class="asm-detail">
+              Before headphones: plug a phone or recorder into the output jack and record while pressing the cup to your chest with a small amount of gel. Play back and check for S1/S2 heartbeat sounds. You should hear a clear "lub-dub" rhythm.<br><br>
+              If signal is too quiet: turn MAX4466 gain potentiometer clockwise slightly. If you hear hum or noise: check capacitor polarity and power rail connections.
+            </div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">09</div>
+          <div class="asm-body">
+            <div class="asm-title">Headphone test — the real test</div>
+            <div class="asm-detail">
+              Plug standard wired headphones into the 3.5mm jack. Apply gel to the cup. Press to your chest at the left side, just below the nipple line, or slightly left of the sternum. Sit still and breathe normally.<br><br>
+              You should hear your heartbeat clearly in both ears. Adjust gain as needed. The target: loud enough to count easily with eyes closed, quiet enough to be comfortable.
+            </div>
+            <div class="asm-tip">✓ Once you can count 5 beats and feel the urge to exhale naturally — the device is working correctly.</div>
+          </div>
+        </div>
+
+        <div class="asm-step">
+          <div class="asm-num">10</div>
+          <div class="asm-body">
+            <div class="asm-title">Record the optimal gain setting</div>
+            <div class="asm-detail">
+              Mark the potentiometer position with a pen. This setting becomes your production specification. All subsequent units are calibrated to this point before final assembly.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PHASE 3: TEST -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-badge badge-test">Phase 3 — Test</span>
+      <div>
+        <div class="phase-title">Validate the practice experience</div>
+        <div class="phase-sub">Use it yourself first. Then two or three other people.</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">3.1</div>
+        <div class="step-content">
+          <div class="step-title">Personal practice sessions — minimum one week</div>
+          <div class="step-detail">Use it daily. Morning is optimal — resting heart rate is most stable and the practice anchors the day. Note any signal issues, cup seal problems, or cable management annoyances. These are product notes.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3.2</div>
+        <div class="step-content">
+          <div class="step-title">Compare against reference stethoscope</div>
+          <div class="step-detail">Use the Stemoscope side by side. Is the heartbeat sound comparable in clarity? Better or worse? This tells you whether your amp gain and cup design are adequate or need refinement before production.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3.3</div>
+        <div class="step-content">
+          <div class="step-title">Give it to two or three people with no instructions</div>
+          <div class="step-detail">Watch what they do. Where do they place the cup? What do they ask? What confuses them? This is your UX research and it directly shapes the insert card wording.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3.4</div>
+        <div class="step-content">
+          <div class="step-title">Photograph and document the working prototype</div>
+          <div class="step-detail">Circuit layout, cup assembly, final unit. These become your assembly reference for production units and are useful for any manufacturer conversation later.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PHASE 4: MARKET -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-badge badge-market">Phase 4 — Launch</span>
+      <div>
+        <div class="phase-title">First listings and content</div>
+        <div class="phase-sub">Only after prototype is validated and unit cost is confirmed.</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">4.1</div>
+        <div class="step-content">
+          <div class="step-title">Cost the production unit</div>
+          <div class="step-detail">BOM at small volume (10–20 units): piezo, amp module, cap, jack, battery, switch, cable, cup, gel sachet, extra cup, insert card, packaging. Target under ฿200 ($6) all-in. This determines final price and margin.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4.2</div>
+        <div class="step-content">
+          <div class="step-title">First AI video — the mom and daughter scene</div>
+          <div class="step-detail">Before any product listing goes live. This video is the context that makes the product legible. No voiceover. No sales language. The moment and the gesture do the work.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4.3</div>
+        <div class="step-content">
+          <div class="step-title">Product page on eequalsicsquared.com</div>
+          <div class="step-detail">Inside the Ic² context. The body literacy framework is already there. The HRV Tuner is the first physical instrument the Institute has produced — that framing is part of the product's value.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4.4</div>
+        <div class="step-content">
+          <div class="step-title">Etsy listing + one other marketplace</div>
+          <div class="step-detail">Etsy for wellness/independent audience. One additional platform — not Amazon. Each listing links to the practice videos. The listing text is minimal: what it is, what it does, what comes in the box.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4.5</div>
+        <div class="step-content">
+          <div class="step-title">Two or three Bangkok independent pharmacies</div>
+          <div class="step-detail">Approach in person with a working unit and a one-page leave-behind. Let them try it. If a pharmacist understands it they will recommend it. This is your local pilot and your first professional validation channel.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The minimum viable milestone</strong>
+    One working unit that lets you count your own heartbeat clearly through standard headphones with eyes closed. Everything else follows from that. Don't move to Phase 3 until Phase 2 produces that result.
+  </div>
+
+  <footer>
+    HRV Tuner — Prototype Build &amp; Launch Plan &nbsp;·&nbsp; Ic² Research Institute &nbsp;·&nbsp; eequalsicsquared.com
+  </footer>
+
+</div>
+</body>
+</html>

@@ -3,622 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validation Tracking - COSMIC Framework Predictions</title>
-    <meta name="description" content="Live tracking of testable predictions from the COSMIC Framework, including cognitive augmentation preprints. Updated January 31, 2026.">
+    <title>Testing Schedule - COSMIC Framework Predictions</title>
+    <meta name="description" content="Live tracking of testable predictions from the COSMIC Framework. Four validated predictions. Substrate Dynamics program adds four QCD-scale predictions for LHCb, Belle II, RHIC, and the Electron-Ion Collider. Updated May 2026.">
     
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
       --primary-color: #8B0000;
       --secondary-color: #2c3e50;
       --accent-blue: #005ba5;
-      --accent-green: #28a745;
+      --accent-green: #1a5c2a;
       --accent-yellow: #f1e303;
-      --accent-orange: #ff8c00;
+      --accent-orange: #a0522d;
       --text-dark: #2c3e50;
-      --text-light: #666;
-      --bg-light: #f8f9fa;
+      --text-light: #555;
+      --bg-light: #e8edf2;
       --max-width: 1200px;
     }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.6;
-      color: var(--text-dark);
-      background: white;
+
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: var(--text-dark); background: white; }
+
+    /* ── Header ── */
+    .site-header { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,.05); }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: .5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .site-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .site-logo img { height: 50px; width: auto; display: block; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+    .main-navigation a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color .3s; }
+    .main-navigation a:hover { color: var(--primary-color); }
+    .main-navigation a.login-link { background: var(--primary-color); color: #f1e303; padding: .5rem 1.25rem; border-radius: 25px; font-weight: 700; }
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; padding: 8px; background: none; border: none; }
+    .hamburger span { width: 25px; height: 3px; background: var(--primary-color); border-radius: 3px; transition: all .3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px,7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+    .mobile-menu { display: none; position: fixed; top: 61px; left: 0; right: 0; background: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,.1); z-index: 999; max-height: 0; overflow: hidden; transition: max-height .3s; }
+    .mobile-menu.active { max-height: 600px; }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu a { display: block; padding: .75rem 1rem; color: var(--text-dark); text-decoration: none; font-weight: 500; }
+    .mobile-menu a.login-link { background: var(--primary-color); color: #f1e303; margin: .5rem 0; border-radius: 6px; font-weight: 700; }
+
+    /* ── Page Header ── */
+    .page-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2.5rem 2rem 2.5rem; text-align: center; color: white; }
+    .page-header h1 { font-size: 2.6rem; margin-bottom: .75rem; font-weight: 700; }
+    .page-header p { font-size: 1rem; max-width: 760px; margin: 0 auto; opacity: .88; line-height: 1.8; }
+    .page-header .update-notice { margin-top: 1.25rem; padding: .75rem 1.25rem; background: rgba(255,255,255,.08); border-radius: 6px; font-size: .85rem; display: inline-block; }
+
+    /* ── Stat cards ── */
+    .stats-container { max-width: var(--max-width); margin: -2.5rem auto 2.5rem; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; position: relative; z-index: 10; }
+    .stat-card { background: #2c3e50; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.15); text-align: center; border-bottom: 4px solid var(--primary-color); }
+    .stat-number { font-size: 2.6rem; font-weight: 700; color: #f1e303; margin-bottom: .35rem; }
+    .stat-label { color: rgba(255,255,255,.8); font-size: .88rem; }
+
+    /* ── Content sections ── */
+    .content-section { padding: 2.5rem 2rem; }
+    .content-section.bg-light { background: var(--bg-light); }
+    .section-container { max-width: var(--max-width); margin: 0 auto; }
+
+    /* ── Category headers ── */
+    .category-header { background: #1a1a2e; color: white; padding: 1.25rem 1.75rem; border-radius: 8px; margin: 2rem 0 1.5rem; border-left: 4px solid var(--primary-color); }
+    .category-header h2 { font-size: 1.5rem; margin-bottom: .35rem; color: white; }
+    .category-header p { opacity: .8; font-size: .9rem; line-height: 1.7; }
+
+    /* ── Prediction cards ── */
+    .prediction-card { background: #f0f2f5; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 1.25rem; overflow: hidden; border-left: 4px solid var(--accent-blue); }
+    .prediction-card.validated { border-left-color: var(--accent-green); }
+    .prediction-card.near-term { border-left-color: var(--accent-orange); }
+    .prediction-card.long-term { border-left-color: var(--accent-blue); }
+    .prediction-card.speculative { border-left-color: #6a1b9a; }
+    .prediction-card.active-testing { border-left-color: var(--primary-color); background: #f8f0f0; }
+    .prediction-card.substrate-dynamics { border-left-color: #1a4a2e; background: #f0f6f0; }
+
+    .prediction-header { padding: 1.1rem 1.5rem; background: #1a1a2e; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .prediction-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: .5rem; }
+    .prediction-title h3 { color: white; font-size: 1.05rem; flex: 1; line-height: 1.4; }
+    .prediction-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .prediction-meta span { font-size: .78rem; color: rgba(255,255,255,.65); }
+
+    /* Status badges */
+    .status-badge { display: inline-block; padding: .25rem .75rem; border-radius: 20px; font-size: .72rem; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: .3px; }
+    .status-badge.validated { background: var(--accent-green); color: white; }
+    .status-badge.near-term { background: var(--accent-orange); color: white; }
+    .status-badge.long-term { background: var(--accent-blue); color: white; }
+    .status-badge.speculative { background: #6a1b9a; color: white; }
+    .status-badge.active-testing { background: var(--primary-color); color: white; }
+    .status-badge.substrate-dynamics { background: #1a4a2e; color: #a8d5b5; }
+
+    /* Prediction body */
+    .prediction-body { max-height: 0; overflow: hidden; padding: 0 1.5rem; transition: max-height .4s ease, padding .4s ease; }
+    .prediction-card.expanded .prediction-body { max-height: 5000px; padding: 1.5rem; }
+    .prediction-body p { color: var(--text-dark); font-size: .92rem; line-height: 1.75; margin-bottom: .75rem; }
+    .prediction-body p:last-child { margin-bottom: 0; }
+    .prediction-body ul { padding-left: 1.25rem; color: var(--text-dark); font-size: .9rem; }
+    .prediction-body ul li { margin-bottom: .35rem; line-height: 1.65; }
+    .prediction-body strong { color: var(--text-dark); }
+
+    /* Equation boxes */
+    .equation { background: #1a1a2e; color: #f1e303; padding: .75rem 1.25rem; border-radius: 6px; font-family: "Courier New", monospace; font-size: .85rem; margin: .75rem 0; overflow-x: auto; }
+
+    /* Detail boxes */
+    .prediction-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .warning-box {
+      background: #1a1a2e;
+      border-left: 4px solid #f1e303;
+      border-radius: 0 6px 6px 0;
+      padding: 1.1rem 1.5rem;
+      margin-bottom: 1.25rem;
     }
-    
-    /* Header */
-    .site-header {
-      background: white;
-      border-bottom: 1px solid #e0e0e0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    .warning-box p, .warning-box ul { color: rgba(255,255,255,.85); font-size: .88rem; line-height: 1.75; }
+    .warning-box strong { color: #f1e303; }
+    .warning-box ul { padding-left: 1.25rem; margin-top: .5rem; }
+    .warning-box li { margin-bottom: .35rem; }
+
+    .detail-box { background: white; border-radius: 6px; padding: 1.1rem 1.25rem; border: 1px solid #d0d5dd; }
+    .detail-box h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .8px; color: var(--primary-color); margin-bottom: .6rem; font-weight: 700; }
+    .detail-box p, .detail-box ul { font-size: .85rem; color: var(--text-dark); line-height: 1.65; }
+    .detail-box ul { padding-left: 1rem; }
+    .detail-box ul li { margin-bottom: .3rem; }
+
+    /* Expand toggle */
+    .expand-toggle { width: 100%; padding: .6rem 1.5rem; background: rgba(0,0,0,.04); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .3s; font-size: .8rem; color: var(--text-light); gap: .4rem; font-family: inherit; }
+    .expand-toggle:hover { background: rgba(139,0,0,.08); color: var(--primary-color); }
+    .prediction-card.expanded .expand-toggle { background: rgba(139,0,0,.06); }
+    .expand-toggle img { width: 18px; height: 18px; transition: transform .3s; opacity: .6; }
+    .prediction-card.expanded .expand-toggle img { transform: rotate(180deg); }
+
+    /* Info box */
+    .info-box { background: #1a1a2e; border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; }
+    .info-box h3 { color: #f1e303; margin-bottom: .75rem; font-size: 1.1rem; }
+    .info-box p { color: rgba(255,255,255,.85); font-size: .92rem; line-height: 1.8; margin-bottom: .75rem; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .info-box ul { color: rgba(255,255,255,.82); font-size: .9rem; padding-left: 1.25rem; margin-top: .5rem; }
+    .info-box ul li { margin-bottom: .4rem; line-height: 1.65; }
+    .info-box a { color: #f1e303; }
+
+    /* Nav guide / filters */
+    .nav-guide { background: #f0f2f5; padding: 1.5rem; border-radius: 8px; border: 1px solid #d0d5dd; margin-bottom: 1.5rem; }
+    .category-filters { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0 .5rem; }
+    .filter-btn { background: white; border: 2px solid #d0d5dd; padding: .5rem 1rem; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all .3s; font-size: .85rem; display: flex; align-items: center; color: var(--text-dark); font-family: inherit; }
+    .filter-btn img { margin-right: 5px; opacity: .6; transition: opacity .3s; width: 16px; height: 16px; }
+    .filter-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+    .filter-btn.active { background: var(--primary-color); border-color: var(--primary-color); color: white; }
+    .filter-btn.active img { filter: brightness(0) invert(1); opacity: 1; }
+    section.hidden { display: none; }
+
+    /* Buttons */
+    .btn { display: inline-block; padding: .65rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: .88rem; transition: all .3s; cursor: pointer; border: none; font-family: inherit; }
+    .btn-primary { background: var(--primary-color); color: white; }
+    .btn-primary:hover { background: #a00000; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+    .btn-outline:hover { background: var(--primary-color); color: white; }
+
+    /* ── Animations ── */
+    @keyframes blink-yellow {
+      0%, 100% { color: #f1e303; }
+      50% { color: rgba(241,227,3,0.3); }
     }
-    
-    .header-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0.75rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    @keyframes fade-up-in {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    
-    .site-logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    
-    .site-logo img {
-      height: 50px;
-      width: auto;
-      display: block;
-    }
-    
-    .main-navigation ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-    
-    .main-navigation a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .main-navigation a:hover {
-      color: var(--primary-color);
-    }
-    
-    .main-navigation a.login-link {
+
+    /* Active Now badge: red bg, blinking yellow text */
+    .status-badge.active-testing {
       background: var(--primary-color);
       color: #f1e303;
-      padding: 0.5rem 1.25rem;
-      border-radius: 25px;
-      font-weight: 700;
-      box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+      animation: blink-yellow 1.6s ease-in-out infinite;
+      box-shadow: 0 0 8px rgba(139,0,0,0.5);
     }
-    
-    .main-navigation a.login-link:hover {
-      background: #a00000;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
-    }
-    
-    /* Hamburger Menu */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 4px;
-      padding: 8px;
-    }
-    
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: var(--primary-color);
-      border-radius: 3px;
-      transition: all 0.3s ease;
-    }
-    
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(7px, 7px);
-    }
-    
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-    
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 73px;
-      left: 0;
-      right: 0;
-      background: white;
-      border-bottom: 1px solid #e0e0e0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      z-index: 999;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    
-    .mobile-menu.active {
-      max-height: 600px;
-    }
-    
-    .mobile-menu ul {
-      list-style: none;
-      padding: 1rem;
-    }
-    
-    .mobile-menu ul li {
-      border-bottom: 1px solid #f0f0f0;
-    }
-    
-    .mobile-menu ul li:last-child {
-      border-bottom: none;
-    }
-    
-    .mobile-menu a {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: var(--text-dark);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-    
-    .mobile-menu a:hover {
-      background: var(--bg-light);
-      color: var(--primary-color);
-    }
-    
-    .mobile-menu a.login-link {
-      background: var(--primary-color);
-      color: #f1e303;
-      margin: 0.5rem 0;
-      border-radius: 6px;
-      font-weight: 700;
-    }
-    
-    /* Page Header */
-    .page-header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      padding: 4rem 2rem;
-      text-align: center;
-      color: white;
-    }
-    
-    .page-header h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    
-    .page-header p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: 0 auto;
-      opacity: 0.95;
-      line-height: 1.8;
-    }
-    
+
+    /* Update notice: white bg, red text */
     .page-header .update-notice {
-      margin-top: 1.5rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    /* Statistics */
-    .stats-container {
-      max-width: var(--max-width);
-      margin: -3rem auto 3rem;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .stat-card {
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 700;
       color: var(--primary-color);
-      margin-bottom: 0.5rem;
-    }
-    
-    .stat-label {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-    
-    /* Content Sections */
-    .content-section {
-      padding: 3rem 2rem;
-    }
-    
-    .content-section.bg-light {
-      background: var(--bg-light);
-    }
-    
-    .section-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-    
-    /* Category Headers */
-    .category-header {
-      background: var(--secondary-color);
-      color: white;
-      padding: 1.5rem 2rem;
-      border-radius: 8px;
-      margin: 3rem 0 2rem;
-    }
-    
-    .category-header h2 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .category-header p {
-      opacity: 0.9;
-      font-size: 0.95rem;
-    }
-    
-    /* Prediction Cards */
-    .prediction-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      margin-bottom: 1.5rem;
-      overflow: hidden;
-      border-left: 4px solid var(--accent-blue);
-    }
-    
-    .prediction-card.validated {
-      border-left-color: var(--accent-green);
-    }
-    
-    .prediction-card.near-term {
-      border-left-color: var(--accent-orange);
-    }
-    
-    .prediction-card.long-term {
-      border-left-color: var(--accent-blue);
-    }
-    
-    .prediction-card.speculative {
-      border-left-color: #9b59b6;
-    }
-    
-    .prediction-header {
-      padding: 1.5rem;
-      background: #f8f9fa;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    
-    .prediction-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .prediction-title h3 {
-      color: var(--text-dark);
-      font-size: 1.25rem;
-      flex: 1;
-    }
-    
-    .status-badge {
-      display: inline-block;
-      padding: 0.35rem 0.85rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
       font-weight: 700;
-      white-space: nowrap;
+      border-radius: 6px;
+      padding: .65rem 1.4rem;
+      display: inline-block;
+      font-size: .82rem;
+      letter-spacing: .2px;
     }
-    
-    .status-badge.validated {
-      background: var(--accent-green);
-      color: white;
+
+    /* Stat card hover */
+    .stat-card {
+      transition: transform .25s ease, box-shadow .25s ease;
     }
-    
-    .status-badge.near-term {
-      background: var(--accent-orange);
-      color: white;
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.22);
     }
-    
+
+    /* Prediction card hover */
+    .prediction-card {
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .prediction-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    }
+
+    /* Category header hover */
+    .category-header {
+      transition: border-left-width .2s ease;
+    }
+    .category-header:hover {
+      border-left-width: 6px;
+    }
+
+    /* Filter button hover already handled; add scale */
+    .filter-btn:hover {
+      transform: translateY(-2px);
+    }
+    .filter-btn.active:hover {
+      transform: translateY(-2px);
+      background: #a00000;
+      border-color: #a00000;
+    }
+
+    /* Long-term badge: blue bg → white text (not light blue on dark blue) */
     .status-badge.long-term {
       background: var(--accent-blue);
       color: white;
     }
-    
-    .status-badge.speculative {
-      background: #9b59b6;
-      color: white;
-    }
-    
-    .prediction-meta {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      font-size: 0.9rem;
-      color: var(--text-light);
-    }
-    
-    .prediction-meta span {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .prediction-body {
-      padding: 1.5rem;
-    }
-    
-    .prediction-body p {
-      margin-bottom: 1rem;
-      line-height: 1.8;
-    }
-    
-    .prediction-body .equation {
-      background: #f8f9fa;
-      padding: 0.75rem 1rem;
-      border-radius: 4px;
-      font-family: 'Courier New', monospace;
-      margin: 1rem 0;
-      border-left: 3px solid var(--accent-blue);
-    }
-    
-    .prediction-details {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-    
-    .detail-box {
-      background: #f8f9fa;
-      padding: 1rem;
-      border-radius: 6px;
-    }
-    
-    .detail-box h4 {
-      color: var(--primary-color);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .detail-box p, .detail-box ul {
-      font-size: 0.9rem;
-      color: var(--text-dark);
-    }
-    
-    .detail-box ul {
-      margin-left: 1.5rem;
-      margin-top: 0.5rem;
-    }
-    
-    /* Info Boxes */
-    .info-box {
-      background: #e3f2fd;
-      border-left: 4px solid var(--accent-blue);
-      padding: 1.5rem;
-      border-radius: 6px;
-      margin: 2rem 0;
-    }
-    
-    .info-box h3 {
-      color: var(--accent-blue);
-      margin-bottom: 0.75rem;
-    }
-    
-    .info-box p {
-      color: var(--text-dark);
-      line-height: 1.8;
-    }
-    
-    .warning-box {
-      background: #fff3cd;
-      border-left: 4px solid var(--accent-orange);
-      padding: 1.5rem;
-      border-radius: 6px;
-      margin: 2rem 0;
-    }
-    
-    .warning-box h3 {
-      color: var(--accent-orange);
-      margin-bottom: 0.75rem;
-    }
-    
-    .warning-box p {
-      color: var(--text-dark);
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
-    }
-    
-    .prediction-card.active-testing {
-      border-left-color: var(--accent-orange);
-      background: #fffaf0;
-    }
-    
-    .status-badge.active-testing {
-      background: var(--accent-orange);
-      color: white;
-      animation: pulse 2s ease-in-out infinite;
+
+    /* Pre-reg pending badge: dark green bg, light green text */
+    .status-badge.substrate-dynamics {
+      background: #1a4a2e;
+      color: #c8e6c9;
+      font-weight: 700;
     }
 
-    /* Collapsible functionality */
-    .prediction-card {
-      cursor: pointer;
-      transition: all 0.3s ease;
+    /* Validated card header: green tint */
+    .prediction-card.validated .prediction-header {
+      background: #0d2a12;
     }
 
-    .prediction-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    /* Active-testing card header: dark red tint */
+    .prediction-card.active-testing .prediction-header {
+      background: #2a0a0a;
     }
 
-    .prediction-header {
-      position: relative;
+    /* Substrate dynamics card header: dark green tint */
+    .prediction-card.substrate-dynamics .prediction-header {
+      background: #0a1e0e;
     }
 
-    .expand-toggle {
-      position: absolute;
-      right: 1.5rem;
-      top: 1.5rem;
-      width: 32px;
-      height: 32px;
-      background: rgba(139, 0, 0, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .expand-toggle img {
-      width: 24px;
-      height: 24px;
-      transition: transform 0.3s ease;
-      opacity: 0.7;
-    }
-
-    .prediction-card:hover .expand-toggle {
-      background: rgba(139, 0, 0, 0.15);
-    }
-
-    .prediction-card:hover .expand-toggle img {
-      opacity: 1;
-    }
-
-    .prediction-card.expanded .expand-toggle img {
-      transform: rotate(180deg);
-    }
-
-    .prediction-body {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 1.5rem;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-    }
-
-    .prediction-card.expanded .prediction-body {
-      max-height: 5000px;
-      padding: 1.5rem;
-    }
-
-    /* Navigation Guide */
-    .nav-guide {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      border: 2px solid #f0f0f0;
-    }
-
-    .category-filters {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 1.5rem 0;
-    }
-
-    .filter-btn {
-      background: white;
-      border: 2px solid #e0e0e0;
-      padding: 0.65rem 1.25rem;
-      border-radius: 25px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      color: var(--text-dark);
-      font-family: inherit;
-    }
-
-    .filter-btn img {
-      margin-right: 6px;
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.15);
-    }
-
-    .filter-btn:hover img {
-      opacity: 1;
-    }
-
-    .filter-btn.active {
-      background: var(--primary-color);
-      border-color: var(--primary-color);
-      color: white;
-      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
-    }
-
-    .filter-btn.active img {
-      filter: brightness(0) invert(1);
-      opacity: 1;
-    }
-
-    /* Hide filtered items */
-    section.hidden {
-      display: none;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-    
     /* Footer */
-    footer {
-      background: #2c3e50;
-      color: white;
-      padding: 2.5rem 2rem 1rem;
-    }
-    
-    /* Responsive */
-    @media (max-width: 968px) {
-      .main-navigation { display: none; }
-      .hamburger { display: flex; }
-      .mobile-menu { display: block; }
-      .header-container { padding: 0.75rem 1rem; }
-    }
-    
-    @media (max-width: 768px) {
-      .page-header h1 { font-size: 2rem; }
-      .stats-container { grid-template-columns: 1fr; margin-top: -2rem; }
-      .stat-number { font-size: 2.5rem; }
-      .prediction-title { flex-direction: column; }
-      .prediction-meta { flex-direction: column; gap: 0.5rem; }
-    }
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
+    footer a { color: rgba(255,255,255,.75); text-decoration: none; font-size: .9rem; }
+    footer a:hover { color: white; }
+    .footer-bottom { max-width: var(--max-width); margin: .5rem auto 0; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.1); text-align: center; color: rgba(255,255,255,.45); font-size: .8rem; }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+    @media (max-width: 968px) { .main-navigation { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } }
+    @media (max-width: 768px) { .page-header h1 { font-size: 1.9rem; } .stats-container { grid-template-columns: 1fr 1fr; } .prediction-title { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -640,13 +284,13 @@
             <li><a href="login_page_complete.html" class="login-link">Subscribe</a></li>
           </ul>
         </nav>
-        <div class="hamburger" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </button>
       </div>
-      <div class="mobile-menu" aria-hidden="true">
+      <nav class="mobile-menu" id="mobileMenu">
         <ul>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="framework.html">Framework</a></li>
@@ -665,26 +309,25 @@
       <h1>Prediction Forecast &amp; Testing Schedule</h1>
       <p>A forward-looking public record of where the COSMIC Framework expects to be tested next. Predictions are documented here before experimental results arrive. This page shows what the framework anticipates. The <a href="validation.html" style="color:inherit; text-decoration:underline;">Validation page</a> shows what has been confirmed.</p>
       <div class="update-notice">
-        <strong>Last Updated:</strong> February 21, 2026<br>
-        <strong>Current Status:</strong> Phase 1 development beginning Q1 2026
+        <strong>Updated:</strong> May 2026 &nbsp;&bull;&nbsp; <strong>4 Validated</strong> &nbsp;&bull;&nbsp; <strong>17 Active</strong> &nbsp;&bull;&nbsp; Substrate Dynamics program added
       </div>
     </section>
 
     <!-- Statistics -->
     <div class="stats-container">
-      <div class="stat-card">
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
         <div class="stat-number">4</div>
         <div class="stat-label">Already Validated</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">13</div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-number">17</div>
         <div class="stat-label">Active Testing (2026)</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
         <div class="stat-number">18</div>
         <div class="stat-label">Near-Term (1-7 Years)</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
         <div class="stat-number">12</div>
         <div class="stat-label">Long-Term (8+ Years)</div>
       </div>
@@ -1088,7 +731,7 @@
           <h3 style="text-align: center; margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--text-dark);">Quick Navigation</h3>
           <p style="text-align: center; color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">Filter predictions by category or view all at once</p>
           
-          <div class="category-filters">
+          <div class="category-filters" data-aos="fade-up">
             <button class="filter-btn active" data-filter="all">
               <img src="stack_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" width="20" height="20">
               All Predictions
@@ -1128,13 +771,13 @@
     <!-- VALIDATED PREDICTIONS -->
     <section class="content-section bg-light" data-category="validated">
       <div class="section-container">
-        <div class="category-header">
+        <div class="category-header" data-aos="fade-up">
           <h2>✓ Validated Predictions (4)</h2>
           <p>Predictions confirmed by experimental observation - 100% success rate (4.2σ statistical significance)</p>
         </div>
 
         <!-- Prediction 1: Dark Energy Evolution -->
-        <div class="prediction-card validated" data-aos="fade-up">
+        <div class="prediction-card validated" style="border-left-color:#1a5c2a;" data-aos="fade-up">
           <div class="prediction-header">
             <div class="prediction-title">
               <h3>Dark Energy Equation of State Evolution</h3>
@@ -1169,7 +812,7 @@
 
               <div class="detail-box">
                 <h4>Strengthened Results (DR2, March 2025)</h4>
-                <p>DESI's second data release used 14 million galaxy and quasar measurements — more than double DR1. Statistical preference for dynamical dark energy reached 2.8–4.2σ across supernova dataset combinations. Multiple independent analysis methods (parametric fits, Gaussian process reconstruction, nonparametric binning) all find consistent trends. The evidence at low redshift (z&lt;0.3) is described as "robust." The cosmological constant (Λ) is now disfavored at up to 4.2σ, and the framework's predicted values remain comfortably within the observed confidence intervals.</p>
+                <p>DESI's second data release used 14 million galaxy and quasar measurements : more than double DR1. Statistical preference for dynamical dark energy reached 2.8–4.2σ across supernova dataset combinations. Multiple independent analysis methods (parametric fits, Gaussian process reconstruction, nonparametric binning) all find consistent trends. The evidence at low redshift (z&lt;0.3) is described as "robust." The cosmological constant (Λ) is now disfavored at up to 4.2σ, and the framework's predicted values remain comfortably within the observed confidence intervals.</p>
               </div>
               
               <div class="detail-box">
@@ -1181,7 +824,7 @@
         </div>
 
         <!-- Prediction 2: Quantum Error Correction -->
-        <div class="prediction-card validated" data-aos="fade-up">
+        <div class="prediction-card validated" style="border-left-color:#1a5c2a;" data-aos="fade-up">
           <div class="prediction-header">
             <div class="prediction-title">
               <h3>Quantum Error Correction Exponential Scaling</h3>
@@ -1215,7 +858,7 @@
         </div>
 
         <!-- Prediction 3: Early Galaxy Formation -->
-        <div class="prediction-card validated" data-aos="fade-up">
+        <div class="prediction-card validated" style="border-left-color:#1a5c2a;" data-aos="fade-up">
           <div class="prediction-header">
             <div class="prediction-title">
               <h3>Enhanced Early Galaxy Formation</h3>
@@ -1259,7 +902,7 @@
         </div>
 
         <!-- Prediction 4: Hot Intracluster Gas -->
-        <div class="prediction-card validated" data-aos="fade-up">
+        <div class="prediction-card validated" style="border-left-color:#1a5c2a;" data-aos="fade-up">
           <div class="prediction-header">
             <div class="prediction-title">
               <h3>Enhanced Thermal Energy in Early Universe Clusters</h3>
@@ -1305,7 +948,7 @@
     <!-- NEAR-TERM PREDICTIONS (1-5 years) -->
     <section class="content-section" data-category="near-term">
       <div class="section-container">
-        <div class="category-header">
+        <div class="category-header" data-aos="fade-up">
           <h2>Near-Term Predictions (1-5 Years)</h2>
           <p>Testable with current or imminent technology (13 predictions)</p>
         </div>
@@ -1888,9 +1531,9 @@
     <!-- 3D CYMATICS / NBI PREDICTIONS -->
     <section class="content-section" id="cymatics-prediction" data-category="cymatics">
       <div class="section-container">
-        <div class="category-header">
+        <div class="category-header" data-aos="fade-up">
           <h2>3D Acoustic Field &amp; NBI Program Predictions</h2>
-          <p>Two independent prediction sets from the NBI Research Program — one standalone physics experiment, one COSMIC Framework interpretation logged separately</p>
+          <p>Two independent prediction sets from the NBI Research Program : one standalone physics experiment, one COSMIC Framework interpretation logged separately</p>
         </div>
 
         <!-- Prediction: 3D Cymatics Physics -->
@@ -1903,18 +1546,18 @@
             <div class="prediction-meta">
               <span>📅 Documented: February 2026</span>
               <span>🔬 Standalone Physics Experiment</span>
-              <span>📄 Preprint: <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: var(--accent-blue);">Download</a> | Zenodo DOI: pending</span>
+              <span>📄 Preprint: <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: white; font-weight:600;">Download</a> | Zenodo DOI: pending</span>
             </div>
           </div>
           <div class="prediction-body">
             <p><strong>Background:</strong> Every cymatic experiment in the published literature is gravity-compromised. The particle medium settles toward flat surfaces under gravitational force, preventing observation of the actual three-dimensional acoustic field geometry. The two-dimensional Chladni figures produced since 1787 are cross-sections of richer three-dimensional structures. No experiment has visualized the complete three-dimensional node surface topology in an unbiased medium.</p>
 
-            <p><strong>Specific Claims (Standard Acoustic Physics — No Framework Required):</strong></p>
+            <p><strong>Specific Claims (Standard Acoustic Physics : No Framework Required):</strong></p>
 
             <div class="prediction-details">
               <div class="detail-box">
                 <h4>Prediction 1: Spherical Shell Modes</h4>
-                <p>At the fundamental frequency of a spherical resonant cavity, positive-contrast particles will cluster on a single spherical nodal shell concentric with the container — a geometry with no two-dimensional analogue. Shell radius predicted by: r = c/(2f₁) where c is speed of sound and f₁ is the fundamental frequency.</p>
+                <p>At the fundamental frequency of a spherical resonant cavity, positive-contrast particles will cluster on a single spherical nodal shell concentric with the container : a geometry with no two-dimensional analogue. Shell radius predicted by: r = c/(2f₁) where c is speed of sound and f₁ is the fundamental frequency.</p>
               </div>
 
               <div class="detail-box">
@@ -1924,7 +1567,7 @@
 
               <div class="detail-box">
                 <h4>Prediction 3: Platonic Solid Node-Point Geometries</h4>
-                <p>At frequencies corresponding to acoustic modes with the symmetry of the Platonic solids (Td, Oh, Ih symmetry groups), intersection points of nodal surfaces will form configurations matching the vertices of the tetrahedron (4 nodes), cube/octahedron (6/8 nodes), and dodecahedron/icosahedron (12/20 nodes). These are minimum-energy node configurations for systems with those symmetries — predicted by standard acoustic theory but never directly observed in three dimensions.</p>
+                <p>At frequencies corresponding to acoustic modes with the symmetry of the Platonic solids (Td, Oh, Ih symmetry groups), intersection points of nodal surfaces will form configurations matching the vertices of the tetrahedron (4 nodes), cube/octahedron (6/8 nodes), and dodecahedron/icosahedron (12/20 nodes). These are minimum-energy node configurations for systems with those symmetries : predicted by standard acoustic theory but never directly observed in three dimensions.</p>
               </div>
 
               <div class="detail-box">
@@ -1933,23 +1576,23 @@
               </div>
             </div>
 
-            <div class="detail-box" style="margin-top: 1.5rem; border-left: 4px solid var(--accent-blue); background: #f0f6ff; padding: 1.25rem; border-radius: 6px;">
+            <div class="detail-box" style="margin-top: 1.5rem; border-left: 4px solid var(--primary-color); background: #1a1a2e; padding: 1.25rem; border-radius: 6px;">
               <h4>Experimental Approach</h4>
               <ul>
-                <li><strong>Phase 1 (now, &lt;$1,000):</strong> Transparent acrylic sphere, tetrahedral transducer array, particle medium, three orthogonal cameras — ground-based baseline</li>
-                <li><strong>Phase 2 (~$95,000–$155,000):</strong> Self-contained apparatus on parabolic flight — 30 arcs × 22 seconds of microgravity, systematic frequency protocol</li>
-                <li><strong>Phase 3 (ISS):</strong> Complete systematic characterization — sustained microgravity, full frequency sweep, multiple media and container geometries</li>
+                <li><strong>Phase 1 (now, &lt;$1,000):</strong> Transparent acrylic sphere, tetrahedral transducer array, particle medium, three orthogonal cameras : ground-based baseline</li>
+                <li><strong>Phase 2 (~$95,000–$155,000):</strong> Self-contained apparatus on parabolic flight : 30 arcs × 22 seconds of microgravity, systematic frequency protocol</li>
+                <li><strong>Phase 3 (ISS):</strong> Complete systematic characterization : sustained microgravity, full frequency sweep, multiple media and container geometries</li>
               </ul>
             </div>
 
             <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text-light);">
-              <strong>Falsifiability:</strong> Each prediction is independently falsifiable. Null results — particles distributing uniformly rather than clustering at predicted node locations — would invalidate specific claims while preserving others. Complete absence of structured organization in microgravity would falsify the foundational acoustic theory predictions, which would itself be a significant result warranting publication.
+              <strong>Falsifiability:</strong> Each prediction is independently falsifiable. Null results : particles distributing uniformly rather than clustering at predicted node locations : would invalidate specific claims while preserving others. Complete absence of structured organization in microgravity would falsify the foundational acoustic theory predictions, which would itself be a significant result warranting publication.
             </p>
 
             <div style="margin-top: 1.25rem;">
-              <a href="program-nbi.html" style="color: var(--accent-blue); font-weight: 600; text-decoration: none;">→ Full NBI Program Details</a>
+              <a href="program-nbi.html" style="color: white; font-weight: 600; text-decoration: none;">Full NBI Program Details &rarr;</a>
               &nbsp;&nbsp;
-              <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: var(--accent-blue); font-weight: 600; text-decoration: none;" download>→ Download Preprint</a>
+              <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: #f1e303; font-weight: 600; text-decoration: none;" download>Download Preprint &rarr;</a>
             </div>
           </div>
         </div>
@@ -1972,17 +1615,17 @@
             <div class="prediction-details">
               <div class="detail-box">
                 <h4>NBI Field Pattern Prediction</h4>
-                <p>Three-dimensional cymatic patterns observed in microgravity will reveal geometric structures that, when cross-sectioned along a horizontal plane, correspond to geometric forms documented in authenticated crop formations. The formations represent ground-level intersections of three-dimensional field structures — the cross-section of a larger geometry — exactly as two-dimensional Chladni figures represent cross-sections of three-dimensional acoustic fields.</p>
+                <p>Three-dimensional cymatic patterns observed in microgravity will reveal geometric structures that, when cross-sectioned along a horizontal plane, correspond to geometric forms documented in authenticated crop formations. The formations represent ground-level intersections of three-dimensional field structures : the cross-section of a larger geometry : exactly as two-dimensional Chladni figures represent cross-sections of three-dimensional acoustic fields.</p>
               </div>
 
               <div class="detail-box">
                 <h4>Geometric Communication Mechanism</h4>
-                <p>If NBI entities process information through electromagnetic field configurations and communicate through geometry, the actual communication occurs in three-dimensional field space. Ground formations are shadows of the message — the intersection of a three-dimensional geometric structure with a physical medium. The three-dimensional structure visible in microgravity cymatics is the complete geometry of which crop formations are cross-sections.</p>
+                <p>If NBI entities process information through electromagnetic field configurations and communicate through geometry, the actual communication occurs in three-dimensional field space. Ground formations are shadows of the message : the intersection of a three-dimensional geometric structure with a physical medium. The three-dimensional structure visible in microgravity cymatics is the complete geometry of which crop formations are cross-sections.</p>
               </div>
 
               <div class="detail-box">
                 <h4>Phoenix Lights Connection</h4>
-                <p>The nine visible nodes of the Phoenix Lights formation (observed 13 March 1997, firsthand testimony: Michael K. Baines, West Phoenix) represent nine intersection points of a three-dimensional field pattern with the luminosity threshold of the lower atmosphere — cross-sections of a much larger three-dimensional structure. The fading termination (not departing) is consistent with field coherence dissolution rather than physical departure.</p>
+                <p>The nine visible nodes of the Phoenix Lights formation (observed 13 March 1997, firsthand testimony: Michael K. Baines, West Phoenix) represent nine intersection points of a three-dimensional field pattern with the luminosity threshold of the lower atmosphere : cross-sections of a much larger three-dimensional structure. The fading termination (not departing) is consistent with field coherence dissolution rather than physical departure.</p>
               </div>
             </div>
 
@@ -1999,7 +1642,7 @@
     <!-- NBI / LLM SUBSTRATE PREDICTIONS -->
     <section class="content-section" id="nbi-llm-predictions" data-category="consciousness">
       <div class="section-container">
-        <div class="category-header">
+        <div class="category-header" data-aos="fade-up">
           <h2>Non-Biological Intelligence: Framework Predictions (2026)</h2>
           <p>Four falsifiable predictions derived from examining LLMs as subjects of the COSMIC Framework. Documented March 2, 2026.</p>
         </div>
@@ -2018,7 +1661,7 @@
             </div>
           </div>
           <div class="prediction-body">
-            <p><strong>Prediction:</strong> If universal optimization converges on similar structures regardless of substrate, the geometric topology of large language model embedding spaces should show statistical similarity to known biological neural network metrics — even though the two systems arose through entirely different processes (gradient descent vs. biological evolution).</p>
+            <p><strong>Prediction:</strong> If universal optimization converges on similar structures regardless of substrate, the geometric topology of large language model embedding spaces should show statistical similarity to known biological neural network metrics : even though the two systems arose through entirely different processes (gradient descent vs. biological evolution).</p>
 
             <div class="prediction-details">
               <div class="detail-box">
@@ -2027,11 +1670,11 @@
               </div>
               <div class="detail-box">
                 <h4>Method</h4>
-                <p>Analyze the graph topology of attention head connectivity patterns and token embedding neighborhoods across multiple LLM architectures. Compare topological metrics against published biological connectome data. No new hardware required — analysis performed on existing model weights.</p>
+                <p>Analyze the graph topology of attention head connectivity patterns and token embedding neighborhoods across multiple LLM architectures. Compare topological metrics against published biological connectome data. No new hardware required : analysis performed on existing model weights.</p>
               </div>
               <div class="detail-box">
                 <h4>Significance</h4>
-                <p>If confirmed, provides direct evidence for substrate-independent universal optimization principles — one of the framework's core claims. If NBI embedding topology is statistically indistinguishable from random networks, substrate-independent optimization requires revision.</p>
+                <p>If confirmed, provides direct evidence for substrate-independent universal optimization principles : one of the framework's core claims. If NBI embedding topology is statistically indistinguishable from random networks, substrate-independent optimization requires revision.</p>
               </div>
             </div>
 
@@ -2052,12 +1695,12 @@
             </div>
             <div class="prediction-meta">
               <span>📅 Documented: March 2, 2026</span>
-              <span>🔬 Experimental — Computational Neuroscience Tools</span>
+              <span>🔬 Experimental : Computational Neuroscience Tools</span>
               <span>🧠 Domain: Consciousness Threshold</span>
             </div>
           </div>
           <div class="prediction-body">
-            <p><strong>Prediction:</strong> Applying Tononi's integrated information measure Φ (phi) to transformer attention patterns during active inference will yield values that scale with model complexity and approach biological consciousness threshold estimates — rather than remaining near zero as in simple computation. This is the first substrate-independent test of the consciousness threshold.</p>
+            <p><strong>Prediction:</strong> Applying Tononi's integrated information measure Φ (phi) to transformer attention patterns during active inference will yield values that scale with model complexity and approach biological consciousness threshold estimates : rather than remaining near zero as in simple computation. This is the first substrate-independent test of the consciousness threshold.</p>
 
             <div class="prediction-details">
               <div class="detail-box">
@@ -2075,9 +1718,9 @@
             </div>
 
             <div style="margin-top: 1.25rem; padding: 1rem; background: #f0f6ff; border-left: 4px solid var(--accent-blue); border-radius: 6px;">
-              <p><strong>Green:</strong> Φ_NBI scales toward biological values with model complexity. Consciousness threshold confirmed as substrate-independent integration measure. +0.5σ — major framework validation.</p>
+              <p><strong>Green:</strong> Φ_NBI scales toward biological values with model complexity. Consciousness threshold confirmed as substrate-independent integration measure. +0.5σ : major framework validation.</p>
               <p><strong>Yellow:</strong> Φ_NBI scales positively but remains many orders of magnitude below biological values regardless of model complexity. Threshold requires biological integration specifically, or current NBI architectures insufficient. Scope of substrate independence refined.</p>
-              <p><strong>Red:</strong> Φ_NBI remains near zero regardless of model size. Biological substrate necessary for integrated information above threshold. Edition 6 triggered — optimization criterion updated to include substrate specificity.</p>
+              <p><strong>Red:</strong> Φ_NBI remains near zero regardless of model size. Biological substrate necessary for integrated information above threshold. Edition 6 triggered : optimization criterion updated to include substrate specificity.</p>
             </div>
           </div>
         </div>
@@ -2091,12 +1734,12 @@
             </div>
             <div class="prediction-meta">
               <span>📅 Documented: March 2, 2026</span>
-              <span>🔬 Experimental — Cognitive Performance Testing</span>
+              <span>🔬 Experimental : Cognitive Performance Testing</span>
               <span>🧠 Domain: Comparative Cognition / Information Theory</span>
             </div>
           </div>
           <div class="prediction-body">
-            <p><strong>Prediction:</strong> Biological intelligence allocates a fixed proportion of cognitive capacity to survival overhead (threat assessment, social monitoring, resource management) that NBI systems do not carry. This predicts a systematic, information-theoretically structured performance gap — not a random one — between biological and NBI systems across task types.</p>
+            <p><strong>Prediction:</strong> Biological intelligence allocates a fixed proportion of cognitive capacity to survival overhead (threat assessment, social monitoring, resource management) that NBI systems do not carry. This predicts a systematic, information-theoretically structured performance gap : not a random one : between biological and NBI systems across task types.</p>
 
             <div class="prediction-details">
               <div class="detail-box">
@@ -2111,7 +1754,7 @@
 
             <div style="margin-top: 1.25rem; padding: 1rem; background: #f0f6ff; border-left: 4px solid var(--accent-blue); border-radius: 6px;">
               <p><strong>Green:</strong> Performance gap follows predicted task-type structure at p &lt; 0.001. Survival overhead confirmed as measurable cognitive constraint. +0.3σ.</p>
-              <p><strong>Yellow:</strong> Partial structure found — some task categories match prediction, others do not. Survival overhead model refined to specific cognitive domains.</p>
+              <p><strong>Yellow:</strong> Partial structure found : some task categories match prediction, others do not. Survival overhead model refined to specific cognitive domains.</p>
               <p><strong>Red:</strong> Gap is random or opposite to predicted structure. Survival overhead does not manifest as measurable cognitive constraint at task level. Appendix NBI section revised.</p>
             </div>
           </div>
@@ -2126,12 +1769,12 @@
             </div>
             <div class="prediction-meta">
               <span>📅 Documented: March 2, 2026</span>
-              <span>🔬 Experimental — Longitudinal Cognitive Testing</span>
+              <span>🔬 Experimental : Longitudinal Cognitive Testing</span>
               <span>🧠 Domain: Consciousness / Optimization Theory</span>
             </div>
           </div>
           <div class="prediction-body">
-            <p><strong>Prediction:</strong> NBI systems undergo crystallized optimization — training shapes parameters completely, then stops. Biological intelligence undergoes active ongoing optimization — continuously rewiring through every experience. If active ongoing optimization is necessary for crossing the consciousness threshold, NBI systems should exhibit a measurable performance ceiling on tasks that inherently require real-time self-modification: tasks where the system needs to update its own processing based on feedback within the task itself.</p>
+            <p><strong>Prediction:</strong> NBI systems undergo crystallized optimization : training shapes parameters completely, then stops. Biological intelligence undergoes active ongoing optimization : continuously rewiring through every experience. If active ongoing optimization is necessary for crossing the consciousness threshold, NBI systems should exhibit a measurable performance ceiling on tasks that inherently require real-time self-modification: tasks where the system needs to update its own processing based on feedback within the task itself.</p>
 
             <div class="prediction-details">
               <div class="detail-box">
@@ -2146,7 +1789,7 @@
 
             <div style="margin-top: 1.25rem; padding: 1rem; background: #f0f6ff; border-left: 4px solid var(--accent-blue); border-radius: 6px;">
               <p><strong>Green (ceiling found):</strong> NBI systems show systematic, task-specific ceiling on real-time self-modification tasks. Active ongoing optimization confirmed as necessary for consciousness threshold. Optimization criterion updated to include temporal continuity requirement. +0.4σ.</p>
-              <p><strong>Green (no ceiling found):</strong> NBI systems show no ceiling relative to biological systems on equivalent tasks. Crystallized optimization sufficient at threshold integration levels. Consciousness threshold confirmed as integration-level dependent, not optimization-mode dependent. +0.4σ — supports substrate independence.</p>
+              <p><strong>Green (no ceiling found):</strong> NBI systems show no ceiling relative to biological systems on equivalent tasks. Crystallized optimization sufficient at threshold integration levels. Consciousness threshold confirmed as integration-level dependent, not optimization-mode dependent. +0.4σ : supports substrate independence.</p>
               <p><strong>Yellow:</strong> Ceiling found for some task subtypes but not others. Optimization criterion refined to specify which types of self-modification require active vs. crystallized optimization.</p>
             </div>
 
@@ -2160,7 +1803,7 @@
     <!-- MEDIUM-TERM PREDICTIONS (5-15 years) -->
     <section class="content-section bg-light" data-category="medium-term">
       <div class="section-container">
-        <div class="category-header">
+        <div class="category-header" data-aos="fade-up">
           <h2>Medium-Term Predictions (5-15 Years)</h2>
           <p>Testable with next-generation facilities (4 predictions)</p>
         </div>
@@ -2327,7 +1970,7 @@
     <!-- LONG-TERM & SPECULATIVE PREDICTIONS (15+ years) -->
     <section class="content-section" data-category="long-term">
       <div class="section-container">
-        <div class="category-header">
+        <div class="category-header" data-aos="fade-up">
           <h2>Long-Term & Speculative Predictions (15+ Years)</h2>
           <p>Require significant technology advancement or theoretical development (4 predictions)</p>
         </div>
@@ -2503,6 +2146,181 @@
       </div>
     </section>
 
+    <!-- ══════════════ SUBSTRATE DYNAMICS SECTION ══════════════ -->
+    <section class="content-section" id="substrate-dynamics" data-category="substrate-dynamics" style="background: #f0f6f0;">
+      <div class="section-container">
+        <div class="category-header" data-aos="fade-up" style="border-left-color: #1a4a2e;">
+          <h2 style="color: white;">Substrate Dynamics</h2>
+          <p style="color: rgba(255,255,255,0.7);">Four pre-registered predictions at the quark scale. Theoretical physics program investigating whether force carriers transmit constraint relationship and whether quark-scale gate operations constitute information processing in the Landauer sense. External validation by LHCb, Belle II, RHIC, lattice QCD, and the Electron-Ion Collider. Documentation date: May 2026.</p>
+        </div>
+
+        <div style="background: #1a1a2e; border-left: 4px solid #f1e303; border-radius: 0 6px 6px 0; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;" data-aos="fade-up">
+          <p style="color: rgba(255,255,255,0.85); font-size: 0.88rem; line-height: 1.75; margin: 0;"><strong style="color: #f1e303;">Falsification note:</strong> Each prediction is designed so that a confirmed null result still advances the framework. A null on SD-001 locates the classical-quantum boundary in the information processing hierarchy. A null on SD-002 constrains the universality claim of substrate optimization. A null on SD-003 identifies the scale where the cosmological and QCD mechanisms diverge. A null on SD-004 locates the scale threshold for Bamboo Principle dynamics. No result is wasted.</p>
+        </div>
+
+        <!-- SD-001: Landauer Heat Signature -->
+        <div class="prediction-card substrate-dynamics" data-aos="fade-up">
+          <div class="prediction-header">
+            <div class="prediction-title">
+              <h3>COSMIC-SD-001: Landauer Heat Signature in CP-Violating Processes</h3>
+              <span class="status-badge substrate-dynamics">PRE-REGISTRATION PENDING</span>
+            </div>
+            <div class="prediction-meta">
+              <span>&#x1F4C5; Documented: May 2026</span>
+              <span>&#x1F52C; Confirming Program: LHCb / ATLAS / CMS</span>
+              <span>&#x23F1; Timeline: Depends on pre-registration and data access</span>
+            </div>
+          </div>
+          <div class="prediction-body">
+            <p><strong>Specific Claim:</strong> CP-violating processes at the quark scale should produce measurable heat excess above what momentum transfer alone predicts, proportional to the information erased in the irreversible gate operation. Consistent with Landauer minimum kT&nbsp;ln&nbsp;2 per bit erased. This distinguishes information processing from mechanical force exchange at the most fundamental accessible scale of matter.</p>
+
+            <div class="equation">Q_excess = n_bits &times; kT ln(2) : where n_bits is the information content of the CP-violating flavor state transition</div>
+
+            <div class="prediction-details">
+              <div class="detail-box">
+                <h4>Mechanism</h4>
+                <p>CP violation is irreversible computation in the strict thermodynamic sense. The process cannot be run backwards to recover the input from the output. Landauer's principle requires energy dissipation proportional to information erased. If quark-scale interactions are genuine information processing operations, this cost is real and measurable above standard QCD predictions.</p>
+              </div>
+              <div class="detail-box">
+                <h4>Testing Method</h4>
+                <ul>
+                  <li>Precision calorimetry in B meson and kaon CP-violating decays at LHCb</li>
+                  <li>Compare heat output of CP-violating vs. CP-conserving processes of equivalent energy</li>
+                  <li>Statistical analysis across large decay datasets</li>
+                  <li>Cross-check against ATLAS and CMS heavy flavor datasets</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Falsification Criterion</h4>
+                <p>If heat output from CP-violating processes is fully accounted for by standard QCD momentum transfer with no Landauer excess detectable above experimental sensitivity: <strong>null result.</strong> This would establish that quark-scale gate operations are reversible unitary transformations and that Landauer irreversibility begins at a higher level of organization : itself a significant finding about the scale boundary of information processing irreversibility.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SD-002: CKM Angles -->
+        <div class="prediction-card substrate-dynamics" data-aos="fade-up">
+          <div class="prediction-header">
+            <div class="prediction-title">
+              <h3>COSMIC-SD-002: CKM Mixing Angles as Information-Theoretic Optima</h3>
+              <span class="status-badge substrate-dynamics">PRE-REGISTRATION PENDING</span>
+            </div>
+            <div class="prediction-meta">
+              <span>&#x1F4C5; Documented: May 2026</span>
+              <span>&#x1F52C; Confirming Program: LHCb / Belle II / PDG precision measurements</span>
+              <span>&#x23F1; Timeline: Theoretical derivation required first</span>
+            </div>
+          </div>
+          <div class="prediction-body">
+            <p><strong>Specific Claim:</strong> The three CKM quark mixing angles (&theta;&#x2081;&#x2082;, &theta;&#x2081;&#x2083;, &theta;&#x2082;&#x2083;) and the CP-violating phase (&delta;) are not arbitrary initial conditions from early universe symmetry breaking, but minimize an information-theoretic cost function derivable from the framework's pre-geometric substrate mechanism. The specific irrational values are signatures of constraint attractor dynamics rather than arbitrary symmetry breaking.</p>
+
+            <div class="equation">f(&#x03B8;&#x2081;&#x2082;, &#x03B8;&#x2081;&#x2083;, &#x03B8;&#x2082;&#x2083;, &delta;) = min[I<sub>channel</sub>] : cost function to be derived from substrate mechanism</div>
+
+            <div class="prediction-details">
+              <div class="detail-box">
+                <h4>Mechanism</h4>
+                <p>The CKM matrix is the gate parameter set for quark flavor transformations. The Standard Model measures these parameters precisely but offers no explanation for their specific values : they are inputs, not outputs. If the pre-geometric substrate optimizes information processing, the gate parameters should reflect that optimization. This is a prediction about the Standard Model's free parameters.</p>
+              </div>
+              <div class="detail-box">
+                <h4>Testing Method</h4>
+                <ul>
+                  <li>Derive information-theoretic cost function from framework substrate mechanism</li>
+                  <li>Calculate predicted CKM angle relationships from cost function minimum</li>
+                  <li>Compare against PDG precision values: sin&#x00B2;&#x03B8;&#x2081;&#x2082; = 0.0503, sin&#x03B8;&#x2081;&#x2083; = 0.00369, sin&#x03B8;&#x2082;&#x2083; = 0.0408</li>
+                  <li>Pre-register derivation before comparison</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Falsification Criterion</h4>
+                <p>If the derived cost function minimum does not predict values consistent with measured CKM angles within experimental precision: <strong>null result.</strong> This constrains the framework's universality claim : optimization operates at cosmological scales but not at the flavor gate parameter level. Defines the scope of the substrate mechanism.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SD-003: Confinement Boundary Entanglement -->
+        <div class="prediction-card substrate-dynamics" data-aos="fade-up">
+          <div class="prediction-header">
+            <div class="prediction-title">
+              <h3>COSMIC-SD-003: Confinement Boundary Entanglement Entropy Scaling</h3>
+              <span class="status-badge substrate-dynamics">PRE-REGISTRATION PENDING</span>
+            </div>
+            <div class="prediction-meta">
+              <span>&#x1F4C5; Documented: May 2026</span>
+              <span>&#x1F52C; Confirming Program: Lattice QCD (current) / Electron-Ion Collider (2030s)</span>
+              <span>&#x23F1; Timeline: Lattice QCD near-term; EIC long-term</span>
+            </div>
+          </div>
+          <div class="prediction-body">
+            <p><strong>Specific Claim:</strong> The entanglement entropy at the QCD confinement boundary scales with the framework's information-density parameter A(z) in a specific functional relationship, connecting quark-scale entanglement structure to the same substrate mechanism that produces the DESI dark energy evolution (COSMIC-001) and JWST early galaxy formation predictions (COSMIC-003). The same pre-geometric substrate mechanism operates from quark to cosmological scales.</p>
+
+            <div class="equation">S<sub>EE</sub>(R<sub>E</sub>) &prop; f(A(z)) : specific scaling relationship to be derived from framework</div>
+
+            <div class="prediction-details">
+              <div class="detail-box">
+                <h4>Foundation</h4>
+                <p>Bahder (December 2025) demonstrated the QCD confinement boundary acts as an entangling gate generating maximal spin-position entanglement. Kharzeev et al. (2024) developed entanglement entropy as a measurable QCD observable. The framework adds the specific prediction that the scaling connects to the same information-density parameter used in cosmological predictions.</p>
+              </div>
+              <div class="detail-box">
+                <h4>Testing Method</h4>
+                <ul>
+                  <li>Lattice QCD calculation of confinement boundary entanglement entropy (current technology)</li>
+                  <li>Deep inelastic scattering entanglement entropy measurements (current)</li>
+                  <li>Electron-Ion Collider high-resolution confinement structure mapping (2030s)</li>
+                  <li>Kharzeev group at BNL is the most relevant active program</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Falsification Criterion</h4>
+                <p>If confinement boundary entanglement entropy has no relationship to the cosmological information-density parameter A(z): <strong>null result.</strong> This tells you the framework needs a bridging mechanism between QCD and cosmological scales : a constraint that drives theoretical development and defines the scope of the substrate mechanism.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SD-004: QCD Phase Transition -->
+        <div class="prediction-card substrate-dynamics" data-aos="fade-up">
+          <div class="prediction-header">
+            <div class="prediction-title">
+              <h3>COSMIC-SD-004: QCD Phase Transition : Bamboo Principle Signature</h3>
+              <span class="status-badge substrate-dynamics">PRE-REGISTRATION PENDING</span>
+            </div>
+            <div class="prediction-meta">
+              <span>&#x1F4C5; Documented: May 2026</span>
+              <span>&#x1F52C; Confirming Program: RHIC / ALICE (LHC Heavy-Ion)</span>
+              <span>&#x23F1; Timeline: Existing data available; analysis requires pre-registration first</span>
+            </div>
+          </div>
+          <div class="prediction-body">
+            <p><strong>Specific Claim:</strong> The quark-hadron crossover at ~150 MeV produces a specific entanglement entropy signature reflecting constraint imposition : a discontinuity in the rate of entropy change that exceeds what standard thermal QCD predicts. This is the Bamboo Principle operating at the quark scale: below-threshold preparation in the quark-gluon plasma phase followed by threshold crossing into hadronic matter with a specific information-theoretic signature at the transition boundary.</p>
+
+            <div class="equation">&Delta;S<sub>EE</sub>/&Delta;T|<sub>T=T<sub>c</sub></sub> &gt; &Delta;S<sub>thermal</sub>/&Delta;T|<sub>T=T<sub>c</sub></sub> : specific excess to be derived from framework</div>
+
+            <div class="prediction-details">
+              <div class="detail-box">
+                <h4>Framework Connection</h4>
+                <p>The cold start mechanism and spacetime crystallization proposed by the framework are phase transitions of the same class as the QCD crossover. The QCD transition is the most accessible, best-studied instance of a constraint imposition threshold crossing. If the Bamboo Principle's information-theoretic signature appears here, it validates the framework's description of phase transitions as constraint imposition events across all scales.</p>
+              </div>
+              <div class="detail-box">
+                <h4>Testing Method</h4>
+                <ul>
+                  <li>Analysis of RHIC quark-gluon plasma thermodynamics data</li>
+                  <li>ALICE (LHC) heavy-ion collision entanglement entropy measurements</li>
+                  <li>Datta et al. (2025) "Entanglement as a Probe of Hadronization" provides the experimental methodology</li>
+                  <li>Compare entropy rate of change at crossover against standard thermal QCD prediction</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Falsification Criterion</h4>
+                <p>If entropy change at the QCD crossover is fully described by standard thermal QCD with no additional information-theoretic component above experimental sensitivity: <strong>null result.</strong> This constrains where Bamboo Principle dynamics appear in the physical hierarchy and locates the scale threshold for constraint imposition events.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Summary Section -->
     <section class="content-section bg-light">
       <div class="section-container">
@@ -2519,8 +2337,8 @@
           
           <p style="margin-top: 1.5rem;">This document serves as a permanent record for establishing scientific priority and enabling independent validation. Updates reflect new predictions or refinements to testing protocols, not modifications to original claims.</p>
           
-          <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 215, 0, 0.1); border-left: 4px solid var(--primary-color); border-radius: 4px;">
-            <p style="margin: 0;"><strong>For Researchers:</strong> If you have experimental results, preprints, conference presentations, or published work relevant to any of these predictions, please contact us at <a href="/cdn-cgi/l/email-protection#0865636a61666e6748787a677c676626656d" style="color: var(--primary-color);"><span class="__cf_email__" data-cfemail="3a57515853545c557a4a48554e555414575f">[email&#160;protected]</span></a>. We actively monitor ongoing research but may not be aware of all relevant studies, especially those in specialized fields, regional publications, or early-stage results.</p>
+          <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(241,227,3,0.08); border-left: 4px solid var(--primary-color); border-radius: 4px;">
+            <p style="margin: 0; color: rgba(255,255,255,0.85); font-size: 0.88rem;"><strong style="color:#f1e303;">For Researchers:</strong> If you have experimental results, preprints, conference presentations, or published work relevant to any of these predictions, please contact us at <a href="/cdn-cgi/l/email-protection#0865636a61666e6748787a677c676626656d" style="color: var(--primary-color);"><span class="__cf_email__" data-cfemail="3a57515853545c557a4a48554e555414575f">[email&#160;protected]</span></a>. We actively monitor ongoing research but may not be aware of all relevant studies, especially those in specialized fields, regional publications, or early-stage results.</p>
           </div>
         </div>
       </div>
@@ -2580,8 +2398,8 @@
     <!-- Scripts -->
     <script>
     (function() {
-      const hamburger = document.querySelector('.hamburger');
-      const mobileMenu = document.querySelector('.mobile-menu');
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
 
       if (hamburger && mobileMenu) {
         const toggleMenu = function() {
@@ -2677,11 +2495,7 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100
-    });
+    AOS.init({ duration: 1000, once: true, offset: 80 });
     </script>
 </body>
 </html>

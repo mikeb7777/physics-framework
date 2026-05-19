@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Substrate Dynamics Results — Ic² Research Institute</title>
+    <meta name="description" content="Internal result log for the Substrate Dynamics theoretical physics program. Four pre-registered predictions at the quark scale for external validation by LHCb, Belle II, RHIC, lattice QCD, and the Electron-Ion Collider.">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+    /* --- Global Styles --- */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    :root {
+    --primary-color: #8B0000;
+    --secondary-color: #2d3f52;
+    --accent-program: #1a4a2e;
+    --accent-program-dark: #0a2018;
+    --accent-nbi-light: #1a7ad4;
+    --accent-yellow: #f1e303;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    }
+    
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: white;
+    }
+    
+    /* Header */
+    .site-header {
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .header-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    }
+    
+    .site-logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+    }
+    
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    }
+    
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
+    
+    .main-navigation a:hover {
+    color: var(--primary-color);
+    }
+    
+    .main-navigation a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+    }
+    
+    .main-navigation a.login-link:hover {
+    background: #a00000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    padding: 8px;
+    background: none;
+    border: none;
+    }
+
+    .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active { max-height: 600px; }
+
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu ul li:last-child { border-bottom: none; }
+
+    .mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    }
+
+    .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+
+    .mobile-menu a.login-link {
+    background: var(--primary-color);
+    color: #f1e303;
+    margin: 0.5rem 0;
+    border-radius: 6px;
+    font-weight: 700;
+    }
+    
+    /* Page Header */
+    .page-header {
+    background: linear-gradient(135deg, #0a2018 0%, #1a4a2e 60%, #1a4a2e 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,122,212,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    }
+    
+    .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    position: relative;
+    }
+    
+    .page-header .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.95;
+    margin-bottom: 0.5rem;
+    position: relative;
+    }
+    
+    .page-header .meta {
+    font-size: 1.05rem;
+    opacity: 0.85;
+    margin-top: 1rem;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    position: relative;
+    }
+
+    .header-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    position: relative;
+    }
+
+    .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    }
+    
+    /* Content Section */
+    .content-section {
+    padding: 2.5rem 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+    
+    .content-section.shaded {
+    background: #e8edf2;
+    max-width: 100%;
+    padding: 2.5rem 2rem;
+    }
+
+    .content-section.shaded .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+
+    .content-section.dark-section {
+    background: #0d1b2e;
+    max-width: 100%;
+    padding: 2.5rem 2rem;
+    }
+
+    .content-section.dark-section .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+    
+    .section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+    }
+    
+    .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    }
+    
+    .section-header p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    max-width: 800px;
+    margin: 0 auto;
+    }
+
+    .section-header.light h2 { color: white; }
+    .section-header.light p { color: rgba(255,255,255,0.8); }
+    
+    /* Content Text */
+    .content-text {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    }
+
+    .content-text:last-child { margin-bottom: 0; }
+    
+    /* Two Column Layout */
+    .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 3rem 0;
+    }
+    
+    .column h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-weight: 700;
+    }
+    
+    .column p {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+    
+    .stat-card {
+    background: #f0f0f0;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid var(--primary-color);
+    }
+    
+    .stat-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(139,0,0,0.15);
+    transform: translateY(-2px);
+    }
+    
+    .stat-card .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .stat-label {
+    color: var(--text-dark);
+    font-size: 1rem;
+    }
+
+    /* Info Box */
+    .info-box {
+    background: #1a1a2e;
+    border-left: 4px solid var(--primary-color);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.9);
+    }
+    
+    .info-box h3 {
+    color: #f1e303;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    }
+    
+    .info-box p {
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    .info-box p:last-child { margin-bottom: 0; }
+
+    .info-box ul {
+    margin: 0.75rem 0 0.75rem 1.5rem;
+    color: rgba(255,255,255,0.85);
+    }
+
+    .info-box ul li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+    /* Conditions Grid */
+    .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+
+    .condition-card {
+    background: #f0f2f5;
+    border-radius: 12px;
+    padding: 2rem;
+    border-top: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+    }
+
+    .condition-card:hover {
+    box-shadow: 0 4px 16px rgba(14,95,168,0.12);
+    transform: translateY(-2px);
+    }
+
+    .condition-card .condition-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    }
+
+    .condition-card h4 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    }
+
+    .condition-card p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* Experiment Cards */
+    .experiment-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin: 3rem 0;
+    }
+
+    .experiment-card {
+    background: #f0f2f5;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    }
+
+    .experiment-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(139,0,0,168,0.1);
+    }
+
+    .experiment-header {
+    padding: 1.5rem 2rem;
+    color: white;
+    }
+
+    .experiment-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    }
+
+    .experiment-header p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    }
+
+    .experiment-body {
+    padding: 2rem;
+    }
+
+    .experiment-body p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    }
+
+    .experiment-body p:last-child { margin-bottom: 0; }
+
+    .experiment-detail {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    }
+
+    .experiment-detail h4 {
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    }
+
+    .experiment-detail p, .experiment-detail li {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    }
+
+    .experiment-detail ul {
+    margin-left: 1.25rem;
+    margin-top: 0.5rem;
+    }
+
+    .experiment-detail ul li { margin-bottom: 0.4rem; }
+
+    /* Evidence Grid — dark cards */
+    .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    }
+
+    .evidence-card {
+    background: #102035;
+    border: 2px solid #1a3a5c;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    }
+
+    .evidence-card:hover {
+    border-color: var(--accent-program);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
+    transform: translateY(-2px);
+    }
+
+    .evidence-card h4 {
+    color: var(--accent-yellow);
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    }
+
+    .evidence-card p {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* Download box */
+    .download-box {
+    background: linear-gradient(135deg, #0a2018 0%, #1a4a2e 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    }
+
+    .download-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .download-box p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 500px;
+    }
+
+    .download-meta {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    }
+
+    /* Prediction logged box */
+    .prediction-log {
+    background: #fff8e1;
+    border: 2px solid #f9a825;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    }
+
+    .prediction-log h4 {
+    color: #e65100;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    }
+
+    .prediction-log ul {
+    margin-left: 1.25rem;
+    }
+
+    .prediction-log ul li {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+    background: linear-gradient(135deg, #0a2018 0%, #1a4a2e 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    }
+
+    .cta-section h2 { color: white; }
+    .cta-section .btn { margin: 0.5rem; }
+
+    /* Button Styles */
+    .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    }
+    
+    .btn-primary:hover {
+    background: #a00000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14,95,168,0.3);
+    }
+
+    .btn-white {
+    background: white;
+    color: var(--primary-color);
+    }
+
+    .btn-white:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+    background: transparent;
+    color: var(--accent-program);
+    border: 2px solid var(--accent-program);
+    }
+    
+    .btn-outline:hover {
+    background: var(--accent-program);
+    color: white;
+    }
+
+    .btn-download {
+    background: white;
+    color: #0a2a4e;
+    font-weight: 700;
+    padding: 0.9rem 2.5rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    }
+
+    .btn-download:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    
+    /* Footer */
+    footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 3rem 2rem 1rem;
+    margin-top: 0;
+    }
+    
+    .footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    }
+    
+    .footer-section h3 { margin-bottom: 1rem; color: white; }
+    
+    .footer-section ul { list-style: none; }
+    
+    .footer-section ul li { margin-bottom: 0.5rem; }
+    
+    .footer-section a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+    }
+    
+    .footer-section a:hover { color: white; }
+
+    .footer-bottom {
+    max-width: var(--max-width);
+    margin: 2rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+    .main-navigation { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
+    .page-header h1 { font-size: 2rem; }
+    .page-header .subtitle { font-size: 1.2rem; }
+    .two-column { grid-template-columns: 1fr; gap: 2rem; }
+    .section-header h2 { font-size: 1.8rem; }
+    .download-box { flex-direction: column; text-align: center; }
+    }
+
+    /* ── Detective Wall ─────────────────────────────────────────────────── */
+    .detective-section {
+        background: #1a1a1a;
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .detective-section::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+        pointer-events: none;
+    }
+    .detective-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+    .detective-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    .detective-title h2 { color: white; font-size: 2rem; margin-bottom: 0.5rem; }
+    .detective-title p { color: rgba(255,255,255,0.5); font-size: 0.9rem; font-style: italic; }
+
+    /* Cork board */
+    .cork-board {
+        background: #2d1f0e;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.4);
+        position: relative;
+        border: 8px solid #3d2a10;
+    }
+    .cork-board::before {
+        content: "";
+        position: absolute; inset: 0;
+        background-image:
+            radial-gradient(ellipse at 20% 30%, rgba(180,120,60,0.06) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 70%, rgba(160,100,40,0.06) 0%, transparent 60%);
+        border-radius: 2px;
+        pointer-events: none;
+    }
+
+    /* Pin grid */
+    .pin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Pin card */
+    .pin-card {
+        background: #fdf9f0;
+        border-radius: 2px;
+        padding: 1.25rem 1.25rem 1.5rem;
+        position: relative;
+        box-shadow: 3px 4px 10px rgba(0,0,0,0.4), 1px 1px 3px rgba(0,0,0,0.2);
+        transform: rotate(var(--rot, 0deg));
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: default;
+    }
+    .pin-card:hover {
+        transform: rotate(0deg) scale(1.03);
+        box-shadow: 5px 8px 20px rgba(0,0,0,0.5);
+        z-index: 10;
+    }
+    /* Push-pin */
+    .pin-card::before {
+        content: "";
+        position: absolute;
+        top: -10px; left: 50%;
+        transform: translateX(-50%);
+        width: 14px; height: 14px;
+        border-radius: 50%;
+        background: var(--pin-color, #cc2200);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 -1px 2px rgba(0,0,0,0.3);
+    }
+    .pin-card .pin-category {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        color: var(--cat-color, #666);
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .pin-card h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+        line-height: 1.35;
+    }
+    .pin-card p {
+        font-size: 0.78rem;
+        color: #444;
+        line-height: 1.6;
+        margin: 0;
+    }
+    .pin-card .pin-status {
+        display: inline-block;
+        margin-top: 0.75rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+    }
+    .status-confirmed { background: #e8f5e9; color: #1a5c2a; }
+    .status-open { background: #fff8e1; color: #7a4f00; }
+    .status-proposed { background: #e3f2fd; color: #1565c0; }
+    .status-unknown { background: #f3e5f5; color: #6a1b9a; }
+
+    /* Red string canvas overlay */
+    #board-canvas {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* Source / reference strip */
+    .ref-strip {
+        margin-top: 2rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+    .ref-tag {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: rgba(255,255,255,0.6);
+        font-size: 0.7rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Mind-map connector label */
+    .connector-label {
+        display: inline-block;
+        background: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.5);
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 2px;
+        font-family: 'Courier New', monospace;
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+        .pin-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .pin-card { padding: 1rem 1rem 1.25rem; }
+    }
+
+    </style>
+    <style>
+    .results-table { min-width: 1400px; }
+    .results-table thead tr th { background: #0a2018; }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute" onerror="this.style.display='none'">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" aria-hidden="true">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+    </ul>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Substrate Dynamics<br><span style="font-size:1.3rem;opacity:0.85;">Program Results Log</span></h1>
+    <div class="subtitle">A Research Program of the Ic² Research Institute &mdash; Theoretical Physics</div>
+    <p class="meta">Four pre-registered predictions at the quark scale. External validation by LHCb, Belle II, RHIC, lattice QCD, and the planned Electron-Ion Collider. A confirmed null result on any test still advances the framework by establishing where in the physical hierarchy information processing transitions from reversible to irreversible.</p>
+    <div class="header-badges">
+        <span class="header-badge">🔬 Theoretical Physics</span>
+        <span class="header-badge">⚡ QCD / Particle Physics</span>
+        <span class="header-badge">📊 Pre-Registration Required</span>
+        <span class="header-badge">🌐 Open Science</span>
+    </div>
+</div>
+
+<div style="max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem;">
+
+    <a href="program-substrate-dynamics.html" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:#1a4a2e;text-decoration:none;font-weight:600;margin-bottom:1.5rem;" data-aos="fade-up">&#8592; Back to Substrate Dynamics Program</a>
+
+    <div style="background:#fff8e1;border-left:4px solid #f9a825;border-radius:0 6px 6px 0;padding:1rem 1.5rem;margin-bottom:2rem;font-size:.88rem;color:#4a3000;line-height:1.7;" data-aos="fade-up">
+        <strong>Pre-registration status:</strong> All four predictions require Zenodo and OSF pre-registration before any data collection or analysis begins. Predictions are documented here as conversation records from May 2026. Formal timestamped pre-registration is the next required step for each test. Do not access experimental data before pre-registration is complete.
+    </div>
+
+    <div style="background:#f0f6f0;border-left:4px solid #1a4a2e;border-radius:0 6px 6px 0;padding:1rem 1.5rem;margin-bottom:2rem;font-size:.88rem;color:#2c3e50;line-height:1.7;" data-aos="fade-up">
+        <strong>Falsification value:</strong> Each test is designed so that a null result still advances the framework. A null on SD-001 locates the classical-quantum boundary in the information processing hierarchy. A null on SD-002 constrains the universality of information-theoretic optimization. A null on SD-003 identifies the need for a bridging mechanism between QCD and cosmological scales. A null on SD-004 locates the scale threshold for Bamboo Principle dynamics. No result is wasted.
+    </div>
+
+    <div class="legend" data-aos="fade-up">
+        <div class="legend-item"><div class="legend-dot" style="background:#1a4a2e;"></div> Substrate Dynamics Program</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6a1b9a;"></div> Pre-Registration Pending</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f9a825;"></div> Pending</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1a5c2a;"></div> Confirmed</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c62828;"></div> Null Result</div>
+    </div>
+
+    <div style="overflow-x:auto;margin-bottom:3rem;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid #e0e0e0;" data-aos="fade-up">
+    <table class="results-table">
+        <thead>
+            <tr>
+                <th>ID</th><th>Confirming Program</th><th>Type</th><th>Prediction</th>
+                <th>Doc. Date</th><th>Run Date</th><th>Outcome</th><th>Control</th>
+                <th>Compliance</th><th>N Tests</th><th>Delta</th>
+                <th>Next Steps</th><th>Lessons</th><th>Notes / Falsification Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="id-cell">SD-001</td>
+                <td class="name-cell">LHCb / ATLAS / CMS</td>
+                <td class="narrow"><span class="badge b-thought">Internal / Theoretical + External Validation</span></td>
+                <td class="pred-cell">CP-violating processes at the quark scale should produce measurable heat excess above momentum transfer predictions, proportional to information erased in the irreversible gate operation. Consistent with Landauer minimum kT ln2 per bit erased.</td>
+                <td class="narrow">May 2026</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Null hypothesis: heat output from CP-violating processes fully accounted for by standard QCD. No Landauer excess. Control: comparison of CP-violating vs. CP-conserving processes of equivalent energy in same detector.</td>
+                <td class="narrow"><span class="badge b-pending">Pre-Registration Pending</span></td>
+                <td class="narrow">Not yet run. Requires theoretical derivation of predicted magnitude before accessing LHC data.</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Pre-register on Zenodo before accessing LHC data. Identify existing LHCb datasets on B meson decays that may contain relevant measurements. Develop quantitative prediction for heat excess magnitude.</td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="medium">Null result still significant: establishes that Landauer irreversibility begins above the quark scale, locating the classical-quantum boundary in the information processing hierarchy.</td>
+            </tr>
+            <tr>
+                <td class="id-cell">SD-002</td>
+                <td class="name-cell">LHCb / Belle II / PDG</td>
+                <td class="narrow"><span class="badge b-combination">Theoretical Derivation + External Data</span></td>
+                <td class="pred-cell">The three CKM mixing angles (θ₁₂, θ₁₃, θ₂₃) and the CP-violating phase (δ) are not arbitrary initial conditions but minimize an information-theoretic cost function derivable from the framework's pre-geometric substrate mechanism. Specific predicted values to be derived before comparison against PDG precision measurements.</td>
+                <td class="narrow">May 2026</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Null hypothesis: CKM angles are arbitrary constants with no information-theoretic structure. Standard Model free parameters set by early universe symmetry breaking only.</td>
+                <td class="narrow"><span class="badge b-pending">Pre-Registration Pending</span></td>
+                <td class="narrow">Not yet run. Requires theoretical derivation of cost function first.</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Derive information-theoretic cost function from the framework. Calculate predicted CKM angle relationships. Compare against PDG values. Pre-register derivation before comparison.</td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="medium">Null result constrains the framework's universality claim: optimization operates at cosmological scales but not at flavor gate parameter level. Defines the scope of the mechanism.</td>
+            </tr>
+            <tr>
+                <td class="id-cell">SD-003</td>
+                <td class="name-cell">Lattice QCD / Electron-Ion Collider</td>
+                <td class="narrow"><span class="badge b-external">External / Computation + Experiment</span></td>
+                <td class="pred-cell">Entanglement entropy at the QCD confinement boundary scales with the framework's information-density parameter A(z) in a specific functional relationship, connecting quark-scale entanglement structure to the same mechanism producing DESI dark energy evolution and JWST early galaxy formation anomalies.</td>
+                <td class="narrow">May 2026</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Null: confinement boundary entanglement entropy has no relationship to cosmological information-density parameter. Mechanism operates at cosmological scales only.</td>
+                <td class="narrow"><span class="badge b-pending">Pre-Registration Pending</span></td>
+                <td class="narrow">Not yet run. Lattice QCD entanglement entropy calculations available now. EIC data available 2030s.</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Derive predicted scaling relationship from framework. Compare against existing Kharzeev group lattice QCD calculations. Pre-register before EIC data access.</td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="medium">Null result tells you the framework needs a bridging mechanism between QCD and cosmological scales — a constraint on the theory that drives theoretical development.</td>
+            </tr>
+            <tr>
+                <td class="id-cell">SD-004</td>
+                <td class="name-cell">RHIC / ALICE (LHC Heavy-Ion)</td>
+                <td class="narrow"><span class="badge b-external">External / Heavy-Ion Collision Data</span></td>
+                <td class="pred-cell">The quark-hadron crossover at ~150 MeV produces a specific entanglement entropy signature reflecting constraint imposition — a discontinuity in entropy rate of change exceeding standard thermal QCD predictions. The Bamboo Principle operating at the quark scale: specific information-theoretic signature at the threshold crossing from quark-gluon plasma to hadronic matter.</td>
+                <td class="narrow">May 2026</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Null: entropy change at QCD crossover fully described by standard thermal QCD. No additional information-theoretic component. Bamboo Principle dynamics do not appear at this scale.</td>
+                <td class="narrow"><span class="badge b-pending">Pre-Registration Pending</span></td>
+                <td class="narrow">Not yet run. Extensive RHIC and ALICE data on QGP thermodynamics available. Requires deriving predicted entropy signature shape before data analysis.</td>
+                <td class="narrow"><span class='blank'>&mdash;</span></td>
+                <td class="wide">Derive predicted entropy signature from framework. Identify existing RHIC/ALICE datasets. Use Datta et al. (2025) methodology as template. Pre-register analysis protocol.</td>
+                <td class="medium"><span class='blank'>&mdash;</span></td>
+                <td class="medium">Null result constrains where Bamboo Principle dynamics appear in physical hierarchy — locates the scale threshold for constraint imposition events.</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div style="text-align:center;margin-top:1rem;" data-aos="fade-up">
+        <a href="program-substrate-dynamics.html" style="display:inline-block;padding:.75rem 1.75rem;background:#1a4a2e;color:white;text-decoration:none;border-radius:6px;font-weight:600;font-size:.9rem;margin-right:.75rem;">Back to Program Page</a>
+        <a href="results.html" style="display:inline-block;padding:.75rem 1.75rem;background:transparent;color:#1a4a2e;border:2px solid #1a4a2e;text-decoration:none;border-radius:6px;font-weight:600;font-size:.9rem;">Main Results Registry</a>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Ic² Research Institute</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="research-publications.html">Publications</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="book.html">The Big TOE</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq-page.html">FAQ</a></li>
+                <li><a href="members.html">Our Members</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="become-member.html">Become a Member</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,0.6);">Terms & Conditions</a></p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1000, once: true, offset: 100 });
+
+// Hamburger menu
+(function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            const expanded = hamburger.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            mobileMenu.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            });
+        });
+    }
+})();
+</script>
+</body>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({duration:1000,once:true,offset:80});
+    const h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');
+    if(h&&m){h.addEventListener('click',function(){this.classList.toggle('active');m.classList.toggle('active');});m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{h.classList.remove('active');m.classList.remove('active');}));}
+</script>
+</body>
+</html>
