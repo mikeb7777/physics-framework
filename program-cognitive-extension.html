@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI-Mediated Cognitive Extension — Ic² Research Institute</title>
+    <meta name="description" content="The AI-Mediated Cognitive Extension program investigates whether structured human-AI collaboration produces measurable gains in cognitive throughput without requiring biological working memory to expand. Based on published research: DOI 10.5281/zenodo.18452510.">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+        --primary-color: #8B0000;
+        --accent-ce: #58606e;
+        --accent-ce-dark: #3d444f;
+        --accent-ce-light: #727b8a;
+        --accent-yellow: #f1e303;
+        --text-dark: #2c3e50;
+        --text-light: #666;
+        --bg-light: #f8f9fa;
+        --max-width: 1200px;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: white;
+    }
+
+    /* Header */
+    .site-header {
+        background: white;
+        border-bottom: 1px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .header-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .site-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .site-logo img { height: 50px; width: auto; display: block; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+    .main-navigation a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.3s ease; }
+    .main-navigation a:hover { color: var(--primary-color); }
+    .main-navigation a.login-link {
+        background: var(--primary-color); color: #f1e303;
+        padding: 0.5rem 1.25rem; border-radius: 25px; font-weight: 700;
+        box-shadow: 0 2px 8px rgba(139,0,0,0.3);
+    }
+    .main-navigation a.login-link:hover {
+        background: #a00000; transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+    }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; padding: 8px; background: none; border: none; }
+    .hamburger span { width: 25px; height: 3px; background: var(--primary-color); border-radius: 3px; transition: all 0.3s ease; display: block; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px,7px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+    .mobile-menu { display: none; position: fixed; top: 73px; left: 0; right: 0; background: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 999; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-menu.active { max-height: 600px; }
+    .mobile-menu ul { list-style: none; padding: 1rem; }
+    .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu ul li:last-child { border-bottom: none; }
+    .mobile-menu a { display: block; padding: 0.75rem 1rem; color: var(--text-dark); text-decoration: none; font-weight: 500; }
+    .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+    .mobile-menu a.login-link { background: var(--primary-color); color: #f1e303; margin: 0.5rem 0; border-radius: 6px; font-weight: 700; }
+
+    /* Page Header */
+    .page-header {
+        background: linear-gradient(135deg, var(--accent-ce-dark) 0%, var(--accent-ce) 60%, var(--accent-ce-light) 100%);
+        color: white;
+        padding: 4rem 2rem 3rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .page-header::before {
+        content: '';
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.04) 0%, transparent 50%);
+        pointer-events: none;
+    }
+    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; position: relative; }
+    .page-header .subtitle { font-size: 1.5rem; opacity: 0.95; margin-bottom: 0.5rem; position: relative; }
+    .page-header .meta { font-size: 1.05rem; opacity: 0.85; margin-top: 1rem; max-width: 750px; margin-left: auto; margin-right: auto; line-height: 1.7; position: relative; }
+    .header-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; position: relative; }
+    .header-badge { background: #0a2a4e; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+
+    /* Content Sections */
+    .content-section { padding: 2.5rem 2rem; max-width: var(--max-width); margin: 0 auto; }
+    .content-section.shaded { background: #e8edf2; max-width: 100%; padding: 2.5rem 2rem; }
+    .content-section.shaded .section-inner { max-width: var(--max-width); margin: 0 auto; }
+    .content-section.dark-section { background: #1c2029; max-width: 100%; padding: 3rem 2rem; }
+    .content-section.dark-section .section-inner { max-width: var(--max-width); margin: 0 auto; }
+
+    .section-header { margin-bottom: 2rem; text-align: center; }
+    .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-dark); }
+    .section-header p { font-size: 1.1rem; color: var(--text-dark); max-width: 800px; margin: 0 auto; }
+    .section-header.light h2 { color: white; }
+    .section-header.light p { color: rgba(255,255,255,0.8); }
+
+    .content-text { color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.05rem; }
+    .content-text:last-child { margin-bottom: 0; }
+
+    /* Two Column */
+    .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 3rem 0; }
+    .column h3 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-dark); font-weight: 700; }
+    .column p { color: var(--text-dark); margin-bottom: 1rem; line-height: 1.8; }
+
+    /* Stats Grid — slide-up overlay matching index.html gallery pattern */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0; }
+    .stat-card {
+        background: #f0f0f0; border-radius: 12px; padding: 2rem; text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-bottom: 4px solid #ccc;
+        position: relative; overflow: hidden; cursor: default;
+    }
+    .stat-card:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .stat-card .stat-value { font-size: 2.5rem; font-weight: 700; color: var(--text-dark); display: block; margin-bottom: 0.5rem; }
+    .stat-card .stat-label { color: var(--text-light); font-size: 0.9rem; line-height: 1.5; }
+    /* Slide-up overlay */
+    .stat-overlay {
+        position: absolute; left: 0; right: 0; bottom: -100%; height: 100%;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        padding: 1.25rem; text-align: center;
+        transition: bottom 0.4s ease;
+        pointer-events: none;
+    }
+    .stat-card:hover .stat-overlay { bottom: 0; }
+    .stat-overlay p { color: rgba(255,255,255,0.92); font-size: 0.82rem; line-height: 1.65; margin: 0; }
+    .stat-overlay .overlay-label { color: #f1e303; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.5rem; }
+
+    /* Info Box */
+    .info-box { background: #1a1a2e; border-left: 4px solid var(--accent-ce); padding: 2rem; margin: 2rem 0; border-radius: 8px; color: rgba(255,255,255,0.9); }
+    .info-box h3 { color: #f1e303; margin-bottom: 1rem; font-size: 1.5rem; }
+    .info-box p { color: rgba(255,255,255,0.88); margin-bottom: 1rem; line-height: 1.8; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .info-box ul { margin: 0.75rem 0 0.75rem 1.5rem; color: rgba(255,255,255,0.85); }
+    .info-box ul li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+    /* Prediction Cards — white on dark section background */
+    .predictions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2.5rem 0; }
+    .prediction-card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-top: 3px solid #ccc;
+        border-radius: 10px;
+        padding: 1.75rem;
+        transition: all 0.3s ease;
+    }
+    .prediction-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+    .prediction-number { font-size: 2.5rem; font-weight: 800; color: #58606e; opacity: 0.35; line-height: 1; margin-bottom: 0.5rem; }
+    .prediction-card h4 { font-size: 1.05rem; color: var(--text-dark); margin-bottom: 0.75rem; font-weight: 700; line-height: 1.4; }
+    .prediction-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.75; margin-bottom: 1rem; }
+
+    /* Foundation Cards */
+    .foundation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2.5rem 0; }
+    .foundation-card {
+        background: #f0f2f5; border-radius: 8px; overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.07); border: 1px solid #d0d5dd;
+    }
+    .foundation-card-header { padding: 1.5rem; color: white; }
+    .foundation-card-header .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem; }
+    .foundation-card-header h3 { font-size: 1.15rem; margin: 0; line-height: 1.35; }
+    .foundation-card-body { padding: 1.5rem; }
+    .foundation-card-body p { color: #444; font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem; }
+    .foundation-card-body p:last-child { margin-bottom: 0; }
+
+    /* Buttons — matching index.html and NBI program page */
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: 600; text-align: center; transition: all 0.3s ease; }
+    .btn-primary { background: var(--primary-color); color: white; }
+    .btn-primary:hover { background: #a00000; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139,0,0,0.3); }
+    .btn-white { background: white; color: var(--primary-color); }
+    .btn-white:hover { background: #f0f0f0; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+    .btn-outline:hover { background: var(--primary-color); color: white; }
+    /* btn-pill from index.html — transparent pill with white border for dark backgrounds */
+    .btn-pill { padding: 12px 32px; background: transparent; color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s; border: 2px solid rgba(255,255,255,0.9); display: inline-block; font-size: 1em; cursor: pointer; letter-spacing: 0.5px; }
+    .btn-pill:hover { background: rgba(255,255,255,0.15); border-color: #fff; transform: translateY(-2px); }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, var(--accent-ce-dark) 0%, var(--accent-ce) 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 12px; margin: 2rem 0; }
+    .cta-section h2 { color: white; }
+    .cta-section .btn { margin: 0.5rem; }
+
+    /* Footer */
+    footer { background: var(--text-dark); color: white; padding: 3rem 2rem 1rem; margin-top: 0; }
+    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+    .footer-section h3 { margin-bottom: 1rem; color: white; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin-bottom: 0.5rem; }
+    .footer-section a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    .footer-section a:hover { color: white; }
+    .footer-bottom { max-width: var(--max-width); margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .main-navigation { display: none; }
+        .hamburger { display: flex; }
+        .mobile-menu { display: block; }
+        .page-header h1 { font-size: 2rem; }
+        .page-header .subtitle { font-size: 1.2rem; }
+        .two-column { grid-template-columns: 1fr; gap: 2rem; }
+        .section-header h2 { font-size: 1.8rem; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- Site Header -->
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute" onerror="this.style.display='none'">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" aria-hidden="true">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Member Login</a></li>
+    </ul>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <h1>AI-Mediated Cognitive Extension</h1>
+    <div class="subtitle">A Research Program of the Ic² Research Institute</div>
+    <p class="meta">The forty-bits-per-second channel capacity is a substrate constraint on biological cognition, not a ceiling on what cognition can do when paired with a complementary system. This program tests whether structured human-AI collaboration produces measurable gains in effective cognitive throughput by reorganizing what working memory carries rather than requiring it to expand.</p>
+    <div class="header-badges">
+        <span class="header-badge">📄 Published Research</span>
+        <span class="header-badge">🔬 Active Program</span>
+        <span class="header-badge">🌐 Open Science</span>
+        <span class="header-badge">⚡ Pre-Registered Predictions</span>
+    </div>
+</div>
+
+<!-- Published Paper Cross-Reference -->
+<section class="content-section" style="padding: 1.5rem 2rem;">
+    <div style="max-width: var(--max-width); margin: 0 auto;">
+        <div style="background: #1a1a2e; border-left: 4px solid var(--accent-ce); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;" data-aos="fade-down" data-aos-delay="100">
+            <div style="flex: 1; min-width: 200px;">
+                <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #f1e303; font-weight: 700; margin-bottom: 0.25rem;">Published Research</p>
+                <p style="font-size: 0.95rem; color: rgba(255,255,255,0.88); margin: 0 0 0.25rem;"><strong>AI-Mediated Cognitive Extension: Engineering Solutions to Substrate Constraints</strong></p>
+                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 0;">Baines, M.K. (2026). Ic² Research Institute. &nbsp;DOI: <a href="https://zenodo.org/records/18452510" target="_blank" style="color: #c8cdd4; text-decoration: underline;">10.5281/zenodo.18452510</a></p>
+            </div>
+            <a href="https://zenodo.org/records/18452510" target="_blank" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Read the Paper</a>
+        </div>
+    </div>
+</section>
+
+<!-- Core Premise -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>The Core Premise</h2>
+        <p>The constraint is real. The question is whether it is the limit it appears to be.</p>
+    </div>
+
+    <div class="two-column">
+        <div class="column" data-aos="fade-right" data-aos-delay="100">
+            <h3>The Substrate Constraint</h3>
+            <p>The human retina samples the visual field at approximately one billion bits per second. By the time that information reaches conscious awareness, it has been compressed by a factor of roughly 25 million to one. Forty bits per second reach experience. The rest is discarded, below the threshold, running processes whose outputs surface without explanation.</p>
+            <p>This is not a failure. The compression is doing essential work: filtering for survival-relevant signals, maintaining a coherent world-model, running autonomic and motor systems that would overwhelm conscious bandwidth if they required deliberate attention. The constraint is the system working as designed.</p>
+            <p>Working memory operates within that compressed channel. It holds approximately four to seven discrete items simultaneously. This limit is consistent across individuals regardless of intelligence, expertise, or education. An expert and a novice both face the same ceiling. What differs is not the ceiling but what occupies the space beneath it. Experts have converted frequently used knowledge into compressed patterns, a process cognitive science calls crystallized intelligence, and these patterns take up less working memory than the raw information did. The space is the same. The packing is more efficient.</p>
+        </div>
+
+        <div class="column" data-aos="fade-left" data-aos-delay="200">
+            <h3>The Composite Substrate Hypothesis</h3>
+            <p>The hypothesis this program tests is not that AI augments human intelligence by being smarter. It is that a human-AI composite system reorganizes the cognitive work so that each component handles what it handles well, and the division produces effective throughput that neither achieves alone.</p>
+            <p>Biological cognition is adaptive, contextual, embodied, and capable of reasoning across domains with incomplete information. It also carries overhead: survival drives, emotional valence, social positioning, fatigue, and the compression artefacts of a system that evolved to prioritize threat detection over abstract reasoning.</p>
+            <p>AI carries none of that overhead. It handles pattern recognition, retrieval, compression, and parallel processing at scales biological working memory cannot sustain. It does not tire. It does not compete with itself for bandwidth. What it lacks is the adaptive contextual reasoning and the embodied understanding of consequences that makes biological cognition useful in the real world.</p>
+            <p>The composite system, in which biological adaptive reasoning operates on AI-compressed information, may produce outcomes that neither component could achieve by working alone. The program tests whether that is true, under what conditions, and with what measurable signatures.</p>
+        </div>
+    </div>
+
+    <div class="info-box" style="background: #f0f4f8; border-left: 4px solid var(--accent-ce); padding: 1.5rem 2rem; border-radius: 0 8px 8px 0; margin: 2rem 0;" data-aos="fade-up">
+        <h3 style="color: var(--accent-ce-dark); margin-bottom: 0.75rem;">The Crystallized Intelligence Problem</h3>
+        <p style="color: var(--text-dark);">There is a well-documented paradox in expertise: as professionals accumulate domain knowledge, they convert adaptive problem-solving capacity (fluid intelligence) into stored pattern libraries (crystallized intelligence). Performance on familiar problems improves. Performance on novel problems degrades. The expert's working memory is increasingly occupied by the maintenance of what they already know, leaving less capacity for encountering what they don't.</p>
+        <p style="color: var(--text-dark); margin-top: 0.75rem;">This is documented in aviation, emergency medicine, and military command, all fields where crystallized expertise is essential but where novel situations routinely exceed the pattern library. The veteran sees clearly what resembles prior experience and misses what doesn't. The composite substrate hypothesis predicts that AI-assisted pattern matching frees working memory from pattern retrieval, allowing fluid intelligence to operate on the novel elements rather than being pre-empted by familiarity.</p>
+        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.75rem;">The underlying argument is developed in the "Speed of Novelty" article at <a href="blog.html" style="color: var(--accent-ce);">eequalsicsquared.com/blog</a> and in Element 17 of <em>A Quest for the Big TOE</em>.</p>
+    </div>
+
+    <div class="stats-grid" data-aos="fade-up">
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="0" style="border-bottom-color: #005ba5;">
+            <div style="width:44px;height:44px;border-radius:50%;background:#005ba5;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;">
+                <img src="cycle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+            </div>
+            <span class="stat-value" style="color: #005ba5;">25M:1</span>
+            <span class="stat-label">Compression ratio from retinal input to conscious awareness; approximately one billion bits per second compresses to forty</span>
+            <div class="stat-overlay" style="background: linear-gradient(160deg, rgba(0,91,165,0.96), rgba(0,40,90,0.98));">
+                <span class="overlay-label">The Bottleneck</span>
+                <p>The visual system samples roughly one billion bits per second. Forty reach conscious awareness. The 25-million-to-one compression runs entirely below the threshold of deliberate attention — and that is where almost all processing happens.</p>
+            </div>
+        </div>
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="100" style="border-bottom-color: #3a8a3a;">
+            <div style="width:44px;height:44px;border-radius:50%;background:#3a8a3a;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;">
+                <img src="health_cross_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+            </div>
+            <span class="stat-value" style="color: #3a8a3a;">4–7</span>
+            <span class="stat-label">Working memory item limit, consistent across individuals regardless of intelligence or expertise</span>
+            <div class="stat-overlay" style="background: linear-gradient(160deg, rgba(30,100,30,0.96), rgba(10,50,10,0.98));">
+                <span class="overlay-label">The Biological Ceiling</span>
+                <p>Cowan (2001) established this limit across extensive literature. Unlike fluid intelligence, the ceiling does not vary with expertise. The composite workflow hypothesis predicts throughput gains without changing this number — optimisation, not expansion.</p>
+            </div>
+        </div>
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="200" style="border-bottom-color: #f58b2b;">
+            <div style="width:44px;height:44px;border-radius:50%;background:#f58b2b;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;">
+                <img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+            </div>
+            <span class="stat-value" style="color: #c96a10;">5</span>
+            <span class="stat-label">Pre-registered prediction sets anchoring the research program, spanning cognition, neuroscience, and physics</span>
+            <div class="stat-overlay" style="background: linear-gradient(160deg, rgba(200,100,20,0.96), rgba(100,45,5,0.98));">
+                <span class="overlay-label">The Predictions</span>
+                <p>Optimisation not expansion. Neuroplastic adaptation timeline. Autonomic control correlation. Landauer heat signatures. Fluid intelligence preservation under load. All five registered before data collection begins.</p>
+            </div>
+        </div>
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="300" style="border-bottom-color: #c8a800;">
+            <div style="width:44px;height:44px;border-radius:50%;background:#c8a800;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;">
+                <img src="calendar_month_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+            </div>
+            <span class="stat-value" style="color: #9a7f00;">36 mo</span>
+            <span class="stat-label">Program duration across two phases, with go/no-go criteria before Phase 2 advancement</span>
+            <div class="stat-overlay" style="background: linear-gradient(160deg, rgba(160,120,0,0.96), rgba(80,55,0,0.98));">
+                <span class="overlay-label">The Timeline</span>
+                <p>Phase One: 18 months, proof of concept, go/no-go assessment at midpoint. Phase Two: 18 months, validation and scale. Full raw data and analysis code released open access upon completion of each phase.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Five Predictions: dark section -->
+<section class="content-section dark-section">
+    <div class="section-inner">
+        <div class="section-header light" data-aos="fade-up">
+            <h2>Five Pre-Registered Predictions</h2>
+            <p>All prediction sets are registered before data collection begins. All data is published open access. Null results are published in full.</p>
+        </div>
+
+        <div class="predictions-grid" data-aos="fade-up">
+
+            <div class="prediction-card" data-aos="fade-up" data-aos-delay="0" style="border-top-color: #005ba5;">
+                <div style="width:42px;height:42px;border-radius:50%;background:#005ba5;display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;">
+                    <img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+                </div>
+                <div class="prediction-number">01</div>
+                <h4>Optimization, Not Expansion</h4>
+                <p>Working memory capacity, measured directly, remains within normal biological limits throughout the program. Effective cognitive throughput, measured as the rate at which complex problems are resolved, increases. The program is testing reorganization of the cognitive load, not expansion of the biological channel. Any result showing measured working memory expansion would falsify the hypothesis.</p>
+                <span class="btn btn-primary" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Framework Prediction</span>&nbsp;
+                <span class="btn btn-outline" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Pre-Registered</span>
+            </div>
+
+            <div class="prediction-card" data-aos="fade-up" data-aos-delay="100" style="border-top-color: #3a8a3a;">
+                <div style="width:42px;height:42px;border-radius:50%;background:#3a8a3a;display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;">
+                    <img src="cycle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+                </div>
+                <div class="prediction-number">02</div>
+                <h4>Neuroplastic Adaptation Timeline</h4>
+                <p>The transition from deliberate tool use to automatic cognitive extension follows a predictable neuroplastic timeline: three to twelve months for the composite workflow to shift from consciously managed to automatic. Participants will show distinct performance signatures at the pre-automatic and post-automatic phases, with the transition detectable through task performance data rather than self-report.</p>
+                <span class="btn btn-outline" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Testable</span>&nbsp;
+                <span class="btn btn-outline" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Pre-Registered</span>
+            </div>
+
+            <div class="prediction-card" data-aos="fade-up" data-aos-delay="200" style="border-top-color: #8B0000;">
+                <div style="width:42px;height:42px;border-radius:50%;background:#8B0000;display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;">
+                    <img src="health_cross_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+                </div>
+                <div class="prediction-number">03</div>
+                <h4>Autonomic Control Accelerates Adaptation</h4>
+                <p>Participants with established autonomic regulation capacity, confirmed via heart rate variability measurement and biofeedback training, will show faster adaptation to the composite workflow than participants without it. Autonomic regulation is a proxy for the ability to consciously manage attentional bandwidth, which is the core skill the composite workflow requires.</p>
+                <span class="btn btn-outline" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Testable</span>&nbsp;
+                <span class="btn btn-outline" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Pre-Registered</span>
+            </div>
+
+            <div class="prediction-card" data-aos="fade-up" data-aos-delay="300" style="border-top-color: #6a1b9a;">
+                <div style="width:42px;height:42px;border-radius:50%;background:#6a1b9a;display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;">
+                    <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+                </div>
+                <div class="prediction-number">04</div>
+                <h4>Landauer Principle Heat Signature</h4>
+                <p>Information erasure during cognitive processing produces heat at the theoretical minimum established by the Landauer principle (kT ln 2 per bit erased at room temperature). This prediction connects the cognitive extension research directly to the COSMIC Framework's claim that information processing is physical. It is the most technically demanding prediction and the one most directly tied to the underlying theory.</p>
+                <span class="btn btn-primary" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Framework Prediction</span>
+            </div>
+
+            <div class="prediction-card" data-aos="fade-up" data-aos-delay="400" style="border-top-color: #c96a10;">
+                <div style="width:42px;height:42px;border-radius:50%;background:#c96a10;display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;">
+                    <img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" style="width:22px;height:22px;filter:invert(1);" alt="">
+                </div>
+                <div class="prediction-number">05</div>
+                <h4>Fluid Intelligence Preservation Under Load</h4>
+                <p>In cognitively loaded conditions including time pressure, novel problems, and high information density, participants using the composite workflow will maintain fluid intelligence performance (novel problem-solving) at levels significantly above a control group working without AI assistance. The prediction is specific: the preservation effect is larger for novel problems than for familiar ones, which distinguishes it from simple performance enhancement.</p>
+                <span class="btn btn-outline" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Testable</span>&nbsp;
+                <span class="btn btn-outline" style="font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;cursor:default;">Pre-Registered</span>
+            </div>
+
+        </div>
+
+        <div style="background: white; border: 1px solid #e0e0e0; border-left: 4px solid var(--primary-color); border-radius: 0 8px 8px 0; padding: 1.5rem 2rem; margin-top: 1rem;" data-aos="fade-up">
+            <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 0.5rem;">Pre-Registration Commitment</p>
+            <p style="color: var(--text-dark); line-height: 1.8; font-size: 0.9rem; margin: 0;">All prediction sets are registered on Zenodo and the Open Science Framework before any data collection begins. Analysis code is released under MIT license before results are published. Null results are published with full methodology and completeness. This is a firm commitment, not a target. Results that falsify the predictions are published with the same completeness as results that confirm them.</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://zenodo.org/records/18452510" target="_blank" class="btn-pill" style="background: var(--primary-color); border-color: rgba(255,255,255,0.6);">Read the Full Paper</a>
+            &nbsp;&nbsp;
+            <a href="results-cognitive-extension.html" class="btn-pill">Results Log</a>
+        </div>
+    </div>
+</section>
+
+<!-- Research Foundation -->
+<section class="content-section">
+    <div class="section-header" data-aos="fade-up">
+        <h2>Research Foundation</h2>
+        <p>The program builds on established findings across cognitive science, neuroscience, and information physics.</p>
+    </div>
+
+    <div class="foundation-grid" data-aos="fade-up">
+
+        <div class="foundation-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="foundation-card-header" style="background: linear-gradient(135deg, #3d444f 0%, #58606e 100%);">
+                <div class="label">Information Physics</div>
+                <h3>The COSMIC Framework: Element 17</h3>
+            </div>
+            <div class="foundation-card-body">
+                <p>Element 17 of <em>A Quest for the Big TOE</em> establishes the mathematical basis for the 25-million-to-one compression ratio and frames it as a substrate constraint in information-theoretic terms rather than a purely biological limitation. The framework predicts that constraints on information processing are physical and should produce measurable physical signatures, which is the basis for Prediction 4 on Landauer heat signatures.</p>
+                <p>The COSMIC Framework treats consciousness as the last node in a long compression chain. The cognitive extension program tests whether that chain can be deliberately reorganized at the interface between biological and non-biological processing nodes.</p>
+            </div>
+        </div>
+
+        <div class="foundation-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="foundation-card-header" style="background: linear-gradient(135deg, #1a5c2a 0%, #2e7d32 100%);">
+                <div class="label">Cognitive Science</div>
+                <h3>Working Memory and Cognitive Load Theory</h3>
+            </div>
+            <div class="foundation-card-body">
+                <p>Cowan (2001) established the approximately four-item working memory limit across extensive experimental literature. Sweller's cognitive load theory provides the framework for understanding how different types of tasks compete for working memory resources. The distinction between intrinsic load (complexity inherent to the task), extraneous load (complexity added by poor design), and germane load (complexity that builds long-term schemas) maps directly onto the composite workflow design.</p>
+                <p>The program uses established cognitive load measurement protocols and extends them to composite human-AI workflows.</p>
+            </div>
+        </div>
+
+        <div class="foundation-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="foundation-card-header" style="background: linear-gradient(135deg, #6a1b9a 0%, #7b1fa2 100%);">
+                <div class="label">Neuroscience</div>
+                <h3>Neuroplasticity and Tool Integration</h3>
+            </div>
+            <div class="foundation-card-body">
+                <p>Yue and Cole (1992) demonstrated 13.5% strength gain through mental imagery alone, establishing that the information processing target produces physical adaptation without physical exercise. This established the principle that neural reorganization follows informational patterns rather than purely physical training. The cognitive extension program applies this principle at the level of workflow integration: the prediction is that structured composite work produces neuroplastic changes in the brain regions responsible for cognitive control and working memory management.</p>
+            </div>
+        </div>
+
+        <div class="foundation-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="foundation-card-header" style="background: linear-gradient(135deg, #8B0000 0%, #c62828 100%);">
+                <div class="label">Information Physics</div>
+                <h3>Landauer's Principle</h3>
+            </div>
+            <div class="foundation-card-body">
+                <p>Landauer (1961) established that erasing one bit of information requires a minimum energy dissipation of kT ln 2 joules. This connects information processing irreversibly to thermodynamics, making information erasure a physical event with measurable physical consequences. Subsequent experimental confirmation (Bérut et al., 2012) established that the limit is measurable in real systems.</p>
+                <p>The cognitive extension program's fourth prediction, that information erasure during cognitive processing produces measurable heat signatures at the Landauer minimum, is designed to test whether biological cognition operates near the physical limit and whether AI-assisted processing shifts the heat signature in a predictable direction.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Implementation -->
+<section class="content-section shaded">
+    <div class="section-inner">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Program Structure</h2>
+        </div>
+
+        <div class="two-column">
+            <div class="column" data-aos="fade-right" data-aos-delay="100">
+                <h3>Phase One: Proof of Concept</h3>
+                <p>Phase One establishes the measurement methodology, recruits and trains a participant cohort, and generates the first data against all five prediction sets. Duration: 18 months. The phase ends with a pre-registered analysis against the go/no-go criteria. Phase Two advancement requires demonstrated improvement in at least two of three primary cognitive metrics at statistically significant levels.</p>
+                <p>Phase One also develops and validates the composite workflow protocols that participants use. These protocols are themselves open-source outputs of the program, available to other researchers before Phase One concludes.</p>
+                <p>Budget range: $2–5M. The minimum budget enables proof-of-concept against the three behavioral prediction sets. The full budget adds the Landauer heat signature measurement and the autonomic control arm.</p>
+            </div>
+
+            <div class="column" data-aos="fade-left" data-aos-delay="200">
+                <h3>Phase Two: Validation and Scale</h3>
+                <p>Phase Two applies validated protocols to a larger cohort, tests generalization across domains and participant profiles, and pursues the Landauer prediction with appropriate instrumentation if not completed in Phase One. Duration: 18 months from go/no-go decision.</p>
+                <p>Phase Two also develops the training materials and dissemination pathway for the composite workflow protocols. The objective is not a proprietary product but open methodology that any practitioner can apply.</p>
+                <p>Collaborators are sought for both phases: cognitive scientists for protocol design and analysis, neuroscientists for the neuroplasticity and autonomic components, and physicists with calorimetry experience for the Landauer measurement arm.</p>
+            </div>
+        </div>
+
+        <div class="info-box" data-aos="fade-up">
+            <h3>Open Science Commitments</h3>
+            <p>All experimental protocols are pre-registered before data collection. All raw data is made publicly available upon publication. Analysis code is published under MIT license before results are released. Null results are published with full methodology. Equipment failures and setbacks are documented publicly with timestamps. The cognitive extension program operates under the same transparency principles as all Ic² Research Institute work, so the scientific record includes what did not work, not only what did.</p>
+            <ul>
+                <li>Pre-registration on Zenodo and Open Science Framework before first data collection</li>
+                <li>Raw data available under CC BY 4.0 upon publication</li>
+                <li>Analysis code under MIT license</li>
+                <li>Null results published with full completeness</li>
+                <li>Public progress log updated quarterly</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="content-section">
+    <div class="cta-section" data-aos="fade-up">
+        <h2 style="margin-bottom: 1rem;">Interested in This Research?</h2>
+        <p style="opacity: 0.9; margin-bottom: 2rem; max-width: 640px; margin-left: auto; margin-right: auto;">The program is seeking collaborators with backgrounds in cognitive science, neuroscience, calorimetry, and experimental design. Public participation is also part of the design, because anyone who works with AI tools in a knowledge-intensive context is a potential contributor to the behavioral measurement arm.</p>
+        <a href="contribute.html" class="btn btn-white">Get Involved</a>
+        <a href="https://zenodo.org/records/18452510" target="_blank" class="btn-pill" style="margin-left: 0.75rem;">Read the Paper</a>
+        <a href="programs-gateway.html" class="btn-pill" style="margin-left: 0.75rem;">All Programs</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Ic² Research Institute</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="research-publications.html">Publications</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="book.html">The Big TOE</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq-page.html">FAQ</a></li>
+                <li><a href="members.html">Our Members</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="become-member.html">Become a Member</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255,255,255,0.6);">Terms &amp; Conditions</a></p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1000, once: true, offset: 100 });
+
+(function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            const expanded = hamburger.classList.contains('active');
+            hamburger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            mobileMenu.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+            });
+        });
+    }
+})();
+</script>
+</body>
+</html>
