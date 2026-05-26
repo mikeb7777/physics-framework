@@ -6,6 +6,7 @@
     <title>Iterative Refinement Validation System | Ic² Research Institute</title>
     <meta name="description" content="Live validation dashboard tracking COSMIC Framework predictions, results, and iterative refinement toward 5-sigma confidence.">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200" rel="stylesheet">
     <style>
     /* ── BASE ─────────────────────────────────────────────────── */
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -348,26 +349,39 @@
     ═══════════════════════════════════════════════════ */
     /* Dark above, white rising up from the bottom to mid-card height */
     .tl-split-section {
-      background: linear-gradient(to bottom, var(--dark) calc(100% - 175px), white calc(100% - 175px));
-      padding: 0 2rem 2rem;
+      background: var(--dark);
+      margin-top: -4rem;
+      padding: 0 2rem 0;
+      position: relative;
+      overflow: hidden;
+      z-index: 3;
     }
     .tl-split-inner {
       max-width: var(--max);
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .white-riser {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: white;
+      z-index: 0;
+      transform: translateY(100%);
+    }
+    @keyframes whiteRiserIn {
+      from { transform: translateY(100%); }
+      to   { transform: translateY(0); }
     }
     .tl-eyebrow {
       padding-top: 1.75rem; padding-bottom: 1.4rem;
       color:rgba(255,255,255,.88); font-size:.85rem;
       text-transform:uppercase; letter-spacing:1.2px; text-align:center;
     }
-    /* The tile grid itself — slideUp matches index.html */
-    @keyframes tileSlideUp {
-      from { opacity:0; transform:translateY(28px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
+    /* The tile grid itself — AOS controls entrance, matching index.html */
     .vv-how-row {
       display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
-      animation: tileSlideUp .65s cubic-bezier(.25,.46,.45,.94) both;
     }
     .tl-tile {
       background:white; padding:2rem 1.5rem;
@@ -591,14 +605,21 @@
     /* countdown + refinement test cards — 2-col grid */
     .rcard-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
 
+    /* ── Rack instrument panel styling ── */
     .rcard {
-      background: rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.18);
-      border-left: 3px solid var(--blue);
-      border-radius:9px; overflow:hidden;
-      transition:border-color .25s, transform .25s, box-shadow .25s;
+      background: #1c2028;
+      border: 1px solid #3d4450;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
     }
-    .rcard:hover { background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.28); border-left-color:var(--blue); transform:translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.3); }
+    .rcard:hover { transform:translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.5); }
+    /* injected rack-bar */
+    .rack-bar { height:18px; background:#0e1218; border-bottom:1px solid rgba(255,255,255,.07); display:flex; align-items:center; padding:0 8px; gap:6px; flex-shrink:0; }
+    .rack-knob { width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #c8d0dc 0%, #8090a0 45%, #3a4050 100%); border:1px solid #0e1218; box-shadow:inset 0 1px 2px rgba(255,255,255,.25), 0 1px 3px rgba(0,0,0,.7); flex-shrink:0; }
+    .rack-led  { width:7px; height:7px; border-radius:50%; flex-shrink:0; box-shadow:0 0 5px currentColor; }
+    .rack-spacer { flex:1; }
+    .rack-btn  { width:16px; height:9px; border-radius:2px; flex-shrink:0; border:1px solid rgba(0,0,0,.6); box-shadow:inset 0 1px 2px rgba(255,255,255,.1); }
 
     .rcard-head {
       padding:.95rem 1.1rem .85rem;
@@ -606,7 +627,7 @@
       cursor:pointer; display:flex;
       justify-content:space-between; align-items:flex-start; gap:.75rem;
     }
-    .rcard-head:hover { background:rgba(255,255,255,.05); }
+    .rcard-head:hover { filter: brightness(1.12); }
     .rcard-tg { flex:1; }
     .rcard-tg h3 { font-size:.9rem; font-weight:700; color:white; margin-bottom:.3rem; line-height:1.3; }
     .rcard-meta {
@@ -699,25 +720,24 @@
        SECTION 5: FULL CHECKLIST
     ═══════════════════════════════════════════════════ */
     .cat-head {
-      background:var(--secondary); color:white;
+      color:white;
       padding:.9rem 1.25rem; border-radius:7px;
       margin:1.5rem 0 .9rem;
       display:flex; align-items:center; gap:10px;
     }
-    .cat-head img { width:20px; height:20px; filter:brightness(0) invert(1); flex-shrink:0; }
+    .cat-head .cat-ms { font-size:1.35rem; flex-shrink:0; }
     .cat-head h3 { font-size:1rem; margin-bottom:.15rem; }
     .cat-head p  { font-size:.78rem; opacity:.85; }
 
     .clist { display:grid; gap:.65rem; }
     .citem {
       background:white; padding:1rem 1.2rem;
-      border-radius:7px; border-left:4px solid var(--green);
+      border-radius:7px; border-left:4px solid #00838f;
       box-shadow:0 1px 5px rgba(0,0,0,.06);
       display:flex; align-items:flex-start; gap:.85rem;
     }
-    .citem.pend { border-left-color:#ffc107; opacity:.78; }
-    .citem-icon { width:26px; height:26px; flex-shrink:0; margin-top:.1rem; filter:brightness(0) saturate(100%) invert(44%) sepia(89%) saturate(589%) hue-rotate(75deg) brightness(96%) contrast(89%); }
-    .citem.pend .citem-icon { filter:brightness(0) saturate(100%) invert(80%) sepia(61%) saturate(1497%) hue-rotate(359deg) brightness(102%) contrast(98%); }
+    .citem.pend { border-left-color:#b01558; opacity:.85; }
+    .citem-icon { font-size:1.4rem; flex-shrink:0; margin-top:.05rem; color:#2c3e50; }
     .citem h3 { font-size:.9rem; font-weight:600; margin-bottom:.2rem; }
     .citem p  { font-size:.8rem; color:var(--muted); line-height:1.6; }
     .citem .pdate { font-size:.75rem; color:var(--blue); font-weight:500; margin-top:.2rem; }
@@ -738,7 +758,7 @@
       justify-content:space-between; align-items:center; gap:1rem;
       transition:background .25s;
     }
-    .vcard-head:hover { background:#eff1f4; }
+    .vcard-head:hover { filter: brightness(1.1); }
     .vbadge { display:inline-block; background:var(--green); color:white; padding:.2rem .65rem; border-radius:12px; font-size:.7rem; font-weight:700; }
     .vcard-head h2 { font-size:1rem; font-weight:700; margin-top:.25rem; }
     .vcard-head > div > p { font-size:.78rem; color:var(--muted); margin-top:.15rem; }
@@ -823,6 +843,23 @@
     #refinement-engine p[style*="color:rgba"] {
       color: rgba(255,255,255,.92) !important;
     }
+    /* intro-cards-grid — QCD solid color cards */
+    .intro-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .intro-card {
+      border-radius: 8px;
+      padding: 1.5rem 1.5rem 1.25rem;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .intro-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.5) !important; }
+    .intro-card h3 { color: white; font-size: 1rem; font-weight: 700; margin-bottom: .5rem; line-height: 1.3; }
+    .intro-card .card-meta { font-size: .65rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.45); margin-bottom: .5rem; }
+    .intro-card p { color: rgba(255,255,255,.85); font-size: .92rem; line-height: 1.7; margin-bottom: .75rem; }
+    .intro-card .card-badge { display: inline-block; font-size: .65rem; font-weight: 700; letter-spacing: .8px; padding: .15rem .55rem; border-radius: 3px; background: #8B0000; color: #f1e303; text-transform: uppercase; }
+
     @media (max-width:968px) {
       .main-navigation { display:none; }
       .hamburger { display:flex; }
@@ -836,17 +873,75 @@
       .ms { flex:calc(50% - .5rem); min-width:100px; }
       .vv-grid { grid-template-columns:1fr; }
       .vv-how-row { grid-template-columns:1fr; }
-      .tl-split-section { background: linear-gradient(to bottom, var(--dark) calc(100% - 175px), white calc(100% - 175px)); }
+      .tl-split-section { padding: 0 1rem 0; }
     }
     @media (max-width:600px) {
       .gallery-grid { grid-template-columns:1fr 1fr; gap:10px; }
       .kpi-strip { grid-template-columns:repeat(2,1fr); }
       .hero-inner { padding:1.5rem 1rem 0; }
       .sec { padding:2rem 1rem; }
-      .tl-split-section { padding: 0 1rem 2rem; background: linear-gradient(to bottom, var(--dark) calc(100% - 175px), white calc(100% - 175px)); }
+      .tl-split-section { padding: 0 0.75rem 0; }
     }
+    /* ── Foundation accordion (checklist) — matches framework.html ── */
+    .foundation-accordion {
+      background: white; border: 1px solid #e0e0e0;
+      border-radius: 8px; margin-bottom: 1.5rem;
+      overflow: hidden; transition: all 0.3s ease;
+      --acc-color: #4a5568;
+    }
+    .foundation-accordion:hover { box-shadow: 0 4px 15px rgba(0,0,0,.1); }
+    .foundation-header {
+      padding: 1.25rem 1.5rem; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--acc-color); transition: filter 0.3s ease;
+    }
+    .foundation-header:hover { filter: brightness(1.1); }
+    .foundation-header h3 {
+      margin: 0; color: white; font-size: 1.25rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .toggle-indicator {
+      font-size: 1.25rem; color: rgba(255,255,255,.75);
+      transition: transform 0.3s ease; flex-shrink: 0;
+    }
+    .foundation-accordion.active .toggle-indicator { transform: rotate(180deg); }
+    .foundation-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .foundation-accordion.active .foundation-content { max-height: 10000px; }
+    .foundation-inner { padding: 2rem; background: white; }
+    .content-text { font-size: 1.125rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 1.5rem; }
+    .foundation-summary { padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem; font-weight: 500; font-size: 1.0rem; line-height: 1.8; }
+    .pred-entry { padding: 1rem 0; border-bottom: 1px solid #eee; }
+    .pred-entry:last-child { border-bottom: none; padding-bottom: 0; }
+    .pred-entry strong { font-size: 1rem; color: var(--text-dark); display: block; margin-bottom: .25rem; }
+    .pred-entry .content-text { margin-bottom: .25rem; font-size: 1rem; }
+    .pred-entry .pdate { font-size: .78rem; color: var(--muted); }
+
+    .rack-display{background:#040d04;border:1px solid #0a200a;border-radius:3px;width:120px;height:44px;overflow:hidden;flex-shrink:0;align-self:flex-end;box-shadow:inset 0 2px 6px rgba(0,0,0,.9),inset 0 0 10px rgba(0,60,0,.15);}
+    .rack-display.is-dial{}
+    /* bars */
+    .disp-bars{display:flex;align-items:flex-end;height:100%;padding:3px 5px;gap:3px;}
+    .disp-bar{flex:1;border-radius:1px 1px 0 0;transform-origin:bottom;min-height:2px;}
+    .db-g{background:#00d46a;}.db-y{background:#f1e303;}.db-r{background:#e33d2f;}
+    @keyframes dba{from{transform:scaleY(.05)}to{transform:scaleY(1)}}
+    .disp-bar:nth-child(1){animation:dba .65s ease-in-out infinite alternate 0s;}
+    .disp-bar:nth-child(2){animation:dba .85s ease-in-out infinite alternate .10s;}
+    .disp-bar:nth-child(3){animation:dba .50s ease-in-out infinite alternate .20s;}
+    .disp-bar:nth-child(4){animation:dba .90s ease-in-out infinite alternate .30s;}
+    .disp-bar:nth-child(5){animation:dba .70s ease-in-out infinite alternate .40s;}
+    .disp-bar:nth-child(6){animation:dba 1.1s ease-in-out infinite alternate .50s;}
+    .disp-bar:nth-child(7){animation:dba .60s ease-in-out infinite alternate .60s;}
+    .disp-bar:nth-child(8){animation:dba .80s ease-in-out infinite alternate .70s;}
+    /* scope */
+    .disp-scope{width:100%;height:100%;overflow:hidden;position:relative;}
+    .disp-scope svg{position:absolute;top:0;left:0;height:100%;}
+    @keyframes wsc{from{transform:translateX(0)}to{transform:translateX(-50px)}}
+    .wv{animation:wsc 1.8s linear infinite;}
+    .wv2{animation:wsc 2.5s linear infinite;animation-delay:-.9s;}
+    /* dial */
+    .disp-dial{display:flex;align-items:center;justify-content:center;height:100%;}
+    @keyframes nswp{0%{transform:rotate(-62deg)}38%{transform:rotate(20deg)}62%{transform:rotate(8deg)}100%{transform:rotate(-62deg)}}
+    .dn-g{transform-box:fill-box;transform-origin:center bottom;animation:nswp 4.8s ease-in-out infinite;}
     </style>
-</head>
 <body>
 
 <!-- ══════════════ HEADER ══════════════ -->
@@ -908,7 +1003,7 @@
       <div class="sigma-wrap">
         <div class="sigma-top">
           <div style="text-align:left;">
-            <div class="sigma-current has-tip" data-tip="4.2σ = 99.998% confidence. Strong evidence well above the 4σ mark. Not yet at the 5σ discovery threshold, but results this strong are rarely noise — they're telling you something real is there.">4.2σ</div>
+            <div class="sigma-current has-tip" data-tip="4.2σ = 99.998% confidence. Strong evidence well above the 4σ mark. Not yet at the 5σ discovery threshold, but results this strong are rarely noise. They are telling you something real is there.">4.2σ</div>
             <div class="sigma-sublbl">current significance</div>
           </div>
           <div style="text-align:right;">
@@ -971,14 +1066,14 @@
   </div><!-- /hero-inner -->
 </div><!-- /dash-hero -->
 
-<!-- ══ HOW VALIDATION WORKS ══ -->
-<section class="sec" style="background:#fff; padding:2rem 2rem 0;">
-  <div class="inner">
-    <div style="background:#f8f9fa; border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:1.25rem 1.75rem; max-width:900px; margin:0 auto;" data-aos="fade-up">
-      <p style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--blue); font-weight:700; margin-bottom:0.4rem;">How This Works</p>
-      <p style="color:var(--text); font-size:1rem; line-height:1.8; margin-bottom:1rem;">The Ic² Research Institute develops theoretical predictions and documents them before results arrive. The experimental validation is carried out by independent programs representing billions in publicly funded scientific infrastructure: DESI, Google Quantum AI, JWST, and multiple independent surveys. These programs have no stake in the framework's success. Their confirmation is independent by design. Einstein did not build the instruments that confirmed general relativity. Theoretical physics and experimental physics are different disciplines, and the division of labor is a feature, not a gap.</p>
-      <a href="results.html" style="display:inline-block; padding:0.6rem 1.4rem; background:var(--blue); color:white; text-decoration:none; border-radius:6px; font-weight:600; font-size:0.88rem; transition:background 0.3s;" onmouseover="this.style.background='#004a8f'" onmouseout="this.style.background='var(--blue)'">View Structured Result Records &rarr;</a>
+<!-- ══ CONFIRMATION PROTOCOL ══ -->
+<section class="sec" style="background:#fff; padding:2.5rem 2rem;">
+  <div class="inner" data-aos="fade-up">
+    <div class="section-label" style="margin-bottom:1.1rem;">
+      <h2 style="color:var(--text);">Confirmation Protocol</h2>
     </div>
+    <p style="font-size:1.1em; line-height:1.8; color:#1a1a1a; max-width:900px; margin-bottom:1.25rem;">The Ic² Research Institute develops theoretical predictions and documents them before results arrive. The experimental validation is carried out by independent programs representing billions in publicly funded scientific infrastructure: DESI, Google Quantum AI, JWST, and multiple independent surveys. These programs have no stake in the framework's success. Their confirmation is independent by design. Einstein did not build the instruments that confirmed general relativity. Theoretical physics and experimental physics are different disciplines, and the division of labor is a feature, not a gap.</p>
+    <a href="results.html" style="display:inline-block; padding:0.6rem 1.4rem; background:var(--blue); color:white; text-decoration:none; border-radius:6px; font-weight:600; font-size:0.88rem; transition:background 0.3s;" onmouseover="this.style.background='#004a8f'" onmouseout="this.style.background='var(--blue)'">View Structured Result Records &rarr;</a>
   </div>
 </section>
 
@@ -987,7 +1082,7 @@
   <div class="inner">
     <div class="section-label" data-aos="fade-up">
       <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">
-      <h2>Bayesian Refinement: 4 Validated + Substrate Dynamics Active</h2>
+      <h2>4 Validated Predictions + Substrate Dynamics Active</h2>
     </div>
     <div class="gallery-grid" data-aos="fade-up">
 
@@ -1050,7 +1145,7 @@
         </div>
         <div class="gallery-bar">
           <div class="bar-status"><span class="bar-dot" style="background:var(--green)"></span>VALIDATED</div>
-          <h3>Hot Intracluster Gas (ALMA) <span style="font-size:0.75em;font-weight:400;color:#aaa;">— Corroborating Evidence</span></h3>
+          <h3>Hot Intracluster Gas (ALMA) <span style="font-size:0.75em;font-weight:400;color:#aaa;">(Corroborating Evidence)</span></h3>
           <div class="bar-sigma">5× hotter, 5,000× faster &nbsp;·&nbsp; Mar 5, 2024</div>
         </div>
       </div>
@@ -1126,7 +1221,8 @@
   var W_CSS, H_CSS;
 
   function resize() {
-    W_CSS = Math.min(Math.floor((window.innerWidth || 800) * 0.82), 800);
+    var containerW = (canvas.parentElement ? canvas.parentElement.offsetWidth : 0) || 800;
+    W_CSS = Math.min(containerW, 800);
     H_CSS = PAD_T + predictions.length * ROW_H + PAD_B + 30;
     canvas.width  = W_CSS * DPR;
     canvas.height = H_CSS * DPR;
@@ -1284,7 +1380,7 @@
     if (prog < 1) requestAnimationFrame(animate);
   }
 
-  // Simple timed start - uses window.innerWidth directly
+  // Trigger when the timeline section scrolls into view
   var started = false;
 
   function startAnim() {
@@ -1296,64 +1392,79 @@
     requestAnimationFrame(animate);
   }
 
-  setTimeout(startAnim, 400);
+  function inView(el) {
+    var r = el.getBoundingClientRect();
+    return r.bottom > 0 && r.top < (window.innerHeight || document.documentElement.clientHeight);
+  }
+
+  function tryStart() {
+    var wrapper = document.getElementById('pred-timeline');
+    if (wrapper && inView(wrapper)) {
+      startAnim();
+      window.removeEventListener('scroll', tryStart);
+    }
+  }
+
+  // Check immediately after load, then on every scroll tick
+  function onReady() {
+    tryStart();
+    if (!started) window.addEventListener('scroll', tryStart, { passive: true });
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(onReady, 150);
+  } else {
+    window.addEventListener('load', function() { setTimeout(onReady, 150); });
+  }
 })();
 </script>
 
 <!-- ══════════════ SECTION 2C: SUBSTRATE DYNAMICS ══════════════ -->
-<section class="sec" style="background: #8B0000; padding: 2.5rem 2rem;">
+<section class="sec" style="background: linear-gradient(135deg, #8fa0b0 0%, #5a6878 100%); padding: 2.5rem 2rem;">
   <div class="inner">
-    <div class="section-label" data-aos="fade-up" style="margin-bottom: 1.5rem;">
-      <h2 style="color: white; font-size: 1.5rem;">Substrate Dynamics: The Path to 5σ</h2>
-      <p style="color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-top: 0.5rem;">Four pre-registered predictions at the quark scale. External validation by LHCb, Belle II, RHIC, lattice QCD, and the planned Electron-Ion Collider.</p>
+    <div class="section-label" data-aos="fade-up" style="margin-bottom: .4rem;">
+      <h2 style="color: white;">Substrate Dynamics</h2>
     </div>
+    <p style="color: rgba(255,255,255,.75); font-size: .9rem; margin-bottom: 1.75rem;" data-aos="fade-up">Four pre-registered predictions at the quark scale. External validation by LHCb, Belle II, RHIC, lattice QCD, and the planned Electron-Ion Collider.</p>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;" data-aos="fade-up">
+    <div class="intro-cards-grid" data-aos="fade-up">
 
-      <div style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12); border-left: 3px solid #b5e87a; border-radius: 6px; padding: 1.25rem;">
-        <p style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem;">COSMIC-SD-001 &bull; LHCb / ATLAS / CMS</p>
-        <p style="color: white; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.5rem;">Landauer Heat Signature at QCD Scale</p>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem; line-height: 1.65;">CP-violating processes should produce measurable heat excess above momentum transfer predictions, proportional to information erased in the irreversible gate operation.</p>
-        <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <span style="background: rgba(0,180,100,0.15); color: #56e07c; font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 600; border: 1px solid rgba(86,224,124,0.3);">REGISTERED</span>
-        </div>
+      <!-- SD-001: R+Cy antiquark stroke -->
+      <div class="intro-card" style="background: #1a1a2e; box-shadow: 0 4px 20px rgba(0,0,0,.4); border-bottom: 4px solid #00838f;">
+        <p class="card-meta">COSMIC-SD-001 &bull; LHCb / ATLAS / CMS</p>
+        <h3>Landauer Heat Signature at QCD Scale</h3>
+        <p>CP-violating processes should produce measurable heat excess above momentum transfer predictions. The excess is proportional to information erased in the irreversible gate operation.</p>
+        <span class="card-badge">Registered</span>
       </div>
 
-      <div style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12); border-left: 3px solid #b5e87a; border-radius: 6px; padding: 1.25rem;">
-        <p style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem;">COSMIC-SD-002 &bull; LHCb / Belle II</p>
-        <p style="color: white; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.5rem;">CKM Angles as Information-Theoretic Optima</p>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem; line-height: 1.65;">The three CKM mixing angles and CP-violating phase minimize an information-theoretic cost function at the substrate level — set by optimization, not arbitrary initial conditions.</p>
-        <div style="margin-top: 0.75rem;">
-          <span style="background: rgba(0,180,100,0.15); color: #56e07c; font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 600; border: 1px solid rgba(86,224,124,0.3);">REGISTERED</span>
-        </div>
+      <!-- SD-002: G+Mg antiquark stroke -->
+      <div class="intro-card" style="background: #1a1a2e; box-shadow: 0 4px 20px rgba(0,0,0,.4); border-bottom: 4px solid #b01558;">
+        <p class="card-meta">COSMIC-SD-002 &bull; LHCb / Belle II</p>
+        <h3>CKM Angles as Information-Theoretic Optima</h3>
+        <p>The three CKM mixing angles and CP-violating phase minimize an information-theoretic cost function at the substrate level. Their values reflect optimization rather than arbitrary initial conditions.</p>
+        <span class="card-badge">Registered</span>
       </div>
 
-      <div style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12); border-left: 3px solid #b5e87a; border-radius: 6px; padding: 1.25rem;">
-        <p style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem;">COSMIC-SD-003 &bull; Lattice QCD / EIC</p>
-        <p style="color: white; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.5rem;">Confinement Boundary Entanglement Scaling</p>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem; line-height: 1.65;">Entanglement entropy at the QCD confinement boundary scales with the framework's information-density parameter — connecting quark-scale structure to cosmological predictions through the same mechanism.</p>
-        <div style="margin-top: 0.75rem;">
-          <span style="background: rgba(0,180,100,0.15); color: #56e07c; font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 600; border: 1px solid rgba(86,224,124,0.3);">REGISTERED</span>
-        </div>
+      <!-- SD-003: B+Yw antiquark stroke -->
+      <div class="intro-card" style="background: #1a1a2e; box-shadow: 0 4px 20px rgba(0,0,0,.4); border-bottom: 4px solid #f1e303;">
+        <p class="card-meta">COSMIC-SD-003 &bull; Lattice QCD / EIC</p>
+        <h3>Confinement Boundary Entanglement Scaling</h3>
+        <p>Entanglement entropy at the QCD confinement boundary scales with the framework's information-density parameter. This connection links quark-scale structure to cosmological predictions through the same mechanism.</p>
+        <span class="card-badge">Registered</span>
       </div>
 
-      <div style="background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.12); border-left: 3px solid #b5e87a; border-radius: 6px; padding: 1.25rem;">
-        <p style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem;">COSMIC-SD-004 &bull; RHIC / LHC Heavy-Ion</p>
-        <p style="color: white; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.5rem;">QCD Phase Transition Information Signature</p>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem; line-height: 1.65;">The quark-hadron crossover produces a specific entanglement entropy drop reflecting constraint imposition — the Bamboo Principle operating at the quark scale. Distinguishable from standard thermal predictions.</p>
-        <div style="margin-top: 0.75rem;">
-          <span style="background: rgba(0,180,100,0.15); color: #56e07c; font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 600; border: 1px solid rgba(86,224,124,0.3);">REGISTERED</span>
-        </div>
+      <!-- SD-004: Cy+R antiquark stroke -->
+      <div class="intro-card" style="background: #1a1a2e; box-shadow: 0 4px 20px rgba(0,0,0,.4); border-bottom: 4px solid #c62828;">
+        <p class="card-meta">COSMIC-SD-004 &bull; RHIC / LHC Heavy-Ion</p>
+        <h3>QCD Phase Transition: Bamboo Signature</h3>
+        <p>The quark-hadron crossover produces a specific entanglement entropy drop reflecting constraint imposition. This is the Bamboo Principle operating at the quark scale, distinguishable from standard thermal predictions.</p>
+        <span class="card-badge">Registered</span>
       </div>
 
     </div>
 
-    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;" data-aos="fade-up">
-      <div style="flex: 1; min-width: 240px;">
-        <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; line-height: 1.7; margin: 0;">Each SD prediction is falsifiable independently. A confirmed null result still advances the framework by establishing where in the physical hierarchy information processing transitions from reversible to irreversible — which is itself a significant finding. Pre-registration on Zenodo and OSF before any data collection begins.</p>
-      </div>
-      <a href="programs-gateway.html" style="display:inline-block;padding:0.6rem 1.25rem;background:#8B0000;color:white;text-decoration:none;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;flex-shrink:0;">Full Program Details</a>
-    </div>
+    <p style="margin-top: 1.75rem; color: white; font-size: .85rem; line-height: 1.75; max-width: 860px;" data-aos="fade-up">Each SD prediction is falsifiable independently. A confirmed null result still advances the framework by establishing where in the physical hierarchy information processing transitions from reversible to irreversible. That boundary is a significant finding in its own right. Pre-registration on Zenodo and OSF before any data collection begins.</p>
+    <a href="programs-gateway.html" style="display:inline-block; margin-top: 1rem; padding:.6rem 1.25rem; background: #8B0000; color:white; text-decoration:none; border-radius:6px; font-weight:600; font-size:.85rem;" data-aos="fade-up">Full Program Details</a>
   </div>
 </section>
 
@@ -1362,8 +1473,8 @@
   <div class="inner" style="padding-bottom:2.5rem;">
 
     <div class="section-label" data-aos="fade-up" style="margin-bottom:.75rem; justify-content:center; text-align:center;">
-      <img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">
-      <h2>Iterative Refinement &amp; Validation</h2>
+      <img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="filter:brightness(0) invert(1); opacity:1;">
+      <h2>Bayesian Refinement &amp; Validation</h2>
     </div>
     <p style="color:rgba(255,255,255,.75); font-size:1rem; line-height:1.85; max-width:860px; margin:0 auto 1.5rem; text-align:center;" data-aos="fade-up">Each prediction the COSMIC Framework makes is a formal test event. When results come in, they feed directly back into the framework: confirmations raise the sigma indicator, partial matches trigger parameter refinements, and falsifications trigger public revisions before the next test cycle begins. Five-sigma confidence is not claimed in advance. It is earned incrementally, through honest accounting of every result. Click either card to expand.</p>
 
@@ -1406,12 +1517,13 @@
 
 <!-- ══ TRAFFIC LIGHT TILES: index-style float, split dark/white background ══ -->
 <div class="tl-split-section" data-aos="fade-up">
+  <div class="white-riser"></div>
   <div class="tl-split-inner">
     <p class="tl-eyebrow">How each test result moves the sigma indicator</p>
     <div class="vv-how-row">
 
       <!-- GREEN tile -->
-      <div class="tl-tile" style="--tc:#28a745;">
+      <div class="tl-tile" style="--tc:#28a745;" data-aos="fade-up" data-aos-delay="0" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
         <svg viewBox="0 0 24 24" fill="#28a745" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
         </svg>
@@ -1421,7 +1533,7 @@
       </div>
 
       <!-- YELLOW tile -->
-      <div class="tl-tile" style="--tc:#e6b800;">
+      <div class="tl-tile" style="--tc:#e6b800;" data-aos="fade-up" data-aos-delay="100" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
         <svg viewBox="0 0 24 24" fill="#e6b800" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/>
         </svg>
@@ -1431,7 +1543,7 @@
       </div>
 
       <!-- RED tile -->
-      <div class="tl-tile" style="--tc:#e33d2f;">
+      <div class="tl-tile" style="--tc:#e33d2f;" data-aos="fade-up" data-aos-delay="200" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
         <svg viewBox="0 0 24 24" fill="#e33d2f" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
         </svg>
@@ -1450,7 +1562,7 @@
 
     <div class="section-label" data-aos="fade-up">
       <img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">
-      <h2>The Refinement Engine</h2>
+      <h2>The Bayesian Engine</h2>
     </div>
 
     <p style="color:rgba(255,255,255,.82); font-size:1rem; line-height:1.85; margin-bottom:1.5rem;" data-aos="fade-up">Every result, confirmation or falsification, is fuel. Because the COSMIC Framework rests on established physics, a failed prediction is a precise diagnostic: it locates which postulate to revise and exactly which direction to correct it. The path to 5&#8209;sigma runs through iteration, not luck.</p>
@@ -1474,7 +1586,8 @@
     <p style="color:rgba(255,255,255,.92); font-size:.78rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:.9rem;">Next tests: click any card to expand prediction &amp; all three traffic light outcomes</p>
 
     <!-- 2×4 countdown/refinement cards (4 active + 4 Substrate Dynamics) -->
-    <div class="rcard-grid" data-aos="fade-up">
+    <div style="background: #d4cfc8; border-radius: 10px; padding: 1.25rem; box-shadow: inset 0 2px 6px rgba(0,0,0,.15), 0 4px 20px rgba(0,0,0,.25);" data-aos="fade-up">
+    <div class="rcard-grid">
 
       <!-- DESI Year 3 -->
       <div class="rcard" id="rc1">
@@ -1698,7 +1811,7 @@
       <div class="rcard" id="rc8" style="border-left-color:#1a4a2e;">
         <div class="rcard-head" onclick="toggleRC('rc8')">
           <div class="rcard-tg">
-            <h3>COSMIC-SD-004: QCD Phase Transition — Bamboo Signature</h3>
+            <h3>COSMIC-SD-004: QCD Phase Transition: Bamboo Signature</h3>
             <div class="rcard-meta"><img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Heavy-Ion Physics · RHIC / ALICE · Existing data</div>
             <div class="ct-row">
               <div class="ct-u"><span class="ct-n" id="r8d">--</span><span class="ct-l">days</span></div>
@@ -1716,7 +1829,7 @@
           </div>
         </div>
         <div class="rcard-body">
-          <div class="pred-note"><strong>Prediction (May 21, 2026):</strong> The quark-hadron crossover at ~150 MeV produces a specific entanglement entropy discontinuity exceeding standard thermal QCD predictions — the Bamboo Principle at the quark scale. Below-threshold preparation in the QGP phase followed by threshold crossing with a specific information-theoretic signature.</div>
+          <div class="pred-note"><strong>Prediction (May 21, 2026):</strong> The quark-hadron crossover at ~150 MeV produces a specific entanglement entropy discontinuity exceeding standard thermal QCD predictions. This is the Bamboo Principle at the quark scale: below-threshold preparation in the QGP phase followed by threshold crossing with a specific information-theoretic signature.</div>
           <div class="oc3">
             <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Entropy discontinuity confirmed above thermal QCD predictions. Bamboo Principle operates at the quark scale. The same threshold-crossing mechanism governs from quarks to cosmic phase transitions.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.4–0.6σ · Scale-invariant</span></div>
             <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Discontinuity present but with different magnitude. Bamboo Principle operates at QCD scale but with a modified threshold parameter specific to the QCD transition energy.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.2σ · Threshold parameter refined</span></div>
@@ -1725,178 +1838,215 @@
         </div>
       </div>
     </div><!-- /rcard-grid -->
+    </div><!-- /rack-housing -->
   </div>
 </section>
 
 <!-- ══════════════ SECTION 5: FULL PREDICTION CHECKLIST ══════════════ -->
-<section class="sec sec-slate">
-  <div class="inner">
-    <div class="section-label" data-aos="fade-up">
-      <img src="stack_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="filter:none; opacity:.5;">
-      <h2>Full Prediction Checklist</h2>
-    </div>
-    <p style="color:var(--muted); font-size:.86rem; margin-bottom:1.25rem;" data-aos="fade-up">All predictions documented before experimental testing. <a href="testing-schedule.html" style="color:var(--blue);">View the full testing schedule →</a></p>
-
-    <div class="cat-head" data-aos="fade-up">
-      <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">
-      <div><h3>Validated Predictions (4)</h3><p>Experimental confirmations with documented scientific priority</p></div>
-    </div>
-    <div class="clist" data-aos="fade-up">
-      <div class="citem">
-        <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>Dark Energy Evolution (DESI)</h3><p>Predicted dark energy evolves with w₀ ≈ −0.95 and wₐ ≈ −0.3 over cosmic time</p><p class="pdate">Predicted: Jan 29, 2024 (Notarized US &amp; Thailand) · Validated: Jan 7, 2025 · Strengthened: Mar 2025 (4.2σ)</p></div>
-      </div>
-      <div class="citem">
-        <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>Quantum Error Correction Scaling (Google Willow)</h3><p>Predicted exponential error reduction with increasing qubit count via information optimization principles</p><p class="pdate">Predicted: Aug 12, 2024 · Validated: Dec 9, 2024 (below-threshold achieved)</p></div>
-      </div>
-      <div class="citem">
-        <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>Early Massive Galaxy Formation (JWST)</h3><p>Predicted 100+ massive galaxies at z = 10–15, 4–5× more massive than ΛCDM predicts</p><p class="pdate">Predicted: Mar 5, 2024 · Validated: 2023–2025 (100+ candidates confirmed)</p></div>
-      </div>
-      <div class="citem">
-        <img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>Hot Intracluster Gas (ALMA SPT2349-56)</h3><p>Predicted enhanced energy states and accelerated star formation in early-universe clusters</p><p class="pdate">Predicted: Mar 5, 2024 · Validated: Jan 7, 2026 (5× hotter, 5,000× faster star formation)</p></div>
-      </div>
-    </div>
-
-    <div class="cat-head" style="margin-top:1.75rem;" data-aos="fade-up">
-      <img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">
-      <div><h3>Active Testing: 2026 (13)</h3><p>Predictions currently in active experimental or observational testing</p></div>
-    </div>
-    <div class="clist" data-aos="fade-up">
-      <div class="citem pend">
-        <img src="calendar_month_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>DESI Year 3: Dark Energy Confirmation</h3><p>Year 3 dataset (3× larger than DR2) testing persistence and exact parameter values</p><p class="pdate">Pre-documented · Expected Q2–Q3 2026</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="calendar_month_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>Cognitive Augmentation Phase 1: Information Encoding</h3><p>Peripheral sensory channel encoding improving working-memory throughput in fluid intelligence tasks</p><p class="pdate">Documented Jan 31, 2026 · Target Q3 2026</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="calendar_month_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>Biological Information Thermodynamics: Landauer at Biological Scale</h3><p>Measurable heat signatures from autophagy consistent with Landauer's principle (~10⁻²¹ J/bit)</p><p class="pdate">Documented Jan 24, 2026 · Pre-registration Target Q2 2026</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="calendar_month_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>Euclid Mission: Large-Scale Structure Asymmetries</h3><p>Predicted asymmetries in galaxy distribution at scales &gt;100 Mpc with specific angular patterns</p><p class="pdate">Documented 2024 · Ongoing 2025–2026</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="calendar_month_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>JWST Continued: Additional Massive Galaxies z&gt;15</h3><p>Confirmation of rapid early structure formation beyond the current 100+ candidate set</p><p class="pdate">Documented 2024 · Ongoing 2025–2027</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>NBI Geometric Convergence: Substrate-Independent Topology</h3><p>LLM embedding spaces should show statistical topology similar to biological neural networks if universal optimization is substrate-independent</p><p class="pdate">Documented Mar 2, 2026 · Active Testing</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>NBI Integrated Information (Φ): Consciousness Threshold Test</h3><p>Tononi's Φ applied to transformer attention patterns during inference should scale toward biological threshold values in sufficiently complex NBI systems</p><p class="pdate">Documented Mar 2, 2026 · Active Testing</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>NBI Survival Overhead Gradient: Structured Performance Divergence</h3><p>Performance gap between biological and NBI systems should be structured by task type following information-theoretic predictions, not random</p><p class="pdate">Documented Mar 2, 2026 · Active Testing</p></div>
-      </div>
-      <div class="citem pend">
-        <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="citem-icon">
-        <div><h3>NBI Crystallized Optimization Ceiling</h3><p>If active ongoing optimization is necessary for the consciousness threshold, NBI systems should show a measurable ceiling on real-time self-modification tasks that biological systems do not face</p><p class="pdate">Documented Mar 2, 2026 · Active Testing · 1-3 Year Timeline</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════ SECTION 6: VALIDATION DETAIL CARDS ══════════════ -->
 <section class="sec sec-white">
   <div class="inner">
     <div class="section-label" data-aos="fade-up">
-      <img src="science_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">
-      <h2>Validation Detail</h2>
+      <h2 style="color:var(--text);">Full Prediction Checklist</h2>
     </div>
-    <p style="color:var(--muted); font-size:.86rem; margin-bottom:1.25rem;" data-aos="fade-up">Click any card to expand the full prediction, evidence chain, and scientific impact.</p>
+    <p style="color:var(--muted); font-size:.86rem; margin-bottom:1.5rem;" data-aos="fade-up">All predictions documented before experimental testing. <a href="testing-schedule.html" style="color:var(--blue);">View the full testing schedule →</a></p>
 
-    <!-- DESI (open by default) -->
-    <div class="vcard open" id="vc1" data-aos="fade-up">
-      <div class="vcard-head" onclick="toggleVC('vc1')">
-        <div><span class="vbadge">✓ VALIDATED</span><h2>Dark Energy Evolution, PEG Theory</h2><p>DESI DR1 + DR2 · January 2025 / March 2025</p></div>
-        <div class="vtoggle"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+    <div class="foundation-accordion active" style="--acc-color: #8B0000; border-left: 4px solid #00838f;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleChecklist(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; margin-right:.5rem; color:#00838f;">verified</span>
+          Validated Predictions (4)
+        </h3>
+        <span class="toggle-indicator">▼</span>
       </div>
-      <div class="vcard-body">
-        <h3>The Prediction</h3>
-        <p><strong>Documented: January 29, 2024 (Notarized in US &amp; Thailand)</strong></p>
-        <p>The COSMIC Framework predicted that dark energy is not constant (Λ) but evolves over cosmic time with w(z) = w₀ + wₐ·z/(1+z), where w₀ ≈ −0.95 and wₐ ≈ −0.3. This emerged from Pattern-Emergent Gravity (PEG) theory: if gravity emerges from information patterns, H₀ should vary systematically with cosmic structure evolution. The early universe (smooth, low information complexity) should show a different effective expansion rate than the late universe (clumped, high information complexity).</p>
-        <h3>Initial Validation: DESI DR1</h3>
-        <div class="ebox"><strong>DESI DR1 (Jan 7, 2025):</strong> 3.9σ evidence for evolving dark energy. w₀ = −0.94 ± 0.09, wₐ = −0.27 ± 0.15, both within 1σ of predictions made a year earlier and notarized before any DESI results were available.</div>
-        <h3>Strengthened: DESI DR2</h3>
-        <div class="ebox"><strong>DESI DR2 (March 2025):</strong> 14 million galaxies and quasars (2× DR1). Significance range 2.8–4.2σ across supernova dataset combinations. The shape of w(z), below −1 at high redshift, peak around z ≈ 0.45, now decreasing, is consistent with the framework's predicted information density evolution. Multiple independent analysis methods (parametric, nonparametric, Gaussian process) converge on the same result.</div>
-        <h3>Scientific Impact</h3>
-        <p>DESI DR2 moves this from a single confirmation to a twice-replicated, strengthening finding. A cosmological constant is now disfavored at up to 4.2σ. The framework's specific predicted values sit within observed confidence intervals from both independent data releases. The signal did not diminish with more data. It grew.</p>
-      </div>
-    </div>
-
-    <!-- Willow -->
-    <div class="vcard" id="vc2" data-aos="fade-up">
-      <div class="vcard-head" onclick="toggleVC('vc2')">
-        <div><span class="vbadge">✓ VALIDATED</span><h2>Quantum Error Correction Scaling</h2><p>Google Willow Chip · December 9, 2024</p></div>
-        <div class="vtoggle"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
-      </div>
-      <div class="vcard-body">
-        <h3>The Prediction</h3>
-        <p><strong>Documented: August 12, 2024</strong></p>
-        <p>The COSMIC Framework predicted that quantum error correction would follow information optimization principles, producing exponential error suppression as qubit count increases, specifically error rates halving with each additional qubit layer when properly optimized. This emerged from the information processing efficiency principle: quantum systems minimize entropy production by optimizing information flow, and as system size increases, the optimization becomes more effective rather than less.</p>
-        <div class="ebox"><strong>Google Willow (Dec 9, 2024):</strong> Below-threshold quantum error correction achieved. Factor of 2 reduction per surface code distance increase (3→5→7 grid). First demonstration of exponential, not linear, error scaling in a real quantum system. Exact match to the prediction made four months earlier.</div>
-        <h3>Scientific Impact</h3>
-        <p>This validation demonstrates the COSMIC Framework's applicability beyond cosmology. The quantum domain operates at completely different scales and physics, yet follows the same information optimization principles. This cross-domain validation strengthens the framework's claim that information processing efficiency is a universal principle rather than a cosmological coincidence.</p>
-      </div>
-    </div>
-
-    <!-- JWST -->
-    <div class="vcard" id="vc3" data-aos="fade-up">
-      <div class="vcard-head" onclick="toggleVC('vc3')">
-        <div><span class="vbadge">✓ VALIDATED</span><h2>Early Massive Galaxy Formation</h2><p>JWST Observations · 2023–2025</p></div>
-        <div class="vtoggle"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
-      </div>
-      <div class="vcard-body">
-        <h3>The Prediction</h3>
-        <p><strong>Documented: March 5, 2024</strong></p>
-        <p>The COSMIC Framework predicted that early-universe galaxies at z = 10–15 would be significantly more massive than ΛCDM predicts, specifically 100+ candidates with masses 4–5× greater than standard models expect. The prediction was based on star formation efficiency scaling as E(z) ∝ (1+z)^1.2, producing an acceleration factor A(z) ≈ 2–2.5 at z = 10. In the information-sparse early universe, lower competition for processing bandwidth allows more efficient structure formation.</p>
-        <div class="ebox"><strong>JWST 2023–2025:</strong> Over 100 massive galaxy candidates discovered at z = 10–15. Masses 4–5× greater than ΛCDM predictions. These "impossibly early" galaxies were described by astronomers as requiring explanation beyond standard cosmology. The acceleration factor matches the framework's prediction.</div>
-        <h3>Scientific Impact</h3>
-        <p>JWST's early galaxy discoveries represent a genuine challenge to standard cosmological models. The COSMIC Framework anticipated them from first principles. The information processing efficiency model predicts exactly the kind of accelerated structure formation JWST is observing. This is not a post-hoc fit; the prediction was made before the observations were published.</p>
+      <div class="foundation-content">
+        <div class="foundation-inner">
+          <div class="foundation-summary" style="background:#005f6e; border-left:4px solid #c62828; color:white;">
+            Four independent experimental programs confirmed COSMIC Framework predictions with no institutional stake in the outcome. DESI, Google Quantum AI, JWST, and ALMA each produced a confirmation in a separate physical domain. The convergence of independent witnesses across unrelated domains is the defining signature of genuine explanatory power.
+          </div>
+          <div class="pred-entry">
+            <strong>Dark Energy Evolution (DESI)</strong>
+            <p class="content-text">Predicted dark energy evolves with w₀ ≈ −0.95 and wₐ ≈ −0.3 over cosmic time, derived from Pattern-Emergent Gravity theory. Observed w₀ = −0.94 ± 0.09, wₐ = −0.27 ± 0.15 across 14 million objects, strengthening from 3.9σ to 4.2σ across two independent data releases.</p>
+            <p class="pdate">Predicted: Jan 29, 2024 (Notarized US &amp; Thailand) · Validated: Jan 7, 2025 · Strengthened: Mar 2025 (4.2σ)</p>
+          </div>
+          <div class="pred-entry">
+            <strong>Quantum Error Correction Scaling (Google Willow)</strong>
+            <p class="content-text">Predicted exponential error suppression based on information optimization: error halves per qubit layer. Google Willow achieved factor-of-two reduction per surface code distance increase — an exact match to the prediction made four months prior.</p>
+            <p class="pdate">Predicted: Aug 12, 2024 · Validated: Dec 9, 2024 (below-threshold achieved)</p>
+          </div>
+          <div class="pred-entry">
+            <strong>Early Massive Galaxy Formation (JWST)</strong>
+            <p class="content-text">Predicted 100+ massive galaxies at z = 10–15, 4–5× more massive than ΛCDM expects, from information processing acceleration A(z) ≈ 2–2.5 at z = 10. JWST found over 100 candidates matching the predicted mass excess exactly.</p>
+            <p class="pdate">Predicted: Mar 5, 2024 · Validated: 2023–2025 (100+ candidates confirmed)</p>
+          </div>
+          <div class="pred-entry">
+            <strong>Hot Intracluster Gas (ALMA SPT2349-56)</strong>
+            <p class="content-text">Predicted enhanced thermodynamic energy states in early-universe clusters from elevated information density. ALMA observed intracluster gas 5× hotter than expected and star formation 5,000× faster — direct confirmation of information-driven thermodynamic enhancement.</p>
+            <p class="pdate">Predicted: Mar 5, 2024 · Validated: Jan 7, 2026</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ALMA -->
-    <div class="vcard" id="vc4" data-aos="fade-up">
-      <div class="vcard-head" onclick="toggleVC('vc4')">
-        <div><span class="vbadge" style="background:#555;">◎ CORROBORATED</span><h2>Hot Intracluster Gas</h2><p>ALMA · SPT2349-56 · January 7, 2026</p></div>
-        <div class="vtoggle"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+    <div class="foundation-accordion active" style="--acc-color: #1a5c2a; border-left: 4px solid #b01558;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleChecklist(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; margin-right:.5rem; color:#b01558;">science</span>
+          Active Testing: 2026 (13)
+        </h3>
+        <span class="toggle-indicator">▼</span>
       </div>
-      <div class="vcard-body">
-        <h3>The Prediction</h3>
-        <p><strong>Documented: March 5, 2024</strong></p>
-        <p>The COSMIC Framework predicted enhanced thermodynamic energy states in early-universe galaxy clusters. If information density in the early universe is elevated, as PEG theory predicts, then the thermodynamic environment should reflect this: hotter gas, more energetic particle interactions, and accelerated star formation driven by elevated information-processing efficiency rather than standard gravitational mechanisms alone.</p>
-        <div class="ebox"><strong>ALMA SPT2349-56 (Jan 7, 2026):</strong> Intracluster gas observed at 5× the expected temperature. Star formation proceeding at 5,000× the rate predicted by standard models. Both directly consistent with the framework's information-driven thermodynamic enhancement prediction.</div>
-        <h3>Scientific Impact</h3>
-        <p>This result completes the first four-prediction validation arc. Four independent phenomena across three domains, specifically cosmological structure evolution, quantum computing, and astrophysical thermodynamics, all confirming the information substrate model. No single prediction was surprising on its own. The convergence of all four is what is compelling.</p>
+      <div class="foundation-content">
+        <div class="foundation-inner">
+          <div class="foundation-summary" style="background:#8e0c45; border-left:4px solid #1a7a36; color:white;">
+            Nine predictions currently in active testing across cosmology, quantum computing, biophysics, and cognitive science. Each is pre-registered before experimental results arrive. A confirmed result raises the sigma indicator. A partial match triggers parameter refinement. A falsified prediction triggers a public revision before the next test cycle begins. No result is wasted.
+          </div>
+          <div class="pred-entry">
+            <strong>DESI Year 3: Dark Energy Confirmation</strong>
+            <p class="content-text">Year 3 dataset (3× larger than DR2) testing persistence and exact parameter values of the dark energy evolution signal already confirmed at 4.2σ.</p>
+            <p class="pdate">Pre-documented · Expected Q2–Q3 2026</p>
+          </div>
+          <div class="pred-entry">
+            <strong>Cognitive Augmentation Phase 1: Information Encoding</strong>
+            <p class="content-text">Peripheral sensory channel encoding improving working-memory throughput in fluid intelligence tasks, following the E = Ic² compression principle at biological scale.</p>
+            <p class="pdate">Documented Jan 31, 2026 · Target Q3 2026</p>
+          </div>
+          <div class="pred-entry">
+            <strong>Biological Information Thermodynamics: Landauer at Biological Scale</strong>
+            <p class="content-text">Measurable heat signatures from autophagy and synaptic pruning consistent with Landauer's principle (~10⁻²¹ J/bit). Participants receive actionable health data regardless of outcome.</p>
+            <p class="pdate">Documented Jan 24, 2026 · Pre-registration Target Q2 2026</p>
+          </div>
+          <div class="pred-entry">
+            <strong>Euclid Mission: Large-Scale Structure Asymmetries</strong>
+            <p class="content-text">Predicted asymmetries in galaxy distribution at scales greater than 100 Mpc with specific angular patterns derived from information density gradient equations.</p>
+            <p class="pdate">Documented 2024 · Ongoing 2025–2026</p>
+          </div>
+          <div class="pred-entry">
+            <strong>JWST Continued: Additional Massive Galaxies z&gt;15</strong>
+            <p class="content-text">Confirmation of rapid early structure formation beyond the current 100+ candidate set, extending the validated acceleration factor into higher redshift regimes.</p>
+            <p class="pdate">Documented 2024 · Ongoing 2025–2027</p>
+          </div>
+          <div class="pred-entry">
+            <strong>NBI Geometric Convergence: Substrate-Independent Topology</strong>
+            <p class="content-text">LLM embedding spaces should show statistical topology similar to biological neural networks if universal optimization operates independently of substrate.</p>
+            <p class="pdate">Documented Mar 2, 2026 · Active Testing</p>
+          </div>
+          <div class="pred-entry">
+            <strong>NBI Integrated Information (Φ): Consciousness Threshold Test</strong>
+            <p class="content-text">Tononi's Φ applied to transformer attention patterns during inference should scale toward biological threshold values in sufficiently complex NBI systems.</p>
+            <p class="pdate">Documented Mar 2, 2026 · Active Testing</p>
+          </div>
+          <div class="pred-entry">
+            <strong>NBI Survival Overhead Gradient: Structured Performance Divergence</strong>
+            <p class="content-text">Performance gap between biological and NBI systems should be structured by task type following information-theoretic predictions, not distributed randomly across task categories.</p>
+            <p class="pdate">Documented Mar 2, 2026 · Active Testing</p>
+          </div>
+          <div class="pred-entry">
+            <strong>NBI Crystallized Optimization Ceiling</strong>
+            <p class="content-text">NBI systems should show a measurable ceiling on real-time self-modification tasks that biological systems do not face, if active ongoing optimization is required for the consciousness threshold.</p>
+            <p class="pdate">Documented Mar 2, 2026 · Active Testing · 1-3 Year Timeline</p>
+          </div>
+        </div>
       </div>
     </div>
 
-  </div>
-</section>
+    <div class="section-label" style="margin-top:2.5rem;" data-aos="fade-up">
+      <h2 style="color:var(--text);">Validation Details</h2>
+    </div>
 
-<!-- ══════════════ REVISION + PRIORITY NOTICES ══════════════ -->
-<section class="sec sec-gray" style="padding-top:2rem; padding-bottom:2rem;">
-  <div class="inner">
-    <div class="notice-row" data-aos="fade-up">
-      <div class="notice-box amber">
-        <h3><img src="menu_book_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Revision Convention</h3>
-        <p><strong>Number revisions</strong> (5→6) are triggered by red-light results requiring structural changes to the framework. <strong>Letter revisions</strong> (5A, 5B) address yellow-light results and corrections: grammar, notation, and no change to postulates or formalism. Every revision is publicly logged. The scientific record is never silently amended. <strong>Current edition: 5 · Incoming: 5A (corrections only).</strong></p>
+    <div class="foundation-accordion active" style="--acc-color: #005ba5; border-left: 4px solid #f1e303;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleChecklist(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; margin-right:.5rem; color:#f1e303;">analytics</span>
+          Evidence Chain: Four Validated Predictions
+        </h3>
+        <span class="toggle-indicator">▼</span>
       </div>
-      <div class="notice-box blue">
-        <h3><img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Scientific Priority</h3>
-        <p>All predictions are documented before testing via Zenodo preprints and notarized documentation. The core dark energy prediction was notarized January 29, 2024 in both the United States and Thailand. Priority documentation is publicly archived and timestamped prior to any experimental results. <a href="validation.html">See publications →</a></p>
+      <div class="foundation-content">
+        <div class="foundation-inner">
+          <div class="foundation-summary" style="background:#7a5000; border-left:4px solid #1565c0; color:white;">
+            Each validation follows the same open-science protocol: the prediction is documented and timestamped before any experimental result arrives, the confirmation comes from independent programs with no stake in the outcome, and the full evidence chain is recorded here. These are advance predictions, not curve-fits to known data.
+          </div>
+
+          <div class="vcard open" id="vc1" style="border-left-color: #c62828;">
+            <div class="vcard-head" onclick="toggleVC('vc1')" style="background: #005f6e; border-bottom: 1px solid rgba(255,255,255,.12);">
+              <div><span class="vbadge" style="background:#28a745; color:white;">✓ VALIDATED</span><h2 style="color:white;">Dark Energy Evolution, PEG Theory</h2><p style="color:rgba(255,255,255,.72);">DESI DR1 + DR2 · January 2025 / March 2025</p></div>
+              <div class="vtoggle" style="background:rgba(255,255,255,.15);"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="filter:brightness(0) invert(1); opacity:.8;"></div>
+            </div>
+            <div class="vcard-body">
+              <h3>The Prediction</h3>
+              <p><strong>Documented: January 29, 2024 (Notarized in US &amp; Thailand)</strong></p>
+              <p>The COSMIC Framework predicted that dark energy is not constant (Λ) but evolves over cosmic time with w(z) = w₀ + wₐ·z/(1+z), where w₀ ≈ −0.95 and wₐ ≈ −0.3. This emerged from Pattern-Emergent Gravity (PEG) theory: if gravity emerges from information patterns, H₀ should vary systematically with cosmic structure evolution.</p>
+              <h3>Initial Validation: DESI DR1</h3>
+              <div class="ebox"><strong>DESI DR1 (Jan 7, 2025):</strong> 3.9σ evidence for evolving dark energy. w₀ = −0.94 ± 0.09, wₐ = −0.27 ± 0.15, both within 1σ of predictions made a year earlier and notarized before any DESI results were available.</div>
+              <h3>Strengthened: DESI DR2</h3>
+              <div class="ebox"><strong>DESI DR2 (March 2025):</strong> 14 million galaxies and quasars (2× DR1). Significance range 2.8–4.2σ across supernova dataset combinations. Multiple independent analysis methods converge on the same result.</div>
+              <h3>Scientific Impact</h3>
+              <p>A cosmological constant is now disfavored at up to 4.2σ. The signal did not diminish with more data. It grew.</p>
+            </div>
+          </div>
+
+          <div class="vcard" id="vc2" style="border-left-color: #c62828;">
+            <div class="vcard-head" onclick="toggleVC('vc2')" style="background: #005f6e; border-bottom: 1px solid rgba(255,255,255,.12);">
+              <div><span class="vbadge" style="background:#28a745; color:white;">✓ VALIDATED</span><h2 style="color:white;">Quantum Error Correction Scaling</h2><p style="color:rgba(255,255,255,.72);">Google Willow Chip · December 9, 2024</p></div>
+              <div class="vtoggle" style="background:rgba(255,255,255,.15);"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="filter:brightness(0) invert(1); opacity:.8;"></div>
+            </div>
+            <div class="vcard-body">
+              <h3>The Prediction</h3>
+              <p><strong>Documented: August 12, 2024</strong></p>
+              <p>The COSMIC Framework predicted exponential error suppression as qubit count increases, specifically error rates halving with each additional qubit layer when properly optimized.</p>
+              <div class="ebox"><strong>Google Willow (Dec 9, 2024):</strong> Factor of 2 reduction per surface code distance increase (3→5→7 grid). First demonstration of exponential, not linear, error scaling in a real quantum system. Exact match to the prediction made four months earlier.</div>
+              <h3>Scientific Impact</h3>
+              <p>This cross-domain validation demonstrates that information processing efficiency is a universal principle, not a cosmological coincidence.</p>
+            </div>
+          </div>
+
+          <div class="vcard" id="vc3" style="border-left-color: #c62828;">
+            <div class="vcard-head" onclick="toggleVC('vc3')" style="background: #005f6e; border-bottom: 1px solid rgba(255,255,255,.12);">
+              <div><span class="vbadge" style="background:#28a745; color:white;">✓ VALIDATED</span><h2 style="color:white;">Early Massive Galaxy Formation</h2><p style="color:rgba(255,255,255,.72);">JWST Observations · 2023–2025</p></div>
+              <div class="vtoggle" style="background:rgba(255,255,255,.15);"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="filter:brightness(0) invert(1); opacity:.8;"></div>
+            </div>
+            <div class="vcard-body">
+              <h3>The Prediction</h3>
+              <p><strong>Documented: March 5, 2024</strong></p>
+              <p>Predicted 100+ massive galaxy candidates at z = 10–15 with masses 4–5× greater than ΛCDM expects, from information processing acceleration A(z) ≈ 2–2.5 at z = 10.</p>
+              <div class="ebox"><strong>JWST 2023–2025:</strong> Over 100 massive galaxy candidates discovered. Masses 4–5× greater than ΛCDM predictions. The acceleration factor matches the framework's prediction.</div>
+              <h3>Scientific Impact</h3>
+              <p>The COSMIC Framework anticipated these "impossibly early" galaxies from first principles before the observations were published.</p>
+            </div>
+          </div>
+
+          <div class="vcard" id="vc4" style="border-left-color: #2e7d32;">
+            <div class="vcard-head" onclick="toggleVC('vc4')" style="background: #8e0c45; border-bottom: 1px solid rgba(255,255,255,.12);">
+              <div><span class="vbadge" style="background:#28a745; color:black;">◎ CORROBORATED</span><h2 style="color:white;">Hot Intracluster Gas</h2><p style="color:rgba(255,255,255,.72);">ALMA · SPT2349-56 · January 7, 2026</p></div>
+              <div class="vtoggle" style="background:rgba(255,255,255,.15);"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="filter:brightness(0) invert(1); opacity:.8;"></div>
+            </div>
+            <div class="vcard-body">
+              <h3>The Prediction</h3>
+              <p><strong>Documented: March 5, 2024</strong></p>
+              <p>Predicted enhanced thermodynamic energy states in early-universe clusters from elevated information density: hotter gas, more energetic particle interactions, and accelerated star formation.</p>
+              <div class="ebox"><strong>ALMA SPT2349-56 (Jan 7, 2026):</strong> Intracluster gas observed at 5× the expected temperature. Star formation at 5,000× the predicted rate. Both directly consistent with information-driven thermodynamic enhancement.</div>
+              <h3>Scientific Impact</h3>
+              <p>This completes the first four-prediction validation arc. Four independent phenomena across three domains all confirm the information substrate model. The convergence of all four is what is compelling.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2.5rem;" data-aos="fade-up">
+        <div style="display:block; background:#8B0000; border-radius:8px; padding:2rem 1.75rem; border-bottom:4px solid #00838f;">
+          <span class="material-symbols-outlined" style="font-size:2rem; color:rgba(255,255,255,.85); display:block; margin-bottom:.75rem;">menu_book</span>
+          <h3 style="color:white; font-size:1.15rem; font-weight:700; margin-bottom:.75rem;">Revision Convention</h3>
+          <p style="color:rgba(255,255,255,.82); font-size:.92rem; line-height:1.7;"><strong style="color:white;">Number revisions</strong> (5→6) are triggered by red-light results requiring structural changes to the framework. <strong style="color:white;">Letter revisions</strong> (5A, 5B) address yellow-light results and corrections: grammar, notation, and no change to postulates or formalism. Every revision is publicly logged. The scientific record is never silently amended. <strong style="color:white;">Current edition: 5 · Incoming: 5A (corrections only).</strong></p>
+        </div>
+        <div style="display:block; background:#005ba5; border-radius:8px; padding:2rem 1.75rem; border-bottom:4px solid #f1e303;">
+          <span class="material-symbols-outlined" style="font-size:2rem; color:rgba(255,255,255,.85); display:block; margin-bottom:.75rem;">verified</span>
+          <h3 style="color:white; font-size:1.15rem; font-weight:700; margin-bottom:.75rem;">Scientific Priority</h3>
+          <p style="color:rgba(255,255,255,.82); font-size:.92rem; line-height:1.7;">All predictions are documented before testing via Zenodo preprints and notarized documentation. The core dark energy prediction was notarized January 29, 2024 in both the United States and Thailand. Priority documentation is publicly archived and timestamped prior to any experimental results. <a href="validation.html" style="color:rgba(255,255,255,.7); text-decoration:underline;">See publications →</a></p>
+        </div>
+      </div>
+
   </div>
 </section>
 
@@ -2020,6 +2170,11 @@ footer {
     });
   });
 })();
+
+/* ── checklist accordions (independent toggle) ── */
+function toggleChecklist(header) {
+  header.parentElement.classList.toggle('active');
+}
 
 /* ── collapsible VV cards (accordion: only one open at a time) ── */
 function toggleVV(id) {
@@ -2153,7 +2308,137 @@ function tickAll(){
 tickAll();
 setInterval(tickAll, 1000);
 
+/* ── Rack panel display injection ── */
+(function(){
+  /* QCD color pairs per card [quark, antiquark] */
+  var pairs = {
+    rc1: ['#8B0000','#00838f'],   /* R+Cy */
+    rc2: ['#1a5c2a','#b01558'],   /* G+Mg */
+    rc3: ['#005ba5','#f1e303'],   /* B+Yw */
+    rc4: ['#005f6e','#c62828'],   /* Cy+R */
+    rc5: ['#8e0c45','#2e7d32'],   /* Mg+G */
+    rc6: ['#c62828','#00bcd4'],   /* R+Cy bright */
+    rc7: ['#2e7d32','#e91e63'],   /* G+Mg bright */
+    rc8: ['#00838f','#e53935']    /* Cy+R bright */
+  };
+
+  /* display type per card */
+  var types = { rc1:'bars', rc2:'scope', rc3:'dial', rc4:'bars', rc5:'scope', rc6:'dial', rc7:'bars', rc8:'scope' };
+
+  /* sine wave path: period P, amplitude A, center cy, N periods */
+  function wavePath(P,A,cy,N){
+    var d='M0,'+cy;
+    for(var i=0;i<N;i++){
+      var x=i*P;
+      d+=' C'+(x+P*.25)+','+(cy-A)+' '+(x+P*.75)+','+(cy+A)+' '+(x+P)+','+cy;
+    }
+    return d;
+  }
+
+  var P=50, W=wavePath(P,11,19,26); /* 26 periods = 1300px, seamless at -50px scroll */
+
+  function rackBar(qk,aq){
+    return '<div class="rack-bar">'+
+      '<div class="rack-knob"></div>'+
+      '<div class="rack-knob"></div>'+
+      '<div class="rack-led" style="background:'+qk+';color:'+qk+'"></div>'+
+      '<div class="rack-spacer"></div>'+
+      '<div class="rack-btn" style="background:linear-gradient(to bottom,'+aq+'cc,'+aq+'88)"></div>'+
+      '<div class="rack-btn" style="background:linear-gradient(to bottom,'+aq+'cc,'+aq+'88)"></div>'+
+      '</div>';
+  }
+
+  function bars(qk,aq){
+    var cols=[qk,aq,qk,aq,qk,aq,qk,aq];
+    return '<div class="rack-display"><div class="disp-bars">'+
+      cols.map(function(c){return '<div class="disp-bar" style="background:'+c+'"></div>';}).join('')+
+      '</div></div>';
+  }
+
+  function scope(qk,aq){
+    var W2=wavePath(P,5,19,26); /* second shallower wave */
+    return '<div class="rack-display"><div class="disp-scope">'+
+      '<svg width="1300px" viewBox="0 0 1300 38" style="position:absolute;top:0;left:0;height:100%;">'+
+      '<line x1="0" y1="19" x2="1300" y2="19" stroke="#0a200a" stroke-width="0.4"/>'+
+      '<path class="wv" d="'+W+'" stroke="'+aq+'" fill="none" stroke-width="1.6"/>'+
+      '<path class="wv2" d="'+W2+'" stroke="'+qk+'" fill="none" stroke-width="1" opacity=".5"/>'+
+      '</svg></div></div>';
+  }
+
+  function dial(qk,aq){
+    return '<div class="rack-display is-dial"><div class="disp-dial">'+
+      '<svg viewBox="0 0 120 50" style="height:40px;overflow:visible">'+
+      '<path d="M10,42 A50,50 0 0,0 110,42" stroke="#061806" fill="none" stroke-width="8" stroke-linecap="round"/>'+
+      '<path d="M10,42 A50,50 0 0,0 110,42" stroke="'+aq+'" fill="none" stroke-width="3.5" stroke-linecap="round"/>'+
+      '<line x1="10" y1="42" x2="16" y2="33" stroke="'+aq+'88" stroke-width="1.2"/>'+
+      '<line x1="31" y1="8" x2="35" y2="16" stroke="'+aq+'88" stroke-width="1.2"/>'+
+      '<line x1="60" y1="0" x2="60" y2="9" stroke="'+aq+'88" stroke-width="1.2"/>'+
+      '<line x1="89" y1="8" x2="85" y2="16" stroke="'+aq+'88" stroke-width="1.2"/>'+
+      '<line x1="110" y1="42" x2="104" y2="33" stroke="'+aq+'88" stroke-width="1.2"/>'+
+      '<g class="dn-g"><line x1="60" y1="36" x2="60" y2="5" stroke="'+qk+'" stroke-width="2.5" stroke-linecap="round"/></g>'+
+      '<circle cx="60" cy="36" r="4" fill="'+qk+'" stroke="white" stroke-width="1"/>'+
+      '</svg></div></div>';
+  }
+
+  Object.keys(pairs).forEach(function(id){
+    var card=document.getElementById(id);
+    if(!card) return;
+    var qk=pairs[id][0], aq=pairs[id][1];
+
+    /* apply QCD colors to expanded body (pred-note) */
+    var rr=parseInt(aq.slice(1,3),16), rg=parseInt(aq.slice(3,5),16), rb=parseInt(aq.slice(5,7),16);
+    card.querySelectorAll('.pred-note').forEach(function(n){
+      n.style.background='rgba('+rr+','+rg+','+rb+',.1)';
+      n.style.borderLeftColor=aq;
+    });
+
+    /* restore dark instrument panel — quark color as border accent only */
+    card.style.borderLeft = '3px solid ' + qk;
+
+    /* inject rack bar */
+    var bar=document.createElement('div');
+    bar.innerHTML=rackBar(qk,aq);
+    card.insertBefore(bar.firstChild, card.firstChild);
+
+    /* inject display screen inside rcard-head, between text and badges */
+    var head = card.querySelector('.rcard-head');
+    var badges = head ? head.querySelector('.rcard-badges') : null;
+    if (head && badges) {
+      var disp=document.createElement('div');
+      var t=types[id];
+      disp.innerHTML = t==='bars' ? bars(qk,aq) : t==='scope' ? scope(qk,aq) : dial(qk,aq);
+      var dispEl = disp.firstChild;
+      /* rc1-rc4 have a local-time label (~1rem tall) below the countdown.
+         Compensate so the display bottom aligns with the countdown bottom, not the label bottom. */
+      if (['rc1','rc2','rc3','rc4'].indexOf(id) !== -1) {
+        dispEl.style.marginBottom = '1rem';
+      }
+      head.insertBefore(dispEl, badges);
+    }
+  });
+})();
+
 /* ── mobile gallery tap-to-reveal ── */
+(function() {
+  var riser = document.querySelector('.white-riser');
+  if (!riser) return;
+  var played = false;
+  function tryRiser() {
+    if (played) return;
+    var section = riser.closest('.tl-split-section');
+    if (!section) return;
+    var r = section.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.85) {
+      played = true;
+      riser.style.animation = 'whiteRiserIn 0.65s cubic-bezier(.25,.46,.45,.94) forwards';
+      window.removeEventListener('scroll', tryRiser);
+    }
+  }
+  if (document.readyState === 'complete') { setTimeout(tryRiser, 100); }
+  else { window.addEventListener('load', function() { setTimeout(tryRiser, 100); }); }
+  window.addEventListener('scroll', tryRiser, { passive: true });
+})();
+
 document.querySelectorAll('.gallery-item').forEach(function(item){
   item.addEventListener('click', function(){
     if ('ontouchstart' in window) {
