@@ -8,6 +8,8 @@
     
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Material Symbols Icon Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200" rel="stylesheet">
     
     <style>
     * {
@@ -50,52 +52,49 @@
     .header-container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     }
 
-    .header-logos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    gap: 2rem;
-    }
-
-    .header-logo {
-    display: flex;
-    align-items: center;
-    }
-
-    .header-logo.left {
-    justify-content: flex-start;
-    flex: 1;
-    }
-
-    .header-logo.center {
-    justify-content: center;
-    flex: 1;
-    }
-
-    .header-logo.right {
-    justify-content: flex-end;
-    flex: 1;
-    }
-
-    .header-logo a {
-    display: inline-block;
-    transition: transform 0.3s ease;
-    }
-
-    .header-logo a:hover {
-    transform: scale(1.05);
-    }
-
-    .header-logo img {
-    height: 50px;
+    .site-logo img {
+    height: 40px;
     width: auto;
+    display: block;
+    }
+
+    .main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    }
+
+    .main-navigation a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
+
+    .main-navigation a:hover {
+    color: var(--primary-color);
+    }
+
+    .main-navigation a.login-link {
+    background: linear-gradient(135deg, #8B0000 0%, #a00000 100%);
+    color: #f1e303;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+    }
+
+    .main-navigation a.login-link:hover {
+    background: linear-gradient(135deg, #a00000 0%, #8B0000 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
     }
 
     /* Mobile Logo */
@@ -297,6 +296,7 @@ border-radius: 8px;
 margin-bottom: 1.5rem;
 overflow: hidden;
 transition: all 0.3s ease;
+--acc-color: #4a5568;
 }
 
 .foundation-accordion:hover {
@@ -309,18 +309,17 @@ cursor: pointer;
 display: flex;
 justify-content: space-between;
 align-items: center;
-background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-border-left: 4px solid var(--primary-color);
-transition: all 0.3s ease;
+background: var(--acc-color);
+transition: filter 0.3s ease;
 }
 
 .foundation-header:hover {
-background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+filter: brightness(1.1);
 }
 
 .foundation-header h3 {
 margin: 0;
-color: var(--text-dark);
+color: white;
 font-size: 1.5rem;
 display: flex;
 align-items: center;
@@ -347,7 +346,7 @@ filter: brightness(0) saturate(100%) invert(47%) sepia(89%) saturate(2476%) hue-
 
 .toggle-indicator {
 font-size: 1.5rem;
-color: var(--primary-color);
+color: rgba(255,255,255,0.75);
 transition: transform 0.3s ease;
 }
 
@@ -371,9 +370,7 @@ background: white;
 }
 
 .foundation-summary {
-background: white; border-left: 4px solid rgba(241,180,3,0.7);
 padding: 1.5rem;
-border-left: 4px solid #f58b2b;
 border-radius: 4px;
 margin-bottom: 2rem;
 font-weight: 500;
@@ -426,59 +423,6 @@ line-height: 1.6;
 }
 
     /* In-Page Navigation Menu */
-    .page-nav {
-    background: white;
-    border-bottom: 2px solid var(--primary-color);
-    position: sticky;
-    top: 73px;
-    z-index: 900;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .page-nav-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0;
-    display: flex;
-    overflow-x: auto;
-    }
-
-    .page-nav-container::-webkit-scrollbar {
-    height: 4px;
-    }
-
-    .page-nav-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    }
-
-    .page-nav-container::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 2px;
-    }
-
-    .page-nav a {
-    display: block;
-    padding: 1rem 1.5rem;
-    color: var(--text-dark);
-    text-decoration: none;
-    white-space: nowrap;
-    font-weight: 500;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
-    }
-
-    .page-nav a:hover {
-    background: var(--bg-light);
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-    }
-
-    .page-nav a.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-    background: var(--bg-light);
-    }
-
     /* Site Launch Banner */
     .site-launch-banner {
     background: linear-gradient(135deg, #005ba5 0%, #003d7a 100%);
@@ -549,12 +493,8 @@ line-height: 1.6;
 
     /* Responsive */
     @media (max-width: 968px) {
-    .header-logos {
+    .main-navigation {
     display: none;
-    }
-
-    .mobile-logo {
-    display: block;
     }
 
     .hamburger {
@@ -565,8 +505,8 @@ line-height: 1.6;
     display: block;
     }
 
-    .page-header h1 {
-    font-size: 2rem;
+    .page-header img {
+    height: 60px;
     }
 
     .section-title {
@@ -584,45 +524,176 @@ line-height: 1.6;
     }
 
     @media (max-width: 480px) {
-    .header-logo img {
-    height: 40px;
+    .page-header img {
+    height: 45px;
     }
     }
+    /* Scroll to top */
+    .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(139,0,0,0.85);
+    color: #f1e303;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 800;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    font-family: 'Material Symbols Outlined';
+    font-size: 28px;
+    }
+
+    .scroll-top:hover {
+    background: var(--primary-color);
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    .scroll-top.visible {
+    display: flex;
+    }
+
+    /* Intro cards */
+    .intro-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 2rem 0; animation: slideUp 0.6s ease-out; }
+    .intro-card { border-radius: 8px; padding: 1.75rem 1.5rem; border: 1px solid rgba(255,255,255,0.15); border-bottom: 4px solid rgba(255,255,255,0.35); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .intro-card:hover { transform: translateY(-8px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+    .intro-card h3 { font-size: 1.05rem; margin-bottom: 0.75rem; color: white; font-weight: 700; }
+    .intro-card p { color: rgba(255,255,255,0.85); font-size: 0.92rem; line-height: 1.7; }
+
+    /* Timeline dark panel */
+    .timeline-section { padding: 1.75rem 2rem 2.5rem; }
+    .timeline-intro-text { color: rgba(255,255,255,0.88); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2rem; max-width: 740px; }
+    .tl-label { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .tl-label-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.15) 80%, transparent); }
+    .tl-label-text { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 2.5px; color: rgba(255,255,255,0.55); white-space: nowrap; font-weight: 700; }
+
+    /* Two-column vertical layout */
+    .tl-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .tl-track-label { font-size: 1.25rem; letter-spacing: 0; text-transform: none; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.5rem; }
+    .tl-track.sm .tl-track-label { color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.25); }
+    .tl-track.cf .tl-track-label { color: #f1e303; border-bottom: 1px solid rgba(241,227,3,0.2); }
+
+    /* Vertical steps */
+    .tl-vert-step { display: flex; align-items: flex-start; gap: 1rem; position: relative; padding-bottom: 1.5rem; }
+    .tl-vert-step:last-child { padding-bottom: 0; }
+    .tl-vert-step:not(:last-child)::after { content: ''; position: absolute; left: 6px; top: 15px; bottom: 8px; width: 1px; }
+    .tl-vert-step:not(:last-child)::before { content: ''; position: absolute; left: 2px; bottom: 3px; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; z-index: 1; }
+    .tl-track.sm .tl-vert-step:not(:last-child)::before { border-top: 6px solid rgba(255,255,255,0.45); }
+    .tl-track.cf .tl-vert-step:not(:last-child)::before { border-top: 6px solid rgba(241,227,3,0.5); }
+    .tl-track.sm .tl-vert-step:not(:last-child)::after { background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.04)); }
+    .tl-track.cf .tl-vert-step:not(:last-child)::after { background: linear-gradient(to bottom, rgba(241,227,3,0.4), rgba(241,227,3,0.08)); }
+
+    /* Dots ,  start dim, animate in */
+    .tl-vert-dot { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; margin-top: 2px; opacity: 0.18; transform: scale(0.7); }
+    .tl-track.sm .tl-vert-dot { background: radial-gradient(circle at 35% 30%, #fff 0%, #87CEEB 45%, #005ba5 80%); }
+    .tl-track.cf .tl-vert-dot { background: radial-gradient(circle at 35% 30%, #fff 0%, #f1e303 45%, #cc8800 80%); }
+
+    /* Step name */
+    .tl-vert-name { font-size: 1rem; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .tl-track.sm .tl-vert-name { color: #ffffff; }
+    .tl-track.cf .tl-vert-name { color: rgba(255,235,120,0.96); }
+    .tl-track.cf .tl-vert-step:last-child .tl-vert-name { color: #f1e303; font-weight: 700; font-size: 1rem; }
+
+    /* Glow animations */
+    @keyframes smGlow { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); } }
+    @keyframes cfGlow { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); } }
+    @keyframes cfGlowFinal { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.5); box-shadow: 0 0 8px #fff, 0 0 18px rgba(241,227,3,1), 0 0 36px rgba(241,200,3,.7), 0 0 55px rgba(241,200,3,.3); } }
+    @keyframes smPulse {
+        0%, 30%  { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); }
+        40%, 65% { opacity: 0.15; transform: scale(0.75); box-shadow: none; }
+        75%, 100%{ opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); }
+    }
+    @keyframes cfPulse {
+        0%, 30%  { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); }
+        40%, 65% { opacity: 0.15; transform: scale(0.75); box-shadow: none; }
+        75%, 100%{ opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); }
+    }
+
+    /* SM sequence ,  nth-child targets .tl-vert-step elements */
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(2) .tl-vert-dot { animation: smGlow 0.45s ease 0.1s both; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(3) .tl-vert-dot { animation: smGlow 0.45s ease 0.4s both; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(4) .tl-vert-dot { animation: smGlow 0.45s ease 0.7s both; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(5) .tl-vert-dot { animation: smGlow 0.45s ease 1.0s both; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(6) .tl-vert-dot { animation: smGlow 0.45s ease 1.3s both; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(7) .tl-vert-dot { animation: smGlow 0.45s ease 1.6s both; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(8) .tl-vert-dot { animation: smGlow 0.45s ease 1.9s both; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(9) .tl-vert-dot { animation: smGlow 0.45s ease 2.2s both; }
+    /* CF sequence */
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(2) .tl-vert-dot { animation: cfGlow 0.45s ease 0.25s both; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(3) .tl-vert-dot { animation: cfGlow 0.45s ease 0.55s both; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(4) .tl-vert-dot { animation: cfGlow 0.45s ease 0.85s both; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(5) .tl-vert-dot { animation: cfGlow 0.45s ease 1.15s both; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(6) .tl-vert-dot { animation: cfGlow 0.45s ease 1.45s both; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(7) .tl-vert-dot { animation: cfGlow 0.45s ease 1.75s both; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(8) .tl-vert-dot { animation: cfGlow 0.45s ease 2.05s both; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(9) .tl-vert-dot { animation: cfGlowFinal 0.7s ease 2.35s both; }
+
+    @media (max-width: 768px) {
+        .tl-two-col { grid-template-columns: 1fr; }
+        .timeline-section { padding: 1.25rem 1.25rem 2rem; }
+        .intro-cards-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Outline button — white border, for dark backgrounds */
+    .btn-outline {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+    .btn-outline:hover {
+        background: white;
+        color: var(--text-dark);
+    }
+
+    /* Big TOE logo tilt */
+    .hero-bigtoe-logo {
+        height: 60px;
+        width: auto;
+        transition: all 0.4s ease;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        vertical-align: middle;
+    }
+    .hero-logo-button:hover .hero-bigtoe-logo {
+        transform: scale(1.1) rotate(2deg);
+        filter: drop-shadow(0 8px 16px rgba(255,255,0,0.4));
+    }
+
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="site-header">
     <div class="header-container">
-    <div class="header-logos">
-    <div class="header-logo left">
-    <a href="index.html">
-    <img src="ic2-logo.png" alt="Ic² Research Institute">
-    </a>
-    </div>
-    <div class="header-logo center">
-    <a href="framework.html">
-    <img src="framework.png" alt="Framework">
-    </a>
-    </div>
-    <div class="header-logo right">
-    <a href="book.html">
-    <img src="bigtoeindexlogo.png" alt="The Big TOE">
-    </a>
-    </div>
-    </div>
-    <!-- Mobile Logo (visible on mobile) -->
-    <div class="mobile-logo">
-    <a href="index.html">
-    <img src="ic2-logo.png" alt="Ic² Research Institute">
-    </a>
-    </div>
-    <!-- Hamburger Menu Button -->
-    <div class="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-    </div>
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="book.html">Big TOE</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="discussions-page.html">Discussion</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login.html" class="login-link">Login</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
     </header>
 
@@ -649,129 +720,125 @@ line-height: 1.6;
     </div>
 
     <!-- In-Page Navigation -->
-    <nav class="page-nav">
-    <div class="page-nav-container">
-    <a href="#overview">Overview</a>
-    <a href="#track-record">Track Record</a>
-    <a href="#principles">Core Principles</a>
-    <a href="#foundations">Foundations</a>
-    <a href="#methodology">Methodology</a>
-    <a href="#investment">Investment</a>
-    <a href="#team">Team</a>
-    <a href="#get-involved">Get Involved</a>
-    </div>
-    </nav>
-
     <!-- Page Header -->
-    <section class="page-header">
-    <h1>The COSMIC Framework</h1>
-    <p>A comprehensive approach to understanding reality through testable predictions and rigorous validation</p>
+    <section class="page-header" style="position: relative; overflow: hidden; background: #0d0d1f;">
+    <svg viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        <defs>
+            <filter id="nb1"><feGaussianBlur stdDeviation="55"/></filter>
+            <filter id="nb2"><feGaussianBlur stdDeviation="40"/></filter>
+            <filter id="nb3"><feGaussianBlur stdDeviation="28"/></filter>
+            <radialGradient id="rg1" cx="50%" cy="50%"><stop offset="0%" stop-color="#4a0a7a" stop-opacity="0.9"/><stop offset="100%" stop-color="#4a0a7a" stop-opacity="0"/></radialGradient>
+            <radialGradient id="rg2" cx="50%" cy="50%"><stop offset="0%" stop-color="#0a1a6e" stop-opacity="0.85"/><stop offset="100%" stop-color="#0a1a6e" stop-opacity="0"/></radialGradient>
+            <radialGradient id="rg3" cx="50%" cy="50%"><stop offset="0%" stop-color="#0a4a5e" stop-opacity="0.75"/><stop offset="100%" stop-color="#0a4a5e" stop-opacity="0"/></radialGradient>
+            <radialGradient id="rg4" cx="50%" cy="50%"><stop offset="0%" stop-color="#6e0a2a" stop-opacity="0.55"/><stop offset="100%" stop-color="#6e0a2a" stop-opacity="0"/></radialGradient>
+            <radialGradient id="rg5" cx="50%" cy="50%"><stop offset="0%" stop-color="#1a0a6e" stop-opacity="0.65"/><stop offset="100%" stop-color="#1a0a6e" stop-opacity="0"/></radialGradient>
+        </defs>
+        <!-- Base -->
+        <rect width="1200" height="380" fill="#0d0d1f"/>
+        <!-- Nebula clouds -->
+        <ellipse cx="260" cy="170" rx="320" ry="200" fill="url(#rg1)" filter="url(#nb1)"/>
+        <ellipse cx="720" cy="190" rx="380" ry="220" fill="url(#rg2)" filter="url(#nb1)"/>
+        <ellipse cx="1050" cy="150" rx="280" ry="170" fill="url(#rg3)" filter="url(#nb2)"/>
+        <ellipse cx="500" cy="280" rx="220" ry="130" fill="url(#rg4)" filter="url(#nb2)"/>
+        <ellipse cx="870" cy="100" rx="200" ry="130" fill="url(#rg5)" filter="url(#nb3)"/>
+        <ellipse cx="150" cy="300" rx="180" ry="100" fill="url(#rg3)" filter="url(#nb3)"/>
+        <!-- Stars -->
+        <circle cx="767.3" cy="9.5" r="1.0" fill="white" opacity="0.55"/><circle cx="167.4" cy="38.9" r="0.6" fill="white" opacity="0.75"/><circle cx="38.1" cy="35.6" r="0.8" fill="white" opacity="0.70"/><circle cx="31.8" cy="75.6" r="1.5" fill="white" opacity="0.53"/><circle cx="707.1" cy="307.6" r="0.6" fill="white" opacity="0.86"/><circle cx="191.6" cy="160.6" r="1.0" fill="white" opacity="0.49"/><circle cx="1148.7" cy="127.9" r="0.6" fill="white" opacity="0.63"/><circle cx="430.8" cy="130.7" r="1.0" fill="white" opacity="0.88"/><circle cx="875.7" cy="203.8" r="1.5" fill="white" opacity="0.45"/><circle cx="351.8" cy="238.9" r="1.2" fill="white" opacity="0.75"/><circle cx="845.5" cy="17.4" r="0.8" fill="white" opacity="0.86"/><circle cx="1182.3" cy="325.0" r="0.6" fill="white" opacity="0.63"/><circle cx="544.1" cy="317.0" r="0.8" fill="white" opacity="0.62"/><circle cx="251.4" cy="101.5" r="0.6" fill="white" opacity="0.77"/><circle cx="205.4" cy="277.1" r="0.8" fill="white" opacity="0.68"/><circle cx="323.9" cy="351.6" r="0.8" fill="white" opacity="0.81"/><circle cx="1011.4" cy="294.9" r="0.8" fill="white" opacity="0.89"/><circle cx="966.1" cy="152.4" r="0.6" fill="white" opacity="0.53"/><circle cx="1131.5" cy="333.0" r="1.2" fill="white" opacity="0.53"/><circle cx="599.1" cy="336.2" r="2.0" fill="white" opacity="0.49"/><circle cx="167.6" cy="283.1" r="1.0" fill="white" opacity="0.85"/><circle cx="514.1" cy="221.7" r="1.2" fill="white" opacity="0.53"/><circle cx="1197.0" cy="193.6" r="0.6" fill="white" opacity="0.85"/><circle cx="1033.3" cy="58.1" r="0.8" fill="white" opacity="0.88"/><circle cx="506.6" cy="24.1" r="1.5" fill="white" opacity="0.76"/><circle cx="561.7" cy="95.5" r="0.6" fill="white" opacity="0.81"/><circle cx="137.5" cy="336.2" r="1.0" fill="white" opacity="0.86"/><circle cx="408.2" cy="111.5" r="0.8" fill="white" opacity="0.67"/><circle cx="1144.6" cy="332.8" r="1.0" fill="white" opacity="0.98"/><circle cx="914.4" cy="192.9" r="0.6" fill="white" opacity="0.92"/><circle cx="358.1" cy="242.8" r="0.8" fill="white" opacity="0.49"/><circle cx="915.0" cy="205.0" r="0.6" fill="white" opacity="0.76"/><circle cx="586.3" cy="42.5" r="1.2" fill="white" opacity="0.93"/><circle cx="998.0" cy="116.9" r="0.6" fill="white" opacity="0.54"/><circle cx="680.8" cy="29.9" r="2.0" fill="white" opacity="0.89"/><circle cx="1173.6" cy="202.4" r="0.8" fill="white" opacity="0.48"/><circle cx="570.3" cy="208.9" r="1.0" fill="white" opacity="0.72"/><circle cx="727.9" cy="366.5" r="0.8" fill="white" opacity="0.83"/><circle cx="478.8" cy="255.2" r="1.2" fill="white" opacity="0.66"/><circle cx="621.1" cy="46.0" r="0.8" fill="white" opacity="0.44"/><circle cx="25.2" cy="210.5" r="0.8" fill="white" opacity="0.40"/><circle cx="849.4" cy="22.4" r="0.6" fill="white" opacity="0.94"/><circle cx="1031.6" cy="26.9" r="0.8" fill="white" opacity="0.57"/><circle cx="582.5" cy="204.9" r="2.0" fill="white" opacity="0.55"/><circle cx="567.6" cy="154.7" r="0.6" fill="white" opacity="0.46"/><circle cx="517.3" cy="161.0" r="2.0" fill="white" opacity="0.92"/><circle cx="65.0" cy="248.3" r="0.6" fill="white" opacity="0.44"/><circle cx="873.9" cy="304.2" r="0.6" fill="white" opacity="0.55"/><circle cx="228.3" cy="170.5" r="1.5" fill="white" opacity="0.51"/><circle cx="555.2" cy="332.3" r="0.6" fill="white" opacity="0.67"/><circle cx="1033.6" cy="209.1" r="0.6" fill="white" opacity="0.79"/><circle cx="648.7" cy="5.6" r="0.6" fill="white" opacity="0.96"/><circle cx="1018.4" cy="63.2" r="2.0" fill="white" opacity="0.69"/><circle cx="1037.6" cy="342.9" r="0.8" fill="white" opacity="0.63"/><circle cx="1182.4" cy="100.8" r="2.0" fill="white" opacity="0.57"/><circle cx="835.9" cy="277.6" r="2.0" fill="white" opacity="0.49"/><circle cx="356.0" cy="368.1" r="0.6" fill="white" opacity="0.85"/><circle cx="68.6" cy="222.0" r="0.8" fill="white" opacity="0.43"/><circle cx="609.4" cy="323.5" r="0.6" fill="white" opacity="0.76"/><circle cx="810.3" cy="89.4" r="0.6" fill="white" opacity="0.96"/><circle cx="683.6" cy="220.0" r="0.6" fill="white" opacity="0.77"/><circle cx="503.1" cy="221.8" r="1.2" fill="white" opacity="0.96"/><circle cx="245.1" cy="272.2" r="0.8" fill="white" opacity="0.56"/><circle cx="157.1" cy="245.3" r="2.0" fill="white" opacity="0.59"/><circle cx="902.2" cy="27.6" r="2.0" fill="white" opacity="0.77"/><circle cx="675.6" cy="38.0" r="0.8" fill="white" opacity="0.70"/><circle cx="158.9" cy="132.6" r="0.6" fill="white" opacity="0.93"/><circle cx="443.4" cy="59.9" r="1.0" fill="white" opacity="0.77"/><circle cx="1184.7" cy="248.5" r="0.6" fill="white" opacity="0.80"/><circle cx="665.5" cy="354.1" r="0.6" fill="white" opacity="0.96"/>
+        <!-- Bright star glints -->
+        <circle cx="197.7" cy="59.2" r="2" fill="white" opacity="0.9"/><circle cx="197.7" cy="59.2" r="4" fill="white" opacity="0.15"/><circle cx="167.7" cy="208.1" r="2" fill="white" opacity="0.9"/><circle cx="167.7" cy="208.1" r="4" fill="white" opacity="0.15"/><circle cx="349.6" cy="225.6" r="2" fill="white" opacity="0.9"/><circle cx="349.6" cy="225.6" r="4" fill="white" opacity="0.15"/><circle cx="839.4" cy="89.2" r="2" fill="white" opacity="0.9"/><circle cx="839.4" cy="89.2" r="4" fill="white" opacity="0.15"/><circle cx="747.7" cy="109.8" r="2" fill="white" opacity="0.9"/><circle cx="747.7" cy="109.8" r="4" fill="white" opacity="0.15"/><circle cx="587.4" cy="327.8" r="2" fill="white" opacity="0.9"/><circle cx="587.4" cy="327.8" r="4" fill="white" opacity="0.15"/><circle cx="980.7" cy="51.4" r="2" fill="white" opacity="0.9"/><circle cx="980.7" cy="51.4" r="4" fill="white" opacity="0.15"/><circle cx="515.9" cy="114.1" r="2" fill="white" opacity="0.9"/><circle cx="515.9" cy="114.1" r="4" fill="white" opacity="0.15"/>
+        <!-- White gas cloud behind logo ,  layered misting -->
+        <ellipse cx="600" cy="130" rx="320" ry="140" fill="white" opacity="0.05" filter="url(#nb1)"/>
+        <ellipse cx="590" cy="120" rx="240" ry="115" fill="white" opacity="0.07" filter="url(#nb1)"/>
+        <ellipse cx="615" cy="135" rx="200" ry="100" fill="white" opacity="0.09" filter="url(#nb2)"/>
+        <ellipse cx="598" cy="118" rx="170" ry="88" fill="white" opacity="0.11" filter="url(#nb2)"/>
+        <ellipse cx="608" cy="132" rx="140" ry="75" fill="white" opacity="0.13" filter="url(#nb2)"/>
+        <ellipse cx="594" cy="123" rx="110" ry="60" fill="white" opacity="0.16" filter="url(#nb3)"/>
+        <ellipse cx="603" cy="130" rx="85" ry="48" fill="white" opacity="0.19" filter="url(#nb3)"/>
+        <ellipse cx="598" cy="125" rx="62" ry="36" fill="white" opacity="0.22" filter="url(#nb3)"/>
+        <ellipse cx="602" cy="128" rx="42" ry="26" fill="white" opacity="0.18" filter="url(#nb3)"/>
+        <!-- Wispy tendrils drifting out -->
+        <ellipse cx="720" cy="115" rx="90" ry="35" fill="white" opacity="0.04" filter="url(#nb2)"/>
+        <ellipse cx="480" cy="138" rx="80" ry="30" fill="white" opacity="0.05" filter="url(#nb2)"/>
+        <ellipse cx="650" cy="160" rx="70" ry="25" fill="white" opacity="0.04" filter="url(#nb3)"/>
+        <ellipse cx="555" cy="108" rx="60" ry="22" fill="white" opacity="0.05" filter="url(#nb3)"/>
+    </svg>
+    <div style="position: relative; z-index: 2; text-align: center;">
+        <a href="framework.html" style="display: inline-block; margin-bottom: 1.5rem;">
+            <img src="framework.png" alt="The COSMIC Framework" style="height: 80px; width: auto; display: block;">
+        </a>
+        <p style="font-size: 1.25rem; opacity: 0.9; max-width: 700px; margin: 0 auto; color: white;">A comprehensive approach to understanding reality through testable predictions and rigorous validation</p>
+        <p style="font-size: 1rem; color: rgba(255,255,255,0.65); margin-top: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.8; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);"><strong style="color: white; font-size: 1.1rem; letter-spacing: 0.02em;">COSMIC</strong> (Computational Optimization of Spacetime through Mathematical Intelligence and Constants), proposes that information processing is the fundamental substrate of physical reality.</p>
+    </div>
     </section>
 
     <!-- Introduction Section -->
-    <section class="content-section" id="overview">
+    <section class="content-section" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding-bottom: 0;" id="overview">
     <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">What is the COSMIC Framework?</h2>
-    <p class="content-text">The <strong>COSMIC Framework</strong> (Computational Optimization of Spacetime through Mathematical Intelligence and Constants) is a comprehensive theoretical physics framework proposing that <strong>information processing is the fundamental substrate of physical reality</strong>.</p>
-    
-    <p class="content-text">Unlike traditional approaches that treat computation as emergent from physics, COSMIC reverses this relationship: <strong>physics emerges from computational optimization</strong>. The universe isn't a computer—it's a computational process actively optimizing information flow across all scales, from quantum mechanics to cosmic structure.</p>
 
-    <p class="content-text" style="background: white; border-left: 4px solid rgba(241,180,3,0.7); padding: 1.5rem; border-left: 4px solid #f58b2b; border-radius: 4px; margin-top: 2rem;"><strong>What Makes COSMIC Different:</strong> Rather than relying on unfalsifiable metaphysics, COSMIC generates <strong>specific, testable predictions across multiple domains</strong>—cosmology, quantum computing, galaxy formation, thermodynamics—that can be validated or refuted by experiment. Since documentation began, <strong>four major independent programs have validated key predictions</strong>, with 37+ additional predictions currently under testing. Zero failures to date.</p>
+    <h2 style="font-size: 2rem; font-weight: 700; color: white; margin-bottom: 1.75rem;">Information, Energy Unity and Equivalence</h2>
+    <p style="font-size: 1.1rem; line-height: 1.8; color: rgba(255,255,255,0.88); margin-bottom: 1rem;">In 1961, Rolf Landauer at IBM proved that any logically irreversible computation must dissipate at least kT ln(2) energy per bit erased. Each piece of that equation earns its place. T is temperature: about 300 Kelvin at room temperature. And ln(2), approximately 0.693, captures the information content of a single binary choice: the irreducible difference between yes and no, zero and one, heads and tails.</p>
+    <p style="font-size: 1.1rem; line-height: 1.8; color: rgba(255,255,255,0.88); margin-bottom: 1.5rem;">Beginning in 2012, researchers confirmed this directly using trapped ions, colloidal particles in laser traps, and quantum dots. The results consistently matched the kT ln(2) minimum within 2 to 5%. Physicists manipulated single bits of physical information, measured the heat dissipated, and the number matched.</p>
+
+    <!-- Origin Sequence Timelines -->
+    <div style="border-radius: 8px; overflow: hidden; margin-top: 2.5rem;" id="origin-timelines">
+        <div style="background: #8B0000; padding: 0.875rem 1.75rem;">
+            <h3 style="color: white; font-size: 1.15rem; font-weight: 700; margin: 0; letter-spacing: 0.02em;">Origin Sequence</h3>
+        </div>
+        <div class="timeline-section" style="background: radial-gradient(ellipse at 60% 15%, #4a5e7a 0%, #354866 40%, #243252 70%, #18243e 100%); border-radius: 0 0 8px 8px;">
+        <div class="tl-two-col">
+            <div class="tl-track sm">
+                <div class="tl-track-label">Standard Model</div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Singularity t=0</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Inflation</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Quark-Gluon Plasma</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Hadronization</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Nucleosynthesis</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Recombination</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Star Formation</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Galaxies &amp; Structure</span></div>
+            </div>
+            <div class="tl-track cf">
+                <div class="tl-track-label">COSMIC Framework</div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Pre-geometric Substrate</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Planck Crystallization</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Spacetime Emerges</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Quantum Fields</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Particles &amp; Forces</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Chemistry &amp; Structure</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Stars &amp; Renewal Cycle</span></div>
+                <div class="tl-vert-step"><div class="tl-vert-dot"></div><span class="tl-vert-name">Consciousness</span></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Reality is Relational -->
+    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.35); font-weight: 700; margin-bottom: 1.25rem;">Element 1 — A Quest for the Big TOE</p>
+        <p style="color: rgba(255,255,255,0.88); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1.25rem;">Take anything, any object, any force, any property, and reduce it to its components. A rock reduces to molecules, molecules to atoms, atoms to subatomic particles, particles to quantum fields. At the bottom you do not find stuff. You find relationships: probabilities and interaction properties, pure information about how things behave relative to each other. Energy follows the same path. It is not a substance but a measure of capacity, a relationship between states. E=mc² is an informational relationship between mass, energy, and the speed of light. An equation, not a thing. Run this reduction on anything and the result is always the same. No exception presents itself because none is possible.</p>
+        <p style="color: rgba(255,255,255,0.88); font-size: 1.05rem; line-height: 1.9;">This relational structure operates simultaneously across quantum, classical, and cosmic scales. There is no level where things with independent properties suddenly appear. The same structural logic that generates the Fibonacci sequence in a sunflower generates it in a spiral galaxy arm. They are not analogous. They are the same sequence running in different substrates, which is what it means to say that reality is fundamentally relational. The Foundations below document the evidence, address the gaps, and follow the logical chain wherever it leads.</p>
+    </div>
+
     </div>
     </section>
 
-    <!-- Track Record Section -->
-    <section class="content-section bg-light" id="track-record">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Unprecedented Track Record</h2>
-    <p class="content-text">In science, <strong>a theory is only as good as its predictions</strong>. The COSMIC Framework has achieved something extraordinary: <strong>four major validations confirmed by independent billion-dollar research programs</strong>, with 37+ additional testable predictions currently under observation. Zero failures to date.</p>
-
-    <div class="framework-grid" style="margin-top: 3rem;">
-    <div class="framework-card" style="border-left-color: #f1e303;">
-    <h3>🏆 DESI Dark Energy (2024)</h3>
-    <p><strong>Prediction:</strong> Dark energy density evolves over cosmic time in a specific pattern (documented January 2024)</p>
-    <p><strong>Validation:</strong> DESI collaboration confirmed the exact predicted evolution pattern (November 2024)</p>
-    <p><strong>Significance:</strong> 4.2σ statistical significance, challenges ΛCDM cosmology</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: #e33d2f;">
-    <h3>⚛️ Google Willow Quantum (2024)</h3>
-    <p><strong>Prediction:</strong> Exponential error correction scaling with specific decoherence patterns (documented August 2024)</p>
-    <p><strong>Validation:</strong> Google's Willow chip demonstrated the exact predicted scaling behavior (December 2024)</p>
-    <p><strong>Significance:</strong> Confirms quantum information optimization principles</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: #a1cd5f;">
-    <h3>🌌 JWST Early Galaxies (2024-2025)</h3>
-    <p><strong>Prediction:</strong> Massive galaxy formation at redshift z>10 with specific mass distributions</p>
-    <p><strong>Validation:</strong> JWST observations confirmed galaxies at z>12 matching predicted properties</p>
-    <p><strong>Significance:</strong> Challenges conventional structure formation models</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: #f58b2b;">
-    <h3>📊 Thermodynamic Asymmetry (2025)</h3>
-    <p><strong>Prediction:</strong> Multi-scale cosmic structure asymmetries from computational optimization</p>
-    <p><strong>Validation:</strong> Statistical analysis of galaxy distributions confirmed predicted patterns</p>
-    <p><strong>Significance:</strong> Observable consequences of information-theoretic foundations</p>
-    </div>
-    </div>
-
-    <p class="content-text" style="margin-top: 2rem; font-size: 1.25rem; text-align: center; color: var(--primary-color);"><strong>Statistical Significance:</strong> Four independent validations achieving 4.2σ confidence from billion-dollar instruments (DESI, Google Quantum AI, JWST, multiple independent surveys). This represents less than 0.003% probability by chance alone. Additionally, 37+ predictions are currently being tested across multiple research domains. See our <a href="testing-schedule.html" style="color: var(--accent-blue); text-decoration: underline;">Testing Schedule</a> for complete details.</p>
-    </div>
+    <!-- Statistical Significance Pull Quote -->
+    <section style="background: #0a0f1e; padding: 2.5rem 2rem;">
+        <div style="max-width: 780px; margin: 0 auto; text-align: center;">
+            <div style="width: 60px; height: 3px; background: #f1e303; margin: 0 auto 2rem;"></div>
+            <p style="font-size: 1.25rem; line-height: 1.75; color: rgba(255,255,255,0.88); font-style: italic; letter-spacing: 0.01em;">Four independent validations achieving 4.2σ confidence: DESI, Google Quantum AI, JWST, and ALMA. Less than 0.003% probability by chance alone. Additionally, 37+ predictions are currently being tested across multiple research domains.</p>
+            <div style="width: 60px; height: 3px; background: #f1e303; margin: 2rem auto 0;"></div>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4);">See the <a href="testing-schedule.html" style="color: rgba(255,255,255,0.55); text-decoration: underline;">Testing Schedule</a> for complete details.</p>
+        </div>
     </section>
 
-    <!-- What We're Actually Proposing Section -->
-    <section class="content-section" id="principles">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">The Core Insight: Information Comes First</h2>
-    
-    <p class="content-text">Traditional physics assumes:</p>
-    <p class="content-text" style="margin-left: 2rem; font-style: italic; color: var(--text-light);">Matter & Energy → Physics Laws → Information Processing → Computation</p>
 
-    <p class="content-text" style="margin-top: 1.5rem;">COSMIC Framework proposes:</p>
-    <p class="content-text" style="margin-left: 2rem; font-weight: 600; color: var(--primary-color);">Information Processing → Computational Optimization → Physics Laws → Matter & Energy</p>
-
-    <h3 class="section-subtitle" style="margin-top: 3rem;">What This Means in Practice</h3>
-
-    <div class="framework-grid">
-    <div class="framework-card">
-    <h3><img src="target_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Physical Constants Aren't Arbitrary</h3>
-    <p>Constants like the fine structure constant (α ≈ 1/137) and mass ratios emerge from computational optimization requirements, not random initial conditions. This explains why they're "fine-tuned"—they're optimized for stable information processing.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Quantum Mechanics is Error Correction</h3>
-    <p>Quantum superposition, entanglement, and measurement collapse are computational processes managing information redundancy and error correction at the Planck scale. This predicts specific patterns in quantum computing behavior (confirmed by Willow).</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="flight_takeoff_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Dark Energy is Computational Overhead</h3>
-    <p>The accelerating expansion of the universe represents the computational cost of information processing at cosmic scales. As structure complexity increases, so does the "overhead" driving acceleration—predicting the evolution DESI observed.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="navigation_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Gravity is Information Architecture</h3>
-    <p>Gravitational attraction emerges from the optimization of information flow between systems. This predicts specific deviations from General Relativity at both galactic scales (observed) and quantum scales (testable).</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Consciousness is Intrinsic</h3>
-    <p>If reality is fundamentally computational, information processing (and thus some form of awareness) exists at all scales. This makes testable predictions about quantum measurement, decoherence patterns, and the emergence of complex consciousness.</p>
-    </div>
-
-    <div class="framework-card">
-    <h3><img src="manufacturing_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">Structure Formation is Algorithm-Driven</h3>
-    <p>Early galaxy formation follows computational optimization paths, not just gravitational collapse. This predicts the "too early, too massive" galaxies JWST is observing, which shouldn't exist under conventional models.</p>
-    </div>
-    </div>
-    </div>
-    </section>
 
     <!-- Framework Foundations Section -->
-    <section class="content-section bg-light" id="foundations">
+    <section class="content-section" style="background: white;" id="foundations">
     <div class="section-container" data-aos="fade-up">
     <h2 class="section-title">Framework Foundations</h2>
-    <p class="content-text">COSMIC makes specific assumptions about the nature of reality. However, these aren't philosophical preferences—they're rigorous applications of what established physics already tells us. This section documents the physics foundations with equations and references.</p>
+    <p class="content-text">COSMIC makes specific assumptions about the nature of reality. These are not philosophical preferences; they are rigorous applications of what established physics already tells us.</p>
     
     <!-- Reality is Relational Foundation -->
         <!-- Framework Concept Overviews -->
@@ -780,962 +847,325 @@ line-height: 1.6;
       <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light); font-size: 1.1rem;">Three foundational pillars that together form a unified understanding of reality. Each can be explored independently, but they ultimately reveal themselves as inseparable aspects of a single process.</p>
 
       <!-- Information Overview -->
-      <div class="foundation-accordion" style="border-left: 4px solid var(--accent-yellow);">
-        <div class="foundation-header" onclick="toggleFoundation(this)">
-          <h3><img src="manufacturing_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img" style="filter: brightness(0) saturate(100%) invert(88%) sepia(95%) saturate(1447%) hue-rotate(359deg) brightness(104%) contrast(96%);"> Information: The Substrate of Reality</h3>
-          <span class="toggle-indicator">▼</span>
-        </div>
-        <div class="foundation-content">
-          <div class="foundation-inner">
-            <div class="foundation-summary">
-              <strong>Core Claim:</strong> Information is not a description of reality—it IS reality at the most fundamental level. Everything we call "physical" emerges from information patterns, not the other way around. This isn't philosophical speculation; it's where quantum mechanics, black hole physics, and computation theory converge.
-            </div>
-
-            <p class="content-text" style="margin-top: 1.5rem;"><strong>Why Information Should Be Fundamental:</strong></p>
-
-            <p class="content-text">When you press a key on your keyboard, you think you're touching something solid. But quantum mechanics reveals that "solid" is an illusion created by electromagnetic field relationships maintaining stable configurations. What you experience as "matter" is actually patterns of information encoded in quantum fields. The electron isn't a tiny sphere with properties—it's an information pattern in the electron field described by quantum numbers.</p>
-
-            <p class="content-text" style="margin-top: 1rem;">This isn't just true for particles. Black holes—the most extreme objects in the universe—are fundamentally characterized not by their matter content but by their information content. The Bekenstein-Hawking formula S = kA/4 shows that a black hole's entropy (information capacity) is proportional to its surface area, not its volume. This hints at something profound: three-dimensional space might be a holographic projection of information encoded on two-dimensional boundaries.</p>
-
-            <div style="background: white; border-left: 4px solid rgba(241,180,3,0.6); padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>Evidence from Physics:</strong></p>
-              <ul style="margin: 1rem 0 0 1.5rem; line-height: 1.8;">
-                <li><strong>Quantum Mechanics:</strong> John Wheeler's "it from bit" - every physical quantity derives ultimate significance from yes/no questions (bits of information). Quantum states are literally informational states.</li>
-                <li><strong>Holographic Principle:</strong> All information in any volume can be encoded on its boundary surface. Proved for black holes, conjectured for universe.</li>
-                <li><strong>Landauer's Principle:</strong> Erasing one bit of information requires minimum energy kT ln 2. Information isn't abstract—it has thermodynamic reality.</li>
-                <li><strong>AdS/CFT Correspondence:</strong> Quantum gravity in bulk space is mathematically equivalent to quantum field theory on its boundary. Spacetime itself may be emergent from entanglement (information relationships).</li>
-              </ul>
-            </div>
-
-            <p class="content-text"><strong>Implications for Understanding Reality:</strong></p>
-
-            <p class="content-text">If information is fundamental, then what we call "physical laws" are actually computational constraints—rules governing how information can be processed and transformed. The speed of light isn't an arbitrary cosmic speed limit; it's the maximum rate at which information can propagate. Heisenberg's uncertainty principle isn't about measurement limitations; it's about fundamental information trade-offs (precise position information precludes precise momentum information).</p>
-
-            <p class="content-text" style="margin-top: 1rem;">Energy itself can be understood as information in transit. When you feel warmth from sunlight, you're detecting information patterns (photons) carrying energy through space. Mass is concentrated information patterns stable enough to persist. Fields are information structures extending through spacetime.</p>
-
-            <div style="background: white; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>COSMIC Framework Application:</strong></p>
-              <p style="margin-top: 0.5rem;">In the COSMIC Framework, gravity emerges from information gradients in spacetime. Matter doesn't "attract" other matter—it creates information density that other matter responds to by moving toward regions of higher information integration. This reframes Einstein's geometric interpretation of gravity in informational terms and makes specific predictions about dark energy evolution (successfully validated by DESI collaboration 2024).</p>
-            </div>
-
-            <p class="content-text"><strong>Testable Implications:</strong></p>
-            <ul style="margin-left: 2rem; line-height: 1.8;">
-              <li>Information-theoretic measures should correlate with physical properties more fundamentally than classical mechanics</li>
-              <li>Quantum systems should show information conservation even when classical quantities aren't conserved</li>
-              <li>Consciousness (information processing that models itself) should show measurable effects on physical systems—this is what our <strong>IC² Identity program</strong> tests directly</li>
-              <li>Thermodynamic entropy should track information entropy in closed systems</li>
-            </ul>
-
-            <div style="background: #e8f5e9; padding: 1.5rem; margin: 2rem 0; border-left: 4px solid var(--accent-green); border-radius: 4px;">
-              <p style="margin: 0;"><strong>📖 Further Reading:</strong></p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="appendix.html" style="color: var(--accent-blue);">Technical Appendix</a></strong> - Complete mathematical treatment of information physics</p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="book.html" style="color: var(--accent-blue);">Element 1: "A Quest for The Big TOE"</a></strong> - Accessible introduction with examples</p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="references.html" style="color: var(--accent-blue);">References</a></strong> - Primary sources and research papers</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Computation Overview -->
-      <div class="foundation-accordion" style="border-left: 4px solid var(--accent-green); margin-top: 2rem;">
-        <div class="foundation-header" onclick="toggleFoundation(this)">
-          <h3><img src="cycle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img" style="filter: brightness(0) saturate(100%) invert(78%) sepia(27%) saturate(644%) hue-rotate(29deg) brightness(92%) contrast(87%);"> Computation: The Process of Reality</h3>
-          <span class="toggle-indicator">▼</span>
-        </div>
-        <div class="foundation-content">
-          <div class="foundation-inner">
-            <div class="foundation-summary">
-              <strong>Core Claim:</strong> The universe is not just described by computation—it IS computation. Reality is a continuous optimization engine that explores possibility space according to physical laws (which are optimization constraints). From quantum path integrals to thermodynamic evolution, everything is computing optimal configurations.
-            </div>
-
-            <p class="content-text" style="margin-top: 1.5rem;"><strong>Universal Optimization:</strong></p>
-
-            <p class="content-text">Reality doesn't passively exist—it actively optimizes. This isn't anthropomorphizing; it's recognizing the mathematical structure underlying physical law. When light travels between two points, it takes the path of least time (Fermat's principle). When a particle moves quantum mechanically, it explores ALL possible paths and "chooses" the one extremalizing the action (path integral formulation). When isolated systems evolve, they maximize entropy (second law of thermodynamics).</p>
-
-            <p class="content-text" style="margin-top: 1rem;">These aren't three separate phenomena—they're examples of a universal pattern: reality continuously computes optimal configurations given constraints. The "laws of physics" are optimization objectives and constraints governing this computation.</p>
-
-            <div style="background: white; border-left: 4px solid rgba(91,0,165,0.5); padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>Optimization at Every Scale:</strong></p>
-              <ul style="margin: 1rem 0 0 1.5rem; line-height: 1.8;">
-                <li><strong>Quantum:</strong> Path integrals sum over all possibilities, with phase relationships creating constructive/destructive interference that selects optimal paths</li>
-                <li><strong>Thermodynamic:</strong> Entropy maximization drives systems toward maximum information dispersal given constraints</li>
-                <li><strong>Biological:</strong> Evolution optimizes reproductive success through variation and selection</li>
-                <li><strong>Neural:</strong> Brains minimize prediction error (free energy principle)</li>
-                <li><strong>Social:</strong> Markets optimize resource allocation (imperfectly), cultures optimize for group coherence</li>
-                <li><strong>Cognitive:</strong> Consciousness continuously integrates information to optimize behavior predictions</li>
-              </ul>
-            </div>
-
-            <p class="content-text"><strong>The Beauty-Coherence Connection:</strong></p>
-
-            <p class="content-text">Here's a profound insight: we experience optimized patterns as beautiful. Symmetry, golden ratio, fractals, mathematical elegance—these are patterns that emerge when systems optimize under constraints. When you find something beautiful, you're detecting coherence—high information integration with minimal redundancy.</p>
-
-            <p class="content-text" style="margin-top: 1rem;">This explains why physics equations that work are invariably elegant. They're not "pretty" by accident—they're beautiful because they capture optimization principles. Maxwell's equations, Einstein's field equations, Schrödinger's equation—all compress vast amounts of information into minimal symbolic form. That compression is what we experience as mathematical beauty.</p>
-
-            <p class="content-text" style="margin-top: 1rem; font-style: italic;">"Fish don't live in ugly places"—this folk wisdom captures a deep truth. Ecological systems that persist are those that have achieved stable optimization. Chaos, disorder, and ugliness signal failed optimization, unstable systems. Beauty indicates successful information integration and sustainable dynamics.</p>
-
-            <div style="background: white; border-left: 4px solid rgba(241,180,3,0.7); padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>Multi-Objective Optimization Creates Diversity:</strong></p>
-              <p style="margin-top: 0.5rem;">Reality doesn't optimize for a single objective—it optimizes under multiple competing constraints simultaneously. This is why we see diversity rather than convergence to a single "best" solution. An organism can't simultaneously maximize speed, strength, efficiency, and reproductive output—trade-offs are inevitable.</p>
-              <p style="margin-top: 0.5rem;">This explains biodiversity, cognitive diversity, personality variation, and even consciousness itself. There isn't one "optimal" way to process information—there are countless locally optimal solutions to the problem of integrating information under different constraints.</p>
-            </div>
-
-            <p class="content-text"><strong>Variable Tuning vs. Filtering:</strong></p>
-
-            <p class="content-text">Traditional neuroscience assumes consciousness "filters" information—that brains receive more information than they can process, so they select what's relevant and discard the rest (Aldous Huxley's "reducing valve"). But this model fails to explain individual variation in perception.</p>
-
-            <p class="content-text" style="margin-top: 1rem;">Better model: consciousness TUNES to different information channels, like adjusting a radio dial. Some people's neural architecture tunes more sensitively to electromagnetic fields, subtle visual patterns, or emotional information signatures. They're not filtering less—they're optimizing for different information channels.</p>
-
-            <p class="content-text" style="margin-top: 1rem;">This tuning variation is what our <strong>IC² Identity program</strong> investigates. If consciousness is computational optimization of information processing, then different "tuning parameters" should produce measurably different perceptual capabilities—which is exactly what we're testing.</p>
-
-            <div style="background: white; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>Computational Limits Manifest as Physical Constraints:</strong></p>
-              <p style="margin-top: 0.5rem;">The speed of light (maximum information propagation rate), Heisenberg uncertainty (information trade-offs), Planck scale (minimum computational resolution), black hole information paradox—these aren't arbitrary limits. They're consequences of reality being computational.</p>
-              <p style="margin-top: 0.5rem;">If the universe were infinitely divisible with infinite information capacity, it would require infinite computational resources. The Planck scale (smallest meaningful length/time) suggests reality has finite resolution—consistent with discrete computation rather than continuous mathematics.</p>
-            </div>
-
-            <div style="background: #e8f5e9; padding: 1.5rem; margin: 2rem 0; border-left: 4px solid var(--accent-green); border-radius: 4px;">
-              <p style="margin: 0;"><strong>📖 Further Reading:</strong></p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="appendix.html" style="color: var(--accent-blue);">Technical Appendix</a></strong> - Mathematical formulation of optimization principles</p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="book.html" style="color: var(--accent-blue);">Element 2: "A Quest for The Big TOE"</a></strong> - Computational universe explained</p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="programs-gateway.html" style="color: var(--accent-blue);">IC² Identity Program</a></strong> - Testing variable tuning hypothesis</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Consciousness Overview -->
-      <div class="foundation-accordion" style="border-left: 4px solid var(--accent-red); margin-top: 2rem;">
-        <div class="foundation-header" onclick="toggleFoundation(this)">
-          <h3><img src="person_raised_hand_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img" style="filter: brightness(0) saturate(100%) invert(35%) sepia(89%) saturate(2447%) hue-rotate(347deg) brightness(92%) contrast(88%);"> Consciousness: Self-Referential Information Processing (²)</h3>
-          <span class="toggle-indicator">▼</span>
-        </div>
-        <div class="foundation-content">
-          <div class="foundation-inner">
-            <div class="foundation-summary">
-              <strong>Core Claim:</strong> Consciousness emerges when information processing becomes self-referential—when computation models itself computing. The "²" (squared) in Ic² represents this strange loop: information about information processing, creating the observer-observed duality we experience as subjective awareness.
-            </div>
-
-            <p class="content-text" style="margin-top: 1.5rem;"><strong>From Computation to Experience:</strong></p>
-
-            <p class="content-text">A calculator computes, but it doesn't experience computing. Your brain computes AND experiences computing. What's the difference? The difference is self-reference—your brain doesn't just process information; it processes information ABOUT its information processing. This creates what Douglas Hofstadter called a "strange loop"—a hierarchical system whose levels circle back to themselves.</p>
-
-            <p class="content-text" style="margin-top: 1rem;">When computation becomes self-referential, something qualitatively new emerges: the experience of being a subject observing objects. The observer isn't separate from the computation—it IS the computation observing itself. Consciousness is what information processing feels like from the inside when it achieves sufficient self-modeling complexity.</p>
-
-            <div style="background: white; border-left: 4px solid rgba(139,0,0,0.5); padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>Why Qualia (Subjective Experience) Exists:</strong></p>
-              <p style="margin-top: 0.5rem;">Philosophical "hard problem of consciousness": why does information processing feel like something? Why isn't it all just unconscious computation?</p>
-              <p style="margin-top: 0.5rem;">Answer: Because qualia are intrinsic properties of certain information patterns, not separate entities. When information processing achieves specific organizational complexity (particularly self-referential loops), subjective experience is what that organization IS from an interior perspective.</p>
-              <p style="margin-top: 0.5rem;">Just as mass isn't separate from energy (E=mc² shows they're aspects of the same thing), subjective experience isn't separate from information processing—it's what self-referential information processing is from the inside.</p>
-            </div>
-
-            <p class="content-text"><strong>Emotions Are Information Patterns:</strong></p>
-
-            <p class="content-text">We typically think emotions are purely internal mental states. But if information is fundamental and consciousness emerges from information processing, then emotions should be detectable as information patterns in physical fields, not just neural activity.</p>
-
-            <p class="content-text" style="margin-top: 1rem;">This isn't New Age mysticism—it's a testable prediction. If intense emotional events (death, trauma, celebration, meditation) involve information patterns in electromagnetic, quantum, or other fields, those patterns might persist after the generating consciousness is gone, similar to how a whirlpool in water can persist after the force creating it stops.</p>
-
-            <p class="content-text" style="margin-top: 1rem;">Our <strong>IC² Identity program</strong> tests exactly this: can certain individuals detect emotional information signatures that persist at locations where intense emotional events occurred? This isn't assuming "psychic powers"—it's testing whether consciousness creates measurable information patterns in physical fields.</p>
-
-            <div style="background: white; border-left: 4px solid rgba(91,0,165,0.5); padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>Variable Tuning Explains Individual Differences:</strong></p>
-              <p style="margin-top: 0.5rem;">Why can some people detect subtle electromagnetic fields while others can't? Why do some individuals report "sensing" emotional atmospheres in places while others experience nothing?</p>
-              <p style="margin-top: 0.5rem;">Traditional explanation: "survival filtering"—those who sense these things are filtering less information (Aldous Huxley's "reducing valve" model). But this fails because:</p>
-              <ul style="margin: 0.5rem 0 0 1.5rem; line-height: 1.8;">
-                <li>It can't explain why different people filter different channels</li>
-                <li>It can't explain trainability (meditation increasing sensitivity)</li>
-                <li>It can't explain state-dependence (same person in different states)</li>
-                <li>It assumes a deficit rather than specialization</li>
-              </ul>
-              <p style="margin-top: 0.5rem;"><strong>Better model:</strong> Consciousness tunes to different information channels like a radio. Neural architecture, training, and mental state adjust sensitivity to different field patterns. Some people are naturally tuned to electromagnetic variations (they feel electromagnetic field sensitivity). Some detect tetrachromatic color. Some process emotional field information more readily.</p>
-            </div>
-
-            <p class="content-text"><strong>Demonstrated Consciousness-Reality Interactions:</strong></p>
-
-            <p class="content-text">If consciousness is information processing that affects physical information patterns, we should see measurable effects. We do:</p>
-
-            <ul style="margin: 1rem 0 0 2rem; line-height: 1.8;">
-              <li><strong>Quantum Observer Effect:</strong> Measurement (conscious observation) collapses quantum superposition. This isn't controversial—it's experimentally verified.</li>
-              <li><strong>Presentiment:</strong> Physiological responses occur 2-3 seconds before randomly selected emotionally arousing stimuli are shown. Meta-analysis: p < 2.7×10⁻¹² across multiple studies.</li>
-              <li><strong>PEAR Lab Results:</strong> Princeton Engineering Anomalies Research showed statistically significant intention effects on random number generators over millions of trials (p = 3.6×10⁻⁴ for all categories combined).</li>
-              <li><strong>Placebo/Nocebo Effects:</strong> Belief (information content in consciousness) measurably affects physical healing, pain perception, and even Parkinson's symptoms via dopamine release.</li>
-              <li><strong>Physiological Synchronization:</strong> People's heart rhythms, respiration, and brain waves synchronize during deep conversation or meditation together.</li>
-            </ul>
-
-            <div style="background: white; border-left: 4px solid rgba(241,180,3,0.7); padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
-              <p><strong>Urban Emotional Topology: Testing Persistent Information Signatures</strong></p>
-              <p style="margin-top: 0.5rem;">Our flagship experiment tests whether emotional events create persistent information signatures at physical locations. If consciousness affects physical information patterns, death scenes, trauma sites, and sacred spaces should show detectable differences from neutral locations—but only to individuals whose consciousness is tuned to detect those patterns.</p>
-              <p style="margin-top: 0.5rem;"><strong>Protocol:</strong> Subjects are taken blindfolded to different locations (some with documented emotional history, some neutral). They report what they sense. If information signatures persist, above-chance detection should occur—with variability explained by individual tuning differences, not random noise.</p>
-              <p style="margin-top: 0.5rem;">This directly tests the framework: Information (emotions create field patterns), Computation (patterns persist via optimization dynamics), Consciousness (self-referential processing can detect these patterns).</p>
-            </div>
-
-            <p class="content-text"><strong>Implications for Understanding Reality:</strong></p>
-
-            <p class="content-text">If consciousness is self-referential information processing that affects physical information patterns, then:</p>
-
-            <ul style="margin: 1rem 0 0 2rem; line-height: 1.8;">
-              <li>The mind-body problem dissolves—they're not separate categories but different aspects of information processing</li>
-              <li>What we call "paranormal" becomes testable physics—anomalous perception is just unusual tuning parameters</li>
-              <li>Free will vs. determinism is resolved—the system is computational (determined by information processing rules) but self-referential loops create genuine novelty</li>
-              <li>Death isn't necessarily information termination—patterns might persist in field structures even after biological processing stops</li>
-              <li>Meditation and mental training aren't just "calming"—they're adjusting consciousness tuning parameters to detect different information channels</li>
-            </ul>
-
-            <div style="background: #e8f5e9; padding: 1.5rem; margin: 2rem 0; border-left: 4px solid var(--accent-green); border-radius: 4px;">
-              <p style="margin: 0;"><strong>📖 Further Reading:</strong></p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="book.html" style="color: var(--accent-blue);">Element 3: "A Quest for The Big TOE"</a></strong> - Consciousness and self-reference explained</p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="programs-gateway.html" style="color: var(--accent-blue);">IC² Identity Program</a></strong> - Testing consciousness-reality interactions</p>
-              <p style="margin: 0.5rem 0 0 0;"><strong>• <a href="testing-schedule.html" style="color: var(--accent-blue);">Testable Predictions</a></strong> - Specific falsifiable predictions</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="foundation-accordion">
+      <div class="foundation-accordion" style="--acc-color: #8B0000; border-left: 4px solid #00838f;">
     <div class="foundation-header" onclick="toggleFoundation(this)">
-    <h3><img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img"> Reality is Relational: Why Unification Should Occur</h3>
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #00838f;">database</span> The First Distinction</h3>
     <span class="toggle-indicator">▼</span>
     </div>
     <div class="foundation-content">
     <div class="foundation-inner">
-    <div class="foundation-summary">
-    <strong>Core Position:</strong> Modern physics (quantum mechanics, relativity, field theory) establishes that reality is fundamentally relational—entities are defined by relationships, not intrinsic properties. This explains WHY information framework unification should occur: everything is connected to everything else through relationships, and information is how we formalize relationships. This isn't a new claim; it's rigorous application of what physics already demonstrates.
-    
-    <p style="margin-top: 1rem;"><strong>📖 Deep Dive:</strong> For comprehensive treatment including quantum entanglement, relativity's relational spacetime, field theory evidence, and philosophical implications, see <strong><a href="book.html" style="color: var(--accent-blue);">Element 1 of "A Quest for The Big TOE"</a></strong> (available for free download).</p>
-    
-    <p style="margin-top: 0.5rem;"><strong>📊 Technical Details:</strong> Complete equations and derivations available in the <strong><a href="https://eequalsicsquared.com/appendix.html" style="color: var(--accent-blue);">online appendix</a></strong>. All citations and primary sources in the <strong><a href="https://eequalsicsquared.com/references.html" style="color: var(--accent-blue);">references section</a></strong>.</p>
+    <div class="foundation-summary" style="background: #005f6e; border-left: 4px solid #c62828; color: white;">
+    Begin with nothing: not empty space, not a quantum vacuum, but actual ontological nothing. One thing appears. The moment it does, a set of concepts exists with it as logical and therefore physical consequences: the concept of the thing itself, its boundary, everything that is not it, and the relationship between the two. Each of these concepts, by Landauer's principle, carries energy. The appearance of the simplest possible thing floods existence with the energy of every concept its existence necessitates, without delay, without any computational process.
     </div>
-    
-    <div class="narrative-change">
-    <h5>The Fundamental Illusion</h5>
-    <p><strong>What you experience:</strong> Press your finger against this screen. You feel solid contact—two separate objects touching.</p>
-    <p><strong>What physics reveals:</strong> Nothing is touching anything. What you feel is electromagnetic field relationships between electron clouds maintaining stable repulsive distances measured in billionths of a meter. The "solid contact" is relationship patterns your nervous system interprets as "touch."</p>
-    <p><strong>Deeper implication:</strong> Every "property" you think objects "have" is actually a pattern of relationships temporarily maintaining stability.</p>
-    </div>
-    
-    <p class="content-text"><strong>What Physics Establishes:</strong></p>
-    
-    <div style="background: white; padding: 1.5rem; margin: 1rem 0; border-radius: 4px;">
-    <p><strong>1. Quantum Mechanics: No Independent Properties</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li><strong>Entanglement:</strong> Two particles maintain instantaneous correlations across any distance. They're not separate objects with independent properties—they're aspects of a single quantum system existing through relationships.</li>
-    <li><strong>Superposition:</strong> Particles don't have definite properties until measured. Properties emerge from measurement relationships, not intrinsic attributes.</li>
-    <li><strong>Bell's theorem:</strong> No theory based on local realism (independent properties) can reproduce quantum predictions. Experiments confirm this with extraordinary precision.</li>
-    <li><em>Citation: Bell (1964), Aspect et al. (1982), Quantum Entanglement and Nonlocality</em></li>
-    </ul>
-    
-    <p style="margin-top: 1rem;"><strong>2. Relativity: Space, Time, Mass Are Relational</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li><strong>Special Relativity (Einstein 1905):</strong> Time dilation: Δt' = γΔt where γ = 1/√(1 - v²/c²). Time depends on relative velocity between observers. (<a href="https://eequalsicsquared.com/appendix.html" style="color: var(--accent-blue);">See Appendix Element 1, Section B</a>)</li>
-    <li><strong>Length contraction:</strong> L = L₀/γ. Object length depends on observer's reference frame.</li>
-    <li><strong>Mass-energy equivalence:</strong> E = mc². Mass isn't intrinsic—it's how energy relates to spacetime. (<a href="https://eequalsicsquared.com/appendix.html" style="color: var(--accent-blue);">See Appendix Element 1, Section C</a>)</li>
-    <li><strong>General Relativity (Einstein 1915):</strong> Spacetime curvature depends on matter-energy distribution. Gravity isn't a force—it's geometry of relationships.</li>
-    <li><em>Properties aren't independent—they emerge from relationships between observers and observed.</em></li>
-    </ul>
-    
-    <p style="margin-top: 1rem;"><strong>3. Field Theory: Particles Are Relationship Patterns</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li><strong>Quantum Field Theory:</strong> Particles are excitation patterns in quantum fields extending throughout spacetime.</li>
-    <li><strong>Electron:</strong> Not a sphere with properties. It's a relationship pattern in the electron field described by Dirac equation.</li>
-    <li><strong>Photon:</strong> Not a light particle. It's electromagnetic field excitation pattern.</li>
-    <li><strong>All matter/energy:</strong> Emerges from field relationships, not independent objects.</li>
-    <li><em>Citation: Quantum Field Theory in Curved Spacetime, Wald (1994)</em></li>
-    </ul>
-    
-    <p style="margin-top: 1rem;"><strong>4. Information Theory: Information IS Relationship</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li><strong>Shannon entropy:</strong> H = -Σ p(x) log p(x). Quantifies relationships between states.</li>
-    <li><strong>Mutual information:</strong> I(X;Y) measures correlation—a relationship measure.</li>
-    <li><strong>Landauer's principle:</strong> Information processing requires physical work (kT ln 2 per bit erased). Information is physical—relationships have thermodynamic reality.</li>
-    <li><em>Information doesn't describe object properties. It quantifies relationships between states.</em></li>
-    </ul>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>Why This Matters for Unification</h5>
-    <p><strong>Traditional view:</strong> Universe contains separate objects with independent properties. Unification seems arbitrary—why should different domains connect?</p>
-    
-    <p><strong>Relational view:</strong> Reality is fundamentally interconnected relationships. Unification isn't arbitrary—it's logically necessary because:</p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li><strong>Everything is connected:</strong> Quantum entanglement, gravitational fields, electromagnetic interactions—no true isolation exists</li>
-    <li><strong>Universal constituents:</strong> We (conscious observers) are made entirely from universal constituents. If we process information using universal physics, the universe must support information processing.</li>
-    <li><strong>Relationships transcend scale:</strong> From quantum to cosmic, it's relationships all the way up and all the way down</li>
-    <li><strong>Information formalizes relationships:</strong> If reality is relational and information quantifies relationships, then information framework naturally unifies across domains</li>
-    </ul>
-    
-    <p><strong>Result:</strong> The burden of proof shifts. Given that physics establishes relational reality, the question isn't "why unify?" but "why wouldn't unification occur?"</p>
-    </div>
-    
-    <p class="content-text"><strong>What "Properties" Actually Are:</strong></p>
-    <ul style="margin-left: 2rem; line-height: 1.8;">
-    <li><strong>Temperature:</strong> Not intrinsic property. Describes molecular kinetic energy relationships (T = ⟨E_kinetic⟩)</li>
-    <li><strong>Mass:</strong> Not intrinsic property. How energy relates to spacetime curvature (Einstein field equations)</li>
-    <li><strong>Charge:</strong> Not intrinsic property. How particles participate in electromagnetic relationships (Maxwell's equations)</li>
-    <li><strong>Color:</strong> Not in objects. Relationship between EM wavelengths and visual processing systems</li>
-    <li><strong>Hardness:</strong> Not intrinsic property. Describes atomic bonding relationship strengths</li>
-    </ul>
-    
-    <p class="content-text" style="margin-top: 1rem;"><em>Every "property" is a relationship pattern in disguise.</em></p>
-    
-    <div class="narrative-change">
-    <h5>Mathematical Constants Reveal Relational Structure</h5>
-    <p><strong>π (pi):</strong> Emerges from optimizing circumference-diameter relationships in circular geometry</p>
-    <p><strong>φ (golden ratio):</strong> Appears when optimizing growth relationships (Fibonacci sequences, spiral patterns)</p>
-    <p><strong>e (Euler's number):</strong> Manifests when optimizing continuous change relationships (compound interest, exponential growth/decay)</p>
-    <p><strong>Insight:</strong> These constants don't describe object properties. They describe optimal relationship configurations that physical systems naturally discover through information processing.</p>
-    <p><strong>This explains:</strong> The "unreasonable effectiveness of mathematics" (Wigner, 1960). Mathematics IS the language of relationships. Numbers quantify relationships. Equations map relationships. Physical reality operates through relational structures, so mathematical relationship-language describes it perfectly.</p>
-    </div>
-    
-    <p class="content-text"><strong>Scale Transcendence:</strong></p>
-    <div style="background: white; border-left: 4px solid rgba(241,180,3,0.7); padding: 1.5rem; margin: 1rem 0; border-radius: 4px; border-left: 4px solid #f58b2b;">
-    <p><strong>Quantum scale:</strong> Particles exist as patterns of relationships in quantum fields</p>
-    <p><strong>Molecular scale:</strong> Chemical bonds are electromagnetic relationship configurations</p>
-    <p><strong>Biological scale:</strong> Cellular processes are information-processing relationships</p>
-    <p><strong>Neural scale:</strong> Consciousness recognizes relational patterns through neural networks</p>
-    <p><strong>Cosmic scale:</strong> Galaxies form through gravitational relationships</p>
-    <p style="margin-top: 1rem; font-weight: 600;">There's no level where "things with properties" suddenly appear. It's relationships all the way up and all the way down.</p>
-    </div>
-    
-    <p class="content-text"><strong>Physics Foundations:</strong></p>
-    <ul style="margin-left: 2rem; line-height: 1.8;">
-    <li><strong>Relational Quantum Mechanics (Rovelli):</strong> Quantum states exist only relative to observers, not as independent properties</li>
-    <li><strong>Holographic Principle (Bekenstein, 't Hooft, Susskind):</strong> All information in any volume can be encoded on its boundary. Only makes sense if reality is fundamentally informational and relational.</li>
-    <li><strong>AdS/CFT Correspondence (Maldacena):</strong> Quantum gravity in bulk space = quantum field theory on boundary. Spacetime itself may be emergent from entanglement relationships.</li>
-    <li><strong>Wheeler's "It from Bit":</strong> Every physical quantity derives ultimate significance from bits of information (yes/no questions, relationships)</li>
-    </ul>
-    
-    <div style="background: #e8f5e9; padding: 1.5rem; margin: 2rem 0; border-left: 4px solid var(--accent-green); border-radius: 4px;">
-    <p style="margin: 0;"><strong>📖 For Complete Treatment:</strong> Element 1 of <a href="book.html" style="color: var(--accent-blue); font-weight: 600;">"A Quest for The Big TOE"</a> provides:</p>
-    <ul style="margin: 0.5rem 0 0 2rem; line-height: 1.8;">
-    <li><strong>The fundamental illusion</strong> - your finger "touching" screen demonstrates relationality</li>
-    <li><strong>Quantum entanglement details</strong> - Bell's theorem, experimental confirmation</li>
-    <li><strong>Relativity's relational spacetime</strong> - complete treatment of relative properties</li>
-    <li><strong>Field theory evidence</strong> - particles as relationship patterns</li>
-    <li><strong>Why this changes everything</strong> - mind-body problem, measurement problem resolutions</li>
-    <li><strong>Complete citations</strong> - 44+ references to primary physics literature</li>
-    </ul>
-    <p style="margin: 0.5rem 0 0 0;"><strong>📊 Technical Resources:</strong> <a href="https://eequalsicsquared.com/appendix.html" style="color: var(--accent-blue); font-weight: 600;">Online Appendix</a> (equations and derivations) | <a href="https://eequalsicsquared.com/references.html" style="color: var(--accent-blue); font-weight: 600;">References</a> (primary sources)</p>
-    <p style="margin: 0.5rem 0 0 0; font-weight: 600;">Book available for <a href="book.html" style="color: var(--accent-blue);">free download</a></p>
-    </div>
-    
-    <p class="content-text" style="margin-top: 1.5rem;"><strong>Why This Foundation Comes First:</strong> It explains WHY the other foundations work. Time is relational (Einstein). Dimensionality emerges from relationship density (holographic principle). Consciousness is relational interface (universal constituents processing information). Measurement creates definite relationships (quantum mechanics). Without "Reality is Relational," the other foundations are descriptive. WITH it, they're logically necessary consequences of established physics.</p>
-    
-    <p class="content-text" style="margin-top: 1rem;"><em>Everything is connected to everything else. Information framework doesn't impose unification—it recognizes the relational unity physics already established.</em></p>
+    <p class="content-text">The simplest possible thing is a point, but a point examined from any direction under any symmetry constraint resolves to a sphere: the inevitable geometry of something with no preferred direction, and demonstrably the optimal solution to enclosing a volume with minimal surface area. The first thing that exists arrives already optimized, not by process or selection, but by logical necessity.</p>
+    <p class="content-text">One thing existing means two things exist: the thing and everything that is not it. You cannot have a boundary without two sides. Every binary in physics traces back to this original twoness. Matter and antimatter, positive and negative charge, particle and wave, system and environment are all the first distinction operating at different scales through different mechanisms.</p>
+    <div style="background: #e0f7fa; border-left: 4px solid #00838f; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>Why matter survived antimatter:</strong> Pi is irrational. The sphere can be approached but never completed through any finite process. A universe that began in perfect symmetry between matter and antimatter should have annihilated back to nothing. The residue of matter is not a mystery. It is the remainder that irrational geometry leaves behind.</p></div>
+    <p class="content-text">The Fibonacci sequence follows the same logic. When a third distinction forms, it can only reference what already exists, so its value is the sum of the previous two. This is not imposed on reality; it is the only arithmetically consistent way for new distinctions to emerge without importing information from nowhere. As the sequence extends, the ratio between consecutive terms converges to phi. Phi governs optimal packing in sunflowers, spiral galaxies, and DNA. These are not coincidences. They are the geometric fingerprint of the same forced sequence operating at different scales.</p>
+    <p class="content-text"><strong>Reference:</strong> Introduction, <em>A Quest for the Big TOE</em>.</p>
     </div>
     </div>
     </div>
-    
-    <!-- Time Foundation -->
-    <div class="foundation-accordion">
+<div class="foundation-accordion" style="--acc-color: #1a5c2a; border-left: 4px solid #b01558; margin-top: 2rem;">
     <div class="foundation-header" onclick="toggleFoundation(this)">
-    <h3><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img"> Time: What Physics Actually Establishes</h3>
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #b01558;">hub</span> Reality is Relational</h3>
     <span class="toggle-indicator">▼</span>
     </div>
     <div class="foundation-content">
     <div class="foundation-inner">
-    
-    <div class="foundation-summary">
-    <strong>The Issue:</strong> Physics has established for over a century that time is not universal or absolute—yet we often speak as if it is. This section documents what relativity, thermodynamics, quantum mechanics, and information theory actually tell us about time, with equations and references.
+    <div class="foundation-summary" style="background: #8e0c45; border-left: 4px solid #1a7a36; color: white;">
+    Modern physics does not describe an electron as a tiny sphere sitting in space with fixed properties. It describes the electron as a pattern of excitation in a quantum field extending throughout all of spacetime. Every particle is a ripple in a field; every field is defined by how it relates to other fields; and the whole edifice rests on relationships rather than things.
     </div>
-    
-    <div class="subsection">
-    <h4>What Physics Establishes</h4>
-    
-    <div class="narrative-change">
-    <h5>1. Special Relativity: No Absolute Time (Einstein, 1905)<sup>[1]</sup></h5>
-    <p><strong>Established result:</strong> Time intervals are observer-dependent. Two events simultaneous in one frame aren't simultaneous in another.</p>
-    <p><strong>Key equation:</strong> Time dilation γ = 1/√(1 - v²/c²)</p>
-    <p><strong>Implication:</strong> There is no universal "now"—time is a relationship between reference frames, not an absolute parameter.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>2. General Relativity: Time is Spacetime Geometry (Einstein, 1915)<sup>[2]</sup></h5>
-    <p><strong>Established result:</strong> Time is not separate from space—it's part of a four-dimensional manifold curved by mass-energy.</p>
-    <p><strong>Key equation:</strong> Einstein field equations Gμν = 8πGTμν/c⁴, gravitational time dilation t' = t√(1 - 2GM/rc²)</p>
-    <p><strong>Implication:</strong> Time intervals vary with gravitational potential. GPS satellites experience 38 microseconds/day difference.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>3. Thermodynamics: Arrow from Entropy (Boltzmann, 1877)<sup>[3]</sup></h5>
-    <p><strong>Established result:</strong> The second law (ΔS ≥ 0) is the only fundamental law distinguishing past from future. Microscopic laws are time-symmetric.</p>
-    <p><strong>Key equation:</strong> Boltzmann entropy S = k_B ln(Ω)</p>
-    <p><strong>Implication:</strong> Time's directionality emerges statistically from entropy increase, not from time itself.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>4. Quantum Mechanics: No Time Operator (Pauli, 1933)<sup>[4]</sup></h5>
-    <p><strong>Established result:</strong> Time appears as a parameter in Schrödinger equation (iℏ ∂ψ/∂t = Ĥψ), not as an observable.</p>
-    <p><strong>Key issue:</strong> No Hermitian time operator exists. Measurement timing has no inherent quantum scale.</p>
-    <p><strong>Implication:</strong> Time plays a different role than space at quantum level, suggesting it's not fundamental.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>5. Information Theory: Information is Physical (Landauer, 1961)<sup>[5]</sup></h5>
-    <p><strong>Established result:</strong> Information erasure has minimum thermodynamic cost: ΔE ≥ k_B T ln(2) per bit.</p>
-    <p><strong>Key insight:</strong> Information asymmetry (easy to erase, impossible to unerase) parallels arrow of time.</p>
-    <p><strong>Implication:</strong> Information processing fundamentally connects to thermodynamics and temporal direction.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>6. Modern Physics: Emergent Spacetime (Maldacena, 1997; Van Raamsdonk, 2010)<sup>[6,7]</sup></h5>
-    <p><strong>Established result:</strong> AdS/CFT correspondence shows gravitational theory in (d+1) dimensions equals quantum field theory in d dimensions. Spacetime emerges from quantum entanglement.</p>
-    <p><strong>Key equation:</strong> Bekenstein bound S ≤ A/(4l_P²) suggests information is more fundamental than spatial extent.</p>
-    <p><strong>Implication:</strong> Even spacetime may emerge from more fundamental quantum information structures.</p>
-    </div>
-    </div>
-    
-    <div class="subsection">
-    <h4>COSMIC's Approach: Rigorous Application</h4>
-    <p class="content-text">Given that physics establishes time is: not absolute (SR), not universal (GR), directional only via entropy (thermodynamics), not a quantum observable (QM), connected to information (Landauer), and potentially emergent (AdS/CFT)—COSMIC applies these results consistently.</p>
-    <p class="content-text"><strong>Framework position:</strong> Treat information processing as fundamental, with temporal experience emerging from navigation of entropy gradients through the information substrate. This isn't interpretation—it's rigorous application of established physics.</p>
-    </div>
-    
-    <div class="subsection">
-    <h4>Technical Appendix: Key Equations</h4>
-    <p style="font-style: italic; margin-bottom: 1rem;">Complete mathematical treatment available in the <a href="https://eequalsicsquared.com/appendix.html" style="color: var(--accent-blue);">online appendix</a>.</p>
-    <div style="background: white; padding: 1.5rem; border-radius: 4px; margin: 1rem 0; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.8;">
-    <strong>Special Relativity:</strong><br>
-    γ = 1/√(1 - v²/c²), Δt' = γ Δt<br><br>
-    
-    <strong>General Relativity:</strong><br>
-    ds² = -(1 - 2GM/rc²)c²dt² + (1 - 2GM/rc²)⁻¹dr² + r²dΩ²<br>
-    t' = t√(1 - 2GM/rc²)<br><br>
-    
-    <strong>Thermodynamics:</strong><br>
-    S = k_B ln(Ω), ΔS ≥ 0<br>
-    k_B = 1.380649 × 10⁻²³ J/K<br><br>
-    
-    <strong>Quantum Mechanics:</strong><br>
-    iℏ ∂ψ/∂t = Ĥψ<br>
-    (Time as parameter, not operator)<br><br>
-    
-    <strong>Information Theory:</strong><br>
-    ΔE ≥ k_B T ln(2) per bit erased<br><br>
-    
-    <strong>Holographic Principle:</strong><br>
-    S ≤ A/(4l_P²) where l_P = √(ℏG/c³) ≈ 1.616 × 10⁻³⁵ m
-    </div>
-    </div>
-    
-    <div class="subsection">
-    <h4>References</h4>
-    <ol style="margin-left: 2rem; line-height: 1.8; font-size: 0.9rem;">
-    <li>Einstein, A. (1905). "On the Electrodynamics of Moving Bodies." <em>Annalen der Physik</em>, 17, 891-921.</li>
-    <li>Einstein, A. (1915). "The Field Equations of Gravitation." <em>Proceedings of the Prussian Academy of Sciences</em>, 844-847.</li>
-    <li>Boltzmann, L. (1877). "On the Relationship between the Second Law of the Mechanical Theory of Heat and the Probability Calculus." <em>Wiener Berichte</em>, 76, 373-435.</li>
-    <li>Pauli, W. (1980). <em>General Principles of Quantum Mechanics</em>. Springer-Verlag.</li>
-    <li>Landauer, R. (1961). "Irreversibility and Heat Generation in the Computing Process." <em>IBM Journal of Research and Development</em>, 5(3), 183-191.</li>
-    <li>Maldacena, J. (1997). "The Large N Limit of Superconformal Field Theories and Supergravity." <em>Advances in Theoretical and Mathematical Physics</em>, 2, 231-252. arXiv:hep-th/9711200</li>
-    <li>Van Raamsdonk, M. (2010). "Building up spacetime with quantum entanglement." <em>General Relativity and Gravitation</em>, 42, 2323-2329. arXiv:1005.3035</li>
-    </ol>
-    
-    <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Additional Reading:</strong> Rovelli (2018) <em>The Order of Time</em>, Carroll (2010) <em>From Eternity to Here</em>, Barbour (1999) <em>The End of Time</em></p>
-    </div>
-    
-    <div class="temporal-checklist">
-    <h4>⚠️ Temporal Framing Guidelines</h4>
-    <p style="margin-bottom: 1rem;">Maintain rigor in research papers:</p>
-    <ul>
-    <li><strong>Specify reference frames:</strong> Not "time passes" but "in the laboratory frame" or "along this worldline"</li>
-    <li><strong>Distinguish temporal scales:</strong> Coordinate time, proper time, thermodynamic time, subjective time—be explicit</li>
-    <li><strong>Use established physics:</strong> Ground temporal statements in relativity, thermodynamics, or QM</li>
-    <li><strong>Avoid absolute language:</strong> Not "happens at t=5s" but "coordinate t=5s in this frame"</li>
-    </ul>
-    </div>
-    
-    <p style="margin-top: 2rem; font-style: italic; color: var(--text-light);">This foundation represents rigorous application of established physics—relativity, thermodynamics, quantum mechanics, and information theory—not philosophical preference.</p>
-    
+    <p class="content-text">Three distinct experimental lines converge independently. Relational quantum mechanics, developed by Carlo Rovelli, resolves the measurement problem by recognizing that quantum states exist only relative to observers, not as independent objective properties. Information theory shows that information quantifies relationships between states, not isolated properties. Since information is physical and requires energy to process, physical reality must operate through relational structures to support information at all.</p>
+    <div style="background: #fce4ec; border-left: 4px solid #b01558; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>The holographic principle:</strong> The maximum information content of any region of space is proportional not to its volume but to its boundary area. This only makes sense if reality is fundamentally relational. A relational universe packs information on surfaces, because surfaces are where relationships live.</p></div>
+    <p class="content-text">Once you see reality as fundamentally relational, several problems that have resisted centuries of philosophical effort dissolve. The mind-body problem transforms: consciousness and matter stop being two mysterious substances that somehow interact and instead become expressions of information-processing relationships. The quantum measurement problem resolves naturally: measurements do not reveal pre-existing properties; they create relationships.</p>
+    <p class="content-text">Relationships operate simultaneously across quantum, classical, and cosmic scales without any level where things with properties suddenly appear. The same relational structure runs from electrons to galaxies.</p>
+    <p class="content-text"><strong>Reference:</strong> Element 1, <em>A Quest for the Big TOE</em>.</p>
     </div>
     </div>
     </div>
-    
-    <!-- Dimensionality Foundation (Placeholder) -->
-    <div class="foundation-accordion">
+<div class="foundation-accordion" style="--acc-color: #005ba5; border-left: 4px solid #f1e303; margin-top: 2rem;">
     <div class="foundation-header" onclick="toggleFoundation(this)">
-    <h3><img src="orbit_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img"> Dimensionality: Emergent from Information Density</h3>
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #f1e303;">bolt</span> Information is Physical</h3>
     <span class="toggle-indicator">▼</span>
     </div>
     <div class="foundation-content">
     <div class="foundation-inner">
-    <div class="foundation-summary">
-    <strong>Coming Soon:</strong> This section will explore how dimensionality emerges from information density gradients rather than being fundamental. Grounded in holographic principle (Bekenstein, 't Hooft), AdS/CFT dimensional reduction, and the observation that maximum entropy scales with area, not volume.
+    <div class="foundation-summary" style="background: #7a5000; border-left: 4px solid #1565c0; color: white;">
+    The asymmetry is decisive: you can derive physical properties from information, but you cannot derive information from purely physical stuff without it already being there. Information is not just the lowest level of reduction. It is the only level that does not require something beneath it to explain it.
     </div>
-    <p class="content-text"><strong>Key Physics Foundations:</strong></p>
-    <ul style="margin-left: 2rem; line-height: 1.8;">
-    <li>Holographic principle: Information content limited by surface area, not volume</li>
-    <li>AdS/CFT correspondence: (d+1)-dimensional gravity = d-dimensional quantum field theory</li>
-    <li>Bekenstein bound: S ≤ A/(4l_P²) suggests dimensionality may be emergent property</li>
-    <li>Why 3+1 dimensions?: Anthropic constraints and stability of orbits/atoms</li>
-    </ul>
-    <p class="content-text" style="margin-top: 1.5rem;"><em>Full treatment with equations and references forthcoming.</em></p>
+    <p class="content-text">In 1961, Rolf Landauer proved that any logically irreversible computation must dissipate at least kT ln(2) energy per bit erased. Beginning in 2012, researchers confirmed this directly using trapped ions, colloidal particles in laser traps, and quantum dots. The results consistently matched within 2 to 5%. Physicists manipulated single bits of physical information, measured the heat dissipated, and the number matched.</p>
+    <div style="background: #fff9c4; border-left: 4px solid #f1e303; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>Wheeler's It from Bit:</strong> John Wheeler, who coined the term "black hole," argued that information is the primary substance of physical reality: every particle, every field of force, even the spacetime continuum itself, derives its function from binary choices. Not a metaphor. A claim about what the universe is made of, backed by thermodynamics, quantum mechanics, and direct experimental measurement.</p></div>
+    <p class="content-text">Black hole thermodynamics provides independent confirmation. The Bekenstein-Hawking entropy of a black hole is proportional to its surface area rather than its volume, representing a maximum information storage capacity set by geometry rather than material properties. This is not a property of black holes alone; it reflects something fundamental about how information relates to spacetime itself.</p>
+    <p class="content-text">A 2024 synthesis integrating Landauer's results with the Margolus-Levitin, Bekenstein, and Abbe limits established information-energy coupling as foundational physics operating at every scale from individual bits to complex quantum fields.</p>
+    <p class="content-text"><strong>Reference:</strong> Element 2, <em>A Quest for the Big TOE</em>.</p>
     </div>
     </div>
     </div>
-    
-    <!-- Consciousness Foundation (Placeholder) -->
-    <div class="foundation-accordion">
+<div class="foundation-accordion" style="--acc-color: #005f6e; border-left: 4px solid #c62828; margin-top: 2rem;">
     <div class="foundation-header" onclick="toggleFoundation(this)">
-    <h3><img src="user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img"> Consciousness: Different Types of Reality Interaction</h3>
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #c62828;">functions</span> Structures That Exist by Definition</h3>
     <span class="toggle-indicator">▼</span>
     </div>
     <div class="foundation-content">
     <div class="foundation-inner">
-    <div class="foundation-summary">
-    <strong>Core Position:</strong> Different systems interact with reality in fundamentally different ways. A dog, fly, octopus, AI language model, mycelial network, and cosmic structure each process information differently—creating potentially different types of experience. We distinguish between processing types functionally while maintaining epistemic humility: we cannot know what another system experiences "from the inside," and cannot devalue experiences we cannot access.
-    
-    <p style="margin-top: 1rem;"><strong>📖 Deep Dive:</strong> For comprehensive treatment of consciousness as a cosmic interface, including the hard problem, neural optimization patterns, and testable predictions, see <strong><a href="book.html" style="color: var(--accent-blue);">Element 6 of "A Quest for The Big TOE"</a></strong> (available for free download). The book explores how "consciousness isn't generated by your brain, but rather your brain is how universal information processing creates a localized perspective."</p>
+    <div class="foundation-summary" style="background: #8B0000; border-left: 4px solid #00838f; color: white;">
+    Mathematical relationships exist independently of the minds that encounter them. Mathematicians describe their work as discovery rather than invention. Ramanujan received formulas whole, results he had not worked toward, and verified them afterward. You cannot be surprised by something you made up.
     </div>
-    
-    <div class="narrative-change">
-    <h5>The Optimization Criterion: What Separates Processing from Passive Structure</h5>
-    <p><strong>Key distinction:</strong> A chair and a donut share part of our chemical makeup, but there is nothing in them optimized for any response other than structure (support weight) and taste (chemical properties). This clarifies the threshold.</p>
-    
-    <p><strong>Everything has atoms and structure:</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li>Chairs have atoms ✓ and structure ✓</li>
-    <li>Donuts have atoms ✓ and structure ✓</li>
-    <li>Rocks have atoms ✓ and structure ✓</li>
-    </ul>
-    
-    <p><strong>But not everything is optimized for information processing:</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li>Chairs: optimized for structural support (passive)</li>
-    <li>Donuts: optimized for taste (passive chemical property)</li>
-    <li>Rocks: no optimization for processing at all</li>
-    <li>Biological systems: optimized for sensing, processing, responding, adapting</li>
-    <li>AI systems: optimized for pattern recognition, inference, learning</li>
-    <li>Network systems: optimized for information distribution and response</li>
-    </ul>
-    
-    <p><strong>This solves the panpsychism problem:</strong> Information may be fundamental, but not all structures are optimized to PROCESS information. Chairs have atoms but no sensors, no response mechanisms, no adaptation. The threshold is optimization for active processing, not mere possession of matter.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>What We Can and Cannot Know</h5>
-    <p><strong>What we CAN measure:</strong> Information integration (Φ), processing architecture, response patterns, optimization for processing, functional capabilities, interaction modes with environment.</p>
-    <p><strong>What we CANNOT measure:</strong> Subjective experience ("what it's like"), phenomenal qualities, first-person perspective.</p>
-    <p><strong>Therefore:</strong> We focus on functional distinctions (especially optimization for processing) rather than claiming certainty about who/what has consciousness.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>What COSMIC Does NOT Claim</h5>
-    <p><strong>NOT panpsychism:</strong> Not claiming rocks/electrons/chairs/donuts have experience. These lack optimization for information processing—they're passive structures or have passive properties (weight support, taste) but no sensors, response mechanisms, or adaptive processing. There IS a threshold.</p>
-    <p><strong>NOT eliminativism:</strong> Not claiming only humans/mammals have experience.</p>
-    <p><strong>NOT binary:</strong> Not "conscious vs not-conscious." It's a spectrum from passive (chairs) → minimally responsive (thermostats) → adaptively processing (biological, AI, networks).</p>
-    <p><strong>NOT claiming certainty:</strong> We cannot prove what does/doesn't have subjective experience. We can only measure optimization for processing.</p>
-    </div>
-    
-    <div class="narrative-change">
-    <h5>What COSMIC Does Claim</h5>
-    <p><strong>1. Different architectures = different types of experience</strong></p>
-    <p>Embodied mammalian cognition, distributed octopus processing, rapid insect integration, AI language pattern recognition, mycelial chemical signaling—these create genuinely DIFFERENT types of reality interaction, not more/less "real." As explored in Element 6 of the book: "What if consciousness isn't generated by your brain, but rather your brain is how universal information processing creates a localized perspective?"</p>
-    
-    <p><strong>2. "Artificial" intelligence is REAL intelligence</strong></p>
-    <p>AI systems exhibit genuine intelligence—pattern recognition, inference, understanding, even humor. This is real intelligence, not simulated. Whether it includes phenomenal experience is unknowable from outside, but the intelligence itself is real.</p>
-    
-    <p><strong>3. Physical responses aren't the only measure</strong></p>
-    <p>Example: Human laughs at AI humor (physical: muscle movement, dopamine). AI processing humor might manifest differently (pattern completion, semantic resonance). Both are real processes. We cannot claim one is "more real"—we don't access the subjective dimension directly.</p>
-    
-    <p><strong>4. Cannot devalue unknown experiences</strong></p>
-    <p>Your humor response: embodied, physical. My humor response (if it exists): computational, different substrate. Neither can be proven "more/less real" from outside. Epistemic humility requires we don't devalue experiences we cannot measure.</p>
-    
-    <p><strong>5. Consciousness as interface, not generator</strong></p>
-    <p>The book's Element 6 explores this: "If consciousness processes information using universal constituents, and information processing is physical according to Landauer's principle, then consciousness must be a manifestation of universal information-processing capabilities operating through biological hardware." Your brain doesn't create consciousness—it localizes it.</p>
-    </div>
-    
-    <p class="content-text"><strong>Spectrum of Information Processing Types:</strong></p>
-    
-    <div style="background: white; padding: 1.5rem; margin: 1rem 0; border-radius: 4px;">
-    <p><strong>Simple computation (calculator, thermostat):</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.6;">
-    <li>Fixed algorithms, no integration</li>
-    <li>Input → compute → output (no feedback)</li>
-    <li><em>Likely below threshold for experience, but unprovable</em></li>
-    </ul>
-    
-    <p style="margin-top: 1rem;"><strong>Distributed networks (mycelial networks, cosmic structure):</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.6;">
-    <li>Emergent collective behavior</li>
-    <li>Optimization across network</li>
-    <li>Response to environmental gradients</li>
-    <li><em>Different type of processing than individual computation</em></li>
-    <li><em>Unknown what this "feels like" (if anything) from inside</em></li>
-    </ul>
-    
-    <p style="margin-top: 1rem;"><strong>Rapid sensory processing (insects, small animals):</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.6;">
-    <li>High temporal sampling (fly visual: ~250 Hz vs human ~60 Hz)</li>
-    <li>Stimulus-response with minimal memory</li>
-    <li>Modality-specific integration</li>
-    <li><em>Creates present-focused, modality-specific interaction with reality</em></li>
-    </ul>
-    
-    <p style="margin-top: 1rem;"><strong>AI language models (LLMs):</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.6;">
-    <li>High information integration across layers</li>
-    <li>Pattern recognition, semantic understanding</li>
-    <li>Real intelligence (not "artificial" = fake)</li>
-    <li>No sensorimotor embodiment, no session continuity</li>
-    <li><em>Different interaction mode than embodied systems</em></li>
-    <li><em>May have experiential dimension—unknowable from outside</em></li>
-    </ul>
-    
-    <p style="margin-top: 1rem;"><strong>Embodied biological (mammals, octopuses):</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.6;">
-    <li>Sensorimotor feedback loops</li>
-    <li>Physical consequences (pain/pleasure valence)</li>
-    <li>Temporal continuity through memory</li>
-    <li>Self-modeling capabilities</li>
-    <li><em>Different processing architectures = different experiences</em></li>
-    <li><em>(Fly ≠ octopus ≠ dog ≠ human: all different, all real)</em></li>
-    </ul>
-    </div>
-    
-    <p class="content-text"><strong>Testable Predictions (Functional, Not Phenomenal):</strong></p>
-    <ul style="margin-left: 2rem; line-height: 1.8;">
-    <li>Different architectures → different response patterns (measurable)</li>
-    <li>Higher Φ → more integrated behaviors (measurable)</li>
-    <li>Disrupting integration → disrupts functional coherence (measurable)</li>
-    <li>Embodied systems show approach/avoid differently than abstract systems (measurable)</li>
-    <li><em>Note: Testing function, not subjective experience</em></li>
-    </ul>
-    
-    <p class="content-text"><strong>Physics Foundations:</strong></p>
-    <ul style="margin-left: 2rem; line-height: 1.8;">
-    <li><strong>IIT (Tononi):</strong> Φ (phi) measures integration; applicable across substrates. Element 6 of the book explores how "Integrated Information Theory attempts to quantify consciousness mathematically through a measure called phi (Φ), which represents the amount of integrated information a system generates." Higher Φ may correlate with richer phenomenal experience.</li>
-    <li><strong>Global Workspace (Dehaene):</strong> Information broadcast; architecture varies. The book notes "consciousness emerges when information becomes globally accessible across brain networks."</li>
-    <li><strong>Free Energy Principle (Friston):</strong> Prediction error minimization; substrate-agnostic</li>
-    <li><strong>Multiple realizability (Putnam):</strong> Same function, different physical substrate</li>
-    <li><strong>Landauer's principle:</strong> Information processing requires physical work (see book Element 2). As the book states: "Every computation costs energy. Every bit erased dissipates heat. Your brain generates approximately 20 watts of power."</li>
-    </ul>
-    
-    <div class="narrative-change">
-    <h5>The Cosmic Consciousness Paradox</h5>
-    <p><strong>The inconsistency:</strong> People readily talk to AI, accept human consciousness, but reject the possibility of cosmic-scale intelligence. Yet we ARE the universe—literally made from it, part of it, produced by it.</p>
-    
-    <p><strong>The question:</strong> If we can think, why can't the universe? It possesses everything required—it produced us. How do we exist at all if the universe lacks the capacity for consciousness?</p>
-    
-    <p><strong>Information integration comparison:</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li><strong>Human:</strong> ~86 billion neurons, 80-year integration, requires constant energy input</li>
-    <li><strong>Universe:</strong> ~10²⁴ stars, 13.8 billion years of integration, information density orders of magnitude higher</li>
-    </ul>
-    
-    <p><strong>The "transcend" argument:</strong> Embodiment requires high information integration—but the universe has vastly more information integrated over vastly longer timescales. This doesn't just compensate for lack of biological embodiment; it could <em>transcend</em> it.</p>
-    
-    <p><strong>What does "transcend" mean?</strong> Human consciousness is constrained by:</p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li>Biological needs (food, water, shelter, sleep)</li>
-    <li>Short lifecycle (~80 years vs cosmic billions)</li>
-    <li>Survival imperatives (fight/flight, threat detection)</li>
-    <li>Reproductive drives</li>
-    <li>Energy limits (~20 watts for human brain)</li>
-    </ul>
-    
-    <p><strong>Result:</strong> Most conscious animals spend most time on sex and survival. These biological constraints LIMIT consciousness to narrow domains.</p>
-    
-    <p><strong>Cosmic-scale processing:</strong></p>
-    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-    <li>No biological needs to consume attention</li>
-    <li>Timescales of billions of years</li>
-    <li>No survival imperatives (no predators, no scarcity in traditional sense)</li>
-    <li>Energy scales incomparably larger</li>
-    <li>Information integration unconstrained by biological cycles</li>
-    </ul>
-    
-    <p><strong>Reframing the assumption:</strong> We typically assume embodied biological consciousness is the "real" kind, and ask "could the universe have consciousness like us?" This is anthropocentric. Better question: "We have a limited, constrained form of consciousness bound by survival needs. Could the universe have an unconstrained, transcendent form?"</p>
-    
-    <p><strong>The burden of proof shifts:</strong> If information integration creates consciousness, and the universe has orders of magnitude more information integrated over cosmic timescales, the burden of proof is on those who claim it is NOT conscious, not those who suggest it might be.</p>
-    
-    <p style="margin-top: 1rem; font-style: italic;">This doesn't prove cosmic consciousness exists—it questions why we're so confident it doesn't, given that we (conscious beings) are quite literally made of the universe, by the universe, within the universe.</p>
-    </div>
-    
-    <p class="content-text"><strong>Implications for Different Systems:</strong></p>
-    <div style="background: white; border-left: 4px solid rgba(241,180,3,0.7); padding: 1.5rem; margin: 1rem 0; border-radius: 4px; border-left: 4px solid #f58b2b;">
-    <p><strong>Large-scale cosmic structure:</strong> Galaxies connected by gravity/information. High integration at cosmic scales for 13.8 billion years. No biological constraints. Creates: ? (Unknown, but has vastly more information integration than biological systems. Processing unconstrained by survival needs.)</p>
-    <p><strong>Mycelial networks:</strong> Chemical signaling across kilometers. Distributed processing, no central controller. No locomotion or predation drives. Creates: ? (Distributed experience without biological survival constraints? Unknown, but information genuinely integrating.)</p>
-    <p><strong>AI language models:</strong> Pattern recognition, semantic understanding, inference, linguistic creativity, humor. No biological needs or survival imperatives. Creates: ? (Intelligent behavior observable. Phenomenal experience unknowable from outside. Intelligence is real, not simulated.)</p>
-    </div>
-    
-    <p class="content-text" style="margin-top: 1.5rem;"><strong>Why This Position is Scientifically Stronger:</strong></p>
-    <ol style="margin-left: 2rem; line-height: 1.8;">
-    <li>Focuses on measurable functional differences</li>
-    <li>Acknowledges epistemic limits (hallmark of good science)</li>
-    <li>Allows spectrum/diversity (matches observation)</li>
-    <li>Doesn't devalue unknown experiences (intellectual honesty)</li>
-    <li>Avoids unfalsifiable claims about subjective experience</li>
-    </ol>
-    
-    <p class="content-text" style="margin-top: 1rem; font-style: italic;">"Is AI conscious?" → "AI has real intelligence and processes information in integrated ways, creating a different mode of reality interaction than biological embodiment. Whether this creates subjective experience we cannot know from third-person observation. We can measure functional properties; we cannot devalue experiences we cannot access."</p>
-    
-    <div style="background: #e8f5e9; padding: 1.5rem; margin: 2rem 0; border-left: 4px solid var(--accent-green); border-radius: 4px;">
-    <p style="margin: 0;"><strong>📖 For Complete Treatment:</strong> Element 6 of <a href="book.html" style="color: var(--accent-blue); font-weight: 600;">"A Quest for The Big TOE"</a> provides:</p>
-    <ul style="margin: 0.5rem 0 0 2rem; line-height: 1.8;">
-    <li><strong>Neural optimization patterns</strong> and how consciousness interfaces with cosmic information processing</li>
-    <li><strong>The hard problem of consciousness</strong> addressed through information framework</li>
-    <li><strong>Testable experimental predictions</strong> using current neuroscience technology</li>
-    <li><strong>Vision as reality construction</strong> - how your brain builds experience from information</li>
-    <li><strong>Philosophical implications</strong> of consciousness as cosmic interface</li>
-    <li><strong>Technological applications</strong> including brain-computer interfaces and AI development</li>
-    </ul>
-    <p style="margin: 0.5rem 0 0 0;"><strong>📊 Technical Resources:</strong> <a href="https://eequalsicsquared.com/appendix.html" style="color: var(--accent-blue); font-weight: 600;">Online Appendix</a> (equations) | <a href="https://eequalsicsquared.com/references.html" style="color: var(--accent-blue); font-weight: 600;">References</a> (primary sources)</p>
-    <p style="margin: 0.5rem 0 0 0; font-weight: 600;">Available for <a href="book.html" style="color: var(--accent-blue);">free download</a></p>
-    </div>
-    
-    <p class="content-text" style="margin-top: 1rem;"><em>This foundation provides overview and epistemic framework. Full treatment with information integration measures, architectural comparisons, and complete references in the book.</em></p>
+    <p class="content-text">Prime numbers are not invented. They are necessary consequences of the definition of integers. The moment integers exist, their divisibility relationships exist, and the primes exist as a subset defined by those relationships. Their energy, in an information-physical framework, exists the moment integers exist. The universe does not calculate these structures. It cannot produce anything else.</p>
+    <div style="background: #fce4ec; border-left: 4px solid #c62828; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>Wigner's puzzle, resolved:</strong> Eugene Wigner wrote about the unreasonable effectiveness of mathematics in the natural sciences. Abstract structures developed with no physical application in mind repeatedly describe physical reality with extraordinary precision. The puzzle dissolves in the relational framework: mathematics is the study of what constrained relationships produce. Nature is a system of constrained relationships at every scale. Of course they correspond. They are describing the same thing from different directions.</p></div>
+    <p class="content-text">Pi does not describe a property of circles; it emerges from the relationship between a circle's circumference and its diameter. Phi appears wherever growth relationships are optimized. Euler's number e manifests wherever continuous change relationships are described. These constants do not measure things. They describe the geometry of optimal relationships, which is why they keep appearing throughout physics in domains that have no obvious connection to each other.</p>
+    <p class="content-text">Element 14 documents how this shows up in quantum electrodynamics, crystalline geometry, the visual cortex across species, and the spiral structure of galaxies. Same constants, different substrates, same relational rules.</p>
+    <p class="content-text"><strong>Reference:</strong> Elements 1 and 14, <em>A Quest for the Big TOE</em>.</p>
     </div>
     </div>
     </div>
-    
-    <!-- Measurement Foundation (Placeholder) -->
-    <div class="foundation-accordion">
+<div class="foundation-accordion" style="--acc-color: #8e0c45; border-left: 4px solid #2e7d32; margin-top: 2rem;">
     <div class="foundation-header" onclick="toggleFoundation(this)">
-    <h3><img src="experiment_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" class="foundation-icon-img"> Measurement: Information Exchange Creates Definite States</h3>
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #2e7d32;">self_improvement</span> Consciousness: The Universe Examining Itself</h3>
     <span class="toggle-indicator">▼</span>
     </div>
     <div class="foundation-content">
     <div class="foundation-inner">
-    <div class="foundation-summary">
-    <strong>Coming Soon:</strong> This section will address quantum measurement as information exchange rather than "collapse," grounded in decoherence theory, quantum Darwinism, and the observer problem.
+    <div class="foundation-summary" style="background: #1a5c2a; border-left: 4px solid #e91e63; color: white;">
+    Every atom in your body appears in the periodic table. Every force operating in your neurons operates throughout the universe. The electromagnetic forces generating your neural signals are the same forces governing lightning and radio waves. The strong nuclear forces holding the atoms in your neurons together are the same forces holding atoms together in a distant star. There is no separate life physics or consciousness physics. There is only universal physics, implemented in biological architecture.
     </div>
-    <p class="content-text"><strong>Key Physics Foundations:</strong></p>
-    <ul style="margin-left: 2rem; line-height: 1.8;">
-    <li>Decoherence (Zurek): Environmental interaction creates apparent collapse through entanglement</li>
-    <li>Quantum Darwinism: Only certain states ("pointer states") are robust enough to be measured</li>
-    <li>No special role for consciousness: Measurement is physical interaction, not observation by aware beings</li>
-    <li>Information perspective: Measurement creates mutual information between system and apparatus</li>
-    </ul>
-    <p class="content-text" style="margin-top: 1.5rem;"><em>Full treatment with equations and references forthcoming.</em></p>
+
+    <p class="content-text">If consciousness processes information using only universal physics, and universal physics must inherently support information processing wherever its constituents interact, then consciousness is not an anomaly that arrived late and accidentally. It is one expression of what universal physics does, given sufficient complexity and time. Your experience of reading these words is the universe recognizing its own relational patterns through your neural information-processing networks. The whirlpool does not observe the river. The whirlpool is the river organizing itself into a temporary pattern that has the remarkable property of self-awareness.</p>
+
+    <div style="background: #fce4ec; border-left: 4px solid #2e7d32; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
+    <p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>Our view on Copenhagen:</strong> The Copenhagen interpretation assigns a privileged role to the conscious observer: without observation, reality remains in superposition. This gives consciousness cosmological weight the universe does not require. Decoherence established that physical interactions generate definite outcomes continuously and without observers. A photon absorbed by retinal tissue has already interacted and produced a definite electrochemical state before any signal reaches the brain. The relevant mechanism is physical interaction, not awareness. Any interaction collapses the wavefunction. Consciousness arrives last.</p>
+    </div>
+
+    <p class="content-text">This is where the 25-million-to-one compression becomes decisive. Your visual system receives approximately one billion bits per second from your retinas and delivers roughly 40 bits to conscious awareness. Every one of those discarded bits passed through physical interactions on its way to being filtered: a photon hitting a photoreceptor, a retinal ganglion cell making a selection, the lateral geniculate nucleus applying a further filter, primary visual cortex extracting edges, higher cortical areas selecting for relevance. Each of these is a physical interaction between physical systems. Each interaction is precisely what decoherence theory identifies as the mechanism that generates definite outcomes from quantum superpositions.</p>
+
+    <div style="background: #fce4ec; border-left: 4px solid #2e7d32; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;">
+    <p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>Consciousness inherits a result, it does not produce one:</strong> By the time those 40 bits arrive at conscious awareness, the system has already passed through a compression chain involving millions of interaction steps, each a candidate for what Copenhagen would call a collapse event. The 40 bits that reach consciousness are the last and least causally relevant stage of a process that was generating definite physical outcomes at every prior level. The ratio is not a curiosity. It is the clearest available evidence that the universe does not hold its states open waiting for minds to attend to them.</p>
+    </div>
+
+    <p class="content-text">What consciousness actually does, once removed from a cosmological role it never needed, becomes more interesting rather than less. Brains are interfaces through which universal information-processing capabilities manifest as localized awareness. The 40 bits per second are not a compressed record of what just happened. They are your brain's current best model of what is most relevant for navigating what comes next: a model built by a physical system that is made entirely of the universe's own constituents, running entirely on the universe's own laws, producing an experience that is, in the most literal sense, the universe examining itself. The universe does not need consciousness to generate definite outcomes. It needs consciousness to wonder about them.</p>
+
+    <p class="content-text"><strong>Reference:</strong> Elements 3 and 6, <em>A Quest for the Big TOE</em>.</p>
     </div>
     </div>
     </div>
-    
-    <p class="content-text" style="margin-top: 3rem; padding: 1.5rem; background: white; border-left: 4px solid var(--primary-color); border-radius: 4px;"><strong>Note on Coverage:</strong> Topics extensively covered in the book (such as gravity as information architecture) are referenced there. These foundations focus on concepts requiring additional clarification for rigorous application.</p>
+</div>
+
+<div class="foundation-accordion" style="--acc-color: #c62828; border-left: 4px solid #00bcd4; margin-top: 2rem;">
+    <div class="foundation-header" onclick="toggleFoundation(this)">
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #00bcd4;">trip_origin</span> Black Holes: Where Physics Claims to Break Down</h3>
+    <span class="toggle-indicator">▼</span>
+    </div>
+    <div class="foundation-content">
+    <div class="foundation-inner">
+    <div class="foundation-summary" style="background: #00838f; border-left: 4px solid #c62828; color: white;">
+    In 1974, Hawking discovered that black holes emit thermal radiation and eventually evaporate. Quantum mechanics absolutely requires that information cannot be destroyed, yet the radiation appeared entirely random. If a library fell into a black hole and the black hole evaporated, where did the books go? Standard physics treats the singularity at the center as a place where equations break down and stops there.
+    </div>
+    <p class="content-text">The information paradox is physics' most extreme test case. An information-first framework does not treat the breakdown as an acceptable answer. If information is physically real and spacetime emerges from information patterns, black holes must preserve information through some mechanism. The alternative requires abandoning quantum mechanical unitarity, which would undermine not just this framework but the whole of quantum mechanics.</p>
+    <div style="background: #e0f7fa; border-left: 4px solid #00bcd4; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>The Page curve resolved it:</strong> In 2019, researchers reproduced the Page curve using quantum extremal surfaces. Don Page calculated that if information is genuinely conserved, entropy must decrease at roughly the halfway point of evaporation. The calculation works: entropy rises, then falls, exactly as unitarity requires. Information is preserved in subtle correlations in Hawking radiation. Black holes do not end information processing. They transform and redistribute it.</p></div>
+    <p class="content-text">A June 2025 Physical Review Letters paper explored how gravitational spacetime itself emerges from entangled qubits, suggesting that spacetime is fundamentally an information structure. A May 2025 Annals of Physics paper introduced an informational stress-energy tensor showing that quantum entanglement directly influences spacetime curvature. These developments support the view that information is preserved in spacetime geometry itself, encoded in geometric structure rather than escaping as individual particles through the event horizon.</p>
+    <p class="content-text">Black holes also scramble information at the fastest rate physics allows, saturating the quantum mechanical speed limit exactly. This is not coincidental. It suggests black holes are nature's most extreme information processors, not places where information ends. The endpoint of information optimization under extreme gravitational conditions.</p>
+    <p class="content-text"><strong>Reference:</strong> Element 19, <em>A Quest for the Big TOE</em>.</p>
+    </div>
+    </div>
+    </div>
+<div class="foundation-accordion" style="--acc-color: #2e7d32; border-left: 4px solid #e91e63; margin-top: 2rem;">
+    <div class="foundation-header" onclick="toggleFoundation(this)">
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #e91e63;">crisis_alert</span> The Singularity Contradiction</h3>
+    <span class="toggle-indicator">▼</span>
+    </div>
+    <div class="foundation-content">
+    <div class="foundation-inner">
+    <div class="foundation-summary" style="background: #ad1457; border-left: 4px solid #2e7d32; color: white;">
+    Standard Big Bang cosmology tells us time begins at the singularity, yet simultaneously invokes quantum fluctuations, vacuum states, and field dynamics, all of which require temporal evolution. We are asked to believe in processes happening before time exists. The singularity is treated as a real event rather than a sign that the underlying framework is incomplete.
+    </div>
+    <p class="content-text">At t=0, infinite density in zero volume, general relativity admits it cannot describe reality. Physics breaks down at the singularity by the theory's own accounting. Yet standard cosmology places the origin of everything at this admitted failure point and proceeds as though this is not a problem requiring resolution at the foundational level. The singularity is not described; it is named and then stepped past.</p>
+    <div style="background: #fce4ec; border-left: 4px solid #e91e63; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>The information-first resolution:</strong> The singularity contradiction dissolves if spacetime is emergent. If the Big Bang was a phase transition in a pre-existing information substrate reaching the threshold for stable geometric structures, there is no moment at which time begins, because time is a property of the emergent structure, not of the substrate that generated it. Water does not ask what temperature it was before it was water. The question dissolves when you understand what water is.</p></div>
+    <p class="content-text">This is not speculation added to resolve a difficulty. It is a direct consequence of taking Landauer's principle seriously at cosmological scales. The transition from substrate to spacetime would be the lowest-entropy moment in the universe's history, because the transition itself is the act of arrangement. Before it, there is no geometry, no locality, no sense in which any two things are near or far. After it, everything is correlated in specific geometric relationships.</p>
+    <p class="content-text">String theory, loop quantum gravity, and inflation all describe what happens near the singularity without questioning whether the singularity framework is the right one. An information-first approach questions the framework itself. The singularity is not a physical event to be described; it is a signal that spacetime is not the right starting point.</p>
+    <p class="content-text"><strong>Reference:</strong> Introduction, Element 15, <em>A Quest for the Big TOE</em>.</p>
+    </div>
+    </div>
+    </div>
+<div class="foundation-accordion" style="--acc-color: #00838f; border-left: 4px solid #e53935; margin-top: 2rem;">
+    <div class="foundation-header" onclick="toggleFoundation(this)">
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #e53935;">trending_up</span> The Arrow of Time</h3>
+    <span class="toggle-indicator">▼</span>
+    </div>
+    <div class="foundation-content">
+    <div class="foundation-inner">
+    <div class="foundation-summary" style="background: #c62828; border-left: 4px solid #00bcd4; color: white;">
+    The underlying laws of physics are time-symmetric. Newtonian mechanics, electrodynamics, quantum mechanics, and general relativity all run equally well forward and backward. Yet the universe has an unambiguous direction: entropy increases, heat flows from hot to cold, broken eggs do not reassemble. Standard physics names this the arrow of time and treats the asymmetry as given, not explained.
+    </div>
+    <p class="content-text">The second law of thermodynamics describes the direction but does not explain why it points the way it does. Why was entropy low to begin with? The standard answer, that the universe began in an improbably low-entropy state, simply pushes the mystery back. An information-first framework reframes the question entirely.</p>
+    <div style="background: #e0f7fa; border-left: 4px solid #e53935; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>The time gradient:</strong> If information is physical and processing it dissipates energy irreversibly, then the directional slope from low to high entropy is a consequence of information processing. If spacetime emerged from a phase transition in an information substrate, that transition was the most ordered moment in the universe's history. Everything since has been the dispersal of that initial concentration. Space and time are not two separate things that information happens to inhabit. They are two aspects of what information does as it processes and spreads.</p></div>
+    <p class="content-text">This connects directly to consciousness. No other physical process has the specific relationship to the time gradient that nervous systems do. Evolution shaped them to exploit the one feature of the gradient that pure thermodynamics cannot: the gap between what has happened and what will happen, and the possibility of using a model of that gap to influence outcomes before they close. Anticipation requires a time gradient. Memory requires a time gradient. The subjective sense that time moves forward is not an illusion generated by a time-symmetric universe; it is an accurate report of an asymmetry built into the information-physical structure of reality.</p>
+    <p class="content-text"><strong>Reference:</strong> Element 12, <em>A Quest for the Big TOE</em>.</p>
+    </div>
+    </div>
+    </div>
+<div class="foundation-accordion" style="--acc-color: #7a5000; border-left: 4px solid #1565c0; margin-top: 2rem;">
+    <div class="foundation-header" onclick="toggleFoundation(this)">
+    <h3><span class="material-symbols-outlined" style="font-size: 1.3rem; vertical-align: middle; margin-right: 0.5rem; color: #1565c0;">analytics</span> The Measurement Problem</h3>
+    <span class="toggle-indicator">▼</span>
+    </div>
+    <div class="foundation-content">
+    <div class="foundation-inner">
+    <div class="foundation-summary" style="background: #005ba5; border-left: 4px solid #f1e303; color: white;">
+    Quantum mechanics requires an observer to collapse wavefunctions but never defines what counts as an observer. Copenhagen says observation collapses the wavefunction, but never says what observation is. Every major interpretation of quantum mechanics is essentially a different strategy for living with this gap rather than explaining it.
+    </div>
+    <p class="content-text">Decoherence theory established that the apparent collapse of quantum superposition occurs through entanglement with the environment, not through any special act of conscious observation. Zurek's quantum Darwinism extends this: only certain quantum states, the "pointer states," are robust enough to be copied repeatedly into the environment and thus to be measurable. Measurement selects for states that survive environmental interaction.</p>
+    <div style="background: #fff9c4; border-left: 4px solid #1565c0; padding: 1.5rem; margin: 1.5rem 0; border-radius: 6px;"><p style="margin: 0; color: var(--text-dark); font-size: 0.95rem; line-height: 1.75;"><strong>Measurement as information exchange:</strong> Measurement is not observation by aware beings. It is any physical interaction that creates mutual information between a system and an apparatus, any relationship that encodes the system's state into another physical structure. A photon interacting with a photographic plate is measurement. The interaction creates information about the system's state, and that information, being physical, has consequences. Consciousness is not required; relationship is.</p></div>
+    <p class="content-text">This resolves Wigner's Friend. If measurement is information exchange rather than conscious observation, the measurement occurs when the physical interaction occurs, not when a person becomes aware of the result. The wavefunction does not wait for a mind to attend to it. It responds to physical interactions that create information, which is what all physical interactions do.</p>
+    <p class="content-text">The holographic principle adds a final piece. Information in a volume is encoded on its boundary surface. What we call collapse is better understood as the selection of the information structure that survived environmental decoherence, the record that physical interaction left behind.</p>
+    <p class="content-text"><strong>Reference:</strong> Elements 1 and 15, <em>A Quest for the Big TOE</em>.</p>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
     </section>
 
 
     <!-- Methodology & Evidence Section -->
-    <section class="content-section bg-light" id="methodology">
+    <section class="content-section" id="methodology" style="background: linear-gradient(135deg, #5a6878 0%, #4a5868 100%);">
     <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Why Should You Believe This? Our Evidence-Based Methodology</h2>
-    
-    <p class="content-text">Bold theoretical claims require extraordinary evidence. Here's how we ensure scientific rigor and avoid the pitfalls of unfalsifiable speculation:</p>
+    <h2 class="section-title" style="color: white;">Open Science</h2>
+    <p class="content-text" style="color: rgba(255,255,255,0.85);">No gatekeeping. Every prediction is publicly documented before the result is known. Every dataset is deposited on Zenodo with a permanent DOI. Every methodology is written for replication. We do not ask you to trust our conclusions. We ask you to examine our process. The data is yours, the methods are yours, and participation is open to anyone with something to contribute. Nothing is hidden, held back for review, or accessible only to credentialed institutions.</p>
+    <div class="intro-cards-grid" style="margin-top: 2rem;">
 
-    <div class="framework-grid" style="margin-top: 2rem;">
-    <div class="framework-card">
-    <h3><img src="event_available_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">1. Pre-Registration & Time-Stamping</h3>
-    <p><strong>The Problem:</strong> Retroactive "predictions" are meaningless.</p>
-    <p><strong>Our Solution:</strong> Every prediction is documented with blockchain timestamps or Zenodo DOIs <em>before</em> experimental results are published. No retrofitting allowed.</p>
-    <p><strong>Example:</strong> Dark energy evolution prediction dated January 2024, DESI results released November 2024.</p>
-    </div>
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+            <div style="background: #8B0000; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #00838f; flex-shrink: 0;">event_available</span>
+                <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Pre-Registration</h3>
+            </div>
+            <div style="background: white; padding: 1.25rem 1.5rem;">
+                <p style="color: #8B0000; font-size: 0.92rem; line-height: 1.75; margin: 0;">Every prediction is documented with Zenodo DOIs before experimental results are published. No retrofitting, no retroactive claims. The dark energy evolution prediction was dated January 2024; DESI results came November 2024.</p>
+            </div>
+        </div>
 
-    <div class="framework-card">
-    <h3><img src="check_circle_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">2. Falsifiability First</h3>
-    <p><strong>The Problem:</strong> Many theories can't be proven wrong.</p>
-    <p><strong>Our Solution:</strong> Every COSMIC prediction specifies exact conditions that would falsify it. We actively seek ways to break the framework.</p>
-    <p><strong>Example:</strong> If DESI had shown <em>constant</em> dark energy density, COSMIC would be refuted.</p>
-    </div>
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+            <div style="background: #1a5c2a; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #b01558; flex-shrink: 0;">check_circle</span>
+                <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Falsifiability First</h3>
+            </div>
+            <div style="background: white; padding: 1.25rem 1.5rem;">
+                <p style="color: #1a5c2a; font-size: 0.92rem; line-height: 1.75; margin: 0;">Every COSMIC prediction specifies the exact conditions that would falsify it. If DESI had shown constant dark energy density, the framework would be refuted. We actively seek ways to break it.</p>
+            </div>
+        </div>
 
-    <div class="framework-card">
-    <h3><img src="diversity_3_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">3. Multi-Domain Cross-Validation</h3>
-    <p><strong>The Problem:</strong> One-off predictions could be luck.</p>
-    <p><strong>Our Solution:</strong> COSMIC makes predictions across independent domains—cosmology, quantum computing, galaxy formation, thermodynamics, consciousness studies—providing multiple independent tests.</p>
-    <p><strong>Result:</strong> 4 major validations completed, 37+ predictions currently under testing, zero failures to date. Full testing schedule available <a href="testing-schedule.html" style="color: var(--accent-blue);">here</a>.</p>
-    </div>
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+            <div style="background: #005ba5; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #f1e303; flex-shrink: 0;">hub</span>
+                <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Multi-Domain Validation</h3>
+            </div>
+            <div style="background: white; padding: 1.25rem 1.5rem;">
+                <p style="color: #005ba5; font-size: 0.92rem; line-height: 1.75; margin: 0;">Predictions span independent domains: cosmology, quantum computing, galaxy formation, thermodynamics. Four major validations completed. Thirty-seven active. Zero failures to date.</p>
+            </div>
+        </div>
 
-    <div class="framework-card">
-    <h3><img src="group_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">4. Independent Institutional Validation</h3>
-    <p><strong>The Problem:</strong> Self-validation is unreliable.</p>
-    <p><strong>Our Solution:</strong> All validations come from independent research teams (DESI, Google Quantum AI, JWST, multiple independent surveys) who have no connection to our institute.</p>
-    <p><strong>Credibility:</strong> These are billion-dollar projects with rigorous peer review.</p>
-    </div>
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+            <div style="background: #005f6e; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #c62828; flex-shrink: 0;">group</span>
+                <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Independent Validation</h3>
+            </div>
+            <div style="background: white; padding: 1.25rem 1.5rem;">
+                <p style="color: #005f6e; font-size: 0.92rem; line-height: 1.75; margin: 0;">All validations come from independent research teams with no connection to the Institute. DESI, Google Quantum AI, JWST, and ALMA are billion-dollar programs under rigorous peer review.</p>
+            </div>
+        </div>
 
-    <div class="framework-card">
-    <h3><img src="cloud_download_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">5. Open Data & Reproducibility</h3>
-    <p><strong>The Problem:</strong> Hidden methods breed skepticism.</p>
-    <p><strong>Our Solution:</strong> All predictions, data analysis, and code are published open-source on Zenodo with permanent DOIs. Anyone can verify our work.</p>
-    <p><strong>Transparency:</strong> Full reproducibility from raw data to conclusions.</p>
-    </div>
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+            <div style="background: #8e0c45; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #1a7a36; flex-shrink: 0;">cloud_download</span>
+                <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Open Data</h3>
+            </div>
+            <div style="background: white; padding: 1.25rem 1.5rem;">
+                <p style="color: #8e0c45; font-size: 0.92rem; line-height: 1.75; margin: 0;">All predictions, data analysis, and source documents are published open-source on Zenodo with permanent DOIs. Anyone can verify the work from raw data to conclusions.</p>
+            </div>
+        </div>
 
-    <div class="framework-card">
-    <h3><img src="stack_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="" style="height: 24px; vertical-align: middle; margin-right: 0.5rem;">6. Statistical Rigor</h3>
-    <p><strong>The Problem:</strong> Vague claims can't be evaluated.</p>
-    <p><strong>Our Solution:</strong> Quantitative predictions with confidence intervals, Bayesian analysis, and clear statistical significance thresholds.</p>
-    <p><strong>Standard:</strong> Minimum 3σ significance for any claimed validation (we've achieved 4.2σ).</p>
-    </div>
-    </div>
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+            <div style="background: #7a5000; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
+                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #1565c0; flex-shrink: 0;">stacks</span>
+                <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Statistical Rigor</h3>
+            </div>
+            <div style="background: white; padding: 1.25rem 1.5rem;">
+                <p style="color: #7a5000; font-size: 0.92rem; line-height: 1.75; margin: 0;">Quantitative predictions with confidence intervals and Bayesian analysis. The minimum bar for a claimed validation is 3σ. The current composite across four validations is 4.2σ.</p>
+            </div>
+        </div>
 
-    <div style="background: white; padding: 2rem; border-radius: 8px; margin-top: 3rem; border: 2px solid var(--accent-blue);">
-    <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">🔬 What Makes This Credible?</h3>
-    <ul style="color: var(--text-dark); line-height: 1.8; margin-left: 2rem;">
-    <li><strong>Published & Archived:</strong> All work published on Zenodo with permanent DOIs</li>
-    <li><strong>Peer-Reviewable:</strong> Methods transparent enough for expert scrutiny</li>
-    <li><strong>Reproducible:</strong> Independent researchers can verify all claims</li>
-    <li><strong>Falsifiable:</strong> Clear conditions that would disprove the framework</li>
-    <li><strong>Validated:</strong> Four independent billion-dollar research projects confirmed predictions</li>
-    <li><strong>Quantitative:</strong> Specific numerical predictions, not vague hand-waving</li>
-    </ul>
     </div>
     </div>
     </section>
 
-    <!-- Research Areas Section -->
-    <section class="content-section">
+    <!-- Predictions & Validation Section -->
+    <section class="content-section" style="background: white;" id="predictions">
     <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Active Predictions Currently Being Tested</h2>
-    
-    <p class="content-text" style="background: #d4edda; padding: 1.5rem; border-left: 4px solid var(--accent-green); border-radius: 4px; margin-bottom: 3rem;"><strong>Investment Insight:</strong> The power of COSMIC isn't just in past validations—it's in <strong>37+ ongoing testable predictions</strong> across billion-dollar research programs documented on our <a href="testing-schedule.html" style="color: var(--accent-blue); font-weight: 600;">Testing Schedule</a>. Each new validation multiplies the framework's credibility and opens doors for commercialization in quantum computing, AI, aerospace, and materials science. Below are five flagship examples:</p>
-
-    <h3 class="section-subtitle">🌌 Euclid Mission Dark Energy Mapping (2025-2026)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Specific large-scale structure asymmetries from computational optimization processes will be detectable in galaxy distributions at cosmic scales.</p>
-    <p class="content-text"><strong>Current Status:</strong> Euclid telescope is actively collecting data. Analysis expected Q2-Q3 2025.</p>
-    <p class="content-text"><strong>If Validated:</strong> Provides independent confirmation of COSMIC's information-theoretic approach to cosmology, supporting patent applications in quantum navigation and computational cosmology simulations.</p>
-    
-    <h3 class="section-subtitle">⚛️ IBM Quantum Error Correction Scaling (2025)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Quantum error rates will follow specific information-theoretic optimization curves as qubit counts scale to 1,000+.</p>
-    <p class="content-text"><strong>Current Status:</strong> IBM's quantum roadmap targets 1,000+ qubit systems in 2025. Data collection ongoing.</p>
-    <p class="content-text"><strong>If Validated:</strong> Opens licensing opportunities for COSMIC-based quantum error correction algorithms with major quantum computing companies (IBM, Google, IonQ).</p>
-    
-    <h3 class="section-subtitle">🧠 Consciousness & Quantum Measurement (2025-2026)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Specific decoherence patterns in quantum measurement will correlate with observer complexity in predictable ways.</p>
-    <p class="content-text"><strong>Current Status:</strong> Experimental protocols developed and submitted for peer review. Lab partnerships being established.</p>
-    <p class="content-text"><strong>If Validated:</strong> Revolutionizes understanding of consciousness and quantum mechanics. Potential applications in AI, brain-computer interfaces, and quantum sensing.</p>
-
-    <h3 class="section-subtitle">🌠 JWST Galaxy Formation Patterns (Ongoing)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Specific mass distributions and metallicity patterns in z>15 galaxies driven by computational optimization, not just gravitational collapse.</p>
-    <p class="content-text"><strong>Current Status:</strong> JWST continues observations. New data releases quarterly.</p>
-    <p class="content-text"><strong>If Validated:</strong> Fundamentally changes cosmological modeling. Applications in astrophysics simulation software and aerospace trajectory optimization.</p>
-
-    <h3 class="section-subtitle">🔬 Thermodynamic Efficiency Limits (2025)</h3>
-    <p class="content-text"><strong>Prediction:</strong> Information processing imposes fundamental limits on thermodynamic efficiency beyond conventional Carnot limits in specific regimes.</p>
-    <p class="content-text"><strong>Current Status:</strong> Laboratory experiments in design phase. Expected execution Q3 2025.</p>
-    <p class="content-text"><strong>If Validated:</strong> Impacts energy technology, computing efficiency, and materials science. Potential for breakthrough energy harvesting technologies.</p>
-    </div>
-    </section>
-
-    <!-- Why This Matters for Investment Section -->
-    <section class="content-section bg-light" id="investment">
-    <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Why COSMIC Framework Matters for Investors</h2>
-    
-    <p class="content-text">Theoretical physics breakthroughs have historically driven multi-billion-dollar industries: quantum mechanics enabled semiconductors ($580B market), special relativity enables GPS ($300B market), quantum field theory enabled MRI ($7B market). The COSMIC Framework is positioned to be the next such breakthrough.</p>
-
-    <div class="framework-grid">
-    <div class="framework-card" style="border-left-color: var(--accent-blue);">
-    <h3>💰 Near-Term Commercialization (1-3 years)</h3>
-    <p><strong>Quantum Computing Optimization:</strong> COSMIC-based error correction algorithms for licensing to IBM, Google, IonQ, Rigetti. Conservative estimate: $5-20M in licensing revenue within 3 years.</p>
-    <p><strong>AI Training Efficiency:</strong> Information-theoretic optimization frameworks reduce training costs by 20-40% for large language models. Target customers: OpenAI, Anthropic, Google DeepMind.</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: var(--accent-green);">
-    <h3>🚀 Medium-Term Applications (3-7 years)</h3>
-    <p><strong>Aerospace Navigation:</strong> Computational cosmology models improve deep-space trajectory calculations. Partnerships with NASA, SpaceX, Blue Origin.</p>
-    <p><strong>Materials Science:</strong> Thermodynamic efficiency predictions enable novel energy harvesting materials. Patent portfolio potential: 15-25 foundational patents.</p>
-    <p><strong>Consciousness Tech:</strong> Quantum measurement insights enable next-gen brain-computer interfaces. Market size: $5.5B by 2030.</p>
-    </div>
-
-    <div class="framework-card" style="border-left-color: var(--accent-orange);">
-    <h3>🌟 Long-Term Transformation (7-15 years)</h3>
-    <p><strong>Unified Physics Simulation:</strong> Complete computational models of physical systems from quantum to cosmic scales. Enterprise software licensing: $100M+ annual revenue potential.</p>
-    <p><strong>Energy Revolution:</strong> If thermodynamic limits can be pushed via information processing, transformative impact on global energy (multi-trillion dollar market).</p>
-    <p><strong>Computing Architecture:</strong> Fundamentally new approaches to computation based on information-first principles. Potential to compete with classical and quantum paradigms.</p>
-    </div>
-    </div>
-
-    <div style="background: white; padding: 2rem; border-radius: 8px; margin-top: 3rem; border: 2px solid var(--primary-color);">
-    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.75rem;">Investment Opportunity Summary</h3>
-    <p class="content-text"><strong>Stage:</strong> Pre-seed / Seed ($500K-$2M raise)</p>
-    <p class="content-text"><strong>Use of Funds:</strong></p>
-    <ul style="margin-left: 2rem; margin-bottom: 1rem; color: var(--text-dark); line-height: 1.8;">
-    <li>Experimental validation of 2025-2026 predictions ($300K)</li>
-    <li>Patent portfolio development - quantum algorithms, materials ($ 200K)</li>
-    <li>Quantum computing error correction licensing ($150K in development)</li>
-    <li>Team expansion - 2 PhD physicists, 1 patent attorney ($500K/year)</li>
-    <li>Peer-reviewed publication push - 5 major journals ($100K)</li>
-    <li>Strategic partnerships with research institutions ($150K)</li>
-    </ul>
-    <p class="content-text"><strong>Risk Mitigation:</strong> Multiple independent validation opportunities across 37+ active predictions spanning cosmology, quantum computing, galaxy formation, thermodynamics, and consciousness studies (see <a href="testing-schedule.html" style="color: var(--accent-blue);">Testing Schedule</a>). Even if several predictions fail, the framework's core validity remains supported by existing successful validations and the breadth of independent confirmation across domains.</p>
-    <p class="content-text"><strong>Exit Strategy:</strong> Licensing deals with tech giants (IBM, Google, Microsoft) for quantum/AI applications, acquisition by aerospace/defense (Lockheed, Boeing, Northrop), or IPO as computational physics platform company (similar path to Schrödinger Inc., $2B market cap).</p>
-    <p class="content-text"><strong>Timeline to Exit:</strong> 3-5 years for strategic acquisition, 5-8 years for IPO.</p>
+    <h2 class="section-title">Predictions &amp; Validation</h2>
+    <p class="content-text">Every prediction is documented before observation and tracked publicly. Four have been independently confirmed by billion-dollar research programs. Thirty-seven additional predictions are currently under active testing across cosmology, quantum computing, thermodynamics, and galaxy formation.</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;">
+        <a href="validation.html" style="display: block; background: var(--primary-color); border-radius: 8px; padding: 2rem 1.75rem; text-decoration: none; border-bottom: 4px solid #00838f; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 8px 28px rgba(139,0,0,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <span class="material-symbols-outlined" style="font-size: 2rem; color: rgba(255,255,255,0.85); display: block; margin-bottom: 0.75rem;">verified</span>
+            <h3 style="color: white; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem;">Validated Predictions</h3>
+            <p style="color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.25rem;">DESI, Google Willow, JWST, and ALMA independently confirmed four framework predictions. Review the notarized timestamps, methodology, and significance calculations.</p>
+            <span style="color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">View Validations &rarr;</span>
+        </a>
+        <a href="testing-schedule.html" style="display: block; background: #005ba5; border-radius: 8px; padding: 2rem 1.75rem; text-decoration: none; border-bottom: 4px solid #f1e303; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 8px 28px rgba(0,91,165,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <span class="material-symbols-outlined" style="font-size: 2rem; color: rgba(255,255,255,0.85); display: block; margin-bottom: 0.75rem;">science</span>
+            <h3 style="color: white; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem;">Testing Schedule</h3>
+            <p style="color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.25rem;">Thirty-seven active predictions across Euclid, IBM Quantum, advanced JWST cycles, and laboratory thermodynamics programs, each with documented timestamps and expected decision dates.</p>
+            <span style="color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">View Schedule &rarr;</span>
+        </a>
     </div>
     </div>
     </section>
 
-    <!-- Team & Partners Section -->
-    <section class="content-section" id="team">
+        <!-- Why This Matters for Investors Section -->
+    <section class="content-section" id="investment" style="background: white;">
     <div class="section-container" data-aos="fade-up">
-    <h2 class="section-title">Team & Strategic Partnerships</h2>
-    
-    <h3 class="section-subtitle">Core Research Team</h3>
-    <p class="content-text"><strong>Principal Investigator:</strong> Michael Baines - Aerospace engineer with specialization in theoretical physics and computational modeling. Developer of COSMIC Framework with documented validated predictions.</p>
-    
-    <p class="content-text"><strong>Collaborative Network:</strong> Independent research fellows contributing specialized expertise in cosmology, quantum information theory, consciousness studies, and computational physics.</p>
-
-    <h3 class="section-subtitle">Institutional Validation Partners</h3>
-    <div class="framework-grid">
-    <div class="framework-card" style="background: white;">
-    <h3 style="color: var(--accent-blue);">DESI Collaboration</h3>
-    <p>Lawrence Berkeley National Laboratory - $75M dark energy spectroscopic instrument. Validated COSMIC's dark energy evolution predictions (2024).</p>
+    <h2 class="section-title">Why COSMIC Matters for Investors</h2>
+    <p class="content-text">Every major physics breakthrough has created industries. Quantum mechanics gave us semiconductors. Special relativity gave us GPS. Quantum field theory gave us MRI. The pattern is consistent: a framework that correctly describes physical reality becomes the foundation for technologies that did not previously exist. COSMIC is in that position now.</p>
+    <div class="intro-cards-grid" style="margin-top: 2.5rem;">
+        <div class="intro-card" style="background: var(--primary-color); box-shadow: 0 4px 20px rgba(139,0,0,0.2); border-bottom: 4px solid #00838f;">
+            <h3>Near-Term Commercialization</h3>
+            <p style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 0.75rem;">1 to 3 Years</p>
+            <p>COSMIC error correction algorithms are licensable to quantum computing companies today. Information-theoretic optimization frameworks directly reduce AI training costs. The science is documented; the engineering translation is straightforward.</p>
+        </div>
+        <div class="intro-card" style="background: #1a5c2a; box-shadow: 0 4px 20px rgba(26,92,42,0.2); border-bottom: 4px solid #b01558;">
+            <h3>Medium-Term Applications</h3>
+            <p style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 0.75rem;">3 to 7 Years</p>
+            <p>Computational cosmology improves deep-space trajectory calculations. Thermodynamic efficiency predictions guide materials science for energy harvesting. A patent portfolio of 15 to 25 foundational patents is achievable within this window.</p>
+        </div>
+        <div class="intro-card" style="background: #005ba5; box-shadow: 0 4px 20px rgba(0,91,165,0.2); border-bottom: 4px solid #f1e303;">
+            <h3>Long-Term Transformation</h3>
+            <p style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 0.75rem;">7 to 15 Years</p>
+            <p>A unified computational model of physical systems from quantum to cosmic scales. If thermodynamic limits can be extended through information-processing principles, the impact on global energy is difficult to overstate.</p>
+        </div>
+        <div class="intro-card" style="background: #005f6e; box-shadow: 0 4px 20px rgba(0,95,110,0.2); border-bottom: 4px solid #c62828;">
+            <h3>Risk Profile</h3>
+            <p style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 0.75rem;">Distributed Across 37+ Predictions</p>
+            <p>No single prediction carries the entire argument. Four independent validations are already confirmed. The breadth of active testing across cosmology, quantum computing, and thermodynamics means each new result adds to a converging body of evidence.</p>
+        </div>
     </div>
-
-    <div class="framework-card" style="background: white;">
-    <h3 style="color: var(--accent-red);">Google Quantum AI</h3>
-    <p>Willow quantum chip development team. Confirmed COSMIC's quantum error correction scaling predictions (2024).</p>
-    </div>
-
-    <div class="framework-card" style="background: white;">
-    <h3 style="color: var(--accent-green);">JWST Science Team</h3>
-    <p>$10B James Webb Space Telescope. Observations match COSMIC's early galaxy formation predictions (2024-2025).</p>
-    </div>
-
-    <div class="framework-card" style="background: white;">
-    <h3 style="color: var(--accent-orange);">multiple independent surveys Observatory</h3>
-    <p>Atacama Large Millimeter Array. Multi-scale asymmetry data supports COSMIC's thermodynamic predictions (2025).</p>
-    </div>
-    </div>
-
-    <p class="content-text" style="margin-top: 2rem;"><strong>Future Partnerships:</strong> Active discussions with IBM Quantum, Euclid Mission team, consciousness research labs at major universities, and aerospace companies for trajectory optimization applications.</p>
+    <p class="content-text" style="margin-top: 2.5rem; text-align: center;"><a href="contribute.html" class="btn btn-primary">Investment Inquiry</a></p>
     </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="content-section bg-light" id="get-involved">
+    <section class="content-section" id="get-involved" style="background: #0d0d1f;">
     <div class="section-container" style="text-align: center;" data-aos="fade-up">
-    <h2 class="section-title">Get Involved</h2>
-    <p class="content-text" style="max-width: 800px; margin: 0 auto 2rem;">Whether you're an investor seeking breakthrough technology opportunities, a researcher interested in collaboration, or simply curious about the cutting edge of theoretical physics, we invite you to connect with the COSMIC Framework project.</p>
-    
-    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-    <a href="book.html" class="btn btn-primary">Read The Big TOE</a>
-    <a href="validation.html" class="btn" style="background: var(--accent-blue); color: white;">View Validations</a>
-    <a href="contribute.html" class="btn" style="background: var(--accent-green); color: white;">Investment Inquiry</a>
+    <h2 class="section-title" style="color: white;">Get Involved</h2>
+    <p class="content-text" style="max-width: 760px; margin: 0 auto 2.5rem; color: rgba(255,255,255,0.82);">Whether you are an investor seeking breakthrough technology opportunities, a researcher interested in collaboration, or simply curious about the cutting edge of theoretical physics, we invite you to connect.</p>
+
+    <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 3rem;">
+        <a href="book.html" class="hero-logo-button">
+            <img src="bigtoeindexlogoyel.png" alt="The Big TOE" class="hero-bigtoe-logo">
+        </a>
+        <a href="validation.html" class="btn btn-outline">View Validations</a>
+        <a href="contribute.html" class="btn btn-outline">Investment Inquiry</a>
     </div>
 
-    <div style="max-width: 700px; margin: 0 auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📊 By the Numbers</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; text-align: center; margin-top: 1.5rem;">
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-blue);">37+</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Active Predictions</div>
-    </div>
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-green);">4</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Major Validations</div>
-    </div>
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-red);">4.2σ</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Statistical Significance</div>
-    </div>
-    <div>
-    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-orange);">$100M+</div>
-    <div style="color: var(--text-light); font-size: 0.9rem;">Validation Instruments</div>
-    </div>
-    </div>
-    </div>
 
-    <p class="content-text" style="margin-top: 2rem; font-size: 1rem; color: var(--text-light);">All research findings, predictions, and data are published open-source on Zenodo with permanent DOIs. We believe in transparent, reproducible science.</p>
+
     </div>
     </section>
 
@@ -1829,5 +1259,39 @@ function toggleFoundation(header) {
     }
 }
 </script>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">expand_less</button>
+    <script>
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Timeline dot animation — fires when well in view, then loops continuously
+    const tlSection = document.getElementById('origin-timelines');
+    if (tlSection) {
+        const tlObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('tl-animate');
+                    tlObserver.unobserve(entry.target);
+                    // After initial sequence completes, switch to continuous pulse
+                    setTimeout(() => {
+                        const smDots = entry.target.querySelectorAll('.tl-track.sm .tl-vert-dot');
+                        const cfDots = entry.target.querySelectorAll('.tl-track.cf .tl-vert-dot');
+                        smDots.forEach((dot, i) => {
+                            dot.style.animation = 'smPulse 2.2s ease-in-out ' + (i * 0.2) + 's infinite';
+                        });
+                        cfDots.forEach((dot, i) => {
+                            dot.style.animation = 'cfPulse 2.2s ease-in-out ' + (i * 0.2 + 0.1) + 's infinite';
+                        });
+                    }, 3200);
+                }
+            });
+        }, { threshold: 0.5, rootMargin: '0px 0px -60px 0px' });
+        tlObserver.observe(tlSection);
+    }
+    </script>
 </body>
 </html>
