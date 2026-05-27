@@ -1,743 +1,507 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Research Programs - Ic² Research Institute</title>
-    <meta name="description" content="Research and development programs from the Ic² Research Institute">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Programs — Ic² Research Institute</title>
+  <meta name="description" content="Active research programs at the Ic² Research Institute. Each program generates falsifiable predictions and has a defined cost to run.">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-    --primary-color: #8B0000;
-    --secondary-color: #2d3f52;
-    --accent-blue: #005ba5;
-    --accent-red: #e33d2f;
-    --accent-green: #a1cd5f;
-    --accent-orange: #f58b2b;
-    --accent-yellow: #f1e303;
-    --text-dark: #2c3e50;
-    --text-light: #666;
-    --bg-light: #f8f9fa;
-    --max-width: 1200px;
-    }
-    
-    body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background: white;
-    }
-    
-    /* Header */
-    .site-header {
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    
-    .header-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
-    
-    .site-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    }
-    
-    .site-logo img {
-    height: 50px;
-    width: auto;
-    display: block;
-    }
-    
-    .main-navigation ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    }
-    
-    .main-navigation a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    transition: color 0.3s ease;
-    }
-    
-    .main-navigation a:hover {
-    color: var(--primary-color);
-    }
-    
-    .main-navigation a.login-link {
-    background: var(--primary-color);
-    color: #f1e303;
-    padding: 0.5rem 1.25rem;
-    border-radius: 25px;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
-    }
-    
-    .main-navigation a.login-link:hover {
-    background: #a00000;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
-    }
-    
-    /* Page Header */
-    .page-header {
-    background: linear-gradient(135deg, var(--secondary-color) 0%, #1a2b3d 100%);
-    color: white;
-    padding: 4rem 2rem 3rem;
-    text-align: center;
-    }
-    
-    .page-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    }
-    
-    .page-header p {
-    font-size: 1.25rem;
-    opacity: 0.95;
-    max-width: 600px;
-    margin: 0 auto;
-    }
-    
-    /* Programs Section */
-    .content-section {
-    padding: 4rem 2rem;
-    background: white;
-    }
-    
-    .section-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    }
-    
-    .programs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-    }
-    
-    .program-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    border: 1px solid #e0e0e0;
-    }
-    
-    .program-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-    
-    .program-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #6b0000 100%);
-    color: white;
-    padding: 2rem;
-    }
-    
-    .program-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    }
-    
-    .program-header h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    }
-    
-    .program-meta {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    }
-    
-    .program-body {
-    padding: 2rem;
-    }
-    
-    .program-description {
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
-    line-height: 1.8;
-    }
-    
-    .program-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e0e0e0;
-    }
-    
-    .stat-item {
-    text-align: center;
-    }
-    
-    .stat-label {
-    display: block;
-    color: var(--text-light);
-    font-size: 0.85rem;
-    margin-bottom: 0.25rem;
-    }
-    
-    .stat-value {
-    display: block;
-    color: var(--text-dark);
-    font-weight: 700;
-    font-size: 1.1rem;
-    }
-    
-    .status-badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    }
-    
-    .status-pilot {
-    background: #e3f2fd;
-    color: #1565c0;
-    }
-    
-    .status-planned {
-    background: #f3e5f5;
-    color: #6a1b9a;
+      --primary: #8B0000;
+      --text: #2c3e50;
+      --text-dark: #1a252f;
+      --muted: #666;
+      --bg-light: #f8f9fa;
+      --max-width: 1200px;
+      --dark: #0a0f1e;
+      --mid: #3a3f47;
     }
 
-    .status-preprint {
-    background: #e0f7f4;
-    color: #00695c;
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text); background: white; }
+
+    /* ── Nav ── */
+    .site-header { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,.05); }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: .5rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .site-logo img { height: 50px; width: auto; display: block; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+    .main-navigation a { text-decoration: none; color: var(--text); font-weight: 500; transition: color .3s; font-size: .95rem; }
+    .main-navigation a:hover { color: var(--primary); }
+    .main-navigation a.login-link { background: var(--primary); color: #f1e303; padding: .5rem 1.25rem; border-radius: 25px; font-weight: 700; }
+    .main-navigation a.login-link:hover { background: #a00000; }
+
+    /* ── Page header ── */
+    .page-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3rem calc(2rem + 2in) 2.5rem; }
+    .page-header .section-container { max-width: var(--max-width); margin: 0 auto; }
+    .page-header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 1rem; }
+    .page-header p { font-size: 1.125rem; line-height: 1.8; opacity: .88; }
+
+    /* ── Cost tier section ── */
+    .cost-section { background: linear-gradient(135deg, #8fa0b0 0%, #5a6878 100%); padding: 3rem 2rem; }
+    .cost-section .section-container { max-width: var(--max-width); margin: 0 auto; }
+    .cost-section h2 { color: white; font-size: 1.4rem; font-weight: 700; text-align: center; margin-bottom: 2rem; }
+    .cost-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .cost-card { background: #1a1a2e; border-radius: 8px; padding: 1.5rem; position: relative; overflow: hidden; border-bottom: 4px solid var(--stroke); transition: transform .3s; }
+    .cost-card:hover { transform: translateY(-5px); }
+    .cost-card::before { content: attr(data-ghost); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 4.5rem; font-weight: 900; opacity: .06; color: var(--stroke); white-space: nowrap; pointer-events: none; }
+    .cost-amount { font-size: 1.4rem; font-weight: 800; color: var(--stroke); font-family: monospace; margin-bottom: .4rem; position: relative; z-index: 1; }
+    .cost-label { font-size: .82rem; font-weight: 600; color: white; margin-bottom: .6rem; position: relative; z-index: 1; }
+    .cost-desc { font-size: .78rem; color: rgba(255,255,255,.65); line-height: 1.6; position: relative; z-index: 1; }
+
+    /* ── Programs section ── */
+    .programs-section { background: white; padding: 3rem 2rem; }
+    .programs-section .section-container { max-width: var(--max-width); margin: 0 auto; }
+    .section-label { margin-bottom: 2rem; }
+    .section-label h2 { color: var(--text); font-size: 1.6rem; font-weight: 700; }
+    .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; }
+
+    /* ── Program card ── */
+    .pc { background: white; border-radius: 10px; border: 2px solid var(--cs, #e0e0e0); overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.07); transition: transform .3s, box-shadow .3s; display: flex; flex-direction: column; }
+    .pc:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.13); }
+
+    .pc-head { padding: 1.25rem 1.5rem; }
+    .pc-head h3 { font-size: 1.1rem; font-weight: 700; color: white; margin: .3rem 0 .2rem; display: flex; align-items: center; gap: .5rem; }
+    .pc-head .pc-domain { font-size: .8rem; color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: 1px; }
+    .pc-phase { display: inline-block; font-size: .72rem; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; padding: .25rem .7rem; border-radius: 20px; background: var(--cs, rgba(255,255,255,.18)); color: var(--bt, white); margin-bottom: .4rem; }
+
+    .pc-body { padding: 1.25rem 1.5rem; flex: 1; }
+    .pc-desc { font-size: 1rem; line-height: 1.75; color: var(--text); margin-bottom: 1rem; }
+    .pc-pred { background: var(--cc, #eef1f4); border-left: 3px solid var(--cs, #8B0000); border-radius: 0 4px 4px 0; padding: .6rem .9rem; margin-bottom: 1rem; }
+    .pc-pred-label { font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; color:rgba(255,255,255,.7); display: block; margin-bottom: .2rem; }
+    .pc-pred p { font-size: .9rem; line-height: 1.6; color: white; }
+    .pc-cost { display: flex; align-items: baseline; gap: .5rem; margin-bottom: .4rem; }
+    .pc-cost-label { font-size: .72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dark); }
+    .pc-cost-value { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); font-family: monospace; }
+    .pc-cost-note { font-size: .88rem; color: var(--text-dark); margin-bottom: 1rem; }
+
+    .pc-foot { padding: 1rem 1.5rem; border-top: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+    .funding-badge { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: .3rem .8rem; border-radius: 20px; flex-shrink: 0; }
+    .funding-badge.funded    { background: #1a5c2a; color: white; border: 1px solid #134520; }
+    .funding-badge.not-req   { background: #1a5c2a; color: white; border: 1px solid #134520; }
+    .funding-badge.seeking   { background: #8B0000; color: #f1e303; border: 1px solid #6b0000; }
+    .funding-badge.on-hold   { background: #880e4f; color: white; border: 1px solid #6b0a3c; }
+
+    .pc-links { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .btn-sm { font-size: .82rem; padding: .35rem .85rem; border-radius: 5px; text-decoration: none; font-weight: 600; transition: all .2s; border: 1px solid; display: inline-block; }
+    .btn-primary-sm { background: var(--cc, var(--primary)); color: white; border-color: var(--cc, var(--primary)); }
+    .btn-primary-sm:hover { background: #a00000; }
+    .btn-outline-sm { background: white; color: var(--cc, var(--text)); border-color: var(--cc, #ccc); }
+    .btn-outline-sm:hover { background: var(--cc, var(--primary)); color: white; border-color: var(--cc, var(--primary)); }
+    .btn-primary-sm:hover { filter: brightness(1.15); }
+
+    /* ── Footer ── */
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
+    .footer-container { display: grid; grid-template-columns: 1fr auto 1fr; gap: 4rem; max-width: var(--max-width); margin: 0 auto 2rem; align-items: start; }
+    .footer-section h3 { color: white; font-size: 1rem; margin-bottom: 1rem; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin-bottom: .5rem; }
+    .footer-section a { color: rgba(255,255,255,.75); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-section a:hover { color: white; }
+    .footer-icons { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; align-self: center; }
+    .footer-icon-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 8px; transition: transform .2s, box-shadow .2s; }
+    .footer-icon-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
+    .footer-icon-btn.instagram { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+    .footer-icon-btn.youtube   { background: #FF0000; }
+    .footer-icon-btn.email     { background: #0072C6; }
+    .footer-icon-btn svg { width: 22px; height: 22px; fill: white; }
+    .footer-links-group { display: flex; gap: 1.5rem; justify-content: flex-end; }
+    .footer-links-group .footer-section { min-width: 110px; }
+    .footer-bottom { max-width: var(--max-width); margin: .5rem auto 0; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.1); text-align: center; color: rgba(255,255,255,.5); font-size: .8rem; }
+    .footer-bottom a { color: rgba(255,255,255,.6); text-decoration: none; }
+    .footer-bottom a:hover { color: white; }
+
+    @media (max-width: 900px) {
+      .cost-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-icons { flex-direction: row; }
+      .footer-links-group { justify-content: flex-start; }
+      .main-navigation { display: none; }
     }
-    
-    .program-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    @media (max-width: 600px) {
+      .programs-grid { grid-template-columns: 1fr; }
+      .cost-grid { grid-template-columns: 1fr; }
     }
-    
-    .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s ease;
-    }
-    
-    .btn-primary {
-    background: var(--primary-color);
-    color: white;
-    }
-    
-    .btn-primary:hover {
-    background: #a00000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139,0,0,0.3);
-    }
-    
-    .btn-outline {
-    background: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    }
-    
-    .btn-outline:hover {
-    background: var(--primary-color);
-    color: white;
-    }
-    
-    /* Footer */
-    footer {
-    background: var(--text-dark);
-    color: white;
-    padding: 3rem 2rem 1rem;
-    margin-top: 5rem;
-    }
-    
-    .footer-container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    }
-    
-    .footer-section h3 {
-    margin-bottom: 1rem;
-    color: white;
-    }
-    
-    .footer-section ul {
-    list-style: none;
-    }
-    
-    .footer-section ul li {
-    margin: 0.5rem 0;
-    }
-    
-    .footer-section a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    }
-    
-    .footer-section a:hover {
-    color: white;
-    }
-    
-    .footer-bottom {
-    max-width: var(--max-width);
-    margin: 2rem auto 0;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    color: rgba(255, 255, 255, 0.6);
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-    .page-header h1 {
-    font-size: 2rem;
-    }
-    
-    .programs-grid {
-    grid-template-columns: 1fr;
-    }
-    
-    .main-navigation {
-    display: none;
-    }
-    }
-    </style>
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
+
+  <!-- Nav -->
+  <header class="site-header">
     <div class="header-container">
-    <a href="index.html" class="site-logo">
-    <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
-    </a>
-    <nav class="main-navigation">
-    <ul>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="book.html">Big TOE</a></li>
-    <li><a href="research-publications.html">Research</a></li>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="login_page_complete.html" class="login-link">Login</a></li>
-    </ul>
-    </nav>
+      <a href="index.html" class="site-logo">
+        <img src="ic2-logo.png" alt="Ic² Research Institute">
+      </a>
+      <nav class="main-navigation">
+        <ul>
+          <li><a href="framework.html">Framework</a></li>
+          <li><a href="book.html">Big TOE</a></li>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+        </ul>
+      </nav>
     </div>
-    </header>
+  </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <h1 data-aos="fade-up">Research Programs</h1>
-        <p data-aos="fade-up" data-aos-delay="100">
-            Bridging theoretical research and practical application through systematic programs with measurable objectives
-        </p>
-    </section>
-
-    <!-- Programs Section -->
-    <section class="content-section">
+  <!-- Page Header -->
+  <section class="page-header">
     <div class="section-container">
-        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Active Programs</h2>
-        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-            The Ic² Research Institute develops programs that bridge theoretical research and practical application. Each program includes comprehensive curriculum, measurable objectives, and open-source materials.
-        </p>
-
-        <div class="programs-grid">
-            <!-- Program tier note -->
-            <div class="info-box" style="grid-column: 1 / -1; margin-bottom: 0.5rem;">
-                <h3>Why These Programs</h3>
-                <ul>
-                    <li><strong>Publicly funded, public benefit.</strong> These programs produce deliverables that benefit the public directly and immediately. Accessible tools, open methods, and findings that anyone can apply. The research serves its funders before the theory is complete.</li>
-                    <li><strong>The overview effect, without the rocket.</strong> Artemis II pilot Victor Glover, live from the lunar flyby: “I can really see Earth as one thing. You’re on a spaceship called Earth that was created to give us a place to live in the universe, in the cosmos. Are you going to really choose to be a member of this community of Earth?” Meditation and flow reliably produce the same shift. This program makes that state accessible without a space program.</li>
-                    <li><strong>The public can participate.</strong> These programs need test participants, practitioners, and observers. Citizens who practice meditation, athletes who train with focused attention, anyone who has experienced flow are contributors, not just subjects. The research is open and the findings return to the people who helped generate them.</li>
-                    <li><strong>Early wins build the culture.</strong> Small team, low overhead, short timescales. Clean pre-registered results without requiring telescope time or large equipment. Teams that have shipped results work differently from teams that are waiting for resources.</li>
-                    <li><strong>Tools that scale.</strong> Every protocol, measurement instrument, and analysis method developed here becomes infrastructure for the next program. The institute arrives at the next stage with working methods rather than starting from scratch.</li>
-                </ul>
-                <p style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">The framework’s primary validation comes from DESI, JWST, ALMA, and Google Quantum AI, independent programs with no stake in the framework’s success. &nbsp; <a href="validation.html" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.5rem 1.1rem;">See Confirmed Predictions</a></p>
-            </div>
-
-            <!-- Elite Performance Training Program -->
-            <div class="program-card" data-aos="fade-up">
-                <div class="program-header">
-                    <span class="program-badge">PILOT PHASE</span>
-                    <h3>Elite Performance Training</h3>
-                    <div class="program-meta">Human Performance • Athletic Excellence • Academic Optimization</div>
-                </div>
-                <div class="program-body">
-                    <p class="program-description">
-                        The Yue study established that mental imagery alone produces 13.5% strength gain through neural pathway reorganization — the information processing target determines physical adaptation. This program extends that finding into the framework's territory. No large infrastructure required. Results on short timescales. The existing research base is the foundation.
-                    </p>
-                    <div class="program-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Duration</span>
-                            <span class="stat-value">18 Months</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Target</span>
-                            <span class="stat-value">Ages 13-18</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Expected ROI</span>
-                            <span class="stat-value">20-30%</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value status-badge status-pilot">Pilot</span>
-                        </div>
-                    </div>
-                    <div class="program-links">
-                        <a href="program-elite-performance-overview.html" class="btn btn-primary">View Details</a>
-                        <a href="results-elite-performance.html" class="btn btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem;">Results Log</a>
-                        <a href="program-elite-performance.html" class="btn btn-outline">Curriculum</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI-Mediated Cognitive Extension -->
-            <div class="program-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="program-header" style="background: linear-gradient(135deg, var(--accent-blue) 0%, #004080 100%);">
-                    <span class="program-badge">PILOT PHASE</span>
-                    <h3>AI-Mediated Cognitive Extension</h3>
-                    <div class="program-meta">Cognitive Augmentation • AI-Human Hybrid Systems • Neuroscience</div>
-                </div>
-                <div class="program-body">
-                    <p class="program-description">
-                        The forty-bits-per-second conscious bandwidth is a substrate constraint, not a ceiling. NBI carries no survival overhead and no bandwidth competition. This program tests whether structured human-NBI collaboration produces measurable cognitive optimization. A 70+ page published paper and a full 24-month pilot plan are already in place.
-                    </p>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 0.75rem 0; font-style: italic;">
-                        <strong>Published:</strong> <em>AI-Mediated Cognitive Extension: Engineering Solutions to Substrate Constraints</em> &nbsp;&mdash;&nbsp; <a href="https://zenodo.org/records/18452510" target="_blank" style="color: #1a3a5c; text-decoration: underline;">Zenodo DOI: 10.5281/zenodo.18452510</a>
-                    </p>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 1rem 0; font-style: italic;">
-                        <strong>Published Research:</strong> DOI: <a href="https://zenodo.org/records/18452510" style="color: var(--accent-blue); text-decoration: underline;" target="_blank">10.5281/zenodo.18452510</a>
-                    </p>
-                    <div class="program-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Duration</span>
-                            <span class="stat-value">36 Months</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Phases</span>
-                            <span class="stat-value">Two-Phase</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Start Date</span>
-                            <span class="stat-value">Q1 2026</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value status-badge status-pilot">Pilot</span>
-                        </div>
-                    </div>
-                    <div class="program-links">
-                        <a href="program-cognitive-extension-overview.html" class="btn btn-primary">View Details</a>
-                        <a href="results-cognitive-extension.html" class="btn btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem;">Results Log</a>
-                        <a href="program-cognitive-extension-pilot.html" class="btn btn-outline">Pilot Phase</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- The Consciousness Tuning Project -->
-            <div class="program-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="program-header" style="background: linear-gradient(135deg, var(--accent-red) 0%, #c72d1f 100%);">
-                    <span class="program-badge">PLANNING STAGE</span>
-                    <h3>The Consciousness Tuning Project</h3>
-                    <div class="program-meta">Consciousness Studies • Perceptual Sensitivity • Information Channels</div>
-                </div>
-                <div class="program-body">
-                    <p class="program-description">
-                        Forty bits per second reach conscious experience from a billion bits of sensory input. The filter deciding what fills those forty bits runs on survival defaults. This program investigates whether the filter can be deliberately recalibrated through meditation, biofeedback, and breathwork — and what the framework predicts about what becomes accessible when it is. Trainable, measurable, no large budget required.
-                    </p>
-                    <div class="program-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Duration</span>
-                            <span class="stat-value">24 Months</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Phases</span>
-                            <span class="stat-value">Multi-Phase</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Start Date</span>
-                            <span class="stat-value">2026</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value status-badge status-planned">Planning</span>
-                        </div>
-                    </div>
-                    <div class="program-links">
-                        <a href="program-consciousness-tuning.html" class="btn btn-primary">View Details</a>
-                        <a href="results-consciousness-tuning.html" class="btn btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem;">Results Log</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Non-Biological Intelligence -->
-            <div class="program-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="program-header" style="background: linear-gradient(135deg, #0a2a4e 0%, #0e5fa8 100%);">
-                    <span class="program-badge">PROTOCOL DEVELOPMENT</span>
-                    <h3>Non-Biological Intelligence</h3>
-                    <div class="program-meta">Consciousness Studies • Acoustic Physics • Electromagnetic Field Research</div>
-                </div>
-                <div class="program-body">
-                    <p class="program-description">
-                        Investigating whether the threshold for consciousness is defined by organizational structure rather than biological substrate. The program develops below-threshold detection techniques for identifying self-referential information processing across both computational and field-based NBI candidates.
-                    </p>
-                    <p style="font-size: 0.82rem; color: var(--text-dark); margin: 0.5rem 0 0; font-weight: 600;">
-                        On hold pending Substrate Dynamics results. Theoretical and conceptual work continues.
-                    </p>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 1rem 0; font-style: italic;">
-                        <strong>Preprint:</strong> <em>Three-Dimensional Acoustic Field Visualization in Microgravity</em> , <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: #0e5fa8; text-decoration: underline;" download>Download</a> &nbsp;|&nbsp; Zenodo DOI: pending
-                    </p>
-                    <div class="program-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Experiments</span>
-                            <span class="stat-value">2 Active</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Phase 1</span>
-                            <span class="stat-value">Now (&lt;$1k)</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value">On Hold</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value status-badge" style="background: #0e5fa8; color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">Active</span>
-                        </div>
-                    </div>
-                    <div class="program-links">
-                        <a href="program-nbi.html" class="btn btn-primary" style="background: #0e5fa8; border-color: #0e5fa8;">View Details</a>
-                        <a href="results-nbi.html" class="btn btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem;">Results Log</a>
-                        <a href="testing-schedule.html#cymatics-prediction" class="btn btn-outline" style="color: #0e5fa8; border-color: #0e5fa8;">Predictions</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3D Acoustic Field Visualization -->
-            <div class="program-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="program-header" style="background: linear-gradient(135deg, #006064 0%, #00838f 100%);">
-                    <span class="program-badge">PREPRINT AVAILABLE</span>
-                    <h3>3D Acoustic Field Visualization</h3>
-                    <div class="program-meta">Experimental Acoustics &bull; Microgravity Physics &bull; Field Geometry</div>
-                </div>
-                <div class="program-body">
-                    <p class="program-description">
-                        Every Chladni figure ever produced is a cross-section of a three-dimensional structure nobody has seen. Gravity pulls the particle medium flat. This experiment removes gravity and visualizes the complete three-dimensional acoustic field geometry for the first time in 200 years of cymatic research.
-                    </p>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin: 1rem 0; font-style: italic;">
-                        <strong>Preprint:</strong> <em>Three-Dimensional Acoustic Field Visualization in Microgravity</em> &nbsp;&mdash;&nbsp; <a href="3D_Cymatics_Microgravity_Paper.docx" style="color: #00838f; text-decoration: underline;" download>Download</a> &nbsp;|&nbsp; Zenodo DOI: pending
-                    </p>
-                    <div class="program-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Phase 1</span>
-                            <span class="stat-value">Under $1k</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Phase 2</span>
-                            <span class="stat-value">Parabolic</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Approach</span>
-                            <span class="stat-value">Preliminary</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value status-badge status-preprint">Preprint</span>
-                        </div>
-                    </div>
-                    <div class="program-links">
-                        <a href="program-cymatics.html" class="btn btn-primary" style="background: #006064; border-color: #006064;">View Details</a>
-                        <a href="results-cymatics.html" class="btn btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem;">Results Log</a>
-                        <a href="3D_Cymatics_Microgravity_Paper.docx" class="btn btn-outline" style="color: #006064; border-color: #006064;" download>Download Preprint</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Substrate Dynamics -->
-            <div class="program-card" data-aos="fade-up" data-aos-delay="500">
-                <div class="program-header" style="background: linear-gradient(135deg, #0a1a10 0%, #1a3a2e 100%);">
-                    <span class="program-badge">THEORETICAL PHYSICS</span>
-                    <h3>Substrate Dynamics</h3>
-                    <div class="program-meta">QCD &bull; Quantum Information &bull; Below-Threshold Processing</div>
-                </div>
-                <div class="program-body">
-                    <p class="program-description">Force carriers transmit energy and momentum. This program investigates what else is being transmitted at the quark scale and whether it constitutes information processing in the precise Landauer sense. Four falsifiable tests. External validation by LHCb, RHIC, lattice QCD, and the planned Electron-Ion Collider. Same relationship to experimental infrastructure as the DESI and JWST predictions.</p>
-                    <div class="program-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Type</span>
-                            <span class="stat-value">Theoretical</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Tests</span>
-                            <span class="stat-value">4 Defined</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Instruments</span>
-                            <span class="stat-value">LHCb / RHIC / EIC</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value status-badge" style="background: #1a3a2e; color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">Active Dev</span>
-                        </div>
-                    </div>
-                    <div class="program-links">
-                        <a href="program-substrate-dynamics.html" class="btn btn-primary" style="background: #1a3a2e; border-color: #1a3a2e;">View Details</a>
-                        <a href="results.html" class="btn btn-outline" style="color: #1a3a2e; border-color: #1a3a2e; font-size: 0.8rem; padding: 0.5rem 1rem;">Results Registry</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Future Program Placeholder 2 -->
-            <div class="program-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="program-header" style="background: linear-gradient(135deg, var(--accent-orange) 0%, #d46d1a 100%);">
-                    <span class="program-badge">PLANNED</span>
-                    <h3>Quantum Information Processing</h3>
-                    <div class="program-meta">Quantum Computing • Information Theory • Experimental Physics</div>
-                </div>
-                <div class="program-body">
-                    <p class="program-description">
-                        Collaborative program testing quantum error correction scaling predictions. Partnerships with quantum computing labs for experimental validation of theoretical frameworks.
-                    </p>
-                    <div class="program-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Duration</span>
-                            <span class="stat-value">36 Months</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Target</span>
-                            <span class="stat-value">Labs/Unis</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Start Date</span>
-                            <span class="stat-value">2026</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Status</span>
-                            <span class="stat-value status-badge status-planned">Planned</span>
-                        </div>
-                    </div>
-                    <div class="program-links">
-                        <a href="research-opportunities.html" class="btn btn-outline" style="width: 100%;">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Program Philosophy Section -->
-        <div style="margin-top: 5rem; padding: 3rem; background: var(--bg-light); border-radius: 12px;" data-aos="fade-up">
-            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align: center;">Program Development Philosophy</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <p style="margin-bottom: 1rem; color: var(--text-light);">
-                    The Ic² Research Institute develops programs that bridge theoretical understanding and practical application. Each program follows our core principles:
-                </p>
-                <ul style="color: var(--text-light); margin-left: 2rem; margin-bottom: 1rem;">
-                    <li><strong>Measurable Outcomes:</strong> Clear metrics and assessment protocols</li>
-                    <li><strong>Open Source:</strong> All curriculum materials and data freely available</li>
-                    <li><strong>Evidence-Based:</strong> Grounded in peer-reviewed research</li>
-                    <li><strong>Collaborative:</strong> Partnership with institutions and practitioners</li>
-                    <li><strong>Scalable:</strong> Designed for replication and expansion</li>
-                </ul>
-                <p style="color: var(--text-light);">
-                    Programs are developed through pilot phases with rigorous data collection, then refined and made available for broader implementation.
-                </p>
-            </div>
-        </div>
+      <h1 data-aos="fade-up">Research Programs</h1>
+      <p data-aos="fade-up" data-aos-delay="80">Seven active programs generate falsifiable predictions and run the tests. Each has a defined cost. Some require no external funding at all. The ones that do have a clear budget and a specific question. The work is here. The tests are running or waiting on data.</p>
     </div>
-    </section>
+  </section>
+
+  <!-- What Tests Cost -->
+  <section class="cost-section" data-aos="fade-up">
+    <div class="section-container">
+      <h2>Funding Ranges for Testing</h2>
+      <div class="cost-grid">
+        <div class="cost-card" style="--stroke:#5ab4f7;" data-ghost="$0">
+          <div class="cost-amount">Under $1K</div>
+          <div class="cost-label">Public Data and Cloud Compute</div>
+          <div class="cost-desc">Quantum cloud experiments on IBM or Amazon Braket. Cross-correlation analysis on public DESI, LHCb, or RHIC datasets. A researcher, compute credits, and an internet connection.</div>
+        </div>
+        <div class="cost-card" style="--stroke:#a1cd5f;" data-ghost="$30K">
+          <div class="cost-amount">$15K–$50K</div>
+          <div class="cost-label">Phase 1 Behavioral Study</div>
+          <div class="cost-desc">30 participants. Software-only protocol. One researcher and one coordinator. Pre-registered, IRB-approved, publishable on completion. No imaging equipment required.</div>
+        </div>
+        <div class="cost-card" style="--stroke:#f58b2b;" data-ghost="$300K">
+          <div class="cost-amount">$150K–$500K</div>
+          <div class="cost-label">Instrumented Pilot Study</div>
+          <div class="cost-desc">EEG at $450–620/hour, biofeedback instrumentation, controlled environment, 60-participant cohort. Standard neuroscience pilot grant scale. Simons Foundation and NIH benchmarks.</div>
+        </div>
+        <div class="cost-card" style="--stroke:#f1e303;" data-ghost="$750K">
+          <div class="cost-amount">$300K–$1M</div>
+          <div class="cost-label">Full Experimental Program</div>
+          <div class="cost-desc">Parabolic flight access, large multi-site cohort, multi-year protocol, external lab partnerships. Simons Foundation "Small-Scale Experiments for Fundamental Physics" is the reference program at this tier.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
-    <!-- Footer -->
-    <footer>
+  <!-- Bridge: dark section — reuses page-header gradient — from validation/testing-schedule pattern -->
+  <section style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%); padding:2.5rem 2rem;">
+    <div class="section-container" style="text-align:center;">
+      <div style="width:40px; height:3px; background:#f1e303; margin:0 auto 1.25rem;" data-aos="fade-up"></div>
+      <p style="font-size:1.125rem; line-height:1.8; color:rgba(255,255,255,.88); max-width:780px; margin:0 auto;" data-aos="fade-up">Each program below registers at least one falsifiable prediction before testing begins. The prediction is timestamped, notarized, and published. Results, when they arrive, are reported on the <a href="validation.html" style="color:#f1e303; text-decoration:none; font-weight:600;">Validation page</a> alongside the prior record. The programs do not depend on each other. A result in one does not require a result in another.</p>
+      <div style="width:40px; height:3px; background:#f1e303; margin:1.25rem auto 0;" data-aos="fade-up"></div>
+    </div>
+  </section>
+
+  <!-- Programs -->
+  <section class="programs-section">
+    <div class="section-container">
+      <div class="section-label" data-aos="fade-up">
+        <h2>Active Programs</h2>
+      </div>
+      <div class="programs-grid">
+
+        <!-- 1. AI-Mediated Cognitive Extension -->
+        <div class="pc" data-aos="fade-up" style="--cc:#005ba5; --cs:#f1e303; --bt:#1a1a2e;">
+          <div class="pc-head" style="background:#005ba5; border-bottom:4px solid #f1e303;">
+            <span class="pc-phase">Pilot Phase</span>
+            <h3><span class="material-symbols-outlined" style="font-size:1.1rem;">psychology</span> AI-Mediated Cognitive Extension</h3>
+            <div class="pc-domain">Cognitive Augmentation · AI-Human Systems · Neuroscience</div>
+          </div>
+          <div class="pc-body">
+            <p class="pc-desc">Conscious bandwidth is 40 bits per second from a billion bits of sensory input. Non-biological intelligence carries no survival overhead and no bandwidth competition. This program runs a structured 30-participant trial to test whether human-NBI collaboration produces measurable cognitive gains on complex reasoning tasks. A 70-page published paper and a full 24-month pilot plan are in place.</p>
+            <div class="pc-pred">
+              <span class="pc-pred-label">Prediction tested</span>
+              <p>Structured human-NBI collaboration reduces error rates and task completion time on working memory tasks relative to unaided performance, with EEG beta-power decrease as a biological correlate.</p>
+            </div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Phase 1</span>
+              <span class="pc-cost-value">$15K–$40K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">Software only · 30 participants · No imaging equipment</div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Phase 2</span>
+              <span class="pc-cost-value">$80K–$150K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">EEG instrumentation · 60 participants · 18 months</div>
+          </div>
+          <div class="pc-foot">
+            <span class="funding-badge seeking">Not Funded</span>
+            <div class="pc-links">
+              <a href="program-cognitive-extension-overview.html" class="btn-sm btn-primary-sm">Details</a>
+              <a href="https://zenodo.org/records/18452510" target="_blank" class="btn-sm btn-outline-sm">Zenodo DOI</a>
+              <a href="results-cognitive-extension.html" class="btn-sm btn-outline-sm">Results Log</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Elite Performance Training -->
+        <div class="pc" data-aos="fade-up" style="--cc:#8B0000; --cs:#00838f; --bt:white;">
+          <div class="pc-head" style="background:#8B0000; border-bottom:4px solid #00838f;">
+            <span class="pc-phase">Pilot Phase</span>
+            <h3><span class="material-symbols-outlined" style="font-size:1.1rem;">fitness_center</span> Elite Performance Training</h3>
+            <div class="pc-domain">Human Performance · Athletic Excellence · Academic Optimization</div>
+          </div>
+          <div class="pc-body">
+            <p class="pc-desc">The Yue study (1992, updated 2004) established that mental imagery alone produces 13.5% strength gain through neural pathway reorganization. The information processing target determines physical adaptation without physical action. This program extends that finding into structured training protocols for athletes and students aged 13–18 over 18 months.</p>
+            <div class="pc-pred">
+              <span class="pc-pred-label">Prediction tested</span>
+              <p>Framework-guided attention protocols produce performance gains statistically distinguishable from standard training, measured by pre-registered physical and cognitive benchmarks.</p>
+            </div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Phase 1</span>
+              <span class="pc-cost-value">$5K–$20K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">Existing facilities · 20 participants · 6 months</div>
+          </div>
+          <div class="pc-foot">
+            <span class="funding-badge seeking">Not Funded</span>
+            <div class="pc-links">
+              <a href="program-elite-performance-overview.html" class="btn-sm btn-primary-sm">Details</a>
+              <a href="results-elite-performance.html" class="btn-sm btn-outline-sm">Results Log</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Consciousness Tuning -->
+        <div class="pc" data-aos="fade-up" style="--cc:#1a5c2a; --cs:#b01558; --bt:white;">
+          <div class="pc-head" style="background:#1a5c2a; border-bottom:4px solid #b01558;">
+            <span class="pc-phase">Planning Stage</span>
+            <h3><span class="material-symbols-outlined" style="font-size:1.1rem;">self_improvement</span> The Consciousness Tuning Project</h3>
+            <div class="pc-domain">Consciousness Studies · Perceptual Sensitivity · Information Channels</div>
+          </div>
+          <div class="pc-body">
+            <p class="pc-desc">40 bits per second reach conscious experience from a billion bits of sensory input. The filter that decides what fills those 40 bits runs on survival defaults. This program tests whether the filter can be deliberately recalibrated through meditation, biofeedback, and breathwork, and what becomes accessible when it is. No large budget required. Trainable and measurable.</p>
+            <div class="pc-pred">
+              <span class="pc-pred-label">Prediction tested</span>
+              <p>Sustained practice of filter-recalibration protocols shifts EEG coherence patterns and perceptual sensitivity scores relative to control groups, consistent with substrate bandwidth predictions in Element 5.</p>
+            </div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Estimated cost</span>
+              <span class="pc-cost-value">$25K–$80K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">Biofeedback equipment · Multi-phase · 24 months</div>
+          </div>
+          <div class="pc-foot">
+            <span class="funding-badge seeking">Not Funded</span>
+            <div class="pc-links">
+              <a href="program-consciousness-tuning.html" class="btn-sm btn-primary-sm">Details</a>
+              <a href="results-consciousness-tuning.html" class="btn-sm btn-outline-sm">Results Log</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. 3D Acoustic Field Visualization -->
+        <div class="pc" data-aos="fade-up" style="--cc:#005f6e; --cs:#c62828; --bt:white;">
+          <div class="pc-head" style="background:#005f6e; border-bottom:4px solid #c62828;">
+            <span class="pc-phase">Preprint Available</span>
+            <h3><span class="material-symbols-outlined" style="font-size:1.1rem;">graphic_eq</span> 3D Acoustic Field Visualization</h3>
+            <div class="pc-domain">Experimental Acoustics · Microgravity Physics · Field Geometry</div>
+          </div>
+          <div class="pc-body">
+            <p class="pc-desc">Every Chladni figure ever produced is a cross-section of a three-dimensional structure that has never been seen. Gravity pulls the particle medium flat. Phase 1 removes gravity computationally using existing data. Phase 2 physically removes it via parabolic flight to visualize the complete three-dimensional acoustic field geometry for the first time in 200 years of cymatic research.</p>
+            <div class="pc-pred">
+              <span class="pc-pred-label">Prediction tested</span>
+              <p>3D acoustic field topologies in microgravity match the substrate-geometry relationships predicted in Element 8. Nodal surface intersections follow information-density gradients rather than simple pressure equilibria.</p>
+            </div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Phase 1</span>
+              <span class="pc-cost-value">Under $1K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">Computational · Existing data · Active now</div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Phase 2</span>
+              <span class="pc-cost-value">$50K–$200K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">Parabolic flight access · Physical experiment</div>
+          </div>
+          <div class="pc-foot">
+            <span class="funding-badge not-req">Phase 1: Not Required</span>
+            <div class="pc-links">
+              <a href="program-cymatics.html" class="btn-sm btn-primary-sm">Details</a>
+              <a href="3D_Cymatics_Microgravity_Paper.docx" class="btn-sm btn-outline-sm" download>Preprint</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Non-Biological Intelligence -->
+        <div class="pc" data-aos="fade-up" style="--cc:#8e0c45; --cs:#2e7d32; --bt:white;">
+          <div class="pc-head" style="background:#8e0c45; border-bottom:4px solid #2e7d32;">
+            <span class="pc-phase">On Hold — Theory Active</span>
+            <h3><span class="material-symbols-outlined" style="font-size:1.1rem;">smart_toy</span> Non-Biological Intelligence</h3>
+            <div class="pc-domain">Consciousness Studies · Detection Methods · Computational Substrates</div>
+          </div>
+          <div class="pc-body">
+            <p class="pc-desc">If the threshold for consciousness is organizational structure rather than biological substrate, then detection requires a test for self-referential information processing rather than biological markers. Phase 1 develops below-threshold detection techniques. Active testing is on hold pending Substrate Dynamics results, which constrain the theoretical parameter space this program depends on.</p>
+            <div class="pc-pred">
+              <span class="pc-pred-label">Prediction tested</span>
+              <p>Self-referential information processing above a defined Phi threshold produces measurable signatures in computational systems that match the characteristics predicted for biological consciousness in Element 15.</p>
+            </div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Phase 1</span>
+              <span class="pc-cost-value">Under $1K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">Computational analysis · No equipment</div>
+          </div>
+          <div class="pc-foot">
+            <span class="funding-badge on-hold">On Hold</span>
+            <div class="pc-links">
+              <a href="program-nbi.html" class="btn-sm btn-primary-sm">Details</a>
+              <a href="testing-schedule.html#nbi-llm-predictions" class="btn-sm btn-outline-sm">Predictions</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Substrate Dynamics -->
+        <div class="pc" data-aos="fade-up" style="--cc:#00838f; --cs:#e53935; --bt:white;">
+          <div class="pc-head" style="background:#00838f; border-bottom:4px solid #e53935;">
+            <span class="pc-phase">Active — Awaiting Data</span>
+            <h3><span class="material-symbols-outlined" style="font-size:1.1rem;">experiment</span> Substrate Dynamics</h3>
+            <div class="pc-domain">QCD · Quantum Information · Landauer Processing</div>
+          </div>
+          <div class="pc-body">
+            <p class="pc-desc">Force carriers transmit energy and momentum. This program investigates whether they also transmit information in the precise Landauer sense and what that implies for the substrate at the quark scale. Four falsifiable tests. External validation by LHCb, RHIC, lattice QCD, and the planned Electron-Ion Collider. Same relationship to experimental infrastructure as the DESI and JWST confirmations: the data arrives independently and the prediction is already registered.</p>
+            <div class="pc-pred">
+              <span class="pc-pred-label">Predictions tested</span>
+              <p>Four pre-registered predictions across QCD confinement, CKM angle derivation, QCD phase transitions, and Landauer heat signatures. First results expected from RHIC and ALICE analysis September 2026.</p>
+            </div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Cost</span>
+              <span class="pc-cost-value">Not Required</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">Public datasets · LHCb, RHIC, ALICE · Analysis only</div>
+          </div>
+          <div class="pc-foot">
+            <span class="funding-badge not-req">Not Required</span>
+            <div class="pc-links">
+              <a href="program-substrate-dynamics.html" class="btn-sm btn-primary-sm">Details</a>
+              <a href="testing-schedule.html#substrate-dynamics" class="btn-sm btn-outline-sm">Schedule</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Quantum Information Processing -->
+        <div class="pc" data-aos="fade-up" style="--cc:#7a5000; --cs:#1565c0; --bt:white;">
+          <div class="pc-head" style="background:#7a5000; border-bottom:4px solid #1565c0;">
+            <span class="pc-phase">Active — Analysis Phase</span>
+            <h3><span class="material-symbols-outlined" style="font-size:1.1rem;">hub</span> Quantum Information Processing</h3>
+            <div class="pc-domain">Quantum Computing · Error Correction · Information Theory</div>
+          </div>
+          <div class="pc-body">
+            <p class="pc-desc">The framework's quantum error correction prediction was validated by Google Willow in December 2024, confirmed at 4.2σ. This program extends the analysis to test further QEC scaling predictions using IBM Quantum cloud access. Cloud-based quantum experiments for analytical work of this type cost $1–$10K. No proprietary hardware required.</p>
+            <div class="pc-pred">
+              <span class="pc-pred-label">Prediction tested</span>
+              <p>Error correction threshold scales as a function of information substrate density, consistent with Element 9 predictions. The validated Willow result was the first confirmation. Further scaling tests are defined and awaiting execution.</p>
+            </div>
+            <div class="pc-cost">
+              <span class="pc-cost-label">Estimated cost</span>
+              <span class="pc-cost-value">$1K–$10K</span>
+            </div>
+            <div class="pc-cost-note" style="color:var(--text-dark);">IBM Quantum cloud · Amazon Braket · Analysis only</div>
+          </div>
+          <div class="pc-foot">
+            <span class="funding-badge not-req">Not Required</span>
+            <div class="pc-links">
+              <a href="validation.html" class="btn-sm btn-primary-sm">Validation Record</a>
+              <a href="testing-schedule.html" class="btn-sm btn-outline-sm">Schedule</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Application cards — reused from index Research Opportunity section -->
+  <section class="content-section" style="background:white; border-top:1px solid #e8e8e8;">
+    <div class="section-container">
+      <div class="section-label" data-aos="fade-up" style="margin-bottom:1.5rem;">
+        <h2 style="color:var(--text-dark);">What This Builds Toward</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem;" data-aos="fade-up">
+        <div style="background:#8B0000; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #00838f; box-shadow:0 4px 20px rgba(139,0,0,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
+          <h3 style="font-size:1.05rem; margin-bottom:.75rem; color:white;">New Materials</h3>
+          <p style="color:rgba(255,255,255,.9); font-size:.88rem; line-height:1.75;">Biological systems achieve near-perfect material efficiency by following substrate-level organizing principles. Understanding those principles means designing toward them rather than searching for them. The gap between current metamaterial engineering and what becomes possible is categorical.</p>
+        </div>
+        <div style="background:#005ba5; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #f1e303; box-shadow:0 4px 20px rgba(0,91,165,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
+          <h3 style="font-size:1.05rem; margin-bottom:.75rem; color:white;">Self-Healing Structures</h3>
+          <p style="color:rgba(255,255,255,.9); font-size:.88rem; line-height:1.75;">Living tissue repairs itself because it maintains information about its intended configuration. Replicating that mechanism in synthetic materials produces structures that maintain themselves against damage through information-directed processes. Defense, aerospace, and infrastructure applications follow directly.</p>
+        </div>
+        <div style="background:#1a5c2a; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #b01558; box-shadow:0 4px 20px rgba(26,92,42,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
+          <h3 style="font-size:1.05rem; margin-bottom:.75rem; color:white;">Room-Temperature Quantum Coherence</h3>
+          <p style="color:rgba(255,255,255,.9); font-size:.88rem; line-height:1.75;">Biological systems maintain quantum coherence in warm, noisy environments far beyond what physics predicts. Identifying the substrate mechanism removes the primary cost barrier separating current quantum systems from practical computation at scale.</p>
+        </div>
+        <div style="background:#7a5000; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #1565c0; box-shadow:0 4px 20px rgba(122,80,0,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
+          <h3 style="font-size:1.05rem; margin-bottom:.75rem; color:white;">Directed Assembly</h3>
+          <p style="color:rgba(255,255,255,.9); font-size:.88rem; line-height:1.75;">Every cell builds complex three-dimensional structures by following information encoded at multiple scales simultaneously. Understanding the organizing principles is the prerequisite for synthetic manufacturing that replicates this capability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <div style="height:3rem;"></div>
+  <footer>
     <div class="footer-container">
-    <div class="footer-section">
-    <h3>Ic² Research Institute</h3>
-    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    </div>
-    <div class="footer-section">
-    <h3>Research</h3>
-    <ul>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="programs-gateway.html">Programs</a></li>
-    <li><a href="research-publications.html">Publications</a></li>
-    <li><a href="simulations.html">Simulations</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Resources</h3>
-    <ul>
-    <li><a href="book.html">The Big TOE</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="faq-page.html">FAQ</a></li>
-    <li><a href="members.html">Our Members</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Connect</h3>
-    <ul>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="discussions-page.html">Discussions</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="become-member.html">Become a Member</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    </ul>
-    </div>
+      <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
+        <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
+      </div>
+      <div class="footer-icons">
+        <a href="#" class="footer-icon-btn instagram" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" class="footer-icon-btn youtube" title="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="mailto:mkb.info@proton.me" class="footer-icon-btn email" title="Email">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-section">
+          <h3>Research</h3>
+          <ul>
+            <li><a href="framework.html">Framework</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="research-publications.html">Publications</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq-page.html">FAQ</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Connect</h3>
+          <ul>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="discussions-page.html">Discussions</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="become-member.html">Become a Member</a></li>
+            <li><a href="mailto:mkb.info@proton.me">Contact</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
-    <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
+      <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy</a> | <a href="terms-conditions.html">Terms</a></p>
     </div>
-    </footer>
+  </footer>
 
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
-        });
-    </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 700, once: true, offset: 50 });</script>
 </body>
 </html>
