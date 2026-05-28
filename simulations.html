@@ -6,6 +6,7 @@
     <title>Simulations - Ic² Research Institute</title>
     <meta name="description" content="Interactive simulations and visualizations from the Ic² Research Institute (COSMIC Framework).">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
@@ -46,9 +47,7 @@
     .mobile-menu a.login-link{background:linear-gradient(135deg,#8B0000 0%,#a00000 100%);color:#f1e303;margin:.5rem 0;border-radius:6px;font-weight:700;}
 
     /* Page header */
-    .page-header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);padding:4rem 2rem;text-align:center;color:#fff;}
-    .page-header h1{font-size:3rem;margin-bottom:1rem;}
-    .page-header p{font-size:1.25rem;opacity:.9;max-width:700px;margin:0 auto;}
+
 
     /* Content */
     .content-section{padding:5rem 2rem;}
@@ -97,9 +96,9 @@
     }
     .visualization h3{color:#f58b2b;margin-top:20px;font-size:1.05em;font-weight:600;}
     .visualization h3{color:#ffb74d;margin-top:20px;font-size:1.1em;}
-    .visualization .figure-container{background:rgba(255,255,255,.04);border-radius:10px;padding:18px;margin:14px 0;border:1px solid rgba(255,255,255,.06);}
+    .figure-container{background:#0d0d1f;border-radius:10px;padding:20px;margin:20px 0;border:1px solid rgba(255,255,255,.08);}
     .visualization .figure-title{text-align:center;font-weight:700;color:#ffffff;margin-bottom:12px;font-size:1.05em;letter-spacing:0.3px;}
-    .visualization .figure-caption{text-align:center;font-style:italic;color:#b0b0b0;margin-top:8px;font-size:.9em;}
+    .visualization .figure-caption{text-align:center;font-style:italic;color:white;margin-top:8px;font-size:.9em;}
     .visualization .plot-container{background:rgba(0,0,0,.3);border-radius:8px;padding:8px;margin:8px 0;}
     .visualization .equation{background:rgba(255,255,255,.06);border-radius:8px;padding:12px;margin:12px 0;font-family:'Courier New',monospace;text-align:center;color:#ffeb3b;border-left:4px solid #ffd700;font-size:.95em;}
     .visualization .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0;}
@@ -112,7 +111,7 @@
     /* ── 3D sim wrappers ── */
     .sim-wrap{position:relative;width:100%;height:420px;border-radius:8px;overflow:hidden;background:#020408;cursor:grab;margin:8px 0;touch-action:none;}
     .sim-wrap:active{cursor:grabbing;}
-    .sim-wrap canvas{display:block;}  /* Three.js owns canvas dimensions — no CSS override */
+    .sim-wrap canvas{display:block;}  /* Three.js owns canvas dimensions. no CSS override */
     .sim-tl{position:absolute;top:10px;left:10px;pointer-events:none;}
     .sim-tr{position:absolute;top:10px;right:10px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:none;}
     .sim-live{display:flex;align-items:center;gap:5px;font-size:.68em;color:#81c784;font-family:'Courier New',monospace;}
@@ -123,7 +122,7 @@
     .elem-badge{display:inline-block;padding:2px 10px;border-radius:50px;font-size:.72em;font-family:'Courier New',monospace;margin-left:10px;vertical-align:middle;background:rgba(79,195,247,.1);color:#4fc3f7;border:1px solid rgba(79,195,247,.3);}
     .section-rule{border:none;border-top:1px solid rgba(255,255,255,.08);margin:28px 0 20px;}
 
-    /* ── Hero logo button — matches index.html exactly ── */
+    /* ── Hero logo button. matches index.html exactly ── */
     .hero-logo-button {
       display: inline-flex;
       align-items: center;
@@ -262,103 +261,314 @@
     .sim-val { font-family: 'Courier New', monospace; font-weight: 700; }
 
     @media(max-width:600px){.sim-wrap{height:300px;}.sim-tr{display:none;}.sim-controls{gap:10px;}}
-    </style>
+
+    .site-header { background:white; border-bottom:1px solid #e0e0e0; position:sticky; top:0; z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,.05); }
+    .header-container { max-width:1200px; margin:0 auto; padding:.5rem 2rem; display:flex; align-items:center; justify-content:space-between; }
+    .site-logo img { height:50px; width:auto; display:block; }
+    .main-navigation ul { list-style:none; display:flex; gap:1.5rem; align-items:center; }
+    .main-navigation a { text-decoration:none; color:#2c3e50; font-weight:500; transition:color .3s; font-size:.95rem; }
+    .main-navigation a:hover { color:#8B0000; }
+    .main-navigation a.login-link { background:#8B0000; color:#f1e303; padding:.5rem 1.25rem; border-radius:25px; font-weight:700; }
+    .page-header { background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%); color:white; padding:3rem calc(2rem + 3in) 2.5rem; }
+    .page-header h1 { font-size:2.4rem; font-weight:700; margin-bottom:1rem; }
+    .page-header p { font-size:1.125rem; line-height:1.8; opacity:.88; }
+    .visualization h2 { color:#2c3e50; font-size:1.4rem; font-weight:700; margin:2.5rem 0 1rem; padding-top:1rem; border-top:1px solid #e8e8e8; }
+    .visualization h2:first-of-type { border-top:none; margin-top:0; }
+    .visualization h3 { color:#2c3e50; font-size:1.1rem; font-weight:600; margin-top:1.5rem; }
+    .visualization p { color:#2c3e50; font-size:1rem; line-height:1.8; margin-bottom:1rem; }
+    .visualization .figure-title { color:white; font-weight:700; margin-bottom:12px; font-size:1.05rem; }
+    .visualization .figure-caption { color:white !important; font-style:italic; margin-top:10px; font-size:.875rem; line-height:1.6; }
+    .elem-badge { background:#005ba5; color:#f1e303; font-size:.65rem; font-weight:700; padding:.2rem .6rem; border-radius:20px; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem; }
+    .section-rule { border:none; border-top:2px solid #e0e0e0; margin:3rem 0 2rem; }
+
+    footer { background:#2c3e50; color:white; padding:2.5rem 2rem 1rem; }
+    .footer-container { display:grid; grid-template-columns:1fr auto 1fr; gap:4rem; max-width:1200px; margin:0 auto 2rem; align-items:start; }
+    .footer-section h3 { color:white; font-size:1rem; margin-bottom:1rem; }
+    .footer-section ul { list-style:none; }
+    .footer-section ul li { margin-bottom:.5rem; }
+    .footer-section a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.9rem; transition:color .2s; }
+    .footer-section a:hover { color:white; }
+    .footer-icons { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; align-self:center; }
+    .social-btn { display:inline-flex; align-items:center; gap:.75rem; padding:.75rem 1.5rem; border-radius:8px; transition:transform .2s,box-shadow .2s; text-decoration:none; font-weight:600; color:white; font-size:.95rem; min-width:200px; }
+    .social-btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.3); }
+    .social-btn.instagram { background:linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+    .social-btn.youtube { background:#FF0000; }
+    .social-btn.email { background:#0072C6; }
+    .social-icon { width:24px; height:24px; flex-shrink:0; }
+    .footer-links-group { display:flex; gap:1.5rem; justify-content:flex-end; }
+    .footer-links-group .footer-section { min-width:110px; }
+    .footer-bottom { max-width:1200px; margin:.5rem auto 0; padding-top:1rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:rgba(255,255,255,.5); font-size:.8rem; }
+    .footer-bottom a { color:rgba(255,255,255,.6); text-decoration:none; }
+    
+    /* ── Foundation Accordion — exact framework.html styles ── */
+    .foundation-accordion {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      --acc-color: #4a5568;
+    }
+    .foundation-accordion:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .foundation-header {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--acc-color);
+      transition: filter 0.3s ease;
+    }
+    .foundation-header:hover { filter: brightness(1.1); }
+    .foundation-header h3 {
+      margin: 0;
+      color: white;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .toggle-indicator {
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.75);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .foundation-accordion.active .toggle-indicator { transform: rotate(180deg); }
+    .foundation-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .foundation-accordion.active .foundation-content { max-height: 10000px; }
+    .foundation-inner {
+      padding: 2rem;
+      background: white;
+    }
+    .foundation-summary {
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    /* ── Figure formatting inside accordions ── */
+    .foundation-inner .figure-container {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 0 2rem 0 !important;
+    }
+    .foundation-inner .figure-title {
+      color: #2c3e50;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-align: left;
+      margin: 1.5rem 0 .75rem 0;
+      padding: 0;
+      background: white;
+    }
+    .foundation-inner .figure-caption {
+      color: #2c3e50 !important;
+      font-style: italic;
+      font-size: .95rem;
+      line-height: 1.75;
+      margin: .75rem 0 0;
+      text-align: left;
+      background: white;
+    }
+    .foundation-inner .highlight {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: .75rem 0 !important;
+    }
+    .foundation-inner .highlight p {
+      color: #2c3e50 !important;
+      font-size: 1rem !important;
+      line-height: 1.8 !important;
+      margin: 0 0 .75rem 0 !important;
+    }
+    .foundation-inner .highlight strong {
+      color: #2c3e50 !important;
+    }
+    .foundation-inner .plot-container {
+      background: #0d0d1f;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 1rem 0;
+    }
+    .foundation-inner .equation {
+      color: #2c3e50 !important;
+      border: 1px solid #005ba5 !important;
+      background: white !important;
+    }
+    .foundation-inner .sim-pill {
+      background: rgba(0,91,165,.1) !important;
+      border-color: rgba(0,91,165,.3) !important;
+      color: #005ba5 !important;
+    }
+    .foundation-inner .grid {
+      gap: 2rem;
+    }
+
+    /* Chart reveal when accordion opens */
+    .foundation-accordion.active .plot-container {
+      animation: chartReveal 0.7s ease-out forwards;
+    }
+    @keyframes chartReveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .data-source-note {
+      color: #546e7a;
+      font-size: .75rem;
+      font-style: italic;
+      margin-top: .5rem;
+      padding: .4rem 0;
+      border-top: 1px solid #e0e0e0;
+    }
+    .data-source-note a { color: #005ba5; }
+    /* Pulse animation for key-point overlays */
+    @keyframes keyBlink {
+      0%,49%  { opacity:1; box-shadow:0 0 10px #f1e303, 0 0 20px rgba(241,227,3,.4); }
+      50%,100% { opacity:0; box-shadow:none; }
+    }
+    .key-pulse { animation: keyBlink 1.2s step-end infinite; }
+    /* Gentle border pulse on 3D sim containers */
+    .sim-wrap { transition: box-shadow 0.3s; }
+    .foundation-accordion.active .sim-wrap { animation: simGlow 4s ease-in-out infinite alternate; }
+    @keyframes simGlow { from { box-shadow: 0 0 0 transparent; } to { box-shadow: 0 0 18px rgba(79,195,247,.25); } }
+    /* Scanline overlay for static charts */
+    .plot-container { position: relative; overflow: hidden; }
+    .foundation-accordion.active .plot-container::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(79,195,247,.04) 50%, transparent 100%);
+      animation: scanline 6s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scanline {
+      0%   { top: -40%; }
+      100% { top: 140%; }
+    }
+</style>
 </head>
 <body>
 
 <!-- ══ HEADER ══ -->
 <header class="site-header">
   <div class="header-container">
-    <div class="header-logos">
-      <div class="header-logo left"><a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a></div>
-      <div class="header-logo center"><a href="framework.html"><img src="framework.png" alt="Framework"></a></div>
-      <div class="header-logo right"><a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a></div>
-    </div>
-    <div class="hamburger"><span></span><span></span><span></span></div>
+    <a href="index.html" class="site-logo">
+      <img src="ic2-logo.png" alt="Ic² Research Institute">
+    </a>
+    <nav class="main-navigation">
+      <ul>
+        <li><a href="framework.html">Framework</a></li>
+        <li><a href="book.html">Big TOE</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="about-page.html">About</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
 
-<!-- ══ MOBILE MENU ══ -->
-<div class="mobile-menu">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="book.html">Big Toe</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="results.html">Results</a></li>
-    <li><a href="discussions-page.html">Discussion</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="login.html" class="login-link">Login</a></li>
-  </ul>
-</div>
-
 <!-- ══ PAGE HEADER ══ -->
 <section class="page-header">
-  <h1>Simulations</h1>
-  <p>Interactive COSMIC Framework visualizations and simulations for exploration and publication.</p>
-</section>
-
-<!-- ══ CONTENT ══ -->
-<section class="content-section">
   <div class="section-container">
-  <div class="visualization" data-aos="fade-up">
-  <div class="container">
-
-    <h1>COSMIC Framework</h1>
-    <p class="lead">Professional Scientific Visualizations</p>
-
-    <!-- ════════════════════════════════════════════
-         PART I · DATA VISUALIZATIONS
-    ════════════════════════════════════════════ -->
-
-    <div class="highlight" style="margin-bottom:28px;background:rgba(255,215,0,0.05);border-left:4px solid #ffd700;border-radius:8px;padding:14px 16px;">
-      <p style="color:#b0c4de;margin:0;font-size:0.97em;">The seven charts below present the core observational and theoretical evidence behind the COSMIC Framework. Each one is drawn from real data or directly testable predictions. Read the guide text beneath each title before looking at the chart; it explains exactly what the axes mean and what pattern to look for.</p>
-    </div>
-
-    <!-- Glossary + Book + Confirmed Predictions quick links — matching site button styles -->
-    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px;align-items:center;justify-content:center;">
-      <a href="glossary.html" class="btn btn-outline" style="border-color:white;color:white;display:inline-flex;align-items:center;gap:8px;">
+    <h1>Simulations</h1>
+    <p>Interactive visualizations of the COSMIC Framework. Each simulation maps a specific element of the framework to observable or computable behavior. Canvas models, 3D explorers, and interactive parameter tools across cosmology, quantum mechanics, and information theory.</p>
+    <p style="margin-top:1rem; opacity:.88;">The charts below present some of the core observational and theoretical evidence behind the COSMIC Framework. Each one is drawn from real data or directly testable predictions.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:1.75rem;align-items:center;">
+      <a href="glossary.html" class="btn btn-outline glossary-btn" style="border-color:rgba(255,255,255,.5);color:white;display:inline-flex;align-items:center;gap:8px;padding:.6rem 1.25rem;border-radius:6px;border:1px solid rgba(255,255,255,.5);text-decoration:none;font-weight:600;transition:all .2s;" onmouseover="this.style.background='white';this.style.color='#1a1a2e';this.style.borderColor='white';" onmouseout="this.style.background='transparent';this.style.color='white';this.style.borderColor='rgba(255,255,255,.5)';">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'/%3E%3C/svg%3E" alt="" style="width:18px;height:18px;">
         Glossary
       </a>
       <a href="book.html" class="hero-logo-button">
         <img src="bigtoeindexlogoyel.png" alt="A Quest for the Big TOE" class="hero-bigtoe-logo">
       </a>
-      <a href="validation.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+      <a href="validation.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:.6rem 1.25rem;border-radius:6px;background:#8B0000;color:#f1e303;text-decoration:none;font-weight:700;transition:all .2s;">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E" alt="" style="width:18px;height:18px;">
         Confirmed Predictions
       </a>
     </div>
+  </div>
+</section>
 
-    <h2>1. Does π Change Across the Universe? <span class="elem-badge">Element 14</span></h2>
-    <div class="figure-container">
-      <div class="figure-title">Figure 1: π Statistical Deviation Measured Across Five WMAP Microwave Frequency Bands</div>
-      <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> The Wilkinson Microwave Anisotropy Probe (WMAP) mapped the faint afterglow of the Big Bang, specifically the Cosmic Microwave Background, observed at five radio frequencies from 23 GHz to 94 GHz. Standard physics predicts that π should behave identically at every frequency.<br><br>
-        <strong style="color:#ffd700;">What the chart shows:</strong> The vertical axis measures how much the observed value of π deviates from its expected value, in units of sigma (σ), the statistician's measure of "how surprising is this result?" Zero means exactly as expected. The teal line traces this deviation across the five frequencies. The dashed yellow line marks 61 GHz, a critical threshold where the deviation crosses zero.<br><br>
-        <strong style="color:#ffd700;">The key finding:</strong> Rather than staying flat at zero, the deviation rises steadily from −0.68σ at 23 GHz to +0.21σ at 94 GHz, with a correlation of r = 0.91. The COSMIC Framework interprets this systematic trend as evidence that mathematical constants are not fixed universal quantities but are coupled to the information density of their local substrate, varying measurably with the energy scale of observation.</p>
+<!-- ══ CONTENT ══ -->
+<section class="content-section" style="background:white;">
+  <div class="section-container">
+  <div data-aos="fade-up">
+
+    <!-- ════════════════════════════════════════════
+         PART I · DATA VISUALIZATIONS
+    ════════════════════════════════════════════ -->
+
+
+
+    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#c62828;">analytics</span>
+          π Statistical Deviation WMAP data
+          <a href="framework.html#element-14" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 14</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
       </div>
-      <div class="plot-container"><div id="pi-evolution" style="width:100%;height:380px;"></div></div>
-      <div class="figure-caption">The teal line rises from bottom-left to top-right, which is a systematic trend that standard physics does not predict. Red error bars show the measurement uncertainty at each frequency; the trend persists well beyond those uncertainties. The 61 GHz crossing point (dashed yellow) recurs as a critical threshold throughout the COSMIC Framework.</div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
+
+          <div style="background:#005ba5; border-bottom:4px solid #f1e303; border-radius:8px; padding:1.25rem 1.5rem; margin-bottom:1.5rem; box-shadow:0 4px 20px rgba(0,91,165,.2);">
+            <p style="font-size:.65rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.65); margin-bottom:.4rem;">Replication Status</p>
+            <p style="color:white; font-size:.95rem; line-height:1.75; margin:0;">This result is derived from the author's analysis of public WMAP data and has not yet been independently replicated. All data, methodology, and code required to replicate it are available in the published papers on <a href="https://zenodo.org" target="_blank" style="color:#f1e303; font-weight:600;">Zenodo (DOI: 10.5281/zenodo.16426808)</a>. Results were verified using Monte Carlo simulation: 10,000 random permutations of the frequency-deviation pairs produced the observed correlation (r = 0.91) with p &lt; 0.05, confirming the result is statistically unlikely to arise by chance alone.</p>
+          </div>
+
+          <p style="color:#2c3e50; font-size:1rem; line-height:1.8; margin-bottom:.75rem;"><strong>What π means here:</strong> This analysis does not measure π geometrically. The constant π enters the CMB power spectrum through the spherical harmonic decomposition used to extract temperature fluctuation coefficients from the microwave maps. At each frequency band, the power spectrum is fitted to the theoretical model, and the best-fit coefficient involving π is extracted. A deviation from zero means the fitted value at that band departs from the theoretical prediction. If π were a fixed universal constant with no physical coupling, these deviations should scatter randomly around zero with no frequency dependence.</p>
+          <p style="color:#2c3e50; font-size:1rem; line-height:1.8; margin-bottom:.75rem;"><strong>Background:</strong> The Wilkinson Microwave Anisotropy Probe (WMAP) mapped the Cosmic Microwave Background at five radio frequencies from 23 GHz to 94 GHz. The ΛCDM model predicts that mathematical constants including π are invariant across frequency and energy scale. Any systematic trend in the extracted deviations would be anomalous under that model.</p>
+          <p style="color:#2c3e50; font-size:1rem; line-height:1.8; margin-bottom:.75rem;"><strong>What the chart shows:</strong> The vertical axis measures how much the extracted value of π deviates from its expected value in units of sigma (σ). Zero means the fitted value matches the theoretical prediction exactly. The teal line traces this deviation across the five WMAP frequency bands. The dashed yellow line marks 61 GHz, where the deviation crosses zero.</p>
+          <p style="color:#2c3e50; font-size:1rem; line-height:1.8; margin-bottom:1.5rem;"><strong>The finding:</strong> The deviation rises from −0.68σ at 23 GHz to +0.21σ at 94 GHz, with a monotonic trend and a correlation of r = 0.91. The COSMIC Framework interprets this as evidence that mathematical constants are coupled to the information density of their local substrate, varying measurably with the energy scale of observation. Independent replication using the methodology published on Zenodo would confirm or constrain this interpretation.</p>
+
+          <div class="figure-container">
+            <div class="plot-container"><div id="pi-evolution" style="width:100%;height:380px;"></div></div>
+            <div class="figure-caption">The teal line rises from bottom-left to top-right. Under the ΛCDM model, no systematic frequency-dependent trend is predicted. Red error bars show the measurement uncertainty at each frequency. The trend persists well beyond those uncertainties. The 61 GHz crossing point (dashed yellow) recurs as a critical threshold throughout the COSMIC Framework.</div>
+          </div>
+
+        </div>
+      </div>
     </div>
 
-    <h2>2. How Mathematical Constants Interact With Each Other <span class="elem-badge">Element 14</span></h2>
+        <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#00838f;">functions</span>
+          Mathematical Constants Interaction
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 14</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="grid">
       <div class="figure-container">
-        <div class="figure-title">Figure 2A: Resonance Behavior of π, φ, and √5 Across Frequency</div>
+        <div class="figure-title">Resonance Behavior of π, φ, and √5 Across Frequency</div>
         <div class="highlight">
           <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> Three mathematical constants plotted against frequency. Each line shows how strongly that constant's "field influence" peaks or shifts as frequency changes. Think of it like tuning a radio, where each constant has a natural frequency at which it resonates most strongly.<br><br>
           <strong style="color:#ffd700;">Key pattern:</strong> The golden ratio φ (gold line) spikes sharply at 61 GHz while the others shift more gradually. This suggests φ is the dominant organizing constant at that critical energy scale, consistent with its appearance throughout natural growth patterns and the COSMIC Framework's predictions about optimal information packing.</p>
         </div>
         <div class="plot-container"><div id="constant-resonance" style="width:100%;height:380px;"></div></div>
-        <div class="figure-caption">The sharp φ peak at 61 GHz (gold line) is not a coincidence; it appears at the same frequency where π crosses zero in Figure 1, suggesting a coordinated phase transition in how mathematical constants govern physical law at that energy scale.</div>
+        <div class="figure-caption">The sharp φ peak at 61 GHz (gold line) is not a coincidence. It appears at the same frequency where π crosses zero in Figure 1, suggesting a coordinated phase transition in how mathematical constants govern physical law at that energy scale.</div>
       </div>
       <div class="figure-container">
-        <div class="figure-title">Figure 2B: How Strongly Do Mathematical Constants Influence Each Other?</div>
+        <div class="figure-title">How Strongly Do Mathematical Constants Influence Each Other?</div>
         <div class="highlight">
           <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> A 5×5 grid where each cell shows the coupling strength between two mathematical constants, specifically how much a change in one affects the other. Brighter gold = stronger coupling (close to 1.0). Darker blue = weaker coupling. The diagonal is always 1.0 because every constant is perfectly coupled to itself.<br><br>
           <strong style="color:#ffd700;">Key pattern:</strong> φ and √5 are the most strongly coupled pair (0.9), which makes mathematical sense since √5 appears in the exact formula for φ: φ = (1+√5)/2. The COSMIC Framework predicts that strongly coupled constants co-evolve; their values are not independent but constrained by the same underlying information geometry.</p>
@@ -368,21 +578,47 @@
       </div>
     </div>
 
-    <h2>3. How Information Density Curves Space: The PEG Field <span class="elem-badge">Element 8</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#b01558;">blur_on</span>
+          Information Density and Curved Space: PEG Field
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 8</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
-      <div class="figure-title">Figure 3: A 2D Map of Information Pattern Density P(x,t) and Its Gravitational Effect</div>
+      <div class="figure-title">A 2D Map of Information Pattern Density P(x,t) and Its Gravitational Effect</div>
       <div class="highlight">
         <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">The core idea (Pattern-Emergent Gravity):</strong> In standard physics, gravity is caused by mass curving spacetime. The COSMIC Framework proposes something deeper: gravity is not fundamental; it <em>emerges</em> from the density of information patterns in a region. Where information is highly concentrated and rapidly changing, spacetime curves more. Mass is just a special case of concentrated information.<br><br>
         <strong style="color:#ffd700;">What you're seeing:</strong> A bird's-eye view of a 2D region of space. The color at each point shows the information pattern density P(x,t), measuring how much structured, non-random information exists there. Gold and yellow = high density (strong gravitational effect). Blue-green = low density (weak gravitational effect). The rippled, wave-like pattern reflects the fact that information doesn't sit still; it propagates, interferes, and forms standing waves, just like other fields.<br><br>
         <strong style="color:#ffd700;">The equation:</strong> g<sub>μν</sub> = η<sub>μν</sub> + α∇<sub>μ</sub>∇<sub>ν</sub>P(x,t) reads as: "The actual curvature of spacetime equals flat spacetime plus a correction proportional to how sharply the information density changes from point to point." Where the information gradient is steep (bright-to-dark transitions on the map), gravity is strongest.</p>
       </div>
       <div class="plot-container"><div id="peg-field" style="width:100%;height:380px;"></div></div>
-      <div class="figure-caption">Look for the bright gold regions, which are where gravity would be strongest in this model. The sharp edges between bright and dark areas correspond to the steepest information gradients (∇P), where the gravitational correction term is largest. The colourbar on the right maps color to information density value. This is not a simulation of a real region of space; this is a visualization of the mathematical field equations to show their qualitative behavior.</div>
+      <div class="figure-caption">Look for the bright gold regions, which are where gravity would be strongest in this model. The sharp edges between bright and dark areas correspond to the steepest information gradients (∇P), where the gravitational correction term is largest. The colorbar on the right maps color to information density value. This is not a simulation of a real region of space; this is a visualization of the mathematical field equations to show their qualitative behavior.</div>
     </div>
 
-    <h2>4. Physics Below the Planck Scale: TransPlanck Dynamics <span class="elem-badge">Element 13</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#f1e303;">science</span>
+          Physics Below the Planck Scale: TransPlanck Dynamics
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 13</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
-      <div class="figure-title">Figure 4: How Mathematical Field Strength Modifies the Effective Planck Length</div>
+      <div class="figure-title">How Mathematical Field Strength Modifies the Effective Planck Length</div>
       <div class="highlight">
         <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> The Planck length (~1.6 × 10⁻³⁵ meters) is the scale at which quantum mechanics and gravity are both relevant simultaneously. Standard physics treats it as an absolute floor; no meaningful physics can occur at smaller distances. This is why we cannot yet unify quantum mechanics with general relativity.<br><br>
         <strong style="color:#ffd700;">What the chart shows:</strong> The horizontal axis is mathematical field strength, a measure of how intense the local information density gradient is. The vertical axis shows the <em>effective</em> Planck length as a fraction of its standard value (1.0 = unchanged). The red dashed line is the traditional fixed Planck limit. The blue filled curve shows what the COSMIC Framework predicts happens when information fields are present.<br><br>
@@ -392,10 +628,23 @@
       <div class="figure-caption">The blue curve peeling away from the red dashed line as you move right along the horizontal axis tells the whole story: the stronger the information field, the lower the effective Planck scale drops, and the larger the blue shaded region of "newly accessible" sub-Planck physics becomes. Standard physics predicts a flat horizontal line at 1.0 forever.</div>
     </div>
 
-    <h2>5. How the Universe Learned to Be Quantum <span class="elem-badge">Element 2</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #2e7d32;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#2e7d32;">hub</span>
+          How the Universe Learned to Be Quantum
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 2</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="grid">
       <div class="figure-container">
-        <div class="figure-title">Figure 5A: The Universe's Transition From Continuous to Quantized Behavior</div>
+        <div class="figure-title">The Universe's Transition From Continuous to Quantized Behavior</div>
         <div class="highlight">
           <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> The universe's history plotted left-to-right, from the Big Bang to today. The vertical axis measures how "quantized" the universe is, meaning how discrete and step-like its behavior is rather than smooth and continuous. Zero = perfectly smooth (classical). 1.0 = fully quantum (discrete energy levels, wave-particle duality, etc.).<br><br>
           <strong style="color:#ffd700;">The COSMIC interpretation:</strong> Standard physics assumes quantization was always a fixed feature of reality. The COSMIC Framework treats it as an emergent property; the universe found quantization as an optimization solution. Just as evolution finds efficient body plans, the universe's information processing "discovered" that discrete energy levels are more efficient than continuous ones. The steep rise corresponds to the phase transition at 61 GHz, after which discrete structure locked in.</p>
@@ -404,7 +653,7 @@
         <div class="figure-caption">Each colored waypoint marks a key epoch: the Big Bang (red), the critical phase transition (orange), particle formation (yellow), nucleosynthesis (green), and the present (teal). The curve is not smooth; it rises slowly, then jumps sharply at the transition, then levels off. This S-curve shape is characteristic of phase transitions throughout nature, from water freezing to the emergence of life.</div>
       </div>
       <div class="figure-container">
-        <div class="figure-title">Figure 5B: Why Atoms Prefer Their Ground State</div>
+        <div class="figure-title">Why Atoms Prefer Their Ground State</div>
         <div class="highlight">
           <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> Each dot is a quantum energy level (ground state, first excited state, second, etc.). The horizontal axis is the energy of that level; higher levels sit further right. The vertical axis shows the information-processing efficiency of that level: how effectively an electron at that energy can participate in information transfer.<br><br>
           <strong style="color:#ffd700;">The key insight:</strong> Efficiency drops as energy increases. The ground state (leftmost dot) is the most efficient information processor, which is precisely why electrons fall back to it naturally. In the COSMIC Framework, "relaxing to the ground state" is not just energy minimization; it is the universe optimizing its information processing. Quantum mechanics is an efficiency algorithm.</p>
@@ -414,9 +663,22 @@
       </div>
     </div>
 
-    <h2>6. Einstein's E = mc² Is Only Half the Story <span class="elem-badge">Element 3</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#c62828; border-left:4px solid #00bcd4;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#00bcd4;">bolt</span>
+          E = mc² Is Only Half the Story
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 3</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
-      <div class="figure-title">Figure 6: Comparing Mass-Energy (E = mc²) and Information-Energy (E = Ic²) in a Living System</div>
+      <div class="figure-title">Comparing Mass-Energy (E = mc²) and Information-Energy (E = Ic²) in a Living System</div>
       <div class="highlight">
         <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> Einstein's famous equation E = mc² tells us how much energy is locked in mass. The COSMIC Framework proposes a parallel equation: E = Ic², where I is the information content of a system. Together they constitute the full energy budget of any physical process.<br><br>
         <strong style="color:#ffd700;">What the chart shows:</strong> Two properties: entropy change (ΔS, how much disorder increases) and energy efficiency, across three processes: standard metabolism (burning food for heat), information processing (thinking, signaling), and the net system combining both. The two bar shades distinguish entropy change from efficiency.<br><br>
@@ -426,9 +688,22 @@
       <div class="figure-caption">The contrast between the red bars (positive entropy, low efficiency) and green bars (negative entropy, high efficiency) illustrates the framework's central claim: information is not a passive description of matter; it is an active energy-carrying process that works against thermodynamic decay. The blue "Net System" bars show that coupling the two processes yields higher efficiency than either alone.</div>
     </div>
 
-    <h2>7. The Universe as a Brain: Cosmic Network Topology <span class="elem-badge">Elements 6 &amp; 17</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #1565c0;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#1565c0;">travel_explore</span>
+          The Universe as a Brain: Cosmic Network Topology
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Elements 6 &amp; 17</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
-      <div class="figure-title">Figure 7: The Large-Scale Structure of the Universe Mapped as an Information Network</div>
+      <div class="figure-title">The Large-Scale Structure of the Universe Mapped as an Information Network</div>
       <div class="highlight">
         <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> At scales of hundreds of millions of light-years, matter in the universe is not randomly scattered. It is organized into a "cosmic web," comprising vast sheets and filaments of galaxies surrounding enormous empty voids. This structure emerged from quantum fluctuations in the early universe, amplified over 13.8 billion years by gravity.<br><br>
         <strong style="color:#ffd700;">What you're seeing:</strong> Gold dots represent galaxy clusters, the densest nodes of the cosmic web, each containing hundreds to thousands of galaxies. Blue lines are the dark-matter filaments connecting them, channelling matter and energy between clusters across hundreds of millions of light-years. The empty regions between lines are cosmic voids, regions almost devoid of matter.<br><br>
@@ -441,12 +716,25 @@
     <!-- ════════════════════════════════════════════
          PART II · 3D INTERACTIVE SIMULATIONS
     ════════════════════════════════════════════ -->
-    <hr class="section-rule">
+            </div>
+      </div>
+    </div>
+<hr class="section-rule">
     <h1 style="margin-top:8px;">3D Framework Simulations</h1>
     <p class="lead">Real-time interactive: drag to orbit · pinch to zoom on mobile</p>
 
     <!-- ── SIM A: PEG GRAVITY ── -->
-    <h2>A. Pattern-Emergent Gravity (PEG) <span class="elem-badge">Element 8</span></h2>
+        <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#00838f;">radar</span>
+          Pattern-Emergent Gravity (PEG)
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 8</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim A: Spacetime Mesh Deforming Around Information Density Wells</div>
       <div class="plot-container" style="padding:0;">
@@ -461,7 +749,20 @@
     <div class="equation">g_μν = η_μν + α∇_μ∇_νP(x,t) · · · Each Planck area ≈ 1 bit · Information density ∝ Curvature · I_μν counts bits processed per unit volume</div>
 
     <!-- ── SIM B: ENTANGLEMENT AS SPACETIME ── -->
-    <h2>B. Entanglement as the Fabric of Space <span class="elem-badge">Element 15</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#b01558;">join_inner</span>
+          Entanglement as the Fabric of Space
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 15</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim B: Space Crystallising from Quantum Entanglement Links</div>
       <div class="plot-container" style="padding:0;">
@@ -476,7 +777,20 @@
     <div class="equation">d(A,B) ∝ 1/S_entanglement(A,B) · · · AdS/CFT: bulk geometry ↔ boundary entanglement entropy · · · "It from Bit" (J.A. Wheeler)</div>
 
     <!-- ── SIM C: ROTATION ── -->
-    <h2>C. Rotation as Optimization Across Scales <span class="elem-badge">Element 4</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#c62828;">rotate_right</span>
+          Rotation as Optimization Across Scales
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 4</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim C: Multi-Scale Spin, from Quantum State Space → Classical Vortex → Galactic Spiral</div>
       <div class="plot-container" style="padding:0;">
@@ -491,7 +805,20 @@
     <div class="equation">R(θ)|ψ⟩ conserves |ψ|² = 1 · · · L = r×p conserved ↔ information conserved · · · Angular momentum = information orientation in state space</div>
 
     <!-- ── SIM D: FOUR FORCES ── -->
-    <h2>D. Four Forces as a Complete Information Architecture <span class="elem-badge">Element 5</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#f1e303;">account_tree</span>
+          Four Forces as a Complete Information Architecture
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 5</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim D: Strong (Store) · EM (Transmit) · Weak (Transform) · Gravity (Organize)</div>
       <div class="plot-container" style="padding:0;">
@@ -506,7 +833,20 @@
     <div class="equation">I_total = I_store (Strong) + I_transmit (EM) + I_transform (Weak) + I_organise (Gravity) · · · Conservation laws = information preservation requirements</div>
 
     <!-- ── SIM E: QUANTUM SCRAMBLING ── -->
-    <h2>E. Quantum Information Scrambling <span class="elem-badge">Element 20</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #2e7d32;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#2e7d32;">shuffle</span>
+          Quantum Information Scrambling
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 20</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim E: Information Wave Propagating Through a Qubit Network at the Lyapunov Rate</div>
       <div class="plot-container" style="padding:0;">
@@ -521,7 +861,20 @@
     <div class="equation">t* ≈ (ℏ/2πk_BT)·ln(N) · · · λ_Lyapunov ≤ 2πk_BT/ℏ (MSS bound) · · · Black holes = maximal scramblers at the Planck temperature</div>
 
     <!-- ── SIM F: PHASE TRANSITION ── -->
-    <h2>F. The Big Bang as an Information Phase Transition <span class="elem-badge">Element 16</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#c62828; border-left:4px solid #00bcd4;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#00bcd4;">flare</span>
+          The Big Bang as an Information Phase Transition
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 16</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim F: Pre-Geometric Substrate Reaching Φ_critical → Spacetime Crystallises</div>
       <div class="plot-container" style="padding:0;">
@@ -538,12 +891,25 @@
     <!-- ════════════════════════════════════════════
          PART III · NEW INTERACTIVE SIMULATIONS
     ════════════════════════════════════════════ -->
-    <hr class="section-rule">
+            </div>
+      </div>
+    </div>
+<hr class="section-rule">
     <h1 style="margin-top:8px;">Interactive Explorers</h1>
     <p class="lead">Adjust the controls and watch the framework respond in real time</p>
 
     <!-- ── SIM G: BAMBOO THRESHOLD ── -->
-    <h2>G. The Bamboo Principle: Below-Threshold Accumulation <span class="elem-badge">Elements 1 &amp; 13</span></h2>
+        <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #1565c0;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#1565c0;">grass</span>
+          The Bamboo Principle: Below-Threshold Accumulation
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Elements 1 &amp; 13</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim G: Sub-Threshold Preparation Leading to Threshold Crossing and Emergence</div>
       <div class="highlight">
@@ -571,7 +937,20 @@
     </div>
 
     <!-- ── SIM H: BELL INEQUALITY ── -->
-    <h2>H. Non-Locality as Substrate Visibility <span class="elem-badge">Element 1</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#00838f;">device_hub</span>
+          Non-Locality as Substrate Visibility
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 1</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim H: Bell Inequality Violation. Local Hidden Variable Theory vs. Quantum Prediction vs. Framework</div>
       <div class="highlight">
@@ -598,7 +977,20 @@
     </div>
 
     <!-- ── SIM I: BELOW-THRESHOLD SUBSTRATE ── -->
-    <h2>I. Sub-Planck Substrate Dynamics <span class="elem-badge">Element 13</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#b01558;">layers</span>
+          Sub-Planck Substrate Dynamics
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 13</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim I: Pre-Geometric Substrate Accumulating to Planck Threshold. Spacetime Crystallization</div>
       <div class="highlight">
@@ -627,7 +1019,20 @@
     </div>
 
     <!-- ── SIM J: NBI ARCHITECTURE ── -->
-    <h2>J. Biological vs. Non-Biological Intelligence Architecture <span class="elem-badge">Element 6</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#c62828;">compare</span>
+          Biological vs. Non-Biological Intelligence Architecture
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 6</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim J: Information Processing Under Different Constraints. Biological vs. NBI</div>
       <div class="highlight">
@@ -653,7 +1058,20 @@
     </div>
 
     <!-- ── SIM K: CMB SIGNATURE ── -->
-    <h2>K. CMB Non-Gaussian Signatures: Framework Prediction vs. Standard Model <span class="elem-badge">Element 16</span></h2>
+            </div>
+      </div>
+    </div>
+    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-aos="fade-up">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem; vertical-align:middle; color:#f1e303;">show_chart</span>
+          CMB Non-Gaussian Signatures: Framework Prediction vs. Standard Model
+          <a href="framework.html" onclick="event.stopPropagation();" style="display:inline-block; font-size:.6rem; font-weight:700; padding:.2rem .65rem; border-radius:20px; background:#005ba5; color:#f1e303; text-decoration:none; text-transform:uppercase; letter-spacing:1px; vertical-align:middle; margin-left:.5rem;">Element 16</a>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
     <div class="figure-container">
       <div class="figure-title">Sim K: CMB Power Spectrum. Standard ΛCDM vs. COSMIC Framework Prediction</div>
       <div class="highlight">
@@ -685,18 +1103,17 @@
     </div>
 
     <!-- ── FOOTER EQUATION + FEATURES ── -->
-    <hr class="section-rule">
-    <div class="equation">Total Framework Equation:<br>Φ_universe(x,t,f,λ,T) = Φ₀(x) + ∫∫∫∫ K(T,f,λ) ρ_math(x,τ,f,λ) dτ df dλ dT</div>
-
-    <div class="highlight">
-      <h3>Visualization Features:</h3>
-      <ul>
-        <li><strong>6 real-time 3D simulations</strong>: drag to orbit, fully touch-enabled for mobile</li>
-        <li><strong>7 Plotly data charts</strong> with error bars and confidence intervals grounded in real WMAP data</li>
-        <li><strong>Framework equations</strong> rendered accurately per element, directly from the published book</li>
-        <li><strong>Multi-scale representations</strong> from quantum spin to cosmic-scale phase transitions</li>
-        <li><strong>Open science</strong>: all data and analysis code available through Zenodo</li>
-      </ul>
+            </div>
+      </div>
+    </div>
+    <div style="background:#0d0d1f; border-radius:8px; padding:2rem 2.5rem; margin:2rem 0; border-left:4px solid #f1e303;">
+      <h2 style="color:white; font-size:1.4rem; font-weight:700; margin-bottom:1rem;">Master Field Equation</h2>
+      <p style="color:rgba(255,255,255,.82); font-size:1rem; line-height:1.8; margin-bottom:1.25rem;">Physics expresses its deepest ideas as equations. Newton compressed motion into F=ma. Einstein compressed mass and energy into E=mc². Each one is a claim about the structure of reality, precise enough to make predictions and compact enough to hold in a single line.</p>
+      <p style="color:rgba(255,255,255,.82); font-size:1rem; line-height:1.8; margin-bottom:1.25rem;">The COSMIC Framework proposes that the universe operates as an information processing system. This is its central equation. It describes how the total information field at any point in space and time is not fixed but emerges from an initial configuration plus the ongoing contribution of mathematical structures acting across every scale. The constants, the ratios, the relationships embedded in physical law are not passive descriptions. They participate actively in shaping the field.</p>
+      <p style="color:rgba(255,255,255,.82); font-size:1rem; line-height:1.8; margin-bottom:1.5rem;">The equation is a theoretical statement, not yet observationally confirmed at this level of completeness. It exists to make the framework testable. Each simulation and visualization on this page is derived from one or more of its terms. Each prediction in the testing schedule is a consequence of what this equation implies for a specific domain.</p>
+      <p style="font-family:monospace; font-size:1.05rem; color:#f1e303; line-height:1.8; margin-bottom:1rem; padding:1rem; background:rgba(255,255,255,.04); border-radius:4px;">Φ_universe(x,t,f,λ,T) = Φ₀(x) + ∫∫∫∫ K(T,f,λ) ρ_math(x,τ,f,λ) dτ df dλ dT</p>
+      <p style="color:rgba(255,255,255,.55); font-size:.85rem; line-height:1.7;">All derivations, element-by-element breakdowns, and supporting analysis are published on <a href="https://zenodo.org" target="_blank" style="color:#f1e303;">Zenodo DOI 10.5281/zenodo.16426808</a>.</p>
+    </div>
     </div>
 
   </div><!-- /.container -->
@@ -709,47 +1126,87 @@
   <div class="footer-container">
     <div class="footer-section">
       <h3>Ic² Research Institute</h3>
-      <p style="color:rgba(255,255,255,.8);font-size:.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+      <p style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
+      <p style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.7;margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
     </div>
-    <div class="footer-section">
-      <h3>Research</h3>
-      <ul>
-        <li><a href="validation.html">Validation</a></li>
-        <li><a href="testing-schedule.html">Testing</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="zenodo-papers.html">Papers</a></li>
-        <li><a href="simulations.html">Simulations</a></li>
-      </ul>
+    <div class="footer-icons">
+      <a href="#" class="social-btn instagram" title="Instagram">
+        <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="#" class="social-btn youtube" title="YouTube">
+        <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </a>
+      <a href="mailto:mkb.info@proton.me" class="social-btn email" title="Email">
+        <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        mkb.info@proton.me
+      </a>
     </div>
-    <div class="footer-section">
-      <h3>Resources</h3>
-      <ul>
-        <li><a href="book.html">The Big TOE</a></li>
-        <li><a href="about-page.html">About</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="faq-page.html">FAQ</a></li>
-        <li><a href="members.html">Our Members</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Connect</h3>
-      <ul>
-        <li><a href="contribute.html">Contribute</a></li>
-        <li><a href="discussions-page.html">Discussions</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="become-member.html">Become a Member</a></li>
-        <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
-      </ul>
+    <div class="footer-links-group">
+      <div class="footer-section">
+        <h3>Research</h3>
+        <ul>
+          <li><a href="framework.html">Framework</a></li>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="programs-gateway.html">Programs</a></li>
+          <li><a href="simulations.html">Simulations</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="book.html">The Big TOE</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="faq-page.html">FAQ</a></li>
+          <li><a href="legal.html">Legal</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="discussions-page.html">Discussions</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="become-member.html">Become a Member</a></li>
+          <li><a href="mailto:mkb.info@proton.me">Contact</a></li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color:rgba(255,255,255,.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color:rgba(255,255,255,.6);">Terms &amp; Conditions</a></p>
+    <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
   </div>
 </footer>
 
 <!-- AOS + hamburger -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>    function initAOS() {
+<script>    function toggleFoundation(header) {
+    const accordion = header.parentElement;
+    const wasActive = accordion.classList.contains('active');
+    document.querySelectorAll('.foundation-accordion').forEach(acc => {
+        acc.classList.remove('active');
+    });
+    if (!wasActive) {
+        accordion.classList.add('active');
+        // Trigger resize on any canvases inside so they render correctly
+        setTimeout(function() {
+            accordion.querySelectorAll('canvas').forEach(function(c) {
+                var e = new Event('resize');
+                window.dispatchEvent(e);
+            });
+            // Trigger Chart.js resize
+            if (window.Chart) {
+                Object.values(Chart.instances || {}).forEach(function(ch) {
+                    if (accordion.contains(ch.canvas)) ch.resize();
+                });
+            }
+        }, 50);
+    }
+}
+    function initAOS() {
         AOS.init({ duration: 900, once: true, offset: 60, easing: 'ease-out-quad', disable: false });
         setTimeout(function() { AOS.refresh(); }, 500);
     }
@@ -893,7 +1350,7 @@ window.addEventListener('load', function() {
     });
   }());
 
-  /* ── Fig 2B: Coupling Matrix — animated cells reveal ── */
+  /* ── Fig 2B: Coupling Matrix. animated cells reveal ── */
   (function() {
     var wrap = document.getElementById('coupling-matrix');
     var canvas = document.createElement('canvas');
@@ -924,7 +1381,7 @@ window.addEventListener('load', function() {
         cx.globalAlpha = cellProgress;
         cx.fillStyle='rgb('+ri+','+gi+','+bi+')';
         cx.fillRect(pad+col2*cw, pad+r*ch, cw-2, ch-2);
-        cx.fillStyle='rgba(0,0,0,0.55)'; cx.font='bold '+(cw*0.28)+'px monospace';
+        cx.fillStyle='rgba(255,255,255,0.92)'; cx.font='bold '+(cw*0.16)+'px monospace';
         cx.textAlign='center'; cx.textBaseline='middle';
         cx.fillText(v.toFixed(1), pad+col2*cw+cw/2, pad+r*ch+ch/2);
       }
@@ -943,7 +1400,7 @@ window.addEventListener('load', function() {
     requestAnimationFrame(drawFrame);
   }());
 
-  /* ── Fig 3: PEG Field — animated scan-line reveal ── */
+  /* ── Fig 3: PEG Field. animated scan-line reveal ── */
   (function() {
     var wrap = document.getElementById('peg-field');
     var canvas = document.createElement('canvas');
@@ -980,7 +1437,7 @@ window.addEventListener('load', function() {
       cx.fillText('X position',pad+pw/2,H-4);
       cx.fillStyle=C.teal; cx.font='bold 14px sans-serif';
       cx.fillText('Information Pattern Density P(x,t): PEG Field',W/2,18);
-      /* colourbar */
+      /* colorbar */
       var cbX=W-28, cbH=ph;
       var grad=cx.createLinearGradient(0,30+cbH,0,30);
       grad.addColorStop(0,'rgb(15,75,55)'); grad.addColorStop(0.5,'rgb(79,195,247)'); grad.addColorStop(1,'rgb(255,215,0)');
@@ -991,27 +1448,45 @@ window.addEventListener('load', function() {
       cx.globalAlpha=1;
     }
 
-    var startTime=null, DURATION=2000;
+    /* Dynamic field function — recalculated each frame with time */
+    function fieldVal(nx, ny, t) {
+      return Math.exp(-(nx*nx+ny*ny)/8) *
+             Math.cos(nx + t*0.35) *
+             Math.sin(ny + t*0.28) +
+             0.12 * Math.sin(nx*1.5 - t*0.5) * Math.cos(ny*1.2 + t*0.4);
+    }
+    function cellColor(v) {
+      var norm = Math.max(0, Math.min(1, (v+0.7)/1.4));
+      return 'rgb('+Math.round(norm*240+15)+','+Math.round(norm*180+75)+','+Math.round((1-norm)*210+45)+')';
+    }
+
+    var startTime=null, DURATION=1800;
     function drawFrame(ts) {
       if (!startTime) startTime=ts;
+      var elapsed=(ts-startTime)/1000;
       var progress=Math.min(1,(ts-startTime)/DURATION);
       var eased=1-Math.pow(1-progress,3);
 
       cx.fillStyle='#0a0a1a'; cx.fillRect(0,0,W,H);
 
-      /* scan-line: reveal row by row */
-      var maxRow=Math.floor(eased*res);
-      cells.forEach(function(c){
-        if (c.iy>maxRow) return;
-        var rowAlpha=(c.iy===maxRow)?((eased*res)%1):1;
-        cx.globalAlpha=rowAlpha;
-        cx.fillStyle=c.col;
-        cx.fillRect(pad+c.ix*cellW, 30+c.iy*cellH, cellW+1, cellH+1);
-      });
+      /* After reveal: use time-based field for undulation */
+      var t = progress<1 ? 0 : (elapsed - DURATION/1000);
+      var maxRow = progress<1 ? Math.floor(eased*res) : res;
+
+      for (var iy=0; iy<res; iy++) {
+        if (iy>maxRow) continue;
+        var rowAlpha = (progress<1 && iy===maxRow) ? ((eased*res)%1) : 1;
+        cx.globalAlpha = rowAlpha;
+        for (var ix=0; ix<res; ix++) {
+          var nx=(ix/res)*10-5, ny=(iy/res)*10-5;
+          var v = fieldVal(nx, ny, t);
+          cx.fillStyle = cellColor(v);
+          cx.fillRect(pad+ix*cellW, 30+iy*cellH, cellW+1, cellH+1);
+        }
+      }
       cx.globalAlpha=1;
       drawAxesAndLabels(eased);
-
-      if (progress<1) requestAnimationFrame(drawFrame);
+      requestAnimationFrame(drawFrame);
     }
     requestAnimationFrame(drawFrame);
   }());
@@ -1133,7 +1608,7 @@ window.addEventListener('load', function() {
     });
   }());
 
-  /* ── Fig 7: Cosmic Network — animated reveal ── */
+  /* ── Fig 7: Cosmic Network. animated reveal ── */
   (function() {
     var wrap = document.getElementById('cosmic-network');
     var canvas = document.createElement('canvas');
@@ -1220,7 +1695,7 @@ window.addEventListener('load', function() {
 
 
 <script>
-/* Three.js sims — initialized on window load so layout dimensions are guaranteed */
+/* Three.js sims. initialized on window load so layout dimensions are guaranteed */
 window.addEventListener('load', function() {
 
   /* ── orbit drag control ── */
@@ -1279,7 +1754,7 @@ window.addEventListener('load', function() {
     return { renderer: renderer, camera: camera };
   }
 
-  /* helper — starfield */
+  /* helper. starfield */
   function stars(n, spread) {
     var g = new THREE.BufferGeometry();
     var p = new Float32Array(n * 3);
@@ -1289,7 +1764,7 @@ window.addEventListener('load', function() {
   }
 
   /* ╔══════════════════════════════════════╗
-     ║  SIM A — PEG GRAVITY                ║
+     ║  SIM A. PEG GRAVITY                ║
      ╚══════════════════════════════════════╝ */
   (function() {
     var x = makeR('c-peg', 'w-peg');
@@ -1347,7 +1822,7 @@ window.addEventListener('load', function() {
   }());
 
   /* ╔══════════════════════════════════════╗
-     ║  SIM B — ENTANGLEMENT AS SPACETIME  ║
+     ║  SIM B. ENTANGLEMENT AS SPACETIME  ║
      ╚══════════════════════════════════════╝ */
   (function() {
     var x = makeR('c-ent', 'w-ent');
@@ -1404,7 +1879,7 @@ window.addEventListener('load', function() {
   }());
 
   /* ╔══════════════════════════════════════╗
-     ║  SIM C — ROTATION AS OPTIMIZATION   ║
+     ║  SIM C. ROTATION AS OPTIMIZATION   ║
      ╚══════════════════════════════════════╝ */
   (function() {
     var x = makeR('c-rot', 'w-rot');
@@ -1461,7 +1936,7 @@ window.addEventListener('load', function() {
   }());
 
   /* ╔══════════════════════════════════════╗
-     ║  SIM D — FOUR FORCES                ║
+     ║  SIM D. FOUR FORCES                ║
      ╚══════════════════════════════════════╝ */
   (function() {
     var x = makeR('c-four', 'w-four');
@@ -1523,7 +1998,7 @@ window.addEventListener('load', function() {
   }());
 
   /* ╔══════════════════════════════════════╗
-     ║  SIM E — QUANTUM SCRAMBLING         ║
+     ║  SIM E. QUANTUM SCRAMBLING         ║
      ╚══════════════════════════════════════╝ */
   (function() {
     var x = makeR('c-scram', 'w-scram');
@@ -1599,7 +2074,7 @@ window.addEventListener('load', function() {
   }());
 
   /* ╔══════════════════════════════════════╗
-     ║  SIM F — PHASE TRANSITION BIG BANG  ║
+     ║  SIM F. PHASE TRANSITION BIG BANG  ║
      ╚══════════════════════════════════════╝ */
   (function() {
     var x = makeR('c-bang', 'w-bang');
@@ -1732,7 +2207,7 @@ function initCanvas(id, callback) {
 }
 
 // ══════════════════════════════════════════════════════════
-// SIM G — BAMBOO THRESHOLD
+// SIM G. BAMBOO THRESHOLD
 // ══════════════════════════════════════════════════════════
 var bamState = { phase: 'accumulate', val: 0, history: [], jumped: false, jumpY: 0, t: 0 };
 var bamRAF = null;
@@ -1785,7 +2260,7 @@ window.bambooReset = bambooReset;
         document.getElementById('bam-status').style.color = '#ffd700';
       }
     } else {
-      // stable — add small noise
+      // stable. add small noise
       bamState.val = 95 + (Math.random() - 0.5) * N * 0.3;
       if (bamState.t % 420 === 0) bambooReset(); // auto-reset loop
     }
@@ -1851,7 +2326,7 @@ window.bambooReset = bambooReset;
 
 
 // ══════════════════════════════════════════════════════════
-// SIM H — BELL INEQUALITY
+// SIM H. BELL INEQUALITY
 // ══════════════════════════════════════════════════════════
 (function bellInit() {
   initCanvas('c-bell', function(cv) {
@@ -2006,7 +2481,7 @@ window.bambooReset = bambooReset;
 
 
 // ══════════════════════════════════════════════════════════
-// SIM I — SUB-PLANCK SUBSTRATE
+// SIM I. SUB-PLANCK SUBSTRATE
 // ══════════════════════════════════════════════════════════
 (function subplanckInit() {
   initCanvas('c-subplanck', function(cv) {
@@ -2134,7 +2609,7 @@ window.bambooReset = bambooReset;
 
 
 // ══════════════════════════════════════════════════════════
-// SIM J — NBI ARCHITECTURE
+// SIM J. NBI ARCHITECTURE
 // ══════════════════════════════════════════════════════════
 (function nbiInit() {
   initCanvas('c-nbi', function(cv) {
@@ -2264,7 +2739,7 @@ Processing', color: '#4fc3f7' },
 
 
 // ══════════════════════════════════════════════════════════
-// SIM K — CMB SIGNATURE
+// SIM K. CMB SIGNATURE
 // ══════════════════════════════════════════════════════════
 (function cmbInit() {
   initCanvas('c-cmb', function(cv) {
@@ -2397,5 +2872,49 @@ Processing', color: '#4fc3f7' },
 
 })();
 </script>
+
+  <script>
+
+  /* ── Data source notes ── */
+  (function() {
+    var sources = {
+      'pi-evolution':         'Data: WMAP public data, NASA. Author\u2019s analysis. Full methodology on <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo DOI\u202010.5281/zenodo.16426808</a>.',
+      'constant-resonance':   'Source: Author\u2019s theoretical calculation from WMAP frequency analysis. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo DOI\u202010.5281/zenodo.16426808</a>.',
+      'coupling-matrix':      'Source: COSMIC Framework theoretical model, Element\u202014. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo DOI\u202010.5281/zenodo.16426808</a>.',
+      'peg-field':            'Source: COSMIC Framework field equations, Element\u20208. Visualization of PEG model; not a simulation of real space. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo</a>.',
+      'planck-scale':         'Source: COSMIC Framework model, Element\u202013. Theoretical extension below the Planck scale. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo</a>.',
+      'quantization-timeline':'Source: COSMIC Framework model, Element\u20202. Theoretical timeline; not fitted to observational data. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo</a>.',
+      'energy-optimization':  'Source: COSMIC Framework model, Element\u20202. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo</a>.',
+      'dual-energy':          'Source: COSMIC Framework extension of special relativity, Element\u20203. Theoretical; not observationally confirmed. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo</a>.',
+      'cosmic-network':       'Source: COSMIC Framework topology model, Elements\u20206\u202d&\u202d17. Theoretical network; structural analogy, not observational data. <a href="https://zenodo.org/records/10.5281/zenodo.16426808" target="_blank">Zenodo</a>.'
+    };
+
+    window.addEventListener('load', function() {
+      Object.keys(sources).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var pc = el.closest('.plot-container') || el.parentElement;
+        var note = document.createElement('p');
+        note.className = 'data-source-note';
+        note.innerHTML = sources[id];
+        pc.insertAdjacentElement('afterend', note);
+      });
+
+      /* Pulse overlay on the 61 GHz marker for pi-evolution and constant-resonance */
+      ['pi-evolution','constant-resonance'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var pc = el.closest('.plot-container');
+        if (!pc) return;
+        pc.style.position = 'relative';
+        var dot = document.createElement('div');
+        dot.title = 'Key threshold: 61 GHz';
+        dot.className = 'key-pulse';
+        dot.style.cssText = 'position:absolute; top:30%; left:50%; width:16px; height:16px; background:#f1e303; border-radius:50%; transform:translate(-50%,-50%); pointer-events:none; box-shadow:0 0 8px #f1e303;';
+        pc.appendChild(dot);
+      });
+    });
+  }());
+  </script>
 </body>
 </html>
