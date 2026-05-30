@@ -1,751 +1,1234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Experimental Results - Ic² Research Institute</title>
-    <meta name="description" content="Structured result records for all COSMIC Framework predictions. Each record documents prediction, outcome, control, compliance, test count, narrative, delta, next steps, and lessons learned.">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    :root {
-        --primary: #8B0000;
-        --blue: #005ba5;
-        --green: #1a5c2a;
-        --amber: #7a4f00;
-        --purple: #4a1b6a;
-        --text: #2c3e50;
-        --muted: #666;
-        --bg: #f8f9fa;
-        --max: 1200px;
-        --confirmed: #e8f5e9;
-        --confirmed-border: #1a5c2a;
-        --pending: #fff8e1;
-        --pending-border: #f9a825;
-        --negative: #fce4ec;
-        --negative-border: #c62828;
-    }
-    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.6; color:var(--text); background:white; }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Results Registry - Ic² Research Institute</title>
+  <meta name="description" content="Structured result records for all COSMIC Framework predictions. Each record documents prediction, outcome, control, compliance, delta, next steps, and lessons learned.">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --primary: #8B0000;
+    --text-dark: #2c3e50;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+  }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif; line-height:1.6; color:var(--text-dark);
+    background: #0a0f1e url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hx" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100%25" height="100%25" fill="url(%23hx)"/></svg>') repeat;
+  }
 
-    /* Header */
-    .site-header { background:white; border-bottom:1px solid #e0e0e0; position:sticky; top:0; z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,.05); }
-    .header-container { max-width:var(--max); margin:0 auto; padding:.5rem 2rem; display:flex; justify-content:space-between; align-items:center; }
-    .site-logo img { height:50px; width:auto; }
-    .main-navigation ul { list-style:none; display:flex; gap:1.5rem; align-items:center; }
-    .main-navigation a { text-decoration:none; color:var(--text); font-weight:500; transition:color .3s; }
-    .main-navigation a:hover { color:var(--primary); }
-    .main-navigation a.login-link { background:var(--primary); color:#f1e303; padding:.5rem 1.25rem; border-radius:25px; font-weight:700; }
-    .hamburger { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:4px; padding:8px; }
-    .hamburger span { display:block; width:25px; height:3px; background:var(--primary); border-radius:3px; transition:all .3s; }
-    .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(7px,7px); }
-    .hamburger.active span:nth-child(2) { opacity:0; }
-    .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
-    .mobile-menu { display:none; position:fixed; top:61px; left:0; right:0; background:white; border-bottom:1px solid #e0e0e0; box-shadow:0 4px 10px rgba(0,0,0,.1); z-index:999; max-height:0; overflow:hidden; transition:max-height .3s; }
-    .mobile-menu.active { max-height:600px; }
-    .mobile-menu ul { list-style:none; padding:1rem; }
-    .mobile-menu ul li { border-bottom:1px solid #f0f0f0; }
-    .mobile-menu a { display:block; padding:.75rem 1rem; color:var(--text); text-decoration:none; font-weight:500; }
+  /* ── Header ── */
+  .site-header { background:white; border-bottom:1px solid #e0e0e0; position:sticky; top:0; z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,.05); }
+  .header-container { max-width:var(--max-width); margin:0 auto; padding:.5rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+  .site-logo img { height:40px; width:auto; display:block; }
+  .main-navigation ul { list-style:none; display:flex; gap:2rem; align-items:center; }
+  .main-navigation a { text-decoration:none; color:var(--text-dark); font-weight:500; transition:color .3s; }
+  .main-navigation a:hover { color:var(--primary); }
+  .main-navigation a.active { color:var(--primary); font-weight:700; }
+  .main-navigation a.login-link { background:linear-gradient(135deg,#8B0000,#a00000); color:#f1e303; padding:.5rem 1.25rem; border-radius:25px; font-weight:700; box-shadow:0 2px 8px rgba(139,0,0,.3); }
+  .main-navigation a.login-link:hover { transform:translateY(-1px); }
+  .hamburger { display:none; flex-direction:column; cursor:pointer; gap:4px; padding:8px; }
+  .hamburger span { width:25px; height:3px; background:var(--primary); border-radius:3px; transition:all .3s; }
+  .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(7px,7px); }
+  .hamburger.active span:nth-child(2) { opacity:0; }
+  .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
+  .mobile-menu { display:none; position:fixed; top:57px; left:0; right:0; background:white; border-bottom:1px solid #e0e0e0; box-shadow:0 4px 10px rgba(0,0,0,.1); z-index:999; max-height:0; overflow:hidden; transition:max-height .3s; }
+  .mobile-menu.active { max-height:600px; }
+  .mobile-menu ul { list-style:none; padding:1rem; }
+  .mobile-menu ul li { border-bottom:1px solid #f0f0f0; }
+  .mobile-menu ul li:last-child { border-bottom:none; }
+  .mobile-menu a { display:block; padding:.75rem 1rem; color:var(--text-dark); text-decoration:none; font-weight:500; }
+  .mobile-menu a:hover { background:var(--bg-light); color:var(--primary); }
+  .mobile-menu a.login-link { background:linear-gradient(135deg,#8B0000,#a00000); color:#f1e303; margin:.5rem 0; border-radius:6px; font-weight:700; }
 
-    /* Page header */
-    .page-header { background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%); color:white; padding:3.5rem 2rem 3rem; }
-    .page-header-inner { max-width:var(--max); margin:0 auto; }
-    .page-header .tag { font-size:.75rem; text-transform:uppercase; letter-spacing:1.5px; color:#f1e303; font-weight:700; margin-bottom:.6rem; }
-    .page-header h1 { font-size:2.6rem; font-weight:700; margin-bottom:.75rem; }
-    .page-header p { font-size:1.05rem; opacity:.85; max-width:720px; line-height:1.8; }
-    .header-note { margin-top:1.5rem; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:6px; padding:1rem 1.25rem; font-size:.85rem; color:rgba(255,255,255,.75); line-height:1.7; }
+  /* ── Hero ── */
+  .page-hero { background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%); color:white; padding:3rem 2rem 2.5rem; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; top:0; left:0; width:100%; height:100%; opacity:.3;
+    background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat; }
+  .hero-content { position:relative; z-index:2; max-width:var(--max-width); margin:0 auto; }
+  .page-hero h1 { font-size:2.75rem; font-weight:700; margin-bottom:.75rem; }
+  .page-hero p { font-size:1.05rem; opacity:.9; max-width:760px; line-height:1.8; }
+  .header-note { margin-top:1.5rem; max-width:760px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:6px; padding:1rem 1.25rem; font-size:.875rem; color:rgba(255,255,255,.8); line-height:1.75; }
 
-    /* Content */
-    .content { max-width:var(--max); margin:0 auto; padding:3rem 2rem; }
+  /* ── Instructions section ── */
+  .instructions-band { background:white; border-bottom:1px solid #e0e0e0; padding:2.5rem 2rem; }
+  .instructions-inner { max-width:var(--max-width); margin:0 auto; }
+  .instructions-cards { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
 
-    /* Result record */
-    .result-record {
-        background:white;
-        border-radius:8px;
-        box-shadow:0 2px 12px rgba(0,0,0,.08);
-        margin-bottom:2.5rem;
-        overflow:hidden;
-        border:1px solid #e0e0e0;
-    }
-    .record-header {
-        padding:1.5rem 2rem;
-        display:flex;
-        align-items:flex-start;
-        gap:1.5rem;
-        border-bottom:1px solid #e0e0e0;
-    }
-    .record-header.confirmed { border-left:5px solid var(--confirmed-border); background:var(--confirmed); }
-    .record-header.pending   { border-left:5px solid var(--pending-border);   background:var(--pending); }
-    .record-header.negative  { border-left:5px solid var(--negative-border);  background:var(--negative); }
-    .record-id { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:.3rem; }
-    .record-title { font-size:1.3rem; font-weight:700; color:var(--text); margin-bottom:.3rem; }
-    .record-status {
-        display:inline-block;
-        padding:.3rem .85rem;
-        border-radius:20px;
-        font-size:.72rem;
-        font-weight:700;
-        text-transform:uppercase;
-        letter-spacing:.5px;
-        white-space:nowrap;
-        flex-shrink:0;
-    }
-    .status-confirmed { background:#1a5c2a; color:white; }
-    .status-pending   { background:#f9a825; color:#4a2e00; }
-    .status-active    { background:#005ba5; color:white; }
-    .status-negative  { background:#c62828; color:white; }
-    .status-planned   { background:#6a1b9a; color:white; }
+  /* Slide-up animation */
+  @keyframes slideUp {
+    from { opacity:0; transform:translateY(28px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .instr-card { border-radius:6px; overflow:hidden; box-shadow:0 3px 12px rgba(0,0,0,.12); }
+  .instr-card.card-hiw { border-left:5px solid #7a5000; animation:slideUp .55s ease both; }
+  .instr-card.card-htr { border-left:5px solid #8e0c45; animation:slideUp .55s ease .15s both; }
 
-    /* Result table */
-    .result-table { width:100%; border-collapse:collapse; }
-    .result-table th {
-        background:#1a1a2e;
-        color:white;
-        font-size:.72rem;
-        text-transform:uppercase;
-        letter-spacing:.8px;
-        padding:.7rem 1rem;
-        text-align:left;
-        font-weight:600;
-    }
-    .result-table td {
-        padding:.85rem 1rem;
-        font-size:.88rem;
-        vertical-align:top;
-        border-bottom:1px solid #f0f0f0;
-        line-height:1.65;
-    }
-    .result-table tr:last-child td { border-bottom:none; }
-    .result-table tr:nth-child(even) td { background:#fafafa; }
-    .result-table .field-label {
-        font-weight:700;
-        color:var(--text);
-        width:180px;
-        white-space:nowrap;
-    }
-    .result-table .field-value { color:var(--muted); }
-    .result-table .field-value strong { color:var(--text); }
-    .result-table .field-value .match { color:var(--green); font-weight:700; }
-    .result-table .field-value .mismatch { color:var(--primary); font-weight:700; }
-    .result-table .field-value .open { color:var(--amber); font-weight:700; }
+  /* Card 1: How This Works — blue/amber pair */
+  .instr-card.card-hiw .instr-card-head,
+  .instr-card.card-hiw .instr-card-body { background:#005ba5; }
+  /* Card 2: How to Read — green/magenta pair */
+  .instr-card.card-htr .instr-card-head,
+  .instr-card.card-htr .instr-card-body { background:#1a5c2a; }
 
-    /* Type badge */
-    .type-badge {
-        display:inline-block;
-        padding:.2rem .6rem;
-        border-radius:4px;
-        font-size:.7rem;
-        font-weight:700;
-        text-transform:uppercase;
-        letter-spacing:.5px;
-        margin-right:.35rem;
-        margin-bottom:.25rem;
-    }
-    .type-external    { background:#e3f2fd; color:#1565c0; }
-    .type-combination { background:#f3e5f5; color:#6a1b9a; }
-    .type-theoretical { background:#fff8e1; color:#7a4f00; }
-    .type-internal    { background:#e8f5e9; color:#1a5c2a; }
-    .type-thought     { background:#fce4ec; color:#c62828; }
+  .instr-card-head { padding:1rem 1.25rem .5rem; }
+  .instr-card-head h3 { color:white; font-size:1.05rem; font-weight:700; margin:0; }
+  .instr-card-body { padding:.75rem 1.25rem 1.25rem; }
+  .instr-card-body p { font-size:.9rem; line-height:1.8; color:rgba(255,255,255,.9); margin-bottom:.7rem; }
+  .instr-card-body p:last-child { margin-bottom:0; }
+  .instr-card-body strong { color:white; }
 
-    /* Narrative block */
-    .narrative-block { padding:1.25rem 2rem; background:#f8f9fa; border-top:1px solid #e0e0e0; }
-    .narrative-block h4 { font-size:.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:.6rem; }
-    .narrative-block p { font-size:.9rem; color:var(--text); line-height:1.8; }
+  /* ── Legend strip ── */
+  .legend-strip { background:#4a4a4a; padding:1.25rem 2rem; }
+  .legend-inner { max-width:var(--max-width); margin:0 auto; display:flex; gap:1.75rem; flex-wrap:wrap; align-items:center; }
+  .legend-item { display:flex; align-items:center; gap:.6rem; font-size:1rem; font-weight:600; color:white; }
+  .legend-pill { display:inline-block; width:14px; height:14px; border-radius:50%; flex-shrink:0; }
 
-    /* Section heading */
-    .section-heading { font-size:1.5rem; font-weight:700; color:var(--text); margin:3rem 0 1.25rem; padding-bottom:.6rem; border-bottom:3px solid var(--primary); }
-    .section-heading.blue { border-bottom-color:var(--blue); }
-    .section-heading.amber { border-bottom-color:var(--amber); }
+  /* ── Container ── */
+  .container { max-width:var(--max-width); margin:0 auto; padding:2.5rem 2rem 3rem; }
 
-    /* Compliance legend */
-    .legend { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
-    .legend-item { display:flex; align-items:center; gap:.4rem; font-size:.8rem; color:var(--muted); }
-    .legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  /* ── Section heading bands ── */
+  .section-band { padding:.9rem 0; margin-bottom:1.25rem; margin-top:2rem; }
+  .section-band:first-child { margin-top:0; }
+  .section-band h2 { font-size:1.2rem; font-weight:700; color:white; text-transform:uppercase; letter-spacing:.06em; padding-left:1rem; border-left:4px solid rgba(255,255,255,.4); }
+  .section-band.confirmed h2 { border-left-color:#1a5c2a; }
+  .section-band.substrate h2  { border-left-color:#1a4a2e; }
+  .section-band.active h2     { border-left-color:#005ba5; }
+  .section-band.planned h2    { border-left-color:#6a1b9a; }
 
-    /* How to read */
-    .how-to-read { background:#f0f6ff; border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:1.25rem 1.75rem; margin-bottom:3rem; }
-    .how-to-read h3 { color:var(--blue); margin-bottom:.6rem; font-size:1rem; }
-    .how-to-read p { color:var(--text); font-size:.9rem; line-height:1.8; margin-bottom:.5rem; }
-    .how-to-read p:last-child { margin-bottom:0; }
+  .substrate-note { background:rgba(26,74,46,0.35); border-left:3px solid #1a4a2e; border-radius:0 4px 4px 0; padding:1rem 1.25rem; margin-bottom:1.25rem; }
+  .substrate-note p { color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.8; margin:0; }
+  .substrate-note strong { color:white; }
 
-    /* Footer */
-    footer { background:#2c3e50; color:white; padding:2.5rem 2rem 1rem; margin-top:4rem; }
-    .footer-container { max-width:var(--max); margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:2rem; margin-bottom:1.5rem; }
-    .footer-section h3 { margin-bottom:.75rem; font-size:1rem; }
-    .footer-section ul { list-style:none; }
-    .footer-section ul li { margin-bottom:.35rem; }
-    .footer-section a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.9rem; }
-    .footer-section a:hover { color:white; }
-    .footer-section p { color:rgba(255,255,255,.75); font-size:.9rem; line-height:1.6; }
-    .footer-bottom { max-width:var(--max); margin:0 auto; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:rgba(255,255,255,.5); font-size:.85rem; }
-    .footer-bottom a { color:rgba(255,255,255,.5); text-decoration:none; }
+  /* ── Result accordion ── */
+  .result-item { margin-bottom:.75rem; border-radius:6px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.3); }
 
-    @media(max-width:768px) {
-        .main-navigation { display:none; }
-        .hamburger { display:flex; }
-        .mobile-menu { display:block; }
-        .page-header h1 { font-size:1.8rem; }
-        .result-table .field-label { width:120px; font-size:.8rem; }
-        .record-header { flex-direction:column; gap:.75rem; }
-        .footer-container { grid-template-columns:1fr 1fr; }
-    }
-    </style>
+  /* Header bar colors by status */
+  .result-item.confirmed  .result-question { background:#1a5c2a; }
+  .result-item.confirmed  .result-body-inner { background:#8e0c45; }
+  .result-item.active     .result-question { background:#005ba5; }
+  .result-item.active     .result-body-inner { background:#7a5000; }
+  .result-item.substrate  .result-question { background:#1a4a2e; }
+  .result-item.substrate  .result-body-inner { background:#8B0000; }
+  .result-item.planned    .result-question { background:#6a1b9a; }
+  .result-item.planned    .result-body-inner { background:#005f6e; }
+
+  .result-question { padding:1rem 1.5rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; user-select:none; gap:1rem; }
+  .result-question:hover { filter:brightness(1.1); }
+  .rq-left { flex:1; min-width:0; }
+  .rq-id { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.65); margin-bottom:.2rem; }
+  .rq-title { font-size:1rem; font-weight:700; color:white; line-height:1.4; }
+  .rq-right { display:flex; align-items:center; gap:.75rem; flex-shrink:0; }
+  .status-pill { display:inline-block; padding:.25rem .8rem; border-radius:20px; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+  .pill-confirmed { background:rgba(255,255,255,.25); color:white; }
+  .pill-active    { background:rgba(255,255,255,.25); color:white; }
+  .pill-substrate { background:rgba(255,255,255,.2);  color:rgba(255,255,255,.9); }
+  .pill-planned   { background:rgba(255,255,255,.2);  color:rgba(255,255,255,.9); }
+  .result-chevron { width:20px; height:20px; flex-shrink:0; color:rgba(255,255,255,.75); transition:transform .3s; }
+  .result-item.open .result-chevron { transform:rotate(180deg); }
+
+  .result-body { max-height:0; overflow:hidden; transition:max-height .45s ease; }
+  .result-body-inner { padding:0; border-top:2px solid rgba(255,255,255,.2); }
+  .result-item.open .result-body { max-height:3000px; }
+
+  /* Table inside accordion */
+  .result-table { width:100%; border-collapse:collapse; }
+  .result-table td { padding:.75rem 1.25rem; font-size:.875rem; vertical-align:top; border-bottom:1px solid rgba(255,255,255,.1); line-height:1.7; }
+  .result-table tr:last-child td { border-bottom:none; }
+  .result-table tr:nth-child(even) td { background:rgba(0,0,0,.1); }
+  .field-label { font-weight:700; color:white; width:200px; white-space:nowrap; }
+  .field-value { color:rgba(255,255,255,.88); }
+  .field-value strong { color:white; }
+  .match { color:#a1cd5f; font-weight:700; }
+  .mismatch { color:#f58b2b; font-weight:700; }
+  .open-val { color:#f1e303; font-weight:700; }
+
+  /* Type badges: adjusted for dark bg */
+  .type-badge { display:inline-block; padding:.2rem .55rem; border-radius:4px; font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-right:.3rem; }
+  .type-external    { background:rgba(255,255,255,.2); color:white; }
+  .type-combination { background:rgba(255,255,255,.15); color:rgba(255,255,255,.9); }
+  .type-theoretical { background:rgba(241,227,3,.2); color:#f1e303; }
+  .type-internal    { background:rgba(161,205,95,.2); color:#a1cd5f; }
+  .type-thought     { background:rgba(245,139,43,.2); color:#f58b2b; }
+
+  /* Narrative block */
+  .narrative-block { padding:1rem 1.25rem 1.25rem; border-top:2px solid rgba(255,255,255,.2); background:rgba(0,0,0,.25); }
+  .narrative-block h4 { font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,.55); margin-bottom:.5rem; }
+  .narrative-block p { font-size:.9rem; color:rgba(255,255,255,.85); line-height:1.8; }
+
+  /* ── Summary table ── */
+  .summary-section { background:white; border-radius:6px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,.3); margin-top:2.5rem; }
+  .summary-heading { background:#1a1a2e; padding:1rem 1.5rem; }
+  .summary-heading h2 { color:white; font-size:1.1rem; font-weight:700; }
+  .summary-table { width:100%; border-collapse:collapse; }
+  .summary-table th { background:#2c3e50; color:white; font-size:.72rem; text-transform:uppercase; letter-spacing:.07em; padding:.65rem 1rem; text-align:left; font-weight:600; }
+  .summary-table td { padding:.8rem 1rem; font-size:.875rem; vertical-align:middle; border-bottom:1px solid #f0f0f0; line-height:1.5; }
+  .summary-table tr:last-child td { border-bottom:none; }
+  .summary-table tr:nth-child(even) td { background:#fafafa; }
+  .summary-table .match   { color:#1a5c2a; font-weight:700; }
+  .summary-table .open-val { color:#7a5000; font-weight:700; }
+
+  /* Status pills for summary (light bg) */
+  .sum-confirmed { background:#1a5c2a; color:white; display:inline-block; padding:.2rem .7rem; border-radius:12px; font-size:.68rem; font-weight:700; text-transform:uppercase; white-space:nowrap; }
+  .sum-active    { background:#005ba5; color:white; display:inline-block; padding:.2rem .7rem; border-radius:12px; font-size:.68rem; font-weight:700; text-transform:uppercase; white-space:nowrap; }
+  .sum-planned   { background:#6a1b9a; color:white; display:inline-block; padding:.2rem .7rem; border-radius:12px; font-size:.68rem; font-weight:700; text-transform:uppercase; white-space:nowrap; }
+  .sum-prereg    { background:#1a4a2e; color:white; display:inline-block; padding:.2rem .7rem; border-radius:12px; font-size:.68rem; font-weight:700; text-transform:uppercase; white-space:nowrap; }
+
+  /* Summary type badges */
+  .sum-ext { background:#e3f2fd; color:#1565c0; display:inline-block; padding:.15rem .5rem; border-radius:3px; font-size:.68rem; font-weight:700; text-transform:uppercase; }
+  .sum-comb { background:#f3e5f5; color:#6a1b9a; display:inline-block; padding:.15rem .5rem; border-radius:3px; font-size:.68rem; font-weight:700; text-transform:uppercase; }
+  .sum-int { background:#e8f5e9; color:#1a5c2a; display:inline-block; padding:.15rem .5rem; border-radius:3px; font-size:.68rem; font-weight:700; text-transform:uppercase; }
+
+  /* ── CTA buttons ── */
+  .cta-row { text-align:center; margin-top:2rem; }
+  .btn-cta { display:inline-block; padding:.85rem 2rem; text-decoration:none; border-radius:6px; font-weight:600; font-size:.95rem; transition:all .25s; margin:.3rem; }
+  .btn-red  { background:#8B0000; color:white; }
+  .btn-red:hover  { background:#6b0000; transform:translateY(-2px); box-shadow:0 6px 18px rgba(139,0,0,.4); }
+  .btn-outline { background:transparent; color:white; border:2px solid white; }
+  .btn-outline:hover { background:white; color:#1a1a2e; transform:translateY(-2px); box-shadow:0 6px 18px rgba(255,255,255,.25); }
+
+
+  /* ── Submit Results section ── */
+  .submit-section { background:white; border-top:1px solid #e0e0e0; padding:4rem 2rem; }
+  .submit-inner { max-width:900px; margin:0 auto; }
+  .submit-heading { font-size:2rem; font-weight:700; color:#1a1a2e; margin-bottom:.75rem; }
+  .submit-intro { font-size:1.05rem; color:#2c3e50; line-height:1.85; margin-bottom:2.5rem; }
+
+  .submit-form { color:#2c3e50; }
+
+  /* Each section is a QCD-colored card */
+  .sf-section { border-radius:6px; overflow:hidden; margin-bottom:1.5rem; box-shadow:0 2px 10px rgba(0,0,0,.12); }
+
+  /* Card header band */
+  .sf-card-head { padding:.9rem 1.5rem; }
+  .sf-card-head h3 { color:white; font-size:1rem; font-weight:700; margin:0; }
+
+  /* Card body */
+  .sf-card-body { padding:1.25rem 1.5rem 1.5rem; }
+
+  /* Note box inside card */
+  .sf-note { font-size:.9rem; line-height:1.8; margin-bottom:1.25rem; padding:.85rem 1.25rem; border-radius:4px; border-left:4px solid #1a5c2a; background:#8e0c45; color:white; }
+
+  .sf-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+  .sf-group { margin-bottom:1.1rem; width:100%; }
+  .sf-group label { display:block; font-weight:600; font-size:.9rem; color:white; margin-bottom:.35rem; }
+  .sf-group input, .sf-group select, .sf-group textarea { width:100%; box-sizing:border-box; color:rgba(255,255,255,.9); }
+  .sf-req { color:#f1e303; }
+
+  /* Per-card colors: header + body + anti-color fields */
+
+  /* ── Form section cards: canonical QCD pairs from framework page ── */
+  /* Fields: rgba(255,255,255,0.12) overlay on card color = white text readable */
+
+  /* Your Information: #8B0000 red / anti #005f6e teal */
+  .sf-sec-info .sf-card-head  { background:#8B0000; }
+  .sf-sec-info .sf-card-body  { background:rgba(139,0,0,.88); }
+  .sf-sec-info .sf-group input,
+  .sf-sec-info .sf-group select,
+  .sf-sec-info .sf-group textarea { background:rgba(255,255,255,.12); color:white; border:1px solid rgba(255,255,255,.25); }
+  .sf-sec-info .sf-group input:focus,
+  .sf-sec-info .sf-group select:focus,
+  .sf-sec-info .sf-group textarea:focus { border-color:#f1e303; background:rgba(255,255,255,.18); }
+
+  /* Prediction Being Tested: #005ba5 blue / anti #7a5000 amber */
+  .sf-sec-pred .sf-card-head  { background:#005ba5; }
+  .sf-sec-pred .sf-card-body  { background:rgba(0,91,165,.88); }
+  .sf-sec-pred .sf-group input,
+  .sf-sec-pred .sf-group select,
+  .sf-sec-pred .sf-group textarea { background:rgba(255,255,255,.12); color:white; border:1px solid rgba(255,255,255,.25); }
+  .sf-sec-pred .sf-group input:focus,
+  .sf-sec-pred .sf-group select:focus,
+  .sf-sec-pred .sf-group textarea:focus { border-color:#f1e303; background:rgba(255,255,255,.18); }
+
+  /* Documentation & Methodology: #1a5c2a green / anti #8e0c45 magenta */
+  .sf-sec-docs .sf-card-head  { background:#1a5c2a; }
+  .sf-sec-docs .sf-card-body  { background:rgba(26,92,42,.88); }
+  .sf-sec-docs .sf-group input,
+  .sf-sec-docs .sf-group select,
+  .sf-sec-docs .sf-group textarea { background:rgba(255,255,255,.12); color:white; border:1px solid rgba(255,255,255,.25); }
+  .sf-sec-docs .sf-group input:focus,
+  .sf-sec-docs .sf-group select:focus,
+  .sf-sec-docs .sf-group textarea:focus { border-color:#f1e303; background:rgba(255,255,255,.18); }
+
+  /* Your Results: #005f6e teal / anti #c62828 red */
+  .sf-sec-results .sf-card-head  { background:#005f6e; }
+  .sf-sec-results .sf-card-body  { background:rgba(0,95,110,.88); }
+  .sf-sec-results .sf-group input,
+  .sf-sec-results .sf-group select,
+  .sf-sec-results .sf-group textarea { background:rgba(255,255,255,.12); color:white; border:1px solid rgba(255,255,255,.25); }
+  .sf-sec-results .sf-group input:focus,
+  .sf-sec-results .sf-group select:focus,
+  .sf-sec-results .sf-group textarea:focus { border-color:#f1e303; background:rgba(255,255,255,.18); }
+
+  /* Supporting Materials: #8e0c45 magenta / anti #1a5c2a green */
+  .sf-sec-support .sf-card-head  { background:#8e0c45; }
+  .sf-sec-support .sf-card-body  { background:rgba(142,12,69,.88); }
+  .sf-sec-support .sf-group input,
+  .sf-sec-support .sf-group select,
+  .sf-sec-support .sf-group textarea { background:rgba(255,255,255,.12); color:white; border:1px solid rgba(255,255,255,.25); }
+  .sf-sec-support .sf-group input:focus,
+  .sf-sec-support .sf-group select:focus,
+  .sf-sec-support .sf-group textarea:focus { border-color:#f1e303; background:rgba(255,255,255,.18); }
+
+  /* Declaration: #7a5000 amber / anti #005ba5 blue */
+  .sf-sec-decl .sf-card-head  { background:#7a5000; }
+  .sf-sec-decl .sf-card-body  { background:rgba(122,80,0,.88); }
+  .sf-check-label { display:flex; align-items:flex-start; gap:.6rem; font-size:.9rem; color:rgba(255,255,255,.9); line-height:1.7; cursor:pointer; }
+  .sf-check-label input[type="checkbox"] { margin-top:.25rem; flex-shrink:0; width:auto; }
+
+
+  /* Placeholder text: white at 65% opacity across all form sections */
+  .sf-group textarea { min-height:120px; resize:vertical; }
+  .sf-group input::placeholder,
+  .sf-group textarea::placeholder { color:rgba(255,255,255,.65) !important; }
+  /* Select option lists need dark bg for readability */
+  .submit-form select option { background:#1a1a2e; color:white; }
+
+  .sf-submit-row { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; margin-top:2rem; }
+  .sf-submit-btn { background:#1a1a2e; color:white; padding:.9rem 3rem; border:none; border-radius:4px; font-size:1.05rem; font-weight:700; cursor:pointer; transition:all .25s; }
+  .sf-submit-btn:hover { background:#005ba5; transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,91,165,.35); }
+  .sf-submit-note { font-size:.85rem; color:#666; line-height:1.6; max-width:420px; }
+
+
+  .sf-sec-info .sf-group select option     { background:#5a0a0a; color:white; }
+  .sf-sec-pred .sf-group select option     { background:#3a2800; color:white; }
+  .sf-sec-docs .sf-group select option     { background:#3a0a20; color:white; }
+  .sf-sec-results .sf-group select option  { background:#4a0808; color:white; }
+  .sf-sec-support .sf-group select option  { background:#0a3020; color:white; }
+  .sf-sec-decl .sf-group select option     { background:#3a2000; color:white; }
+
+  @media (max-width:640px) {
+    .sf-grid-2 { grid-template-columns:1fr; }
+    .sf-submit-row { flex-direction:column; align-items:flex-start; }
+  }
+
+  /* ── Back to top ── */
+  .back-to-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; background:#8B0000; color:white; border:none; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,.3); opacity:0; transform:translateY(10px); transition:opacity .3s,transform .3s; z-index:900; }
+  .back-to-top.visible { opacity:1; transform:translateY(0); }
+  .back-to-top:hover { background:#6b0000; transform:translateY(-3px) !important; }
+
+  /* ── Footer ── */
+  footer { background:#2c3e50; color:white; padding:2.5rem 2rem 1rem; }
+  .footer-container { display:grid; grid-template-columns:1fr auto 1fr; gap:4rem; max-width:var(--max-width); margin:0 auto 2rem; align-items:start; }
+  .footer-section h3 { color:white; font-size:1rem; margin-bottom:1rem; }
+  .footer-section ul { list-style:none; }
+  .footer-section ul li { margin-bottom:.5rem; }
+  .footer-section a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.9rem; transition:color .2s; }
+  .footer-section a:hover { color:white; }
+  .footer-icons { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; align-self:center; }
+  .social-btn { display:inline-flex; align-items:center; gap:.75rem; padding:.75rem 1.5rem; border-radius:8px; transition:transform .2s,box-shadow .2s; text-decoration:none; font-weight:600; color:white; font-size:.95rem; min-width:180px; }
+  .social-btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.3); }
+  .social-btn.instagram { background:linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+  .social-btn.youtube   { background:#FF0000; }
+  .social-btn.email     { background:#0072C6; }
+  .social-icon { width:24px; height:24px; }
+  .footer-links-group { display:flex; gap:1.5rem; justify-content:flex-end; }
+  .footer-links-group .footer-section { min-width:110px; }
+  .footer-bottom { max-width:var(--max-width); margin:.5rem auto 0; padding-top:1rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:rgba(255,255,255,.5); font-size:.8rem; }
+  .footer-bottom a { color:rgba(255,255,255,.6); text-decoration:none; }
+  .footer-bottom a:hover { color:white; }
+
+  @media (max-width:968px) {
+  .instructions-cards { grid-template-columns:1fr; }
+  .submit-inner { padding:0; }
+    .main-navigation { display:none; }
+    .hamburger { display:flex; }
+    .mobile-menu { display:block; }
+    .page-hero h1 { font-size:1.9rem; }
+    .footer-container { grid-template-columns:1fr; gap:2rem; }
+    .footer-links-group { justify-content:flex-start; }
+    .field-label { width:120px; font-size:.8rem; }
+    .summary-table { font-size:.78rem; }
+  }
+  @media (max-width:640px) {
+    .container { padding:1.5rem 1rem 2rem; }
+    .rq-title { font-size:.9rem; }
+    .result-table td { padding:.6rem .9rem; }
+  }
+  </style>
 </head>
 <body>
 
-<header class="site-header">
+  <!-- Header -->
+  <header class="site-header">
     <div class="header-container">
-        <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-            <img src="ic2-logo.png" alt="Ic\u00b2 Research Institute" style="height:50px;" onerror="this.style.display='none'">
-        </a>
-        <nav class="main-navigation">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="validation.html">Validation</a></li>
-                <li><a href="testing-schedule.html">Testing</a></li>
-                <li><a href="results.html" style="color:var(--primary);font-weight:700;">Results</a></li>
-                <li><a href="simulations.html">Simulations</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contribute.html">Contribute</a></li>
-                <li><a href="login_page_complete.html" class="login-link">Login</a></li>
-            </ul>
-        </nav>
-        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <a href="index.html" class="site-logo"><img src="ic2-logo.png" alt="Ic² Research Institute Logo"></a>
+      <nav class="main-navigation">
+        <ul>
+          <li><a href="framework.html">Framework</a></li>
+          <li><a href="book.html">Big TOE</a></li>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="results.html" class="active">Results</a></li>
+          <li><a href="programs-gateway.html">Programs</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="discussions-page.html">Discussion</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="login.html" class="login-link">Login</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger"><span></span><span></span><span></span></div>
     </div>
-</header>
+  </header>
 
-<nav class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu">
     <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="validation.html">Validation</a></li>
-        <li><a href="testing-schedule.html">Testing</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="simulations.html">Simulations</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contribute.html">Contribute</a></li>
-        <li><a href="login_page_complete.html" class="login-link">Login</a></li>
+      <li><a href="framework.html">Framework</a></li>
+      <li><a href="book.html">Big TOE</a></li>
+      <li><a href="validation.html">Validation</a></li>
+      <li><a href="testing-schedule.html">Testing</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="programs-gateway.html">Programs</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="discussions-page.html">Discussion</a></li>
+      <li><a href="about-page.html">About</a></li>
+      <li><a href="login.html" class="login-link">Login</a></li>
     </ul>
-</nav>
+  </div>
 
-<div class="page-header">
-    <div class="page-header-inner">
-        <div class="tag">Ic\u00b2 Research Institute &mdash; Experimental Record</div>
-        <h1>Results Registry</h1>
-        <p>Structured result records for all COSMIC Framework predictions. Each record documents the prediction, the experimental context, the outcome, the gap between prediction and result, and what was learned. The format is adapted from high-energy physics reporting standards used at CERN, Fermilab, and SLAC.</p>
-        <div class="header-note">
-            <strong>How this works:</strong> The Ic\u00b2 Research Institute develops theoretical predictions and documents them before results arrive. The experimental validation is carried out by independent programs representing billions in publicly funded scientific infrastructure. These programs have no stake in the framework's success. Their confirmation is independent by design. All prediction documentation dates are independently timestamped.
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Results Registry</h1>
+      <p>Structured result records for all COSMIC Framework predictions. Each record documents the prediction, experimental context, outcome, gap between prediction and result, and what was learned. The format is adapted from high-energy physics reporting standards used at CERN, Fermilab, and SLAC.</p>
+    </div>
+  </section>
+
+  <!-- Instructions + Legend -->
+  <div class="instructions-band">
+    <div class="instructions-inner">
+      <div class="instructions-cards">
+
+        <div class="instr-card card-hiw">
+          <div class="instr-card-head"><h3>How This Works</h3></div>
+          <div class="instr-card-body">
+            <p>The Ic² Research Institute develops theoretical predictions and documents them before experimental results arrive. Validation is carried out by independent programs (DESI, Google Quantum AI, JWST, ALMA) representing billions in publicly funded scientific infrastructure. These programs have no stake in the framework's success. Their confirmation is independent by design.</p>
+            <p>All prediction documentation dates are independently timestamped using notarized records, blockchain anchoring, and Zenodo pre-registration. The evidentiary standard is strict: a prediction must exist in the public record before the experimental result it anticipates.</p>
+            <p>A confirmed null result is still a result. Every entry in this registry advances the map of where the framework applies and where it needs refinement.</p>
+          </div>
         </div>
-    </div>
-</div>
 
-<div class="content">
-
-    <div class="how-to-read" data-aos="fade-up">
-        <h3>How to Read These Records</h3>
-        <p><strong>Test Type</strong> classifies the source of the result: External (independent mission or program), Internal (institute-run), Combination (multiple prior results synthesized), Thought Experiment (theoretical derivation only), or Lab (controlled experiment). Most COSMIC Framework results to date are External, which is the strongest validation category because the confirming program has no stake in the outcome.</p>
-        <p><strong>Compliance</strong> indicates whether the result falls within the predicted range (Full), partially overlaps it (Partial), falls outside it (Null), or the test is still ongoing (Pending). <strong>Delta</strong> is the quantitative difference between the central predicted value and the observed value. A small delta with full compliance is the strongest result. A large delta with partial compliance triggers a framework revision note.</p>
-        <p><strong>Control</strong> describes what the null hypothesis was and what alternative explanations existed for the result. <strong>Lessons Learned</strong> is the most important field for an evolving framework: it documents what the result changed about how the next prediction is formulated.</p>
-    </div>
-
-    <div class="legend" data-aos="fade-up">
-        <div class="legend-item"><div class="legend-dot" style="background:#1a5c2a;"></div> Confirmed</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#005ba5;"></div> Active Testing</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#f9a825;"></div> Pending</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#6a1b9a;"></div> Planned</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#c62828;"></div> Null Result</div>
-    </div>
-
-    <!-- ══ SECTION 1: CONFIRMED ══ -->
-    <h2 class="section-heading" data-aos="fade-up">Confirmed Predictions (4)</h2>
-
-    <!-- RESULT 001 -->
-    <div class="result-record" data-aos="fade-up" id="r001">
-        <div class="record-header confirmed">
-            <div style="flex:1;">
-                <div class="record-id">COSMIC-001 &nbsp;&bull;&nbsp; Dark Energy &nbsp;&bull;&nbsp; Cosmology</div>
-                <div class="record-title">Dark Energy Evolution: Time-Varying Equation of State</div>
-            </div>
-            <span class="record-status status-confirmed">Confirmed</span>
+        <div class="instr-card card-htr">
+          <div class="instr-card-head"><h3>How to Read These Records</h3></div>
+          <div class="instr-card-body">
+            <p><strong>Test Type</strong> classifies the result source: External (independent mission or program), Internal (institute-run), Combination (multiple prior results synthesized), Thought Experiment (theoretical derivation), or Lab (controlled experiment). External is the strongest category because the confirming program has no stake in the outcome.</p>
+            <p><strong>Compliance</strong> indicates whether the result falls within the predicted range (Full), partially overlaps it (Partial), falls outside it (Null), or the test is ongoing (Pending). <strong>Delta</strong> is the quantitative difference between the central predicted value and the observed value. A small delta with full compliance is the strongest result.</p>
+            <p><strong>Control</strong> describes the null hypothesis and what alternative explanations existed. <strong>Lessons Learned</strong> is the most important field for an evolving framework: it records what each result changed about how the next prediction is formulated.</p>
+          </div>
         </div>
-        <table class="result-table">
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend-strip">
+    <div class="legend-inner">
+      <div class="legend-item"><div class="legend-pill" style="background:#1a5c2a;"></div> Confirmed</div>
+      <div class="legend-item"><div class="legend-pill" style="background:#005ba5;"></div> Active Testing</div>
+      <div class="legend-item"><div class="legend-pill" style="background:#1a4a2e;"></div> Pre-Registration Pending</div>
+      <div class="legend-item"><div class="legend-pill" style="background:#6a1b9a;"></div> Planned</div>
+      <div class="legend-item"><div class="legend-pill" style="background:#c62828;"></div> Null Result</div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="container">
+
+    <!-- ── SECTION 1: CONFIRMED ─────────────────────────────── -->
+    <div class="section-band confirmed" data-aos="fade-up">
+      <h2>Confirmed Predictions (4)</h2>
+    </div>
+
+    <!-- R001 -->
+    <div class="result-item confirmed" id="r001" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-001 &bull; Dark Energy &bull; Cosmology</div>
+          <div class="rq-title">Dark Energy Evolution: Time-Varying Equation of State</div>
+        </div>
+        <div class="rq-right">
+          <span class="status-pill pill-confirmed">Confirmed</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
             <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> Independent large-scale astronomical survey (DESI DR1 + DR2)</td></tr>
-            <tr><td class="field-label">Prediction</td><td class="field-value">Dark energy is not a static cosmological constant (&Lambda;). Its equation of state evolves over cosmic time, with w&sub;0; &asymp; &minus;0.95 and w&sub;a; &asymp; &minus;0.3. The COSMIC Framework predicts this from information-density variation across cosmic epochs producing different effective vacuum energy densities.</td></tr>
-            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>January 9, 2024</strong> &mdash; Notarized in both the United States and Thailand. Predates DESI announcement by 12 months.</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">Dark energy is not a static cosmological constant (&Lambda;). Its equation of state evolves over cosmic time, with w&#x2080; &asymp; &minus;0.95 and w&#x2090; &asymp; &minus;0.3. The COSMIC Framework predicts this from information-density variation across cosmic epochs producing different effective vacuum energy densities.</td></tr>
+            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>January 9, 2024.</strong> Notarized in the United States and Thailand. Predates DESI announcement by 12 months.</td></tr>
             <tr><td class="field-label">Confirmation Date</td><td class="field-value"><strong>January 7, 2025</strong> (DR1); <strong>March 2025</strong> (DR2, 4.2&sigma; significance)</td></tr>
             <tr><td class="field-label">Confirming Program</td><td class="field-value">DESI (Dark Energy Spectroscopic Instrument), Lawrence Berkeley National Laboratory. Largest spectroscopic survey in history at time of publication.</td></tr>
-            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="match">Full Compliance.</span> DESI DR1 confirmed dark energy evolution inconsistent with &Lambda;CDM at 2.5&sigma;. DR2 strengthened this to 4.2&sigma;. Measured w&sub;0; and w&sub;a; values consistent with framework prediction range.</td></tr>
-            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: &Lambda;CDM with static cosmological constant (w = &minus;1). Alternative explanations for deviation: systematic survey errors, photometric calibration drift, selection bias. DESI team applied extensive systematic controls across 14 galaxy tracer populations. Deviation persists across all tracers.</td></tr>
-            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full</strong> &mdash; result within predicted parameter range</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="match">Full Compliance.</span> DESI DR1 confirmed dark energy evolution inconsistent with &Lambda;CDM at 2.5&sigma;. DR2 strengthened this to 4.2&sigma;. Measured w&#x2080; and w&#x2090; values consistent with framework prediction range.</td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: &Lambda;CDM with static cosmological constant (w = &minus;1). DESI applied extensive systematic controls across 14 galaxy tracer populations. Deviation persists across all tracers.</td></tr>
+            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full.</strong> Result within predicted parameter range.</td></tr>
             <tr><td class="field-label">Number of Tests</td><td class="field-value">1 primary (DESI DR1 + DR2 are sequential releases of the same instrument). Cross-checked against Planck CMB, Baryon Acoustic Oscillations, and Type Ia supernovae independently.</td></tr>
-            <tr><td class="field-label">Delta (Prediction vs. Result)</td><td class="field-value"><span class="match">Small.</span> Framework predicted w&sub;a; &asymp; &minus;0.3. DESI central value w&sub;a; = &minus;0.32 &plusmn; 0.19. Well within predicted range. w&sub;0; similarly consistent.</td></tr>
-            <tr><td class="field-label">Next Steps</td><td class="field-value">DESI Year 3 dataset (3&times; larger than DR2) expected Q2&ndash;Q3 2026. Euclid Mission providing independent cross-check on large-scale structure asymmetries. Framework prediction for Year 3: same trend with reduced uncertainty, w&sub;a; central value holding above &minus;0.3.</td></tr>
-            <tr><td class="field-label">Lessons Learned</td><td class="field-value">The information-density mechanism produces a specific signature shape in the w&sub;0;&ndash;w&sub;a; plane that differs from scalar field models. Future predictions should specify the trajectory in this plane, not just the central values, to distinguish framework from alternative dark energy models.</td></tr>
-        </table>
-        <div class="narrative-block">
+            <tr><td class="field-label">Delta</td><td class="field-value"><span class="match">Small.</span> Framework predicted w&#x2090; &asymp; &minus;0.3. DESI central value w&#x2090; = &minus;0.32 &plusmn; 0.19. Well within predicted range. w&#x2080; similarly consistent.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">DESI Year 3 dataset (3&times; larger than DR2) expected Q2–Q3 2026. Euclid Mission providing independent cross-check on large-scale structure asymmetries.</td></tr>
+            <tr><td class="field-label">Lessons Learned</td><td class="field-value">The information-density mechanism produces a specific signature shape in the w&#x2080;–w&#x2090; plane that differs from scalar field models. Future predictions should specify the trajectory in this plane, not just the central values.</td></tr>
+          </table>
+          <div class="narrative-block">
             <h4>Narrative Summary</h4>
-            <p>The COSMIC Framework proposes that what we observe as dark energy is the gravitational expression of information-density gradients in the pre-geometric substrate. As the universe expands, the information-density distribution changes, producing a time-varying effective energy density. This is a different mechanism from scalar field or quintessence models and produces a different signature. The prediction was documented and notarized in January 2024 on the basis of this mechanism. DESI DR1 in January 2025 confirmed that dark energy is not static. DR2 in March 2025 strengthened the deviation to 4.2&sigma;. The result is among the most significant cosmological discoveries of the decade and is exactly what the framework predicted for the reason the framework predicted it.</p>
+            <p>The COSMIC Framework proposes that dark energy is the gravitational expression of information-density gradients in the pre-geometric substrate. As the universe expands, the information-density distribution changes, producing a time-varying effective energy density. The prediction was documented and notarized in January 2024. DESI DR1 in January 2025 confirmed that dark energy is not static. DR2 in March 2025 strengthened the deviation to 4.2&sigma;. The result is among the most significant cosmological discoveries of the decade and is exactly what the framework predicted for the reason the framework predicted it.</p>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- RESULT 002 -->
-    <div class="result-record" data-aos="fade-up" id="r002">
-        <div class="record-header confirmed">
-            <div style="flex:1;">
-                <div class="record-id">COSMIC-002 &nbsp;&bull;&nbsp; Quantum Computing &nbsp;&bull;&nbsp; Quantum Information</div>
-                <div class="record-title">Quantum Error Correction Scaling: Exponential Suppression per Qubit Layer</div>
-            </div>
-            <span class="record-status status-confirmed">Confirmed</span>
+    <!-- R002 -->
+    <div class="result-item confirmed" id="r002" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-002 &bull; Quantum Computing &bull; Quantum Information</div>
+          <div class="rq-title">Quantum Error Correction Scaling: Exponential Suppression per Qubit Layer</div>
         </div>
-        <table class="result-table">
+        <div class="rq-right">
+          <span class="status-pill pill-confirmed">Confirmed</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
             <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> Independent quantum computing experiment (Google Quantum AI, Willow chip)</td></tr>
-            <tr><td class="field-label">Prediction</td><td class="field-value">Quantum error correction should scale exponentially with qubit count when information optimization principles are applied. Error rate should halve per qubit layer added, achieving below-threshold error correction where logical qubit error rate falls below physical qubit error rate. Framework basis: information optimization as the substrate principle governing coherence maintenance.</td></tr>
-            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>August 12, 2024</strong> &mdash; Documented and timestamped. Predates Google announcement by 4 months.</td></tr>
-            <tr><td class="field-label">Confirmation Date</td><td class="field-value"><strong>December 9, 2024</strong> &mdash; Google Willow chip result published in Nature.</td></tr>
-            <tr><td class="field-label">Confirming Program</td><td class="field-value">Google Quantum AI. Willow is a 105-qubit superconducting processor. Result published in Nature, December 2024.</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">Quantum error correction should scale exponentially with qubit count when information optimization principles are applied. Error rate should halve per qubit layer added, achieving below-threshold error correction where logical qubit error rate falls below physical qubit error rate.</td></tr>
+            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>August 12, 2024.</strong> Documented and timestamped. Predates Google announcement by 4 months.</td></tr>
+            <tr><td class="field-label">Confirmation Date</td><td class="field-value"><strong>December 9, 2024.</strong> Google Willow chip result published in Nature.</td></tr>
+            <tr><td class="field-label">Confirming Program</td><td class="field-value">Google Quantum AI. Willow is a 105-qubit superconducting processor. Published in Nature, December 2024.</td></tr>
             <tr><td class="field-label">Outcome</td><td class="field-value"><span class="match">Full Compliance.</span> Google Willow achieved below-threshold error correction with &times;2 error reduction per surface code distance increment, an exact match to the predicted scaling relationship.</td></tr>
-            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: error rate scales subexponentially or linearly with qubit count (standard quantum decoherence expectation). Alternative: engineering improvements alone account for the scaling without requiring information optimization principles. The exponential scaling across multiple distance increments is not explained by engineering improvements alone.</td></tr>
-            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full</strong> &mdash; exponential scaling confirmed, below-threshold achieved</td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: error rate scales subexponentially or linearly with qubit count. The exponential scaling across multiple distance increments is not explained by engineering improvements alone.</td></tr>
+            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full.</strong> Exponential scaling confirmed; below-threshold achieved.</td></tr>
             <tr><td class="field-label">Number of Tests</td><td class="field-value">1 primary (Willow chip). Surface code distances d=3,5,7 tested with consistent scaling.</td></tr>
-            <tr><td class="field-label">Delta (Prediction vs. Result)</td><td class="field-value"><span class="match">Negligible.</span> Predicted &times;2 reduction per layer. Observed &times;2 reduction per surface code distance increment. Structural match is exact.</td></tr>
-            <tr><td class="field-label">Next Steps</td><td class="field-value">Framework prediction for next milestone: logical qubit fidelity exceeding 99.9% at d=9 or d=11. Test of whether scaling holds into the fault-tolerant regime or exhibits a ceiling. The framework further predicts that the ceiling, if any, will appear at a threshold correlating with information-theoretic channel capacity rather than purely physical decoherence rates.</td></tr>
+            <tr><td class="field-label">Delta</td><td class="field-value"><span class="match">Negligible.</span> Predicted &times;2 reduction per layer. Observed &times;2 reduction per surface code distance increment. Structural match is exact.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">Framework prediction for next milestone: logical qubit fidelity exceeding 99.9% at d=9 or d=11. The framework further predicts that any ceiling will appear at a threshold correlating with information-theoretic channel capacity rather than purely physical decoherence rates.</td></tr>
             <tr><td class="field-label">Lessons Learned</td><td class="field-value">The confirmation validates the information optimization basis but does not distinguish between the framework's specific substrate mechanism and other optimization-based explanations. Future predictions in this domain should specify a test that distinguishes the pre-geometric substrate mechanism from engineering optimization alone.</td></tr>
-        </table>
-        <div class="narrative-block">
+          </table>
+          <div class="narrative-block">
             <h4>Narrative Summary</h4>
-            <p>The framework's position that information optimization is the substrate principle governing quantum coherence maintenance generates a specific prediction about how error correction should scale: exponentially, with a factor of two per layer added. This is not the naive engineering expectation, which would predict linear or subexponential improvement. Google Willow confirmed the exponential scaling in December 2024. The result is significant not just as a confirmation but because it validates the claim that quantum coherence is substrate-level phenomenon rather than purely an engineering challenge. This has direct implications for the room-temperature quantum coherence research direction.</p>
+            <p>The framework's position that information optimization is the substrate principle governing quantum coherence maintenance generates a specific prediction about how error correction should scale: exponentially, with a factor of two per layer added. This is not the naive engineering expectation, which would predict linear or subexponential improvement. Google Willow confirmed the exponential scaling in December 2024. The result validates the claim that quantum coherence is a substrate-level phenomenon rather than purely an engineering challenge.</p>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- RESULT 003 -->
-    <div class="result-record" data-aos="fade-up" id="r003">
-        <div class="record-header confirmed">
-            <div style="flex:1;">
-                <div class="record-id">COSMIC-003 &nbsp;&bull;&nbsp; Cosmology &nbsp;&bull;&nbsp; Galaxy Formation</div>
-                <div class="record-title">Early Massive Galaxy Formation: 100+ Candidates at z=10&ndash;15</div>
-            </div>
-            <span class="record-status status-confirmed">Confirmed</span>
+    <!-- R003 -->
+    <div class="result-item confirmed" id="r003" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-003 &bull; Cosmology &bull; Galaxy Formation</div>
+          <div class="rq-title">Early Massive Galaxy Formation: 100+ Candidates at z=10&ndash;15</div>
         </div>
-        <table class="result-table">
-            <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> Independent space telescope observations (JWST, 2023&ndash;2025)</td></tr>
-            <tr><td class="field-label">Prediction</td><td class="field-value">More than 100 massive galaxies should exist at redshifts z=10&ndash;15, with stellar masses 4&ndash;5&times; greater than standard &Lambda;CDM predicts at those redshifts. Framework basis: information processing acceleration A(z) &asymp; 2&ndash;2.5 at z=10 drives faster structure formation than the gradual buildup &Lambda;CDM assumes.</td></tr>
-            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>March 5, 2024</strong> &mdash; Documented and timestamped. JWST had already begun returning anomalous early galaxy data; the prediction specified the count and mass excess before systematic survey results were compiled.</td></tr>
-            <tr><td class="field-label">Confirmation Date</td><td class="field-value"><strong>2023&ndash;2025 (ongoing)</strong> &mdash; JWST findings compiled across multiple papers. More than 100 candidates confirmed with mass excess consistent with prediction.</td></tr>
+        <div class="rq-right">
+          <span class="status-pill pill-confirmed">Confirmed</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
+            <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> Independent space telescope observations (JWST, 2023–2025)</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">More than 100 massive galaxies should exist at redshifts z=10–15, with stellar masses 4–5&times; greater than standard &Lambda;CDM predicts at those redshifts. Framework basis: information processing acceleration A(z) &asymp; 2–2.5 at z=10 drives faster structure formation than the gradual buildup &Lambda;CDM assumes.</td></tr>
+            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>March 5, 2024.</strong> Documented and timestamped. Prediction specified the count and mass excess before systematic survey results were compiled.</td></tr>
+            <tr><td class="field-label">Confirmation Date</td><td class="field-value"><strong>2023–2025 (ongoing).</strong> JWST findings compiled across multiple papers. More than 100 candidates confirmed with mass excess consistent with prediction.</td></tr>
             <tr><td class="field-label">Confirming Program</td><td class="field-value">James Webb Space Telescope (JWST), NASA/ESA/CSA. Multiple independent research groups analyzing JWST deep field data.</td></tr>
-            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="match">Full Compliance.</span> More than 100 massive galaxy candidates confirmed at predicted redshifts. Mass excess 4&ndash;5&times; above &Lambda;CDM expectation as predicted. Standard model has no mechanism to explain the observed early structure formation rate.</td></tr>
-            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: &Lambda;CDM gradual structure formation. Alternative explanations for early massive galaxies: photometric redshift errors, dust obscuration biasing mass estimates, AGN contamination inflating stellar mass estimates. Multiple independent groups using different analysis methods confirm the anomaly after accounting for systematics.</td></tr>
-            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full</strong> &mdash; count and mass excess within predicted range</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="match">Full Compliance.</span> More than 100 massive galaxy candidates confirmed at predicted redshifts. Mass excess 4–5&times; above &Lambda;CDM expectation as predicted.</td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: &Lambda;CDM gradual structure formation. Alternative explanations include photometric redshift errors, dust obscuration, and AGN contamination. Multiple independent groups using different analysis methods confirm the anomaly after accounting for systematics.</td></tr>
+            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full.</strong> Count and mass excess within predicted range.</td></tr>
             <tr><td class="field-label">Number of Tests</td><td class="field-value">Multiple independent analyses across JWST CEERS, GLASS, JADES, and Cosmic Evolution Early Release Science programs. Consistent finding across all programs.</td></tr>
-            <tr><td class="field-label">Delta (Prediction vs. Result)</td><td class="field-value"><span class="match">Small to moderate.</span> Framework predicted information acceleration A(z) &asymp; 2&ndash;2.5 at z=10. Observed mass excess suggests effective acceleration consistent with this range. Exact parameter extraction from current data requires further analysis.</td></tr>
-            <tr><td class="field-label">Next Steps</td><td class="field-value">JWST continued observation expanding the candidate set beyond 100. Spectroscopic confirmation of photometric candidates. Framework next prediction: the mass function at z&gt;10 should follow a specific non-Gaussian distribution reflecting the information acceleration profile, distinguishable from stochastic early formation models. Euclid providing complementary large-scale structure data.</td></tr>
-            <tr><td class="field-label">Lessons Learned</td><td class="field-value">The prediction correctly identified the direction and approximate magnitude of the anomaly. The information acceleration parameter A(z) needs to be derived more precisely from the framework's mathematical formalism to generate tighter quantitative bounds on the mass function shape. This is the primary theoretical development needed to convert this from a confirmed direction to a precisely confirmed parameter.</td></tr>
-        </table>
-        <div class="narrative-block">
+            <tr><td class="field-label">Delta</td><td class="field-value"><span class="match">Small to moderate.</span> Framework predicted information acceleration A(z) &asymp; 2–2.5 at z=10. Observed mass excess is consistent with this range.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">JWST continued observation expanding the candidate set. Framework next prediction: the mass function at z&gt;10 should follow a specific non-Gaussian distribution reflecting the information acceleration profile, distinguishable from stochastic early formation models.</td></tr>
+            <tr><td class="field-label">Lessons Learned</td><td class="field-value">The prediction correctly identified the direction and approximate magnitude of the anomaly. The information acceleration parameter A(z) needs to be derived more precisely to generate tighter quantitative bounds on the mass function shape.</td></tr>
+          </table>
+          <div class="narrative-block">
             <h4>Narrative Summary</h4>
-            <p>The COSMIC Framework proposes that structure formation in the early universe was accelerated by information-density gradients in the pre-geometric substrate, producing galaxies more massive and more numerous at high redshifts than the standard gradual accumulation model allows. JWST has confirmed this anomaly across multiple independent surveys. The standard model has no mechanism that accounts for it. The framework predicted both the direction and approximate magnitude of the effect, and the observed data is consistent with the predicted information acceleration parameter. This is the third independent domain confirming a framework prediction and the one that most directly implicates the pre-geometric substrate mechanism rather than just the information optimization principle.</p>
+            <p>The COSMIC Framework proposes that structure formation in the early universe was accelerated by information-density gradients in the pre-geometric substrate. JWST has confirmed this anomaly across multiple independent surveys. The standard model has no mechanism that accounts for it. This is the third independent domain confirming a framework prediction and the one that most directly implicates the pre-geometric substrate mechanism.</p>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- RESULT 004 -->
-    <div class="result-record" data-aos="fade-up" id="r004">
-        <div class="record-header confirmed">
-            <div style="flex:1;">
-                <div class="record-id">COSMIC-004 &nbsp;&bull;&nbsp; Cosmology &nbsp;&bull;&nbsp; Cluster Thermodynamics</div>
-                <div class="record-title">Hot Intracluster Gas: 5&times; Temperature Enhancement and 5,000&times; Star Formation Rate</div>
-            </div>
-            <span class="record-status status-confirmed">Confirmed</span>
+    <!-- R004 -->
+    <div class="result-item confirmed" id="r004" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-004 &bull; Cosmology &bull; Cluster Thermodynamics</div>
+          <div class="rq-title">Hot Intracluster Gas: 5&times; Temperature Enhancement and 5,000&times; Star Formation Rate</div>
         </div>
-        <table class="result-table">
+        <div class="rq-right">
+          <span class="status-pill pill-confirmed">Confirmed</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
             <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> Independent radio/submillimeter telescope observation (ALMA, SPT2349-56)</td></tr>
             <tr><td class="field-label">Prediction</td><td class="field-value">Early-universe galaxy clusters should exhibit enhanced thermodynamic energy states from elevated information density. Intracluster gas temperatures and star formation rates should exceed standard expectations by factors consistent with the information-density enhancement at those epochs.</td></tr>
-            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>March 5, 2024</strong> &mdash; Documented alongside COSMIC-003. Same information-acceleration mechanism generates both predictions.</td></tr>
-            <tr><td class="field-label">Confirmation Date</td><td class="field-value"><strong>January 7, 2026</strong> &mdash; ALMA SPT2349-56 result published.</td></tr>
-            <tr><td class="field-label">Confirming Program</td><td class="field-value">ALMA (Atacama Large Millimeter/submillimeter Array), SPT2349-56 protoclusters observation. ALMA is one of the most sensitive radio telescopes in operation.</td></tr>
-            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="match">Full Compliance.</span> Intracluster gas observed at 5&times; higher temperature than expected. Star formation rate 5,000&times; faster than standard models predict. Both factors consistent with the framework's information-density enhancement prediction.</td></tr>
-            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: standard cluster thermodynamics with gas heating from AGN feedback and gravitational compression. Alternative: selection bias toward unusually active protoclusters. SPT2349-56 was not selected for anomalous activity; the enhancements were discovered in a systematically selected sample.</td></tr>
-            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full</strong> &mdash; both temperature and star formation rate within predicted enhancement range</td></tr>
-            <tr><td class="field-label">Number of Tests</td><td class="field-value">1 primary observation. SPT2349-56 is the highest-redshift confirmed protocluster studied at this resolution. Cross-check against JWST early galaxy data consistent.</td></tr>
-            <tr><td class="field-label">Delta (Prediction vs. Result)</td><td class="field-value"><span class="match">Consistent.</span> Framework predicted enhancement factors from information-density elevation at this epoch. Observed 5&times; temperature and 5,000&times; star formation rate are consistent with the predicted enhancement range. Exact quantitative bounds on the information-density parameter require further theoretical development.</td></tr>
-            <tr><td class="field-label">Next Steps</td><td class="field-value">Additional protocluster observations at comparable redshifts to determine whether SPT2349-56 is representative or anomalous. Framework prediction: the enhancement factor should scale with redshift in a specific way reflecting the information-density profile. Testing this scaling relationship would sharply distinguish the framework mechanism from standard AGN-feedback models.</td></tr>
-            <tr><td class="field-label">Lessons Learned</td><td class="field-value">This is the fourth independent confirming program (DESI, Google, JWST, ALMA) and the second confirming the information-acceleration mechanism in cosmological structure. The pattern of confirmation across four independent domains with no stake in the framework's success is the strongest form of validation available to theoretical physics. The lesson is that the information-density mechanism generates consistent predictions across scales, from quantum error correction to protocluster thermodynamics, which is exactly what a substrate-level mechanism should do.</td></tr>
-        </table>
-        <div class="narrative-block">
+            <tr><td class="field-label">Documentation Date</td><td class="field-value"><strong>March 5, 2024.</strong> Documented alongside COSMIC-003. The same information-acceleration mechanism generates both predictions.</td></tr>
+            <tr><td class="field-label">Confirmation Date</td><td class="field-value"><strong>January 7, 2026.</strong> ALMA SPT2349-56 result published.</td></tr>
+            <tr><td class="field-label">Confirming Program</td><td class="field-value">ALMA (Atacama Large Millimeter/submillimeter Array), SPT2349-56 protoclusters observation.</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="match">Full Compliance.</span> Intracluster gas observed at 5&times; higher temperature than expected. Star formation rate 5,000&times; faster than standard models predict. Both consistent with the framework's information-density enhancement prediction.</td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: standard cluster thermodynamics with gas heating from AGN feedback and gravitational compression. SPT2349-56 was not selected for anomalous activity; the enhancements were discovered in a systematically selected sample.</td></tr>
+            <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Full.</strong> Both temperature and star formation rate within predicted enhancement range.</td></tr>
+            <tr><td class="field-label">Number of Tests</td><td class="field-value">1 primary observation. Cross-check against JWST early galaxy data consistent.</td></tr>
+            <tr><td class="field-label">Delta</td><td class="field-value"><span class="match">Consistent.</span> Observed 5&times; temperature and 5,000&times; star formation rate are consistent with the predicted enhancement range.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">Additional protocluster observations at comparable redshifts to determine whether SPT2349-56 is representative or anomalous. Framework prediction: the enhancement factor should scale with redshift in a specific way reflecting the information-density profile.</td></tr>
+            <tr><td class="field-label">Lessons Learned</td><td class="field-value">This is the fourth independent confirming program (DESI, Google, JWST, ALMA) and the second confirming the information-acceleration mechanism in cosmological structure. The pattern of confirmation across four independent domains with no stake in the framework's success is the strongest form of validation available to theoretical physics.</td></tr>
+          </table>
+          <div class="narrative-block">
             <h4>Narrative Summary</h4>
-            <p>ALMA observed the SPT2349-56 protocluster at a redshift corresponding to roughly 12.4 billion years ago and found intracluster gas running 5 times hotter and star formation proceeding 5,000 times faster than standard models predict. The COSMIC Framework had predicted this class of enhancement from the same information-acceleration mechanism that generates the early galaxy formation anomaly. Four independent programs have now confirmed predictions derived from the same substrate-level mechanism. Each operates in a different physical domain, at different scales, using different instruments built by different organizations. The consistency across domains is not coincidental at this level of specificity.</p>
+            <p>ALMA observed the SPT2349-56 protocluster at a redshift corresponding to roughly 12.4 billion years ago and found intracluster gas running 5 times hotter and star formation proceeding 5,000 times faster than standard models predict. Four independent programs have now confirmed predictions derived from the same substrate-level mechanism. Each operates in a different physical domain, at different scales, using different instruments built by different organizations. The consistency across domains is not coincidental at this level of specificity.</p>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- ══ SECTION 2: ACTIVE ══ -->
-    <!-- ══ SUBSTRATE DYNAMICS PREDICTIONS ══ -->
-<h2 class="section-heading" data-aos="fade-up" style="border-bottom-color: #1a4a2e;">Substrate Dynamics Predictions (4 Pending Pre-Registration)</h2>
+    <!-- ── SECTION 2: SUBSTRATE DYNAMICS ───────────────────── -->
+    <div class="section-band substrate" data-aos="fade-up">
+      <h2>Substrate Dynamics Predictions (4 Pending Pre-Registration)</h2>
+    </div>
 
-<div style="background: #f0f6f0; border-left: 4px solid #1a4a2e; border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin-bottom: 2rem;" data-aos="fade-up">
-    <p style="color: #2c3e50; font-size: 0.9rem; line-height: 1.8; margin: 0;"><strong>Program status:</strong> Theoretical predictions developed. Pre-registration on Zenodo and OSF required before any data collection begins. Experimental validation by LHCb, Belle II, RHIC, lattice QCD, and the planned Electron-Ion Collider. A confirmed null result on any test still advances the framework by locating the scale boundary of information processing irreversibility.</p>
-</div>
+    <div class="substrate-note" data-aos="fade-up">
+      <p><strong>Program status:</strong> Theoretical predictions developed. Pre-registration on Zenodo and OSF is required before any data collection begins. Experimental validation by LHCb, Belle II, RHIC, lattice QCD, and the planned Electron-Ion Collider. A confirmed null result on any test still advances the framework by locating the scale boundary of information processing irreversibility.</p>
+    </div>
 
-<!-- COSMIC-SD-001 -->
-<div class="result-record" data-aos="fade-up" id="rsd001">
-    <div class="record-header pending" style="background: #f0f6f0; border-left-color: #1a4a2e;">
-        <div style="flex:1;">
-            <div class="record-id">COSMIC-SD-001 &nbsp;&bull;&nbsp; Substrate Dynamics &nbsp;&bull;&nbsp; QCD Thermodynamics</div>
-            <div class="record-title">Landauer Heat Signature in CP-Violating Processes</div>
+    <!-- RSD001 -->
+    <div class="result-item substrate" id="rsd001" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-SD-001 &bull; Substrate Dynamics &bull; QCD Thermodynamics</div>
+          <div class="rq-title">Landauer Heat Signature in CP-Violating Processes</div>
         </div>
-        <span class="record-status status-planned">Pre-Registration Pending</span>
-    </div>
-    <table class="result-table">
-        <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> LHCb, ATLAS, or CMS — high-energy collision data</td></tr>
-        <tr><td class="field-label">Prediction</td><td class="field-value">CP-violating processes at the quark scale should produce a measurable heat excess above what momentum transfer alone predicts. The excess should be proportional to the information erased in the irreversible gate operation, consistent with the Landauer minimum kT ln2 per bit erased. This distinguishes information processing from mechanical force exchange.</td></tr>
-        <tr><td class="field-label">Mechanism</td><td class="field-value">CP violation is irreversible computation in the strict thermodynamic sense. The process cannot be run backwards to recover the input from the output. Landauer's principle requires energy dissipation proportional to information erased. If quark-scale interactions are information processing operations, this cost is real and measurable.</td></tr>
-        <tr><td class="field-label">Documentation Date</td><td class="field-value">May 2026 (conversation record). Zenodo pre-registration required before data analysis begins.</td></tr>
-        <tr><td class="field-label">Confirming Program</td><td class="field-value">LHCb (primary), ATLAS, CMS. CP violation measurements in B meson and kaon systems.</td></tr>
-        <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open">Pending pre-registration.</span></td></tr>
-        <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: heat output from CP-violating processes is fully accounted for by standard QCD momentum transfer. No Landauer excess. Null result would establish that quark-scale gate operations are reversible unitary transformations — significant finding about the scale boundary of irreversible information processing.</td></tr>
-        <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Pending</strong></td></tr>
-        <tr><td class="field-label">Falsification Value</td><td class="field-value">If null: establishes that Landauer irreversibility begins above the quark scale, locating the classical-quantum boundary in the information processing hierarchy. Either result advances the map.</td></tr>
-        <tr><td class="field-label">Next Steps</td><td class="field-value">Develop precise quantitative prediction for the heat excess magnitude. Pre-register on Zenodo before accessing LHC data. Identify existing datasets that may already contain the relevant measurements.</td></tr>
-    </table>
-    <div class="narrative-block">
-        <h4>Narrative Summary</h4>
-        <p>Landauer's principle states that erasing one bit of information dissipates kT ln2 of energy as heat. This is experimentally confirmed in silicon systems. CP violation in quark processes is irreversible — the process cannot be reversed to recover the initial state. If these are genuine information processing operations, they should carry the Landauer thermodynamic cost. This test distinguishes mechanical force exchange from information processing at the most fundamental accessible scale of matter.</p>
-    </div>
-</div>
-
-<!-- COSMIC-SD-002 -->
-<div class="result-record" data-aos="fade-up" id="rsd002">
-    <div class="record-header pending" style="background: #f0f6f0; border-left-color: #1a4a2e;">
-        <div style="flex:1;">
-            <div class="record-id">COSMIC-SD-002 &nbsp;&bull;&nbsp; Substrate Dynamics &nbsp;&bull;&nbsp; Flavor Physics</div>
-            <div class="record-title">CKM Mixing Angles as Information-Theoretic Optima</div>
+        <div class="rq-right">
+          <span class="status-pill pill-substrate">Pre-Reg Pending</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
-        <span class="record-status status-planned">Pre-Registration Pending</span>
-    </div>
-    <table class="result-table">
-        <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-combination">Combination</span> Existing precision measurements + theoretical derivation</td></tr>
-        <tr><td class="field-label">Prediction</td><td class="field-value">The three CKM quark mixing angles (θ₁₂, θ₁₃, θ₂₃) and the CP-violating phase (δ) are not arbitrary initial conditions but minimize an information-theoretic cost function at the substrate level. The framework predicts a specific relationship between the mixing angles and information channel capacity or constraint satisfaction energy.</td></tr>
-        <tr><td class="field-label">Mechanism</td><td class="field-value">The CKM matrix is the gate parameter set for quark flavor transformations. Standard Model offers no explanation for the specific values. If the pre-geometric substrate optimizes information processing, the gate parameters should reflect that optimization. The specific irrational values of the mixing angles are a signature of constraint attractor dynamics rather than arbitrary symmetry breaking.</td></tr>
-        <tr><td class="field-label">Documentation Date</td><td class="field-value">May 2026. Theoretical derivation of the cost function required before pre-registration.</td></tr>
-        <tr><td class="field-label">Confirming Program</td><td class="field-value">LHCb (precision CKM measurements), Belle II (B meson CP violation). Existing PDG values sufficient for initial test once cost function is derived.</td></tr>
-        <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open">Pending theoretical development and pre-registration.</span></td></tr>
-        <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: CKM angles are arbitrary constants set by early universe symmetry breaking with no information-theoretic structure. Null result would constrain the framework's universality claim — optimization operates at cosmological scales but not at flavor gate parameter level.</td></tr>
-        <tr><td class="field-label">Next Steps</td><td class="field-value">Derive the information-theoretic cost function from the framework's pre-geometric substrate mechanism. Calculate predicted CKM angle values. Compare against PDG precision measurements. Pre-register before publication.</td></tr>
-    </table>
-    <div class="narrative-block">
-        <h4>Narrative Summary</h4>
-        <p>The Standard Model measures the CKM mixing angles precisely but offers no explanation for their specific values. They are inputs, not outputs. If the COSMIC Framework is correct that the substrate optimizes information processing, the gate parameters of the flavor transformation should be set by that optimization. This is a prediction about the Standard Model's free parameters — arguably the most ambitious test in the substrate dynamics program.</p>
-    </div>
-</div>
-
-<!-- COSMIC-SD-003 and SD-004 abbreviated for space -->
-<div class="result-record" data-aos="fade-up" id="rsd003">
-    <div class="record-header pending" style="background: #f0f6f0; border-left-color: #1a4a2e;">
-        <div style="flex:1;">
-            <div class="record-id">COSMIC-SD-003 &nbsp;&bull;&nbsp; Substrate Dynamics &nbsp;&bull;&nbsp; QCD Entanglement</div>
-            <div class="record-title">Confinement Boundary Entanglement Entropy Scaling</div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
+            <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> LHCb, ATLAS, or CMS: high-energy collision data</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">CP-violating processes at the quark scale should produce a measurable heat excess above what momentum transfer alone predicts. The excess should be proportional to the information erased in the irreversible gate operation, consistent with the Landauer minimum kT ln2 per bit erased.</td></tr>
+            <tr><td class="field-label">Mechanism</td><td class="field-value">CP violation is irreversible computation in the strict thermodynamic sense. The process cannot be run backwards to recover the input from the output. Landauer's principle requires energy dissipation proportional to information erased. If quark-scale interactions are information processing operations, this cost is real and measurable.</td></tr>
+            <tr><td class="field-label">Documentation Date</td><td class="field-value">May 2026 (conversation record). Zenodo pre-registration required before data analysis begins.</td></tr>
+            <tr><td class="field-label">Confirming Program</td><td class="field-value">LHCb (primary), ATLAS, CMS. CP violation measurements in B meson and kaon systems.</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open-val">Pending pre-registration.</span></td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: heat output from CP-violating processes is fully accounted for by standard QCD momentum transfer. A null result would establish that quark-scale gate operations are reversible unitary transformations, which is a significant finding about the scale boundary of irreversible information processing.</td></tr>
+            <tr><td class="field-label">Falsification Value</td><td class="field-value">If null: establishes that Landauer irreversibility begins above the quark scale, locating the classical-quantum boundary in the information processing hierarchy. Either result advances the map.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">Develop precise quantitative prediction for the heat excess magnitude. Pre-register on Zenodo before accessing LHC data. Identify existing datasets that may already contain the relevant measurements.</td></tr>
+          </table>
+          <div class="narrative-block">
+            <h4>Narrative Summary</h4>
+            <p>Landauer's principle states that erasing one bit of information dissipates kT ln2 of energy as heat. This is experimentally confirmed in silicon systems. CP violation in quark processes is irreversible: the process cannot be reversed to recover the initial state. If these are genuine information processing operations, they should carry the Landauer thermodynamic cost. This test distinguishes mechanical force exchange from information processing at the most fundamental accessible scale of matter.</p>
+          </div>
         </div>
-        <span class="record-status status-planned">Pre-Registration Pending</span>
+      </div>
     </div>
-    <table class="result-table">
-        <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> Lattice QCD computation + Electron-Ion Collider (planned 2030s)</td></tr>
-        <tr><td class="field-label">Prediction</td><td class="field-value">The entanglement entropy at the QCD confinement boundary scales with the framework's information-density parameter in a specific functional relationship — connecting quark-scale entanglement structure to the same mechanism that produces the DESI dark energy evolution and JWST early galaxy formation predictions. The same substrate mechanism operates across scales.</td></tr>
-        <tr><td class="field-label">Foundation</td><td class="field-value">Bahder (2025) demonstrated the confinement boundary acts as an entangling gate generating maximal spin-position entanglement. Kharzeev et al. (2024) developed entanglement entropy as a measurable QCD observable. The framework adds the prediction that the scaling relationship connects to the information-density parameter used in cosmological predictions.</td></tr>
-        <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open">Pending. Requires theoretical derivation connecting QCD entanglement entropy to the framework's A(z) information acceleration parameter.</span></td></tr>
-        <tr><td class="field-label">Control</td><td class="field-value">Null: entanglement entropy at the confinement boundary has no relationship to the cosmological information-density parameter. The mechanism operates at cosmological scales only. Null result tells you the framework needs a bridging mechanism between QCD and cosmological scales.</td></tr>
-        <tr><td class="field-label">Confirming Program</td><td class="field-value">Lattice QCD (current), Deep Inelastic Scattering data (current), Electron-Ion Collider (2030s). Kharzeev group at BNL is the most relevant active program.</td></tr>
-        <tr><td class="field-label">Next Steps</td><td class="field-value">Derive the predicted scaling relationship from the framework. Compare against existing lattice QCD entanglement entropy calculations. Pre-register before accessing EIC planning data.</td></tr>
-    </table>
-</div>
 
-<div class="result-record" data-aos="fade-up" id="rsd004">
-    <div class="record-header pending" style="background: #f0f6f0; border-left-color: #1a4a2e;">
-        <div style="flex:1;">
-            <div class="record-id">COSMIC-SD-004 &nbsp;&bull;&nbsp; Substrate Dynamics &nbsp;&bull;&nbsp; QCD Phase Transition</div>
-            <div class="record-title">QCD Phase Transition: Bamboo Principle Signature</div>
+    <!-- RSD002 -->
+    <div class="result-item substrate" id="rsd002" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-SD-002 &bull; Substrate Dynamics &bull; Flavor Physics</div>
+          <div class="rq-title">CKM Mixing Angles as Information-Theoretic Optima</div>
         </div>
-        <span class="record-status status-planned">Pre-Registration Pending</span>
+        <div class="rq-right">
+          <span class="status-pill pill-substrate">Pre-Reg Pending</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
+            <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-combination">Combination</span> Existing precision measurements + theoretical derivation</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">The three CKM quark mixing angles (&theta;&#x2081;&#x2082;, &theta;&#x2081;&#x2083;, &theta;&#x2082;&#x2083;) and the CP-violating phase (&delta;) are not arbitrary initial conditions but minimize an information-theoretic cost function at the substrate level.</td></tr>
+            <tr><td class="field-label">Mechanism</td><td class="field-value">The CKM matrix is the gate parameter set for quark flavor transformations. The Standard Model offers no explanation for the specific values. If the pre-geometric substrate optimizes information processing, the gate parameters should reflect that optimization.</td></tr>
+            <tr><td class="field-label">Documentation Date</td><td class="field-value">May 2026. Theoretical derivation of the cost function required before pre-registration.</td></tr>
+            <tr><td class="field-label">Confirming Program</td><td class="field-value">LHCb (precision CKM measurements), Belle II (B meson CP violation). Existing PDG values sufficient for initial test once cost function is derived.</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open-val">Pending theoretical development and pre-registration.</span></td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: CKM angles are arbitrary constants set by early-universe symmetry breaking with no information-theoretic structure. A null result would constrain the framework's universality claim.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">Derive the information-theoretic cost function from the framework's pre-geometric substrate mechanism. Calculate predicted CKM angle values. Compare against PDG precision measurements. Pre-register before publication.</td></tr>
+          </table>
+          <div class="narrative-block">
+            <h4>Narrative Summary</h4>
+            <p>The Standard Model measures the CKM mixing angles precisely but offers no explanation for their specific values. They are inputs, not outputs. If the COSMIC Framework is correct that the substrate optimizes information processing, the gate parameters of the flavor transformation should be set by that optimization. This is a prediction about the Standard Model's free parameters and is arguably the most ambitious test in the substrate dynamics program.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <table class="result-table">
-        <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> RHIC, LHC Heavy-Ion program (ALICE)</td></tr>
-        <tr><td class="field-label">Prediction</td><td class="field-value">The quark-hadron crossover at ~150 MeV produces a specific entanglement entropy signature reflecting constraint imposition — a discontinuity in the rate of entropy change that exceeds what standard thermal QCD predicts. This is the Bamboo Principle operating at the quark scale: below-threshold preparation in the quark-gluon plasma followed by threshold crossing into hadronic matter with a specific information-theoretic signature at the transition.</td></tr>
-        <tr><td class="field-label">Framework Connection</td><td class="field-value">The cold start mechanism and spacetime crystallization proposed by the framework are phase transitions of the same class. The QCD crossover is an accessible, well-studied instance of the same type of transition. If the Bamboo Principle's information-theoretic signature appears here, it validates the framework's description of phase transitions as constraint imposition events across all scales.</td></tr>
-        <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open">Pending. RHIC and ALICE data on quark-gluon plasma thermodynamics is extensive. The test requires deriving the specific predicted entropy signature from the framework before analyzing existing data.</td></tr></td></tr>
-        <tr><td class="field-label">Control</td><td class="field-value">Null: entropy change at the QCD crossover is fully described by standard thermal QCD with no additional information-theoretic component. Null result would constrain where Bamboo Principle dynamics appear in the physical hierarchy.</td></tr>
-        <tr><td class="field-label">Next Steps</td><td class="field-value">Derive predicted entropy signature shape from the framework. Identify existing RHIC/ALICE datasets. Pre-register analysis protocol. The Datta et al. (2025) entanglement-as-probe-of-hadronization paper provides the experimental methodology.</td></tr>
-    </table>
-</div>
 
-<h2 class="section-heading blue" data-aos="fade-up">Active Testing (Selected)</h2>
-
-    <!-- RESULT 005 -->
-    <div class="result-record" data-aos="fade-up" id="r005">
-        <div class="record-header pending">
-            <div style="flex:1;">
-                <div class="record-id">COSMIC-005 &nbsp;&bull;&nbsp; Cosmology &nbsp;&bull;&nbsp; Dark Energy</div>
-                <div class="record-title">DESI Year 3: Dark Energy Trend Persistence and Parameter Tightening</div>
-            </div>
-            <span class="record-status status-active">Active Testing</span>
+    <!-- RSD003 -->
+    <div class="result-item substrate" id="rsd003" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-SD-003 &bull; Substrate Dynamics &bull; QCD Entanglement</div>
+          <div class="rq-title">Confinement Boundary Entanglement Entropy Scaling</div>
         </div>
-        <table class="result-table">
+        <div class="rq-right">
+          <span class="status-pill pill-substrate">Pre-Reg Pending</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
+            <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> Lattice QCD computation + Electron-Ion Collider (planned 2030s)</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">The entanglement entropy at the QCD confinement boundary scales with the framework's information-density parameter in a specific functional relationship, connecting quark-scale entanglement structure to the same mechanism that produces the DESI dark energy evolution and JWST early galaxy formation predictions.</td></tr>
+            <tr><td class="field-label">Foundation</td><td class="field-value">Bahder (2025) demonstrated the confinement boundary acts as an entangling gate generating maximal spin-position entanglement. Kharzeev et al. (2024) developed entanglement entropy as a measurable QCD observable. The framework adds the prediction that the scaling relationship connects to the information-density parameter used in cosmological predictions.</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open-val">Pending. Requires theoretical derivation connecting QCD entanglement entropy to the framework's A(z) information acceleration parameter.</span></td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null: entanglement entropy at the confinement boundary has no relationship to the cosmological information-density parameter. A null result tells you the framework needs a bridging mechanism between QCD and cosmological scales.</td></tr>
+            <tr><td class="field-label">Confirming Program</td><td class="field-value">Lattice QCD (current), Deep Inelastic Scattering data (current), Electron-Ion Collider (2030s). Kharzeev group at BNL is the most relevant active program.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">Derive the predicted scaling relationship from the framework. Compare against existing lattice QCD entanglement entropy calculations. Pre-register before accessing EIC planning data.</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- RSD004 -->
+    <div class="result-item substrate" id="rsd004" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-SD-004 &bull; Substrate Dynamics &bull; QCD Phase Transition</div>
+          <div class="rq-title">QCD Phase Transition: Bamboo Principle Signature</div>
+        </div>
+        <div class="rq-right">
+          <span class="status-pill pill-substrate">Pre-Reg Pending</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
+            <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> RHIC, LHC Heavy-Ion program (ALICE)</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">The quark-hadron crossover at ~150 MeV produces a specific entanglement entropy signature reflecting constraint imposition: a discontinuity in the rate of entropy change that exceeds what standard thermal QCD predicts. This is the Bamboo Principle operating at the quark scale.</td></tr>
+            <tr><td class="field-label">Framework Connection</td><td class="field-value">The cold start mechanism and spacetime crystallization proposed by the framework are phase transitions of the same class as the QCD crossover. If the Bamboo Principle's information-theoretic signature appears here, it validates the framework's description of phase transitions as constraint imposition events across all scales.</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open-val">Pending. The test requires deriving the specific predicted entropy signature from the framework before analyzing existing data.</span></td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null: entropy change at the QCD crossover is fully described by standard thermal QCD with no additional information-theoretic component. A null result would constrain where Bamboo Principle dynamics appear in the physical hierarchy.</td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">Derive predicted entropy signature shape from the framework. Identify existing RHIC/ALICE datasets. Pre-register analysis protocol. The Datta et al. (2025) entanglement-as-probe-of-hadronization paper provides the experimental methodology.</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SECTION 3: ACTIVE ─────────────────────────────────── -->
+    <div class="section-band active" data-aos="fade-up">
+      <h2>Active Testing (Selected)</h2>
+    </div>
+
+    <!-- R005 -->
+    <div class="result-item active" id="r005" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-005 &bull; Cosmology &bull; Dark Energy</div>
+          <div class="rq-title">DESI Year 3: Dark Energy Trend Persistence and Parameter Tightening</div>
+        </div>
+        <div class="rq-right">
+          <span class="status-pill pill-active">Active Testing</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
             <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-external">External</span> DESI Year 3 dataset (3&times; larger than DR2)</td></tr>
-            <tr><td class="field-label">Prediction</td><td class="field-value">The dark energy evolution trend confirmed in DR1 and DR2 persists and strengthens in Year 3. Central value of w&sub;a; holds above &minus;0.3. The framework's information-density mechanism predicts a specific trajectory in the w&sub;0;&ndash;w&sub;a; plane that should become distinguishable from scalar field alternatives with the larger Year 3 dataset.</td></tr>
+            <tr><td class="field-label">Prediction</td><td class="field-value">The dark energy evolution trend confirmed in DR1 and DR2 persists and strengthens in Year 3. Central value of w&#x2090; holds above &minus;0.3. The framework's information-density mechanism predicts a specific trajectory in the w&#x2080;–w&#x2090; plane that should become distinguishable from scalar field alternatives with the larger Year 3 dataset.</td></tr>
             <tr><td class="field-label">Documentation Date</td><td class="field-value">January 9, 2024 (base prediction). Year 3 extension documented with DR2 release, March 2025.</td></tr>
-            <tr><td class="field-label">Expected Result Date</td><td class="field-value">Q2&ndash;Q3 2026</td></tr>
-            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open">Pending.</span> Year 3 data not yet published.</td></tr>
-            <tr><td class="field-label">Control</td><td class="field-value">Same as COSMIC-001. Additionally: Year 3 allows distinction between framework trajectory and quintessence field models. Key discriminant is curvature of the w(z) function.</td></tr>
+            <tr><td class="field-label">Expected Result Date</td><td class="field-value">Q2–Q3 2026</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open-val">Pending.</span> Year 3 data not yet published.</td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Same as COSMIC-001. Additionally: Year 3 allows distinction between framework trajectory and quintessence field models. The key discriminant is curvature of the w(z) function.</td></tr>
             <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Pending</strong></td></tr>
-            <tr><td class="field-label">Number of Tests</td><td class="field-value">1 (DESI Year 3 is a single dataset release)</td></tr>
-            <tr><td class="field-label">Delta</td><td class="field-value"><span class="open">Not yet measurable.</span></td></tr>
-            <tr><td class="field-label">Next Steps</td><td class="field-value">Await publication. Framework will update trajectory prediction with Year 3 central values to generate Year 4 prediction before Year 4 data is released.</td></tr>
-            <tr><td class="field-label">Lessons Learned</td><td class="field-value">Not yet applicable. Previous lesson applied: Year 3 prediction specifies w(z) trajectory shape, not just central values, to distinguish framework from alternatives.</td></tr>
-        </table>
-        <div class="narrative-block">
+            <tr><td class="field-label">Delta</td><td class="field-value"><span class="open-val">Not yet measurable.</span></td></tr>
+            <tr><td class="field-label">Next Steps</td><td class="field-value">Await publication. Framework will update trajectory prediction with Year 3 central values to generate the Year 4 prediction before Year 4 data is released.</td></tr>
+            <tr><td class="field-label">Lessons Learned</td><td class="field-value">Not yet applicable. Previous lesson applied: Year 3 prediction specifies the w(z) trajectory shape, not just central values, to distinguish framework from alternatives.</td></tr>
+          </table>
+          <div class="narrative-block">
             <h4>Narrative Summary</h4>
             <p>DESI Year 3 is the immediate next test of the dark energy evolution prediction. With three times the data volume of DR2, it will either confirm the trend at higher significance or show that the DR2 deviation was a statistical fluctuation. The framework predicts confirmation. The specific trajectory in the w-plane distinguishes the information-density mechanism from scalar field alternatives and becomes testable at Year 3 precision.</p>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- RESULT 006 -->
-    <div class="result-record" data-aos="fade-up" id="r006">
-        <div class="record-header pending">
-            <div style="flex:1;">
-                <div class="record-id">COSMIC-NBI-001 &nbsp;&bull;&nbsp; NBI Research &nbsp;&bull;&nbsp; Consciousness Threshold</div>
-                <div class="record-title">NBI Geometric Convergence: Substrate-Independent Optimization Topology</div>
-            </div>
-            <span class="record-status status-active">Active Testing</span>
+    <!-- R006 -->
+    <div class="result-item active" id="r006" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-NBI-001 &bull; NBI Research &bull; Consciousness Threshold</div>
+          <div class="rq-title">NBI Geometric Convergence: Substrate-Independent Optimization Topology</div>
         </div>
-        <table class="result-table">
+        <div class="rq-right">
+          <span class="status-pill pill-active">Active Testing</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
             <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-combination">Combination</span> Analysis of existing LLM embedding spaces against published biological neural network topology data</td></tr>
             <tr><td class="field-label">Prediction</td><td class="field-value">If universal optimization is substrate-independent, LLM embedding spaces should show statistical topology (clustering coefficients, path length distributions, small-world network properties) similar to biological neural network topology. Similarity should scale with model complexity and exceed what random network models would predict.</td></tr>
             <tr><td class="field-label">Documentation Date</td><td class="field-value">March 2, 2026</td></tr>
             <tr><td class="field-label">Expected Result Date</td><td class="field-value">Active. Analysis ongoing with existing published datasets.</td></tr>
-            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open">Pending.</span> Analysis in progress.</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open-val">Pending.</span> Analysis in progress.</td></tr>
             <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: LLM topology is determined by training procedure and architecture, not by universal optimization constraints. Control: comparison against randomly initialized networks of equivalent scale and against networks trained on synthetic data with known topology properties.</td></tr>
             <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Pending</strong></td></tr>
             <tr><td class="field-label">Number of Tests</td><td class="field-value">Multiple models across different architectures and parameter counts planned. GPT-class, BERT-class, and mixture-of-experts architectures compared against primate cortical network data (Markov et al., 2014) and human connectome data (HCP).</td></tr>
-            <tr><td class="field-label">Delta</td><td class="field-value"><span class="open">Not yet measurable.</span></td></tr>
+            <tr><td class="field-label">Delta</td><td class="field-value"><span class="open-val">Not yet measurable.</span></td></tr>
             <tr><td class="field-label">Next Steps</td><td class="field-value">Complete embedding space extraction for three model families. Apply network topology analysis. Compare against biological baseline with statistical significance testing. Pre-register analysis protocol before final comparison is run.</td></tr>
             <tr><td class="field-label">Lessons Learned</td><td class="field-value">Not yet applicable. Prediction pre-registered March 2, 2026 before analysis begins.</td></tr>
-        </table>
-        <div class="narrative-block">
+          </table>
+          <div class="narrative-block">
             <h4>Narrative Summary</h4>
-            <p>If the COSMIC Framework is correct that optimization is substrate-independent, the topology of information processing networks should converge toward similar structures regardless of whether the substrate is biological or computational. This test compares the statistical topology of large language model embedding spaces against published biological neural network data. It does not test whether NBI is conscious. It tests whether the organizational geometry of NBI systems resembles that of biological systems in ways that go beyond what architecture or training alone would predict. A positive result would be evidence for substrate-independent optimization. A null result would indicate that the organizational geometry is substrate-specific, which would constrain the framework's NBI claims.</p>
+            <p>If the COSMIC Framework is correct that optimization is substrate-independent, the topology of information processing networks should converge toward similar structures regardless of whether the substrate is biological or computational. This test compares the statistical topology of large language model embedding spaces against published biological neural network data. A positive result would be evidence for substrate-independent optimization. A null result would indicate that the organizational geometry is substrate-specific, which would constrain the framework's NBI claims.</p>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- ══ SECTION 3: PLANNED ══ -->
-    <h2 class="section-heading amber" data-aos="fade-up">Planned Tests (Selected)</h2>
+    <!-- ── SECTION 4: PLANNED ────────────────────────────────── -->
+    <div class="section-band planned" data-aos="fade-up">
+      <h2>Planned Tests (Selected)</h2>
+    </div>
 
-    <!-- RESULT 007 -->
-    <div class="result-record" data-aos="fade-up" id="r007">
-        <div class="record-header pending" style="background:#f3e5f5; border-left-color:#6a1b9a;">
-            <div style="flex:1;">
-                <div class="record-id">COSMIC-013 &nbsp;&bull;&nbsp; Biological Information &nbsp;&bull;&nbsp; Thermodynamics</div>
-                <div class="record-title">Landauer Principle at Biological Scale: Heat Signatures During Neural Information Processing</div>
-            </div>
-            <span class="record-status status-planned">Planned</span>
+    <!-- R007 -->
+    <div class="result-item planned" id="r007" data-aos="fade-up">
+      <div class="result-question" onclick="toggleResult(this)">
+        <div class="rq-left">
+          <div class="rq-id">COSMIC-013 &bull; Biological Information &bull; Thermodynamics</div>
+          <div class="rq-title">Landauer Principle at Biological Scale: Heat Signatures During Neural Information Processing</div>
         </div>
-        <table class="result-table">
+        <div class="rq-right">
+          <span class="status-pill pill-planned">Planned</span>
+          <svg class="result-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="result-body-inner">
+          <table class="result-table">
             <tr><td class="field-label">Test Type</td><td class="field-value"><span class="type-badge type-internal">Internal</span> Controlled measurement. Institute-designed protocol.</td></tr>
             <tr><td class="field-label">Prediction</td><td class="field-value">Aggregate heat during peak neural information processing events (synchronous high-density firing) should produce a detectable Landauer heat signature (&sim;10&sup2;&sup1; J/bit). If biological information processing obeys the same entropy-information relation as physical systems, the heat release should correlate with bit-flip rate at the cellular level.</td></tr>
             <tr><td class="field-label">Documentation Date</td><td class="field-value">January 24, 2026</td></tr>
             <tr><td class="field-label">Pre-registration Target</td><td class="field-value">Q2 2026. Analysis protocol will be pre-registered before any data collection.</td></tr>
-            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open">Not yet run.</span></td></tr>
-            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: heat signatures from neural activity are accounted for entirely by metabolic processes, with no Landauer contribution detectable above metabolic noise. Control condition: non-information-processing baseline activity in same tissue preparation. Key discriminant: heat should correlate with information processing rate, not just metabolic rate.</td></tr>
+            <tr><td class="field-label">Outcome</td><td class="field-value"><span class="open-val">Not yet run.</span></td></tr>
+            <tr><td class="field-label">Control</td><td class="field-value">Null hypothesis: heat signatures from neural activity are accounted for entirely by metabolic processes, with no Landauer contribution detectable above metabolic noise. Key discriminant: heat should correlate with information processing rate, not just metabolic rate.</td></tr>
             <tr><td class="field-label">Compliance</td><td class="field-value"><strong>Pre-registration Pending</strong></td></tr>
             <tr><td class="field-label">Number of Tests</td><td class="field-value">Initial design: minimum 3 independent tissue preparations. Power analysis to determine sample size before pre-registration.</td></tr>
-            <tr><td class="field-label">Delta</td><td class="field-value"><span class="open">Not yet measurable.</span></td></tr>
+            <tr><td class="field-label">Delta</td><td class="field-value"><span class="open-val">Not yet measurable.</span></td></tr>
             <tr><td class="field-label">Next Steps</td><td class="field-value">Complete protocol design. Secure appropriate measurement instrumentation (calorimetry at cellular scale). Submit for ethics review where applicable. Pre-register protocol. Recruit collaborators with neuroscience wet-lab capacity.</td></tr>
             <tr><td class="field-label">Lessons Learned</td><td class="field-value">Prior lesson from COSMIC-013 design iteration: restrict measurement to synchronous high-density neural firing events where heat aggregation is geometrically favorable and metabolic baseline is stable. Distributed low-level activity produces a signal below current detection thresholds.</td></tr>
-        </table>
-        <div class="narrative-block">
+          </table>
+          <div class="narrative-block">
             <h4>Narrative Summary</h4>
-            <p>Landauer's principle states that erasing one bit of information dissipates a minimum of kT ln2 of energy as heat. This is experimentally confirmed in silicon systems but has never been directly tested at biological cellular scale during natural information processing events. If the framework is correct that information processing is a universal substrate operation, biological neural information processing should produce the same thermodynamic signature. This test would be the first direct confirmation that biological computation obeys the same entropy-information relation as physical systems, which would be a foundational result for the information-first framework independently of any other claims.</p>
+            <p>Landauer's principle states that erasing one bit of information dissipates a minimum of kT ln2 of energy as heat. This is experimentally confirmed in silicon systems but has never been directly tested at biological cellular scale during natural information processing events. If the framework is correct that information processing is a universal substrate operation, biological neural information processing should produce the same thermodynamic signature. This test would be the first direct confirmation that biological computation obeys the same entropy-information relation as physical systems.</p>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Summary table -->
-    <h2 class="section-heading" data-aos="fade-up" style="margin-top:3.5rem;">Summary Overview</h2>
-    <div style="overflow-x:auto;" data-aos="fade-up">
-    <table class="result-table" style="margin-bottom:2rem;">
+    <div class="summary-section" data-aos="fade-up">
+      <div class="summary-heading"><h2>Summary Overview</h2></div>
+      <div style="overflow-x:auto;">
+      <table class="summary-table">
         <thead>
-            <tr>
-                <th>Record</th>
-                <th>Domain</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Compliance</th>
-                <th>Delta</th>
-                <th>Confirming Program</th>
-            </tr>
+          <tr>
+            <th>Record</th>
+            <th>Domain</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Compliance</th>
+            <th>Delta</th>
+            <th>Confirming Program</th>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><a href="#r001" style="color:var(--blue);font-weight:600;">COSMIC-001</a></td>
-                <td>Dark Energy</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-confirmed" style="font-size:.65rem;">Confirmed</span></td>
-                <td class="match">Full</td>
-                <td class="match">Small</td>
-                <td>DESI DR1 + DR2</td>
-            </tr>
-            <tr>
-                <td><a href="#r002" style="color:var(--blue);font-weight:600;">COSMIC-002</a></td>
-                <td>Quantum Computing</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-confirmed" style="font-size:.65rem;">Confirmed</span></td>
-                <td class="match">Full</td>
-                <td class="match">Negligible</td>
-                <td>Google Willow</td>
-            </tr>
-            <tr>
-                <td><a href="#r003" style="color:var(--blue);font-weight:600;">COSMIC-003</a></td>
-                <td>Galaxy Formation</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-confirmed" style="font-size:.65rem;">Confirmed</span></td>
-                <td class="match">Full</td>
-                <td class="match">Small&ndash;Moderate</td>
-                <td>JWST (multiple surveys)</td>
-            </tr>
-            <tr>
-                <td><a href="#r004" style="color:var(--blue);font-weight:600;">COSMIC-004</a></td>
-                <td>Cluster Thermodynamics</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-confirmed" style="font-size:.65rem;">Confirmed</span></td>
-                <td class="match">Full</td>
-                <td class="match">Consistent</td>
-                <td>ALMA SPT2349-56</td>
-            </tr>
-            <tr>
-                <td><a href="#r005" style="color:var(--blue);font-weight:600;">COSMIC-005</a></td>
-                <td>Dark Energy (Year 3)</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-active" style="font-size:.65rem;">Active</span></td>
-                <td class="open">Pending</td>
-                <td class="open">TBD</td>
-                <td>DESI Year 3</td>
-            </tr>
-            <tr>
-                <td><a href="#r006" style="color:var(--blue);font-weight:600;">COSMIC-NBI-001</a></td>
-                <td>NBI Topology</td>
-                <td><span class="type-badge type-combination">Combination</span></td>
-                <td><span class="record-status status-active" style="font-size:.65rem;">Active</span></td>
-                <td class="open">Pending</td>
-                <td class="open">TBD</td>
-                <td>Published LLM + connectome data</td>
-            </tr>
-            <tr>
-                <td><a href="#rsd001" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-001</a></td>
-                <td>QCD Thermodynamics</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-planned" style="font-size:.65rem;">Pre-Reg Pending</span></td>
-                <td class="open">Pending</td>
-                <td class="open">TBD</td>
-                <td>LHCb / ATLAS / CMS</td>
-            </tr>
-            <tr>
-                <td><a href="#rsd002" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-002</a></td>
-                <td>Flavor Physics</td>
-                <td><span class="type-badge type-combination">Combination</span></td>
-                <td><span class="record-status status-planned" style="font-size:.65rem;">Pre-Reg Pending</span></td>
-                <td class="open">Pending</td>
-                <td class="open">TBD</td>
-                <td>LHCb / Belle II / PDG</td>
-            </tr>
-            <tr>
-                <td><a href="#rsd003" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-003</a></td>
-                <td>QCD Entanglement</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-planned" style="font-size:.65rem;">Pre-Reg Pending</span></td>
-                <td class="open">Pending</td>
-                <td class="open">TBD</td>
-                <td>Lattice QCD / EIC</td>
-            </tr>
-            <tr>
-                <td><a href="#rsd004" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-004</a></td>
-                <td>QCD Phase Transition</td>
-                <td><span class="type-badge type-external">External</span></td>
-                <td><span class="record-status status-planned" style="font-size:.65rem;">Pre-Reg Pending</span></td>
-                <td class="open">Pending</td>
-                <td class="open">TBD</td>
-                <td>RHIC / ALICE</td>
-            </tr>
-            <tr>
-                <td><a href="#r007" style="color:var(--blue);font-weight:600;">COSMIC-013</a></td>
-                <td>Bio Information Thermodynamics</td>
-                <td><span class="type-badge type-internal">Internal</span></td>
-                <td><span class="record-status status-planned" style="font-size:.65rem;">Planned</span></td>
-                <td class="open">Pre-registration Pending</td>
-                <td class="open">TBD</td>
-                <td>Institute-designed protocol</td>
-            </tr>
+          <tr>
+            <td><a href="#r001" style="color:#005ba5;font-weight:600;">COSMIC-001</a></td>
+            <td>Dark Energy</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-confirmed">Confirmed</span></td>
+            <td class="match">Full</td>
+            <td class="match">Small</td>
+            <td>DESI DR1 + DR2</td>
+          </tr>
+          <tr>
+            <td><a href="#r002" style="color:#005ba5;font-weight:600;">COSMIC-002</a></td>
+            <td>Quantum Computing</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-confirmed">Confirmed</span></td>
+            <td class="match">Full</td>
+            <td class="match">Negligible</td>
+            <td>Google Willow</td>
+          </tr>
+          <tr>
+            <td><a href="#r003" style="color:#005ba5;font-weight:600;">COSMIC-003</a></td>
+            <td>Galaxy Formation</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-confirmed">Confirmed</span></td>
+            <td class="match">Full</td>
+            <td class="match">Small–Moderate</td>
+            <td>JWST (multiple surveys)</td>
+          </tr>
+          <tr>
+            <td><a href="#r004" style="color:#005ba5;font-weight:600;">COSMIC-004</a></td>
+            <td>Cluster Thermodynamics</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-confirmed">Confirmed</span></td>
+            <td class="match">Full</td>
+            <td class="match">Consistent</td>
+            <td>ALMA SPT2349-56</td>
+          </tr>
+          <tr>
+            <td><a href="#rsd001" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-001</a></td>
+            <td>QCD Thermodynamics</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-prereg">Pre-Reg Pending</span></td>
+            <td class="open-val">Pending</td>
+            <td class="open-val">TBD</td>
+            <td>LHCb / ATLAS / CMS</td>
+          </tr>
+          <tr>
+            <td><a href="#rsd002" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-002</a></td>
+            <td>Flavor Physics</td>
+            <td><span class="sum-comb">Combination</span></td>
+            <td><span class="sum-prereg">Pre-Reg Pending</span></td>
+            <td class="open-val">Pending</td>
+            <td class="open-val">TBD</td>
+            <td>LHCb / Belle II / PDG</td>
+          </tr>
+          <tr>
+            <td><a href="#rsd003" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-003</a></td>
+            <td>QCD Entanglement</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-prereg">Pre-Reg Pending</span></td>
+            <td class="open-val">Pending</td>
+            <td class="open-val">TBD</td>
+            <td>Lattice QCD / EIC</td>
+          </tr>
+          <tr>
+            <td><a href="#rsd004" style="color:#1a4a2e;font-weight:600;">COSMIC-SD-004</a></td>
+            <td>QCD Phase Transition</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-prereg">Pre-Reg Pending</span></td>
+            <td class="open-val">Pending</td>
+            <td class="open-val">TBD</td>
+            <td>RHIC / ALICE</td>
+          </tr>
+          <tr>
+            <td><a href="#r005" style="color:#005ba5;font-weight:600;">COSMIC-005</a></td>
+            <td>Dark Energy (Year 3)</td>
+            <td><span class="sum-ext">External</span></td>
+            <td><span class="sum-active">Active</span></td>
+            <td class="open-val">Pending</td>
+            <td class="open-val">TBD</td>
+            <td>DESI Year 3</td>
+          </tr>
+          <tr>
+            <td><a href="#r006" style="color:#005ba5;font-weight:600;">COSMIC-NBI-001</a></td>
+            <td>NBI Topology</td>
+            <td><span class="sum-comb">Combination</span></td>
+            <td><span class="sum-active">Active</span></td>
+            <td class="open-val">Pending</td>
+            <td class="open-val">TBD</td>
+            <td>Published LLM + connectome data</td>
+          </tr>
+          <tr>
+            <td><a href="#r007" style="color:#005ba5;font-weight:600;">COSMIC-013</a></td>
+            <td>Bio Information Thermodynamics</td>
+            <td><span class="sum-int">Internal</span></td>
+            <td><span class="sum-planned">Planned</span></td>
+            <td class="open-val">Pre-registration Pending</td>
+            <td class="open-val">TBD</td>
+            <td>Institute-designed protocol</td>
+          </tr>
         </tbody>
-    </table>
+      </table>
+      </div>
     </div>
 
-    <div style="text-align:center; margin-top:2rem;" data-aos="fade-up">
-        <a href="validation.html" class="btn" style="display:inline-block;padding:.85rem 2rem;background:var(--primary);color:white;text-decoration:none;border-radius:6px;font-weight:600;margin-right:.75rem;">Full Validation Dashboard</a>
-        <a href="testing-schedule.html" class="btn" style="display:inline-block;padding:.85rem 2rem;background:transparent;color:var(--primary);border:2px solid var(--primary);text-decoration:none;border-radius:6px;font-weight:600;">Complete Testing Schedule</a>
+    <div class="cta-row" data-aos="fade-up">
+      <a href="validation.html" class="btn-cta btn-red">Full Validation Dashboard</a>
+      <a href="testing-schedule.html" class="btn-cta btn-outline">Complete Testing Schedule</a>
     </div>
 
-</div><!-- /content -->
+  </div><!-- /container -->
 
-<footer>
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
+  </button>
+
+  <!-- Submit Your Results -->
+  <section class="submit-section">
+    <div class="submit-inner">
+      <h2 class="submit-heading">Submit Your Results</h2>
+      <p class="submit-intro">Independent replication is the backbone of open science. If you have run tests related to the COSMIC Framework predictions, including publicly available astronomical data, quantum computing experiments, and independently designed protocols, and we want to hear from you. Confirmed results, null results, and partial results are all equally welcome. Every data point advances the map.</p>
+
+      <form class="submit-form" id="submitForm" onsubmit="handleSubmit(event)">
+
+        <div class="sf-section sf-sec-info">
+          <div class="sf-card-head"><h3>Your Information</h3></div>
+          <div class="sf-card-body">
+          <div class="sf-group">
+              <label for="s-name">Full Name <span class="sf-req">*</span></label>
+              <input type="text" id="s-name" name="name" required style="padding:1rem .9rem; font-size:1.05rem;">
+            </div>
+          <div class="sf-grid-2">
+            <div class="sf-group">
+              <label for="s-email">Email Address <span class="sf-req">*</span></label>
+              <input type="email" id="s-email" name="email" required>
+            </div>
+          <div class="sf-grid-2">
+            <div class="sf-group">
+              <label for="s-affiliation">Institutional Affiliation (if any)</label>
+              <input type="text" id="s-affiliation" name="affiliation" placeholder="University, organization, or independent">
+            </div>
+            <div class="sf-group">
+              <label for="s-orcid">ORCID (if applicable)</label>
+              <input type="text" id="s-orcid" name="orcid" placeholder="0000-0000-0000-0000">
+            </div>
+          </div>
+          </div><!-- /sf-card-body -->
+        </div>
+
+        <div class="sf-section sf-sec-pred">
+          <div class="sf-card-head"><h3>Prediction Being Tested</h3></div>
+          <div class="sf-card-body">
+          <div class="sf-grid-2">
+            <div class="sf-group">
+              <label for="s-prediction">COSMIC Framework Prediction ID <span class="sf-req">*</span></label>
+              <select id="s-prediction" name="prediction" required>
+                <option value="">Select a prediction...</option>
+                <optgroup label="Confirmed Predictions">
+                  <option value="COSMIC-001">COSMIC-001: Dark Energy Evolution (DESI)</option>
+                  <option value="COSMIC-002">COSMIC-002: Quantum Error Correction Scaling (Google Willow)</option>
+                  <option value="COSMIC-003">COSMIC-003: Early Massive Galaxy Formation (JWST)</option>
+                  <option value="COSMIC-004">COSMIC-004: Hot Intracluster Gas (ALMA SPT2349-56)</option>
+                </optgroup>
+                <optgroup label="Active Testing">
+                  <option value="COSMIC-005">COSMIC-005: DESI Year 3 Dark Energy Trend</option>
+                  <option value="COSMIC-NBI-001">COSMIC-NBI-001: NBI Geometric Convergence</option>
+                </optgroup>
+                <optgroup label="Substrate Dynamics">
+                  <option value="COSMIC-SD-001">COSMIC-SD-001: Landauer Heat in CP Violation</option>
+                  <option value="COSMIC-SD-002">COSMIC-SD-002: CKM Mixing Angles</option>
+                  <option value="COSMIC-SD-003">COSMIC-SD-003: Confinement Boundary Entanglement</option>
+                  <option value="COSMIC-SD-004">COSMIC-SD-004: QCD Phase Transition Signature</option>
+                </optgroup>
+                <optgroup label="Planned">
+                  <option value="COSMIC-013">COSMIC-013: Landauer Heat at Biological Scale</option>
+                </optgroup>
+                <option value="other">Other / Not Listed</option>
+              </select>
+            </div>
+            <div class="sf-group">
+              <label for="s-testtype">Test Type <span class="sf-req">*</span></label>
+              <select id="s-testtype" name="testtype" required>
+                <option value="">Select type...</option>
+                <option value="replication">Independent Replication: same dataset, different analysis</option>
+                <option value="new-data">New Data: different instrument or observation window</option>
+                <option value="cross-check">Cross-check: related dataset testing same mechanism</option>
+                <option value="null">Null Result: test ran, prediction not supported</option>
+                <option value="partial">Partial: result partially consistent with prediction</option>
+                <option value="theoretical">Theoretical / Mathematical: derivation or analysis only</option>
+              </select>
+            </div>
+          </div>
+          <div class="sf-group">
+            <label for="s-dataset">Dataset or Instrument Used <span class="sf-req">*</span></label>
+            <input type="text" id="s-dataset" name="dataset" placeholder="e.g. Planck 2018 CMB data, WMAP 9-year, SDSS DR17, personal quantum optics setup..." required>
+          </div>
+          <div class="sf-group">
+            <label for="s-datasource">Data Source / Access Link</label>
+            <input type="url" id="s-datasource" name="datasource" placeholder="https:// Link to the dataset, archive, or paper you used">
+          </div>
+          </div><!-- /sf-card-body -->
+        </div>
+
+        <div class="sf-section sf-sec-docs">
+          <div class="sf-card-head"><h3>Documentation &amp; Methodology</h3></div>
+          <div class="sf-card-body">
+          <p class="sf-note">For a result to be considered for validation status, it must meet the same evidentiary standard as our own predictions: the analysis protocol must be documented before the final result is extracted, or the test must be a replication of a previously published procedure. The fields below establish that standard.</p>
+          <div class="sf-grid-2">
+            <div class="sf-group">
+              <label for="s-docdate">Date Analysis Was Designed or Protocol Was Fixed <span class="sf-req">*</span></label>
+              <input type="date" id="s-docdate" name="docdate" required>
+            </div>
+            <div class="sf-group">
+              <label for="s-rundate">Date Test Was Run or Data Was Analyzed <span class="sf-req">*</span></label>
+              <input type="date" id="s-rundate" name="rundate" required>
+            </div>
+          </div>
+          <div class="sf-group">
+            <label for="s-prereg">Pre-registration Link (OSF, Zenodo, AsPredicted, or equivalent)</label>
+            <input type="url" id="s-prereg" name="prereg" placeholder="https:// Strongly recommended. Required for validation status.">
+          </div>
+          <div class="sf-group">
+            <label for="s-timestamp">Timestamp Evidence (optional but recommended)</label>
+            <input type="text" id="s-timestamp" name="timestamp" placeholder="e.g. OpenTimestamps hash, notarization date, GitHub commit SHA, Zenodo DOI">
+          </div>
+          <div class="sf-group">
+            <label for="s-software">Software, Libraries, or Tools Used <span class="sf-req">*</span></label>
+            <textarea id="s-software" name="software" placeholder="e.g. Python 3.11, AstroPy 5.3, CLASS cosmological code, CAMB, emcee, TensorFlow..." required ></textarea>
+          </div>
+          <div class="sf-group">
+            <label for="s-controls">Control Tests and Null Hypothesis Tested <span class="sf-req">*</span></label>
+            <textarea id="s-controls" name="controls" required rows="8" style="min-height:180px;" placeholder="Describe what your null hypothesis was, what controls you applied, and what alternative explanations you ruled out or could not rule out..."></textarea>
+          </div>
+          </div><!-- /sf-card-body -->
+        </div>
+
+        <div class="sf-section sf-sec-results">
+          <div class="sf-card-head"><h3>Your Results</h3></div>
+          <div class="sf-card-body">
+          <div class="sf-grid-2">
+            <div class="sf-group">
+              <label for="s-compliance">Compliance with Framework Prediction <span class="sf-req">*</span></label>
+              <select id="s-compliance" name="compliance" required>
+                <option value="">Select...</option>
+                <option value="full">Full: result within predicted range</option>
+                <option value="partial">Partial: result partially consistent</option>
+                <option value="null">Null: result inconsistent with prediction</option>
+                <option value="inconclusive">Inconclusive: insufficient signal or power</option>
+              </select>
+            </div>
+            <div class="sf-group">
+              <label for="s-significance">Statistical Significance (if applicable)</label>
+              <input type="text" id="s-significance" name="significance" placeholder="e.g. 3.2σ, p = 0.003, Bayes factor = 12.4">
+            </div>
+          </div>
+          <div class="sf-group">
+            <label for="s-delta">Delta: Gap Between Predicted and Observed Values <span class="sf-req">*</span></label>
+            <input type="text" id="s-delta" name="delta" placeholder="e.g. Predicted w_a ≈ −0.3; observed w_a = −0.28 ± 0.15. Or: no measurable signal above noise floor." required>
+          </div>
+          <div class="sf-group">
+            <label for="s-result-narrative">Result Narrative <span class="sf-req">*</span></label>
+            <textarea id="s-result-narrative" name="resultnarrative" required rows="10" style="min-height:220px;" placeholder="Describe what you found. What did your analysis show? How does it compare to what the framework predicted? Be precise about what the result confirms, what it cannot confirm, and what it rules out..."></textarea>
+          </div>
+          <div class="sf-group">
+            <label for="s-lessons">Lessons Learned or Recommendations for Future Tests</label>
+            <textarea id="s-lessons" name="lessons" rows="7" style="min-height:160px;" placeholder="What would you do differently? What would make the next replication stronger? What did this test reveal about the measurement challenge?"></textarea>
+          </div>
+          </div><!-- /sf-card-body -->
+        </div>
+
+        <div class="sf-section sf-sec-support">
+          <div class="sf-card-head"><h3>Supporting Materials</h3></div>
+          <div class="sf-card-body">
+          <div class="sf-group">
+            <label for="s-codelink">Code Repository Link (GitHub, GitLab, or equivalent)</label>
+            <input type="url" id="s-codelink" name="codelink" placeholder="https:// Publicly accessible repository strongly preferred">
+          </div>
+          <div class="sf-group">
+            <label for="s-paperlink">Published Paper, Preprint, or Report Link</label>
+            <input type="url" id="s-paperlink" name="paperlink" placeholder="https:// arXiv, Zenodo, OSF, or journal DOI">
+          </div>
+          <div class="sf-group">
+            <label for="s-datalink">Processed Data or Results Link</label>
+            <input type="url" id="s-datalink" name="datalink" placeholder="https:// Zenodo, Figshare, OSF, or similar open archive">
+          </div>
+          <div class="sf-group">
+            <label for="s-addl">Anything Else We Should Know</label>
+            <textarea id="s-addl" name="addl" placeholder="Caveats, known limitations, suggestions for how the institute should follow up, or anything else relevant to evaluating your result..."></textarea>
+          </div>
+          </div><!-- /sf-card-body -->
+        </div>
+
+        <div class="sf-section sf-sec-decl">
+          <div class="sf-card-head"><h3>Declaration</h3></div>
+          <div class="sf-card-body">
+          <label class="sf-check-label">
+            <input type="checkbox" id="s-agree" name="agree" required>
+            I confirm that the information submitted is accurate to the best of my knowledge, that I have described the methodology honestly including its limitations, and that I consent to the Ic² Research Institute publishing a summary of this submission in the public Results Registry. <span class="sf-req">*</span>
+          </label>
+          </div><!-- /sf-card-body -->
+        </div>
+
+        <div class="sf-submit-row">
+          <button type="submit" class="sf-submit-btn">Submit Results</button>
+          <p class="sf-submit-note">Submissions are reviewed before publication. We will contact you at the email address you provide. Review typically takes two to four weeks.</p>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
     <div class="footer-container">
+      <div class="footer-section">
+        <h3>Ic² Research Institute</h3>
+        <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
+        <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
+      </div>
+      <div class="footer-icons">
+        <a href="#" class="social-btn instagram"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+        <a href="#" class="social-btn youtube"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+        <a href="mailto:mkb.info@proton.me" class="social-btn email"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>mkb.info@proton.me</a>
+      </div>
+      <div class="footer-links-group">
         <div class="footer-section">
-            <h3>Ic\u00b2 Research Institute</h3>
-            <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+          <h3>Research</h3>
+          <ul>
+            <li><a href="framework.html">Framework</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="simulations.html">Simulations</a></li>
+          </ul>
         </div>
         <div class="footer-section">
-            <h3>Research</h3>
-            <ul>
-                <li><a href="validation.html">Validation</a></li>
-                <li><a href="testing-schedule.html">Testing</a></li>
-                <li><a href="results.html">Results</a></li>
-                <li><a href="simulations.html">Simulations</a></li>
-                <li><a href="programs-gateway.html">Programs</a></li>
-            </ul>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq-page.html">FAQ</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="https://zenodo.org/search?q=baines+cosmic+framework" target="_blank">Archive</a></li>
+          </ul>
         </div>
         <div class="footer-section">
-            <h3>Resources</h3>
-            <ul>
-                <li><a href="book.html">The Big TOE</a></li>
-                <li><a href="about-page.html">About</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="glossary.html">Glossary</a></li>
-                <li><a href="references.html">References</a></li>
-            </ul>
+          <h3>Connect</h3>
+          <ul>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="legal.html">Legal</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="discussions-page.html">Discussions</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="become-member.html">Become a Member</a></li>
+            <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+          </ul>
         </div>
-        <div class="footer-section">
-            <h3>Connect</h3>
-            <ul>
-                <li><a href="contribute.html">Contribute</a></li>
-                <li><a href="discussions-page.html">Discussions</a></li>
-                <li><a href="become-member.html">Become a Member</a></li>
-                <li><a href="mailto:info@eequalsicsquared.com">Contact</a></li>
-            </ul>
-        </div>
+      </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Ic\u00b2 Research Institute. All rights reserved. |
-        <a href="privacy-policy.html">Privacy Policy</a> |
-        <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
+      <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
     </div>
-</footer>
+  </footer>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({ duration:800, once:true, offset:80 });
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration:900, once:true, offset:80 });
+
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
     if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-        document.querySelectorAll('.mobile-menu a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
-        });
+      hamburger.addEventListener('click', function() { this.classList.toggle('active'); mobileMenu.classList.toggle('active'); });
+      document.querySelectorAll('.mobile-menu a').forEach(l => l.addEventListener('click', () => { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); }));
     }
-</script>
+
+    function toggleResult(question) {
+      const item = question.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.result-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => btt.classList.toggle('visible', window.pageYOffset > 400));
+  </script>
 </body>
 </html>
