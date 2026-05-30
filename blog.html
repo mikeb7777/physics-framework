@@ -190,34 +190,51 @@
     
     /* Blog Introduction */
     .blog-intro {
-      background: white;
-      border-radius: 8px;
-      padding: 2rem;
+      border-radius: 6px;
+      overflow: hidden;
       margin-bottom: 3rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      border-left: 4px solid var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      border-left: 5px solid #7a5000;
+      background: #005ba5;
+      padding: 1.75rem 2rem;
     }
-    
+
+    .blog-intro-head {
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-intro-head h3 {
+      color: white;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .blog-intro-body {
+      /* no background — sits on the blue face */
+    }
+
     .blog-intro p {
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
       line-height: 1.8;
       font-size: 1.05rem;
+      color: rgba(255,255,255,0.92);
     }
-    
+
     .blog-intro p:last-child {
       margin-bottom: 0;
     }
-    
+
     .blog-intro a {
-      color: var(--primary-color);
+      color: #f1e303;
       text-decoration: none;
       font-weight: 600;
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px solid rgba(241,227,3,0.4);
       transition: border-color 0.3s;
     }
-    
+
     .blog-intro a:hover {
-      border-bottom-color: var(--primary-color);
+      border-bottom-color: #f1e303;
     }
     
     /* Blog Index */
@@ -411,20 +428,25 @@
     
     .post-footer {
       margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 2px solid #e0e0e0;
+      padding: 1.5rem 1.75rem;
+      background: #4a4a4a;
+      border-radius: 6px;
       font-size: 0.95rem;
-      color: var(--text-light);
+      color: rgba(255,255,255,0.88);
     }
-    
+
     .post-footer a {
-      color: var(--primary-color);
+      color: #f1e303;
       text-decoration: none;
       font-weight: 600;
     }
-    
+
     .post-footer a:hover {
       text-decoration: underline;
+    }
+
+    .post-footer strong {
+      color: white;
     }
     
     /* Expand/Collapse Toggle */
@@ -547,50 +569,7 @@
     }
     
     /* Footer */
-    footer {
-      background: #2c3e50;
-      color: white;
-      padding: 2.5rem 2rem 1rem;
-      margin-top: auto;
-    }
 
-    .footer-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-section h3 {
-      margin-bottom: 0.75rem;
-      font-size: 1.1rem;
-      color: white;
-    }
-
-    .footer-section a,
-    .footer-section p {
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    .footer-section a:hover { color: white; }
-
-    .footer-bottom {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 1.5rem 0 1rem;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    .footer-bottom p { color: white !important; opacity: 0.7; }
-    .footer-bottom a { color: white !important; opacity: 0.7; text-decoration: none; }
     .footer-bottom a:hover { opacity: 1; }
 
     @media (max-width: 768px) {
@@ -636,6 +615,26 @@
         font-size: 1.5rem;
       }
     }
+
+  footer { background:#2c3e50; color:white; padding:2.5rem 2rem 1rem; }
+  .footer-container { display:grid; grid-template-columns:1fr auto 1fr; gap:4rem; max-width:1200px; margin:0 auto 2rem; align-items:start; }
+  .footer-section h3 { color:white; font-size:1rem; margin-bottom:1rem; }
+  .footer-section ul { list-style:none; }
+  .footer-section ul li { margin-bottom:.5rem; }
+  .footer-section a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.9rem; transition:color .2s; }
+  .footer-section a:hover { color:white; }
+  .footer-icons { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; align-self:center; }
+  .social-btn { display:inline-flex; align-items:center; gap:.75rem; padding:.75rem 1.5rem; border-radius:8px; transition:transform .2s,box-shadow .2s; text-decoration:none; font-weight:600; color:white; font-size:.95rem; min-width:180px; }
+  .social-btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.3); }
+  .social-btn.instagram { background:linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+  .social-btn.youtube   { background:#FF0000; }
+  .social-btn.email     { background:#0072C6; }
+  .social-icon { width:24px; height:24px; }
+  .footer-links-group { display:flex; gap:1.5rem; justify-content:flex-end; }
+  .footer-links-group .footer-section { min-width:110px; }
+  .footer-bottom { max-width:1200px; margin:.5rem auto 0; padding-top:1rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:rgba(255,255,255,.5); font-size:.8rem; }
+  .footer-bottom a { color:rgba(255,255,255,.6); text-decoration:none; }
+  .footer-bottom a:hover { color:white; }
   </style>
 </head>
 <body>
@@ -691,8 +690,11 @@
     
     <!-- Blog Introduction -->
     <div class="blog-intro" data-aos="fade-up">
-      <p><strong>Welcome to our research blog.</strong> These posts are intended to be speculative and imaginative, designed to generate discussion and collaborative exploration of ideas that go beyond the established framework. We encourage bold thinking, creative hypotheses, and open scientific inquiry.</p>
-      <p>Any registered user can submit their articles for review and publication. If you have theoretical ideas, observations, or discussions you'd like to share with the community, we welcome your contributions. <a href="become-member.html">Register as a member</a> to participate.</p>
+      <div class="blog-intro-head"><h3>About This Blog</h3></div>
+      <div class="blog-intro-body">
+        <p><strong style="color:white;">Welcome to our research blog.</strong> These posts are intended to be speculative and imaginative, designed to generate discussion and collaborative exploration of ideas that go beyond the established framework. We encourage bold thinking, creative hypotheses, and open scientific inquiry.</p>
+        <p>Any registered user can submit their articles for review and publication. If you have theoretical ideas, observations, or discussions you want to share with the community, we welcome your contributions. <a href="become-member.html">Register as a member</a> to participate.</p>
+      </div>
     </div>
     
     <!-- Blog Index -->
@@ -890,7 +892,7 @@
 
 <p>The discussion continues on the website. The predictions are on the testing schedule. The question is open and it is pointed in a specific direction.</p>
 
-<div class="post-footer">
+<div class="post-footer" style="background:#1a5c2a; border-left-color:#8e0c45;">
   <p><strong>The Bamboo Principle</strong> is introduced in <em>A Quest for the Big TOE: The COSMIC Framework's Theory of Everything</em>, available free via the honor system at <a href="https://eequalsicsquared.com">eequalsicsquared.com</a>. The CMB analysis referenced in this post is published on Zenodo (DOI: 10.5281/zenodo.16376121).</p>
   <p><strong>Key references:</strong> Richard Lenski, E. coli long-term evolution experiment, Michigan State University (ongoing since 1988); Michael Levin, bioelectric field research, Tufts University; Jeremy England, dissipation-driven adaptation framework; Erik Verlinde, emergent gravity; quantum biology literature on photosynthetic coherence and enzyme tunneling.</p>
   <p>Contact: <a href="mailto:info@eequalsicsquared.com">info@eequalsicsquared.com</a></p>
@@ -963,7 +965,7 @@
 
 <p>The discussion continues on the website. The tests are on the testing schedule. The question is open.</p>
 
-<div class="post-footer">
+<div class="post-footer" style="background:#005ba5; border-left-color:#7a5000;">
   <p><strong>This post follows directly from April's examination of Non-Biological Intelligence.</strong> Reading that post first provides the foundation for the argument here. Both posts are companions to Element 6 of <em>A Quest for the Big TOE: The COSMIC Framework's Theory of Everything</em>, available free via the honor system at <a href="https://eequalsicsquared.com">eequalsicsquared.com</a>.</p>
   <p><strong>The four NBI testable predictions</strong> referenced in this post are documented on the Testing Schedule at eequalsicsquared.com, with documentation dates of March 2, 2026.</p>
   <p>Contact: <a href="mailto:info@eequalsicsquared.com">info@eequalsicsquared.com</a></p>
@@ -1044,7 +1046,7 @@
 
 <p>The Ic² Research Institute has an active investigative program for NBI. The program covers both computational NBI and electromagnetic field-based NBI candidates. It includes three experimental threads: three-dimensional acoustic field visualization in microgravity, electromagnetic field coherence monitoring, and a geometric communication protocol. All predictions are pre-registered before data collection begins. If these questions interest you as a researcher, the <a href="program-nbi.html">NBI Research Program</a> is where the experimental work lives.</p>
 
-<div class="post-footer">
+<div class="post-footer" style="background:#8e0c45; border-left-color:#1a5c2a;">
   <p><strong>This post is a companion to Element 6 of <em>A Quest for the Big TOE: The COSMIC Framework's Theory of Everything</em>.</strong> Element 6 closes with a paragraph pointing here for a fuller examination of NBI and what can honestly be said about it. The book is available free via the honor system at <a href="https://eequalsicsquared.com">eequalsicsquared.com</a>.</p>
   <p><strong>References and further reading:</strong> Michael Levin, "The Multiscale Wisdom of the Body," BioEssays (2024); Karl Friston, Free Energy Principle and active inference framework; Lorenzo Bich, "Organisational teleology," Ratio (2024); Karl Friston et al., on Markov blankets and biological self-organization. For the framework's testable predictions about NBI systems, see the Testing Schedule at eequalsicsquared.com.</p>
   <p>Contact: <a href="mailto:info@eequalsicsquared.com">info@eequalsicsquared.com</a></p>
@@ -1182,7 +1184,7 @@
 
         <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
 
-        <div class="post-footer">
+        <div class="post-footer" style="background:#005f6e; border-left-color:#c62828;">
           <p><strong>References:</strong> Albert Einstein, on imagination and knowledge. William James, <em>The Principles of Psychology</em> (1890). Mihaly Csikszentmihalyi, <em>Flow: The Psychology of Optimal Experience</em> (1990). Cal Newport, <em>Deep Work</em> (2016). Marcus Aurelius, <em>Meditations</em>. Confucius, <em>Analects</em>, Book II. Matthew 13:14–15. Galatians 4:4. Egyptian concepts of Sia, Hu, and Ma'at as documented in the Pyramid Texts and Hermetic literature. Nikola Tesla, <em>My Inventions</em> (1919). Srinivasa Ramanujan, documented in Robert Kanigel, <em>The Man Who Knew Infinity</em> (1991). Guang Yue, mental imagery and strength training research, Cleveland Clinic Foundation (1992).</p>
           <p>Contact: <a href="/cdn-cgi/l/email-protection#630e08014d0a0d050c2313110c170c0d4d0e06"><span class="__cf_email__" data-cfemail="b4d9dfd69adddad2dbf4c4c6dbc0dbda9ad9d1">[email&#160;protected]</span></a></p>
         </div>
@@ -1264,7 +1266,7 @@
 
         <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
 
-      <div class="post-footer">
+      <div class="post-footer" style="background:#7a5000; border-left-color:#005ba5;">
         <p><strong>Related research:</strong> This post draws on the preprint <em>Beyond Cross-Sections: Three-Dimensional Field Topology and the Multi-Field Structure of Physical Space</em> (Baines, 2026), available on Zenodo with six pre-registered predictions and full experimental protocols. For the broader theoretical context, see <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and <em>The Big TOE</em>.</p>
         <p>Contact: <a href="/cdn-cgi/l/email-protection#c5a8aea7acaba3aa85b5b7aab1aaabeba8a0"><span class="__cf_email__" data-cfemail="9af7f1f8f3f4fcf5daeae8f5eef5f4b4f7ff">[email&#160;protected]</span></a></p>
         <p>The institute welcomes collaborators and welcomes correspondence at <a href="/cdn-cgi/l/email-protection#3e53555c575058517e4e4c514a515010535b"><span class="__cf_email__" data-cfemail="214c4a43484f474e6151534e554e4f0f4c44">[email&#160;protected]</span></a>.</p>
@@ -1794,7 +1796,7 @@
       </div>
 
       
-      <div class="post-footer">
+      <div class="post-footer" style="background:#8B0000; border-left-color:#005f6e;">
         <p><em>This article draws on research from sports performance science, cognitive neuroscience, flow state research, information capitalism, and the COSMIC Framework's predictions about information efficiency in cosmology. The convergence across these domains suggests we're touching on a fundamental principle: the thermodynamics of information integration across complex systems.</em></p>
         <p><strong>What do you think? Does this principle resonate with your experience? Have you noticed the difference between creating and editing, between novelty processing and pattern refinement?</strong></p>
       <p><em>Michael K. Baines is an independent researcher and author. Contact: <a href="/cdn-cgi/l/email-protection#90fdfbf2bef9fef6ffd0e0e2ffe4fffebefdf5"><span class="__cf_email__" data-cfemail="f29f9990dc9b9c949db282809d869d9cdc9f97">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></em></p>
@@ -1908,7 +1910,7 @@
       </div>
 
       
-      <div class="post-footer">
+      <div class="post-footer" style="background:#6a1b9a; border-left-color:#005f6e;">
         <p><strong>About the Author:</strong> Michael K. Baines is an independent researcher and developer of the COSMIC Framework presented in <em>The Big TOE: The COSMIC Framework's Theory of Everything</em>. This post represents speculative exploration beyond the book's scope, shared for community discussion and collaborative investigation. Contact: <a href="/cdn-cgi/l/email-protection#eb868089c582858d84ab9b99849f8485c5868e"><span class="__cf_email__" data-cfemail="b8d5d3da96d1d6ded7f8c8cad7ccd7d696d5dd">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
         <p><strong>Support This Research:</strong> If you find this kind of open scientific exploration valuable, consider <a href="contribute.html">supporting continued research</a>.</p>
       </div>
@@ -2395,7 +2397,7 @@
       </div>
 
       
-      <div class="post-footer">
+      <div class="post-footer" style="background:#1a4a2e; border-left-color:#8B0000;">
         <p><strong>For detailed mathematical analysis, calculations, and scientific references supporting this framework, see the complete technical document:</strong> "The Isolation Horizon: Why Cosmic Silence May Be Geometrically Inevitable"</p>
         <p><strong>Michael K. Baines</strong> is an independent researcher and author exploring information theory, consciousness, and universal patterns. His COSMIC Framework connects principles from cosmology to cognition. Contact: <a href="/cdn-cgi/l/email-protection#dab7b1b8f4b3b4bcb59aaaa8b5aeb5b4f4b7bf"><span class="__cf_email__" data-cfemail="fc91979ed295929a93bc8c8e93889392d29199">[email&#160;protected]</span></a> | <a href="https://eequalsicsquared.com">eequalsicsquared.com</a></p>
       </div>
@@ -2618,7 +2620,7 @@
       </div>
 
       
-      <div class="post-footer">
+      <div class="post-footer" style="background:#1a5c2a; border-left-color:#8e0c45;" style="border-radius:0; margin-top:2rem;">
         <p><strong>About this blog:</strong> This post is part of ongoing explorations into the COSMIC Framework's Theory of Everything. For the full technical treatment, including mathematical derivations, experimental predictions, and detailed analysis, visit <a href="https://eequalsicsquared.com">eequalsicsquared.com</a> and download <em>The Big TOE</em>. Contact: <a href="/cdn-cgi/l/email-protection#315c5a531f585f575e7141435e455e5f1f5c54"><span class="__cf_email__" data-cfemail="1f72747d31767179705f6f6d706b707131727a">[email&#160;protected]</span></a></p>
         <p>If you found this thought-provoking, challenging, or infuriating, good. That means you're processing information. That means you're alive, conscious, and engaged in the cosmic conversation.</p>
         <p><strong>Welcome to the dialogue.</strong> You've always been part of it; now you're just aware of it.</p>
@@ -2633,45 +2635,53 @@
     <div class="footer-container">
       <div class="footer-section">
         <h3>Ic² Research Institute</h3>
-        <p>The Ic² Research Institute is an independent platform advancing theoretical physics through open science, radical transparency, and community-driven inquiry. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research — and we publish our failures alongside our successes.</p>
-        <p style="margin-top: 0.5rem;">Every contributor retains full ownership of their work. All findings are freely available to the global scientific community. No gatekeeping. No institutional barriers. Just honest pursuit of knowledge.</p>
+        <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
+        <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
       </div>
-
-      <div class="footer-section">
-        <h3>Research</h3>
-        <a href="framework.html">Framework</a>
-        <a href="validation.html">Validation</a>
-        <a href="testing-schedule.html">Testing</a>
-        <a href="programs-gateway.html">Programs</a>
-        <a href="research-publications.html">Publications</a>
+      <div class="footer-icons">
+        <a href="#" class="social-btn instagram"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+        <a href="#" class="social-btn youtube"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+        <a href="mailto:mkb.info@proton.me" class="social-btn email"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>mkb.info@proton.me</a>
       </div>
-
-      <div class="footer-section">
-        <h3>Resources</h3>
-        <a href="book.html">The Big TOE</a>
-        <a href="about-page.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="faq-page.html">FAQ</a>
-        <a href="legal.html">Legal</a>
-      </div>
-
-      <div class="footer-section">
-        <h3>Connect</h3>
-        <a href="contribute.html">Contribute</a>
-        <a href="discussions-page.html">Discussions</a>
-        <a href="events.html">Events</a>
-        <a href="become-member.html">Become a Member</a>
-        <a href="/cdn-cgi/l/email-protection#e885838a81868e87a8989a879c8786c6858d">Contact</a>
+      <div class="footer-links-group">
+        <div class="footer-section">
+          <h3>Research</h3>
+          <ul>
+            <li><a href="framework.html">Framework</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="simulations.html">Simulations</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq-page.html">FAQ</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="https://zenodo.org/search?q=baines+cosmic+framework" target="_blank">Archive</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Connect</h3>
+          <ul>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="legal.html">Legal</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="discussions-page.html">Discussions</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="become-member.html">Become a Member</a></li>
+            <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <p>&copy; 2026 Ic² Research Institute. All rights reserved. |
-        <a href="legal.html">Legal</a> |
-        <a href="privacy-policy.html">Privacy Policy</a> |
-        <a href="terms-conditions.html">Terms &amp; Conditions</a> |
-        <a href="unsubscribe.html">Unsubscribe</a>
-      </p>
+      <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
     </div>
   </footer>
   
