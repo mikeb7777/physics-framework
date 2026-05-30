@@ -14,7 +14,10 @@
       --bg-light:      #f8f9fa;
       --max-width:     1200px;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--bg-light); }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: var(--text-dark); background: #0a0f1e; }
+
+    /* Dark page background with hex pattern */
+    .page-bg { background: #0a0f1e url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hx" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100%25" height="100%25" fill="url(%23hx)"/></svg>') repeat; }
 
     /* ── Header ── */
     .site-header { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
@@ -48,20 +51,25 @@
     .page-hero p  { font-size: 1.1rem; opacity: 0.9; }
 
     /* ── Path selector ── */
-    .path-strip { background: #2c3e50; padding: 1.5rem 2rem; }
+    .path-strip { background: white; padding: 1.5rem 2rem; border-bottom: 1px solid #e0e0e0; }
     .path-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .path-card { border-radius: 6px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
     .path-card.research { background: #8B0000; }
     .path-card.discussion { background: #005f6e; }
-    .path-card h3 { color: white; font-size: 1.15rem; margin: 0; }
-    .path-card p { color: rgba(255,255,255,0.88); font-size: 0.95rem; margin: 0; line-height: 1.6; }
+    .path-card h3 { font-size: 1.15rem; margin: 0; }
+    .path-card p { font-size: 0.95rem; margin: 0; line-height: 1.6; }
     .path-btn { display: inline-block; padding: 0.6rem 1.5rem; border-radius: 4px; font-weight: 700; font-size: 0.9rem; text-decoration: none; text-align: center; transition: filter 0.2s, transform 0.2s; align-self: flex-start; }
+    .path-card.research h3 { color: white; }
+    .path-card.research p  { color: rgba(255,255,255,0.88); }
     .path-card.research  .path-btn { background: #f1e303; color: #8B0000; }
+    .path-card.discussion h3 { color: white; }
+    .path-card.discussion p  { color: rgba(255,255,255,0.88); }
     .path-card.discussion .path-btn { background: #f1e303; color: #005f6e; }
     .path-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
     /* ── Container ── */
-    .container { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem 3rem; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem 3rem; background: transparent; }
+    .membership-band { background: #2c3e50; width: 100%; }
 
     /* ── Member tier cards ── */
     .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
@@ -78,50 +86,83 @@
     .tier-body li { padding: 0.4rem 0 0.4rem 1.4rem; position: relative; color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.6; }
     .tier-body li:before { content: "✓"; position: absolute; left: 0; color: #f1e303; font-weight: 700; }
 
-    /* ── How it works ── */
-    .how-it-works { background: #005ba5; border-radius: 6px; padding: 1.75rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
-    .how-it-works h2 { color: white; font-size: 1.4rem; margin-bottom: 1rem; }
-    .how-it-works p  { color: rgba(255,255,255,0.92); line-height: 1.8; margin-bottom: 0.75rem; font-size: 1rem; }
-    .how-it-works p:last-child { margin-bottom: 0; }
-    .how-it-works strong { color: white; }
+
 
     /* ── Current members ── */
     .members-section { margin-bottom: 2rem; }
-    .members-section h2 { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 0.5rem; border-bottom: 3px solid #8B0000; padding-bottom: 0.5rem; }
-    .members-section > p { color: var(--text-dark); margin-bottom: 1.5rem; font-size: 1rem; }
-    .member-card { background: white; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; display: flex; gap: 0; max-width: 500px; }
+    .members-section h2 { font-size: 1.5rem; color: white; margin-bottom: 0.5rem; border-bottom: 3px solid #8B0000; padding-bottom: 0.5rem; }
+    .members-section > p { color: rgba(255,255,255,0.88); margin-bottom: 1.5rem; font-size: 1rem; }
+    .member-card { background: #1a2744; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.35); overflow: hidden; display: flex; gap: 0; max-width: 500px; border: 1px solid rgba(255,255,255,0.1); }
     .member-photo { width: 120px; height: 140px; object-fit: cover; flex-shrink: 0; background: var(--bg-light); }
     .member-info { padding: 1.25rem; }
-    .member-name  { font-size: 1.2rem; font-weight: 700; color: #8B0000; margin-bottom: 0.2rem; }
-    .member-title { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 0.5rem; }
-    .member-orcid { font-size: 0.85rem; color: #005ba5; margin-bottom: 0.75rem; }
-    .member-orcid a { color: #005ba5; text-decoration: none; }
+    .member-name  { font-size: 1.2rem; font-weight: 700; color: #f1e303; margin-bottom: 0.2rem; }
+    .member-title { font-size: 0.9rem; color: rgba(255,255,255,0.75); margin-bottom: 0.5rem; }
+    .member-orcid { font-size: 0.85rem; color: #5ab4f7; margin-bottom: 0.75rem; }
+    .member-orcid a { color: #5ab4f7; text-decoration: none; }
     .member-orcid a:hover { text-decoration: underline; }
-    .member-focus li { font-size: 0.88rem; color: #555; padding: 0.15rem 0 0.15rem 1rem; position: relative; list-style: none; }
-    .member-focus li:before { content: "•"; position: absolute; left: 0; color: #8B0000; }
+    .member-focus li { font-size: 0.88rem; color: rgba(255,255,255,0.8); padding: 0.15rem 0 0.15rem 1rem; position: relative; list-style: none; }
+    .member-focus li:before { content: "•"; position: absolute; left: 0; color: #f1e303; }
 
     /* ── Application form ── */
-    .form-section-heading { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 1.5rem; border-bottom: 3px solid #8B0000; padding-bottom: 0.5rem; }
-    .membership-form { background: white; border-radius: 6px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .form-section-heading { font-size: 1.4rem; color: white; margin-bottom: 0.75rem; }
+    .membership-form { background: rgba(0,91,165,0.88); border-radius: 6px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.35); }
     .form-block { margin-bottom: 2rem; }
-    .form-block h3 { font-size: 1.1rem; font-weight: 700; color: #8B0000; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid #eee; }
+    .form-block h3 { font-size: 1.1rem; font-weight: 700; color: #f1e303; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid rgba(255,255,255,0.2); }
     .form-group { margin-bottom: 1.25rem; }
-    label { display: block; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-dark); font-size: 0.95rem; }
-    .required { color: #8B0000; }
-    input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea, select { width: 100%; padding: 0.7rem 0.9rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; font-size: 1rem; color: var(--text-dark); transition: border-color 0.3s ease; background: white; }
-    input:focus, textarea:focus, select:focus { outline: none; border-color: #8B0000; }
+    label { display: block; font-weight: 600; margin-bottom: 0.4rem; color: white; font-size: 0.95rem; }
+    .required { color: #f1e303; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea, select { width: 100%; padding: 0.7rem 0.9rem; border: 1px solid rgba(255,255,255,0.25); border-radius: 4px; font-family: inherit; font-size: 1rem; color: white; transition: border-color 0.3s ease; background: rgba(255,255,255,0.1); }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: #f1e303; background: rgba(255,255,255,0.15); }
     textarea { min-height: 110px; resize: vertical; }
+    select option { background: #0a2540; color: white; }
     .conditional-section { display: none; }
     .conditional-section.active { display: block; }
     .checkbox-group { display: flex; align-items: flex-start; gap: 0.6rem; }
     .checkbox-group input[type="checkbox"] { width: auto; margin-top: 0.25rem; flex-shrink: 0; }
-    .checkbox-group label { margin-bottom: 0; font-weight: normal; font-size: 0.95rem; }
-    .file-upload { border: 2px dashed #ddd; padding: 1.5rem; text-align: center; border-radius: 4px; background: var(--bg-light); cursor: pointer; transition: all 0.3s ease; }
-    .file-upload:hover { border-color: #8B0000; background: white; }
+    .checkbox-group label { margin-bottom: 0; font-weight: normal; font-size: 0.95rem; color: white; }
+    .file-upload { border: 2px dashed rgba(255,255,255,0.3); padding: 1.5rem; text-align: center; border-radius: 4px; background: rgba(255,255,255,0.08); cursor: pointer; transition: all 0.3s ease; color: white; }
+    .file-upload:hover { border-color: #f1e303; background: rgba(255,255,255,0.14); }
     .file-upload input[type="file"] { display: none; }
-    .file-info { margin-top: 0.5rem; font-size: 0.875rem; color: #666; }
-    .btn-submit { background: #8B0000; color: white; padding: 1rem 3rem; border: none; border-radius: 4px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
-    .btn-submit:hover { background: #6b0000; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139,0,0,0.3); }
+    .file-info { margin-top: 0.5rem; font-size: 0.875rem; color: rgba(255,255,255,0.65); }
+    .btn-submit { background: #f1e303; color: #003a7a; padding: 1rem 3rem; border: none; border-radius: 4px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+    .btn-submit:hover { background: #ffe600; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+
+    /* ── Roles accordion ── */
+    .roles-section { margin-bottom: 2rem; }
+    .roles-section-title { font-size: 1.3rem; color: white; margin-bottom: 1rem; font-weight: 700; }
+    .role-category-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin: 1.25rem 0 0.5rem; }
+    .role-category-label:first-of-type { margin-top: 0; }
+
+    .role-item { margin-bottom: 0.5rem; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.25); }
+    .role-question { padding: 0.9rem 1.25rem; font-size: 0.975rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .role-question:hover { filter: brightness(1.12); }
+    .role-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.2); font-size: 0.8rem; font-weight: 700; color: white; flex-shrink: 0; margin-right: 0.75rem; }
+    .role-title-text { flex: 1; }
+    .role-badge { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 3px; background: rgba(255,255,255,0.18); color: rgba(255,255,255,0.85); margin-left: 0.75rem; flex-shrink: 0; }
+    .role-chevron { width: 18px; height: 18px; flex-shrink: 0; margin-left: 0.75rem; color: rgba(255,255,255,0.7); transition: transform 0.3s ease; }
+    .role-item.open .role-chevron { transform: rotate(180deg); }
+    .role-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .role-body-inner { padding: 0.75rem 1.25rem 1.25rem; border-top: 1px solid rgba(255,255,255,0.15); }
+    .role-body-inner p { color: rgba(255,255,255,0.88); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.75rem; }
+    .role-body-inner p:last-child { margin-bottom: 0; }
+    .role-body-inner ul { list-style: none; padding: 0; margin-top: 0.5rem; }
+    .role-body-inner li { font-size: 0.875rem; color: rgba(255,255,255,0.82); padding: 0.2rem 0 0.2rem 1.2rem; position: relative; line-height: 1.5; }
+    .role-body-inner li::before { content: "›"; position: absolute; left: 0; color: #f1e303; font-weight: 700; }
+    .skills-lbl { font-size: 0.75rem; font-weight: 700; color: #f1e303; text-transform: uppercase; letter-spacing: 0.07em; margin: 0.75rem 0 0.3rem; }
+    .role-item.open .role-body { max-height: 600px; }
+
+    /* Role category colors */
+    .role-cat-research .role-question { background: #8B0000; }
+    .role-cat-research .role-body-inner { background: rgba(139,0,0,0.82); }
+    .role-cat-ops      .role-question { background: #7a5000; }
+    .role-cat-ops      .role-body-inner { background: rgba(122,80,0,0.82); }
+    .role-cat-comms    .role-question { background: #1a5c2a; }
+    .role-cat-comms    .role-body-inner { background: rgba(26,92,42,0.82); }
+    .role-cat-tech     .role-question { background: #8e0c45; }
+    .role-cat-tech     .role-body-inner { background: rgba(142,12,69,0.82); }
+    .role-cat-observer .role-question { background: #005f6e; }
+    .role-cat-observer .role-body-inner { background: rgba(0,95,110,0.82); }
 
     /* ── CTA (navy, not footer color) ── */
     .cta-section { background: #1a1a2e; color: white; padding: 3rem 2rem; text-align: center; margin-bottom: 0; }
@@ -235,12 +276,14 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="page-bg">
 
-    <!-- Membership tiers -->
-    <section data-aos="fade-up" style="margin-bottom: 2rem;">
-      <h2 style="font-size:1.5rem; color:var(--text-dark); margin-bottom:1rem; border-bottom:3px solid #8B0000; padding-bottom:0.5rem;">Who This Membership Is For</h2>
-      <p style="color:var(--text-dark); margin-bottom:1.5rem; font-size:1.05rem; line-height:1.8;">Research membership is for people who want to actively contribute to the institute's work — either by conducting research or by providing the professional support that makes research possible. This is not a fan community or a discussion forum. Those looking to follow the research and join discussions should sign up through the <a href="https://www.michaelkbaines.com/community" target="_blank" style="color:#005ba5;">PeepSo community</a> instead.</p>
+  <!-- Who This Membership Is For — full-width gunmetal band -->
+  <div class="membership-band" data-aos="fade-up">
+  <div style="max-width:1000px; margin:0 auto; padding:2.5rem 2rem;">
+    <section>
+      <h2 style="font-size:1.5rem; color:white; margin-bottom:1rem;">Who This Membership Is For</h2>
+      <p style="color:rgba(255,255,255,0.88); margin-bottom:1.5rem; font-size:1.05rem; line-height:1.8;">Research membership is for people who want to actively contribute to the institute's work — either by conducting research or by providing the professional support that makes research possible. This is not a fan community or a discussion forum. Those looking to follow the research and join discussions should sign up through the <a href="https://www.michaelkbaines.com/community" target="_blank" style="color:#5ab4f7; text-decoration:underline;">PeepSo community</a> instead.</p>
 
       <div class="tier-grid">
         <div class="tier-card research">
@@ -280,39 +323,418 @@
         </div>
       </div>
     </section>
+  </div>
+  </div><!-- /membership-band -->
 
-    <!-- How it works -->
-    <div class="how-it-works" data-aos="fade-up">
-      <h2>How It Works</h2>
-      <p><strong>Research Members</strong> are the intellectual core of the institute. They identify research questions, design projects, and recruit the people they need from the support pool or from outside. They have full autonomy to assemble and run their own teams. There are no institutional gatekeepers — only the work.</p>
-      <p><strong>Support Members</strong> contribute their professional skills to active research projects. Engagements are primarily virtual and arranged directly between project leads and support members. Leads may organize in-person collaboration for their teams when appropriate.</p>
-      <p><strong>All members</strong> apply through this form regardless of how they first connected with the institute. This ensures proper coordination, transparency, and that everyone understands the IP and publication terms before beginning work.</p>
+  <div class="container">
+
+    <!-- How it works — plain dark panel, no card -->
+    <div style="background:#005ba5; padding:1.75rem; margin-bottom:2rem; border-radius:6px;" data-aos="fade-up">
+      <p style="color:rgba(255,255,255,0.92); line-height:1.8; margin-bottom:0.75rem; font-size:1rem;"><strong style="color:white;">Research Members</strong> are the intellectual core of the institute. They identify research questions, design projects, and recruit the people they need. They have full autonomy to assemble and run their own teams. There are no institutional gatekeepers — only the work.</p>
+      <p style="color:rgba(255,255,255,0.92); line-height:1.8; margin-bottom:0.75rem; font-size:1rem;"><strong style="color:white;">Support Members</strong> contribute professional skills to active research projects. Engagements are primarily virtual and arranged directly between project leads and support members.</p>
+      <p style="color:rgba(255,255,255,0.92); line-height:1.8; margin-bottom:0; font-size:1rem;"><strong style="color:white;">All members</strong> apply through this form regardless of how they first connected with the institute. This ensures proper coordination, transparency, and that everyone understands the IP and publication terms before beginning work.</p>
     </div>
 
-    <!-- Current members -->
-    <section class="members-section" data-aos="fade-up">
-      <h2>Current Members</h2>
-      <p>The institute is currently led by its founder, with infrastructure in place to support collaborative research as the team grows.</p>
-      <div class="member-card">
-        <img src="https://via.placeholder.com/120x140/8B0000/FFFFFF?text=MKB" alt="Michael K. Baines" class="member-photo">
-        <div class="member-info">
-          <div class="member-name">Michael K. Baines</div>
-          <div class="member-title">Founder &amp; Lead Researcher</div>
-          <div class="member-orcid">ORCID: <a href="https://orcid.org/0009-0001-8084-3870" target="_blank">0009-0001-8084-3870</a></div>
-          <ul class="member-focus">
-            <li>COSMIC Framework Development</li>
-            <li>Information Physics &amp; Cosmology</li>
-            <li>Consciousness Studies</li>
-            <li>Aerospace Engineering (Bombardier, Boeing)</li>
-          </ul>
+
+    <!-- Roles accordion -->
+    <section class="roles-section" data-aos="fade-up">
+      <h2 class="roles-section-title">Available Roles</h2>
+      <p style="color:rgba(255,255,255,0.75); font-size:0.9rem; margin-bottom:1.25rem; line-height:1.7;">Each role has a code. Enter the code(s) for the position(s) you are applying for in the application form below. All roles are part-time and flexible unless otherwise arranged with your program manager.</p>
+
+      <div class="role-category-label">Research</div>
+
+        <div class="role-item role-cat-research">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">R001A</span>
+            <span class="role-title-text">Research Lead / Program Manager</span>
+            <span class="role-badge">PhD preferred</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Leads a research program end to end: defines the question, designs the project, recruits the team, and directs the work. Full autonomy over scope and method. May publish under the institute's auspices or independently.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>PhD or equivalent research experience in physics, mathematics, consciousness studies, or a closely related field</li><li>Demonstrated ability to design and execute original research</li><li>Strong scientific writing and publication record</li><li>Ability to direct and evaluate others' contributions</li><li>Self-directed; comfortable working without institutional infrastructure</li></ul>
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="role-item role-cat-research">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">R002A</span>
+            <span class="role-title-text">Research Associate</span>
+            <span class="role-badge">Graduate-level</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Contributes substantively to an ongoing research project under a program manager. May lead sub-components, conduct literature reviews, build models, and co-author publications.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Graduate-level background in physics, mathematics, or consciousness studies</li><li>Literature review and critical analysis</li><li>Mathematical modeling or computational methods</li><li>Scientific writing experience</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-research">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">R003A</span>
+            <span class="role-title-text">Research Assistant</span>
+            <span class="role-badge">No experience required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Supports a research project with tasks assigned by the program manager. An entry point for students and self-taught individuals with strong curiosity. The program manager defines the work and provides all necessary guidance.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Genuine curiosity about physics, consciousness, or cosmology</li><li>Ability to follow direction and complete assigned tasks reliably</li><li>Basic research literacy: reading papers, organizing notes</li><li>Any analytical or technical skills are a bonus, not a requirement</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-research">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">R004A</span>
+            <span class="role-title-text">Data Analyst</span>
+            <span class="role-badge">Technical background</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Processes and analyzes datasets related to cosmological observations, quantum experiments, or framework validation. Produces visualizations and statistical summaries for research outputs.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Python, R, or Julia for data analysis</li><li>Statistical methods and hypothesis testing</li><li>Data visualization (matplotlib, Plotly, seaborn)</li><li>Familiarity with scientific data formats (FITS, CSV, HDF5)</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-research">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">R005A</span>
+            <span class="role-title-text">Computational Modeler</span>
+            <span class="role-badge">Technical background</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Builds numerical simulations to test COSMIC Framework predictions. Translates theoretical predictions into testable computational experiments in collaboration with research leads.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Numerical simulation (Python, C++, Julia, or MATLAB)</li><li>Physics or mathematics background</li><li>Experience with simulation frameworks or HPC environments</li><li>Version control and code documentation (GitHub)</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-research">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">R006A</span>
+            <span class="role-title-text">NBI / AI Systems Researcher</span>
+            <span class="role-badge">Technical or philosophical</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Investigates the framework's specific predictions about non-biological intelligence: embedding space topology, integrated information, and the I_crystallized theoretical node.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Machine learning or NLP background (PyTorch, transformers)</li><li>Philosophy of mind or consciousness studies</li><li>Familiarity with Tononi's IIT or related frameworks</li><li>Strong analytical writing</li></ul>
+            </div>
+          </div>
+        </div>
+      <div class="role-category-label">Operations &amp; Administration</div>
+
+        <div class="role-item role-cat-ops">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">OA001A</span>
+            <span class="role-title-text">Financial Officer</span>
+            <span class="role-badge">Financial background required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Manages financial records, contribution tracking, and tax compliance. Leads grant identification and proposal submissions. The most consequential support role for long-term institute growth.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Accounting, bookkeeping, or financial management experience</li><li>Grant research and proposal writing</li><li>Familiarity with research or non-profit funding landscapes</li><li>QuickBooks, Wave, or equivalent tools</li><li>Understanding of IRS reporting for independent organizations</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-ops">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">OA002A</span>
+            <span class="role-title-text">Grant Writer / Proposal Specialist</span>
+            <span class="role-badge">Writing and research background</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Identifies funding opportunities from foundations, government programs, and private donors. Writes, submits, and tracks grant proposals. Responds to RFPs and maintains a proposal calendar.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Grant writing and proposal development experience</li><li>Knowledge of research funding databases (Grants.gov, Foundation Directory)</li><li>Strong persuasive writing and deadline discipline</li><li>Ability to translate scientific work into accessible language for non-specialist reviewers</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-ops">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">OA003A</span>
+            <span class="role-title-text">Executive / Administrative Assistant</span>
+            <span class="role-badge">Organizational skills</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Supports the institute director and program managers with correspondence, scheduling, document management, and coordination tasks.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Calendar and email management</li><li>Document preparation (Word, Google Docs)</li><li>File organization and record keeping</li><li>Reliable, detail-oriented, and responsive</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-ops">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">OA004A</span>
+            <span class="role-title-text">Secretary / Office Coordinator</span>
+            <span class="role-badge">Administrative experience helpful</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Handles day-to-day administrative tasks: correspondence, meeting notes, member onboarding documentation, and general coordination.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Professional written communication</li><li>Meeting minute-taking and document formatting</li><li>Microsoft Office or Google Workspace</li><li>Organizational reliability</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-ops">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">OA005A</span>
+            <span class="role-title-text">Program Assistant</span>
+            <span class="role-badge">No experience required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Works directly under a program manager, completing assigned tasks as directed. The program manager defines all work and provides guidance. Tasks vary by project.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Reliability and follow-through on assigned tasks</li><li>Clear communication when clarification is needed</li><li>Willingness to learn and take direction</li><li>Any relevant skills are a bonus, not a requirement</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-ops">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">OA006A</span>
+            <span class="role-title-text">Legal Advisor</span>
+            <span class="role-badge">Legal background required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Advisory role providing guidance on IP, publishing agreements, contributor contracts, entity formation, and regulatory compliance as the institute grows.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>IP law, publishing law, or non-profit law</li><li>Contract drafting and review</li><li>Familiarity with open licensing (Creative Commons, MIT)</li><li>U.S. or international research law experience welcome</li></ul>
+            </div>
+          </div>
+        </div>
+      <div class="role-category-label">Communications &amp; Media</div>
+
+        <div class="role-item role-cat-comms">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">CM001A</span>
+            <span class="role-title-text">Social Media Manager</span>
+            <span class="role-badge">Platform experience required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Manages the institute's presence on Instagram, YouTube, and other platforms. Creates and schedules content, engages the audience, and grows organic reach for research updates.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Content creation for science or educational audiences</li><li>Platform management (Instagram, YouTube, LinkedIn, X)</li><li>Basic graphic design for social posts (Canva, Figma)</li><li>Analytics and audience growth strategies</li><li>Ability to translate complex science into accessible language</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-comms">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">CM002A</span>
+            <span class="role-title-text">Video Producer / Media Creator</span>
+            <span class="role-badge">Production experience required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Produces video content for YouTube and the website: explainer videos, research summaries, animations, and event recordings. Works from scripts provided by research leads.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Video editing (DaVinci Resolve, Premiere Pro, or Final Cut)</li><li>Motion graphics or animation (After Effects, Runway ML)</li><li>Science communication sensibility</li><li>AI video generation tools (Runway, ElevenLabs) a strong plus</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-comms">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">CM003A</span>
+            <span class="role-title-text">Science Writer / Editor</span>
+            <span class="role-badge">Writing background required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Writes blog posts, newsletter content, and public-facing research summaries. Edits research outputs for clarity and public accessibility.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Science writing or journalism background</li><li>Ability to accurately represent complex physics for general readers</li><li>Editing and proofreading</li><li>SEO basics for web content a plus</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-comms">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">CM004A</span>
+            <span class="role-title-text">Outreach &amp; Communications Coordinator</span>
+            <span class="role-badge">Communications background helpful</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Manages press inquiries, drafts announcements, coordinates event promotion, and builds relationships with science journalists and media outlets.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>PR, communications, or journalism background</li><li>Press release writing and media list management</li><li>Event promotion and coordination</li><li>Email newsletter management (Mailchimp or equivalent)</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="role-item role-cat-comms">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">CM005A</span>
+            <span class="role-title-text">Copy Editor</span>
+            <span class="role-badge">Editing background required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Reviews and edits written content across all institute outputs: research summaries, blog posts, website copy, grant proposals, and correspondence. Ensures accuracy, clarity, consistency of voice, and adherence to American English usage.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Professional editing or proofreading experience</li><li>Strong command of American English grammar, style, and usage</li><li>Familiarity with a style guide (Chicago, APA, or equivalent)</li><li>Ability to edit scientific content without distorting meaning</li><li>Attention to detail and consistent turnaround reliability</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-comms">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">CM006A</span>
+            <span class="role-title-text">Video Editor</span>
+            <span class="role-badge">Editing experience required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Assembles and edits video footage, narration, and graphics into finished productions for YouTube and the institute website. Works from raw assets and direction provided by the media producer or research lead.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Video editing proficiency (DaVinci Resolve, Premiere Pro, or Final Cut)</li><li>Color grading and audio mixing basics</li><li>Experience cutting educational, documentary, or explainer content</li><li>Ability to hit deadlines and work from a brief</li><li>Motion graphics (After Effects) a plus</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-comms">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">CM007A</span>
+            <span class="role-title-text">Public Relations Manager</span>
+            <span class="role-badge">PR or communications background</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Develops and executes the institute's public relations strategy. Builds relationships with science journalists, podcast hosts, and media outlets. Manages press coverage of validated predictions, book releases, and major research milestones.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>PR, communications, or journalism background</li><li>Media relationship management and pitch writing</li><li>Crisis communication awareness</li><li>Experience placing stories in science, technology, or mainstream media</li><li>Strong written and verbal communication</li></ul>
+            </div>
+          </div>
+        </div>
+      <div class="role-category-label">Technical &amp; Design</div>
+
+        <div class="role-item role-cat-tech">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">TD001A</span>
+            <span class="role-title-text">Webmaster / Web Developer</span>
+            <span class="role-badge">Web development required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Maintains and expands the institute's websites (eequalsicsquared.com on GitHub Pages; michaelkbaines.com on WordPress). Implements new features and ensures cross-page consistency.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>HTML, CSS, JavaScript</li><li>GitHub Pages and static site deployment</li><li>WordPress administration and plugin management</li><li>Supabase or equivalent for authentication a strong plus</li><li>Responsive design and accessibility standards</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-tech">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">TD002A</span>
+            <span class="role-title-text">Graphic Designer / Illustrator</span>
+            <span class="role-badge">Design portfolio required</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Creates visual assets for the website, publications, social media, and presentations. Develops diagrams, infographics, and illustrations that make complex physics accessible.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Adobe Creative Suite, Figma, or Affinity</li><li>Scientific illustration or data visualization</li><li>Brand consistency and design system thinking</li><li>SVG production for web</li><li>Motion graphics or 3D (After Effects, Spline) a plus</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-tech">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">TD003A</span>
+            <span class="role-title-text">Data Visualization Specialist</span>
+            <span class="role-badge">Technical and design background</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Transforms research datasets and simulation outputs into publication-quality charts, diagrams, and interactive web visualizations.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>D3.js, Plotly, matplotlib, or seaborn</li><li>Scientific visualization principles and accuracy</li><li>HTML/CSS for interactive web charts</li><li>Physics or mathematics literacy</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="role-item role-cat-tech">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">TD004A</span>
+            <span class="role-title-text">Technical Writer / Documentation</span>
+            <span class="role-badge">Writing and technical background</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>Produces clear documentation for research methodologies, code repositories, website features, and member onboarding materials.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Technical writing and structured documentation</li><li>Markdown, GitHub wikis, or Notion</li><li>Ability to understand and accurately document technical processes</li><li>Science or engineering background a plus</li></ul>
+            </div>
+          </div>
+        </div>
+      <div class="role-category-label">Student</div>
+
+        <div class="role-item role-cat-research">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">ST001A</span>
+            <span class="role-title-text">Student Contributor</span>
+            <span class="role-badge">Currently enrolled</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>For current students at any level — high school, undergraduate, or graduate — who want to contribute to the institute as part of a school project, independent study, capstone, or thesis. The program manager will work with you to define a scope that fits your timeline and academic requirements. A letter of participation can be provided for your institution if needed.</p>
+              <div class="skills-lbl">Typical requirements</div>
+              <ul><li>Currently enrolled in an accredited school, college, or university program</li><li>A defined project or assignment that the institute contribution will support</li><li>Ability to communicate your timeline and deliverable requirements clearly</li><li>No prior research experience required — curiosity and commitment are what matter</li><li>Supervision or sign-off from a faculty advisor may be required depending on your institution</li></ul>
+            </div>
+          </div>
+        </div>
+      <div class="role-category-label">Observer</div>
+
+        <div class="role-item role-cat-observer">
+          <div class="role-question" onclick="toggleRole(this)">
+            <span class="role-num">OB001A</span>
+            <span class="role-title-text">Observer</span>
+            <span class="role-badge">Open to all</span>
+            <svg class="role-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+          <div class="role-body">
+            <div class="role-body-inner">
+              <p>An Observer is a member of the public with a genuine interest in the institute's work. Observers are not contributors or employees. They receive access to selected team meetings, are invited to open Zoom calls, and stay informed about research progress. Observer status is reviewed and approved like all other roles.</p>
+              <div class="skills-lbl">Typical skills &amp; requirements</div>
+              <ul><li>Genuine interest in theoretical physics, consciousness studies, or open science</li><li>Professional or respectful conduct in meetings and calls</li><li>No research or technical background required</li><li>Observers may not direct or contribute to research — that requires a research or support role</li></ul>
+            </div>
+          </div>
+        </div>
     </section>
 
     <!-- Application form -->
     <section id="application" data-aos="fade-up">
       <h2 class="form-section-heading">Membership Application</h2>
-      <p style="color:var(--text-dark); margin-bottom:1.5rem; font-size:1rem; line-height:1.8;">Applications are reviewed by the institute. Research and support member applications are typically processed within two to three weeks. We will contact you at the email address you provide.</p>
+      <p style="color:rgba(255,255,255,0.88); margin-bottom:1.5rem; font-size:1rem; line-height:1.8;">Applications are reviewed by the institute. Research and support member applications are typically processed within two to three weeks. We will contact you at the email address you provide.</p>
 
       <form class="membership-form" id="membershipForm">
 
@@ -341,12 +763,53 @@
         <div class="form-block">
           <h3>Membership Type</h3>
           <div class="form-group">
-            <label for="membershipType">I am applying as: <span class="required">*</span></label>
+            <label for="roleNumber">Role Code(s) from the list above <span class="required">*</span></label>
+            <input type="text" id="roleNumber" name="roleNumber" placeholder="e.g. R003A, CM005A — use OB001A for Observer, ST001A for Student" required>
+          </div>
+          <div class="form-group">
+            <label for="membershipType">Membership category: <span class="required">*</span></label>
             <select id="membershipType" name="membershipType" required onchange="updateFormSections()">
               <option value="">Select membership type...</option>
               <option value="research">Research Member — I want to conduct or co-lead research</option>
               <option value="support">Support Member — I want to contribute professional skills</option>
+              <option value="observer">Observer — I want to attend meetings and follow the research</option>
+              <option value="student">Student — I am contributing as part of a school project</option>
             </select>
+          </div>
+        </div>
+
+
+        <!-- Availability & Duration -->
+        <div class="form-block">
+          <h3>Availability &amp; Expected Duration</h3>
+          <div class="form-group">
+            <label for="hoursPerWeek">Approximate hours per week you can commit <span class="required">*</span></label>
+            <select id="hoursPerWeek" name="hoursPerWeek" required>
+              <option value="">Select...</option>
+              <option value="1-3">1–3 hours per week</option>
+              <option value="4-8">4–8 hours per week</option>
+              <option value="9-15">9–15 hours per week</option>
+              <option value="16-25">16–25 hours per week</option>
+              <option value="project">Project-based — hours vary</option>
+              <option value="flexible">Flexible / to be arranged with program manager</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="expectedDuration">Expected length of membership <span class="required">*</span></label>
+            <select id="expectedDuration" name="expectedDuration" required>
+              <option value="">Select...</option>
+              <option value="single-task">Single task or assignment (days)</option>
+              <option value="1-3months">1–3 months</option>
+              <option value="3-6months">3–6 months</option>
+              <option value="6-12months">6–12 months</option>
+              <option value="1year+">More than one year</option>
+              <option value="ongoing">Ongoing / indefinite</option>
+              <option value="school-project">Duration of a school project or term</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="timeZone">Time zone and general availability windows (Optional)</label>
+            <input type="text" id="timeZone" name="timeZone" placeholder="e.g. GMT+7 Bangkok, available evenings and weekends">
           </div>
         </div>
 
@@ -444,6 +907,20 @@
           </div>
         </div>
 
+
+        <!-- Observer section -->
+        <div class="form-block conditional-section" id="observerSection">
+          <h3>About Your Interest</h3>
+          <div class="form-group">
+            <label for="observerInterest">What draws you to the institute's work? <span class="required">*</span></label>
+            <textarea id="observerInterest" name="observerInterest" placeholder="Tell us what aspects of the research interest you and why you'd like to follow along..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="observerBackground">Your background (Optional)</label>
+            <textarea id="observerBackground" name="observerBackground" placeholder="Share anything about your background or how you heard about us — entirely optional..."></textarea>
+          </div>
+        </div>
+
         <!-- Supporting documents -->
         <div class="form-block">
           <h3>Supporting Documents (Optional)</h3>
@@ -476,11 +953,12 @@
     </section>
 
   </div><!-- /container -->
+  </div><!-- /page-bg -->
 
   <!-- CTA -->
-  <section class="cta-section">
-    <h2>Want to Follow the Research?</h2>
-    <p>The community discussion forum is open to everyone. Sign up through PeepSo to participate in discussions, follow project updates, and connect with other researchers and interested readers.</p>
+  <section class="cta-section" style="background:white; border-top: 1px solid #e0e0e0;">
+    <h2 style="color:#2c3e50;">Want to Follow the Research?</h2>
+    <p style="color:#444;">The community discussion forum is open to everyone. Sign up through PeepSo to participate in discussions, follow project updates, and connect with other researchers and interested readers.</p>
     <a href="https://www.michaelkbaines.com/community" target="_blank" style="display:inline-block; padding:0.85rem 2.5rem; background:#005f6e; color:white; text-decoration:none; border-radius:4px; font-weight:700; transition:all 0.25s;">Join the Community</a>
   </section>
 
@@ -565,10 +1043,18 @@
       document.querySelectorAll('.mobile-menu a').forEach(l => l.addEventListener('click', () => { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); }));
     }
 
+    function toggleRole(question) {
+      const item = question.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.role-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
     function updateFormSections() {
       const type = document.getElementById('membershipType').value;
       document.getElementById('researchSection').classList.toggle('active', type === 'research');
       document.getElementById('supportSection').classList.toggle('active', type === 'support');
+      document.getElementById('observerSection').classList.toggle('active', type === 'observer' || type === 'student');
       ['primaryInterest','specificInterests','skillsContribution','motivations'].forEach(id => {
         const el = document.getElementById(id);
         if (el) type === 'research' ? el.setAttribute('required','required') : el.removeAttribute('required');
@@ -577,6 +1063,8 @@
         const el = document.getElementById(id);
         if (el) type === 'support' ? el.setAttribute('required','required') : el.removeAttribute('required');
       });
+      const obsInterest = document.getElementById('observerInterest');
+      if (obsInterest) type === 'observer' ? obsInterest.setAttribute('required','required') : obsInterest.removeAttribute('required');
     }
 
     document.getElementById('membershipForm').addEventListener('submit', function(e) {
