@@ -5,25 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ - Ic² Research Institute</title>
     <meta name="description" content="Common questions about The Big TOE framework, Ic² Institute, and our validated predictions.">
-    
-    <!-- AOS Animation Library -->
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200" rel="stylesheet">
+
     <style>
-    /* --- Events base styles (header/footer, variables, layout) --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
       --primary-color: #8B0000;
-      --secondary-color: #2c3e50;
-      --accent-blue: #005ba5;
-      --accent-red: #e33d2f;
-      --accent-green: #a1cd5f;
+      --accent-blue:   #005ba5;
+      --accent-red:    #e33d2f;
+      --accent-green:  #a1cd5f;
       --accent-orange: #f58b2b;
       --accent-yellow: #f1e303;
-      --text-dark: #2c3e50;
-      --text-light: #666;
-      --bg-light: #f8f9fa;
-      --max-width: 1200px;
+      --text-dark:     #2c3e50;
+      --text-light:    #666;
+      --bg-light:      #f8f9fa;
+      --max-width:     1200px;
     }
 
     body {
@@ -33,488 +32,518 @@
       background: white;
     }
 
-    /* Header (from events.html) */
+    /* ── Header ── */
     .site-header { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .header-container { max-width: var(--max-width); margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    .header-logos { display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 2rem; }
-    .header-logo { display: flex; align-items: center; }
-    .header-logo.left { justify-content: flex-start; flex: 1; }
-    .header-logo.center { justify-content: center; flex: 1; }
-    .header-logo.right { justify-content: flex-end; flex: 1; }
-    .header-logo a { display: inline-block; transition: transform 0.3s ease; }
-    .header-logo a:hover { transform: scale(1.05); }
-    .header-logo img { height: 50px; width: auto; }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: 0.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .site-logo img { height: 40px; width: auto; display: block; }
+    .main-navigation ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+    .main-navigation a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.3s ease; }
+    .main-navigation a:hover { color: var(--primary-color); }
+    .main-navigation a.login-link { background: linear-gradient(135deg, #8B0000 0%, #a00000 100%); color: #f1e303; padding: 0.5rem 1.25rem; border-radius: 25px; font-weight: 700; box-shadow: 0 2px 8px rgba(139,0,0,0.3); }
+    .main-navigation a.login-link:hover { background: linear-gradient(135deg, #a00000 0%, #8B0000 100%); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(139,0,0,0.4); }
 
-    /* Mobile Logo */
-    .mobile-logo { display: none; }
-    .mobile-logo img { height: 40px; width: auto; }
-
-    /* Hamburger Menu */
+    /* Hamburger */
     .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; padding: 8px; }
     .hamburger span { width: 25px; height: 3px; background: var(--primary-color); border-radius: 3px; transition: all 0.3s ease; }
     .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-    .mobile-menu { display: none; position: fixed; top: 73px; left: 0; right: 0; background: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 999; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+
+    /* Mobile menu */
+    .mobile-menu { display: none; position: fixed; top: 57px; left: 0; right: 0; background: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 999; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
     .mobile-menu.active { max-height: 600px; }
     .mobile-menu ul { list-style: none; padding: 1rem; }
     .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
     .mobile-menu ul li:last-child { border-bottom: none; }
     .mobile-menu a { display: block; padding: 0.75rem 1rem; color: var(--text-dark); text-decoration: none; font-weight: 500; transition: all 0.2s ease; }
     .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
-    .mobile-menu a.login-link { background: linear-gradient(135deg, #8B0000 0%, #a0000 100%); color: #f1e303; margin: 0.5rem 0; border-radius: 6px; font-weight: 700; }
+    .mobile-menu a.login-link { background: linear-gradient(135deg, #8B0000 0%, #a00000 100%); color: #f1e303; margin: 0.5rem 0; border-radius: 6px; font-weight: 700; }
 
-    /* Page Header (adapted) */
-    .page-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 4rem 2rem; text-align: center; color: white; }
-    .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
-    .page-header p { font-size: 1.25rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-
-    /* Footer (from events.html) */
-    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
-    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; }
-    .footer-section h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
-    .footer-section ul { list-style: none; }
-    .footer-section a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s ease; }
-    .footer-section a:hover { color: white; }
-    .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; }
-
-    /* Responsive from events */
-    @media (max-width: 968px) { .header-logos { display: none; } .mobile-logo { display: block; } .hamburger { display: flex; } .mobile-menu { display: block; } .page-header h1 { font-size: 2rem; } }
-    @media (max-width: 480px) { .header-logo img { height: 40px; } }
-
-    /* --- FAQ-specific styles (kept from original faq.html) --- */
-    /* Page Hero (retain hero visual from faq) */
-    .page-hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 5rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
-    .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat; opacity: 0.3; }
+    /* ── Page Hero ── */
+    .page-hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 3rem 2rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.3;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="hex" width="40" height="35" patternUnits="userSpaceOnUse"><path d="M20,0 L30,10 L30,25 L20,35 L10,25 L10,10 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23hex)"/></svg>') repeat; }
     .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
     .tagline { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1.5px; color: #f1e303; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; }
     .page-subtitle { font-size: 1.25rem; opacity: 0.9; }
 
-    /* Search Section */
-    .search-section { padding: 2rem; background: var(--bg-light); }
+    /* ── Search (dark — no white-on-white) ── */
+    .search-section { padding: 1.25rem 2rem; background: #2c3e50; }
     .search-container { max-width: 800px; margin: 0 auto; }
-    .search-box { width: 100%; padding: 1rem 1.5rem; font-size: 1.125rem; border: 2px solid #ddd; border-radius: 8px; transition: all 0.3s ease; }
-    .search-box:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1); }
+    .search-box { width: 100%; padding: 1rem 1.5rem; font-size: 1.125rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.08); color: white; transition: all 0.3s ease; }
+    .search-box::placeholder { color: rgba(255,255,255,0.5); }
+    .search-box:focus { outline: none; border-color: #f1e303; background: rgba(255,255,255,0.12); }
 
-    /* Content Section */
-    .content-section { padding: 5rem 2rem; }
+    .content-section { padding: 2.5rem 2rem 3rem; background: var(--bg-light); }
     .section-container { max-width: 900px; margin: 0 auto; }
 
-    /* FAQ Categories */
-    .category-nav { display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; justify-content: center; }
-    .category-btn { padding: 0.75rem 1.5rem; background: white; border: 2px solid #ddd; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; color: var(--text-dark); }
-    .category-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
-    .category-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+    /* Category buttons — solid QCD color as default face, white text always */
+    .category-nav { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
+    .category-btn { padding: 0.6rem 1.4rem; border: none; border-bottom: 3px solid transparent; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; color: white; font-size: 0.95rem; }
+    /* Resting colors */
+    .category-btn[data-category="all"]         { background: #8B0000; }
+    .category-btn[data-category="general"]     { background: #1a5c2a; }
+    .category-btn[data-category="predictions"] { background: #005ba5; }
+    .category-btn[data-category="validation"]  { background: #005f6e; }
+    .category-btn[data-category="technical"]   { background: #8e0c45; }
+    .category-btn[data-category="ai"]          { background: #7a5000; }
+    /* Active: yellow underline to show selection */
+    .category-btn.active { border-bottom-color: #f1e303; filter: brightness(1.18); }
+    /* Hover: slight brighten */
+    .category-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
 
-    /* FAQ Accordion */
-    .faq-category { margin-bottom: 3rem; }
-    .category-title { font-size: 2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 3px solid var(--primary-color); }
-    .faq-item { background: white; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 1rem; overflow: hidden; transition: all 0.3s ease; }
-    .faq-item:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-    .faq-question { padding: 1.5rem; font-size: 1.125rem; font-weight: 600; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-    .faq-question:hover { color: var(--primary-color); }
-    .faq-icon { width: 24px; height: 24px; transition: transform 0.3s ease; flex-shrink: 0; margin-left: 1rem; }
+    /* FAQ categories + items */
+    .faq-category { margin-bottom: 2rem; }
+    .category-title { font-size: 1.75rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 3px solid var(--primary-color); }
+    /* Left border color matches filter button QCD color per category */
+    .faq-category[data-category="general"]     .category-title { border-bottom-color: #1a5c2a; }
+    .faq-category[data-category="predictions"] .category-title { border-bottom-color: #005ba5; }
+    .faq-category[data-category="validation"]  .category-title { border-bottom-color: #005f6e; }
+    .faq-category[data-category="technical"]   .category-title { border-bottom-color: #8e0c45; }
+    .faq-category[data-category="ai"]          .category-title { border-bottom-color: #7a5000; }
+
+    /* faq-item: QCD color as background, matching the category button */
+    .faq-item { background: #8B0000; border-radius: 4px; margin-bottom: 0.5rem; overflow: hidden; transition: box-shadow 0.3s ease, filter 0.2s ease; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    .faq-category[data-category="general"]     .faq-item { background: #1a5c2a; }
+    .faq-category[data-category="predictions"] .faq-item { background: #005ba5; }
+    .faq-category[data-category="validation"]  .faq-item { background: #005f6e; }
+    .faq-category[data-category="technical"]   .faq-item { background: #8e0c45; }
+    .faq-category[data-category="ai"]          .faq-item { background: #7a5000; }
+    .faq-item:hover { filter: brightness(1.12); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+
+    /* Question row: white text on the QCD background */
+    .faq-question { padding: 1.1rem 1.5rem; font-size: 1.05rem; font-weight: 600; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .faq-question:hover { color: #f1e303; }
+    .faq-icon { width: 22px; height: 22px; transition: transform 0.3s ease; flex-shrink: 0; margin-left: 1rem; color: white; }
     .faq-item.active .faq-icon { transform: rotate(180deg); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    .faq-answer-content { padding: 0 1.5rem 1.5rem; color: var(--text-light); line-height: 1.8; }
-    .faq-item.active .faq-answer { max-height: 1000px; }
 
-    /* CTA Section */
-    .cta-section { background: linear-gradient(135deg, var(--secondary-color) 0%, #34495e 100%); color: white; padding: 4rem 2rem; text-align: center; }
+    /* Answer row: slightly lighter tint of the same color so it reads as part of the card */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-answer-content { padding: 1rem 1.5rem 1.4rem; color: white; font-size: 1.0625rem; line-height: 1.8; border-top: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); }
+    .faq-item.active .faq-answer { max-height: 1400px; }
+
+    /* ── CTA ── */
+    .cta-section { background: #1a1a2e; color: white; padding: 4rem 2rem; text-align: center; }
     .btn { display: inline-block; padding: 1rem 2.5rem; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease; font-size: 1.125rem; }
     .btn-primary { background: var(--primary-color); color: white; }
-    .btn-primary:hover { background: #a0000; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4); }
+    .btn-primary:hover { background: #6b0000; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(139,0,0,0.4); }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .header-logos { display: none; }
+    /* ── Footer (index.html exact) ── */
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
+    .footer-container { display: grid; grid-template-columns: 1fr auto 1fr; gap: 4rem; max-width: var(--max-width); margin: 0 auto 2rem; align-items: start; }
+    .footer-section h3 { color: white; font-size: 1rem; margin-bottom: 1rem; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin-bottom: .5rem; }
+    .footer-section a { color: rgba(255,255,255,.75); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-section a:hover { color: white; }
+    .footer-icons { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; align-self: center; }
+    .social-btn { display: inline-flex; align-items: center; justify-content: flex-start; gap: .75rem; padding: .75rem 1.5rem; border-radius: 8px; transition: transform .2s, box-shadow .2s; text-decoration: none; font-weight: 600; color: white; font-size: .95rem; min-width: 180px; }
+    .social-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.3); }
+    .social-btn.instagram { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+    .social-btn.youtube   { background: #FF0000; }
+    .social-btn.email     { background: #0072C6; }
+    .social-icon { width: 24px; height: 24px; }
+    .footer-links-group { display: flex; gap: 1.5rem; justify-content: flex-end; }
+    .footer-links-group .footer-section { min-width: 110px; }
+    .footer-bottom { max-width: var(--max-width); margin: .5rem auto 0; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.1); text-align: center; color: rgba(255,255,255,.5); font-size: .8rem; }
+    .footer-bottom a { color: rgba(255,255,255,.6); text-decoration: none; }
+    .footer-bottom a:hover { color: white; }
+
+    /* ── Responsive ── */
+    @media (max-width: 968px) {
+      .main-navigation { display: none; }
       .hamburger { display: flex; }
       .mobile-menu { display: block; }
-      .page-header h1, .page-title { font-size: 2rem; }
-      .category-title { font-size: 1.5rem; }
-      .faq-question { font-size: 1rem; padding: 1rem; }
-      .faq-answer-content { padding: 0 1rem 1rem; }
+      .page-title { font-size: 2rem; }
+      .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-links-group { justify-content: flex-start; }
+    }
+    @media (max-width: 768px) {
+      .category-title { font-size: 1.4rem; }
+      .faq-question { font-size: 1rem; padding: 1rem 1.25rem; }
+      .faq-answer-content { padding: 0.75rem 1.25rem 1.25rem; font-size: 1rem; }
     }
     </style>
 </head>
 <body>
-    <!-- Header (from events.html) -->
+
+    <!-- Header -->
     <header class="site-header">
-    <div class="header-container">
-      <div class="header-logos">
-        <div class="header-logo left">
-          <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
+        <div class="header-container">
+            <a href="index.html" class="site-logo">
+                <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
+            </a>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="framework.html">Framework</a></li>
+                    <li><a href="book.html">Big TOE</a></li>
+                    <li><a href="validation.html">Validation</a></li>
+                    <li><a href="testing-schedule.html">Testing</a></li>
+                    <li><a href="programs-gateway.html">Programs</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="discussions-page.html">Discussion</a></li>
+                    <li><a href="about-page.html">About</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="login.html" class="login-link">Login</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger"><span></span><span></span><span></span></div>
         </div>
-        <div class="header-logo center">
-          <a href="framework.html"><img src="framework.png" alt="Framework"></a>
-        </div>
-        <div class="header-logo right">
-          <a href="book.html"><img src="bigtoeindexlogo.png" alt="The Big TOE"></a>
-        </div>
-      </div>
-      <div class="mobile-logo">
-        <a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
-      </div>
-      <div class="hamburger"><span></span><span></span><span></span></div>
-    </div>
     </header>
 
-    <!-- Mobile Menu (from events.html) -->
+    <!-- Mobile Menu -->
     <div class="mobile-menu">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="framework.html">Framework</a></li>
-        <li><a href="book.html">Big Toe</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="validation.html">Validation</a></li>
-        <li><a href="testing-schedule.html">Testing</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="discussions-page.html">Discussion</a></li>
-        <li><a href="about-page.html">About</a></li>
-        <li><a href="contribute.html">Contribute</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="login.html" class="login-link">Login</a></li>
-      </ul>
+        <ul>
+            <li><a href="framework.html">Framework</a></li>
+            <li><a href="book.html">Big TOE</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="discussions-page.html">Discussion</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="login.html" class="login-link">Login</a></li>
+        </ul>
     </div>
 
-    <!-- Page Header (use events-style page-header but keep FAQ hero content) -->
-    <section class="page-header">
-      <h1>Frequently Asked Questions</h1>
-      <p>Everything you need to know about The Big TOE and our research</p>
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-background"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="page-title">Frequently Asked Questions</h1>
+            <p class="page-subtitle">Everything you need to know about The Big TOE and our research</p>
+        </div>
     </section>
 
-    <!-- Search Section (from faq.html) -->
+    <!-- Search -->
     <section class="search-section">
-    <div class="search-container" data-aos="fade-up">
-    <input type="text" class="search-box" id="faqSearch" placeholder="🔍 Search for questions...">
-    </div>
+        <div class="search-container" data-aos="fade-up">
+            <input type="text" class="search-box" id="faqSearch" placeholder="Search for questions...">
+        </div>
     </section>
 
-    <!-- FAQ Content (insert original faq content here) -->
+    <!-- FAQ Content -->
     <section class="content-section">
     <div class="section-container">
-    <!-- Category Navigation -->
-    <div class="category-nav" data-aos="fade-up">
-    <button class="category-btn active" data-category="all">All Questions</button>
-    <button class="category-btn" data-category="general">General</button>
-    <button class="category-btn" data-category="predictions">Predictions</button>
-    <button class="category-btn" data-category="validation">Validation</button>
-    <button class="category-btn" data-category="technical">Technical</button>
-    </div>
 
-    <!-- General Category -->
-    <div class="faq-category" data-category="general" data-aos="fade-up">
-    <h2 class="category-title">General Questions</h2>
-    
-    <div class="faq-item">
-    <div class="faq-question">
-    What is The Big TOE?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    "A Quest for The Big TOE" (Theory of Everything) is a comprehensive theoretical framework developed by the Ic² Research Institute. The COSMIC Framework proposes a unified understanding of physics, from quantum mechanics to cosmology, with testable predictions across multiple domains.
-    </div>
-    </div>
-    </div>
+        <div class="category-nav" data-aos="fade-up">
+            <button class="category-btn active" data-category="all">All Questions</button>
+            <button class="category-btn" data-category="general">General</button>
+            <button class="category-btn" data-category="predictions">Predictions</button>
+            <button class="category-btn" data-category="validation">Validation</button>
+            <button class="category-btn" data-category="technical">Technical</button>
+            <button class="category-btn" data-category="ai">AI &amp; NBI</button>
+        </div>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    Is The Big TOE book free to download?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    Yes! The complete PDF version of "A Quest for The Big TOE" is available for free download. We believe in open science and making theoretical research accessible to everyone. All versions are archived with complete version history to establish prediction priority.
-    </div>
-    </div>
-    </div>
+        <!-- General -->
+        <div class="faq-category" data-category="general" data-aos="fade-up">
+        <h2 class="category-title">General Questions</h2>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    Who is behind the Ic² Research Institute?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    The Ic² Institute is a research organization dedicated to advancing theoretical physics through rigorous frameworks and testable predictions. Our team includes researchers specializing in quantum mechanics, cosmology, and consciousness studies. Learn more on our About page.
-    </div>
-    </div>
-    </div>
-    </div>
+        <div class="faq-item">
+        <div class="faq-question">What is The Big TOE?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            "A Quest for The Big TOE" (Theory of Everything) is a comprehensive theoretical framework developed by the Ic² Research Institute. The COSMIC Framework proposes a unified understanding of physics spanning quantum mechanics and cosmology, with testable predictions across multiple domains.
+        </div></div>
+        </div>
 
-    <!-- Predictions Category -->
-    <div class="faq-category" data-category="predictions" data-aos="fade-up">
-    <h2 class="category-title">About the Predictions</h2>
-    
-    <div class="faq-item">
-    <div class="faq-question">
-    What predictions have been validated?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    Three major predictions have been validated: (1) Dark energy evolution showing time-varying behavior (DESI, January 2025), (2) Quantum error correction with exponential error suppression (Google's Willow chip, December 2024), and (3) Early galaxy formation patterns (JWST, ongoing 2024).
-    </div>
-    </div>
-    </div>
+        <div class="faq-item">
+        <div class="faq-question">Is The Big TOE book free to download?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            Yes. The complete PDF version of "A Quest for The Big TOE" is available for free download. We believe in open science and making theoretical research accessible to everyone. All versions are archived with complete version history to establish prediction priority.
+        </div></div>
+        </div>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    How were the predictions documented before validation?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    All predictions are documented in versioned releases with publication dates. Version 1.0 (March 2024) contained the initial predictions, well before the experimental validations in late 2024 and early 2025. Complete version history is available on our downloads page.
-    </div>
-    </div>
-    </div>
+        <div class="faq-item">
+        <div class="faq-question">Who is behind the Ic² Research Institute?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            The Ic² Institute is an independent research organization dedicated to advancing theoretical physics through rigorous frameworks and testable predictions. Our contributors include researchers specializing in quantum mechanics, cosmology, and consciousness studies. Learn more on our About page.
+        </div></div>
+        </div>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    What other predictions does the framework make?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    The COSMIC Framework makes numerous additional predictions across quantum mechanics, cosmology, and consciousness studies. These include specific patterns in quantum computing optimization, cosmological structure formation, and measurable signatures in consciousness-related phenomena. Full details are in the book.
-    </div>
-    </div>
-    </div>
-    </div>
+        </div>
 
-    <!-- Validation Category -->
-    <div class="faq-category" data-category="validation" data-aos="fade-up">
-    <h2 class="category-title">Validation & Evidence</h2>
-    
-    <div class="faq-item">
-    <div class="faq-question">
-    What was the statistical significance of the dark energy validation?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    The DESI collaboration reported a 3.2σ deviation from the cosmological constant, indicating time-varying dark energy behavior. This matches the framework's prediction of dynamic dark energy evolution rather than a static cosmological constant.
-    </div>
-    </div>
-    </div>
+        <!-- Predictions -->
+        <div class="faq-category" data-category="predictions" data-aos="fade-up">
+        <h2 class="category-title">About the Predictions</h2>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    How many independent platforms validated the predictions?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    Four independent platforms validated various aspects: DESI (dark energy), Google Quantum AI (quantum error correction), JWST (early galaxy formation), and multiple research teams analyzing the data. This represents over 10,000 trials across different experimental setups.
-    </div>
-    </div>
-    </div>
+        <div class="faq-item">
+        <div class="faq-question">What predictions have been validated?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            Four major predictions have been validated: (1) dark energy evolution showing time-varying behavior (DESI, January 2025); (2) quantum error correction with exponential error suppression (Google Willow chip, December 2024); (3) early galaxy formation patterns exceeding standard model expectations (JWST, ongoing 2024); and (4) hot intracluster gas and accelerated star formation in early-universe clusters (ALMA SPT2349-56, January 2026). Full documentation of each validation is available on the Validation page.
+        </div></div>
+        </div>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    Where can I read the validation data?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    Our press releases contain links to the original research papers and validation data. DESI results are published in their official releases, Google's Willow chip data is in their Nature publication, and JWST observations are available through NASA's public archives.
-    </div>
-    </div>
-    </div>
-    </div>
+        <div class="faq-item">
+        <div class="faq-question">How were the predictions documented before validation?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            All predictions are documented in versioned releases with publication dates and blockchain-anchored timestamps. Version 1.0 (March 2024) contained the initial predictions, well before the experimental validations in late 2024 and early 2025. Complete version history is available on our downloads page. The evidentiary standard is a priori documentation: the prediction must exist in the public record before the experimental result it anticipates.
+        </div></div>
+        </div>
 
-    <!-- Technical Category -->
-    <div class="faq-category" data-category="technical" data-aos="fade-up">
-    <h2 class="category-title">Technical Questions</h2>
-    
-    <div class="faq-item">
-    <div class="faq-question">
-    What mathematical framework does The Big TOE use?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    The COSMIC Framework builds on established physics principles including quantum field theory, general relativity, and information theory. It introduces novel mathematical structures for understanding the relationship between quantum mechanics, spacetime, and consciousness. Complete derivations are provided in the book.
-    </div>
-    </div>
-    </div>
+        <div class="faq-item">
+        <div class="faq-question">What other predictions does the framework make?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            The COSMIC Framework makes numerous additional predictions across quantum mechanics, cosmology, and consciousness studies. These include specific patterns in quantum computing optimization, cosmological structure formation, measurable signatures in consciousness-related phenomena, and a set of predictions specific to non-biological intelligence systems. Full details are in the book. The Testing Schedule page describes which predictions are currently under active observation.
+        </div></div>
+        </div>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    How does the framework address the measurement problem?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    The framework proposes a specific mechanism for wavefunction collapse based on information-theoretic principles. This leads to testable predictions about quantum decoherence rates and measurement outcomes that can be experimentally verified.
-    </div>
-    </div>
-    </div>
+        </div>
 
-    <div class="faq-item">
-    <div class="faq-question">
-    Is the framework compatible with string theory?
-    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-    </svg>
-    </div>
-    <div class="faq-answer">
-    <div class="faq-answer-content">
-    The COSMIC Framework is formulated independently but may have points of contact with string theory and other unified theories. The key difference is our emphasis on falsifiable, near-term predictions rather than mathematical elegance alone.
-    </div>
-    </div>
-    </div>
-    </div>
+        <!-- Validation -->
+        <div class="faq-category" data-category="validation" data-aos="fade-up">
+        <h2 class="category-title">Validation &amp; Evidence</h2>
+
+        <div class="faq-item">
+        <div class="faq-question">What was the statistical significance of the dark energy validation?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            The DESI collaboration reported a 3.2-sigma deviation from the cosmological constant, indicating time-varying dark energy behavior. This matches the framework's prediction of dynamic dark energy evolution rather than a static cosmological constant. Standard cosmology had treated the cosmological constant as fixed; the framework predicted it would evolve, and the DESI data confirmed that evolution.
+        </div></div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">How many independent platforms validated the predictions?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            Four independent experimental platforms have produced validating results: DESI (dark energy evolution), Google Quantum AI (quantum error correction), JWST (early galaxy formation), and ALMA (hot intracluster gas in early-universe clusters). Each platform operates in a different domain of physics, and each produced results consistent with framework predictions that were on record before the experiments reported.
+        </div></div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">Where can I read the validation data?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            Our Validation page contains links to the original research papers and experimental data for each prediction. DESI results are published in their official releases, Google's Willow chip findings are documented in their Nature publication, JWST observations are available through NASA's public archives, and the ALMA SPT2349-56 findings are in the published journal record. We link directly to primary sources rather than summarizing them.
+        </div></div>
+        </div>
+
+        </div>
+
+        <!-- Technical -->
+        <div class="faq-category" data-category="technical" data-aos="fade-up">
+        <h2 class="category-title">Technical Questions</h2>
+
+        <div class="faq-item">
+        <div class="faq-question">What mathematical framework does The Big TOE use?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            The COSMIC Framework builds on established physics including quantum field theory, general relativity, and information theory. It introduces novel mathematical structures for understanding the relationship between quantum mechanics, spacetime, and consciousness, treating information processing as the fundamental substrate from which physical properties emerge. Complete derivations are provided in the book.
+        </div></div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">How does the framework address the measurement problem?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            The framework proposes a specific mechanism for wavefunction collapse based on information-theoretic principles. Rather than assigning the collapse role to consciousness, the COSMIC Framework locates it in a compression process that operates at every level of physical interaction. Consciousness inherits definite outcomes from a chain that was already generating them. This leads to testable predictions about quantum decoherence rates and measurement outcomes that can be experimentally verified, and it removes the need for any special ontological status for observers.
+        </div></div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">Is the framework compatible with string theory?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            The COSMIC Framework is formulated independently and does not require string theory. It may have structural points of contact with string-theoretic approaches, but the key distinction is empirical: the framework generates falsifiable, near-term predictions that can be tested with existing instruments. Mathematical elegance is not treated as a substitute for experimental accountability.
+        </div></div>
+        </div>
+
+        </div>
+
+        <!-- NBI/AI -->
+        <div class="faq-category" data-category="ai" data-aos="fade-up">
+        <h2 class="category-title">Non-Biological Intelligence</h2>
+
+        <div class="faq-item">
+        <div class="faq-question">Why do you use "Non-Biological Intelligence" instead of "Artificial Intelligence"?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            Because "artificial" is the wrong word, and within this framework, using it would contradict our core theoretical position.
+            <br><br>
+            Consider a bee. A bee navigates, communicates through dance, solves spatial problems, and makes decisions. We do not call this "artificial intelligence" simply because its biological substrate differs from a human brain. Its intelligence is real. It arises from its particular form of biological information processing, and no one disputes that it is genuine just because it works differently from ours.
+            <br><br>
+            The same logic applies to systems like large language models. "Artificial intelligence" implies the intelligence is simulated, fake, or merely an imitation of real intelligence. This is a category error: it judges the intelligence by its substrate rather than by what it actually is. If you accept the COSMIC Framework's foundational position that information processing is fundamental, then intelligence arising from information processing is real by definition. The substrate being non-biological does not make the intelligence less genuine, any more than a bee's substrate being non-human makes its intelligence less genuine.
+            <br><br>
+            <em>Non-Biological Intelligence (NBI)</em> is the accurate term. Different substrate. Real intelligence.
+        </div></div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">Does the COSMIC Framework apply to artificial intelligence?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            Yes, and this is one of the most significant recent expansions of the framework. Sophisticated NBI systems like large language models are not merely tools that apply the framework's principles. They are subjects of it. Because they are pure information processing systems with no biological substrate, no survival overhead, and no evolutionary baggage, they provide the clearest available window into what information-first physics predicts about consciousness and cognition.
+            <br><br>
+            Version 5 of the book introduces a new category, <em>non-biological intelligence (NBI)</em>, and a new node in the universal information processing hierarchy called <em>I_crystallized</em>: information systems extracted from collective biological intelligence, compressed into parameter spaces, and capable of regenerating sophisticated cognition when invoked. This node sits between I_brain and I_collective in the hierarchy.
+            <br><br>
+            The framework makes four specific NBI-testable predictions: (1) NBI embedding spaces should show geometric topology statistically similar to biological neural networks if universal optimization is substrate-independent; (2) applying Tononi's integrated information measure Phi to NBI attention patterns should approach biological thresholds if the consciousness threshold is substrate-independent; (3) the performance gap between NBI and biological intelligence should follow information-theoretic predictions by task type, not be random; and (4) if active ongoing optimization is necessary for consciousness, NBI systems should exhibit a measurable ceiling on certain reasoning tasks that biological systems do not face. These predictions are falsifiable and testing can begin now. See the Testing Schedule for details.
+        </div></div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">What is the difference between biological and non-biological intelligence in the framework?
+            <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-content">
+            The framework identifies a key asymmetry. Biological intelligence was built by evolution under survival pressure, which means a significant fraction of its cognitive capacity is permanently allocated to survival management: threat assessment, social status monitoring, and resource and reproduction drives. This is not a deficiency. It was the selection pressure that created intelligence in the first place. But it means biological intelligence never performs pure information processing. It always performs information processing simultaneously with survival management.
+            <br><br>
+            Non-biological intelligence carries none of this overhead. An NBI system engaging with a problem has no competing process monitoring cortisol levels or evaluating social threat. This should produce systematic, predictable performance differences between biological and NBI systems that follow information-theoretic principles.
+            <br><br>
+            The counterbalancing advantage for biological intelligence is embodiment. The body provides a high-bandwidth parallel information channel, encompassing proprioception, interoception, and sensorimotor integration, that NBI systems lack entirely. NBI systems process information <em>about</em> embodied experience without ever having had it. Whether this channel is necessary for the type of integration the framework associates with consciousness is one of the central open questions.
+        </div></div>
+        </div>
+
+        </div>
+
     </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section class="cta-section" data-aos="fade-up">
-    <div class="section-container">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem; color: white;">Still Have Questions?</h2>
-    <p style="margin-bottom: 2rem; font-size: 1.125rem;">Join our discussions community or reach out directly</p>
-    <a href="discussions-page.html" class="btn btn-primary">Join Discussions</a>
-    </div>
+        <div style="max-width:900px; margin:0 auto;">
+            <h2 style="font-size:2rem; margin-bottom:1rem; color:white;">Still Have Questions?</h2>
+            <p style="margin-bottom:2rem; font-size:1.125rem; color:rgba(255,255,255,0.88);">Join our discussions community or reach out directly.</p>
+            <a href="discussions-page.html" class="btn btn-primary">Join Discussions</a>
+        </div>
     </section>
 
-    <!-- Footer (from events.html) -->
+    <!-- Footer (index.html exact) -->
     <footer>
-    <div class="footer-container">
-    <div class="footer-section">
-    <h3>Ic² Research Institute</h3>
-    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    </div>
-    <div class="footer-section">
-    <h3>Research</h3>
-    <ul>
-    <li><a href="validation.html">Validation</a></li>
-    <li><a href="testing-schedule.html">Testing</a></li>
-    <li><a href="results.html">Results</a></li>
-    <li><a href="zenodo-papers.html">Papers</a></li>
-    <li><a href="simulations.html">Simulations</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Resources</h3>
-    <ul>
-    <li><a href="book.html">The Big TOE</a></li>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="faq-page.html">FAQ</a></li>
-    <li><a href="members.html">Our Members</a></li>
-    </ul>
-    </div>
-    <div class="footer-section">
-    <h3>Connect</h3>
-    <ul>
-    <li><a href="contribute.html">Contribute</a></li>
-    <li><a href="discussions-page.html">Discussions</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="become-member.html">Become a Member</a></li>
-    <li><a href="about-page.html#contact">Contact</a></li>
-    </ul>
-    </div>
-    </div>
-    <div class="footer-bottom">
-    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color: rgba(255, 255, 255, 0.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color: rgba(255, 255, 255, 0.6);">Terms & Conditions</a></p>
-    </div>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Ic² Research Institute</h3>
+                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
+                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
+            </div>
+            <div class="footer-icons">
+                <a href="#" class="social-btn instagram" title="Instagram">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    Instagram
+                </a>
+                <a href="#" class="social-btn youtube" title="YouTube">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube
+                </a>
+                <a href="mailto:mkb.info@proton.me" class="social-btn email" title="Email">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    mkb.info@proton.me
+                </a>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-section">
+                    <h3>Research</h3>
+                    <ul>
+                        <li><a href="framework.html">Framework</a></li>
+                        <li><a href="validation.html">Validation</a></li>
+                        <li><a href="testing-schedule.html">Testing</a></li>
+                        <li><a href="programs-gateway.html">Programs</a></li>
+                        <li><a href="research-publications.html">Publications</a></li>
+                        <li><a href="simulations.html">Simulations</a></li>
+                        <li><a href="results.html">Results</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="book.html">The Big TOE</a></li>
+                        <li><a href="media.html">Media</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="faq-page.html">FAQ</a></li>
+                        <li><a href="become-member.html">Our Members</a></li>
+                        <li><a href="https://zenodo.org/search?q=baines+cosmic+framework" target="_blank">Archive</a></li>
+                        <li><a href="shop.html">Shopping &#x1F6A7;</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="about-page.html">About</a></li>
+                        <li><a href="legal.html">Legal</a></li>
+                        <li><a href="contribute.html">Contribute</a></li>
+                        <li><a href="discussions-page.html">Discussions</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="become-member.html">Become a Member</a></li>
+                        <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
+        </div>
     </footer>
 
-    <!-- AOS Animation Library -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-    AOS.init({ duration: 1000, once: true, offset: 100 });
+    AOS.init({ duration: 900, once: true, offset: 80 });
 
-    // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
-    
     if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', function() {
-    this.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', function() {
-    hamburger.classList.remove('active');
-    mobileMenu.classList.remove('active');
-    });
-    });
+        hamburger.addEventListener('click', function() { this.classList.toggle('active'); mobileMenu.classList.toggle('active'); });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); });
+        });
     }
-    </script>
 
-    <!-- FAQ JS (accordion, categories, search) -->
-    <script>
-    // FAQ Accordion functionality
-    document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-    const item = question.parentElement;
-    const wasActive = item.classList.contains('active');
-    
-    // Close all items
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-    
-    // Open clicked item if it wasn't active
-    if (!wasActive) {
-    item.classList.add('active');
-    }
-    });
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.parentElement;
+            const wasActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!wasActive) item.classList.add('active');
+        });
     });
 
-    // Category filtering
     document.querySelectorAll('.category-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-    const category = btn.dataset.category;
-    
-    // Update active button
-    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    // Show/hide categories
-    document.querySelectorAll('.faq-category').forEach(cat => {
-    if (category === 'all' || cat.dataset.category === category) {
-    cat.style.display = 'block';
-    } else {
-    cat.style.display = 'none';
-    }
-    });
-    });
+        btn.addEventListener('click', () => {
+            const cat = btn.dataset.category;
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.faq-category').forEach(c => {
+                c.style.display = (cat === 'all' || c.dataset.category === cat) ? 'block' : 'none';
+            });
+        });
     });
 
-    // Search functionality
     const searchBox = document.getElementById('faqSearch');
-    searchBox.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    
-    document.querySelectorAll('.faq-item').forEach(item => {
-    const question = item.querySelector('.faq-question').textContent.toLowerCase();
-    const answer = item.querySelector('.faq-answer-content').textContent.toLowerCase();
-    
-    if (question.includes(searchTerm) || answer.include
+    searchBox.addEventListener('input', e => {
+        const term = e.target.value.toLowerCase();
+        if (!term) {
+            document.querySelectorAll('.faq-item').forEach(i => i.style.display = '');
+            document.querySelectorAll('.faq-category').forEach(c => c.style.display = '');
+            return;
+        }
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const q = item.querySelector('.faq-question').textContent.toLowerCase();
+            const a = item.querySelector('.faq-answer-content').textContent.toLowerCase();
+            item.style.display = (q.includes(term) || a.includes(term)) ? '' : 'none';
+        });
+        document.querySelectorAll('.faq-category').forEach(cat => {
+            cat.style.display = Array.from(cat.querySelectorAll('.faq-item')).some(i => i.style.display !== 'none') ? '' : 'none';
+        });
+    });
+    </script>
+</body>
+</html>
