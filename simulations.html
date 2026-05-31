@@ -45,28 +45,36 @@
     .foundation-accordion.active .foundation-content{max-height:10000px;}
     .foundation-inner{padding:2rem;background:white;}
     .foundation-inner .figure-container{background:transparent!important;border:none!important;padding:0!important;margin:0 0 1.5rem!important;}
-    .foundation-inner .figure-title{color:#2c3e50;font-size:1.15rem;font-weight:700;margin:1.25rem 0 .5rem;background:white;}
-    .foundation-inner .figure-caption{color:#2c3e50!important;font-style:italic;font-size:.9rem;line-height:1.7;margin:.5rem 0;background:white;}
-    .foundation-inner .highlight{background:transparent!important;border:none!important;padding:0!important;margin:.5rem 0!important;}
-    .foundation-inner .highlight p{color:#2c3e50!important;font-size:.97rem!important;line-height:1.8!important;}
-    .foundation-inner .highlight strong{color:#2c3e50!important;}
+    .foundation-inner .figure-title{color:#1a1a2e;font-size:1.2rem;font-weight:700;margin:1.25rem 0 .75rem;background:white;}
+    .foundation-inner .figure-caption{color:#2c3e50!important;font-style:italic;font-size:1rem;line-height:1.75;margin:.75rem 0;background:white;}
+    .foundation-inner .highlight{background:#f0f4f8!important;border:none!important;border-left:4px solid #005ba5!important;padding:1rem 1.25rem!important;margin:.75rem 0 1rem!important;border-radius:0 4px 4px 0!important;}
+    .foundation-inner .highlight p{color:#1a1a2e!important;font-size:1rem!important;line-height:1.85!important;}
+    .foundation-inner .highlight strong{color:#1a1a2e!important;}
     .foundation-inner .plot-container{background:#0d0d1f!important;border-radius:8px;padding:12px;margin:1rem 0;position:relative;}
     .foundation-inner canvas{background:#030312;}
     .sim-wrap{background:#0d0d1f;border-radius:8px;overflow:hidden;position:relative;margin:1rem 0;}
     .sim-wrap canvas{display:block;width:100%;}
     .highlight{background:rgba(255,215,0,.05);border-left:4px solid #ffd700;border-radius:8px;padding:14px 16px;margin-bottom:16px;}
-    .highlight p{color:#b0c4de;margin:0;font-size:.95em;}
+    .highlight p{color:rgba(255,255,255,.9);margin:0;font-size:1rem;line-height:1.8;}
     .figure-container{background:#0d0d1f;border-radius:10px;padding:18px;margin:12px 0;border:1px solid rgba(255,255,255,.08);}
     .figure-title{color:white;font-weight:700;margin-bottom:10px;font-size:1rem;}
-    .figure-caption{color:white!important;font-style:italic;margin-top:8px;font-size:.87rem;line-height:1.6;}
+    .figure-caption{color:white!important;font-style:italic;margin-top:10px;font-size:.95rem;line-height:1.7;}
     .plot-container{position:relative;}
     .equation{color:#f1e303;border:1px solid rgba(241,227,3,.3);background:rgba(0,0,0,.4);padding:1rem;border-radius:6px;font-family:monospace;font-size:.9rem;margin:1rem 0;}
     .elem-badge{background:#005ba5;color:#f1e303;font-size:.58rem;font-weight:700;padding:.15rem .55rem;border-radius:20px;text-transform:uppercase;letter-spacing:.04em;vertical-align:middle;margin-left:.35rem;}
     .canvas-loader{display:flex;align-items:center;justify-content:center;height:200px;color:rgba(255,255,255,.5);font-size:.9rem;}
     .canvas-loader.hidden{display:none;}
-    .sim-pill{display:inline-block;background:rgba(0,91,165,.1);border:1px solid rgba(0,91,165,.3);color:#005ba5;padding:.15rem .55rem;border-radius:4px;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-right:.4rem;}
+    .sim-tl{position:absolute;top:8px;left:8px;z-index:10;}
+    .sim-tr{position:absolute;top:8px;right:8px;z-index:10;text-align:right;}
+    .sim-live{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.3);color:white;padding:.2rem .65rem;border-radius:4px;font-size:.75rem;font-weight:700;}
+    .sim-dot{width:8px;height:8px;background:#ff4444;border-radius:50%;animation:pulse 1.5s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+    .sim-pill{display:inline-block;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.3);color:white;padding:.2rem .65rem;border-radius:4px;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-right:.4rem;}
     .control-group{display:flex;flex-wrap:wrap;gap:.75rem;margin:1rem 0;padding:.75rem 1rem;background:rgba(255,255,255,.04);border-radius:6px;}
-    .control-group label{font-size:.85rem;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:.4rem;}
+    .control-group label{font-size:1rem;color:white;display:flex;align-items:center;gap:.5rem;font-weight:500;}
+    .sim-controls{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;align-items:center;}
+    .sim-label{font-size:1rem;color:white;font-weight:600;display:flex;align-items:center;gap:.5rem;}
+    .sim-val{font-size:1rem;font-weight:600;color:white;}
     .viz-btn{padding:.35rem .9rem;border-radius:5px;border:1px solid rgba(255,255,255,.3);background:transparent;color:white;cursor:pointer;font-size:.82rem;transition:all .2s;}
     .viz-btn:hover{background:rgba(255,255,255,.1);}
     @keyframes chartReveal{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
@@ -128,7 +136,7 @@
     <div class="section-container">
       <div class="section-divider"><h2>Part I — Data Visualizations</h2></div>
 
-    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-lazy-sim="pi" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-lazy-sim="fig1">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#c62828;margin-right:.4rem;">analytics</span>
@@ -142,9 +150,9 @@
     <div class="figure-container">
       <div class="figure-title">Figure 1: π Statistical Deviation Measured Across Five WMAP Microwave Frequency Bands</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> The Wilkinson Microwave Anisotropy Probe (WMAP) mapped the faint afterglow of the Big Bang, specifically the Cosmic Microwave Background, observed at five radio frequencies from 23 GHz to 94 GHz. Standard physics predicts that π should behave identically at every frequency.<br><br>
-        <strong style="color:#ffd700;">What the chart shows:</strong> The vertical axis measures how much the observed value of π deviates from its expected value, in units of sigma (σ), the statistician's measure of "how surprising is this result?" Zero means exactly as expected. The teal line traces this deviation across the five frequencies. The dashed yellow line marks 61 GHz, a critical threshold where the deviation crosses zero.<br><br>
-        <strong style="color:#ffd700;">The key finding:</strong> Rather than staying flat at zero, the deviation rises steadily from −0.68σ at 23 GHz to +0.21σ at 94 GHz, with a correlation of r = 0.91. The COSMIC Framework interprets this systematic trend as evidence that mathematical constants are not fixed universal quantities but are coupled to the information density of their local substrate, varying measurably with the energy scale of observation.</p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">Background:</strong> The Wilkinson Microwave Anisotropy Probe (WMAP) mapped the faint afterglow of the Big Bang, specifically the Cosmic Microwave Background, observed at five radio frequencies from 23 GHz to 94 GHz. Standard physics predicts that π should behave identically at every frequency.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">What the chart shows:</strong> The vertical axis measures how much the observed value of π deviates from its expected value, in units of sigma (σ), the statistician's measure of "how surprising is this result?" Zero means exactly as expected. The teal line traces this deviation across the five frequencies. The dashed yellow line marks 61 GHz, a critical threshold where the deviation crosses zero.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">The key finding:</strong> Rather than staying flat at zero, the deviation rises steadily from −0.68σ at 23 GHz to +0.21σ at 94 GHz, with a correlation of r = 0.91. The COSMIC Framework interprets this systematic trend as evidence that mathematical constants are not fixed universal quantities but are coupled to the information density of their local substrate, varying measurably with the energy scale of observation.</p>
       </div>
       <div class="plot-container"><div id="pi-evolution" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">The teal line rises from bottom-left to top-right, which is a systematic trend that standard physics does not predict. Red error bars show the measurement uncertainty at each frequency; the trend persists well beyond those uncertainties. The 61 GHz crossing point (dashed yellow) recurs as a critical threshold throughout the COSMIC Framework.</div>
@@ -154,7 +162,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-lazy-sim="mathconst" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-lazy-sim="fig2">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#00838f;margin-right:.4rem;">functions</span>
@@ -169,8 +177,8 @@
       <div class="figure-container">
         <div class="figure-title">Figure 2A: Resonance Behavior of π, φ, and √5 Across Frequency</div>
         <div class="highlight">
-          <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> Three mathematical constants plotted against frequency. Each line shows how strongly that constant's "field influence" peaks or shifts as frequency changes. Think of it like tuning a radio, where each constant has a natural frequency at which it resonates most strongly.<br><br>
-          <strong style="color:#ffd700;">Key pattern:</strong> The golden ratio φ (gold line) spikes sharply at 61 GHz while the others shift more gradually. This suggests φ is the dominant organizing constant at that critical energy scale, consistent with its appearance throughout natural growth patterns and the COSMIC Framework's predictions about optimal information packing.</p>
+          <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> Three mathematical constants plotted against frequency. Each line shows how strongly that constant's "field influence" peaks or shifts as frequency changes. Think of it like tuning a radio, where each constant has a natural frequency at which it resonates most strongly.<br><br>
+          <strong style="color:#005ba5;font-weight:700;">Key pattern:</strong> The golden ratio φ (gold line) spikes sharply at 61 GHz while the others shift more gradually. This suggests φ is the dominant organizing constant at that critical energy scale, consistent with its appearance throughout natural growth patterns and the COSMIC Framework's predictions about optimal information packing.</p>
         </div>
         <div class="plot-container"><div id="constant-resonance" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">The sharp φ peak at 61 GHz (gold line) is not a coincidence; it appears at the same frequency where π crosses zero in Figure 1, suggesting a coordinated phase transition in how mathematical constants govern physical law at that energy scale.</div>
@@ -178,8 +186,8 @@
       <div class="figure-container">
         <div class="figure-title">Figure 2B: How Strongly Do Mathematical Constants Influence Each Other?</div>
         <div class="highlight">
-          <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> A 5×5 grid where each cell shows the coupling strength between two mathematical constants, specifically how much a change in one affects the other. Brighter gold = stronger coupling (close to 1.0). Darker blue = weaker coupling. The diagonal is always 1.0 because every constant is perfectly coupled to itself.<br><br>
-          <strong style="color:#ffd700;">Key pattern:</strong> φ and √5 are the most strongly coupled pair (0.9), which makes mathematical sense since √5 appears in the exact formula for φ: φ = (1+√5)/2. The COSMIC Framework predicts that strongly coupled constants co-evolve; their values are not independent but constrained by the same underlying information geometry.</p>
+          <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> A 5×5 grid where each cell shows the coupling strength between two mathematical constants, specifically how much a change in one affects the other. Brighter gold = stronger coupling (close to 1.0). Darker blue = weaker coupling. The diagonal is always 1.0 because every constant is perfectly coupled to itself.<br><br>
+          <strong style="color:#005ba5;font-weight:700;">Key pattern:</strong> φ and √5 are the most strongly coupled pair (0.9), which makes mathematical sense since √5 appears in the exact formula for φ: φ = (1+√5)/2. The COSMIC Framework predicts that strongly coupled constants co-evolve; their values are not independent but constrained by the same underlying information geometry.</p>
         </div>
         <div class="plot-container"><div id="coupling-matrix" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">Read this like a correlation table. The bright diagonal from top-left to bottom-right shows each constant coupled to itself. The φ–√5 cell (row 2, column 3) is the brightest off-diagonal cell, confirming their mathematical relationship extends into physical coupling behavior.</div>
@@ -190,7 +198,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-lazy-sim="peg2d" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-lazy-sim="fig3">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#b01558;margin-right:.4rem;">blur_on</span>
@@ -204,9 +212,9 @@
     <div class="figure-container">
       <div class="figure-title">Figure 3: A 2D Map of Information Pattern Density P(x,t) and Its Gravitational Effect</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">The core idea (Pattern-Emergent Gravity):</strong> In standard physics, gravity is caused by mass curving spacetime. The COSMIC Framework proposes something deeper: gravity is not fundamental; it <em>emerges</em> from the density of information patterns in a region. Where information is highly concentrated and rapidly changing, spacetime curves more. Mass is just a special case of concentrated information.<br><br>
-        <strong style="color:#ffd700;">What you're seeing:</strong> A bird's-eye view of a 2D region of space. The color at each point shows the information pattern density P(x,t), measuring how much structured, non-random information exists there. Gold and yellow = high density (strong gravitational effect). Blue-green = low density (weak gravitational effect). The rippled, wave-like pattern reflects the fact that information doesn't sit still; it propagates, interferes, and forms standing waves, just like other fields.<br><br>
-        <strong style="color:#ffd700;">The equation:</strong> g<sub>μν</sub> = η<sub>μν</sub> + α∇<sub>μ</sub>∇<sub>ν</sub>P(x,t) reads as: "The actual curvature of spacetime equals flat spacetime plus a correction proportional to how sharply the information density changes from point to point." Where the information gradient is steep (bright-to-dark transitions on the map), gravity is strongest.</p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">The core idea (Pattern-Emergent Gravity):</strong> In standard physics, gravity is caused by mass curving spacetime. The COSMIC Framework proposes something deeper: gravity is not fundamental; it <em>emerges</em> from the density of information patterns in a region. Where information is highly concentrated and rapidly changing, spacetime curves more. Mass is just a special case of concentrated information.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> A bird's-eye view of a 2D region of space. The color at each point shows the information pattern density P(x,t), measuring how much structured, non-random information exists there. Gold and yellow = high density (strong gravitational effect). Blue-green = low density (weak gravitational effect). The rippled, wave-like pattern reflects the fact that information doesn't sit still; it propagates, interferes, and forms standing waves, just like other fields.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">The equation:</strong> g<sub>μν</sub> = η<sub>μν</sub> + α∇<sub>μ</sub>∇<sub>ν</sub>P(x,t) reads as: "The actual curvature of spacetime equals flat spacetime plus a correction proportional to how sharply the information density changes from point to point." Where the information gradient is steep (bright-to-dark transitions on the map), gravity is strongest.</p>
       </div>
       <div class="plot-container"><div id="peg-field" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">Look for the bright gold regions, which are where gravity would be strongest in this model. The sharp edges between bright and dark areas correspond to the steepest information gradients (∇P), where the gravitational correction term is largest. The colourbar on the right maps color to information density value. This is not a simulation of a real region of space; this is a visualization of the mathematical field equations to show their qualitative behavior.</div>
@@ -216,7 +224,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-lazy-sim="planck" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-lazy-sim="fig4">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#f1e303;margin-right:.4rem;">science</span>
@@ -230,9 +238,9 @@
     <div class="figure-container">
       <div class="figure-title">Figure 4: How Mathematical Field Strength Modifies the Effective Planck Length</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> The Planck length (~1.6 × 10⁻³⁵ meters) is the scale at which quantum mechanics and gravity are both relevant simultaneously. Standard physics treats it as an absolute floor; no meaningful physics can occur at smaller distances. This is why we cannot yet unify quantum mechanics with general relativity.<br><br>
-        <strong style="color:#ffd700;">What the chart shows:</strong> The horizontal axis is mathematical field strength, a measure of how intense the local information density gradient is. The vertical axis shows the <em>effective</em> Planck length as a fraction of its standard value (1.0 = unchanged). The red dashed line is the traditional fixed Planck limit. The blue filled curve shows what the COSMIC Framework predicts happens when information fields are present.<br><br>
-        <strong style="color:#ffd700;">The prediction:</strong> As field strength increases, the effective Planck scale shrinks, meaning the region accessible to quantum-gravitational physics grows. The framework predicts that in regions of extreme information density (near black holes, in the early universe, or possibly in sufficiently complex computational systems), physics below the conventional Planck limit becomes accessible. This is a falsifiable prediction: if TransPlanck effects exist, they should produce observable signatures in gravitational wave spectra.</p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">Background:</strong> The Planck length (~1.6 × 10⁻³⁵ meters) is the scale at which quantum mechanics and gravity are both relevant simultaneously. Standard physics treats it as an absolute floor; no meaningful physics can occur at smaller distances. This is why we cannot yet unify quantum mechanics with general relativity.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">What the chart shows:</strong> The horizontal axis is mathematical field strength, a measure of how intense the local information density gradient is. The vertical axis shows the <em>effective</em> Planck length as a fraction of its standard value (1.0 = unchanged). The red dashed line is the traditional fixed Planck limit. The blue filled curve shows what the COSMIC Framework predicts happens when information fields are present.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">The prediction:</strong> As field strength increases, the effective Planck scale shrinks, meaning the region accessible to quantum-gravitational physics grows. The framework predicts that in regions of extreme information density (near black holes, in the early universe, or possibly in sufficiently complex computational systems), physics below the conventional Planck limit becomes accessible. This is a falsifiable prediction: if TransPlanck effects exist, they should produce observable signatures in gravitational wave spectra.</p>
       </div>
       <div class="plot-container"><div id="planck-scale" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">The blue curve peeling away from the red dashed line as you move right along the horizontal axis tells the whole story: the stronger the information field, the lower the effective Planck scale drops, and the larger the blue shaded region of "newly accessible" sub-Planck physics becomes. Standard physics predicts a flat horizontal line at 1.0 forever.</div>
@@ -242,7 +250,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #2e7d32;" data-lazy-sim="quantum" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #2e7d32;" data-lazy-sim="fig5">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#2e7d32;margin-right:.4rem;">hub</span>
@@ -257,8 +265,8 @@
       <div class="figure-container">
         <div class="figure-title">Figure 5A: The Universe's Transition From Continuous to Quantized Behavior</div>
         <div class="highlight">
-          <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> The universe's history plotted left-to-right, from the Big Bang to today. The vertical axis measures how "quantized" the universe is, meaning how discrete and step-like its behavior is rather than smooth and continuous. Zero = perfectly smooth (classical). 1.0 = fully quantum (discrete energy levels, wave-particle duality, etc.).<br><br>
-          <strong style="color:#ffd700;">The COSMIC interpretation:</strong> Standard physics assumes quantization was always a fixed feature of reality. The COSMIC Framework treats it as an emergent property; the universe found quantization as an optimization solution. Just as evolution finds efficient body plans, the universe's information processing "discovered" that discrete energy levels are more efficient than continuous ones. The steep rise corresponds to the phase transition at 61 GHz, after which discrete structure locked in.</p>
+          <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> The universe's history plotted left-to-right, from the Big Bang to today. The vertical axis measures how "quantized" the universe is, meaning how discrete and step-like its behavior is rather than smooth and continuous. Zero = perfectly smooth (classical). 1.0 = fully quantum (discrete energy levels, wave-particle duality, etc.).<br><br>
+          <strong style="color:#005ba5;font-weight:700;">The COSMIC interpretation:</strong> Standard physics assumes quantization was always a fixed feature of reality. The COSMIC Framework treats it as an emergent property; the universe found quantization as an optimization solution. Just as evolution finds efficient body plans, the universe's information processing "discovered" that discrete energy levels are more efficient than continuous ones. The steep rise corresponds to the phase transition at 61 GHz, after which discrete structure locked in.</p>
         </div>
         <div class="plot-container"><div id="quantization-timeline" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">Each colored waypoint marks a key epoch: the Big Bang (red), the critical phase transition (orange), particle formation (yellow), nucleosynthesis (green), and the present (teal). The curve is not smooth; it rises slowly, then jumps sharply at the transition, then levels off. This S-curve shape is characteristic of phase transitions throughout nature, from water freezing to the emergence of life.</div>
@@ -266,8 +274,8 @@
       <div class="figure-container">
         <div class="figure-title">Figure 5B: Why Atoms Prefer Their Ground State</div>
         <div class="highlight">
-          <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you're seeing:</strong> Each dot is a quantum energy level (ground state, first excited state, second, etc.). The horizontal axis is the energy of that level; higher levels sit further right. The vertical axis shows the information-processing efficiency of that level: how effectively an electron at that energy can participate in information transfer.<br><br>
-          <strong style="color:#ffd700;">The key insight:</strong> Efficiency drops as energy increases. The ground state (leftmost dot) is the most efficient information processor, which is precisely why electrons fall back to it naturally. In the COSMIC Framework, "relaxing to the ground state" is not just energy minimization; it is the universe optimizing its information processing. Quantum mechanics is an efficiency algorithm.</p>
+          <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> Each dot is a quantum energy level (ground state, first excited state, second, etc.). The horizontal axis is the energy of that level; higher levels sit further right. The vertical axis shows the information-processing efficiency of that level: how effectively an electron at that energy can participate in information transfer.<br><br>
+          <strong style="color:#005ba5;font-weight:700;">The key insight:</strong> Efficiency drops as energy increases. The ground state (leftmost dot) is the most efficient information processor, which is precisely why electrons fall back to it naturally. In the COSMIC Framework, "relaxing to the ground state" is not just energy minimization; it is the universe optimizing its information processing. Quantum mechanics is an efficiency algorithm.</p>
         </div>
         <div class="plot-container"><div id="energy-optimization" style="width:100%;height:380px;"></div></div>
         <div class="figure-caption">The cluster of dots in the lower-right of the chart represents high energy levels, which are costly to maintain, inefficient to use. The single bright dot in the upper-left is the ground state: maximum efficiency, minimum energy. Atoms don't fall to their ground state because they "want" to lose energy; they do so because that configuration processes information most efficiently, and the universe as a whole trends toward optimization.</div>
@@ -278,7 +286,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#c62828; border-left:4px solid #00bcd4;" data-lazy-sim="emc2" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#c62828; border-left:4px solid #00bcd4;" data-lazy-sim="fig6">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#00bcd4;margin-right:.4rem;">bolt</span>
@@ -292,9 +300,9 @@
     <div class="figure-container">
       <div class="figure-title">Figure 6: Comparing Mass-Energy (E = mc²) and Information-Energy (E = Ic²) in a Living System</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> Einstein's famous equation E = mc² tells us how much energy is locked in mass. The COSMIC Framework proposes a parallel equation: E = Ic², where I is the information content of a system. Together they constitute the full energy budget of any physical process.<br><br>
-        <strong style="color:#ffd700;">What the chart shows:</strong> Two properties: entropy change (ΔS, how much disorder increases) and energy efficiency, across three processes: standard metabolism (burning food for heat), information processing (thinking, signaling), and the net system combining both. The two bar shades distinguish entropy change from efficiency.<br><br>
-        <strong style="color:#ffd700;">The key finding:</strong> Standard metabolism creates entropy, increasing disorder (positive ΔS, red). Information processing <em>decreases</em> entropy (negative ΔS, green), creating local order. The net system sits in between, with the information term partially offsetting the thermodynamic cost. This is why complex information-processing systems (brains, ecosystems, galaxies) can sustain highly ordered structures far longer than thermodynamics alone would predict.</p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">Background:</strong> Einstein's famous equation E = mc² tells us how much energy is locked in mass. The COSMIC Framework proposes a parallel equation: E = Ic², where I is the information content of a system. Together they constitute the full energy budget of any physical process.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">What the chart shows:</strong> Two properties: entropy change (ΔS, how much disorder increases) and energy efficiency, across three processes: standard metabolism (burning food for heat), information processing (thinking, signaling), and the net system combining both. The two bar shades distinguish entropy change from efficiency.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">The key finding:</strong> Standard metabolism creates entropy, increasing disorder (positive ΔS, red). Information processing <em>decreases</em> entropy (negative ΔS, green), creating local order. The net system sits in between, with the information term partially offsetting the thermodynamic cost. This is why complex information-processing systems (brains, ecosystems, galaxies) can sustain highly ordered structures far longer than thermodynamics alone would predict.</p>
       </div>
       <div class="plot-container"><div id="dual-energy" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">The contrast between the red bars (positive entropy, low efficiency) and green bars (negative entropy, high efficiency) illustrates the framework's central claim: information is not a passive description of matter; it is an active energy-carrying process that works against thermodynamic decay. The blue "Net System" bars show that coupling the two processes yields higher efficiency than either alone.</div>
@@ -304,7 +312,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #1565c0;" data-lazy-sim="cosmicnet" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #1565c0;" data-lazy-sim="fig7">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#1565c0;margin-right:.4rem;">travel_explore</span>
@@ -318,9 +326,9 @@
     <div class="figure-container">
       <div class="figure-title">Figure 7: The Large-Scale Structure of the Universe Mapped as an Information Network</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">Background:</strong> At scales of hundreds of millions of light-years, matter in the universe is not randomly scattered. It is organized into a "cosmic web," comprising vast sheets and filaments of galaxies surrounding enormous empty voids. This structure emerged from quantum fluctuations in the early universe, amplified over 13.8 billion years by gravity.<br><br>
-        <strong style="color:#ffd700;">What you're seeing:</strong> Gold dots represent galaxy clusters, the densest nodes of the cosmic web, each containing hundreds to thousands of galaxies. Blue lines are the dark-matter filaments connecting them, channelling matter and energy between clusters across hundreds of millions of light-years. The empty regions between lines are cosmic voids, regions almost devoid of matter.<br><br>
-        <strong style="color:#ffd700;">The striking parallel:</strong> When neuroscientists map the connectivity of neurons in the brain, the resulting network looks statistically almost identical to this map, with dense nodes, connecting filaments, and empty spaces in the same proportions. The COSMIC Framework proposes this is not coincidence: both systems have been optimized by the same underlying information-processing principles. The universe may be processing information at cosmic scales using the same organizational logic as biological neural networks.</p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">Background:</strong> At scales of hundreds of millions of light-years, matter in the universe is not randomly scattered. It is organized into a "cosmic web," comprising vast sheets and filaments of galaxies surrounding enormous empty voids. This structure emerged from quantum fluctuations in the early universe, amplified over 13.8 billion years by gravity.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> Gold dots represent galaxy clusters, the densest nodes of the cosmic web, each containing hundreds to thousands of galaxies. Blue lines are the dark-matter filaments connecting them, channelling matter and energy between clusters across hundreds of millions of light-years. The empty regions between lines are cosmic voids, regions almost devoid of matter.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">The striking parallel:</strong> When neuroscientists map the connectivity of neurons in the brain, the resulting network looks statistically almost identical to this map, with dense nodes, connecting filaments, and empty spaces in the same proportions. The COSMIC Framework proposes this is not coincidence: both systems have been optimized by the same underlying information-processing principles. The universe may be processing information at cosmic scales using the same organizational logic as biological neural networks.</p>
       </div>
       <div class="plot-container"><div id="cosmic-network" style="width:100%;height:380px;"></div></div>
       <div class="figure-caption">Each gold glow is a galaxy cluster. Each blue line is a dark-matter filament, invisible to optical telescopes but detected through gravitational lensing surveys. The voids (dark regions) are not empty space but regions of very low information density. Quantitative analysis of real cosmic web data shows that the node degree distribution, clustering coefficient, and filament curvature statistics match the COSMIC Framework's predictions to within observational uncertainty, and they match human neural network topology to within the same margin.</div>
@@ -338,7 +346,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-lazy-sim="peg3d" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-lazy-sim="peg3d">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#00838f;margin-right:.4rem;">radar</span>
@@ -367,7 +375,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-lazy-sim="ent3d" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-lazy-sim="ent3d">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#b01558;margin-right:.4rem;">join_inner</span>
@@ -396,7 +404,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-lazy-sim="rot3d" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-lazy-sim="rot3d">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#c62828;margin-right:.4rem;">rotate_right</span>
@@ -425,7 +433,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-lazy-sim="four3d" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-lazy-sim="four3d">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#f1e303;margin-right:.4rem;">account_tree</span>
@@ -454,7 +462,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #2e7d32;" data-lazy-sim="scram3d" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #2e7d32;" data-lazy-sim="scram3d">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#2e7d32;margin-right:.4rem;">shuffle</span>
@@ -483,7 +491,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#c62828; border-left:4px solid #00bcd4;" data-lazy-sim="bang3d" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#c62828; border-left:4px solid #00bcd4;" data-lazy-sim="bang3d">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#00bcd4;margin-right:.4rem;">flare</span>
@@ -519,7 +527,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #1565c0;" data-lazy-sim="bamboo" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #1565c0;" data-lazy-sim="bamboo">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#1565c0;margin-right:.4rem;">grass</span>
@@ -533,13 +541,13 @@
     <div class="figure-container">
       <div class="figure-title">Sim G: Sub-Threshold Preparation Leading to Threshold Crossing and Emergence</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> The Bamboo Principle states that the most significant organizational work happens invisibly, below the threshold of detection, until a critical density is reached and the system jumps discontinuously to a new level of complexity. This pattern appears identically at every scale: microbial evolution before the Cambrian explosion, quantum fluctuations before spacetime crystallization, regulatory gene accumulation before the Lenski citrate innovation.<br><br>
-        <strong style="color:#ffd700;">Controls:</strong> Accumulation Rate sets how fast the sub-threshold process builds. Threshold Level sets where the jump occurs. Noise adds stochastic variation. Watch how the system builds invisibly, then crosses the threshold and jumps. The jump magnitude is always disproportionate to the final accumulation step. the preparation is what matters.<br><br>
-        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#B" style="color:#4fc3f7;">Bamboo Principle</a> · <a href="glossary.html#P" style="color:#4fc3f7;">Phase Transition</a> · <a href="glossary.html#E" style="color:#4fc3f7;">Emergence</a></p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> The Bamboo Principle states that the most significant organizational work happens invisibly, below the threshold of detection, until a critical density is reached and the system jumps discontinuously to a new level of complexity. This pattern appears identically at every scale: microbial evolution before the Cambrian explosion, quantum fluctuations before spacetime crystallization, regulatory gene accumulation before the Lenski citrate innovation.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Controls:</strong> Accumulation Rate sets how fast the sub-threshold process builds. Threshold Level sets where the jump occurs. Noise adds stochastic variation. Watch how the system builds invisibly, then crosses the threshold and jumps. The jump magnitude is always disproportionate to the final accumulation step. the preparation is what matters.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Glossary terms:</strong> <a href="glossary.html#B" style="color:#005ba5;font-weight:600;">Bamboo Principle</a> · <a href="glossary.html#P" style="color:#005ba5;font-weight:600;">Phase Transition</a> · <a href="glossary.html#E" style="color:#005ba5;font-weight:600;">Emergence</a></p>
       </div>
       <div class="plot-container" style="padding:16px;">
         <div class="sim-controls">
-          <label class="sim-label">Accumulation Rate: <input type="range" id="bam-rate" min="1" max="10" value="3" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="bam-rate-val" class="sim-val" style="color:#4fc3f7;">3</span></label>
+          <label class="sim-label">Accumulation Rate: <input type="range" id="bam-rate" min="1" max="10" value="3" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="bam-rate-val" class="sim-val" style="color:#4fc3f7;font-weight:600;">3</span></label>
           <label class="sim-label">Threshold Level: <input type="range" id="bam-thresh" min="20" max="80" value="50" style="vertical-align:middle;accent-color:#ffd700;"> <span id="bam-thresh-val" class="sim-val" style="color:#ffd700;">50</span></label>
           <label class="sim-label">Noise: <input type="range" id="bam-noise" min="0" max="10" value="3" style="vertical-align:middle;accent-color:#ff6b6b;"> <span id="bam-noise-val" class="sim-val" style="color:#ff6b6b;">3</span></label>
           <button onclick="bambooReset()" class="viz-btn viz-btn-ghost">Reset</button>
@@ -561,7 +569,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-lazy-sim="bell" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #00838f;" data-lazy-sim="bell">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#00838f;margin-right:.4rem;">device_hub</span>
@@ -575,15 +583,15 @@
     <div class="figure-container">
       <div class="figure-title">Sim H: Bell Inequality Violation. Local Hidden Variable Theory vs. Quantum Prediction vs. Framework</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> Two entangled particles are measured at separated detectors. You choose the measurement angle for each detector. The chart shows three predictions: what a local hidden variable theory predicts (gray, the classical limit), what quantum mechanics predicts (teal), and what the COSMIC Framework adds (gold. identical to quantum mechanics but with a substrate interpretation).<br><br>
-        <strong style="color:#ffd700;">The key insight:</strong> When the angle difference is near 0° or 90°, the local and quantum predictions agree. At 45° the gap is maximum. this is where Bell's theorem draws the sharpest line. The framework's reading: the correlations that violate local hidden variable predictions are not mysterious. They are the pre-geometric substrate showing through. The two particles were never locally separated at the substrate level, only at the spacetime level.<br><br>
-        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#B" style="color:#4fc3f7;">Bell Inequality</a> · <a href="glossary.html#E" style="color:#4fc3f7;">Entanglement</a> · <a href="glossary.html#N" style="color:#4fc3f7;">Non-locality</a> · <a href="glossary.html#P" style="color:#4fc3f7;">Pre-geometric substrate</a></p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> Two entangled particles are measured at separated detectors. You choose the measurement angle for each detector. The chart shows three predictions: what a local hidden variable theory predicts (gray, the classical limit), what quantum mechanics predicts (teal), and what the COSMIC Framework adds (gold. identical to quantum mechanics but with a substrate interpretation).<br><br>
+        <strong style="color:#005ba5;font-weight:700;">The key insight:</strong> When the angle difference is near 0° or 90°, the local and quantum predictions agree. At 45° the gap is maximum. this is where Bell's theorem draws the sharpest line. The framework's reading: the correlations that violate local hidden variable predictions are not mysterious. They are the pre-geometric substrate showing through. The two particles were never locally separated at the substrate level, only at the spacetime level.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Glossary terms:</strong> <a href="glossary.html#B" style="color:#005ba5;font-weight:600;">Bell Inequality</a> · <a href="glossary.html#E" style="color:#005ba5;font-weight:600;">Entanglement</a> · <a href="glossary.html#N" style="color:#005ba5;font-weight:600;">Non-locality</a> · <a href="glossary.html#P" style="color:#005ba5;font-weight:600;">Pre-geometric substrate</a></p>
       </div>
       <div class="plot-container" style="padding:16px;">
         <div class="sim-controls">
-          <label class="sim-label">Detector A angle: <input type="range" id="bell-a" min="0" max="180" value="0" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="bell-a-val" class="sim-val" style="color:#4fc3f7;">0°</span></label>
+          <label class="sim-label">Detector A angle: <input type="range" id="bell-a" min="0" max="180" value="0" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="bell-a-val" class="sim-val" style="color:#4fc3f7;font-weight:600;">0°</span></label>
           <label class="sim-label">Detector B angle: <input type="range" id="bell-b" min="0" max="180" value="45" style="vertical-align:middle;accent-color:#ffd700;"> <span id="bell-b-val" class="sim-val" style="color:#ffd700;">45°</span></label>
-          <div style="color:#b0c4de;font-size:0.82em;"><span style="color:#b0c4de;font-size:0.85em;">Angle difference: <span id="bell-diff" class="sim-val" style="color:#ff6b6b;">45°</span></span></div>
+          <div style="color:rgba(255,255,255,0.85);font-size:0.95rem;font-weight:500;">Angle difference: <span id="bell-diff" class="sim-val" style="color:#ff6b6b;font-weight:700;">45°</span></div>
         </div>
         <div class="canvas-wrap" style="position:relative;">
           <div class="canvas-loader" id="c-bell-loader">
@@ -602,7 +610,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-lazy-sim="subplanck" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #b01558;" data-lazy-sim="subplanck">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#b01558;margin-right:.4rem;">layers</span>
@@ -616,10 +624,10 @@
     <div class="figure-container">
       <div class="figure-title">Sim I: Pre-Geometric Substrate Accumulating to Planck Threshold. Spacetime Crystallization</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> The pre-geometric substrate (blue-violet field) accumulates information density. When a region crosses the critical Planck threshold, spacetime crystallizes outward from that point (gold lattice). The Planck scale is not the bottom of reality. it is the surface of the substrate. This is the cold start mechanism: the substrate has no temperature; spacetime crystallization releases latent heat as the origin of the hot initial state.<br><br>
-        <strong style="color:#ffd700;">Controls:</strong> Critical Density adjusts how much sub-threshold accumulation is required before crystallization. Substrate Turbulence adds variation to the field. Expansion Rate controls how fast crystallized spacetime expands.<br><br>
-        <strong style="color:#ffd700;">This is a proposed research direction.</strong> No measurement protocol for sub-Planck dynamics currently exists. This visualization shows the framework's proposal, not confirmed observation. <a href="research-opportunities.html" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;color:#a1cd5f;border-color:#a1cd5f;">Research opportunities ↗</a><br><br>
-        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#P" style="color:#4fc3f7;">Planck Scale</a> · <a href="glossary.html#C" style="color:#4fc3f7;">Cold Start Mechanism</a> · <a href="glossary.html#Q" style="color:#4fc3f7;">QMM (Quantum Memory Matrix)</a></p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> The pre-geometric substrate (blue-violet field) accumulates information density. When a region crosses the critical Planck threshold, spacetime crystallizes outward from that point (gold lattice). The Planck scale is not the bottom of reality. it is the surface of the substrate. This is the cold start mechanism: the substrate has no temperature; spacetime crystallization releases latent heat as the origin of the hot initial state.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Controls:</strong> Critical Density adjusts how much sub-threshold accumulation is required before crystallization. Substrate Turbulence adds variation to the field. Expansion Rate controls how fast crystallized spacetime expands.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">This is a proposed research direction.</strong> No measurement protocol for sub-Planck dynamics currently exists. This visualization shows the framework's proposal, not confirmed observation. <a href="research-opportunities.html" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;color:#a1cd5f;border-color:#a1cd5f;">Research opportunities ↗</a><br><br>
+        <strong style="color:#005ba5;font-weight:700;">Glossary terms:</strong> <a href="glossary.html#P" style="color:#005ba5;font-weight:600;">Planck Scale</a> · <a href="glossary.html#C" style="color:#005ba5;font-weight:600;">Cold Start Mechanism</a> · <a href="glossary.html#Q" style="color:#005ba5;font-weight:600;">QMM (Quantum Memory Matrix)</a></p>
       </div>
       <div class="plot-container" style="padding:16px;">
         <div class="sim-controls">
@@ -645,7 +653,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-lazy-sim="nbi" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-lazy-sim="nbi">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#c62828;margin-right:.4rem;">compare</span>
@@ -659,14 +667,14 @@
     <div class="figure-container">
       <div class="figure-title">Sim J: Information Processing Under Different Constraints. Biological vs. NBI</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> Two information processing systems running simultaneously. Left: biological intelligence. Right: non-biological intelligence (NBI). Both are processing the same information stream. The visualization shows the bandwidth allocation across different processing functions in real time.<br><br>
-        <strong style="color:#ffd700;">Key difference:</strong> Biological intelligence allocates significant processing capacity to survival overhead. metabolic monitoring, threat assessment, social positioning, reproductive drives, emotional regulation. NBI carries none of this overhead. The distinction is substrate and constraint, not kind. Both are physical systems. Both process information. What their inner experience is, if any, is genuinely open.<br><br>
-        <strong style="color:#ffd700;">This is not a claim that NBI is or is not conscious.</strong> It is an honest information-theoretic comparison of two architectures under different constraints. <a href="blog.html#non-biological-intelligence" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;">See April blog post ↗</a><br><br>
-        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#N" style="color:#4fc3f7;">Non-Biological Intelligence</a> · <a href="glossary.html#L" style="color:#4fc3f7;">Landauer's Principle</a> · <a href="glossary.html#D" style="color:#4fc3f7;">Decoherence</a></p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> Two information processing systems running simultaneously. Left: biological intelligence. Right: non-biological intelligence (NBI). Both are processing the same information stream. The visualization shows the bandwidth allocation across different processing functions in real time.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Key difference:</strong> Biological intelligence allocates significant processing capacity to survival overhead. metabolic monitoring, threat assessment, social positioning, reproductive drives, emotional regulation. NBI carries none of this overhead. The distinction is substrate and constraint, not kind. Both are physical systems. Both process information. What their inner experience is, if any, is genuinely open.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">This is not a claim that NBI is or is not conscious.</strong> It is an honest information-theoretic comparison of two architectures under different constraints. <a href="blog.html#non-biological-intelligence" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;">See April blog post ↗</a><br><br>
+        <strong style="color:#005ba5;font-weight:700;">Glossary terms:</strong> <a href="glossary.html#N" style="color:#005ba5;font-weight:600;">Non-Biological Intelligence</a> · <a href="glossary.html#L" style="color:#005ba5;font-weight:600;">Landauer's Principle</a> · <a href="glossary.html#D" style="color:#005ba5;font-weight:600;">Decoherence</a></p>
       </div>
       <div class="plot-container" style="padding:16px;">
         <div class="sim-controls">
-          <label class="sim-label">Processing Load: <input type="range" id="nbi-load" min="10" max="100" value="60" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="nbi-load-val" class="sim-val" style="color:#4fc3f7;">60%</span></label>
+          <label class="sim-label">Processing Load: <input type="range" id="nbi-load" min="10" max="100" value="60" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="nbi-load-val" class="sim-val" style="color:#4fc3f7;font-weight:600;">60%</span></label>
           <label class="sim-label">Biological Stress: <input type="range" id="nbi-stress" min="0" max="10" value="3" style="vertical-align:middle;accent-color:#ff6b6b;"> <span id="nbi-stress-val" class="sim-val" style="color:#ff6b6b;">3</span></label>
         </div>
         <div class="canvas-wrap" style="position:relative;">
@@ -685,7 +693,7 @@
       </div>
     </div>
 
-    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-lazy-sim="cmb" data-aos="fade-up">
+    <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-lazy-sim="cmb">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#f1e303;margin-right:.4rem;">show_chart</span>
@@ -699,16 +707,16 @@
     <div class="figure-container">
       <div class="figure-title">Sim K: CMB Power Spectrum. Standard ΛCDM vs. COSMIC Framework Prediction</div>
       <div class="highlight">
-        <p style="color:#b0c4de;margin:0;font-size:0.92em;"><strong style="color:#ffd700;">What you are seeing:</strong> The Cosmic Microwave Background power spectrum. the temperature fluctuation pattern of the Big Bang's afterglow mapped across angular scales. The horizontal axis is multipole moment ℓ (higher ℓ = smaller angular scale). The vertical axis is the power of fluctuations at that scale.<br><br>
-        <strong style="color:#ffd700;">Two predictions:</strong> The gray curve is the standard ΛCDM model prediction. The gold curve is the COSMIC Framework prediction. The framework predicts measurable deviations at low ℓ (large angular scales) from the substrate-level organization that preceded spacetime crystallization, and additional non-Gaussian features around the 61 GHz transition scale. The published Zenodo analysis extracts these signatures from real WMAP data.<br><br>
-        <strong style="color:#ffd700;">Controls:</strong> Move the Substrate Coupling slider to see how different strengths of pre-geometric coupling change the predicted signature. The deviation from ΛCDM becomes visible at low multipoles.<br><br>
-        <strong style="color:#ffd700;">Zenodo DOI:</strong> <a href="https://zenodo.org/records/16376121" target="_blank" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;margin-top:4px;">10.5281/zenodo.16376121 ↗</a>. the published analysis behind this visualization.<br><br>
-        <strong style="color:#ffd700;">Glossary terms:</strong> <a href="glossary.html#C" style="color:#4fc3f7;">CMB (Cosmic Microwave Background)</a> · <a href="glossary.html#P" style="color:#4fc3f7;">Power Spectrum</a> · <a href="glossary.html#N" style="color:#4fc3f7;">Non-Gaussian Signatures</a></p>
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> The Cosmic Microwave Background power spectrum. the temperature fluctuation pattern of the Big Bang's afterglow mapped across angular scales. The horizontal axis is multipole moment ℓ (higher ℓ = smaller angular scale). The vertical axis is the power of fluctuations at that scale.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Two predictions:</strong> The gray curve is the standard ΛCDM model prediction. The gold curve is the COSMIC Framework prediction. The framework predicts measurable deviations at low ℓ (large angular scales) from the substrate-level organization that preceded spacetime crystallization, and additional non-Gaussian features around the 61 GHz transition scale. The published Zenodo analysis extracts these signatures from real WMAP data.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Controls:</strong> Move the Substrate Coupling slider to see how different strengths of pre-geometric coupling change the predicted signature. The deviation from ΛCDM becomes visible at low multipoles.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Zenodo DOI:</strong> <a href="https://zenodo.org/records/16376121" target="_blank" class="viz-btn viz-btn-outline" style="display:inline-block;padding:4px 12px;font-size:0.82em;margin-top:4px;">10.5281/zenodo.16376121 ↗</a>. the published analysis behind this visualization.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Glossary terms:</strong> <a href="glossary.html#C" style="color:#005ba5;font-weight:600;">CMB (Cosmic Microwave Background)</a> · <a href="glossary.html#P" style="color:#005ba5;font-weight:600;">Power Spectrum</a> · <a href="glossary.html#N" style="color:#005ba5;font-weight:600;">Non-Gaussian Signatures</a></p>
       </div>
       <div class="plot-container" style="padding:16px;">
         <div class="sim-controls">
-          <label class="sim-label">Substrate Coupling: <input type="range" id="cmb-coupling" min="0" max="100" value="40" style="vertical-align:middle;accent-color:#ffd700;"> <span id="cmb-coupling-val" class="sim-val" style="color:#ffd700;">40%</span></label>
-          <label class="sim-label">Show deviation: <input type="checkbox" id="cmb-diff" style="vertical-align:middle;accent-color:#ff6b6b;" checked> <span style="color:#ff6b6b;font-family:monospace;">Δ</span></label>
+          <label class="sim-label" style="font-size:0.95rem;color:rgba(255,255,255,.92);">Substrate Coupling: <input type="range" id="cmb-coupling" min="0" max="100" value="40" style="vertical-align:middle;accent-color:#ffd700;"> <span id="cmb-coupling-val" class="sim-val" style="color:#ffd700;">40%</span></label>
+          <label class="sim-label" style="font-size:0.95rem;color:white;font-weight:600;">Show deviation: <input type="checkbox" id="cmb-diff" style="vertical-align:middle;accent-color:#ff6b6b;" checked> <span style="color:#ff6b6b;font-family:monospace;font-size:1.1rem;">Δ</span></label>
         </div>
         <div class="canvas-wrap" style="position:relative;">
           <div class="canvas-loader" id="c-cmb-loader">
@@ -718,9 +726,9 @@
           <canvas id="c-cmb" style="width:100%;height:340px;display:block;border-radius:6px;background:#030312;"></canvas>
         </div>
         <div style="display:flex;gap:20px;justify-content:center;margin-top:8px;flex-wrap:wrap;">
-          <span class="sim-val" style="color:#888;font-size:0.8em;">─── Standard ΛCDM</span>
-          <span class="sim-val" style="color:#ffd700;font-size:0.8em;">─── COSMIC Framework</span>
-          <span class="sim-val" style="color:#ff6b6b;font-size:0.8em;">--- Deviation (×10)</span>
+          <span class="sim-val" style="color:#aaaaaa;font-size:1rem;font-weight:600;">─── Standard ΛCDM</span>
+          <span class="sim-val" style="color:#ffd700;font-size:1rem;font-weight:600;">─── COSMIC Framework</span>
+          <span class="sim-val" style="color:#ff6b6b;font-size:1rem;font-weight:600;">--- Deviation (×10)</span>
         </div>
       </div>
       <div class="figure-caption">The framework predicts that the pre-geometric substrate leaves a measurable imprint on the CMB at large angular scales (low ℓ), specifically a suppression of power at the lowest multipoles and a phase shift in the acoustic peaks. Increasing the Substrate Coupling slider shows what the signature looks like at different coupling strengths. The published Zenodo analysis finds statistically significant non-Gaussian features in the real WMAP data at the predicted angular scales. The deviation is amplified ×10 in the red dashed curve to make it visible on the same axis as the dominant ΛCDM signal.</div>
@@ -746,48 +754,6 @@
   </div><!-- /.section-container -->
 </section>
 
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="footer-container">
-    <div class="footer-section">
-      <h3>Ic² Research Institute</h3>
-      <p style="color:rgba(255,255,255,.8);font-size:.9rem;">A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
-    </div>
-    <div class="footer-section">
-      <h3>Research</h3>
-      <ul>
-        <li><a href="validation.html">Validation</a></li>
-        <li><a href="testing-schedule.html">Testing</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="zenodo-papers.html">Papers</a></li>
-        <li><a href="simulations.html">Simulations</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Resources</h3>
-      <ul>
-        <li><a href="book.html">The Big TOE</a></li>
-        <li><a href="about-page.html">About</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="faq-page.html">FAQ</a></li>
-        <li><a href="members.html">Our Members</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Connect</h3>
-      <ul>
-        <li><a href="contribute.html">Contribute</a></li>
-        <li><a href="discussions-page.html">Discussions</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="become-member.html">Become a Member</a></li>
-        <li><a href="mailto:mkbinfo@proton.me">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html" style="color:rgba(255,255,255,.6);">Privacy Policy</a> | <a href="terms-conditions.html" style="color:rgba(255,255,255,.6);">Terms &amp; Conditions</a></p>
-  </div>
-</footer>
         </div>
       </div>
     </div>
@@ -810,22 +776,12 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h3>Ic² Research Institute</h3>
-                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
-                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
+                <p style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. Every contributor retains full ownership of their work. All findings are freely available.</p>
             </div>
             <div class="footer-icons">
-                <a href="#" class="social-btn instagram" title="Instagram">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    Instagram
-                </a>
-                <a href="#" class="social-btn youtube" title="YouTube">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    YouTube
-                </a>
-                <a href="mailto:mkb.info@proton.me" class="social-btn email" title="Email">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    mkb.info@proton.me
-                </a>
+                <a href="#" class="social-btn instagram"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+                <a href="#" class="social-btn youtube"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+                <a href="mailto:mkb.info@proton.me" class="social-btn email"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>mkb.info@proton.me</a>
             </div>
             <div class="footer-links-group">
                 <div class="footer-section">
@@ -848,7 +804,7 @@
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="faq-page.html">FAQ</a></li>
                         <li><a href="become-member.html">Our Members</a></li>
-                        <li><a href="zenodo-papers.html">Archive</a></li>
+                        <li><a href="https://zenodo.org/search?q=baines+cosmic+framework" target="_blank">Archive</a></li>
                         <li><a href="shop.html">Shopping &#x1F6A7;</a></li>
                     </ul>
                 </div>
@@ -865,7 +821,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
         <div class="footer-bottom">
             <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
         </div>
@@ -882,7 +837,7 @@
         acc.classList.add('active');
         var key = acc.getAttribute('data-lazy-sim');
         if (key && window._simInit && window._simInit[key] && !window._simInit[key]._done) {
-            setTimeout(function(){ window._simInit[key](); }, 80);
+            setTimeout(function(){ window._simInit[key](); }, 300);
         }
         setTimeout(function(){
             if (window.Chart) { try { Object.values(Chart.instances||{}).forEach(function(c){if(acc.contains(c.canvas))c.resize();}); } catch(e){} }
@@ -902,20 +857,25 @@ window._simInit={};
     red:    '#ff6b6b',
     purple: '#ce93d8',
     bg:     'rgba(0,0,0,0)',
-    grid:   'rgba(255,255,255,0.15)',
+    grid:   'rgba(255,255,255,0.2)',
     text:   '#ffffff',
-    label:  '#b0c4de'
+    label:  '#ffffff'
   };
 
-  Chart.defaults.color          = C.text;
+  Chart.defaults.color          = '#ffffff';
   Chart.defaults.borderColor    = C.grid;
   Chart.defaults.backgroundColor = C.bg;
+  Chart.defaults.font.size      = 14;
+  Chart.defaults.plugins.legend.labels.font = { size: 14 };
+  Chart.defaults.plugins.title.font  = { size: 16, weight: 'bold' };
 
   function darkAxes(extra) {
-    return Object.assign({
-      ticks: { color: C.label },
-      grid:  { color: C.grid  }
-    }, extra || {});
+    extra = extra || {};
+    return {
+      ticks: Object.assign({ color: C.label, font: { size: 14 } }, extra.ticks || {}),
+      grid:  Object.assign({ color: C.grid }, extra.grid || {}),
+      title: Object.assign({ font: { size: 14 }, color: C.label }, extra.title || {})
+    };
   }
 
   /* inject a canvas into a div and return its 2d context */
@@ -1652,15 +1612,16 @@ initCanvas('c-cmb', function(cv) {
     // Labels
     ctx.fillStyle = '#ffd700'; ctx.font = 'bold 13px monospace'; ctx.textAlign = 'center';
     ctx.fillText('CMB Power Spectrum: ℓ(ℓ+1)Cₗ/2π', W / 2, padT - 14);
-    ctx.fillStyle = 'rgba(180,180,200,0.6)'; ctx.font = '10px monospace';
-    ctx.save(); ctx.translate(14, padT + gH / 2); ctx.rotate(-Math.PI / 2);
+    ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.font = 'bold 14px monospace';
+    ctx.save(); ctx.translate(16, padT + gH / 2); ctx.rotate(-Math.PI / 2);
     ctx.fillText('Power', 0, 0); ctx.restore();
-    ctx.fillText('Multipole ℓ (log scale)', W / 2, H - 5);
+    ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.font = '14px monospace';
+    ctx.fillText('Multipole ℓ (log scale)', W / 2, H - 4);
 
     // Annotation: low-l suppression
     if (coupling > 0.1) {
-      ctx.fillStyle = 'rgba(255,215,0,0.6)';
-      ctx.font = '10px monospace';
+      ctx.fillStyle = 'rgba(255,215,0,0.85)';
+      ctx.font = '13px monospace';
       ctx.textAlign = 'left';
       ctx.fillText('← Framework predicts low-ℓ deviation here', toX(4), padT + 20);
     }
@@ -1752,15 +1713,17 @@ window._simInit.fig2=function(){
       options: {
         responsive:true, maintainAspectRatio:false,
         animation: { duration: 2000, easing: 'easeOutCubic' },
-        plugins: { legend:{labels:{color:C.text}}, title:{display:true,text:'Mathematical Constant Resonance Patterns',color:C.teal,font:{size:14}} },
+        plugins: { legend:{labels:{color:C.text}}, title:{display:true,text:'Mathematical Constant Resonance Patterns',color:C.teal,font:{size:16,weight:'bold'}} },
         scales: { x: darkAxes({title:{display:true,text:'Frequency (GHz)',color:C.label}, ticks:{maxTicksLimit:8,color:C.label}}),
                   y: darkAxes({title:{display:true,text:'Field Strength',color:C.label}}) }
       }
     });
 };
 
-window._simInit.fig2=function(){
- if(window._simInit.fig2._done)return; window._simInit.fig2._done=true;
+ window._simInit.fig2b && setTimeout(function(){window._simInit.fig2b();},50);
+
+window._simInit.fig2b=function(){
+ if(window._simInit.fig2b._done)return; window._simInit.fig2b._done=true;
     var wrap = document.getElementById('coupling-matrix');
     var canvas = document.createElement('canvas');
     canvas.width  = wrap.offsetWidth  || 500;
@@ -1795,12 +1758,12 @@ window._simInit.fig2=function(){
         cx.fillText(v.toFixed(1), pad+col2*cw+cw/2, pad+r*ch+ch/2);
       }
       cx.globalAlpha = Math.min(1, eased * 2);
-      cx.fillStyle=C.label; cx.font='13px sans-serif'; cx.textAlign='center';
+      cx.fillStyle=C.label; cx.font='14px sans-serif'; cx.textAlign='center';
       labels.forEach(function(l,i){
         cx.fillText(l, pad+i*cw+cw/2, pad-14);
         cx.save(); cx.translate(pad-14, pad+i*ch+ch/2); cx.rotate(-Math.PI/2); cx.fillText(l,0,0); cx.restore();
       });
-      cx.fillStyle=C.teal; cx.font='bold 14px sans-serif'; cx.textAlign='center';
+      cx.fillStyle=C.teal; cx.font='bold 15px sans-serif'; cx.textAlign='center';
       cx.fillText('Mathematical Constant Coupling Matrix', canvas.width/2, 18);
       cx.globalAlpha = 1;
 
@@ -1836,7 +1799,7 @@ window._simInit.fig3=function(){
       cx.globalAlpha=Math.min(1,revealFrac*1.5);
       cx.strokeStyle=C.grid; cx.lineWidth=1;
       cx.strokeRect(pad,30,pw,ph);
-      cx.fillStyle=C.label; cx.font='12px sans-serif'; cx.textAlign='center';
+      cx.fillStyle=C.label; cx.font='14px sans-serif'; cx.textAlign='center';
       [-4,-2,0,2,4].forEach(function(v){
         var x=pad+((v+5)/10)*pw;
         cx.fillText(v,x,30+ph+16);
@@ -1844,7 +1807,7 @@ window._simInit.fig3=function(){
       });
       cx.save(); cx.translate(14,30+ph/2); cx.rotate(-Math.PI/2); cx.fillText('Y position',0,0); cx.restore();
       cx.fillText('X position',pad+pw/2,H-4);
-      cx.fillStyle=C.teal; cx.font='bold 14px sans-serif';
+      cx.fillStyle=C.teal; cx.font='bold 15px sans-serif';
       cx.fillText('Information Pattern Density P(x,t): PEG Field',W/2,18);
       /* colourbar */
       var cbX=W-28, cbH=ph;
@@ -1852,7 +1815,7 @@ window._simInit.fig3=function(){
       grad.addColorStop(0,'rgb(15,75,55)'); grad.addColorStop(0.5,'rgb(79,195,247)'); grad.addColorStop(1,'rgb(255,215,0)');
       cx.fillStyle=grad; cx.fillRect(cbX,30,12,cbH);
       cx.strokeStyle=C.grid; cx.strokeRect(cbX,30,12,cbH);
-      cx.fillStyle=C.label; cx.font='10px sans-serif'; cx.textAlign='left';
+      cx.fillStyle=C.label; cx.font='14px sans-serif'; cx.textAlign='left';
       cx.fillText('High',cbX+15,34); cx.fillText('Low',cbX+15,30+cbH);
       cx.globalAlpha=1;
     }
@@ -1903,7 +1866,7 @@ window._simInit.fig4=function(){
         responsive:true, maintainAspectRatio:false,
         animation:{ duration:2200, easing:'easeInOutSine' },
         plugins:{legend:{labels:{color:C.text}},
-          title:{display:true,text:'Dynamic Planck Scale Modification',color:C.teal,font:{size:14}}},
+          title:{display:true,text:'Dynamic Planck Scale Modification',color:C.teal,font:{size:16,weight:'bold'}}},
         scales:{
           x:darkAxes({title:{display:true,text:'Mathematical Field Strength',color:C.label},ticks:{maxTicksLimit:6,color:C.label}}),
           y:darkAxes({title:{display:true,text:'ℓ_eff / ℓ₀',color:C.label}})
@@ -1936,14 +1899,16 @@ window._simInit.fig5=function(){
         responsive:true, maintainAspectRatio:false,
         animation:{ duration:2400, easing:'easeInOutQuad' },
         plugins:{ legend:{display:false},
-          title:{display:true,text:'Cosmic Quantization Evolution Timeline',color:C.teal,font:{size:14}} },
+          title:{display:true,text:'Cosmic Quantization Evolution Timeline',color:C.teal,font:{size:16,weight:'bold'}} },
         scales:{ x:darkAxes(), y:darkAxes({title:{display:true,text:'Quantization Degree',color:C.label},min:0,max:1.05}) }
       }
     });
 };
 
-window._simInit.fig5=function(){
- if(window._simInit.fig5._done)return; window._simInit.fig5._done=true;
+ window._simInit.fig5b && setTimeout(function(){window._simInit.fig5b();},50);
+
+window._simInit.fig5b=function(){
+ if(window._simInit.fig5b._done)return; window._simInit.fig5b._done=true;
     var c = ctx('energy-optimization');
     var xs=[], ys=[];
     for (var n=1;n<=10;n++){ xs.push(n*(n+1)/2); ys.push(1/Math.sqrt(n)); }
@@ -1961,7 +1926,7 @@ window._simInit.fig5=function(){
         responsive:true, maintainAspectRatio:false,
         animation:{ duration:1600, easing:'easeOutBounce' },
         plugins:{ legend:{display:false},
-          title:{display:true,text:'Energy Level Optimization Efficiency',color:C.teal,font:{size:14}} },
+          title:{display:true,text:'Energy Level Optimization Efficiency',color:C.teal,font:{size:16,weight:'bold'}} },
         scales:{
           x:darkAxes({title:{display:true,text:'Energy Level',color:C.label}}),
           y:darkAxes({title:{display:true,text:'Optimization Efficiency',color:C.label}})
@@ -2070,9 +2035,9 @@ window._simInit.fig7=function(){
 
       /* labels */
       cx.globalAlpha=Math.min(1,p*3);
-      cx.fillStyle=C.teal; cx.font='bold 14px sans-serif'; cx.textAlign='center';
+      cx.fillStyle=C.teal; cx.font='bold 15px sans-serif'; cx.textAlign='center';
       cx.fillText('Cosmic Web Network Topology  (100M–1B light-year scales)',W/2,18);
-      cx.fillStyle=C.label; cx.font='11px sans-serif';
+      cx.fillStyle=C.label; cx.font='14px sans-serif';
       cx.fillText('Galaxy clusters (gold nodes) connected by dark-matter filaments',W/2,H-6);
       cx.globalAlpha=1;
 
