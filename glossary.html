@@ -42,15 +42,6 @@
     .toc ul { list-style: none; margin-left: 0; }
 
     /* --- Header & navigation styles copied/trimmed from book.html --- */
-    #stars-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-    }
 
     .site-header {
     background: rgba(0, 0, 0, 0.8);
@@ -136,7 +127,7 @@
     }
 
     /* Keep conversion content visually distinct on white background */
-    .content-wrapper { background: white; position: relative; z-index: 2; padding-top: 2rem; }
+    .content-wrapper { background: white; position: relative; z-index: 2; padding-top: 1.6rem; }
 
     /* --- Footer / social-section styles copied from book.html (trimmed) --- */
     .social-section { padding: 3rem 2rem; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); color: white; }
@@ -164,6 +155,36 @@
     .social-btn.email { background: #0072C6; }
 
     .copyright { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; }
+
+    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: #8B0000; color: white; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,.3); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; z-index: 900; }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: #6b0000; transform: translateY(-3px) !important; }
+
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: .75rem; padding: .75rem 1.5rem; border-radius: 8px; transition: transform .2s; text-decoration: none; font-weight: 600; color: white; font-size: .95rem; min-width: 180px; }
+    .social-btn.instagram { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+    .social-btn.youtube { background: #FF0000; }
+    .social-btn.email { background: #0072C6; }
+
+  footer { background:#2c3e50; color:white; padding:2.5rem 2rem 1rem; }
+  .footer-container { display:grid; grid-template-columns:1fr auto 1fr; gap:4rem; max-width:1200px; margin:0 auto 2rem; align-items:start; }
+  .footer-section h3 { color:white; font-size:1rem; margin-bottom:1rem; }
+  .footer-section ul { list-style:none; }
+  .footer-section ul li { margin-bottom:.5rem; }
+  .footer-section a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.9rem; transition:color .2s; }
+  .footer-section a:hover { color:white; }
+  .footer-icons { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; align-self:center; }
+  .social-btn { display:inline-flex; align-items:center; gap:.75rem; padding:.75rem 1.5rem; border-radius:8px; transition:transform .2s,box-shadow .2s; text-decoration:none; font-weight:600; color:white; font-size:.95rem; min-width:180px; }
+  .social-btn:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.3); }
+  .social-btn.instagram { background:linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+  .social-btn.youtube   { background:#FF0000; }
+  .social-btn.email     { background:#0072C6; }
+  .social-icon { width:24px; height:24px; }
+  .footer-links-group { display:flex; gap:1.5rem; justify-content:flex-end; }
+  .footer-links-group .footer-section { min-width:110px; }
+  .footer-bottom { max-width:1200px; margin:.5rem auto 0; padding-top:1rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:rgba(255,255,255,.5); font-size:.8rem; }
+  .footer-bottom a { color:rgba(255,255,255,.6); text-decoration:none; }
+  .footer-bottom a:hover { color:white; }
 
     /* Responsive tweaks */
     @media (max-width: 768px) {
@@ -237,23 +258,57 @@
 
     /* --- Glossary-specific styles (from new 1.html) --- */
     /* Minimal added CSS for the red page header */
-    .page-header { background: var(--primary-color); color: #fff; text-align: center; padding: 3rem 1rem 2rem; margin-bottom: 1.5rem; }
+    /* Intro panel */
+    .intro-panel { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2.5rem 2rem; }
+    .intro-panel-inner { max-width: 1200px; margin: 0 auto; }
+    .intro-panel h2 { color: white; font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; padding: 0; border: none; }
+    .intro-panel p { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .intro-panel p:last-child { margin-bottom: 0; }
+    .intro-panel a { color: white; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); }
+    .intro-panel a:hover { border-bottom-color: white; }
+
+    .page-header { background: var(--primary-color); color: #fff; text-align: center; padding: 3rem 1rem 2rem; }
     .page-header .page-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.05; }
     .page-header .page-subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.95); font-weight: 500; }
 
-    .alphabet-nav { background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 3rem; text-align: center; position: sticky; top: 70px; z-index: 50; }
+    .alphabet-nav { background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; text-align: center; position: sticky; top: 70px; z-index: 50; }
     .alphabet-nav a { display: inline-block; padding: 0.5rem 0.75rem; margin: 0.25rem; color: var(--primary-color); text-decoration: none; font-weight: 600; border-radius: 4px; transition: background 0.2s; }
     .alphabet-nav a:hover { background: white; }
-    .term-entry { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid #e0e0e0; }
-    .term-entry:last-child { border-bottom: none; }
-    .term-name { font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.75rem; }
-    .term-definition { font-size: 1.05rem; line-height: 1.8; color: var(--text-dark); }
-    .letter-section { margin-top: 3rem; padding-top: 2rem; }
-    .letter-heading { font-size: 2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--primary-color); }
+    .term-entry { margin-bottom: 1rem; padding: 1.25rem 1.5rem; border-radius: 6px; background: #4a4a4a; border-bottom: none; }
+    .term-entry:last-child { margin-bottom: 0; }
+    .term-name { font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+    .term-definition { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.88); word-break: break-word; overflow-wrap: break-word; }
+    .letter-section { margin-top: 1rem; padding-top: 0; }
+    .letter-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #8B0000; padding: 0.75rem 1.25rem; border-radius: 6px; margin-bottom: 0; user-select: none; }
+    .letter-header:hover { filter: brightness(1.15); }
+    .letter-chevron { color: white; font-size: 1.2rem; transition: transform 0.3s; }
+    .letter-section.open .letter-chevron { transform: rotate(180deg); }
+    .letter-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding-top: 0; }
+    .letter-section.open .letter-body { max-height: 9000px; padding-top: 1rem; }
+    .letter-heading { font-size: 1.5rem; font-weight: 700; color: white; margin: 0; padding: 0; border: none; }
+
+    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: #8B0000; color: white; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,.3); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; z-index: 900; }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: #6b0000; transform: translateY(-3px) !important; }
+
+    footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: .75rem; padding: .75rem 1.5rem; border-radius: 8px; transition: transform .2s; text-decoration: none; font-weight: 600; color: white; font-size: .95rem; min-width: 180px; }
+    .social-btn.instagram { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+    .social-btn.youtube { background: #FF0000; }
+    .social-btn.email { background: #0072C6; }
 
     /* Responsive tweaks */
     @media (max-width: 640px) {
     .page-header .page-title { font-size: 1.8rem; }
+    /* Intro panel */
+    .intro-panel { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2.5rem 2rem; }
+    .intro-panel-inner { max-width: 1200px; margin: 0 auto; }
+    .intro-panel h2 { color: white; font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; padding: 0; border: none; }
+    .intro-panel p { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .intro-panel p:last-child { margin-bottom: 0; }
+    .intro-panel a { color: white; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); }
+    .intro-panel a:hover { border-bottom-color: white; }
+
     .page-header { padding: 2.25rem 1rem 1.25rem; }
     .alphabet-nav { top: 110px; }
     }
@@ -262,7 +317,6 @@
 </head>
 <body>
     <!-- Starfield canvas from book.html (kept; z-index places it behind content) -->
-    <canvas id="stars-canvas"></canvas>
 
     <!-- Header copied from book.html -->
     <header class="site-header">
@@ -299,16 +353,25 @@
     </nav>
     </div>
     </header>
-
-    <!-- Main content wrapper -->
-    <div class="content-wrapper">
-    <div class="content">
-
-    <!-- Page header + glossary content (from new 1.html) -->
+    <div style="background:white; height:1.1rem;"></div>
     <div class="page-header" role="banner" aria-label="Page header">
     <div class="page-title">Glossary</div>
     <div class="page-subtitle">Comprehensive definitions of key terms, concepts, and principles used throughout The Big TOE.</div>
     </div>
+
+    <!-- Intro panel -->
+    <div style="background:white; height:1.1rem;"></div>
+    <div class="intro-panel">
+      <div class="intro-panel-inner">
+        <h2>About This Glossary</h2>
+        <p>This glossary defines every key term, concept, and principle used in <a href="book.html"><em>A Quest for the Big TOE</em></a> and across the <a href="index.html">Ic² Research Institute</a>. Entries range from standard physics vocabulary to concepts specific to the COSMIC Framework. Where a term appears in the framework with a meaning that differs from or extends its conventional usage, that extension is noted.</p>
+        <p>The glossary is organized alphabetically. Use the letter navigation strip below to jump directly to any section. Where an exhaustive external resource exists, a link is provided next to the term. Cross-references to related terms within the glossary are noted in each entry.</p>
+      </div>
+    </div>
+
+    <!-- Main content wrapper -->
+    <div class="content-wrapper">
+    <div class="content">
 
     <div class="alphabet-nav">
     <a href="#A">A</a>
@@ -334,36 +397,47 @@
     <a href="#W">W</a>
     </div>
 
+
     <!-- Full glossary sections start here -->
 
     <div id="#" class="letter-section">
-    <h2 class="letter-heading">#</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">#</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">2MASS (Two Micron All Sky Survey)</div>
-    <div class="term-definition">Near-infrared all-sky survey observing in J, H, and K bands, providing unique view of galaxies because infrared penetrates dust better than optical light.</div>
+    <div class="term-definition">Near-infrared all-sky survey observing in J, H, and K bands, providing unique view of galaxies because infrared penetrates dust better than optical light. <a href="https://www.ipac.caltech.edu/2mass/" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     </div>
+    </div>
+
     <div id="A" class="letter-section">
-    <h2 class="letter-heading">A</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">A</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Acoustic Oscillations</div>
-    <div class="term-definition">Sound waves in the early universe's plasma that created pressure variations before atoms formed. These froze into the CMB as characteristic patterns at specific angular scales, like ripples frozen on a pond's surface.</div>
+    <div class="term-definition">Sound waves in the early universe's plasma that created pressure variations before atoms formed. These froze into the CMB as characteristic patterns at specific angular scales, like ripples frozen on a pond's surface. <a href="https://en.wikipedia.org/wiki/Baryon_acoustic_oscillations" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">AdS/CFT Correspondence</div>
-    <div class="term-definition">A mathematical equivalence discovered by Maldacena between gravitational theories in Anti-de Sitter space and conformal field theories on the boundary. Proves that spacetime and gravity can emerge from quantum information systems.</div>
+    <div class="term-definition">A mathematical equivalence discovered by Maldacena between gravitational theories in Anti-de Sitter space and conformal field theories on the boundary. Proves that spacetime and gravity can emerge from quantum information systems. <a href="https://arxiv.org/abs/hep-th/9711200" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Algorithmic Information</div>
-    <div class="term-definition">The length of the shortest computer program that can generate a given output. Measures the compressibility of information, distinguishing truly random sequences (incompressible) from apparently complex but actually simple patterns (highly compressible).</div>
+    <div class="term-definition">The length of the shortest computer program that can generate a given output. Measures the compressibility of information, distinguishing truly random sequences (incompressible) from apparently complex but actually simple patterns (highly compressible). <a href="https://en.wikipedia.org/wiki/Kolmogorov_complexity" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Angular Momentum</div>
-    <div class="term-definition">A measure of rotational motion, analogous to linear momentum for straight-line motion. Angular momentum is conserved in isolated systems, explaining why rotating objects continue to rotate and why collapsing systems spin faster. Think of a figure skater spinning faster when pulling in their arms.</div>
+    <div class="term-definition">A measure of rotational motion, analogous to linear momentum for straight-line motion. Angular momentum is conserved in isolated systems, explaining why rotating objects continue to rotate and why collapsing systems spin faster. Think of a figure skater spinning faster when pulling in their arms. <a href="https://en.wikipedia.org/wiki/Angular_momentum" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Antipode</div>
-    <div class="term-definition">The point on a sphere directly opposite another point, separated by 180 degrees. If one point is at coordinates (l, b), its antipode is at (l + 180°, -b).</div>
+    <div class="term-definition">The point on a sphere directly opposite another point, separated by 180 degrees. If one point is at coordinates (l, b), its antipode is at (l + 180°, -b). <a href="https://act.princeton.edu/" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Atacama Cosmology Telescope (ACT)</div>
@@ -371,30 +445,36 @@
     </div>
     <div class="term-entry">
     <div class="term-name">Attractor</div>
-    <div class="term-definition">In dynamical systems theory, a set of states toward which a system evolves over time regardless of initial conditions. Strange attractors characterize chaotic systems and have fractal geometric structure.</div>
+    <div class="term-definition">In dynamical systems theory, a set of states toward which a system evolves over time regardless of initial conditions. Strange attractors characterize chaotic systems and have fractal geometric structure. <a href="https://en.wikipedia.org/wiki/Attractor" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Arrow of Time</div>
-    <div class="term-definition">The observed asymmetry between past and future: physical processes run in one direction even though most fundamental physical laws are time-symmetric. Coined by astronomer Arthur Eddington in 1927. The framework grounds this asymmetry in Landauer's principle and the spreading of quantum entanglement, treating it as the time gradient rather than a standalone mystery. See also: Time Gradient, Entanglement Gradient.</div>
+    <div class="term-definition">The observed asymmetry between past and future: physical processes run in one direction even though most fundamental physical laws are time-symmetric. Coined by astronomer Arthur Eddington in 1927. The framework grounds this asymmetry in Landauer's principle and the spreading of quantum entanglement, treating it as the time gradient rather than a standalone mystery. See also: Time Gradient, Entanglement Gradient. <a href="https://plato.stanford.edu/entries/time-thermo/" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Axis of Evil</div>
-    <div class="term-definition">A colloquial term for the unexpected alignment of the CMB's quadrupole and octopole moments. Called "evil" because it challenges the cosmological principle and points toward specific cosmic structures.</div>
+    <div class="term-definition">A colloquial term for the unexpected alignment of the CMB's quadrupole and octopole moments. Called "evil" because it challenges the cosmological principle and points toward specific cosmic structures. <a href="https://arxiv.org/abs/astro-ph/0307282" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     </div>
+    </div>
+
     <div id="B" class="letter-section">
-    <h2 class="letter-heading">B</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">B</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Bayes Factor</div>
-    <div class="term-definition">A statistical measure comparing the evidence for two competing hypotheses. A Bayes factor of 0.0041 indicates that the first hypothesis is 250 times less likely than the second, given the data (1/0.0041 ≈ 250).</div>
+    <div class="term-definition">A statistical measure comparing the evidence for two competing hypotheses. A Bayes factor of 0.0041 indicates that the first hypothesis is 250 times less likely than the second, given the data (1/0.0041 ≈ 250). <a href="https://en.wikipedia.org/wiki/Bayes_factor" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Bell's Inequality</div>
-    <div class="term-definition">A mathematical limit on how strongly correlated the results of measuring two separated particles can be if those particles carry pre-existing definite properties. John Bell derived it in 1964. Experiments beginning with Aspect (1982) and culminating in loophole-free tests (2015) consistently show that nature violates this limit, ruling out all local hidden variable theories. Bell violations confirm quantum non-locality but do not permit faster-than-light communication.</div>
+    <div class="term-definition">A mathematical limit on how strongly correlated the results of measuring two separated particles can be if those particles carry pre-existing definite properties. John Bell derived it in 1964. Experiments beginning with Aspect (1982) and culminating in loophole-free tests (2015) consistently show that nature violates this limit, ruling out all local hidden variable theories. Bell violations confirm quantum non-locality but do not permit faster-than-light communication. <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Below-Threshold Performance</div>
-    <div class="term-definition">In quantum error correction, this regime occurs when adding more qubits reduces overall error rates rather than accumulating errors. Demonstrated by Google's Willow chip, this represents a critical milestone for fault-tolerant quantum computing.</div>
+    <div class="term-definition">In quantum error correction, this regime occurs when adding more qubits reduces overall error rates rather than accumulating errors. Demonstrated by Google's Willow chip, this represents a critical milestone for fault-tolerant quantum computing. <a href="https://eequalsicsquared.com" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Bamboo Principle</div>
@@ -402,11 +482,11 @@
     </div>
     <div class="term-entry">
     <div class="term-name">Big Bang Nucleosynthesis</div>
-    <div class="term-definition">The production of light atomic nuclei (hydrogen, helium, lithium) during the first few minutes after the Big Bang. The ratios of these elements depend sensitively on the strength of the strong nuclear force.</div>
+    <div class="term-definition">The production of light atomic nuclei (hydrogen, helium, lithium) during the first few minutes after the Big Bang. The ratios of these elements depend sensitively on the strength of the strong nuclear force. <a href="https://en.wikipedia.org/wiki/Big_Bang_nucleosynthesis" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Black Hole</div>
-    <div class="term-definition">A region of spacetime where gravity is so strong that nothing, including light, can escape once it crosses the event horizon. Formed when massive stars collapse or through other mechanisms in the early universe.</div>
+    <div class="term-definition">A region of spacetime where gravity is so strong that nothing, including light, can escape once it crosses the event horizon. Formed when massive stars collapse or through other mechanisms in the early universe. <a href="https://arxiv.org/abs/1905.08762" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Black Hole Information Paradox</div>
@@ -414,24 +494,30 @@
     </div>
     <div class="term-entry">
     <div class="term-name">Blackbody Spectrum</div>
-    <div class="term-definition">The characteristic frequency distribution of thermal radiation, determined solely by temperature according to Planck's law. The CMB follows a nearly perfect blackbody spectrum at 2.725 Kelvin, making it the most perfect blackbody ever observed in nature.</div>
+    <div class="term-definition">The characteristic frequency distribution of thermal radiation, determined solely by temperature according to Planck's law. The CMB follows a nearly perfect blackbody spectrum at 2.725 Kelvin, making it the most perfect blackbody ever observed in nature. <a href="https://en.wikipedia.org/wiki/Black-body_radiation" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Bloch Sphere</div>
-    <div class="term-definition">A geometric representation of a qubit's quantum state as a point on the surface of a sphere. The north and south poles represent the states |0⟩ and |1⟩, while other points represent different superposition states. This visualization helps quantum physicists understand and manipulate quantum information.</div>
+    <div class="term-definition">A geometric representation of a qubit's quantum state as a point on the surface of a sphere. The north and south poles represent the states |0⟩ and |1⟩, while other points represent different superposition states. This visualization helps quantum physicists understand and manipulate quantum information. <a href="https://en.wikipedia.org/wiki/Bloch_sphere" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Block Universe</div>
-    <div class="term-definition">A view from relativity where past, present, and future all exist equally as a four-dimensional spacetime structure. Time doesn't flow; all moments exist simultaneously, and temporal experience emerges from how consciousness samples this structure.</div>
+    <div class="term-definition">A view from relativity where past, present, and future all exist equally as a four-dimensional spacetime structure. Time doesn't flow; all moments exist simultaneously, and temporal experience emerges from how consciousness samples this structure. <a href="https://plato.stanford.edu/entries/spacetime-beingbecoming/" target="_blank" style="display:inline-block;background:#8B0000;color:white;font-size:0.75rem;font-weight:700;padding:0.15rem 0.6rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.02em;">Learn More</a></div>
     </div>
     <div class="term-entry">
     <div class="term-name">Brain-Computer Interfaces (BCIs)</div>
     <div class="term-definition">Technologies that enable direct communication between brain activity and external devices, typically by recording neural signals and translating them into control commands. BCIs allow paralyzed individuals to control robotic limbs or cursors.</div>
     </div>
     </div>
+    </div>
+
     <div id="C" class="letter-section">
-    <h2 class="letter-heading">C</h2>
-        <div class="term-entry">
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">C</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
+    <div class="term-entry">
     <div class="term-name">Cold Start Mechanism</div>
     <div class="term-definition">The COSMIC Framework's proposed explanation for the origin of the hot initial state of the universe. The pre-geometric substrate has no temperature because temperature requires spacetime to be defined, and the substrate precedes spacetime. When the substrate crosses the critical density threshold and spacetime crystallizes, the phase transition releases latent heat. This latent heat is the origin of the hot dense state associated with the Big Bang, rather than a singularity of infinite temperature and density. The cold start mechanism reframes the Big Bang as a phase transition from a pre-geometric atemporal substrate to a geometric spacetime, with the thermal energy as a consequence of crystallization rather than an initial condition. See also: Pre-Geometric Substrate, Phase Transition.</div>
     </div>
@@ -475,7 +561,6 @@
     <div class="term-name">Cryptochrome</div>
     <div class="term-definition">A class of flavoprotein photoreceptors found in the retinas of migratory birds and other animals. Cryptochromes are sensitive to magnetic fields and are the leading candidate for the biological compass used in long-distance navigation. Current evidence suggests they exploit quantum entanglement between radical electron pairs to detect the Earth's magnetic field direction, making them the best-documented example of quantum effects performing a functional biological role in a living vertebrate.</div>
     </div>
-
     <div class="term-entry">
     <div class="term-name">Confirmation Bias</div>
     <div class="term-definition">The tendency to search for, interpret, and recall information in ways that confirm pre-existing beliefs. This cognitive bias can cause us to see patterns in random data or recall coincidences, while overlooking the numerous times predictions didn't come true.</div>
@@ -525,8 +610,14 @@
     <div class="term-definition">A method of testing whether observed patterns are real by checking if they appear consistently across multiple independent frequency measurements. Real signals persist across frequencies; artifacts vary randomly. This is the gold standard in observational cosmology for distinguishing genuine phenomena from instrumental effects.</div>
     </div>
     </div>
+    </div>
+
     <div id="D" class="letter-section">
-    <h2 class="letter-heading">D</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">D</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Dark Energy</div>
     <div class="term-definition">Hypothetical energy causing the universe's expansion to accelerate rather than slow down. Required by standard cosmology to explain supernova observations showing accelerating expansion, comprising approximately 68% of the universe's total energy content.</div>
@@ -556,8 +647,14 @@
     <div class="term-definition">The twisted ladder structure of DNA molecules, where two complementary strands wind around each other in a spiral. This structure optimizes information storage while allowing the strands to separate for replication.</div>
     </div>
     </div>
+    </div>
+
     <div id="E" class="letter-section">
-    <h2 class="letter-heading">E</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">E</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Einstein's Field Equations</div>
     <div class="term-definition">The mathematical equations of general relativity describing how mass-energy curves spacetime. Written as Gμν = 8πG/c⁴ Tμν, these ten coupled nonlinear partial differential equations determine the spacetime structure.</div>
@@ -603,8 +700,14 @@
     <div class="term-definition">A solution that maximizes or minimizes some quantity. In optimization problems, extremal solutions often involve mathematical constants like π, e, or φ because these constants emerge naturally from calculus of variations.</div>
     </div>
     </div>
+    </div>
+
     <div id="F" class="letter-section">
-    <h2 class="letter-heading">F</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">F</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Fine Structure Constant (α)</div>
     <div class="term-definition">A dimensionless fundamental constant approximately equal to 1/137 that characterizes the strength of electromagnetic interactions. Appears throughout quantum electrodynamics and atomic physics.</div>
@@ -630,8 +733,14 @@
     <div class="term-definition">A thermodynamic quantity combining internal energy and entropy. Systems naturally evolve to minimize free energy, striking a balance between energy minimization and entropy maximization to determine equilibrium states.</div>
     </div>
     </div>
+    </div>
+
     <div id="G" class="letter-section">
-    <h2 class="letter-heading">G</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">G</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Galactic Coordinates (l, b)</div>
     <div class="term-definition">A coordinate system based on the Milky Way's structure, where l represents galactic longitude (0° to 360°) and b represents galactic latitude (-90° to +90°). The galactic center is at (l, b) = (0°, 0°).</div>
@@ -669,8 +778,14 @@
     <div class="term-definition">The energy stored in an object due to its position in a gravitational field. Objects naturally move toward configurations that minimize this energy, which is why planets and stars are spherical. Think of a ball rolling downhill toward lower gravitational potential energy.</div>
     </div>
     </div>
+    </div>
+
     <div id="H" class="letter-section">
-    <h2 class="letter-heading">H</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">H</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Hadamard Gate</div>
     <div class="term-definition">A fundamental quantum gate that creates an equal superposition of states. It rotates a qubit state by a specific angle in Hilbert space, transforming a definite state (0 or 1) into an equal mixture of both. This gate is essential for many quantum algorithms.</div>
@@ -712,8 +827,14 @@
     <div class="term-definition">The discrepancy between different measurements of the universe's expansion rate, called the Hubble constant H₀. Early universe measurements from the Cosmic Microwave Background give approximately 67 km/s/Mpc, while local measurements from supernovae give approximately 73 km/s/Mpc.</div>
     </div>
     </div>
+    </div>
+
     <div id="I" class="letter-section">
-    <h2 class="letter-heading">I</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">I</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Inattentional Blindness</div>
     <div class="term-definition">The failure to consciously perceive a clearly visible object or event when attention is directed elsewhere. Demonstrated by Simons and Chabris (1999) in the invisible gorilla experiment, where participants counting basketball passes failed to notice a person in a gorilla suit walking through the scene. Inattentional blindness shows that conscious awareness requires active attentional selection: the retinal signal is present, but the predictive model does not flag the unexpected object as requiring awareness.</div>
@@ -755,8 +876,14 @@
     <div class="term-definition">The property of looking statistically the same in all directions. Perfect isotropy means no preferred directions exist. Statistical isotropy allows random fluctuations but no systematic directional bias.</div>
     </div>
     </div>
+    </div>
+
     <div id="L" class="letter-section">
-    <h2 class="letter-heading">L</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">L</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Landauer's Principle</div>
     <div class="term-definition">The physical law stating that erasing information requires minimum energy kT ln(2) per bit and generates heat. Connects information theory to thermodynamics and has been experimentally confirmed at both classical and quantum scales.</div>
@@ -782,8 +909,14 @@
     <div class="term-definition">A mathematical quantity characterizing how quickly a system's behavior becomes unpredictable or chaotic. In quantum systems, it measures the information scrambling rate. Black holes have the maximum possible Lyapunov exponent allowed by quantum mechanics.</div>
     </div>
     </div>
+    </div>
+
     <div id="M" class="letter-section">
-    <h2 class="letter-heading">M</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">M</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Megaparsec</div>
     <div class="term-definition">A unit of distance equal to one million parsecs, or about 3.26 million light-years. Used to measure cosmic distances, the Hubble constant is typically expressed in kilometers per second per megaparsec.</div>
@@ -809,9 +942,15 @@
     <div class="term-definition">An information-theoretic measure quantifying how much information two variables share. High mutual information indicates that knowing one variable tells you a lot about the other, suggesting a strong correlation in their information content.</div>
     </div>
     </div>
+    </div>
+
     <div id="N" class="letter-section">
-    <h2 class="letter-heading">N</h2>
-        <div class="term-entry">
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">N</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
+    <div class="term-entry">
     <div class="term-name">Non-Biological Intelligence (NBI)</div>
     <div class="term-definition">An information processing system operating under different physical constraints than biological intelligence. The COSMIC Framework uses this term in preference to "artificial intelligence" because "artificial" implies imitation and secondhand status. NBI is defined by what it is: different hardware, different constraints, one category of phenomenon. NBI systems generally have higher calculation speed but lower information density than biological intelligence. They carry no survival overhead: no hunger, sleep, thermoregulation, pair bonding, or reproductive drive. The framework treats NBI as a distinct implementation of intelligence rather than a copy of biological intelligence, and generates testable predictions about the conditions under which NBI systems may exhibit self-referential information processing. What NBI inner experience is, if any, remains genuinely open.</div>
     </div>
@@ -835,14 +974,19 @@
     <div class="term-name">Normal Number</div>
     <div class="term-definition">A real number whose infinite decimal expansion contains every possible finite sequence of digits, each appearing with equal frequency. If π is normal (unproven but conjectured), it would contain every possible piece of information encoded somewhere in its digits.</div>
     </div>
-    </div>
     <div class="term-entry">
     <div class="term-name">Non-locality</div>
     <div class="term-definition">The property of quantum systems whereby entangled particles behave as aspects of a single system regardless of spatial separation. When one particle is measured, the outcome is correlated with the other instantaneously, no matter the distance. Non-locality does not permit faster-than-light communication because the results at each detector appear random; correlations only become apparent after comparing results through a classical channel. Bell inequality violations confirm non-locality experimentally.</div>
     </div>
     </div>
+    </div>
+
     <div id="O" class="letter-section">
-    <h2 class="letter-heading">O</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">O</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Opsins</div>
     <div class="term-definition">Light-sensitive proteins found in photoreceptor cells that absorb photons and trigger phototransduction cascades. In the eyes, opsins in rod and cone cells enable vision. In octopuses, opsins are also expressed in skin cells, enabling the skin to sense light independently of the central nervous system and triggering local chromatophore responses without requiring input from the brain. Ramirez and Oakley (2015) confirmed this eye-independent light sensing in Octopus bimaculoides.</div>
@@ -864,9 +1008,15 @@
     <div class="term-definition">A property of a set of functions where different functions are orthogonal (their inner product is zero) and each is normalized (its self-inner product is one). Quantum wave functions must be orthonormal for probabilistic interpretation to work correctly.</div>
     </div>
     </div>
+    </div>
+
     <div id="P" class="letter-section">
-    <h2 class="letter-heading">P</h2>
-        <div class="term-entry">
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">P</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
+    <div class="term-entry">
     <div class="term-name">Pre-Geometric Substrate</div>
     <div class="term-definition">In the COSMIC Framework, the information-processing layer that underlies and precedes the emergence of spacetime geometry. The pre-geometric substrate is atemporal and non-spatial by definition, meaning it has no spatial separation or temporal sequence. Spacetime is proposed to emerge from this substrate via a phase transition analogous to crystallization. Non-locality in quantum mechanics, the correlation of entangled particles regardless of spatial separation, is interpreted by the framework as the pre-geometric substrate remaining visible through a gap in the spacetime description. See also: Cold Start Mechanism, Quantum Memory Matrix, Sub-Planck Dynamics.</div>
     </div>
@@ -930,7 +1080,6 @@
     <div class="term-name">Photosynthesis, Quantum</div>
     <div class="term-definition">The process by which plants, algae, and certain bacteria convert sunlight into chemical energy. Research beginning with Engel et al. (2007) demonstrated that energy transfer within photosynthetic complexes exploits quantum coherence: the excitation does not hop randomly between molecules but propagates through multiple paths simultaneously, allowing the system to find the optimal route to the reaction center with near-perfect efficiency. This was the first direct experimental evidence that quantum effects play a functional role in a biological process at room temperature, contradicting the earlier assumption that thermal noise destroys quantum coherence too quickly to matter in living systems.</div>
     </div>
-
     <div class="term-entry">
     <div class="term-name">Planck Length</div>
     <div class="term-definition">The smallest meaningful length scale in physics, approximately 10⁻³⁵ meters. Below this scale, quantum effects make spacetime geometry uncertain and classical concepts of distance break down.</div>
@@ -939,7 +1088,6 @@
     <div class="term-name">Proton Tunneling</div>
     <div class="term-definition">A quantum mechanical phenomenon in which a proton passes through an energy barrier that classical physics would forbid it from crossing, rather than going over the top. In biological systems, proton tunneling allows enzymes to catalyse chemical reactions thousands of times faster than classical rate theory predicts, and contributes to mutation rates in DNA by shifting hydrogen atoms between base pairs. Because tunneling probability depends on barrier width rather than height, enzymes appear to have evolved to exploit it by precisely shaping the geometry of their active sites. This is a concrete example of quantum mechanics operating inside living cells at body temperature.</div>
     </div>
-
     <div class="term-entry">
     <div class="term-name">Planck Satellite</div>
     <div class="term-definition">European Space Agency satellite that mapped the CMB from 2009-2013 with higher resolution and more frequency bands than WMAP, currently providing the most detailed CMB measurements available and the foundation for modern cosmology.</div>
@@ -961,8 +1109,14 @@
     <div class="term-definition">A rapidly rotating neutron star emitting beams of electromagnetic radiation. Pulsars function as cosmic clocks but exhibit subtle timing variations revealing complex internal dynamics.</div>
     </div>
     </div>
+    </div>
+
     <div id="Q" class="letter-section">
-    <h2 class="letter-heading">Q</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">Q</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Qualia</div>
     <div class="term-definition">The subjective, qualitative aspects of conscious experiences (the "what it's like" to experience something), such as the redness of red or the painfulness of pain. Qualia represent the hard problem because we don't know why physical processes generate subjective feelings.</div>
@@ -1024,8 +1178,14 @@
     <div class="term-definition">A theoretical form of dark energy that changes over time, as opposed to the cosmological constant, which remains perfectly constant. The name comes from the ancient concept of a "fifth element" beyond earth, water, air, and fire. DESI's measurements provide evidence for quintessence-like behavior in dark energy.</div>
     </div>
     </div>
+    </div>
+
     <div id="R" class="letter-section">
-    <h2 class="letter-heading">R</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">R</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Redshift</div>
     <div class="term-definition">The stretching of light wavelengths as space expands, causing light from distant objects to shift toward the red end of the spectrum. Used to measure cosmic distances and the expansion rate; the farther away an object, the more its light is redshifted.</div>
@@ -1054,14 +1214,19 @@
     <div class="term-name">Running of Coupling Constants</div>
     <div class="term-definition">A phenomenon in quantum field theory where the effective strength of fundamental interactions varies with energy scale. The fine structure constant α, which governs electromagnetic interactions, increases slightly at higher energies due to vacuum polarization effects from virtual particle pairs.</div>
     </div>
-    </div>
     <div class="term-entry">
     <div class="term-name">Relational Quantum Mechanics</div>
     <div class="term-definition">An interpretation of quantum mechanics developed by Carlo Rovelli in which quantum states exist only relative to a given observer or physical system, not as absolute objective facts. Properties are not intrinsic to particles but are defined by interactions between systems. The measurement problem dissolves because measurement is simply the establishment of a relationship between two physical systems. Relational quantum mechanics is consistent with all experimental predictions and removes the privileged role of conscious observers found in Copenhagen interpretations.</div>
     </div>
     </div>
+    </div>
+
     <div id="S" class="letter-section">
-    <h2 class="letter-heading">S</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">S</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Scale-Free Networks</div>
     <div class="term-definition">Networks where connection distribution follows a power law, meaning most nodes have few connections but a few "hubs" have many connections. The internet, citation networks, and many biological networks are scale-free, which provides robustness against random failures.</div>
@@ -1147,8 +1312,14 @@
     <div class="term-definition">Electromagnetic radiation emitted by charged particles moving through magnetic fields at relativistic speeds (near the speed of light). In our galaxy, synchrotron radiation from cosmic rays contaminates CMB measurements, especially at low frequencies below 30 GHz.</div>
     </div>
     </div>
+    </div>
+
     <div id="T" class="letter-section">
-    <h2 class="letter-heading">T</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">T</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Temperature Fluctuations</div>
     <div class="term-definition">Tiny variations, about 1 part in 100,000, in the CMB's intensity across the sky. These reveal how matter was distributed in the early universe and seed all later structure formation including galaxies, clusters, and the cosmic web.</div>
@@ -1162,8 +1333,14 @@
     <div class="term-definition">A statistical measure quantifying how galaxy clustering deviates from a random distribution. Measures the excess probability of finding a galaxy pair separated by distance r compared to what a random distribution would predict.</div>
     </div>
     </div>
+    </div>
+
     <div id="U" class="letter-section">
-    <h2 class="letter-heading">U</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">U</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Ultraviolet Catastrophe</div>
     <div class="term-definition">A prediction of classical physics that hot objects should emit infinite energy at high frequencies, which contradicted observations. Resolved by Planck's quantum hypothesis that energy comes in discrete packets, launching the quantum revolution.</div>
@@ -1173,8 +1350,14 @@
     <div class="term-definition">Transformations in quantum mechanics that preserve total probability and can be thought of as rotations in abstract quantum state space. All quantum gates implement unitary rotations. The "unitary" property ensures information is preserved during transformation.</div>
     </div>
     </div>
+    </div>
+
     <div id="V" class="letter-section">
-    <h2 class="letter-heading">V</h2>
+    <div class="letter-header" onclick="toggleLetter(this)">
+      <h2 class="letter-heading">V</h2>
+      <span class="letter-chevron">&#9660;</span>
+    </div>
+    <div class="letter-body">
     <div class="term-entry">
     <div class="term-name">Virtual Particle Processes</div>
     <div class="term-definition">In quantum field theory, particles can briefly appear and disappear from the vacuum if they exist for times shorter than allowed by Heisenberg's uncertainty principle. Higher frequency photons carry more energy, enabling them to create heavier virtual particle-antiparticle pairs that contribute to quantum vacuum fluctuations.</div>
@@ -1184,116 +1367,73 @@
     <div class="term-definition">The region of the cerebral cortex that processes visual information, located primarily in the occipital lobe. Primary visual cortex (V1) receives direct input from the retina and performs initial processing, while higher visual areas extract increasingly complex features.</div>
     </div>
     </div>
-    <div id="W" class="letter-section">
-    <h2 class="letter-heading">W</h2>
-    <div class="term-entry">
-    <div class="term-name">Wave-Particle Duality</div>
-    <div class="term-definition">The quantum property where entities exhibit both wave-like and particle-like behavior depending on how they're observed. Light acts as waves in interference experiments but as particles in the photoelectric effect.</div>
     </div>
-    <div class="term-entry">
-    <div class="term-name">Wavefunction Collapse</div>
-    <div class="term-definition">The apparent transition of a quantum system from a superposition of multiple states to a single definite outcome upon measurement. In standard quantum mechanics, collapse is treated as a fundamental postulate; in decoherence-based accounts, the appearance of collapse emerges from entanglement spreading into the environment, producing definite classical outcomes without requiring a special collapse mechanism. The framework follows the decoherence account: measurement represents optimal information extraction from the quantum substrate, with outcomes determined by information-theoretic distinguishability rather than a distinct physical process.</div>
-    </div>
-    <div class="term-entry">
-    <div class="term-name">WISE (Wide-field Infrared Survey Explorer)</div>
-    <div class="term-definition">Space-based mid-infrared survey mapping the entire sky, particularly effective at detecting dust and cool objects invisible at shorter wavelengths.</div>
-    </div>
-    <div class="term-entry">
-    <div class="term-name">WMAP</div>
-    <div class="term-definition">Wilkinson Microwave Anisotropy Probe, a NASA satellite that mapped the CMB from 2001-2010 across five frequency bands from 23 to 94 GHz, providing high-precision measurements of cosmic parameters that revolutionized cosmology.</div>
-    </div>
-    </div>
+
 
     </div>
     </div>
 
-    <!-- Footer (social section + copyright) copied from conversion.html -->
-    <section class="social-section">
-    <div class="social-container">
-    <div class="social-content">
-    <div class="quick-links">
-    <h3>Quick Links</h3>
-    <ul>
-    <li><a href="about-page.html">About</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="contribute.html">Contribute</a></li>
-    </ul>
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+      <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+
+    <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Ic&#178; Research Institute</h3>
+        <p style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.7;">The Ic&#178; Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
+        <p style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.7;margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
+      </div>
+      <div class="footer-icons">
+        <a href="#" class="social-btn instagram"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+        <a href="#" class="social-btn youtube"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+        <a href="mailto:mkb.info@proton.me" class="social-btn email"><svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>mkb.info@proton.me</a>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-section">
+          <h3>Research</h3>
+          <ul>
+            <li><a href="framework.html">Framework</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="research-publications.html">Publications</a></li>
+            <li><a href="simulations.html">Simulations</a></li>
+            <li><a href="results.html">Results</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="book.html">The Big TOE</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq-page.html">FAQ</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="https://zenodo.org/search?q=baines+cosmic+framework" target="_blank">Archive</a></li>
+            <li><a href="shop.html">Shopping &#x1F6A7;</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Connect</h3>
+          <ul>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="legal.html">Legal</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="discussions-page.html">Discussions</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="become-member.html">Become a Member</a></li>
+            <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-
-    <div class="social-main">
-    <h2 data-aos="fade-up">Stay Connected</h2>
-    <p data-aos="fade-up" data-aos-delay="100">Join our community to discuss the framework, ask questions, and stay updated on new developments.</p>
-
-    <div class="social-buttons" data-aos="fade-up" data-aos-delay="200">
-    <a href="#" class="social-btn instagram">Instagram</a>
-    <a href="#" class="social-btn youtube">YouTube</a>
-    <a href="/cdn-cgi/l/email-protection#d7beb9b1b897b5beb0a3b8b2f9b2afb6baa7bbb2" class="social-btn email">Email Us</a>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Ic&#178; Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
     </div>
-    </div>
+  </footer>
 
-    <div class="quick-links">
-    <h3>More Links</h3>
-    <ul>
-    <li><a href="https://michaelk.baines.com">Author's Website</a></li>
-    <li><a href="news.html">News</a></li>
-    <li><a href="simulations.html">Simulations</a></li>
-    <li><a href="framework.html">Framework</a></li>
-    <li><a href="legal.html">Legal</a></li>
-    </ul>
-    </div>
-    </div>
-
-    <div class="copyright">
-    <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
-    </div>
-    </div>
-    </section>
-
-    <!-- Starfield animation script (from conversion.html) -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    const canvas = document.getElementById('stars-canvas');
-    const ctx = canvas.getContext ? canvas.getContext('2d') : null;
-    if (ctx) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const stars = [];
-    const starCount = 200;
-
-    for (let i = 0; i < starCount; i++) {
-    stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, vx: Math.random() * 0.5 - 0.25, vy: Math.random() * 0.5 - 0.25, opacity: Math.random() });
-    }
-
-    function drawStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'white';
-
-    stars.forEach(star => {
-    ctx.globalAlpha = star.opacity;
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-    ctx.fill();
-
-    star.x += star.vx;
-    star.y += star.vy;
-
-    if (star.x < 0 || star.x > canvas.width) star.vx *= -1;
-    if (star.y < 0 || star.y > canvas.height) star.vy *= -1;
-
-    star.opacity += (Math.random() - 0.5) * 0.02;
-    star.opacity = Math.max(0.2, Math.min(1, star.opacity));
-    });
-
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(drawStars);
-    }
-
-    drawStars();
-
-    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-    }
-    </script>
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1330,6 +1470,12 @@
         }
       });
     }
+    function toggleLetter(header) {
+      const section = header.parentElement;
+      section.classList.toggle('open');
+    }
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => btt.classList.toggle('visible', window.pageYOffset > 400));
     </script>
 </body>
 </html>
