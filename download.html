@@ -122,6 +122,25 @@
       background: rgba(255,255,255,0.22);
     }
     
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+    .blink { animation: blink 1.2s ease-in-out infinite; }
+    .intro-panel { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2.5rem 2rem; }
+    .intro-panel-inner { max-width: 1200px; margin: 0 auto; }
+    .intro-panel h2 { color: white; font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; padding: 0; border: none; }
+    .intro-panel p { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .intro-panel p:last-child { margin-bottom: 0; }
+    .intro-panel a { color: white; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); }
+    .foundation-accordion { background:white; border:1px solid #e0e0e0; border-radius:8px; margin-bottom:1.5rem; overflow:hidden; }
+    .foundation-accordion:hover { box-shadow:0 4px 15px rgba(0,0,0,.1); }
+    .foundation-header { padding:1.25rem 1.5rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--acc-color,#1a1a2e); transition:filter .3s; }
+    .foundation-header:hover { filter:brightness(1.1); }
+    .foundation-header h3 { margin:0; color:white; font-size:1.05rem; display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; }
+    .toggle-indicator { color:white; font-size:1.1rem; transition:transform .3s; flex-shrink:0; }
+    .foundation-accordion.active .toggle-indicator { transform:rotate(180deg); }
+    .fa-content { max-height:0; overflow:hidden; transition:max-height .5s ease; }
+    .foundation-accordion.active .fa-content { max-height:9000px; }
+    .fa-inner { padding:1.5rem 2rem; background:white; }
+
     .page-header {
       background: var(--primary-color);
       padding: 2rem 2rem;
@@ -435,7 +454,7 @@
     
     /* Suggest an Edit Section */
     .suggest-edit-section {
-      background: #000000;
+      background: #2c3e50;
       padding: 4rem 0;
       margin-bottom: 2rem;
     }
@@ -499,7 +518,7 @@
       padding: 0.75rem 1rem;
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: 6px;
-      background: rgba(255,255,255,0.08);
+      background: #005f6e;
       color: white;
       font-family: inherit;
       font-size: 1rem;
@@ -508,19 +527,19 @@
     
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.6);
     }
     
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: var(--primary-color);
-      background: rgba(255,255,255,0.12);
+      border-color: #f1e303;
+      background: #00838f;
     }
     
     .form-group select option {
-      background: #1a1a1a;
+      background: #005f6e;
       color: white;
     }
     
@@ -679,7 +698,16 @@
       <h1>Download A Quest for The Big TOE</h1>
       <p>The COSMIC Framework Unification Theory</p>
     </div>
-    
+    <div style="background:white; height:1.1rem;"></div>
+    <div class="intro-panel">
+      <div class="intro-panel-inner">
+        <h2>About This Download</h2>
+        <p><em>A Quest for the Big TOE</em> is the primary theoretical document of the Ic&#178; Research Institute. It presents the COSMIC Framework in full: 21 Elements covering information theory, quantum mechanics, cosmology, consciousness, and the mathematical structures connecting them.</p>
+        <p>Four of its predictions have been independently confirmed by DESI, Google Quantum AI, JWST, and ALMA. The full testing schedule and validation records are on the <a href="testing-schedule.html">Testing</a> and <a href="validation.html">Validation</a> pages.</p>
+      </div>
+    </div>
+    <div style="background:white; height:1.1rem;"></div>
+
     <div class="content-wrapper">
       <div class="content">
         <!-- Download Now CTA -->
@@ -687,18 +715,18 @@
           <a href="A_Quest_for_The_Big_TOE_Version_5B.pdf" class="btn-pill" style="font-size: 1.2rem; padding: 1rem 3rem;" download>Download Now. Version 5B</a>
         </div>
         
-        <!-- How the research works -->
-        <div style="background:#f0f6ff; border-left:4px solid #005ba5; border-radius:0 8px 8px 0; padding:1.25rem 1.75rem; margin-bottom:1.75rem;">
-          <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:#005ba5; font-weight:700; margin-bottom:0.4rem;">About the Research</p>
-          <p style="color:#2c3e50; font-size:0.95rem; line-height:1.8; margin:0;">The book presents a theoretical framework. The experimental validation depends on publicly funded missions including DESI, Google Quantum AI, JWST, and ALMA, programs representing billions in scientific infrastructure that operate entirely independently of this work. Three predictions documented in this book preceded confirmation by those programs. The full testing schedule is on the <a href="testing-schedule.html" style="color:#005ba5; font-weight:600;">Testing Schedule page</a>.</p>
-        </div>
-
-        <!-- Editorial Notice -->
-        <div class="editorial-notice">
-          <h3>Suggest an Edit</h3>
-          <p>This is a living document, and your participation makes it stronger. Whether you've spotted a typo, found a clearer way to express an idea, or noticed something that doesn't quite add up, your input is genuinely valued.</p>
-          <p>Use the form below to submit your suggestion. Every edit is reviewed, and accepted changes will be credited in the next revision. <strong>Professional editing is scheduled for August 2026</strong>, so your contributions during this period directly shape the final published version.</p>
-          <p>Thank you for taking the time to read carefully and help improve this work. Open science means building knowledge together.</p>
+        <!-- About the Research + Suggest an Edit — QCD cards side by side -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+          <div style="background:#005ba5; border-left:5px solid #7a5000; border-radius:6px; padding:1.75rem; box-shadow:0 3px 12px rgba(0,0,0,0.12);">
+            <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:#f1e303; font-weight:700; margin-bottom:0.75rem;">About the Research</p>
+            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin:0;">The book presents a theoretical framework. The experimental validation depends on publicly funded missions including DESI, Google Quantum AI, JWST, and ALMA, programs representing billions in scientific infrastructure that operate entirely independently of this work. Four predictions documented in this book preceded confirmation by those programs. The full testing schedule is on the <a href="testing-schedule.html" style="color:#f1e303; font-weight:600;">Testing Schedule page</a>.</p>
+          </div>
+          <div style="background:#1a5c2a; border-left:5px solid #8e0c45; border-radius:6px; padding:1.75rem; box-shadow:0 3px 12px rgba(0,0,0,0.12);">
+            <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.7); font-weight:700; margin-bottom:0.75rem;">Open Science</p>
+            <h3 style="color:white; font-size:1.1rem; font-weight:700; margin:0 0 0.75rem; border:none;">Suggest an Edit</h3>
+            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin-bottom:0.75rem;">This is a living document and your participation makes it stronger. Whether you have spotted a typo, found a clearer way to express an idea, or noticed something that does not add up, your input is genuinely valued.</p>
+            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin:0;">Every edit is reviewed and accepted changes are credited in the next revision. <strong style="color:white;">Professional editing is scheduled for August 2026</strong>, so your contributions during this period directly shape the final published version.</p>
+          </div>
         </div>
         
         <!-- Suggest an Edit Section -->
@@ -764,348 +792,260 @@
     <div class="content-wrapper">
       <div class="content" style="padding-top: 0;">
         
-        <!-- Honor System Notice -->
-        <div class="honor-system-box">
-          <h2>Honor-Based Access</h2>
-          <p><strong>Knowledge should be accessible to all.</strong> If you find value in this work and are able to contribute, voluntary donations are welcomed but never required.</p>
-          <p>If you're facing financial hardship, academic pressures, or simply exploring ideas, please access the work freely without any pressure or guilt.</p>
-          <p>Those who can contribute help make continued research and free access possible for everyone.</p>
-          <div style="margin-top: 1.5rem;">
-            <a href="contribute.html" class="btn-pill">Support This Work (Optional)</a>
-          </div>
+        <!-- Honor-Based Access — plain text on white -->
+        <div style="max-width:800px; margin:0 auto 2.5rem;">
+          <h2 style="color:#1a1a2e; font-size:1.5rem; margin-bottom:0.75rem;">Honor-Based Access</h2>
+          <p style="color:#2c3e50; font-size:1rem; line-height:1.85; margin-bottom:0.75rem;"><strong style="color:#1a1a2e;">Knowledge should be accessible to all.</strong> There is no paywall and no sign-up required. If you are a student, a researcher, or someone facing financial hardship, download without hesitation and without guilt.</p>
+          <p style="color:#2c3e50; font-size:1rem; line-height:1.85; margin-bottom:0;">If the work has value for you and you are in a position to support it, the <a href="contribute.html" style="color:#8B0000; font-weight:600;">Contribute page</a> offers a way to do so at whatever level feels right. Those who contribute make continued access possible for everyone.</p>
         </div>
 
-        <!-- Poster Download Section -->
-        <div style="margin: 2.5rem 0; padding: 2rem; background: #f8f9fa; border-left: 4px solid var(--primary-color); border-radius: 0 8px 8px 0;">
-          <h2 style="margin-top: 0; color: var(--primary-color);">Thank You for Your Contribution</h2>
-          <p>Your support makes continued open research possible. As a thank you, please accept this high-resolution poster of the COSMIC Framework — printable at most print shops and designed for framing.</p>
-          <p style="margin-bottom: 1.5rem;">The poster summarises the framework's ten open problems and the substrate account for each, the origin sequence comparison, and the four confirmed predictions, all in one piece.</p>
+        <h2 style="color:#1a1a2e;margin-bottom:0.5rem;">Available Versions</h2>
+        <p style="color:#2c3e50;margin-bottom:1.5rem;">All versions are preserved for transparency and documented prediction priority. Earlier versions contain predictions as originally recorded before experimental confirmation.</p>
 
-          <!-- Poster preview thumbnail -->
-          <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap; margin-bottom: 1.5rem;">
-            <div style="flex-shrink: 0;">
-              <div style="width: 260px; height: 347px; overflow: hidden; border: 2px solid #ccc; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.18); background: #030711;">
-                <iframe
-                  src="cosmic_poster.html"
-                  style="width: 756px; height: 1010px; border: none; pointer-events: none; transform: scale(0.344); transform-origin: top left; display: block;"
-                  scrolling="no"
-                  title="COSMIC Framework Poster Preview">
-                </iframe>
+        <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #005f6e;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 5B <span style="display:inline-block;background:#f1e303;color:#8B0000;font-size:0.68rem;font-weight:800;padding:0.18rem 0.6rem;border-radius:20px;margin-left:0.5rem;text-transform:uppercase;letter-spacing:0.06em;" class="blink">Latest Version</span> <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 2026</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Comprehensive framework clarification edition. Sharpens the distinction between programmed computation and fundamental calculation, deepens the treatment of mathematical constants, strengthens the awe and wonder framing throughout, and adds falsification-forward Conclusion with upcoming observational program references.</p>
+              <div class="changelog">
+                <h4>Changes in Version 5B</h4>
+                <ul>
+                    <li>Introduction: section heading clarified from "Without Computation" to "Without Being Computed"</li>
+                    <li>Introduction: computation passages revised</li>
+                    <li>Introduction: added arithmetic-from-first-distinction paragraph</li>
+                    <li>Introduction: neutral first-cause boundary statement added</li>
+                    <li>Element 2: non-physical systems pushback added</li>
+                    <li>Element 3: awe-deepening passage restores sense of wonder</li>
+                    <li>Element 6: questions become tractable without becoming smaller</li>
+                    <li>Element 7: brain-cosmos parallel paragraph added</li>
+                    <li>Element 14: Wigner passage replaced with full arithmetic argument</li>
+                    <li>Conclusion: falsification-forward paragraphs added</li>
+                    <li>Conclusion: Pattern-Emergent Gravity honestly framed</li>
+                    <li>References: Conclusion section added with four upcoming observational program citations</li>
+                </ul>
               </div>
-              <p style="font-size: 0.75rem; color: #888; text-align: center; margin-top: 0.4rem;">Preview — click to zoom</p>
-            </div>
-            <div style="flex: 1; min-width: 200px;">
-              <h3 style="margin-top: 0; color: var(--primary-color); font-size: 1.05rem;">COSMIC Framework Poster</h3>
-              <p style="font-size: 0.9rem; line-height: 1.65;">One page. Ten open problems in physics. One coherent response. Designed for 18&Prime; &times; 24&Prime; or 24&Prime; &times; 36&Prime; framing. Dark space aesthetic with real science imagery. Suitable for home, office, lab, or lecture room.</p>
-              <ul style="font-size: 0.88rem; line-height: 1.8; padding-left: 1.2rem; color: #444;">
-                <li>Ten framework positions vs open problems</li>
-                <li>Origin sequence comparison</li>
-                <li>Four independently confirmed predictions</li>
-                <li>Print-ready at 300 DPI</li>
-              </ul>
-            </div>
-          </div>
-
-          <div style="text-align: center; margin: 1.5rem 0;">
-            <a href="cosmic_poster.html" download="COSMIC_Framework_Poster.html" class="btn-pill" style="display: inline-block; margin-bottom: 0.75rem;">Download Poster (HTML)</a>
-            <p style="font-size: 0.82rem; color: #666; margin: 0;">Open in Chrome, then File &rarr; Print &rarr; Save as PDF at your target size.</p>
-          </div>
-
-          <div style="background: white; border: 1px solid #ddd; border-radius: 6px; padding: 1.5rem; margin-top: 1.5rem;">
-            <h3 style="margin-top: 0; font-size: 1.1rem; color: var(--primary-color);">Print Specifications</h3>
-
-            <h4 style="margin-bottom: 0.4rem; font-size: 0.95rem;">Recommended Sizes</h4>
-            <ul style="margin-bottom: 1rem; padding-left: 1.4rem; font-size: 0.9rem; line-height: 1.7;">
-              <li><strong>18&Prime; &times; 24&Prime;</strong> &mdash; Standard poster frame size. Most widely available at print shops and frame retailers. Ideal for home or office display.</li>
-              <li><strong>24&Prime; &times; 36&Prime;</strong> &mdash; Large format. Striking at distance. Suited to lecture rooms, labs, and gallery-style display.</li>
-              <li><strong>A2 (420 &times; 594 mm)</strong> &mdash; International standard equivalent to 18&Prime; &times; 24&Prime;. Use for orders outside North America.</li>
-            </ul>
-
-            <h4 style="margin-bottom: 0.4rem; font-size: 0.95rem;">Paper and Finish</h4>
-            <ul style="margin-bottom: 1rem; padding-left: 1.4rem; font-size: 0.9rem; line-height: 1.7;">
-              <li><strong>Satin (recommended)</strong> &mdash; The best all-round choice. Richer color than matte, no mirror glare under light. Works framed or unframed.</li>
-              <li><strong>Glossy</strong> &mdash; Maximum color vibrancy and contrast. Best viewed away from direct light sources. Can show fingerprints; best behind glass.</li>
-              <li><strong>Matte</strong> &mdash; No glare at any angle. Slightly softer color saturation. Ideal for bright rooms or display under strong overhead lighting.</li>
-              <li><strong>Weight</strong> &mdash; Request 200&ndash;250 gsm (60&ndash;80 lb cover stock). Heavier stock holds shape better when framed without a backing board.</li>
-            </ul>
-
-            <h4 style="margin-bottom: 0.4rem; font-size: 0.95rem;">Resolution and Color</h4>
-            <ul style="margin-bottom: 1rem; padding-left: 1.4rem; font-size: 0.9rem; line-height: 1.7;">
-              <li><strong>Minimum 300 DPI</strong> at final print size. When exporting from Chrome, set the paper size to your target dimensions before saving the PDF.</li>
-              <li><strong>Color profile: sRGB</strong> &mdash; accepted by all major print shops. If a shop requests CMYK, most online services convert automatically.</li>
-              <li>The dark background prints best on a calibrated printer. Request a proof print at smaller size before committing to large format if budget allows.</li>
-            </ul>
-
-            <h4 style="margin-bottom: 0.4rem; font-size: 0.95rem;">Framing</h4>
-            <ul style="margin-bottom: 0; padding-left: 1.4rem; font-size: 0.9rem; line-height: 1.7;">
-              <li><strong>Mat board</strong> &mdash; A 1.5&Prime;&ndash;2&Prime; white or black mat adds visual separation and a professional finish. Black mat complements the dark poster background particularly well.</li>
-              <li><strong>Glass</strong> &mdash; Standard glass works well with matte or satin finish. Request UV-protective or anti-reflective glass for glossy prints or brightly lit spaces.</li>
-              <li><strong>Frame depth</strong> &mdash; A standard 18&Prime; &times; 24&Prime; frame accepts the poster directly. If adding a mat, account for the mat opening size when ordering the frame.</li>
-              <li>Print shops such as FedEx Office, Staples, Shutterfly, and Printful offer online upload and large-format printing with nationwide pickup or delivery.</li>
-            </ul>
-          </div>
-        </div>
-
-        <h2>Available Versions</h2>
-        <p>All versions are available for transparency and to establish documented prediction priority. Earlier versions contain predictions made before experimental validation.</p>
-        
-        <div class="version-grid">
-
-          <!-- Version 5B (Current) -->
-          <div class="version-card current">
-            <div class="version-badge">Current Version</div>
-            <div class="version-number">Version 5B</div>
-            <div class="version-date">Published: May 2026</div>
-            <p class="version-description">Comprehensive framework clarification edition. Sharpens the distinction between programmed computation and fundamental calculation, deepens the treatment of mathematical constants, strengthens the awe and wonder framing throughout, and adds falsification-forward Conclusion with upcoming observational program references.</p>
-
-            <div class="changelog">
-              <h4>Changes in Version 5B</h4>
-              <ul>
-                <li>Introduction: section heading clarified from "Without Computation" to "Without Being Computed". precise distinction between designed systems and rule-following instantiation</li>
-                <li>Introduction: computation passages revised. substrate performs calculation in the fundamental sense; the four arithmetic operations follow necessarily from the first distinction</li>
-                <li>Introduction: added arithmetic-from-first-distinction paragraph. pi gives division, complement gives addition, all formal mathematics follows</li>
-                <li>Introduction: "or design" removed from Fibonacci section; neutral first-cause boundary statement added with discussion link</li>
-                <li>Introduction: grammatical correction ("It's" to "It is")</li>
-                <li>Element 2: non-physical systems pushback added. examines what exactly a non-physical system would be and demonstrates the category contains only physical things</li>
-                <li>Element 3: "nothing but ordinary physics" replaced; awe-deepening passage restores sense of wonder at mechanism</li>
-                <li>Element 3: "Not as a miracle" passage revised. understanding deepens rather than closes</li>
-                <li>Element 6: "nothing special, nothing unique" passage revised</li>
-                <li>Element 6: "inexplicable mystery" passage revised. questions become tractable without becoming smaller</li>
-                <li>Element 6: "The universe does not think" nuanced. affirms calculation in the fundamental sense</li>
-                <li>Element 7: brain-cosmos parallel paragraph added. states the structural similarity as measured fact, draws the line at cosmic brain claim</li>
-                <li>Element 14: "dissolves the mystery" replaced with "makes the correspondence intelligible"</li>
-                <li>Element 14: Wigner passage replaced with full arithmetic argument. mathematics is what the universe is doing, not an unreasonable correspondence</li>
-                <li>Element 14: golden ratio phrase revised for religious neutrality</li>
-                <li>Element 14: arithmetic-from-first-distinction paragraph added</li>
-                <li>Element 16: "intelligent design" removed from fine-tuning list; neutral first-cause boundary statement added</li>
-                <li>Conclusion: falsification-forward paragraphs added. the framework asks for tests, not belief</li>
-                <li>Conclusion: gravity and watching paragraph added. Pattern-Emergent Gravity honestly framed; upcoming programs named with references</li>
-                <li>Conclusion: final sentence added</li>
-                <li>References: Conclusion section added with four upcoming observational program citations</li>
-              </ul>
-            </div>
-
-            <div class="btn-container">
-              <a href="A_Quest_for_The_Big_TOE_Version_5B.pdf" class="btn-pill" download>Download PDF</a>
-            </div>
-          </div>
-
-          <!-- Version 5A -->
-          <div class="version-card">
-            <div class="version-number">Version 5A</div>
-            <div class="version-date">Published: Early 2026</div>
-            <p class="version-description">Full readability revision across all 21 Elements and the Conclusion. Establishes the prose standards, structural conventions, and style framework that Version 5B refines. Subtitle corrections, Element 4 rebuilt around rotational symmetry and Bloch sphere, inflation reframed as correctly identifying real problems rather than a competitor framework.</p>
-
-            <div class="changelog">
-              <h4>Changes in Version 5A</h4>
-              <ul>
-                <li>Comprehensive readability revision across Introduction, all 21 Elements, and Conclusion</li>
-                <li>Element 3 subtitle corrected from overclaiming to accurate framing</li>
-                <li>Element 4 rebuilt around isotropic substrate, rotational symmetry, angular momentum conservation</li>
-                <li>Inflation reframed as identifying real problems the framework provides substrate-level mechanism for</li>
-                <li>State of the Framework table with traffic-light color coding introduced</li>
-                <li>Em dashes replaced throughout with appropriate punctuation and bridge words</li>
-                <li>Readability standards established: sentences over 40 words flagged, one main idea per paragraph</li>
-              </ul>
-            </div>
-
-            <div class="btn-container">
-              <a href="A_Quest_for_The_Big_TOE_Version_5A.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-
-          <!-- Version 3.5 -->
-          <div class="version-card">
-            <div class="version-number">Version 3.5</div>
-            <div class="version-date">Published: November 15, 2025</div>
-            <p class="version-description">Pre-release evaluation version with updated validation tracking and framework refinements.</p>
-
-            <div class="changelog">
-              <h4>Changes in Version 3.5</h4>
-              <ul>
-                <li>Added comprehensive validation tracking system</li>
-                <li>Updated cosmic information density predictions</li>
-                <li>Enhanced quantum computing optimization framework</li>
-                <li>New predictions for upcoming JWST observations</li>
-                <li>Refined consciousness emergence model</li>
-                <li>Updated references with 2025 experimental results</li>
-                <li>Improved mathematical notation consistency</li>
-              </ul>
-            </div>
-
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_3_5.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-
-          <!-- Version 3.4 -->
-          <div class="version-card">
-            <div class="version-number">Version 3.4</div>
-            <div class="version-date">Published: September 8, 2025</div>
-            <p class="version-description">Updated quantum mechanics chapter with recent experimental insights.</p>
-            
-            <div class="changelog">
-              <h4>Changes in Version 3.4</h4>
-              <ul>
-                <li>Expanded quantum entanglement discussion</li>
-                <li>New section on quantum computing implications</li>
-                <li>Updated predictions for particle physics experiments</li>
-                <li>Enhanced information processing framework</li>
-                <li>Additional worked examples in appendices</li>
-                <li>Improved cross-referencing system</li>
-              </ul>
-            </div>
-            
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_3_4.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-          
-          <!-- Version 3.3 -->
-          <div class="version-card">
-            <div class="version-number">Version 3.3</div>
-            <div class="version-date">Published: August 1, 2025</div>
-            <p class="version-description">Refinements to consciousness framework and information dynamics.</p>
-            
-            <div class="changelog">
-              <h4>Changes in Version 3.3</h4>
-              <ul>
-                <li>Enhanced consciousness emergence model with biological examples</li>
-                <li>New section on information flow in neural networks</li>
-                <li>Updated dark energy parameter constraints</li>
-                <li>Expanded glossary with additional technical terms</li>
-                <li>Corrections to references formatting</li>
-              </ul>
-            </div>
-            
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_3_3.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-          
-          <!-- Version 3.2 -->
-          <div class="version-card">
-            <div class="version-number">Version 3.2</div>
-            <div class="version-date">Published: July 2, 2025</div>
-            <p class="version-description">Expanded predictions and mathematical rigor improvements.</p>
-            
-            <div class="changelog">
-              <h4>Changes in Version 3.2</h4>
-              <ul>
-                <li>New testable predictions for particle physics experiments</li>
-                <li>Enhanced mathematical proofs in appendices</li>
-                <li>Added section on computational complexity bounds</li>
-                <li>Improved notation consistency throughout</li>
-                <li>Updated figures with higher resolution versions</li>
-              </ul>
-            </div>
-            
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_3_2.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-          
-          <!-- Version 3.1 -->
-          <div class="version-card">
-            <div class="version-number">Version 3.1</div>
-            <div class="version-date">Published: May 28, 2025</div>
-            <p class="version-description">Minor corrections and clarifications based on initial reader feedback.</p>
-            
-            <div class="changelog">
-              <h4>Changes in Version 3.1</h4>
-              <ul>
-                <li>Corrected typos and formatting inconsistencies</li>
-                <li>Clarified explanations in quantum mechanics chapters</li>
-                <li>Added index for easier navigation</li>
-                <li>Updated web links and references</li>
-                <li>Minor revisions to introduction chapter</li>
-              </ul>
-            </div>
-            
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_3_1.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-          
-          <!-- Version 3.0 -->
-          <div class="version-card">
-            <div class="version-number">Version 3.0</div>
-            <div class="version-date">Published: April 15, 2025</div>
-            <p class="version-description">Major update featuring validated predictions from DESI, Google's Willow quantum chip, and JWST observations.</p>
-            
-            <div class="changelog">
-              <h4>Major Updates in Version 3.0</h4>
-              <ul>
-                <li>Added DESI dark energy validation analysis (January 2025)</li>
-                <li>Updated quantum computing section with Willow chip error correction results</li>
-                <li>Expanded JWST early galaxy formation predictions and confirmations</li>
-                <li>New chapter: Could the Universe Use Prime Numbers as Logic Gates</li>
-                <li>Enhanced mathematical appendices with detailed proofs</li>
-                <li>Comprehensive updated citations and references</li>
-                <li>Galaxy asymmetry predictions documented</li>
-              </ul>
-            </div>
-            
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_3_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-          
-          <!-- Version 2.0 -->
-          <div class="version-card">
-            <div class="version-number">Version 2.0</div>
-            <div class="version-date">Published: August 12, 2024</div>
-            <p class="version-description">Major update including quantum error correction predictions (later validated by Google's Willow chip) and expanded consciousness framework.</p>
-            
-            <div class="changelog">
-              <h4>Changes in Version 2.0</h4>
-              <ul>
-                <li>Added quantum error correction optimization predictions</li>
-                <li>Expanded consciousness and information processing chapters</li>
-                <li>New section on computational boundaries in physics</li>
-                <li>Enhanced dark energy evolution models</li>
-                <li>Additional mathematical proofs and derivations</li>
-                <li>Refined terminology and explanations</li>
-              </ul>
-            </div>
-            
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_2_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-            </div>
-          </div>
-          
-          <!-- Version 1.0 -->
-          <div class="version-card">
-            <div class="version-number">Version 1.0</div>
-            <div class="version-date">Published: March 5, 2024</div>
-            <p class="version-description">Original release establishing The COSMIC Framework and initial predictions that were later experimentally validated.</p>
-            
-            <div class="changelog">
-              <h4>Original Content</h4>
-              <ul>
-                <li>Complete COSMIC Framework foundation</li>
-                <li>Dark energy evolution predictions (validated by DESI 2024-2025)</li>
-                <li>Early galaxy formation predictions (confirmed by JWST)</li>
-                <li>Information-consciousness relationship framework</li>
-                <li>Mathematical framework and derivations</li>
-                <li>Testable predictions across multiple domains</li>
-              </ul>
-            </div>
-            
-            <div class="btn-container">
-              <a href="The_Big_TOE_Ver_1_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="A_Quest_for_The_Big_TOE_Version_5B.pdf" class="btn-pill" download>Download PDF</a>
+              </div>
             </div>
           </div>
         </div>
-        
-        <!-- Citation Box -->
-        <div class="citation-box">
-          <h3>How to Cite This Work</h3>
-          <p>If you reference this work in your research, please use the following citation format:</p>
-          <div class="citation-text">Bai, M. K. (2025). A Quest for The Big TOE: The COSMIC Framework 
-Unification Theory (Version 3.5). Ic² Research Institute. 
-Retrieved from https://ic2institute.org/download</div>
+        <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #8e0c45;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 5A <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: Early 2026</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Full readability revision across all 21 Elements and the Conclusion. Establishes prose standards and style framework that Version 5B refines.</p>
+              <div class="changelog">
+                <h4>Changes in Version 5A</h4>
+                <ul>
+                    <li>Comprehensive readability revision across all 21 Elements</li>
+                    <li>Element 3 subtitle corrected</li>
+                    <li>Element 4 rebuilt around rotational symmetry and Bloch sphere</li>
+                    <li>Inflation reframed as identifying real problems</li>
+                    <li>State of the Framework table introduced</li>
+                    <li>Em dashes replaced throughout</li>
+                    <li>Readability standards established</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="A_Quest_for_The_Big_TOE_Version_5A.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #7a5000;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 3.5 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: November 15, 2025</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Pre-release evaluation version with updated validation tracking.</p>
+              <div class="changelog">
+                <h4>Changes in Version 3.5</h4>
+                <ul>
+                    <li>Added comprehensive validation tracking system</li>
+                    <li>Updated cosmic information density predictions</li>
+                    <li>Enhanced quantum computing optimization framework</li>
+                    <li>New predictions for upcoming JWST observations</li>
+                    <li>Refined consciousness emergence model</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_3_5.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 3.4 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: September 8, 2025</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Updated quantum mechanics chapter with recent experimental insights.</p>
+              <div class="changelog">
+                <h4>Changes in Version 3.4</h4>
+                <ul>
+                    <li>Expanded quantum entanglement discussion</li>
+                    <li>New section on quantum computing implications</li>
+                    <li>Updated predictions for particle physics experiments</li>
+                    <li>Improved cross-referencing system</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_3_4.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #1a5c2a;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 3.3 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 1, 2025</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Refinements to consciousness framework and information dynamics.</p>
+              <div class="changelog">
+                <h4>Changes in Version 3.3</h4>
+                <ul>
+                    <li>Enhanced consciousness emergence model with biological examples</li>
+                    <li>New section on information flow in neural networks</li>
+                    <li>Updated dark energy parameter constraints</li>
+                    <li>Expanded glossary</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_3_3.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #005ba5;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 3.2 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: July 2, 2025</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Expanded predictions and mathematical rigor improvements.</p>
+              <div class="changelog">
+                <h4>Changes in Version 3.2</h4>
+                <ul>
+                    <li>New testable predictions for particle physics</li>
+                    <li>Enhanced mathematical proofs</li>
+                    <li>Added section on computational complexity bounds</li>
+                    <li>Improved notation consistency</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_3_2.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #005f6e;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 3.1 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 28, 2025</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Minor corrections and clarifications based on initial reader feedback.</p>
+              <div class="changelog">
+                <h4>Changes in Version 3.1</h4>
+                <ul>
+                    <li>Corrected typos and formatting inconsistencies</li>
+                    <li>Clarified quantum mechanics chapters</li>
+                    <li>Added index</li>
+                    <li>Minor revisions to introduction</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_3_1.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foundation-accordion" style="--acc-color:#1a1a2e; border-left:4px solid #f1e303;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 3.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: April 15, 2025</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Major update featuring validated predictions from DESI, Google Willow, and JWST.</p>
+              <div class="changelog">
+                <h4>Changes in Version 3.0</h4>
+                <ul>
+                    <li>Added DESI dark energy validation analysis</li>
+                    <li>Updated quantum computing section with Willow results</li>
+                    <li>Expanded JWST early galaxy formation predictions</li>
+                    <li>New chapter on prime numbers as logic gates</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_3_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #8e0c45;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 2.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 12, 2024</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Major update including quantum error correction predictions later validated by Google Willow.</p>
+              <div class="changelog">
+                <h4>Changes in Version 2.0</h4>
+                <ul>
+                    <li>Added quantum error correction optimization predictions</li>
+                    <li>Expanded consciousness and information processing chapters</li>
+                    <li>New section on computational boundaries</li>
+                    <li>Enhanced dark energy evolution models</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_2_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #7a5000;">
+          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
+            <h3>Version 1.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: March 5, 2024</span></h3>
+            <span class="toggle-indicator">&#9660;</span>
+          </div>
+          <div class="fa-content">
+            <div class="fa-inner">
+              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Original release establishing the COSMIC Framework and initial predictions.</p>
+              <div class="changelog">
+                <h4>Changes in Version 1.0</h4>
+                <ul>
+                    <li>Complete COSMIC Framework foundation</li>
+                    <li>Dark energy evolution predictions (validated by DESI)</li>
+                    <li>Early galaxy formation predictions (confirmed by JWST)</li>
+                    <li>Information-consciousness relationship framework</li>
+                    <li>Testable predictions across multiple domains</li>
+                </ul>
+              </div>
+              <div class="btn-container" style="margin-top:1.25rem;">
+                <a href="The_Big_TOE_Ver_1_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     
