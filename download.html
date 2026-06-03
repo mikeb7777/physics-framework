@@ -139,7 +139,11 @@
     .foundation-accordion.active .toggle-indicator { transform:rotate(180deg); }
     .fa-content { max-height:0; overflow:hidden; transition:max-height .5s ease; }
     .foundation-accordion.active .fa-content { max-height:9000px; }
-    .fa-inner { padding:1.5rem 2rem; background:white; }
+    .fa-inner { padding:1.5rem 2rem; background:var(--acc-color,#1a1a2e); }
+    .fa-inner p { color:rgba(255,255,255,0.9) !important; }
+    .fa-inner h4 { color:white !important; }
+    .fa-inner ul li { color:rgba(255,255,255,0.88) !important; }
+    .fa-inner .btn-container { border-top:1px solid rgba(255,255,255,0.15); padding-top:1.25rem; }
 
     .page-header {
       background: var(--primary-color);
@@ -223,16 +227,16 @@
     }
     
     .version-card {
-      background: #f8f9fa;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 2rem;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
       position: relative;
     }
     
     .version-card.current {
-      border: 2px solid var(--primary-color);
-      background: white;
+      background: transparent;
+      border: none;
     }
     
     .version-badge {
@@ -261,27 +265,27 @@
     }
     
     .version-description {
-      color: var(--text-dark);
+      color: rgba(255,255,255,0.92);
       margin-bottom: 1.5rem;
-      line-height: 1.7;
+      line-height: 1.8;
+      font-size: 1rem;
     }
     
     .changelog {
-      background: white;
-      border-left: 4px solid var(--primary-color);
+      background: var(--acc-stroke,#333);
+      border-left: 4px solid rgba(255,255,255,0.3);
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       border-radius: 4px;
     }
     
-    .version-card.current .changelog {
-      background: #f8f9fa;
-    }
+
     
     .changelog h4 {
-      color: var(--primary-color);
+      color: white;
       margin-top: 0;
       margin-bottom: 1rem;
+      font-size: 1rem;
     }
     
     .changelog ul {
@@ -290,16 +294,18 @@
     }
     
     .changelog li {
-      padding: 0.5rem 0 0.5rem 1.5rem;
+      padding: 0.4rem 0 0.4rem 1.4rem;
       position: relative;
-      color: var(--text-dark);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
     
     .changelog li::before {
-      content: "→";
+      content: "•";
       position: absolute;
       left: 0;
-      color: var(--primary-color);
+      color: rgba(255,255,255,0.6);
       font-weight: bold;
     }
     
@@ -802,7 +808,7 @@
         <h2 style="color:#1a1a2e;margin-bottom:0.5rem;">Available Versions</h2>
         <p style="color:#2c3e50;margin-bottom:1.5rem;">All versions are preserved for transparency and documented prediction priority. Earlier versions contain predictions as originally recorded before experimental confirmation.</p>
 
-        <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #005f6e;">
+        <div class="foundation-accordion" style="--acc-color:#8B0000; --acc-stroke:#005f6e; border-left:4px solid #005f6e;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 5B <span style="display:inline-block;background:#f1e303;color:#8B0000;font-size:0.68rem;font-weight:800;padding:0.18rem 0.6rem;border-radius:20px;margin-left:0.5rem;text-transform:uppercase;letter-spacing:0.06em;" class="blink">Latest Version</span> <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 2026</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -833,7 +839,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #8e0c45;">
+        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 5A <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: Early 2026</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -859,7 +865,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #7a5000;">
+        <div class="foundation-accordion" style="--acc-color:#005ba5; --acc-stroke:#7a5000; border-left:4px solid #7a5000;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 3.5 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: November 15, 2025</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -883,7 +889,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;">
+        <div class="foundation-accordion" style="--acc-color:#005f6e; --acc-stroke:#c62828; border-left:4px solid #c62828;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 3.4 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: September 8, 2025</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -906,7 +912,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#8e0c45; border-left:4px solid #1a5c2a;">
+        <div class="foundation-accordion" style="--acc-color:#8e0c45; --acc-stroke:#1a5c2a; border-left:4px solid #1a5c2a;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 3.3 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 1, 2025</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -929,7 +935,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#7a5000; border-left:4px solid #005ba5;">
+        <div class="foundation-accordion" style="--acc-color:#7a5000; --acc-stroke:#005ba5; border-left:4px solid #005ba5;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 3.2 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: July 2, 2025</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -952,7 +958,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#8B0000; border-left:4px solid #005f6e;">
+        <div class="foundation-accordion" style="--acc-color:#8B0000; --acc-stroke:#005f6e; border-left:4px solid #005f6e;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 3.1 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 28, 2025</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -975,7 +981,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#1a1a2e; border-left:4px solid #f1e303;">
+        <div class="foundation-accordion" style="--acc-color:#1a1a2e; --acc-stroke:#f1e303; border-left:4px solid #f1e303;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 3.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: April 15, 2025</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -998,7 +1004,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#1a5c2a; border-left:4px solid #8e0c45;">
+        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 2.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 12, 2024</span></h3>
             <span class="toggle-indicator">&#9660;</span>
@@ -1021,7 +1027,7 @@
             </div>
           </div>
         </div>
-        <div class="foundation-accordion" style="--acc-color:#005ba5; border-left:4px solid #7a5000;">
+        <div class="foundation-accordion" style="--acc-color:#005ba5; --acc-stroke:#7a5000; border-left:4px solid #7a5000;">
           <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
             <h3>Version 1.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: March 5, 2024</span></h3>
             <span class="toggle-indicator">&#9660;</span>
