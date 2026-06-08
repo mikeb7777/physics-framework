@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Resources – Ic² Research Institute</title>
+    <meta name="description" content="Free courses, simulations, videos, and communities for readers who want to go deeper into the physics behind the COSMIC Framework.">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-color: #8B0000;
+            --secondary-color: #2c3e50;
+            --accent-blue: #005ba5;
+            --accent-red: #e33d2f;
+            --accent-green: #a1cd5f;
+            --accent-orange: #f58b2b;
+            --accent-yellow: #f1e303;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --max-width: 1200px;
+
+            /* QCD level colors */
+            --qcd-red:   #e33d2f;
+            --qcd-green: #5a9e2f;
+            --qcd-blue:  #005ba5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: white;
+        }
+
+        /* ── Header ── */
+        .site-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .header-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .site-logo img { height: 40px; width: auto; display: block; }
+        .main-navigation ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .main-navigation a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .main-navigation a:hover { color: var(--primary-color); }
+        .main-navigation a.login-link {
+            background: linear-gradient(135deg, #8B0000 0%, #a00000 100%);
+            color: #f1e303;
+            padding: 0.5rem 1.25rem;
+            border-radius: 25px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(139,0,0,0.3);
+        }
+        .main-navigation a.login-link:hover {
+            background: linear-gradient(135deg, #a00000 0%, #8B0000 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139,0,0,0.4);
+        }
+
+        /* ── Hamburger ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+        }
+        .hamburger span {
+            width: 25px; height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px,7px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 73px; left: 0; right: 0;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 999;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-menu.active { max-height: 600px; }
+        .mobile-menu ul { list-style: none; padding: 1rem; }
+        .mobile-menu ul li { border-bottom: 1px solid #f0f0f0; }
+        .mobile-menu ul li:last-child { border-bottom: none; }
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .mobile-menu a:hover { background: var(--bg-light); color: var(--primary-color); }
+        .mobile-menu a.login-link {
+            background: linear-gradient(135deg, #8B0000 0%, #a00000 100%);
+            color: #f1e303;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        /* ── Page hero ── */
+        .page-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2c3e50 100%);
+            color: white;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+        }
+        .page-hero .tagline {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-yellow);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .page-hero h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .page-hero p {
+            max-width: 680px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.82);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* ── QCD legend ── */
+        .qcd-legend {
+            background: var(--bg-light);
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1.25rem 2rem;
+        }
+        .qcd-legend-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .qcd-legend-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+        .qcd-legend-pills {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .qcd-note {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-left: auto;
+            font-style: italic;
+        }
+
+        /* ── Filter buttons ── */
+        .filter-bar {
+            max-width: var(--max-width);
+            margin: 2rem auto 0;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-right: 0.25rem;
+        }
+        .filter-btn {
+            border: 2px solid #ddd;
+            background: white;
+            color: var(--text-dark);
+            padding: 0.4rem 1.1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover { border-color: var(--secondary-color); background: var(--bg-light); }
+        .filter-btn.active-all { background: var(--secondary-color); color: white; border-color: var(--secondary-color); }
+        .filter-btn.active-red  { background: var(--qcd-red);   color: white; border-color: var(--qcd-red); }
+        .filter-btn.active-green{ background: var(--qcd-green); color: white; border-color: var(--qcd-green); }
+        .filter-btn.active-blue { background: var(--qcd-blue);  color: white; border-color: var(--qcd-blue); }
+
+        /* ── Main content ── */
+        .resources-section {
+            max-width: var(--max-width);
+            margin: 2.5rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .category-heading {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 3rem 0 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .category-heading .cat-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Resource cards grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .resource-card {
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            padding: 1.4rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .resource-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .resource-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        /* Level pills */
+        .level-pill {
+            display: inline-block;
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .pill-red   { background: var(--qcd-red);   color: white; }
+        .pill-green { background: var(--qcd-green); color: white; }
+        .pill-blue  { background: var(--qcd-blue);  color: white; }
+
+        .resource-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .resource-link {
+            display: inline-block;
+            margin-top: 0.25rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            align-self: flex-start;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        .resource-link:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* hidden card state for filtering */
+        .resource-card.hidden { display: none; }
+
+        /* ── Intro note ── */
+        .intro-note {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            max-width: var(--max-width);
+            margin: 0 auto 0;
+        }
+        .intro-note p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .intro-note-wrap {
+            max-width: var(--max-width);
+            margin: 2rem auto 0;
+            padding: 0 2rem;
+        }
+
+        /* ── Footer ── */
+        footer { background: #2c3e50; color: white; padding: 2.5rem 2rem 1rem; }
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-section h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.35rem; }
+        .footer-section a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s ease; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        .footer-bottom p { color: rgba(255,255,255,0.7); }
+        .footer-bottom a { color: rgba(255,255,255,0.6); text-decoration: none; }
+        .footer-bottom a:hover { color: white; }
+
+        /* ── Responsive ── */
+        @media (max-width: 968px) {
+            .main-navigation { display: none; }
+            .hamburger { display: flex; }
+            .mobile-menu { display: block; }
+            .footer-container { grid-template-columns: 1fr 1fr; }
+            .qcd-note { display: none; }
+        }
+        @media (max-width: 640px) {
+            .page-hero h1 { font-size: 1.9rem; }
+            .footer-container { grid-template-columns: 1fr; }
+            .resource-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="site-logo">
+            <img src="ic2-logo.png" alt="Ic² Research Institute Logo">
+        </a>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="book.html">Big TOE</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="discussions-page.html">Discussion</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="login.html" class="login-link">Login</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+    <ul>
+        <li><a href="framework.html">Framework</a></li>
+        <li><a href="book.html">Big TOE</a></li>
+        <li><a href="validation.html">Validation</a></li>
+        <li><a href="testing-schedule.html">Testing</a></li>
+        <li><a href="programs-gateway.html">Programs</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="discussions-page.html">Discussion</a></li>
+        <li><a href="about-page.html">About</a></li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="login.html" class="login-link">Login</a></li>
+    </ul>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <p class="tagline">The Big TOE — Additional Resources</p>
+    <h1>Go Deeper</h1>
+    <p>The framework is an invitation, not a destination. These free courses, simulations, videos, and communities are for readers who want to engage directly with the physics behind the COSMIC Framework.</p>
+</section>
+
+<!-- QCD Level Legend -->
+<div class="qcd-legend">
+    <div class="qcd-legend-inner">
+        <span class="qcd-legend-label">Difficulty level</span>
+        <div class="qcd-legend-pills">
+            <span class="level-pill pill-red">Foundational</span>
+            <span style="font-size:0.82rem; color:var(--text-light);">No prior physics required</span>
+            <span style="color:#ccc; margin: 0 0.25rem;">|</span>
+            <span class="level-pill pill-green">Intermediate</span>
+            <span style="font-size:0.82rem; color:var(--text-light);">Some calculus or physics helpful</span>
+            <span style="color:#ccc; margin: 0 0.25rem;">|</span>
+            <span class="level-pill pill-blue">Advanced</span>
+            <span style="font-size:0.82rem; color:var(--text-light);">University-level physics assumed</span>
+        </div>
+        <span class="qcd-note">Colors after QCD: red, green, blue — the three color charges of quarks</span>
+    </div>
+</div>
+
+<!-- Intro note -->
+<div class="intro-note-wrap" data-aos="fade-up">
+    <div class="intro-note">
+        <p>All resources listed here are free to access. Links open in a new tab. The Ic² Research Institute has no affiliation with any of the platforms listed and receives no compensation for these recommendations. They are included solely because they are good.</p>
+    </div>
+</div>
+
+<!-- Filter bar -->
+<div class="filter-bar" data-aos="fade-up">
+    <span class="filter-label">Filter by level:</span>
+    <button class="filter-btn active-all" onclick="filterCards('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCards('red', this)">Foundational</button>
+    <button class="filter-btn" onclick="filterCards('green', this)">Intermediate</button>
+    <button class="filter-btn" onclick="filterCards('blue', this)">Advanced</button>
+</div>
+
+<!-- Resources -->
+<div class="resources-section">
+
+    <!-- VIDEO LECTURES -->
+    <h2 class="category-heading" data-aos="fade-up"><span class="cat-icon">▶</span> Video Lectures</h2>
+    <div class="resource-grid">
+
+        <div class="resource-card" data-level="red" data-aos="fade-up">
+            <div class="card-top">
+                <h3>PBS Space Time</h3>
+                <span class="level-pill pill-red">Foundational</span>
+            </div>
+            <p>YouTube channel produced by PBS that covers quantum mechanics, black holes, information theory, cosmology, and spacetime with genuine scientific depth. The topics map directly onto the framework's territory and the production quality is exceptional.</p>
+            <a href="https://www.youtube.com/@pbsspacetime" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="red" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Crash Course Physics</h3>
+                <span class="level-pill pill-red">Foundational</span>
+            </div>
+            <p>A fast-moving, engaging introduction to classical and modern physics. Covers mechanics, thermodynamics, electromagnetism, and quantum concepts in short episodes. Ideal starting point for readers with no prior physics background.</p>
+            <a href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>The Theoretical Minimum — Leonard Susskind</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>Stanford's recorded lecture series by Leonard Susskind covering classical mechanics, quantum mechanics, special relativity, statistical mechanics, and cosmology. Rigorous but built for the motivated non-specialist. Susskind is one of the inventors of string theory and one of its clearest critics.</p>
+            <a href="https://theoreticalminimum.com/courses" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>3Blue1Brown</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>Visual mathematics at its best. The linear algebra, calculus, and neural network series provide the mathematical intuition underlying much of modern physics. If equations in the framework leave you wanting more foundation, start here.</p>
+            <a href="https://www.youtube.com/@3blue1brown" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="blue" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Perimeter Institute — PIRSA</h3>
+                <span class="level-pill pill-blue">Advanced</span>
+            </div>
+            <p>The Perimeter Institute Recorded Seminar Archive hosts thousands of lectures by leading researchers in quantum gravity, quantum foundations, cosmology, and quantum information. Graduate-level content from the researchers who are working on these questions now.</p>
+            <a href="https://pirsa.org/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="blue" data-aos="fade-up">
+            <div class="card-top">
+                <h3>MIT OpenCourseWare — Physics</h3>
+                <span class="level-pill pill-blue">Advanced</span>
+            </div>
+            <p>Full MIT physics courses with lecture notes, problem sets, and exams, at no cost. Covers classical mechanics, quantum mechanics, statistical physics, electromagnetism, and graduate-level special topics including quantum field theory and general relativity.</p>
+            <a href="https://ocw.mit.edu/search/?d=Physics&s=department_course_numbers.sort_coursenum" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+    </div>
+
+    <!-- SIMULATIONS -->
+    <h2 class="category-heading" data-aos="fade-up"><span class="cat-icon">⚙</span> Interactive Simulations</h2>
+    <div class="resource-grid">
+
+        <div class="resource-card" data-level="red" data-aos="fade-up">
+            <div class="card-top">
+                <h3>PhET Interactive Simulations</h3>
+                <span class="level-pill pill-red">Foundational</span>
+            </div>
+            <p>Browser-based simulations from the University of Colorado Boulder covering quantum mechanics, wave behavior, atomic structure, nuclear physics, and more. No installation required. Exceptional for building physical intuition before engaging with formalism.</p>
+            <a href="https://phet.colorado.edu/en/simulations/filter?subjects=quantum-phenomena&type=html" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Quantum Game</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>A browser-based puzzle game built on real quantum optics. Players route photons through polarizers, beam splitters, and detectors to complete levels, encountering genuine quantum behavior including superposition and interference along the way.</p>
+            <a href="https://quantumgame.io/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>IBM Quantum Composer</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>Build and run actual quantum circuits on IBM's real quantum hardware, free. The visual circuit composer requires no programming. A direct window into the quantum computing territory the framework discusses in Elements 11 through 13 and 21.</p>
+            <a href="https://quantum.ibm.com/composer" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="blue" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Wolfram Physics Project Explorer</h3>
+                <span class="level-pill pill-blue">Advanced</span>
+            </div>
+            <p>Interactive tools for exploring the Wolfram Physics Project's hypergraph models of spacetime emergence. A different approach to the same fundamental problem the COSMIC Framework addresses: how does spacetime arise from something more primitive?</p>
+            <a href="https://www.wolframphysics.org/tools/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+    </div>
+
+    <!-- WRITTEN RESOURCES -->
+    <h2 class="category-heading" data-aos="fade-up"><span class="cat-icon">📄</span> Written Resources</h2>
+    <div class="resource-grid">
+
+        <div class="resource-card" data-level="red" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Khan Academy — Physics</h3>
+                <span class="level-pill pill-red">Foundational</span>
+            </div>
+            <p>Structured, free courses in classical mechanics, thermodynamics, waves, electromagnetism, and quantum physics. Written lessons, worked examples, and practice problems at every stage. The clearest on-ramp for readers who want systematic coverage from the ground up.</p>
+            <a href="https://www.khanacademy.org/science/physics" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>The Feynman Lectures on Physics</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>Richard Feynman's complete undergraduate physics lectures, free online in their entirety. Volume III covers quantum mechanics. Written with Feynman's characteristic refusal to accept an explanation he could not make clear. One of the best physics books ever produced.</p>
+            <a href="https://www.feynmanlectures.caltech.edu/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="blue" data-aos="fade-up">
+            <div class="card-top">
+                <h3>arXiv.org — Physics and Cosmology</h3>
+                <span class="level-pill pill-blue">Advanced</span>
+            </div>
+            <p>The preprint server where most physics research appears before journal publication. All five of the framework's registered predictions draw on papers published here. The gr-qc (general relativity and quantum cosmology) and hep-th (high-energy theory) sections are most relevant to the framework's questions.</p>
+            <a href="https://arxiv.org/list/gr-qc/recent" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="blue" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Zenodo — Open Research Repository</h3>
+                <span class="level-pill pill-blue">Advanced</span>
+            </div>
+            <p>The open-access repository where the COSMIC Framework's own preprints and data files are published. Also hosts preprints across all scientific disciplines. Peer-reviewed and grey literature both available, freely and permanently.</p>
+            <a href="https://zenodo.org/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+    </div>
+
+    <!-- COMMUNITIES -->
+    <h2 class="category-heading" data-aos="fade-up"><span class="cat-icon">◎</span> Communities and Discussion</h2>
+    <div class="resource-grid">
+
+        <div class="resource-card" data-level="red" data-aos="fade-up">
+            <div class="card-top">
+                <h3>r/AskPhysics — Reddit</h3>
+                <span class="level-pill pill-red">Foundational</span>
+            </div>
+            <p>A large, moderated community where curious readers can ask physics questions and receive answers from students, researchers, and educators. Patient with genuine questions. A good place to test your understanding of concepts from the framework against people who will push back honestly.</p>
+            <a href="https://www.reddit.com/r/AskPhysics/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Physics Stack Exchange</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>A Q&A platform for physics questions with answers from researchers and advanced students. Answers are ranked and peer-reviewed by the community. More technical than Reddit; better for questions with precise, formal answers. The quantum mechanics and general relativity tags are particularly active.</p>
+            <a href="https://physics.stackexchange.com/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Ic² Research Institute Discussions</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>The institute's own discussion forum for questions about the COSMIC Framework, its predictions, and its implications. The right place to engage directly with the ideas in this book, challenge specific claims, and follow the progress of registered predictions as new data arrives.</p>
+            <a href="discussions-page.html" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="blue" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Perimeter Institute — Public Outreach</h3>
+                <span class="level-pill pill-blue">Advanced</span>
+            </div>
+            <p>The Perimeter Institute runs public lectures, workshops, and online learning programs bringing researchers in quantum gravity, quantum foundations, and cosmology into direct contact with engaged non-specialists. The International Summer School for Young Physicists and Perimeter Scholars International materials are freely available online.</p>
+            <a href="https://perimeterinstitute.ca/outreach" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+    </div>
+
+    <!-- OBSERVATIONAL PROGRAMS -->
+    <h2 class="category-heading" data-aos="fade-up"><span class="cat-icon">🔭</span> Observational Programs Referenced in the Framework</h2>
+    <div class="resource-grid">
+
+        <div class="resource-card" data-level="red" data-aos="fade-up">
+            <div class="card-top">
+                <h3>JWST — James Webb Space Telescope</h3>
+                <span class="level-pill pill-red">Foundational</span>
+            </div>
+            <p>NASA's public portal for the James Webb Space Telescope, whose early galaxy observations are registered as a confirmed prediction of the framework (COSMIC-003). Image gallery, news, and plain-language explanations of results as they are released.</p>
+            <a href="https://webbtelescope.org/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>DESI — Dark Energy Spectroscopic Instrument</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>DESI's dark energy evolution results are the basis for two registered framework predictions: COSMIC-001 and the black hole density prediction targeting DESI DR3. The public results portal releases survey data and summary papers as the five-year survey concludes.</p>
+            <a href="https://www.desi.lbl.gov/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="green" data-aos="fade-up">
+            <div class="card-top">
+                <h3>LIGO — Gravitational Wave Observatory</h3>
+                <span class="level-pill pill-green">Intermediate</span>
+            </div>
+            <p>LIGO's public outreach portal covers gravitational wave detection, black hole mergers, and neutron star collisions. The gravitational wave signatures discussed in Element 19 come directly from LIGO and Virgo data. Event alerts and open data releases available.</p>
+            <a href="https://www.ligo.org/" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+        <div class="resource-card" data-level="blue" data-aos="fade-up">
+            <div class="card-top">
+                <h3>Euclid Mission — ESA</h3>
+                <span class="level-pill pill-blue">Advanced</span>
+            </div>
+            <p>The European Space Agency's Euclid mission is mapping the large-scale structure of the universe across ten billion years of cosmic history. Its results are a primary target dataset for the framework's dark energy mechanism investigation and the black hole density prediction.</p>
+            <a href="https://www.esa.int/Science_Exploration/Space_Science/Euclid" target="_blank" rel="noopener" class="resource-link">Visit →</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Ic² Research Institute</h3>
+            <p style="color:rgba(255,255,255,0.8); font-size:0.9rem;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science, radical transparency, and community-driven inquiry. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research — and we publish our failures alongside our successes.</p>
+            <p style="color:rgba(255,255,255,0.8); font-size:0.9rem; margin-top:0.5rem;">Every contributor retains full ownership of their work. All findings are freely available to the global scientific community. No gatekeeping. No institutional barriers. Just honest pursuit of knowledge.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Research</h3>
+            <ul>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="validation.html">Validation</a></li>
+                <li><a href="testing-schedule.html">Testing</a></li>
+                <li><a href="programs-gateway.html">Programs</a></li>
+                <li><a href="research-publications.html">Publications</a></li>
+                <li><a href="simulations.html">Simulations</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="book.html">The Big TOE</a></li>
+                <li><a href="about-page.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq-page.html">FAQ</a></li>
+                <li><a href="legal.html">Legal</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="discussions-page.html">Discussions</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="become-member.html">Become a Member</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
+    </div>
+</footer>
+
+<script>
+    // Hamburger menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+
+    // Level filter
+    function filterCards(level, btn) {
+        // Update button states
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            b.className = 'filter-btn';
+        });
+        if (level === 'all') btn.classList.add('active-all');
+        else if (level === 'red')   btn.classList.add('active-red');
+        else if (level === 'green') btn.classList.add('active-green');
+        else if (level === 'blue')  btn.classList.add('active-blue');
+
+        // Show/hide cards
+        document.querySelectorAll('.resource-card').forEach(card => {
+            if (level === 'all' || card.dataset.level === level) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        // Hide empty category headings
+        document.querySelectorAll('.category-heading').forEach(heading => {
+            const grid = heading.nextElementSibling;
+            if (!grid) return;
+            const visible = Array.from(grid.querySelectorAll('.resource-card'))
+                .some(c => !c.classList.contains('hidden'));
+            heading.style.display = visible ? '' : 'none';
+        });
+    }
+</script>
+
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ duration: 800, once: true, offset: 80 });</script>
+
+</body>
+</html>
