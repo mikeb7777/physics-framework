@@ -1,1231 +1,1 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download - A Quest for The Big TOE</title>
-    <meta name="description" content="Download the complete book - Information accessible to all. Contributions welcome but never required.">
-    
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary-color: #8B0000;
-      --text-dark: #2c3e50;
-      --max-width: 1200px;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.8;
-      color: var(--text-dark);
-      background: #ffffff;
-    }
-    
-    .content {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-    
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    h2 { font-size: 2rem; margin: 2rem 0 1rem; }
-    h3 { font-size: 1.5rem; margin: 1.5rem 0 1rem; color: var(--primary-color); }
-    h4 { font-size: 1.2rem; margin: 1rem 0 0.5rem; font-weight: 600; }
-    p { margin-bottom: 1rem; }
-    a { color: var(--primary-color); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    
-    .site-header {
-      background: rgba(0, 0, 0, 0.9);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .site-logo img {
-      height: 50px;
-      width: auto;
-    }
-    
-    /* Hamburger Menu Icon */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      padding: 0.5rem;
-      z-index: 1001;
-    }
-    
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: white;
-      margin: 3px 0;
-      transition: all 0.3s ease;
-      border-radius: 2px;
-    }
-    
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(8px, 8px);
-    }
-    
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -7px);
-    }
-    
-    .main-navigation ul {
-      list-style: none;
-      display: flex;
-      gap: 1.25rem;
-      align-items: center;
-    }
-    
-    .main-navigation a {
-      text-decoration: none;
-      color: white;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    .main-navigation a:hover {
-      color: var(--primary-color);
-    }
-    
-    .btn-login {
-      padding: 0.4rem 1rem;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 4px;
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
-    }
-    
-    .btn-login:hover {
-      background: rgba(255,255,255,0.22);
-    }
-    
-    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
-    .blink { animation: blink 1.2s ease-in-out infinite; }
-    .intro-panel { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2.5rem 2rem; }
-    .intro-panel-inner { max-width: 1200px; margin: 0 auto; }
-    .intro-panel h2 { color: white; font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; padding: 0; border: none; }
-    .intro-panel p { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.85; margin-bottom: 0.85rem; }
-    .intro-panel p:last-child { margin-bottom: 0; }
-    .intro-panel a { color: white; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); }
-    .foundation-accordion { background:white; border:1px solid #e0e0e0; border-radius:8px; margin-bottom:1.5rem; overflow:hidden; }
-    .foundation-accordion:hover { box-shadow:0 4px 15px rgba(0,0,0,.1); }
-    .foundation-header { padding:1.25rem 1.5rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--acc-color,#1a1a2e); transition:filter .3s; }
-    .foundation-header:hover { filter:brightness(1.1); }
-    .foundation-header h3 { margin:0; color:white; font-size:1.05rem; display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; }
-    .toggle-indicator { color:white; font-size:1.1rem; transition:transform .3s; flex-shrink:0; }
-    .foundation-accordion.active .toggle-indicator { transform:rotate(180deg); }
-    .fa-content { max-height:0; overflow:hidden; transition:max-height .5s ease; }
-    .foundation-accordion.active .fa-content { max-height:9000px; }
-    .fa-inner { padding:1.5rem 2rem; background:var(--acc-color,#1a1a2e); }
-    .fa-inner p { color:rgba(255,255,255,0.9) !important; }
-    .fa-inner h4 { color:white !important; }
-    .fa-inner ul li { color:rgba(255,255,255,0.88) !important; }
-    .fa-inner .btn-container { border-top:1px solid rgba(255,255,255,0.15); padding-top:1.25rem; }
-
-    .page-header {
-      background: var(--primary-color);
-      padding: 2rem 2rem;
-      text-align: center;
-      color: white;
-      margin-top: 1rem;
-    }
-    
-    .page-header h1 {
-      color: white;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    .page-header p {
-      color: white;
-      font-size: 1.2rem;
-      margin: 0;
-    }
-    
-    .content-wrapper {
-      background: white;
-      position: relative;
-      z-index: 2;
-      padding-top: 2rem;
-    }
-    
-    /* Suggest an Edit Intro */
-    .editorial-notice {
-      background: #f8f9fa;
-      border-left: 4px solid var(--primary-color);
-      border-radius: 4px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-    
-    .editorial-notice h3 {
-      color: var(--primary-color);
-      margin-top: 0;
-      font-size: 1.3rem;
-    }
-    
-    .editorial-notice p {
-      color: var(--text-dark);
-      line-height: 1.7;
-      margin-bottom: 0.75rem;
-    }
-    
-    .editorial-notice p:last-child {
-      margin-bottom: 0;
-    }
-    
-    .editorial-notice strong {
-      font-weight: 600;
-    }
-    
-    .honor-system-box {
-      background: #f8f9fa;
-      border: 2px solid var(--primary-color);
-      border-radius: 8px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    
-    .honor-system-box h2 {
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-    
-    .honor-system-box p {
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
-    }
-    
-    .version-grid {
-      display: grid;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-    
-    .version-card {
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-      position: relative;
-    }
-    
-    .version-card.current {
-      background: transparent;
-      border: none;
-    }
-    
-    .version-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--primary-color);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-    
-    .version-number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 0.5rem;
-    }
-    
-    .version-date {
-      color: #666;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-    
-    .version-description {
-      color: rgba(255,255,255,0.92);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-      font-size: 1rem;
-    }
-    
-    .changelog {
-      background: var(--acc-stroke,#333);
-      border-left: 4px solid rgba(255,255,255,0.3);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border-radius: 4px;
-    }
-    
-
-    
-    .changelog h4 {
-      color: white;
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-    }
-    
-    .changelog ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    
-    .changelog li {
-      padding: 0.4rem 0 0.4rem 1.4rem;
-      position: relative;
-      color: rgba(255,255,255,0.9);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    
-    .changelog li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: rgba(255,255,255,0.6);
-      font-weight: bold;
-    }
-    
-    .btn-container {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    
-    .btn-pill {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      background: var(--primary-color);
-      color: white;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      text-align: center;
-      flex: 1;
-      min-width: 150px;
-    }
-    
-    .btn-pill:hover {
-      background: #a00000;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    
-    .btn-gray {
-      background: #6c757d;
-    }
-    
-    .btn-gray:hover {
-      background: #5a6268;
-    }
-    
-    .citation-box {
-      background: #f8f9fa;
-      border-left: 4px solid var(--primary-color);
-      padding: 2rem;
-      border-radius: 4px;
-      margin-top: 2rem;
-    }
-    
-    .citation-box h3 {
-      margin-top: 0;
-      color: var(--primary-color);
-    }
-    
-    .citation-text {
-      background: white;
-      padding: 1rem;
-      border-radius: 4px;
-      font-family: 'Courier New', monospace;
-      border: 1px solid #e0e0e0;
-      margin-top: 1rem;
-    }
-    
-    .back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 50px;
-      height: 50px;
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      transition: all 0.3s;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    
-    .back-to-top:hover {
-      background: #a00000;
-      transform: translateY(-5px);
-    }
-    
-    .back-to-top.visible {
-      display: flex;
-    }
-    
-    .social-section {
-      padding: 3rem 2rem;
-      background: rgba(0,0,0,0.9);
-      color: white;
-    }
-    
-    .social-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .social-content {
-      display: grid;
-      grid-template-columns: 1fr 3fr 1fr;
-      gap: 2rem;
-      align-items: start;
-      margin-bottom: 2rem;
-    }
-    
-    .quick-links h3 { color: white; font-size: 1.1rem; margin-bottom: 1rem; }
-    .quick-links ul { list-style: none; padding: 0; }
-    .quick-links li { margin-bottom: 0.75rem; }
-    .quick-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; }
-    .quick-links a:hover { color: white; }
-    
-    .social-main { text-align: center; }
-    .social-main h2 { color: white; font-size: 1.75rem; margin-bottom: 0.5rem; }
-    .social-main p { color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
-    
-    .social-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
-    
-    .social-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      color: white;
-    }
-    
-    .social-btn.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-    .social-btn.youtube { background: #FF0000; }
-    .social-btn.email { background: #0072C6; }
-    
-    .copyright {
-      text-align: center;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.9rem;
-    }
-    
-    .copyright a {
-      color: white;
-      text-decoration: none;
-    }
-    
-    .copyright a:hover {
-      text-decoration: underline;
-    }
-    
-    /* Suggest an Edit Section */
-    .suggest-edit-section {
-      background: #2c3e50;
-      padding: 4rem 0;
-      margin-bottom: 2rem;
-    }
-    
-    .suggest-edit-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    
-    .suggest-edit-section h2 {
-      color: white;
-      font-size: 2rem;
-      margin-bottom: 0.25rem;
-      text-align: center;
-    }
-    
-    .suggest-edit-section .section-subtitle {
-      color: rgba(255,255,255,0.9);
-      font-size: 1.2rem;
-      text-align: center;
-      margin-bottom: 0.5rem;
-    }
-    
-    .suggest-edit-section .section-note {
-      color: rgba(255,255,255,0.6);
-      font-size: 0.95rem;
-      text-align: center;
-      margin-bottom: 2.5rem;
-      font-style: italic;
-    }
-    
-    .edit-form {
-      display: grid;
-      gap: 1.5rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .form-group label {
-      color: rgba(255,255,255,0.85);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
-    
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 0.75rem 1rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 6px;
-      background: #005f6e;
-      color: white;
-      font-family: inherit;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, background 0.3s ease;
-    }
-    
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: rgba(255,255,255,0.6);
-    }
-    
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #f1e303;
-      background: #00838f;
-    }
-    
-    .form-group select option {
-      background: #005f6e;
-      color: white;
-    }
-    
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-    
-    .btn-submit-edit {
-      display: inline-block;
-      padding: 0.85rem 2.5rem;
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.05rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: inherit;
-      justify-self: center;
-    }
-    
-    .btn-submit-edit:hover {
-      background: #a00000;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
-    }
-    
-    .edit-form-success {
-      display: none;
-      text-align: center;
-      padding: 2rem;
-      color: #a1cd5f;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    
-    /* Mobile Styles */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-      
-      .header-container {
-        padding: 1rem;
-      }
-      
-      .main-navigation {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.95);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .main-navigation.active {
-        max-height: 500px;
-      }
-      
-      .main-navigation ul {
-        flex-direction: column;
-        gap: 0;
-        padding: 1rem 0;
-      }
-      
-      .main-navigation li {
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .main-navigation li:last-child {
-        border-bottom: none;
-      }
-      
-      .main-navigation a {
-        display: block;
-        padding: 1rem;
-        width: 100%;
-      }
-      
-      .btn-login {
-        display: inline-block;
-        margin: 0.5rem auto;
-        width: calc(100% - 2rem);
-      }
-      
-      .social-content { 
-        grid-template-columns: 1fr; 
-        gap: 1rem; 
-      }
-      
-      .page-header h1 { 
-        font-size: 2rem; 
-      }
-      
-      .content { 
-        padding: 2rem 1rem; 
-      }
-      
-      .btn-container { 
-        flex-direction: column; 
-      }
-      
-      .btn-pill { 
-        width: 100%; 
-      }
-      
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-      
-      .suggest-edit-section {
-        padding: 3rem 0;
-      }
-    }
-    
-    </style>
-</head>
-<body>
-    <header class="site-header">
-      <div class="header-container">
-        <div class="site-logo">
-          <a href="book.html">
-            <img src="bigtoeindexlogoyel.png" alt="The Big TOE">
-          </a>
-        </div>
-        
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        
-        <nav class="main-navigation" id="mainNav">
-          <ul>
-            <li><a href="book.html">Home</a></li>
-            <li><a href="about-page.html">About</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="appendix.html">Appendix</a></li>
-            <li><a href="glossary.html">Glossary</a></li>
-            <li><a href="contribute.html">Contribute</a></li>
-            <li><a href="login_page_complete.html" class="btn-login">Login</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    
-    <div class="page-header">
-      <h1>Download A Quest for The Big TOE</h1>
-      <p>The COSMIC Framework Unification Theory</p>
-    </div>
-    <div style="background:white; height:1.1rem;"></div>
-    <div class="intro-panel">
-      <div class="intro-panel-inner">
-        <h2>About This Download</h2>
-        <p><em>A Quest for the Big TOE</em> is the primary theoretical document of the Ic&#178; Research Institute. It presents the COSMIC Framework in full: 21 Elements covering information theory, quantum mechanics, cosmology, consciousness, and the mathematical structures connecting them.</p>
-        <p>Four of its predictions have been independently confirmed by DESI, Google Quantum AI, JWST, and ALMA. The full testing schedule and validation records are on the <a href="testing-schedule.html">Testing</a> and <a href="validation.html">Validation</a> pages.</p>
-      </div>
-    </div>
-    <div style="background:white; height:1.1rem;"></div>
-
-    <div class="content-wrapper">
-      <div class="content">
-        <!-- Download Now CTA -->
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <a href="A_Quest_for_The_Big_TOE_Version_6A.pdf" class="btn-pill" style="font-size: 1.2rem; padding: 1rem 3rem;" download>Download Now. Version 6A</a>
-        </div>
-        
-        <!-- About the Research + Suggest an Edit — QCD cards side by side -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
-          <div style="background:#005ba5; border-left:5px solid #7a5000; border-radius:6px; padding:1.75rem; box-shadow:0 3px 12px rgba(0,0,0,0.12);">
-            <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:#f1e303; font-weight:700; margin-bottom:0.75rem;">About the Research</p>
-            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin:0;">The book presents a theoretical framework. The experimental validation depends on publicly funded missions including DESI, Google Quantum AI, JWST, and ALMA, programs representing billions in scientific infrastructure that operate entirely independently of this work. Four predictions documented in this book preceded confirmation by those programs. The full testing schedule is on the <a href="testing-schedule.html" style="color:#f1e303; font-weight:600;">Testing Schedule page</a>.</p>
-          </div>
-          <div style="background:#1a5c2a; border-left:5px solid #8e0c45; border-radius:6px; padding:1.75rem; box-shadow:0 3px 12px rgba(0,0,0,0.12);">
-            <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.7); font-weight:700; margin-bottom:0.75rem;">Open Science</p>
-            <h3 style="color:white; font-size:1.1rem; font-weight:700; margin:0 0 0.75rem; border:none;">Suggest an Edit</h3>
-            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin-bottom:0.75rem;">This is a living document and your participation makes it stronger. Whether you have spotted a typo, found a clearer way to express an idea, or noticed something that does not add up, your input is genuinely valued.</p>
-            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin:0;">Every edit is reviewed and accepted changes are credited in the next revision. <strong style="color:white;">Professional editing is scheduled for August 2026</strong>, so your contributions during this period directly shape the final published version.</p>
-          </div>
-        </div>
-        
-        <!-- Suggest an Edit Section -->
-        </div>
-    </div>
-    <section class="suggest-edit-section" id="suggest-edit">
-      <div class="suggest-edit-container">
-        <h2 data-aos="fade-up">Open Science</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Suggest an Edit</p>
-        <p class="section-note" data-aos="fade-up" data-aos-delay="150">Accepted edits will appear in the following revision.</p>
-        
-        <form class="edit-form" id="editForm" data-aos="fade-up" data-aos-delay="200">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="editType">Edit What?</label>
-              <select id="editType" name="editType" required>
-                <option value="" disabled selected>Select a section</option>
-                <option value="book">Book Content</option>
-                <option value="appendix">Appendix</option>
-                <option value="glossary">Glossary</option>
-                <option value="reference">Reference</option>
-                <option value="equation">Equation</option>
-                <option value="image">Image / Figure</option>
-                <option value="index">Index</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="pageNumber">Page Number</label>
-              <input type="text" id="pageNumber" name="pageNumber" placeholder="e.g. 42, A-7, or Glossary p.3">
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="presentText">Present Text (what currently appears)</label>
-            <textarea id="presentText" name="presentText" placeholder="Copy or describe the existing text, equation, or content as it currently reads..." required></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label for="suggestedText">Suggested Text (your proposed change)</label>
-            <textarea id="suggestedText" name="suggestedText" placeholder="Write your suggested replacement, correction, or improvement..." required></textarea>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="editorName">Your Name (optional)</label>
-              <input type="text" id="editorName" name="editorName" placeholder="For acknowledgment in revision notes">
-            </div>
-            <div class="form-group">
-              <label for="editorEmail">Email (optional)</label>
-              <input type="email" id="editorEmail" name="editorEmail" placeholder="If you'd like a response">
-            </div>
-          </div>
-          
-          <button type="submit" class="btn-submit-edit">Submit Suggestion</button>
-        </form>
-        
-        <div class="edit-form-success" id="editFormSuccess">
-          ✓ Thank you! Your suggestion has been received and will be reviewed for the next revision.
-        </div>
-      </div>
-    </section>
-    <div class="content-wrapper">
-      <div class="content" style="padding-top: 0;">
-        
-        <!-- Honor-Based Access — plain text on white -->
-        <div style="max-width:800px; margin:0 auto 2.5rem;">
-          <h2 style="color:#1a1a2e; font-size:1.5rem; margin-bottom:0.75rem;">Honor-Based Access</h2>
-          <p style="color:#2c3e50; font-size:1rem; line-height:1.85; margin-bottom:0.75rem;"><strong style="color:#1a1a2e;">Knowledge should be accessible to all.</strong> There is no paywall and no sign-up required. If you are a student, a researcher, or someone facing financial hardship, download without hesitation and without guilt.</p>
-          <p style="color:#2c3e50; font-size:1rem; line-height:1.85; margin-bottom:0;">If the work has value for you and you are in a position to support it, the <a href="contribute.html" style="color:#8B0000; font-weight:600;">Contribute page</a> offers a way to do so at whatever level feels right. Those who contribute make continued access possible for everyone.</p>
-        </div>
-
-        <h2 style="color:#1a1a2e;margin-bottom:0.5rem;">Available Versions</h2>
-        <p style="color:#2c3e50;margin-bottom:1.5rem;">All versions are preserved for transparency and documented prediction priority. Earlier versions contain predictions as originally recorded before experimental confirmation.</p>
-
-        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 6A <span style="display:inline-block;background:#f1e303;color:#8B0000;font-size:0.68rem;font-weight:800;padding:0.18rem 0.6rem;border-radius:20px;margin-left:0.5rem;text-transform:uppercase;letter-spacing:0.06em;" class="blink">Latest Version</span> <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: June 2026</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Targeted revision addressing scientific accuracy, grammatical precision, and theoretical depth. Strengthens the black hole mechanics treatment, updates all reference numbering, and sharpens the Conclusion.</p>
-              <div class="changelog">
-                <h4>Changes in Version 6A</h4>
-                <ul>
-                    <li>References: complete renumbering for consistency across all Elements</li>
-                    <li>Element 19: singularity reframed as description of how not to have a universe</li>
-                    <li>Element 19: fine-tuning paragraph added connecting fixed-point mathematics to physical instantiation</li>
-                    <li>Element 19: BKL chaos section expanded</li>
-                    <li>Black hole mechanics: Renewal Function and Compression Principle sections deepened</li>
-                    <li>Conclusion: updated to reflect 6A theoretical additions</li>
-                    <li>Factual corrections: glial cell ratio, quantum navigation terminology, photosynthesis coherence qualification</li>
-                    <li>AdS/CFT geometry limitation noted explicitly</li>
-                    <li>Citation collisions in Element 8 resolved</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="A_Quest_for_The_Big_TOE_Version_6A.pdf" class="btn-pill" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#8B0000; --acc-stroke:#005f6e; border-left:4px solid #005f6e;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 5B <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 2026</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Comprehensive framework clarification edition. Sharpens the distinction between programmed computation and fundamental calculation, deepens the treatment of mathematical constants, strengthens the awe and wonder framing throughout, and adds falsification-forward Conclusion with upcoming observational program references.</p>
-              <div class="changelog">
-                <h4>Changes in Version 5B</h4>
-                <ul>
-                    <li>Introduction: section heading clarified from "Without Computation" to "Without Being Computed"</li>
-                    <li>Introduction: computation passages revised</li>
-                    <li>Introduction: added arithmetic-from-first-distinction paragraph</li>
-                    <li>Introduction: neutral first-cause boundary statement added</li>
-                    <li>Element 2: non-physical systems pushback added</li>
-                    <li>Element 3: awe-deepening passage restores sense of wonder</li>
-                    <li>Element 6: questions become tractable without becoming smaller</li>
-                    <li>Element 7: brain-cosmos parallel paragraph added</li>
-                    <li>Element 14: Wigner passage replaced with full arithmetic argument</li>
-                    <li>Conclusion: falsification-forward paragraphs added</li>
-                    <li>Conclusion: Pattern-Emergent Gravity honestly framed</li>
-                    <li>References: Conclusion section added with four upcoming observational program citations</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="A_Quest_for_The_Big_TOE_Version_5B.pdf" class="btn-pill" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 5A <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: Early 2026</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Full readability revision across all 21 Elements and the Conclusion. Establishes prose standards and style framework that Version 5B refines.</p>
-              <div class="changelog">
-                <h4>Changes in Version 5A</h4>
-                <ul>
-                    <li>Comprehensive readability revision across all 21 Elements</li>
-                    <li>Element 3 subtitle corrected</li>
-                    <li>Element 4 rebuilt around rotational symmetry and Bloch sphere</li>
-                    <li>Inflation reframed as identifying real problems</li>
-                    <li>State of the Framework table introduced</li>
-                    <li>Em dashes replaced throughout</li>
-                    <li>Readability standards established</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="A_Quest_for_The_Big_TOE_Version_5A.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#005ba5; --acc-stroke:#7a5000; border-left:4px solid #7a5000;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 3.5 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: November 15, 2025</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Pre-release evaluation version with updated validation tracking.</p>
-              <div class="changelog">
-                <h4>Changes in Version 3.5</h4>
-                <ul>
-                    <li>Added comprehensive validation tracking system</li>
-                    <li>Updated cosmic information density predictions</li>
-                    <li>Enhanced quantum computing optimization framework</li>
-                    <li>New predictions for upcoming JWST observations</li>
-                    <li>Refined consciousness emergence model</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_3_5.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#005f6e; --acc-stroke:#c62828; border-left:4px solid #c62828;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 3.4 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: September 8, 2025</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Updated quantum mechanics chapter with recent experimental insights.</p>
-              <div class="changelog">
-                <h4>Changes in Version 3.4</h4>
-                <ul>
-                    <li>Expanded quantum entanglement discussion</li>
-                    <li>New section on quantum computing implications</li>
-                    <li>Updated predictions for particle physics experiments</li>
-                    <li>Improved cross-referencing system</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_3_4.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#8e0c45; --acc-stroke:#1a5c2a; border-left:4px solid #1a5c2a;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 3.3 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 1, 2025</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Refinements to consciousness framework and information dynamics.</p>
-              <div class="changelog">
-                <h4>Changes in Version 3.3</h4>
-                <ul>
-                    <li>Enhanced consciousness emergence model with biological examples</li>
-                    <li>New section on information flow in neural networks</li>
-                    <li>Updated dark energy parameter constraints</li>
-                    <li>Expanded glossary</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_3_3.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#7a5000; --acc-stroke:#005ba5; border-left:4px solid #005ba5;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 3.2 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: July 2, 2025</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Expanded predictions and mathematical rigor improvements.</p>
-              <div class="changelog">
-                <h4>Changes in Version 3.2</h4>
-                <ul>
-                    <li>New testable predictions for particle physics</li>
-                    <li>Enhanced mathematical proofs</li>
-                    <li>Added section on computational complexity bounds</li>
-                    <li>Improved notation consistency</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_3_2.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#8B0000; --acc-stroke:#005f6e; border-left:4px solid #005f6e;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 3.1 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 28, 2025</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Minor corrections and clarifications based on initial reader feedback.</p>
-              <div class="changelog">
-                <h4>Changes in Version 3.1</h4>
-                <ul>
-                    <li>Corrected typos and formatting inconsistencies</li>
-                    <li>Clarified quantum mechanics chapters</li>
-                    <li>Added index</li>
-                    <li>Minor revisions to introduction</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_3_1.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#1a1a2e; --acc-stroke:#f1e303; border-left:4px solid #f1e303;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 3.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: April 15, 2025</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Major update featuring validated predictions from DESI, Google Willow, and JWST.</p>
-              <div class="changelog">
-                <h4>Changes in Version 3.0</h4>
-                <ul>
-                    <li>Added DESI dark energy validation analysis</li>
-                    <li>Updated quantum computing section with Willow results</li>
-                    <li>Expanded JWST early galaxy formation predictions</li>
-                    <li>New chapter on prime numbers as logic gates</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_3_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 2.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 12, 2024</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Major update including quantum error correction predictions later validated by Google Willow.</p>
-              <div class="changelog">
-                <h4>Changes in Version 2.0</h4>
-                <ul>
-                    <li>Added quantum error correction optimization predictions</li>
-                    <li>Expanded consciousness and information processing chapters</li>
-                    <li>New section on computational boundaries</li>
-                    <li>Enhanced dark energy evolution models</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_2_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foundation-accordion" style="--acc-color:#005ba5; --acc-stroke:#7a5000; border-left:4px solid #7a5000;">
-          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">
-            <h3>Version 1.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: March 5, 2024</span></h3>
-            <span class="toggle-indicator">&#9660;</span>
-          </div>
-          <div class="fa-content">
-            <div class="fa-inner">
-              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Original release establishing the COSMIC Framework and initial predictions.</p>
-              <div class="changelog">
-                <h4>Changes in Version 1.0</h4>
-                <ul>
-                    <li>Complete COSMIC Framework foundation</li>
-                    <li>Dark energy evolution predictions (validated by DESI)</li>
-                    <li>Early galaxy formation predictions (confirmed by JWST)</li>
-                    <li>Information-consciousness relationship framework</li>
-                    <li>Testable predictions across multiple domains</li>
-                </ul>
-              </div>
-              <div class="btn-container" style="margin-top:1.25rem;">
-                <a href="The_Big_TOE_Ver_1_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
-    
-    <section class="social-section">
-      <div class="social-container">
-        <div class="social-content">
-          <div class="quick-links">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="about-page.html">About</a></li>
-              <li><a href="events.html">Events</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="contribute.html">Contribute</a></li>
-            </ul>
-          </div>
-          
-          <div class="social-main">
-            <h2 data-aos="fade-up">Stay Connected</h2>
-            <p data-aos="fade-up" data-aos-delay="100">Join our community to discuss the framework, ask questions, and stay updated on new developments.</p>
-            
-            <div class="social-buttons" data-aos="fade-up" data-aos-delay="200">
-              <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram">
-                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-                Instagram
-              </a>
-              
-              <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&amp;si=vSqcIFxxo68LdkWD" target="_blank" rel="noopener" class="social-btn youtube">
-                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-                YouTube
-              </a>
-              
-              <a href="/cdn-cgi/l/email-protection#432a2d252c03212a24372c266d202c2e" class="social-btn email">
-                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-                Email Us
-              </a>
-            </div>
-          </div>
-          
-          <div class="quick-links">
-            <h3>More Links</h3>
-            <ul>
-              <li><a href="https://michaelkbaines.com">Author's Website</a></li>
-              <li><a href="news.html">News</a></li>
-              <li><a href="simulations.html">Simulations</a></li>
-              <li><a href="framework.html">Framework</a></li>
-              <li><a href="legal.html">Legal</a></li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="copyright">
-          <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
-        </div>
-      </div>
-    </section>
-    
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-    AOS.init();
-    
-    // Hamburger menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const mainNav = document.getElementById('mainNav');
-    
-    hamburger.addEventListener('click', function() {
-      this.classList.toggle('active');
-      mainNav.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking a link
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        mainNav.classList.remove('active');
-      });
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const isClickInsideNav = mainNav.contains(event.target);
-      const isClickOnHamburger = hamburger.contains(event.target);
-      
-      if (!isClickInsideNav && !isClickOnHamburger && mainNav.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        mainNav.classList.remove('active');
-      }
-    });
-    
-    // Back to top button functionality
-    window.addEventListener('scroll', function() {
-        const backToTop = document.getElementById('backToTop');
-        if (window.pageYOffset > 300) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
-    
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-    
-    // Suggest an Edit form handler
-    const editForm = document.getElementById('editForm');
-    const editFormSuccess = document.getElementById('editFormSuccess');
-    
-    editForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Collect form data
-        const formData = {
-            editType: document.getElementById('editType').value,
-            pageNumber: document.getElementById('pageNumber').value,
-            presentText: document.getElementById('presentText').value,
-            suggestedText: document.getElementById('suggestedText').value,
-            editorName: document.getElementById('editorName').value,
-            editorEmail: document.getElementById('editorEmail').value
-        };
-        
-        // For now, log to console (replace with actual endpoint when ready)
-        console.log('Edit suggestion submitted:', formData);
-        
-        // Show success message
-        editForm.style.display = 'none';
-        editFormSuccess.style.display = 'block';
-        
-        // Reset and show form again after 5 seconds
-        setTimeout(function() {
-            editForm.reset();
-            editForm.style.display = 'grid';
-            editFormSuccess.style.display = 'none';
-        }, 5000);
-    });
-    </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Download - A Quest for The Big TOE</title>    <meta name="description" content="Download the complete book - Information accessible to all. Contributions welcome but never required.">        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">        <style>    * { margin: 0; padding: 0; box-sizing: border-box; }    :root {      --primary-color: #8B0000;      --text-dark: #2c3e50;      --max-width: 1200px;    }        body {      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;      line-height: 1.8;      color: var(--text-dark);      background: #ffffff;    }        .content {      max-width: var(--max-width);      margin: 0 auto;      padding: 3rem 2rem;    }        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }    h2 { font-size: 2rem; margin: 2rem 0 1rem; }    h3 { font-size: 1.5rem; margin: 1.5rem 0 1rem; color: var(--primary-color); }    h4 { font-size: 1.2rem; margin: 1rem 0 0.5rem; font-weight: 600; }    p { margin-bottom: 1rem; }    a { color: var(--primary-color); text-decoration: none; }    a:hover { text-decoration: underline; }        .site-header {      background: rgba(0, 0, 0, 0.9);      border-bottom: 1px solid rgba(255,255,255,0.1);      position: sticky;      top: 0;      z-index: 1000;    }        .header-container {      max-width: 1200px;      margin: 0 auto;      padding: 1rem 2rem;      display: flex;      justify-content: space-between;      align-items: center;    }        .site-logo img {      height: 50px;      width: auto;    }        /* Hamburger Menu Icon */    .hamburger {      display: none;      flex-direction: column;      cursor: pointer;      padding: 0.5rem;      z-index: 1001;    }        .hamburger span {      width: 25px;      height: 3px;      background: white;      margin: 3px 0;      transition: all 0.3s ease;      border-radius: 2px;    }        .hamburger.active span:nth-child(1) {      transform: rotate(45deg) translate(8px, 8px);    }        .hamburger.active span:nth-child(2) {      opacity: 0;    }        .hamburger.active span:nth-child(3) {      transform: rotate(-45deg) translate(7px, -7px);    }        .main-navigation ul {      list-style: none;      display: flex;      gap: 1.25rem;      align-items: center;    }        .main-navigation a {      text-decoration: none;      color: white;      font-weight: 500;      transition: color 0.3s ease;    }        .main-navigation a:hover {      color: var(--primary-color);    }        .btn-login {      padding: 0.4rem 1rem;      background: rgba(255,255,255,0.12);      border: 1px solid rgba(255,255,255,0.25);      border-radius: 4px;      color: white;      text-decoration: none;      transition: all 0.3s ease;      font-size: 0.95rem;    }        .btn-login:hover {      background: rgba(255,255,255,0.22);    }        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }    .blink { animation: blink 1.2s ease-in-out infinite; }    .intro-panel { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2.5rem 2rem; }    .intro-panel-inner { max-width: 1200px; margin: 0 auto; }    .intro-panel h2 { color: white; font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; padding: 0; border: none; }    .intro-panel p { color: rgba(255,255,255,0.88); font-size: 1rem; line-height: 1.85; margin-bottom: 0.85rem; }    .intro-panel p:last-child { margin-bottom: 0; }    .intro-panel a { color: white; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); }    .foundation-accordion { background:white; border:1px solid #e0e0e0; border-radius:8px; margin-bottom:1.5rem; overflow:hidden; }    .foundation-accordion:hover { box-shadow:0 4px 15px rgba(0,0,0,.1); }    .foundation-header { padding:1.25rem 1.5rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--acc-color,#1a1a2e); transition:filter .3s; }    .foundation-header:hover { filter:brightness(1.1); }    .foundation-header h3 { margin:0; color:white; font-size:1.05rem; display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; }    .toggle-indicator { color:white; font-size:1.1rem; transition:transform .3s; flex-shrink:0; }    .foundation-accordion.active .toggle-indicator { transform:rotate(180deg); }    .fa-content { max-height:0; overflow:hidden; transition:max-height .5s ease; }    .foundation-accordion.active .fa-content { max-height:9000px; }    .fa-inner { padding:1.5rem 2rem; background:var(--acc-color,#1a1a2e); }    .fa-inner p { color:rgba(255,255,255,0.9) !important; }    .fa-inner h4 { color:white !important; }    .fa-inner ul li { color:rgba(255,255,255,0.88) !important; }    .fa-inner .btn-container { border-top:1px solid rgba(255,255,255,0.15); padding-top:1.25rem; }    .page-header {      background: var(--primary-color);      padding: 2rem 2rem;      text-align: center;      color: white;      margin-top: 1rem;    }        .page-header h1 {      color: white;      font-size: 2.5rem;      margin-bottom: 1rem;    }        .page-header p {      color: white;      font-size: 1.2rem;      margin: 0;    }        .content-wrapper {      background: white;      position: relative;      z-index: 2;      padding-top: 2rem;    }        /* Suggest an Edit Intro */    .editorial-notice {      background: #f8f9fa;      border-left: 4px solid var(--primary-color);      border-radius: 4px;      padding: 2rem;      margin-bottom: 2rem;    }        .editorial-notice h3 {      color: var(--primary-color);      margin-top: 0;      font-size: 1.3rem;    }        .editorial-notice p {      color: var(--text-dark);      line-height: 1.7;      margin-bottom: 0.75rem;    }        .editorial-notice p:last-child {      margin-bottom: 0;    }        .editorial-notice strong {      font-weight: 600;    }        .honor-system-box {      background: #f8f9fa;      border: 2px solid var(--primary-color);      border-radius: 8px;      padding: 2rem;      margin-bottom: 2rem;      text-align: center;    }        .honor-system-box h2 {      color: var(--primary-color);      margin-bottom: 1rem;    }        .honor-system-box p {      margin-bottom: 1rem;      font-size: 1.05rem;    }        .version-grid {      display: grid;      gap: 2rem;      margin-bottom: 2rem;    }        .version-card {      background: transparent;      border: none;      border-radius: 0;      padding: 0;      position: relative;    }        .version-card.current {      background: transparent;      border: none;    }        .version-badge {      position: absolute;      top: 1rem;      right: 1rem;      background: var(--primary-color);      color: white;      padding: 0.5rem 1rem;      border-radius: 20px;      font-weight: 600;      font-size: 0.9rem;    }        .version-number {      font-size: 2rem;      font-weight: 700;      color: var(--primary-color);      margin-bottom: 0.5rem;    }        .version-date {      color: #666;      font-size: 0.95rem;      margin-bottom: 1rem;    }        .version-description {      color: rgba(255,255,255,0.92);      margin-bottom: 1.5rem;      line-height: 1.8;      font-size: 1rem;    }        .changelog {      background: var(--acc-stroke,#333);      border-left: 4px solid rgba(255,255,255,0.3);      padding: 1.5rem;      margin-bottom: 1.5rem;      border-radius: 4px;    }            .changelog h4 {      color: white;      margin-top: 0;      margin-bottom: 1rem;      font-size: 1rem;    }        .changelog ul {      list-style: none;      padding-left: 0;    }        .changelog li {      padding: 0.4rem 0 0.4rem 1.4rem;      position: relative;      color: rgba(255,255,255,0.9);      font-size: 0.95rem;      line-height: 1.6;    }        .changelog li::before {      content: "•";      position: absolute;      left: 0;      color: rgba(255,255,255,0.6);      font-weight: bold;    }        .btn-container {      display: flex;      gap: 1rem;      flex-wrap: wrap;    }        .btn-pill {      display: inline-block;      padding: 0.75rem 2rem;      background: var(--primary-color);      color: white;      text-decoration: none;      border-radius: 50px;      font-weight: 600;      transition: all 0.3s ease;      text-align: center;      flex: 1;      min-width: 150px;    }        .btn-pill:hover {      background: #a00000;      transform: translateY(-2px);      box-shadow: 0 4px 8px rgba(0,0,0,0.2);    }        .btn-gray {      background: #6c757d;    }        .btn-gray:hover {      background: #5a6268;    }        .citation-box {      background: #f8f9fa;      border-left: 4px solid var(--primary-color);      padding: 2rem;      border-radius: 4px;      margin-top: 2rem;    }        .citation-box h3 {      margin-top: 0;      color: var(--primary-color);    }        .citation-text {      background: white;      padding: 1rem;      border-radius: 4px;      font-family: 'Courier New', monospace;      border: 1px solid #e0e0e0;      margin-top: 1rem;    }        .back-to-top {      position: fixed;      bottom: 2rem;      right: 2rem;      width: 50px;      height: 50px;      background: var(--primary-color);      color: white;      border: none;      border-radius: 50%;      font-size: 1.5rem;      cursor: pointer;      display: none;      align-items: center;      justify-content: center;      z-index: 999;      transition: all 0.3s;      box-shadow: 0 4px 6px rgba(0,0,0,0.1);    }        .back-to-top:hover {      background: #a00000;      transform: translateY(-5px);    }        .back-to-top.visible {      display: flex;    }        .social-section {      padding: 3rem 2rem;      background: rgba(0,0,0,0.9);      color: white;    }        .social-container {      max-width: 1200px;      margin: 0 auto;    }        .social-content {      display: grid;      grid-template-columns: 1fr 3fr 1fr;      gap: 2rem;      align-items: start;      margin-bottom: 2rem;    }        .quick-links h3 { color: white; font-size: 1.1rem; margin-bottom: 1rem; }    .quick-links ul { list-style: none; padding: 0; }    .quick-links li { margin-bottom: 0.75rem; }    .quick-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; }    .quick-links a:hover { color: white; }        .social-main { text-align: center; }    .social-main h2 { color: white; font-size: 1.75rem; margin-bottom: 0.5rem; }    .social-main p { color: rgba(255,255,255,0.8); margin-bottom: 1rem; }        .social-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }        .social-btn {      display: inline-flex;      align-items: center;      gap: 0.6rem;      padding: 0.6rem 1rem;      border-radius: 8px;      text-decoration: none;      font-weight: 600;      transition: all 0.3s ease;      color: white;    }        .social-btn.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }    .social-btn.youtube { background: #FF0000; }    .social-btn.email { background: #0072C6; }        .copyright {      text-align: center;      padding-top: 1.5rem;      border-top: 1px solid rgba(255, 255, 255, 0.1);      color: rgba(255, 255, 255, 0.6);      font-size: 0.9rem;    }        .copyright a {      color: white;      text-decoration: none;    }        .copyright a:hover {      text-decoration: underline;    }        /* Suggest an Edit Section */    .suggest-edit-section {      background: #2c3e50;      padding: 4rem 0;      margin-bottom: 2rem;    }        .suggest-edit-container {      max-width: var(--max-width);      margin: 0 auto;      padding: 0 2rem;    }        .suggest-edit-section h2 {      color: white;      font-size: 2rem;      margin-bottom: 0.25rem;      text-align: center;    }        .suggest-edit-section .section-subtitle {      color: rgba(255,255,255,0.9);      font-size: 1.2rem;      text-align: center;      margin-bottom: 0.5rem;    }        .suggest-edit-section .section-note {      color: rgba(255,255,255,0.6);      font-size: 0.95rem;      text-align: center;      margin-bottom: 2.5rem;      font-style: italic;    }        .edit-form {      display: grid;      gap: 1.5rem;      max-width: 800px;      margin: 0 auto;    }        .form-row {      display: grid;      grid-template-columns: 1fr 1fr;      gap: 1.5rem;    }        .form-group {      display: flex;      flex-direction: column;    }        .form-group label {      color: rgba(255,255,255,0.85);      font-weight: 600;      margin-bottom: 0.5rem;      font-size: 0.95rem;    }        .form-group input,    .form-group select,    .form-group textarea {      padding: 0.75rem 1rem;      border: 1px solid rgba(255,255,255,0.2);      border-radius: 6px;      background: #005f6e;      color: white;      font-family: inherit;      font-size: 1rem;      transition: border-color 0.3s ease, background 0.3s ease;    }        .form-group input::placeholder,    .form-group textarea::placeholder {      color: rgba(255,255,255,0.6);    }        .form-group input:focus,    .form-group select:focus,    .form-group textarea:focus {      outline: none;      border-color: #f1e303;      background: #00838f;    }        .form-group select option {      background: #005f6e;      color: white;    }        .form-group textarea {      resize: vertical;      min-height: 100px;    }        .btn-submit-edit {      display: inline-block;      padding: 0.85rem 2.5rem;      background: var(--primary-color);      color: white;      border: none;      border-radius: 50px;      font-weight: 600;      font-size: 1.05rem;      cursor: pointer;      transition: all 0.3s ease;      font-family: inherit;      justify-self: center;    }        .btn-submit-edit:hover {      background: #a00000;      transform: translateY(-2px);      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);    }        .edit-form-success {      display: none;      text-align: center;      padding: 2rem;      color: #a1cd5f;      font-size: 1.1rem;      font-weight: 600;    }        /* Mobile Styles */    @media (max-width: 768px) {      .hamburger {        display: flex;      }            .header-container {        padding: 1rem;      }            .main-navigation {        position: absolute;        top: 100%;        left: 0;        right: 0;        background: rgba(0, 0, 0, 0.95);        max-height: 0;        overflow: hidden;        transition: max-height 0.3s ease;        border-bottom: 1px solid rgba(255,255,255,0.1);      }            .main-navigation.active {        max-height: 500px;      }            .main-navigation ul {        flex-direction: column;        gap: 0;        padding: 1rem 0;      }            .main-navigation li {        width: 100%;        text-align: center;        border-bottom: 1px solid rgba(255,255,255,0.1);      }            .main-navigation li:last-child {        border-bottom: none;      }            .main-navigation a {        display: block;        padding: 1rem;        width: 100%;      }            .btn-login {        display: inline-block;        margin: 0.5rem auto;        width: calc(100% - 2rem);      }            .social-content {         grid-template-columns: 1fr;         gap: 1rem;       }            .page-header h1 {         font-size: 2rem;       }            .content {         padding: 2rem 1rem;       }            .btn-container {         flex-direction: column;       }            .btn-pill {         width: 100%;       }            .form-row {        grid-template-columns: 1fr;      }            .suggest-edit-section {        padding: 3rem 0;      }    }        </style></head><body>    <header class="site-header">      <div class="header-container">        <div class="site-logo">          <a href="book.html">            <img src="bigtoeindexlogoyel.png" alt="The Big TOE">          </a>        </div>                <div class="hamburger" id="hamburger">          <span></span>          <span></span>          <span></span>        </div>                <nav class="main-navigation" id="mainNav">          <ul>            <li><a href="book.html">Home</a></li>            <li><a href="about-page.html">About</a></li>            <li><a href="blog.html">Blog</a></li>            <li><a href="references.html">References</a></li>            <li><a href="appendix.html">Appendix</a></li>            <li><a href="glossary.html">Glossary</a></li>            <li><a href="contribute.html">Contribute</a></li>            <li><a href="login_page_complete.html" class="btn-login">Login</a></li>          </ul>        </nav>      </div>    </header>        <div class="page-header">      <h1>Download A Quest for The Big TOE</h1>      <p>The COSMIC Framework Unification Theory</p>    </div>    <div style="background:white; height:1.1rem;"></div>    <div class="intro-panel">      <div class="intro-panel-inner">        <h2>About This Download</h2>        <p><em>A Quest for the Big TOE</em> is the primary theoretical document of the Ic&#178; Research Institute. It presents the COSMIC Framework in full: 21 Elements covering information theory, quantum mechanics, cosmology, consciousness, and the mathematical structures connecting them.</p>        <p>Four of its predictions have been independently confirmed by DESI, Google Quantum AI, JWST, and ALMA. The full testing schedule and validation records are on the <a href="testing-schedule.html">Testing</a> and <a href="validation.html">Validation</a> pages.</p>      </div>    </div>    <div style="background:white; height:1.1rem;"></div>    <div class="content-wrapper">      <div class="content">        <!-- Download Now CTA -->        <div style="text-align: center; margin-bottom: 2rem;">          <a href="A Quest for The Big TOE Version 6A.pdf" class="btn-pill" style="font-size: 1.2rem; padding: 1rem 3rem;" download>Download Now. Version 6A</a>        </div>                <!-- About the Research + Suggest an Edit — QCD cards side by side -->        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">          <div style="background:#005ba5; border-left:5px solid #7a5000; border-radius:6px; padding:1.75rem; box-shadow:0 3px 12px rgba(0,0,0,0.12);">            <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:#f1e303; font-weight:700; margin-bottom:0.75rem;">About the Research</p>            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin:0;">The book presents a theoretical framework. The experimental validation depends on publicly funded missions including DESI, Google Quantum AI, JWST, and ALMA, programs representing billions in scientific infrastructure that operate entirely independently of this work. Four predictions documented in this book preceded confirmation by those programs. The full testing schedule is on the <a href="testing-schedule.html" style="color:#f1e303; font-weight:600;">Testing Schedule page</a>.</p>          </div>          <div style="background:#1a5c2a; border-left:5px solid #8e0c45; border-radius:6px; padding:1.75rem; box-shadow:0 3px 12px rgba(0,0,0,0.12);">            <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.7); font-weight:700; margin-bottom:0.75rem;">Open Science</p>            <h3 style="color:white; font-size:1.1rem; font-weight:700; margin:0 0 0.75rem; border:none;">Suggest an Edit</h3>            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin-bottom:0.75rem;">This is a living document and your participation makes it stronger. Whether you have spotted a typo, found a clearer way to express an idea, or noticed something that does not add up, your input is genuinely valued.</p>            <p style="color:rgba(255,255,255,0.92); font-size:0.95rem; line-height:1.85; margin:0;">Every edit is reviewed and accepted changes are credited in the next revision. <strong style="color:white;">Professional editing is scheduled for August 2026</strong>, so your contributions during this period directly shape the final published version.</p>          </div>        </div>                <!-- Suggest an Edit Section -->        </div>    </div>    <section class="suggest-edit-section" id="suggest-edit">      <div class="suggest-edit-container">        <h2 data-aos="fade-up">Open Science</h2>        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Suggest an Edit</p>        <p class="section-note" data-aos="fade-up" data-aos-delay="150">Accepted edits will appear in the following revision.</p>                <form class="edit-form" id="editForm" data-aos="fade-up" data-aos-delay="200">          <div class="form-row">            <div class="form-group">              <label for="editType">Edit What?</label>              <select id="editType" name="editType" required>                <option value="" disabled selected>Select a section</option>                <option value="book">Book Content</option>                <option value="appendix">Appendix</option>                <option value="glossary">Glossary</option>                <option value="reference">Reference</option>                <option value="equation">Equation</option>                <option value="image">Image / Figure</option>                <option value="index">Index</option>                <option value="other">Other</option>              </select>            </div>            <div class="form-group">              <label for="pageNumber">Page Number</label>              <input type="text" id="pageNumber" name="pageNumber" placeholder="e.g. 42, A-7, or Glossary p.3">            </div>          </div>                    <div class="form-group">            <label for="presentText">Present Text (what currently appears)</label>            <textarea id="presentText" name="presentText" placeholder="Copy or describe the existing text, equation, or content as it currently reads..." required></textarea>          </div>                    <div class="form-group">            <label for="suggestedText">Suggested Text (your proposed change)</label>            <textarea id="suggestedText" name="suggestedText" placeholder="Write your suggested replacement, correction, or improvement..." required></textarea>          </div>                    <div class="form-row">            <div class="form-group">              <label for="editorName">Your Name (optional)</label>              <input type="text" id="editorName" name="editorName" placeholder="For acknowledgment in revision notes">            </div>            <div class="form-group">              <label for="editorEmail">Email (optional)</label>              <input type="email" id="editorEmail" name="editorEmail" placeholder="If you'd like a response">            </div>          </div>                    <button type="submit" class="btn-submit-edit">Submit Suggestion</button>        </form>                <div class="edit-form-success" id="editFormSuccess">          ✓ Thank you! Your suggestion has been received and will be reviewed for the next revision.        </div>      </div>    </section>    <div class="content-wrapper">      <div class="content" style="padding-top: 0;">                <!-- Honor-Based Access — plain text on white -->        <div style="max-width:800px; margin:0 auto 2.5rem;">          <h2 style="color:#1a1a2e; font-size:1.5rem; margin-bottom:0.75rem;">Honor-Based Access</h2>          <p style="color:#2c3e50; font-size:1rem; line-height:1.85; margin-bottom:0.75rem;"><strong style="color:#1a1a2e;">Knowledge should be accessible to all.</strong> There is no paywall and no sign-up required. If you are a student, a researcher, or someone facing financial hardship, download without hesitation and without guilt.</p>          <p style="color:#2c3e50; font-size:1rem; line-height:1.85; margin-bottom:0;">If the work has value for you and you are in a position to support it, the <a href="contribute.html" style="color:#8B0000; font-weight:600;">Contribute page</a> offers a way to do so at whatever level feels right. Those who contribute make continued access possible for everyone.</p>        </div>        <h2 style="color:#1a1a2e;margin-bottom:0.5rem;">Available Versions</h2>        <p style="color:#2c3e50;margin-bottom:1.5rem;">All versions are preserved for transparency and documented prediction priority. Earlier versions contain predictions as originally recorded before experimental confirmation.</p>        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 6A <span style="display:inline-block;background:#f1e303;color:#8B0000;font-size:0.68rem;font-weight:800;padding:0.18rem 0.6rem;border-radius:20px;margin-left:0.5rem;text-transform:uppercase;letter-spacing:0.06em;" class="blink">Latest Version</span> <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: June 2026</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Targeted revision addressing scientific accuracy, grammatical precision, and theoretical depth. Strengthens the black hole mechanics treatment, updates all reference numbering, and sharpens the Conclusion.</p>              <div class="changelog">                <h4>Changes in Version 6A</h4>                <ul>                    <li>References: complete renumbering for consistency across all Elements</li>                    <li>Element 19: singularity reframed as description of how not to have a universe</li>                    <li>Element 19: fine-tuning paragraph added connecting fixed-point mathematics to physical instantiation</li>                    <li>Element 19: BKL chaos section expanded</li>                    <li>Black hole mechanics: Renewal Function and Compression Principle sections deepened</li>                    <li>Conclusion: updated to reflect 6A theoretical additions</li>                    <li>Factual corrections: glial cell ratio, quantum navigation terminology, photosynthesis coherence qualification</li>                    <li>AdS/CFT geometry limitation noted explicitly</li>                    <li>Citation collisions in Element 8 resolved</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="A Quest for The Big TOE Version 6A.pdf" class="btn-pill" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#8B0000; --acc-stroke:#005f6e; border-left:4px solid #005f6e;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 5B <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 2026</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Comprehensive framework clarification edition. Sharpens the distinction between programmed computation and fundamental calculation, deepens the treatment of mathematical constants, strengthens the awe and wonder framing throughout, and adds falsification-forward Conclusion with upcoming observational program references.</p>              <div class="changelog">                <h4>Changes in Version 5B</h4>                <ul>                    <li>Introduction: section heading clarified from "Without Computation" to "Without Being Computed"</li>                    <li>Introduction: computation passages revised</li>                    <li>Introduction: added arithmetic-from-first-distinction paragraph</li>                    <li>Introduction: neutral first-cause boundary statement added</li>                    <li>Element 2: non-physical systems pushback added</li>                    <li>Element 3: awe-deepening passage restores sense of wonder</li>                    <li>Element 6: questions become tractable without becoming smaller</li>                    <li>Element 7: brain-cosmos parallel paragraph added</li>                    <li>Element 14: Wigner passage replaced with full arithmetic argument</li>                    <li>Conclusion: falsification-forward paragraphs added</li>                    <li>Conclusion: Pattern-Emergent Gravity honestly framed</li>                    <li>References: Conclusion section added with four upcoming observational program citations</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="A_Quest_for_The_Big_TOE_Version_5B.pdf" class="btn-pill" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 5A <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: Early 2026</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Full readability revision across all 21 Elements and the Conclusion. Establishes prose standards and style framework that Version 5B refines.</p>              <div class="changelog">                <h4>Changes in Version 5A</h4>                <ul>                    <li>Comprehensive readability revision across all 21 Elements</li>                    <li>Element 3 subtitle corrected</li>                    <li>Element 4 rebuilt around rotational symmetry and Bloch sphere</li>                    <li>Inflation reframed as identifying real problems</li>                    <li>State of the Framework table introduced</li>                    <li>Em dashes replaced throughout</li>                    <li>Readability standards established</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="A_Quest_for_The_Big_TOE_Version_5A.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#005ba5; --acc-stroke:#7a5000; border-left:4px solid #7a5000;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 3.5 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: November 15, 2025</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Pre-release evaluation version with updated validation tracking.</p>              <div class="changelog">                <h4>Changes in Version 3.5</h4>                <ul>                    <li>Added comprehensive validation tracking system</li>                    <li>Updated cosmic information density predictions</li>                    <li>Enhanced quantum computing optimization framework</li>                    <li>New predictions for upcoming JWST observations</li>                    <li>Refined consciousness emergence model</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_3_5.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#005f6e; --acc-stroke:#c62828; border-left:4px solid #c62828;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 3.4 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: September 8, 2025</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Updated quantum mechanics chapter with recent experimental insights.</p>              <div class="changelog">                <h4>Changes in Version 3.4</h4>                <ul>                    <li>Expanded quantum entanglement discussion</li>                    <li>New section on quantum computing implications</li>                    <li>Updated predictions for particle physics experiments</li>                    <li>Improved cross-referencing system</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_3_4.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#8e0c45; --acc-stroke:#1a5c2a; border-left:4px solid #1a5c2a;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 3.3 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 1, 2025</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Refinements to consciousness framework and information dynamics.</p>              <div class="changelog">                <h4>Changes in Version 3.3</h4>                <ul>                    <li>Enhanced consciousness emergence model with biological examples</li>                    <li>New section on information flow in neural networks</li>                    <li>Updated dark energy parameter constraints</li>                    <li>Expanded glossary</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_3_3.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#7a5000; --acc-stroke:#005ba5; border-left:4px solid #005ba5;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 3.2 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: July 2, 2025</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Expanded predictions and mathematical rigor improvements.</p>              <div class="changelog">                <h4>Changes in Version 3.2</h4>                <ul>                    <li>New testable predictions for particle physics</li>                    <li>Enhanced mathematical proofs</li>                    <li>Added section on computational complexity bounds</li>                    <li>Improved notation consistency</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_3_2.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#8B0000; --acc-stroke:#005f6e; border-left:4px solid #005f6e;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 3.1 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: May 28, 2025</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Minor corrections and clarifications based on initial reader feedback.</p>              <div class="changelog">                <h4>Changes in Version 3.1</h4>                <ul>                    <li>Corrected typos and formatting inconsistencies</li>                    <li>Clarified quantum mechanics chapters</li>                    <li>Added index</li>                    <li>Minor revisions to introduction</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_3_1.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#1a1a2e; --acc-stroke:#f1e303; border-left:4px solid #f1e303;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 3.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: April 15, 2025</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Major update featuring validated predictions from DESI, Google Willow, and JWST.</p>              <div class="changelog">                <h4>Changes in Version 3.0</h4>                <ul>                    <li>Added DESI dark energy validation analysis</li>                    <li>Updated quantum computing section with Willow results</li>                    <li>Expanded JWST early galaxy formation predictions</li>                    <li>New chapter on prime numbers as logic gates</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_3_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#1a5c2a; --acc-stroke:#8e0c45; border-left:4px solid #8e0c45;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 2.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: August 12, 2024</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Major update including quantum error correction predictions later validated by Google Willow.</p>              <div class="changelog">                <h4>Changes in Version 2.0</h4>                <ul>                    <li>Added quantum error correction optimization predictions</li>                    <li>Expanded consciousness and information processing chapters</li>                    <li>New section on computational boundaries</li>                    <li>Enhanced dark energy evolution models</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_2_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>        <div class="foundation-accordion" style="--acc-color:#005ba5; --acc-stroke:#7a5000; border-left:4px solid #7a5000;">          <div class="foundation-header" onclick="this.parentElement.classList.toggle('active')">            <h3>Version 1.0 <span style="font-weight:400;font-size:0.82rem;opacity:0.7;margin-left:0.5rem;">Published: March 5, 2024</span></h3>            <span class="toggle-indicator">&#9660;</span>          </div>          <div class="fa-content">            <div class="fa-inner">              <p style="color:#2c3e50;line-height:1.8;margin-bottom:1rem;">Original release establishing the COSMIC Framework and initial predictions.</p>              <div class="changelog">                <h4>Changes in Version 1.0</h4>                <ul>                    <li>Complete COSMIC Framework foundation</li>                    <li>Dark energy evolution predictions (validated by DESI)</li>                    <li>Early galaxy formation predictions (confirmed by JWST)</li>                    <li>Information-consciousness relationship framework</li>                    <li>Testable predictions across multiple domains</li>                </ul>              </div>              <div class="btn-container" style="margin-top:1.25rem;">                <a href="The_Big_TOE_Ver_1_0.pdf" class="btn-pill btn-gray" download>Download PDF</a>              </div>            </div>          </div>        </div>      </div>    </div>        <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>        <section class="social-section">      <div class="social-container">        <div class="social-content">          <div class="quick-links">            <h3>Quick Links</h3>            <ul>              <li><a href="about-page.html">About</a></li>              <li><a href="events.html">Events</a></li>              <li><a href="blog.html">Blog</a></li>              <li><a href="contribute.html">Contribute</a></li>            </ul>          </div>                    <div class="social-main">            <h2 data-aos="fade-up">Stay Connected</h2>            <p data-aos="fade-up" data-aos-delay="100">Join our community to discuss the framework, ask questions, and stay updated on new developments.</p>                        <div class="social-buttons" data-aos="fade-up" data-aos-delay="200">              <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram">                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>                </svg>                Instagram              </a>                            <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&amp;si=vSqcIFxxo68LdkWD" target="_blank" rel="noopener" class="social-btn youtube">                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>                </svg>                YouTube              </a>                            <a href="/cdn-cgi/l/email-protection#432a2d252c03212a24372c266d202c2e" class="social-btn email">                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>                </svg>                Email Us              </a>            </div>          </div>                    <div class="quick-links">            <h3>More Links</h3>            <ul>              <li><a href="https://michaelkbaines.com">Author's Website</a></li>              <li><a href="news.html">News</a></li>              <li><a href="simulations.html">Simulations</a></li>              <li><a href="framework.html">Framework</a></li>              <li><a href="legal.html">Legal</a></li>            </ul>          </div>        </div>                <div class="copyright">          <p>&copy; 2025 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>        </div>      </div>    </section>        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>    <script>    AOS.init();        // Hamburger menu toggle    const hamburger = document.getElementById('hamburger');    const mainNav = document.getElementById('mainNav');        hamburger.addEventListener('click', function() {      this.classList.toggle('active');      mainNav.classList.toggle('active');    });        // Close mobile menu when clicking a link    const navLinks = mainNav.querySelectorAll('a');    navLinks.forEach(link => {      link.addEventListener('click', function() {        hamburger.classList.remove('active');        mainNav.classList.remove('active');      });    });        // Close mobile menu when clicking outside    document.addEventListener('click', function(event) {      const isClickInsideNav = mainNav.contains(event.target);      const isClickOnHamburger = hamburger.contains(event.target);            if (!isClickInsideNav && !isClickOnHamburger && mainNav.classList.contains('active')) {        hamburger.classList.remove('active');        mainNav.classList.remove('active');      }    });        // Back to top button functionality    window.addEventListener('scroll', function() {        const backToTop = document.getElementById('backToTop');        if (window.pageYOffset > 300) {            backToTop.classList.add('visible');        } else {            backToTop.classList.remove('visible');        }    });        function scrollToTop() {        window.scrollTo({            top: 0,            behavior: 'smooth'        });    }        // Suggest an Edit form handler    const editForm = document.getElementById('editForm');    const editFormSuccess = document.getElementById('editFormSuccess');        editForm.addEventListener('submit', function(e) {        e.preventDefault();                // Collect form data        const formData = {            editType: document.getElementById('editType').value,            pageNumber: document.getElementById('pageNumber').value,            presentText: document.getElementById('presentText').value,            suggestedText: document.getElementById('suggestedText').value,            editorName: document.getElementById('editorName').value,            editorEmail: document.getElementById('editorEmail').value        };                // For now, log to console (replace with actual endpoint when ready)        console.log('Edit suggestion submitted:', formData);                // Show success message        editForm.style.display = 'none';        editFormSuccess.style.display = 'block';                // Reset and show form again after 5 seconds        setTimeout(function() {            editForm.reset();            editForm.style.display = 'grid';            editFormSuccess.style.display = 'none';        }, 5000);    });    </script></body></html>
