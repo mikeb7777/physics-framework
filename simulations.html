@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Simulations. Ic² Research Institute</title>
+<meta name="description" content="Eighteen interactive visualisations of the COSMIC Framework: WMAP data, pattern-emergent gravity, sub-Planck dynamics and the origin sequence. Canvas models, 3D explorers and parameter tools.">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -134,7 +135,42 @@
 
   <section class="content-section">
     <div class="section-container">
-      <div class="section-divider"><h2>Part I. Data Visualizations</h2></div>
+      
+    <div class="colour-key" style="max-width:1200px;margin:0 auto 2rem;padding:1.25rem 1.5rem;
+         background:#0d1520;border:1px solid rgba(140,190,250,.22);border-left:4px solid #005f6e;border-radius:6px;">
+      <div style="font-family:monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+                  color:#8fd0ff;margin-bottom:.6rem;">How to read the colours</div>
+      <p style="color:rgba(226,238,255,.86);font-size:.95rem;line-height:1.6;margin:0 0 .9rem;">
+        Panel colours are not decorative. They cycle through two physical colour systems:
+        <strong style="color:#fff;">quark colour charge</strong> &mdash; the red, green and blue
+        of the strong interaction, which carry no visual meaning in nature but label the three
+        charge states &mdash; and the <strong style="color:#fff;">Rubin Observatory / LSST filter
+        bands</strong>, the six passbands (u&nbsp;g&nbsp;r&nbsp;i&nbsp;z&nbsp;y) through which the
+        sky is actually photographed.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+        <span style="display:inline-flex;align-items:center;gap:.45rem;background:#c62828;color:#fff;
+              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">RED &middot; colour charge</span>
+        <span style="display:inline-flex;align-items:center;gap:.45rem;background:#1a5c2a;color:#fff;
+              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">GREEN &middot; colour charge</span>
+        <span style="display:inline-flex;align-items:center;gap:.45rem;background:#005ba5;color:#fff;
+              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">BLUE &middot; colour charge</span>
+        <span style="display:inline-flex;align-items:center;gap:.45rem;background:#005f6e;color:#fff;
+              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">g / r band</span>
+        <span style="display:inline-flex;align-items:center;gap:.45rem;background:#8e0c45;color:#fff;
+              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">i band</span>
+        <span style="display:inline-flex;align-items:center;gap:.45rem;background:#8B0000;color:#fff;
+              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">z band</span>
+        <span style="display:inline-flex;align-items:center;gap:.45rem;background:#7a5000;color:#fff;
+              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">y band</span>
+      </div>
+      <p style="color:rgba(190,215,245,.6);font-size:.82rem;line-height:1.5;margin:.9rem 0 0;">
+        Field maps use <strong style="color:#c8e6ff;">viridis</strong>, which is monotonic in
+        lightness &mdash; apparent brightness tracks the value, so no false boundary appears where
+        the data is smooth.
+      </p>
+    </div>
+<div class="section-divider"><h2>Part I. Data Visualizations</h2></div>
 
     <div class="foundation-accordion" style="--acc-color:#005f6e; border-left:4px solid #c62828;" data-lazy-sim="fig1">
       <div class="foundation-header" onclick="toggleFoundation(this)">
@@ -213,11 +249,11 @@
       <div class="figure-title">Figure 3: A 2D Map of Information Pattern Density P(x,t) and Its Gravitational Effect</div>
       <div class="highlight">
         <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">The core idea (Pattern-Emergent Gravity):</strong> In standard physics, gravity is caused by mass curving spacetime. The COSMIC Framework proposes something deeper: gravity is not fundamental; it <em>emerges</em> from the density of information patterns in a region. Where information is highly concentrated and rapidly changing, spacetime curves more. Mass is just a special case of concentrated information.<br><br>
-        <strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> A bird's-eye view of a 2D region of space. The color at each point shows the information pattern density P(x,t), measuring how much structured, non-random information exists there. Gold and yellow = high density (strong gravitational effect). Blue-green = low density (weak gravitational effect). The rippled, wave-like pattern reflects the fact that information doesn't sit still; it propagates, interferes, and forms standing waves, just like other fields.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">What you're seeing:</strong> A bird's-eye view of a 2D region of space. The color at each point shows the information pattern density P(x,t), measuring how much structured, non-random information exists there. Yellow and green = high density (strong gravitational effect). Teal and deep purple = low density (weak gravitational effect). The rippled, wave-like pattern reflects the fact that information doesn't sit still; it propagates, interferes, and forms standing waves, just like other fields.<br><br>
         <strong style="color:#005ba5;font-weight:700;">The equation:</strong> g<sub>μν</sub> = η<sub>μν</sub> + α∇<sub>μ</sub>∇<sub>ν</sub>P(x,t) reads as: "The actual curvature of spacetime equals flat spacetime plus a correction proportional to how sharply the information density changes from point to point." Where the information gradient is steep (bright-to-dark transitions on the map), gravity is strongest.</p>
       </div>
       <div class="plot-container"><div id="peg-field" style="width:100%;height:380px;"></div></div>
-      <div class="figure-caption">Look for the bright gold regions, which are where gravity would be strongest in this model. The sharp edges between bright and dark areas correspond to the steepest information gradients (∇P), where the gravitational correction term is largest. The colourbar on the right maps color to information density value. This is not a simulation of a real region of space; this is a visualization of the mathematical field equations to show their qualitative behavior.</div>
+      <div class="figure-caption">Look for the bright yellow regions, which are where gravity would be strongest in this model. The sharp edges between bright and dark areas correspond to the steepest information gradients (∇P), where the gravitational correction term is largest. The colourbar on the right maps color to information density value. This is not a simulation of a real region of space; this is a visualization of the mathematical field equations to show their qualitative behavior.</div>
     </div>
 
         </div>
@@ -338,7 +374,7 @@
          PART II · 3D INTERACTIVE SIMULATIONS
     ════════════════════════════════════════════ -->
     <hr class="section-rule">
-    <h1 style="margin-top:8px;">3D Framework Simulations</h1>
+    <h2 style="margin-top:8px;">3D Framework Simulations</h2>
     <p class="lead">Real-time interactive: drag to orbit · pinch to zoom on mobile</p>
 
     <!-- ── SIM A: PEG GRAVITY ── -->
@@ -533,7 +569,7 @@
          PART III · NEW INTERACTIVE SIMULATIONS
     ════════════════════════════════════════════ -->
     <hr class="section-rule">
-    <h1 style="margin-top:8px;">Interactive Explorers</h1>
+    <h2 style="margin-top:8px;">Interactive Explorers</h2>
     <p class="lead">Adjust the controls and watch the framework respond in real time</p>
 
     <!-- ── SIM G: BAMBOO THRESHOLD ── -->
@@ -859,11 +895,28 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+/* Perceptually-uniform, colour-blind-safe colormap. The previous ramp ran
+   blue -> desaturated grey-green -> yellow; that grey midpoint reads as a
+   boundary in smooth data, which is the well-known failure of jet-style
+   maps. Viridis is monotonic in lightness, so apparent brightness tracks
+   the value, and it ends on a yellow close to the brand #f1e303. */
+function viridis(t){
+  t = Math.max(0, Math.min(1, t));
+  var stops = [[68,1,84],[72,40,120],[62,74,137],[49,104,142],[38,130,142],
+               [31,158,137],[53,183,121],[109,205,89],[180,222,44],[253,231,37]];
+  var x = t * (stops.length - 1), i = Math.floor(x), f = x - i;
+  if (i >= stops.length - 1) return stops[stops.length - 1];
+  var a = stops[i], b = stops[i+1];
+  return [Math.round(a[0]+(b[0]-a[0])*f),
+          Math.round(a[1]+(b[1]-a[1])*f),
+          Math.round(a[2]+(b[2]-a[2])*f)];
+}
+
     AOS.init({duration:800,once:true,offset:50,easing:'ease-out-quad'});
     function toggleFoundation(header) {
     var acc = header.parentElement;
     var wasActive = acc.classList.contains('active');
-    document.querySelectorAll('.foundation-accordion').forEach(function(a){a.classList.remove('active');});
+    /* multi-open: an explorable page should let two simulations be compared */
     if (!wasActive) {
         acc.classList.add('active');
         var key = acc.getAttribute('data-lazy-sim');
@@ -1822,7 +1875,7 @@ window._simInit.fig3=function(){
       var nx=(ix/res)*10-5, ny=(iy/res)*10-5;
       var v=Math.exp(-(nx*nx+ny*ny)/8)*Math.cos(nx)*Math.sin(ny);
       var norm=Math.max(0,Math.min(1,(v+0.6)/1.2));
-      var r2=Math.round(norm*240+15), g2=Math.round(norm*180+75), b2=Math.round((1-norm)*210+45);
+      var vc=viridis(norm); var r2=vc[0], g2=vc[1], b2=vc[2];
       cells.push({ix:ix,iy:iy,col:'rgb('+r2+','+g2+','+b2+')'});
     }
 
@@ -2469,5 +2522,22 @@ window._simInit.bang3d=function(){
     }());
 };
   </script>
+
+<script>
+/* Show the page at rest. Every simulation was collapsed and lazily built on
+   click, so a page whose whole purpose is visualisation opened as a stack of
+   coloured bars. Open the first item of each section on load. */
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var seen = {}, heads = document.querySelectorAll('.foundation-header');
+    for (var i = 0; i < heads.length; i++){
+      var sec = 0, n = heads[i];
+      while (n && n !== document.body){ if (n.previousElementSibling) { n = n.previousElementSibling; if (/^H[12]$/.test(n.tagName)) { sec = n.textContent.trim(); break; } } else { n = n.parentElement; } }
+      if (!seen[sec]) { seen[sec] = 1; try { toggleFoundation(heads[i]); } catch(e){} }
+    }
+    window.dispatchEvent(new Event('resize'));
+  }, 400);
+});
+</script>
 </body>
 </html>
