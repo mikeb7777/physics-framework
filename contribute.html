@@ -624,7 +624,7 @@
               <li>Four independently confirmed predictions</li>
               <li>Print-ready at 300 DPI</li>
             </ul>
-            <a href="cosmic-framework-poster.pdf" download style="display:inline-block; padding:0.75rem 2rem; background:#8B0000; color:white; text-decoration:none; border-radius:50px; font-weight:600; transition:all 0.3s ease;">Download Poster (PDF)</a>
+            <a href="cosmic-framework-poster.pdf" download download style="display:inline-block; padding:0.75rem 2rem; background:#8B0000; color:white; text-decoration:none; border-radius:50px; font-weight:600; transition:all 0.3s ease;">Download Poster (PDF)</a>
             <p style="color:#2c3e50; font-size:0.9rem; margin-top:0.6rem;">Free to download, print, and share. No sign-up required.</p>
           </div>
         </div>
@@ -766,5 +766,36 @@
       });
     }
   </script>
+<style id="aos-failsafe-style">
+html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+</style>
+<noscript><style>[data-aos]{opacity:1!important;transform:none!important;}</style></noscript>
+<script id="aos-failsafe-script">
+(function(){
+  /* Content must be visible at rest. AOS parks [data-aos] elements at
+     opacity:0 and only reveals them on scroll, so link previews, crawlers,
+     archiving tools and any reader who does not scroll saw a blank page.
+     Styles are set on the elements directly - a stylesheet rule loses to
+     AOS's own doubled-attribute selector. */
+  var reveal = function(){
+    document.documentElement.classList.add('aos-failsafe');
+    var els = document.querySelectorAll('[data-aos]');
+    for (var i = 0; i < els.length; i++){
+      els[i].style.setProperty('transition','none','important');
+      els[i].style.setProperty('animation','none','important');
+      els[i].style.setProperty('opacity','1','important');
+      els[i].style.setProperty('transform','none','important');
+    }
+  };
+  var t = setTimeout(reveal, 1200);
+  window.addEventListener('load', function(){
+    if (!window.AOS){ clearTimeout(t); reveal(); return; }
+    setTimeout(function(){
+      if (!document.querySelector('[data-aos].aos-animate')){ clearTimeout(t); reveal(); }
+    }, 900);
+  });
+})();
+</script>
+
 </body>
 </html>

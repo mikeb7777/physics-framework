@@ -677,7 +677,7 @@
     <li><a href="glossary.html">Glossary</a></li>
     <li><a href="discussions-page.html">Discussions</a></li>
     <li><a href="faq-page.html">FAQ</a></li>
-    <li><a href="login_page_complete.html" class="btn-login">Login</a></li>
+    <li><a href="login.html" class="btn-login">Login</a></li>
     </ul>
     </nav>
     </div>
@@ -798,7 +798,7 @@
     YouTube
     </a>
     
-    <a href="/cdn-cgi/l/email-protection#21424e4f55404255614459404c514d440f424e4c" class="social-btn email">
+    <a href="mailto:contact@example.com">
     <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
     </svg>
@@ -826,7 +826,7 @@
     </section>
 
     <!-- Starfield Animation -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
     const canvas = document.getElementById('stars-canvas');
     const ctx = canvas.getContext('2d');
     
@@ -913,5 +913,36 @@
     <script>
     AOS.init();
     </script>
+<style id="aos-failsafe-style">
+html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+</style>
+<noscript><style>[data-aos]{opacity:1!important;transform:none!important;}</style></noscript>
+<script id="aos-failsafe-script">
+(function(){
+  /* Content must be visible at rest. AOS parks [data-aos] elements at
+     opacity:0 and only reveals them on scroll, so link previews, crawlers,
+     archiving tools and any reader who does not scroll saw a blank page.
+     Styles are set on the elements directly - a stylesheet rule loses to
+     AOS's own doubled-attribute selector. */
+  var reveal = function(){
+    document.documentElement.classList.add('aos-failsafe');
+    var els = document.querySelectorAll('[data-aos]');
+    for (var i = 0; i < els.length; i++){
+      els[i].style.setProperty('transition','none','important');
+      els[i].style.setProperty('animation','none','important');
+      els[i].style.setProperty('opacity','1','important');
+      els[i].style.setProperty('transform','none','important');
+    }
+  };
+  var t = setTimeout(reveal, 1200);
+  window.addEventListener('load', function(){
+    if (!window.AOS){ clearTimeout(t); reveal(); return; }
+    setTimeout(function(){
+      if (!document.querySelector('[data-aos].aos-animate')){ clearTimeout(t); reveal(); }
+    }, 900);
+  });
+})();
+</script>
+
 </body>
 </html>
