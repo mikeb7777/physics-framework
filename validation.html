@@ -1578,6 +1578,37 @@
       </div>
 
 
+      <!-- Rubin Observatory DR1 -->
+      <div class="rcard" id="rc9">
+        <div class="rcard-head" onclick="toggleRC('rc9')">
+          <div class="rcard-tg">
+            <h3>Rubin Observatory DR1: Large-Scale Structure Isotropy</h3>
+            <div class="rcard-meta"><img src="orbit_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Cosmology &middot; NSF&ndash;DOE Vera C. Rubin Observatory (LSST) &middot; Expected mid-2028</div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r9d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r9h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r9m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r9s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await"><span class="b-dot" style="background:white"></span>AWAITING</span>
+            <div class="xbtn"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (registered July 31, 2025 &middot; <a href="https://doi.org/10.5281/zenodo.16639922" target="_blank" rel="noopener">10.5281/zenodo.16639922</a>):</strong> Beyond 100 megaparsecs, galaxy distributions should show directional asymmetry rather than perfect isotropy, following specific angular patterns tied to the substrate's information-density geometry, and correlated with the independently identified large-scale-structure axis at (l,&nbsp;b)&nbsp;&asymp;&nbsp;(210&deg;,&nbsp;&minus;20&deg;).</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Asymmetry detected at the predicted scale, correlated with the independently identified large-scale-structure axis. Strong corroboration, strengthened further if Euclid's overlapping survey agrees.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.5&ndash;0.7&sigma; &middot; Major event</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>An asymmetry appears, but at a different angular scale or weaker than predicted. That calls for a revised scale factor in the geometric-transition model, not abandonment.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Neutral &middot; Scale factor refined</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>Large-scale structure proves statistically isotropic once full-precision data is in. This prediction is dead, and we will say so.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Edition 6 triggered</span><p class="rev-note"><strong>Lesson:</strong> Directional structure is not a signature of the substrate at survey scales; restrict the geometric claim to the CMB epoch.</p></div>
+          </div>
+        </div>
+      </div>
+
       <!-- COSMIC-SD-001: Landauer Heat @ QCD scale -->
       <div class="rcard" id="rc5" style="border-left-color:#1a4a2e;">
         <div class="rcard-head" onclick="toggleRC('rc5')">
@@ -2103,6 +2134,7 @@ function toggleVC(id) {
    r2 Cog-Aug Phase1 — Sep 30 2026 17:00 local  (Q3 submission deadline)
    r3 Simons Obs     — Mar 1  2027 14:00 local  (est. first-results announcement)
    r4 Thermo Testing — Oct 1  2026 12:00 local  (Q4 2026 testing window opens; pre-registration complete)
+   r9 Rubin DR1      — Jul 1  2028 12:00 local  (est. mid-2028 release; the dataset that settles the isotropy prediction)
 */
 var targets = {
   r1: new Date('2026-12-01T09:00:00'),
@@ -2113,7 +2145,8 @@ var targets = {
   r5: new Date('2026-12-01T12:00:00'),   // SD-001: target LHCb/ATLAS/CMS data comparison Dec 2026
   r6: new Date('2027-06-01T12:00:00'),   // SD-002: target completion of theoretical derivation Jun 2027
   r7: new Date('2026-10-01T12:00:00'),   // SD-003: target lattice QCD comparison Oct 2026
-  r8: new Date('2026-09-01T12:00:00')    // SD-004: target RHIC/ALICE analysis Sep 2026
+  r8: new Date('2026-09-01T12:00:00'),   // SD-004: target RHIC/ALICE analysis Sep 2026
+  r9: new Date('2028-07-01T12:00:00')    // Rubin DR1: est. mid-2028, settles the isotropy prediction
 };
 
 /* Inject a local-time label beneath each clock once on load */
@@ -2122,7 +2155,8 @@ var targets = {
     r1: 'est. analysis window opens · 09:00 local',
     r2: 'Q3 submission deadline · 17:00 local',
     r3: 'est. first results · 14:00 local',
-    r4: 'Q4 testing window opens · noon local'
+    r4: 'Q4 testing window opens · noon local',
+    r9: 'est. Data Release 1 · noon local'
   };
   Object.keys(labels).forEach(function(pfx){
     var row = document.querySelector('#'+pfx.replace('r','rc')+' .ct-row');
@@ -2155,14 +2189,8 @@ function fillTimer(target, pfx){
 }
 
 function tickAll(){
-  fillTimer(targets.r1, 'r1');
-  fillTimer(targets.r2, 'r2');
-  fillTimer(targets.r3, 'r3');
-  fillTimer(targets.r4, 'r4');
-  fillTimer(targets.r5, 'r5');
-  fillTimer(targets.r6, 'r6');
-  fillTimer(targets.r7, 'r7');
-  fillTimer(targets.r8, 'r8');
+  /* iterate the targets map, so adding a card only means adding a target */
+  Object.keys(targets).forEach(function(pfx){ fillTimer(targets[pfx], pfx); });
 }
 tickAll();
 setInterval(tickAll, 1000);
