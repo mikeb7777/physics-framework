@@ -527,6 +527,262 @@
     .mc-circle {
       transition: fill-opacity 0.5s ease, filter 0.5s ease;
     }
+
+    /* ---- The Quest section ----------------------------------------------
+       Gunmetal, the site's established mid-tone section background, so this
+       does not sit dark-on-dark against the navy page header above it. */
+    .quest-section {
+      position: relative;
+      background: linear-gradient(135deg, #5a6878 0%, #4a5868 100%);
+      padding: 4.5rem 2rem 4rem;
+    }
+    /* Sits behind the copy, on the empty right-hand third of the container,
+       and dissolves outward via its own mask so it has no visible edge. */
+    .quest-sky {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(48%, 620px);
+      pointer-events: none;
+      opacity: .92;
+    }
+    .quest-sky svg { position: relative; width: 100%; height: 100%; display: block; }
+
+    /* One feather shape, shared by the dark pool and the photo, so they fade
+       into the gunmetal along exactly the same edge. */
+    .quest-nightfall,
+    .quest-mw {
+      position: absolute;
+      inset: 0;
+      -webkit-mask-image: radial-gradient(ellipse 54% 54% at 74% 40%, #000 0%, #000 22%, transparent 100%);
+              mask-image: radial-gradient(ellipse 54% 54% at 74% 40%, #000 0%, #000 22%, transparent 100%);
+    }
+    .quest-nightfall { background: rgba(9, 13, 20, .72); }
+    .quest-fg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: auto;
+      max-height: 58%;
+      object-fit: contain;
+      object-position: 50% 100%;
+      opacity: .95;
+    }
+    .quest-mw {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 46% 34%;
+      mix-blend-mode: screen;
+      opacity: 1;
+    }
+    /* The drawn stars are the stand-in. Once a photo loads they step aside,
+       and the ground and figure stay, since those need to read as solid. */
+    .quest-sky.has-photo .qs-stars { display: none; }
+    .quest-sky:not(.has-photo) .quest-nightfall { opacity: .55; }
+    .qs-tw { animation: qs-twinkle 5.5s ease-in-out infinite; }
+    @keyframes qs-twinkle {
+      0%, 100% { opacity: inherit; }
+      50%      { opacity: .12; }
+    }
+    .quest-inner { position: relative; max-width: 860px; }
+    .quest-lead {
+      font-size: 1.32rem;
+      line-height: 1.75;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    .quest-body {
+      font-size: 1.125rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,.93);
+      margin-bottom: 1.5rem;
+    }
+    .quest-pivot {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      margin: 2rem 0 1.75rem;
+      color: #fff;
+    }
+    .quest-pivot .quest-split { color: var(--accent-yellow); }
+    .quest-cta {
+      margin-top: 2.5rem;
+      padding: 1.9rem 2rem;
+      border: 1px solid rgba(255,255,255,.28);
+      border-left: 4px solid var(--accent-yellow);
+      border-radius: 6px;
+      background: rgba(13,13,31,.22);
+    }
+    .quest-cta-line {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,.93);
+      margin: 0 0 .5rem;
+    }
+    .quest-cta-ask {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 1.4rem;
+      letter-spacing: -.01em;
+    }
+    .quest-cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    /* The page-level .btn-outline is a red outline, which is for light
+       sections. On this dark panel it takes the same white treatment the
+       outline button already has everywhere else on the site. */
+    .quest-cta .btn-outline {
+      color: #fff;
+      border: 2px solid #fff;
+      background: transparent;
+    }
+    .quest-cta .btn-outline:hover {
+      background: #fff;
+      color: var(--text-dark);
+    }
+    .quest-cta-note {
+      font-size: .85rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,.72);
+      margin: 1.2rem 0 0;
+    }
+    /* Below this the copy spans the full width and would run over the figure,
+       so the scene steps back to a hint of sky. */
+    @media (max-width: 980px) {
+      .quest-sky { width: 62%; opacity: .3; }
+    }
+    @media (max-width: 640px) {
+      .quest-sky { opacity: .2; }
+      .quest-section { padding: 3rem 1.25rem 2.75rem; }
+      .quest-lead { font-size: 1.15rem; }
+      .quest-pivot { font-size: 1.35rem; }
+      .quest-cta-ask { font-size: 1.4rem; }
+      .quest-cta { padding: 1.4rem 1.25rem; }
+      .quest-cta-buttons .btn { width: 100%; text-align: center; }
+    }
+    /* ---- Colour-system figure ------------------------------------------- */
+    .colour-figure { margin: 2rem 0 2.25rem; }
+    .colour-figure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .colour-figure-cell {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1.25rem 1.25rem 1.4rem;
+      border-left: 4px solid #005f6e;
+    }
+    .cf-svg { display: block; width: 100%; max-width: 260px; margin: 0 auto .9rem; }
+    .cf-label {
+      font-size: 11px;
+      font-family: monospace;
+      letter-spacing: .06em;
+      fill: var(--muted, #6b7280);
+    }
+    .cf-band {
+      font-size: 15px;
+      font-weight: 700;
+      font-family: monospace;
+      fill: #fff;
+      text-anchor: middle;
+      paint-order: stroke;
+      stroke: rgba(0,0,0,.45);
+      stroke-width: 2.5px;
+    }
+    .cf-cap {
+      font-size: .88rem;
+      line-height: 1.65;
+      color: var(--text-dark);
+    }
+    .colour-figure-note {
+      font-size: .9rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-top: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(0,131,143,.4);
+    }
+    .cf-spin-slow {
+      transform-origin: 110px 115px;   /* the triple-overlap centre, not the viewBox centre */
+      animation: cf-rotate 64s linear infinite;
+    }
+    .cf-pulse    { animation: cf-glow 6s ease-in-out infinite; }
+    .cf-band-w   { animation: cf-band-lift 6s ease-in-out infinite; transform-box: fill-box; }
+    @keyframes cf-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes cf-glow {
+      0%, 100% { opacity: .85; }
+      50%      { opacity: 1; }
+    }
+    /* Each wedge brightens for its share of a six-second cycle. */
+    @keyframes cf-band-lift {
+      0%, 14%, 100% { filter: brightness(1); }
+      6%            { filter: brightness(1.55); }
+    }
+
+    /* ---- Colour-mapping image strip ------------------------------------- */
+    .colour-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0 1rem;
+    }
+    .colour-strip-item { margin: 0; }
+    .colour-strip-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      aspect-ratio: 1 / 1;
+      background: #0d0d1f;
+      border-bottom: 4px solid #005f6e;
+    }
+    .colour-strip-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      transition: transform 6s ease-out;
+    }
+    .colour-strip-item:hover .colour-strip-frame img { transform: scale(1.09); }
+    .colour-strip-item figcaption {
+      font-size: .86rem;
+      line-height: 1.6;
+      color: var(--text-dark);
+      margin-top: .65rem;
+    }
+    .colour-strip-credit {
+      display: block;
+      margin-top: .4rem;
+      font-size: .72rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .colour-strip-note {
+      font-size: .9rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: .5rem 0 0;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(0,131,143,.4);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cf-spin-slow,
+      .cf-band-w,
+      .cf-pulse,
+      .qs-tw,
+      .quest-mw { animation: none; }
+    }
     </style>
   
   <style>
@@ -764,6 +1020,217 @@
     </div>
   </section>
 
+  <!-- The Quest. Sets up everything below it, so it sits directly under the header. -->
+  <section class="quest-section">
+  <!-- Night scene worked into the panel itself: masked, tinted from the
+       section's own gunmetal, and faded on every edge so it reads as depth in
+       the background rather than a picture laid on top. Vector, so there is no
+       file to ship and nothing to license. -->
+  <div class="quest-sky" aria-hidden="true">
+    <!-- A pool of night deepened into the panel, so the photo screened on top
+         of it has something dark to sit against. Both share the same feather. -->
+    <div class="quest-nightfall"></div>
+    <!-- Real sky, if the file is there. "screen" makes its black background
+         drop out against the panel by itself, so no alpha channel and no
+         cut-out are needed; the mask only has to soften the edges. -->
+    <img class="quest-mw" src="milky-way.jpg" alt=""
+         onload="this.closest('.quest-sky').classList.add('has-photo')"
+         onerror="this.remove()">
+    <!-- Real silhouette, cut from the photograph by luminance: the figure and
+         the foreground were already near-black, so the sky lifts straight out
+         and leaves a feathered alpha edge. Normal blend, because this layer
+         has to darken where the sky layer lightens. -->
+    <img class="quest-fg" src="silhouette.png" alt="" onerror="this.remove()">
+    <svg viewBox="0 0 460 560" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <radialGradient id="qs-vignette" cx="68%" cy="40%" r="52%">
+          <stop offset="0%"   stop-color="#fff" stop-opacity="1"/>
+          <stop offset="52%"  stop-color="#fff" stop-opacity=".92"/>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+        </radialGradient>
+        <mask id="qs-mask">
+          <rect x="0" y="0" width="460" height="560" fill="url(#qs-vignette)"/>
+        </mask>
+        <linearGradient id="qs-ground" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#232b36" stop-opacity=".95"/>
+          <stop offset="100%" stop-color="#232b36" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="qs-airglow" cx="50%" cy="64%" r="42%">
+          <stop offset="0%"   stop-color="#a8bcd2" stop-opacity=".38"/>
+          <stop offset="100%" stop-color="#a8bcd2" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <g mask="url(#qs-mask)">
+        <ellipse cx="230" cy="360" rx="215" ry="100" fill="url(#qs-airglow)"/>
+
+        <g class="qs-stars" fill="#f4f9ff">
+        <circle cx="38.3" cy="160.5" r="1.75" opacity="0.71" class="qs-tw" style="animation-delay:3.2s"/>
+        <circle cx="231.5" cy="104.4" r="1.63" opacity="0.716"/>
+        <circle cx="230.9" cy="223.5" r="2.88" opacity="0.422"/>
+        <circle cx="392.7" cy="190.9" r="1.97" opacity="0.629" class="qs-tw" style="animation-delay:6.6s"/>
+        <circle cx="66.1" cy="93.2" r="1.51" opacity="0.489"/>
+        <circle cx="168.6" cy="348.6" r="1.68" opacity="0.467"/>
+        <circle cx="392.8" cy="45.0" r="2.82" opacity="0.492"/>
+        <circle cx="294.0" cy="231.7" r="1.27" opacity="0.515"/>
+        <circle cx="286.9" cy="225.8" r="1.69" opacity="0.403"/>
+        <circle cx="32.6" cy="117.0" r="1.83" opacity="0.8"/>
+        <circle cx="230.1" cy="188.6" r="1.26" opacity="0.67"/>
+        <circle cx="225.3" cy="305.8" r="1.39" opacity="0.505"/>
+        <circle cx="319.1" cy="109.8" r="2.98" opacity="0.805"/>
+        <circle cx="264.7" cy="34.4" r="1.16" opacity="0.652" class="qs-tw" style="animation-delay:1.6s"/>
+        <circle cx="417.1" cy="232.8" r="1.54" opacity="0.357"/>
+        <circle cx="421.7" cy="121.0" r="2.17" opacity="0.821"/>
+        <circle cx="225.9" cy="236.8" r="1.54" opacity="0.511"/>
+        <circle cx="429.3" cy="78.2" r="1.13" opacity="0.57"/>
+        <circle cx="133.5" cy="55.2" r="1.89" opacity="0.803"/>
+        <circle cx="393.7" cy="69.9" r="1.21" opacity="0.704" class="qs-tw" style="animation-delay:4.2s"/>
+        <circle cx="153.9" cy="311.7" r="1.53" opacity="0.377" class="qs-tw" style="animation-delay:2.8s"/>
+        <circle cx="12.3" cy="76.9" r="1.49" opacity="0.773"/>
+        <circle cx="155.4" cy="122.3" r="1.04" opacity="0.472"/>
+        <circle cx="7.1" cy="11.9" r="1.29" opacity="0.731"/>
+        <circle cx="103.2" cy="69.5" r="1.57" opacity="0.874"/>
+        <circle cx="85.7" cy="79.5" r="2.73" opacity="0.521"/>
+        <circle cx="387.9" cy="250.6" r="1.28" opacity="0.492" class="qs-tw" style="animation-delay:5.8s"/>
+        <circle cx="285.9" cy="76.4" r="1.46" opacity="0.48"/>
+        <circle cx="383.1" cy="184.6" r="2.19" opacity="0.665" class="qs-tw" style="animation-delay:4.3s"/>
+        <circle cx="207.5" cy="157.7" r="1.3" opacity="0.486"/>
+        <circle cx="374.4" cy="184.0" r="1.27" opacity="0.636" class="qs-tw" style="animation-delay:3.9s"/>
+        <circle cx="65.6" cy="96.8" r="1.19" opacity="0.452"/>
+        <circle cx="176.0" cy="168.2" r="3.05" opacity="0.521"/>
+        <circle cx="350.4" cy="346.2" r="1.75" opacity="0.288"/>
+        <circle cx="325.3" cy="51.7" r="1.14" opacity="0.471"/>
+        <circle cx="45.2" cy="195.0" r="3.04" opacity="0.514" class="qs-tw" style="animation-delay:6.8s"/>
+        <circle cx="310.7" cy="19.2" r="2.93" opacity="0.86"/>
+        <circle cx="386.6" cy="229.6" r="1.15" opacity="0.641" class="qs-tw" style="animation-delay:4.9s"/>
+        <circle cx="88.2" cy="121.2" r="1.42" opacity="0.499"/>
+        <circle cx="62.6" cy="180.5" r="1.36" opacity="0.38"/>
+        <circle cx="119.3" cy="132.6" r="1.15" opacity="0.526" class="qs-tw" style="animation-delay:6.5s"/>
+        <circle cx="314.4" cy="31.4" r="1.11" opacity="0.736"/>
+        <circle cx="28.3" cy="65.7" r="1.81" opacity="0.562"/>
+        <circle cx="389.0" cy="85.2" r="1.38" opacity="0.689"/>
+        <circle cx="234.0" cy="177.9" r="1.61" opacity="0.476"/>
+        <circle cx="322.8" cy="156.5" r="1.54" opacity="0.57"/>
+        <circle cx="128.9" cy="312.7" r="1.41" opacity="0.456"/>
+        <circle cx="326.9" cy="156.4" r="2.55" opacity="0.464"/>
+        <circle cx="245.4" cy="122.6" r="1.1" opacity="0.818"/>
+        <circle cx="28.3" cy="232.4" r="1.16" opacity="0.627" class="qs-tw" style="animation-delay:0.1s"/>
+        <circle cx="165.6" cy="46.7" r="1.19" opacity="0.685"/>
+        <circle cx="358.5" cy="56.0" r="1.83" opacity="0.496"/>
+        <circle cx="308.9" cy="19.4" r="1.19" opacity="0.795"/>
+        <circle cx="399.8" cy="215.6" r="3.06" opacity="0.398"/>
+        <circle cx="44.0" cy="177.7" r="1.43" opacity="0.576" class="qs-tw" style="animation-delay:3.7s"/>
+        <circle cx="347.3" cy="180.8" r="1.31" opacity="0.513"/>
+        <circle cx="414.3" cy="345.4" r="1.29" opacity="0.409"/>
+        <circle cx="270.9" cy="250.1" r="1.62" opacity="0.41" class="qs-tw" style="animation-delay:3.3s"/>
+        <circle cx="161.0" cy="304.1" r="2.63" opacity="0.557"/>
+        <circle cx="313.3" cy="80.9" r="1.36" opacity="0.48" class="qs-tw" style="animation-delay:2.7s"/>
+        <circle cx="284.8" cy="197.3" r="1.15" opacity="0.553"/>
+        <circle cx="30.5" cy="31.4" r="2.22" opacity="0.515" class="qs-tw" style="animation-delay:3.6s"/>
+        <circle cx="24.0" cy="169.4" r="2.51" opacity="0.611"/>
+        <circle cx="220.6" cy="263.8" r="3.09" opacity="0.612"/>
+        <circle cx="28.2" cy="315.3" r="2.59" opacity="0.383" class="qs-tw" style="animation-delay:4.7s"/>
+        <circle cx="41.8" cy="150.6" r="1.68" opacity="0.478" class="qs-tw" style="animation-delay:3.4s"/>
+        <circle cx="391.7" cy="317.7" r="1.04" opacity="0.289" class="qs-tw" style="animation-delay:6.0s"/>
+        <circle cx="396.0" cy="110.7" r="1.28" opacity="0.468"/>
+        <circle cx="60.5" cy="75.8" r="1.43" opacity="0.734"/>
+        <circle cx="70.0" cy="34.7" r="1.66" opacity="0.877"/>
+        <circle cx="207.4" cy="313.2" r="1.56" opacity="0.445" class="qs-tw" style="animation-delay:3.4s"/>
+        <circle cx="65.6" cy="285.2" r="1.23" opacity="0.297"/>
+        <circle cx="228.5" cy="29.3" r="1.75" opacity="0.718" class="qs-tw" style="animation-delay:3.8s"/>
+        <circle cx="230.2" cy="69.2" r="2.09" opacity="0.696"/>
+        <circle cx="449.3" cy="84.6" r="1.74" opacity="0.784" class="qs-tw" style="animation-delay:0.7s"/>
+        <circle cx="151.3" cy="17.8" r="2.35" opacity="0.878"/>
+        <circle cx="350.0" cy="61.8" r="1.74" opacity="0.613"/>
+        <circle cx="322.7" cy="82.2" r="2.96" opacity="0.513"/>
+        <circle cx="445.7" cy="275.7" r="1.16" opacity="0.511"/>
+        <circle cx="166.9" cy="27.3" r="1.82" opacity="0.514"/>
+        <circle cx="269.7" cy="141.4" r="2.16" opacity="0.705" class="qs-tw" style="animation-delay:1.1s"/>
+        <circle cx="57.5" cy="7.9" r="1.27" opacity="0.711"/>
+        <circle cx="37.2" cy="189.2" r="1.73" opacity="0.628"/>
+        <circle cx="173.5" cy="312.4" r="1.51" opacity="0.52" class="qs-tw" style="animation-delay:3.3s"/>
+        <circle cx="112.6" cy="267.4" r="1.11" opacity="0.376" class="qs-tw" style="animation-delay:4.1s"/>
+        <circle cx="96.9" cy="17.2" r="1.39" opacity="0.497"/>
+        <circle cx="439.1" cy="245.7" r="2.24" opacity="0.459"/>
+        <circle cx="125.8" cy="42.4" r="1.29" opacity="0.499"/>
+        <circle cx="164.7" cy="191.8" r="1.79" opacity="0.656"/>
+        <circle cx="229.1" cy="49.7" r="1.48" opacity="0.723"/>
+        <circle cx="239.7" cy="269.9" r="1.62" opacity="0.341"/>
+        <circle cx="116.4" cy="23.3" r="1.23" opacity="0.745"/>
+        <circle cx="12.5" cy="216.4" r="2.1" opacity="0.575"/>
+        <circle cx="153.9" cy="57.1" r="1.63" opacity="0.486"/>
+        <circle cx="102.5" cy="23.0" r="2.53" opacity="0.958"/>
+        <circle cx="46.4" cy="162.1" r="1.31" opacity="0.569"/>
+        <circle cx="147.5" cy="237.9" r="1.01" opacity="0.446" class="qs-tw" style="animation-delay:1.7s"/>
+        <circle cx="415.1" cy="62.0" r="1.08" opacity="0.757"/>
+        <circle cx="394.5" cy="275.5" r="2.38" opacity="0.337"/>
+        <circle cx="52.7" cy="134.2" r="2.69" opacity="0.675"/>
+        <circle cx="90.0" cy="34.1" r="1.83" opacity="0.82"/>
+        <circle cx="283.1" cy="189.0" r="1.27" opacity="0.397"/>
+        <circle cx="265.9" cy="43.9" r="1.74" opacity="0.902"/>
+        <circle cx="113.6" cy="261.0" r="1.29" opacity="0.406"/>
+        <circle cx="84.1" cy="90.3" r="1.06" opacity="0.606" class="qs-tw" style="animation-delay:5.9s"/>
+        <circle cx="308.3" cy="79.8" r="1.84" opacity="0.617"/>
+        <circle cx="297.1" cy="312.2" r="1.24" opacity="0.49"/>
+        <circle cx="238.6" cy="230.6" r="1.13" opacity="0.656"/>
+        <circle cx="390.4" cy="26.1" r="1.37" opacity="0.493"/>
+        <circle cx="40.4" cy="233.7" r="1.05" opacity="0.381"/>
+        <circle cx="357.3" cy="55.0" r="2.75" opacity="0.723"/>
+        <circle cx="401.9" cy="213.7" r="1.18" opacity="0.512"/>
+        <circle cx="375.6" cy="69.0" r="1.8" opacity="0.551" class="qs-tw" style="animation-delay:6.7s"/>
+        <circle cx="217.5" cy="325.5" r="1.12" opacity="0.447"/>
+        <circle cx="313.4" cy="148.5" r="1.14" opacity="0.426"/>
+        <circle cx="118.0" cy="308.4" r="1.1" opacity="0.463"/>
+        <circle cx="343.3" cy="235.6" r="1.15" opacity="0.415" class="qs-tw" style="animation-delay:1.4s"/>
+        <circle cx="354.2" cy="119.5" r="2.43" opacity="0.487" class="qs-tw" style="animation-delay:3.5s"/>
+        <circle cx="296.3" cy="190.9" r="2.88" opacity="0.499"/>
+        <circle cx="157.0" cy="77.7" r="1.17" opacity="0.467" class="qs-tw" style="animation-delay:3.9s"/>
+        <circle cx="183.8" cy="94.7" r="1.09" opacity="0.58" class="qs-tw" style="animation-delay:3.7s"/>
+        <circle cx="308.8" cy="74.8" r="1.2" opacity="0.548"/>
+        <circle cx="184.1" cy="319.2" r="1.16" opacity="0.52" class="qs-tw" style="animation-delay:0.6s"/>
+        <circle cx="113.9" cy="333.4" r="2.92" opacity="0.298"/>
+        <circle cx="119.9" cy="56.7" r="1.37" opacity="0.758"/>
+        <circle cx="60.7" cy="9.8" r="1.2" opacity="0.889"/>
+        <circle cx="33.9" cy="66.0" r="1.66" opacity="0.749" class="qs-tw" style="animation-delay:3.5s"/>
+        <circle cx="39.3" cy="151.2" r="1.09" opacity="0.491"/>
+        <circle cx="143.0" cy="36.6" r="2.59" opacity="0.537" class="qs-tw" style="animation-delay:0.7s"/>
+        <circle cx="242.3" cy="231.1" r="1.7" opacity="0.58"/>
+        <circle cx="177.6" cy="69.5" r="2.16" opacity="0.802"/>
+        </g>
+
+      </g>
+    </svg>
+  </div>
+
+    <div class="section-container quest-inner">
+
+      <div class="section-label" data-aos="fade-up" style="margin-bottom:1.5rem;">
+        <h2 style="color:#fff;">Who We Are</h2>
+      </div>
+
+      <p class="quest-lead" data-aos="fade-up">The book and the Institute are both quests for clarity, but not the kind that makes reality simpler. Quantum mechanics did not make reality clearer in that sense. It made reality stranger, and every honest step since has followed that same direction. Whatever sits orders of magnitude below the Planck length is likely to be stranger still.</p>
+
+      <p class="quest-body" data-aos="fade-up">The clarity worth chasing is clarity of method: better questions, faster revision, and never defending an answer past what the evidence supports. Not final answers. Not comfort. A clearer way of standing in front of something strange.</p>
+
+      <p class="quest-body" data-aos="fade-up">Whoever the first human was, wherever they stood, one of the first questions was likely, &ldquo;Where am I?&rdquo;</p>
+
+      <p class="quest-pivot" data-aos="fade-up"><span>Question.</span> <span class="quest-split">Quest&#8209;ion.</span></p>
+
+      <p class="quest-body" data-aos="fade-up">That quest to find out was version one. We have been asking it ever since. Maybe that is what being human is: not the answer, but the asking.</p>
+
+      <div class="quest-cta" data-aos="fade-up">
+        <p class="quest-cta-line">The framework is on revision 6. Do you ever wonder what Revision&nbsp;10 will look like?</p>
+        <p class="quest-cta-ask">Help us get there.</p>
+        <div class="quest-cta-buttons">
+          <a href="book.html" class="btn btn-primary">Read the current revision</a>
+          <a href="contribute.html" class="btn btn-outline">Work on it with us</a>
+        </div>
+        <p class="quest-cta-note">Every prediction is timestamped before the result arrives, and the record includes the ones that did not hold.</p>
+      </div>
+
+    </div>
+  </section>
+
   <!-- About Our Name. 3 QCD cards -->
   <section class="content-section" style="background:white; padding:3rem 2rem;">
     <div class="section-container">
@@ -924,7 +1391,7 @@
         <p style="margin-top: 1rem;">This geometric unity mirrors the deep insight from modern physics: reality is fundamentally relational. Nothing exists in isolation. Properties emerge from relationships. The triangle itself is the message: separation is the illusion; integration is the reality.</p>
       </div>
 
-      <div style="background:#8e0c45; border-radius:8px; padding:1.5rem; margin:2rem 0; border-bottom:4px solid #2e7d32;">
+      <div style="background:#8e0c45; border-radius:8px; padding:1.5rem; margin:2rem 0; border-bottom:4px solid #1a7a36;">
         <h3 style="color:white; font-weight:600; margin-bottom:1rem;">The Open Center: Emergence and Incompleteness</h3>
         <p>The hexagonal space at the center where the three elements meet is deliberately open, not empty but pregnant with possibility. This openness represents several crucial concepts:</p>
         <p style="margin-top: 1rem;"><strong>Emergence:</strong> When information, consciousness, and computation interact, something greater than their sum emerges. The open center is where subjective experience arises from objective processes, where meaning emerges from pattern, where novelty appears from deterministic laws.</p>
@@ -952,8 +1419,8 @@
 
   <!-- Mission, Values, Team - Using Foundation Accordion Style -->
 
-  <!-- About Our Colors -->
-  <section class="content-section" style="background:white; padding:3rem 2rem;">
+  <!-- About Our Colors. Anchor target for the colour banner on other pages. -->
+  <section id="colors" class="content-section" style="background:white; padding:3rem 2rem; scroll-margin-top:90px;">
     <div class="section-container">
       <div class="section-label" data-aos="fade-up" style="margin-bottom:1rem;">
         <h2 style="color:var(--text-dark);">About Our Colors</h2>
@@ -961,6 +1428,67 @@
       <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.25rem;" data-aos="fade-up">The color pairs used across this website are not chosen for aesthetics. They are drawn from Quantum Chromodynamics, the physics of the strong force, and they carry the same structural logic as the particles they are named after.</p>
       <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.25rem;" data-aos="fade-up">Quarks carry one of three color charges: red, green, or blue. Their antiparticles carry the anticolors: cyan, magenta, and yellow. Gluons, the force carriers of the strong force, carry a color-anticolor pair. No quark's color is ever directly observed, because confinement means only colorless combinations, called hadrons, can exist freely in nature. The color charge is defined entirely by how particles interact. No quark possesses a color in isolation. The property only exists in the relationship. This is the pattern that Element 1 identifies across all of physics: every property, without exception, is a relationship in disguise. The names red, green, blue, cyan, magenta, and yellow are entirely symbolic. Quarks are far too small to interact with visible light in any way. The labels were chosen because three color charges combine to produce a colorless result, the same way three primary colors of light combine to produce white, but the analogy is mathematical, not physical.</p>
       <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.25rem;" data-aos="fade-up">There is a structural parallel worth noting. The Vera Rubin Observatory uses six photometric filters spanning ultraviolet to near-infrared. To produce any color image, astronomers select three filters and map them to RGB display channels: actual photon wavelength bins assigned to human perceptual primaries for visualization. The resulting image logic is the same as QCD color logic. Three primaries combine to neutral. Anticolors cancel their partner. Red plus green plus blue equals white, whether the referent is light, strong-force charge, or a display model. QCD physicists chose the color metaphor precisely because this additive-neutrality structure was already familiar. The Vera Rubin Observatory uses the same structure because it is mapping real wavelengths onto the same human perceptual system. The correspondence between them is not coincidence but convergence: three independent domains arriving at the same organisational logic because the logic itself is doing something useful in each case.</p>
+      <!-- The two colour systems, side by side. Vector, so it stays sharp and
+           carries no licensing question; motion is decorative only. -->
+      <figure class="colour-figure" data-aos="fade-up">
+        <div class="colour-figure-grid">
+
+          <div class="colour-figure-cell">
+            <svg viewBox="0 0 220 220" role="img" aria-label="Three quark colour charges, red, green and blue, overlapping so that the region common to all three is white." class="cf-svg">
+              <!-- The white centre rotates with the circles, so the triple
+                   overlap and the colourless result never drift apart. -->
+              <g class="cf-spin-slow">
+                <circle cx="110" cy="82"  r="56" fill="#c62828" opacity=".78"/>
+                <circle cx="82"  cy="132" r="56" fill="#1a7a36" opacity=".78"/>
+                <circle cx="138" cy="132" r="56" fill="#005ba5" opacity=".78"/>
+                <circle cx="110" cy="115" r="18" fill="#ffffff" class="cf-pulse"/>
+              </g>
+              <text x="110" y="205" text-anchor="middle" class="cf-label">R + G + B &#8594; colourless</text>
+            </svg>
+            <figcaption class="cf-cap"><strong>Quark colour charge.</strong> Three charges, and only the combination that sums to colourless exists freely. The names are symbolic: quarks are far too small to interact with visible light.</figcaption>
+          </div>
+
+          <div class="colour-figure-cell">
+            <svg viewBox="0 0 220 220" role="img" aria-label="A lens disc divided into the six Rubin Observatory LSST passbands, u g r i z y, running from ultraviolet through visible to near-infrared." class="cf-svg">
+              <defs>
+                <radialGradient id="cf-glass" cx="38%" cy="30%">
+                  <stop offset="0%"  stop-color="#ffffff" stop-opacity=".55"/>
+                  <stop offset="55%" stop-color="#ffffff" stop-opacity=".06"/>
+                  <stop offset="100%" stop-color="#000000" stop-opacity=".22"/>
+                </radialGradient>
+              </defs>
+              <!-- Six wedges in filter-wheel order, coloured by each band's
+                   effective wavelength. The last two are near-infrared, so they
+                   are rendered as the absence of a visible colour. The wheel
+                   does not rotate; instead each band lifts in turn, which is
+                   what the instrument actually does and keeps the labels
+                   readable. -->
+              <g>
+                <path d="M110 105 L110 33 A72 72 0 0 1 172.4 69 Z" fill="#6a3ad6" class="cf-band-w" style="animation-delay:0s"/>
+                <path d="M110 105 L172.4 69 A72 72 0 0 1 172.4 141 Z" fill="#2eae54" class="cf-band-w" style="animation-delay:1s"/>
+                <path d="M110 105 L172.4 141 A72 72 0 0 1 110 177 Z" fill="#e03b2a" class="cf-band-w" style="animation-delay:2s"/>
+                <path d="M110 105 L110 177 A72 72 0 0 1 47.6 141 Z" fill="#8e1b1b" class="cf-band-w" style="animation-delay:3s"/>
+                <path d="M110 105 L47.6 141 A72 72 0 0 1 47.6 69 Z" fill="#4a2020" class="cf-band-w" style="animation-delay:4s"/>
+                <path d="M110 105 L47.6 69 A72 72 0 0 1 110 33 Z" fill="#2b1414" class="cf-band-w" style="animation-delay:5s"/>
+                <text x="139" y="60"  class="cf-band">u</text>
+                <text x="156" y="110" class="cf-band">g</text>
+                <text x="139" y="155" class="cf-band">r</text>
+                <text x="78"  y="155" class="cf-band">i</text>
+                <text x="60"  y="110" class="cf-band">z</text>
+                <text x="78"  y="60"  class="cf-band">y</text>
+              </g>
+              <circle cx="110" cy="105" r="72" fill="url(#cf-glass)"/>
+              <circle cx="110" cy="105" r="72" fill="none" stroke="rgba(0,0,0,.28)" stroke-width="3"/>
+              <circle cx="110" cy="105" r="20" fill="#0d0d1f"/>
+              <text x="110" y="205" text-anchor="middle" class="cf-label">368 nm &#8594; 971 nm</text>
+            </svg>
+            <figcaption class="cf-cap"><strong>LSST passbands.</strong> Six real wavelength bins running from near-ultraviolet to near-infrared. Two of the six are invisible to the eye, so any colour image is three of them chosen and assigned to red, green and blue.</figcaption>
+          </div>
+
+        </div>
+        <figcaption class="colour-figure-note">Two unrelated domains, one structure. Neither diagram shows a colour anything actually has. Both assign three channels that sum to neutral, because that is the arrangement which makes the combination readable. This site&rsquo;s palette is the third instance.</figcaption>
+      </figure>
+
       <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.75rem;" data-aos="fade-up">The design system on this website uses the same pairs for the same structural reason. Each card's primary color and its accent are a quark-antiquark pair. Together they produce a visually neutral, stable unit. The logic is the same whether the domain is a photon wavelength, a strong-force charge, or a section border. The Rubin Observatory is among the instruments expected to test framework predictions as its survey matures. That the color framework of the instrument, the color framework of the physics it is testing, and the color framework of this website all operate on the same additive logic is not planned. It is simply what happens when the same structural solution appears in independent contexts.</p>
       <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.75rem;" data-aos="fade-up">What makes QCD color mathematically striking is what Element 4 establishes. There are eight gluon types, corresponding to the eight generators of SU(3) color symmetry. Each gluon type performs a specific rotation in three-dimensional complex color space. Together they form a complete gate set: any color transformation can be decomposed from operations in this set. The quarks are the qubits. The gluons are the gates. The hadron is the stable output state of the computation. Physical rotation is state space rotation. The color labels are not decorative. They name the dimensions of the space in which the computation runs.</p>
 
@@ -997,9 +1525,9 @@
         <div style="display:flex; align-items:center; gap:.75rem; background:#f8f9fa; border-radius:6px; padding:.6rem .9rem;">
           <div style="display:flex; gap:3px;">
             <div style="width:28px; height:28px; border-radius:4px; background:#8e0c45;"></div>
-            <div style="width:28px; height:28px; border-radius:4px; background:#2e7d32;"></div>
+            <div style="width:28px; height:28px; border-radius:4px; background:#1a7a36;"></div>
           </div>
-          <div style="font-size:.85rem; color:var(--text-dark);"><strong>Mg + G</strong> &nbsp;<span style="color:var(--muted);">#8e0c45 / #2e7d32</span></div>
+          <div style="font-size:.85rem; color:var(--text-dark);"><strong>Mg + G</strong> &nbsp;<span style="color:var(--muted);">#8e0c45 / #1a7a36</span></div>
         </div>
         <div style="display:flex; align-items:center; gap:.75rem; background:#f8f9fa; border-radius:6px; padding:.6rem .9rem;">
           <div style="display:flex; gap:3px;">
@@ -1013,24 +1541,76 @@
             <div style="width:28px; height:28px; border-radius:4px; background:#c62828;"></div>
             <div style="width:28px; height:28px; border-radius:4px; background:#00bcd4;"></div>
           </div>
-          <div style="font-size:.85rem; color:var(--text-dark);"><strong>R bright + Cy bright</strong> &nbsp;<span style="color:var(--muted);">#c62828 / #00bcd4</span></div>
+          <div style="font-size:.85rem; color:var(--text-dark);"><strong>R + Cy bright</strong> &nbsp;<span style="color:var(--muted);">#c62828 / #00bcd4</span></div>
         </div>
         <div style="display:flex; align-items:center; gap:.75rem; background:#f8f9fa; border-radius:6px; padding:.6rem .9rem;">
           <div style="display:flex; gap:3px;">
             <div style="width:28px; height:28px; border-radius:4px; background:#00838f;"></div>
             <div style="width:28px; height:28px; border-radius:4px; background:#e53935;"></div>
           </div>
-          <div style="font-size:.85rem; color:var(--text-dark);"><strong>G bright + Mg bright</strong> &nbsp;<span style="color:var(--muted);">#00838f / #e53935</span></div>
+          <div style="font-size:.85rem; color:var(--text-dark);"><strong>Cy + R bright</strong> &nbsp;<span style="color:var(--muted);">#00838f / #e53935</span></div>
         </div>
         <div style="display:flex; align-items:center; gap:.75rem; background:#f8f9fa; border-radius:6px; padding:.6rem .9rem;">
           <div style="display:flex; gap:3px;">
-            <div style="width:28px; height:28px; border-radius:4px; background:#005f6e;"></div>
-            <div style="width:28px; height:28px; border-radius:4px; background:#c62828;"></div>
+            <div style="width:28px; height:28px; border-radius:4px; background:#2e7d32;"></div>
+            <div style="width:28px; height:28px; border-radius:4px; background:#e91e63;"></div>
           </div>
-          <div style="font-size:.85rem; color:var(--text-dark);"><strong>Cy bright + R</strong> &nbsp;<span style="color:var(--muted);">#005f6e / #c62828</span></div>
+          <div style="font-size:.85rem; color:var(--text-dark);"><strong>G + Mg bright</strong> &nbsp;<span style="color:var(--muted);">#2e7d32 / #e91e63</span></div>
         </div>
       </div>
       <p style="font-size:.85rem; color:var(--muted); margin-top:1rem; line-height:1.7;" data-aos="fade-up">Each card, accordion, or section on this site uses one pair. The primary color is the quark charge. The border or accent is the anticolor. Together they produce a colorless, stable visual unit. Reference: Element 4, <em>A Quest for the Big TOE</em>.</p>
+
+      <!-- Three real observations, each one a set of measured wavelength bands
+           assigned to red, green and blue. Credits are taken from the IPTC
+           metadata embedded in the originals by ESA and ESO. -->
+      <div class="colour-strip" data-aos="fade-up">
+        <figure class="colour-strip-item">
+          <div class="colour-strip-frame">
+            <img src="colour-terzan5.jpg" loading="lazy"
+                 alt="The dense stellar system Terzan 5, imaged by the Webb and Hubble telescopes."
+                 onerror="this.closest('.colour-strip-item').remove()">
+          </div>
+          <figcaption>
+            <strong>Terzan 5.</strong> Two telescopes, one picture. Webb records infrared, Hubble records visible light, and the whites, blues and reds here are those separate bands assigned to the three channels a screen can display.
+            <span class="colour-strip-credit">NASA, ESA, CSA, STScI, G.&nbsp;Zullo</span>
+          </figcaption>
+        </figure>
+        <figure class="colour-strip-item">
+          <div class="colour-strip-frame">
+            <img src="colour-red-spider.jpg" loading="lazy"
+                 alt="The Red Spider Nebula, NGC 6537, imaged in infrared by Webb's NIRCam."
+                 onerror="this.closest('.colour-strip-item').remove()">
+          </div>
+          <figcaption>
+            <strong>The Red Spider Nebula.</strong> Every colour in this image is infrared. Webb&rsquo;s NIRCam records wavelengths no eye can detect, so the red and the blue were chosen to hold them apart. They were not observed.
+            <span class="colour-strip-credit">ESA/Webb, NASA &amp; CSA, J.&nbsp;H.&nbsp;Kast</span>
+          </figcaption>
+        </figure>
+        <figure class="colour-strip-item">
+          <div class="colour-strip-frame">
+            <img src="colour-ngc1300.jpg" loading="lazy"
+                 alt="The barred spiral galaxy NGC 1300, imaged with the MUSE instrument on the Very Large Telescope."
+                 onerror="this.closest('.colour-strip-item').remove()">
+          </div>
+          <figcaption>
+            <strong>NGC&nbsp;1300.</strong> ESO describes this one plainly: green, red and infrared filters combined. Two of the three are colours. The third is a decision.
+            <span class="colour-strip-credit">ESO/PHANGS</span>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="colour-strip-note" data-aos="fade-up">None of these is a photograph in the ordinary sense. Each is a set of measured wavelength bands assigned to red, green and blue so that a human visual system can read them, and the assignment is a choice made by the people who processed the data. These come from Webb and the Very Large Telescope rather than from Rubin, but the decision is the same one, and it is the same decision the palette on this site makes.</p>
+      <script>
+        /* If none of the image files are present, drop the empty strip and its
+           note rather than leaving a caption with nothing to caption. */
+        window.addEventListener('load', function () {
+          var strip = document.querySelector('.colour-strip');
+          if (strip && !strip.querySelector('.colour-strip-item')) {
+            var note = document.querySelector('.colour-strip-note');
+            if (note) note.remove();
+            strip.remove();
+          }
+        });
+      </script>
     </div>
   </section>
 
@@ -1062,7 +1642,7 @@
         </div>
         <div class="foundation-content">
           <div class="foundation-inner">
-            <div class="foundation-summary" style="background:#8e0c45; border-left:4px solid #2e7d32; color:white;">
+            <div class="foundation-summary" style="background:#8e0c45; border-left:4px solid #1a7a36; color:white;">
               Six operating principles, not aspirational statements. Every one is either demonstrated by the public record or it is not. The record is public so anyone can check.
             </div>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.25rem; margin-top:1.5rem;">
@@ -1252,6 +1832,23 @@
       once: true,
       offset: 100
     });
+
+    /* Deep links jump straight past the scroll events AOS reveals content on,
+       so arriving at about-page.html#colors from the colour banner would land
+       on a section still sitting at opacity zero. Reveal the target section
+       outright by applying AOS's own class, rather than depending on a scroll
+       event that has already been missed. */
+    if (location.hash) {
+      window.addEventListener('load', function () {
+        var target;
+        try { target = document.querySelector(location.hash); } catch (e) { return; }
+        if (!target) return;
+        var hidden = target.querySelectorAll('[data-aos]');
+        for (var i = 0; i < hidden.length; i++) hidden[i].classList.add('aos-animate');
+        if (target.hasAttribute('data-aos')) target.classList.add('aos-animate');
+        target.scrollIntoView();
+      });
+    }
   </script>
 
   <script>
