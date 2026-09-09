@@ -1,10 +1,9 @@
 # Ic² Research Institute: Website Style Guide
 
-**Version 1.1** · 9 September 2026
+**Version 1.2** · 9 September 2026
 **Governs:** eequalsicsquared.com, the static site served from this repository
-**Changed in this revision:** the em dash rule now describes the misuse rather
-than banning the mark; the QCD pair count corrected from six to nine; an open
-item on Mg+G resolved.
+**Changed in this revision:** the contraction rule now allows them where the
+full form reads stiffly, and names the three places they are still expanded.
 
 > ### No silent amendments
 >
@@ -54,7 +53,22 @@ the sentence instead.
 This rule governs prose. Em dashes remain fine as label separators in headings,
 tables, timelines, and reference lines, including in this document.
 
-**Contractions** — Avoid in formal body text. Use `do not`, `it is`, `they are`.
+**Contractions** — Allowed where avoiding one makes the sentence stilted. The
+test is whether the full form is doing work or just sounding stiff: *"it is not a
+metaphor"* earns the expansion, *"that is not what is happening"* does not, and
+reads better as *"that's not what's happening"*.
+
+Expand them in three places, where the precision is the point:
+
+| Where | Why |
+|---|---|
+| A stated prediction | It goes on the record and gets quoted back |
+| A falsification standard | The condition has to be unambiguous |
+| A claim about what the evidence shows | The register should be flatter than the surrounding prose |
+
+Everywhere else, including blog posts, reels, captions and calls to action, use
+whichever reads naturally aloud. A page with no contractions anywhere sounds
+translated, which costs more credibility than the formality buys.
 
 **Paragraph text** — `font-size: 1.125rem; line-height: 1.8; color: var(--text-dark)` on light backgrounds. `color: rgba(255,255,255,0.88)` on dark.
 
@@ -302,7 +316,7 @@ Uses split header+body with R+Cy: red header, cyan `info` icon, white body, red 
 - **No "coming soon"** — all sections must have real book content or be omitted
 - **References** format: `Element N, A Quest for the Big TOE` — inline, at end of accordion body
 - **Book attribution label:** `font-size: 0.7rem; uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.35)`
-- **"Isn't", "aren't", "they're"** — avoid contractions in formal body text
+- **Contractions** — see Typography. Allowed where the full form reads stiffly; expanded in predictions, falsification standards, and claims about evidence
 - **Section heading "Looking Forward"** — forbidden; write a proper conceptual bridge
 - Equations removed from main text (accessible only in appendix)
 
@@ -346,6 +360,7 @@ Newest first. Add a row here in the same commit that changes a rule.
 
 | Version | Date | Change |
 |---|---|---|
+| 1.2 | 2026-09-09 | Contractions no longer banned in body text. They are allowed wherever the full form reads stiffly, and expanded only in stated predictions, falsification standards, and claims about what the evidence shows, where the phrasing gets quoted back. The previous absolute wording was producing prose that read as translated. Stated twice in the guide, in Typography and in Content Rules; both updated, and Content Rules now points at Typography rather than restating it. |
 | 1.1 | 2026-09-09 | Brought under version control and into the repository. Em dash rule rewritten to target the misuse, an em dash standing in for parentheses, a comma, a colon, a semicolon or a connecting word, rather than banning the mark outright; the previous wording had produced a scorched-earth pass over the blog. Pair table heading corrected from "Six combinations only" to nine, which is what it lists and what the rule below it already said. Mg+G resolved in favor of this table: the antiquark is `#1a7a36`, not the `#2e7d32` the pages had drifted to, which duplicated G+Mg bright’s quark. Corrected in twelve places. Spelling normalized to US English. |
 | 1.0 | before 2026-09-09 | Original guide, unversioned, kept outside the repository. Header recorded only "Last updated: Session ending framework.html v1". |
 
