@@ -176,7 +176,21 @@
     .hero-statement strong { color:white; }
 
     /* sigma meter */
-    .sigma-wrap { }
+    /* faint Metatron's Cube filling the blank space around the meter */
+    .sigma-wrap { position:relative; }
+    .sigma-wrap > *:not(.hero-mark) { position:relative; z-index:1; }
+    .hero-mark {
+      position:absolute; top:50%; left:50%;
+      width:clamp(300px,32vw,470px); height:auto;
+      transform:translate(-50%,-50%);
+      opacity:.26; pointer-events:none; z-index:0;
+    }
+    @keyframes metatron-rotate { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+    #vh-metatron-spin {
+      transform-box:fill-box; transform-origin:center;
+      animation:metatron-rotate 90s linear infinite;
+    }
+    @media (prefers-reduced-motion:reduce) { #vh-metatron-spin { animation:none; } }
     .sigma-top {
       display:flex; justify-content:space-between;
       align-items:flex-end; margin-bottom:.4rem;
@@ -865,6 +879,7 @@
       .hamburger { display:flex; }
       .mobile-menu { display:block; }
       .hero-body { grid-template-columns:1fr; }
+      .hero-mark { width:clamp(240px,68vw,340px); opacity:.18; }
       .kpi-strip { grid-template-columns:repeat(3,1fr); }
       .gallery-grid { grid-template-columns:repeat(2,1fr); }
       .rcard-grid { grid-template-columns:1fr; }
@@ -1036,6 +1051,101 @@
         <p>This is the threshold that distinguished Einstein's relativity from alternatives. Mercury's orbit, gravitational lensing, time dilation, and gravitational waves each independently required curved spacetime. The COSMIC Framework is approaching that same convergence threshold across four independent domains. The goal is 5&#8209;sigma. <strong>Every result, pass or fail, moves the needle.</strong></p>
       </div>
       <div class="sigma-wrap">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="hero-mark" aria-hidden="true" focusable="false" >
+        <g id="vh-metatron-spin" style="transform-origin:100px 100px;">
+        <g id="vh-mc-lines">      <line x1="100" y1="100" x2="100.0" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="127.19" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="127.19" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="100.0" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="72.81" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="72.81" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="100.0" y2="37.2" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100" y1="100" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="127.19" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="127.19" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="100.0" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="72.81" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="72.81" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="100.0" y2="37.2" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="68.6" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="127.19" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="100.0" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="72.81" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="72.81" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="100.0" y2="37.2" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="84.3" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="100.0" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="72.81" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="72.81" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="100.0" y2="37.2" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="127.19" y1="115.7" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="72.81" y2="115.7" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="72.81" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="100.0" y2="37.2" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="131.4" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="115.7" x2="72.81" y2="84.3" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="115.7" x2="100.0" y2="37.2" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="115.7" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="115.7" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="115.7" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="115.7" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="115.7" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="84.3" x2="100.0" y2="37.2" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="84.3" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="84.3" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="84.3" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="84.3" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="72.81" y1="84.3" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="37.2" x2="154.39" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="37.2" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="37.2" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="37.2" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="37.2" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="154.39" y1="68.6" x2="154.39" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="154.39" y1="68.6" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="154.39" y1="68.6" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="154.39" y1="68.6" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="154.39" y1="131.4" x2="100.0" y2="162.8" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="154.39" y1="131.4" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="154.39" y1="131.4" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="162.8" x2="45.61" y2="131.4" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="100.0" y1="162.8" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+        <line x1="45.61" y1="131.4" x2="45.61" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/></g>
+        <g id="vh-mc-outer">      <circle cx="100.0" cy="37.2" r="15.7" fill="#8B0000" fill-opacity="0.22" stroke="#8B0000" stroke-opacity="0.4" stroke-width="0.6"/>
+        <circle cx="154.39" cy="68.6" r="15.7" fill="#1a5c2a" fill-opacity="0.22" stroke="#1a5c2a" stroke-opacity="0.4" stroke-width="0.6"/>
+        <circle cx="154.39" cy="131.4" r="15.7" fill="#005ba5" fill-opacity="0.22" stroke="#005ba5" stroke-opacity="0.4" stroke-width="0.6"/>
+        <circle cx="100.0" cy="162.8" r="15.7" fill="#00838f" fill-opacity="0.22" stroke="#00838f" stroke-opacity="0.4" stroke-width="0.6"/>
+        <circle cx="45.61" cy="131.4" r="15.7" fill="#b01558" fill-opacity="0.22" stroke="#b01558" stroke-opacity="0.4" stroke-width="0.6"/>
+        <circle cx="45.61" cy="68.6" r="15.7" fill="#f1e303" fill-opacity="0.22" stroke="#f1e303" stroke-opacity="0.4" stroke-width="0.6"/></g>
+        <g id="mc-inner">      <circle cx="100.0" cy="68.6" r="15.7" fill="#8B0000" fill-opacity="0.42" stroke="#8B0000" stroke-opacity="0.5" stroke-width="0.6"/>
+        <circle cx="127.19" cy="84.3" r="15.7" fill="#1a5c2a" fill-opacity="0.42" stroke="#1a5c2a" stroke-opacity="0.5" stroke-width="0.6"/>
+        <circle cx="127.19" cy="115.7" r="15.7" fill="#005ba5" fill-opacity="0.42" stroke="#005ba5" stroke-opacity="0.5" stroke-width="0.6"/>
+        <circle cx="100.0" cy="131.4" r="15.7" fill="#00838f" fill-opacity="0.42" stroke="#00838f" stroke-opacity="0.5" stroke-width="0.6"/>
+        <circle cx="72.81" cy="115.7" r="15.7" fill="#b01558" fill-opacity="0.42" stroke="#b01558" stroke-opacity="0.5" stroke-width="0.6"/>
+        <circle cx="72.81" cy="84.3" r="15.7" fill="#f1e303" fill-opacity="0.42" stroke="#f1e303" stroke-opacity="0.5" stroke-width="0.6"/></g>
+        <circle cx="100" cy="100" r="15.7" fill="white" fill-opacity="0.45" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+        </g>
+        </svg>
         <div class="sigma-top">
           <div style="text-align:left;">
             <div class="sigma-current has-tip" data-tip="4.2σ = 99.998% confidence. Strong evidence well above the 4σ mark. Not yet at the 5σ discovery threshold, but results this strong are rarely noise. They are telling you something real is there.">4.2σ</div>
@@ -1316,7 +1426,7 @@
   <div class="inner">
     <div class="section-label" data-aos="fade-up" style="margin-bottom: .4rem;">
       <p style="font-size:.65rem; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,.55); margin-bottom:.4rem;">Next Up After DESI DR3</p>
-      <h2 style="color: white;">Substrate Dynamics <span style="font-size:.65em; font-weight:400; color:rgba(255,255,255,.65);">· First results expected September 2026</span></h2>
+      <h2 style="color: white;">Substrate Dynamics <span style="font-size:.65em; font-weight:400; color:rgba(255,255,255,.65);">&middot; Registered May 2026 &middot; testing opens September 2026, no results yet</span></h2>
     </div>
     <p style="color: rgba(255,255,255,.82); font-size: .9rem; line-height:1.75; margin-bottom: 1.75rem;" data-aos="fade-up">DESI DR3 tests the framework at cosmological scale. Substrate Dynamics tests it at the opposite extreme: the quark scale. Four pre-registered predictions enter active testing beginning September 2026 with RHIC and ALICE heavy-ion analysis, followed by LHCb and Belle II results through late 2026, lattice QCD comparisons by October 2026, and CKM angle derivation by June 2027. Validation is carried out by independent programs with no stake in the framework outcome.</p>
 
@@ -1358,6 +1468,7 @@
 
     <p style="margin-top: 1.75rem; color: white; font-size: .85rem; line-height: 1.75; max-width: 860px;" data-aos="fade-up">Each SD prediction is falsifiable independently. A confirmed null result still advances the framework by establishing where in the physical hierarchy information processing transitions from reversible to irreversible. That boundary is a significant finding in its own right. Pre-registration on Zenodo and OSF before any data collection begins.</p>
     <a href="programs-gateway.html" style="display:inline-block; margin-top: 1rem; padding:.6rem 1.25rem; background: #8B0000; color:white; text-decoration:none; border-radius:6px; font-weight:600; font-size:.85rem;" data-aos="fade-up">Full Program Details</a>
+    <a href="results-substrate-dynamics.html" style="display:inline-block; margin-top: 1rem; margin-left:.6rem; padding:.6rem 1.25rem; background: transparent; color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,.55); border-radius:6px; font-weight:600; font-size:.85rem;" data-aos="fade-up">Per-prediction status &rarr;</a>
   </div>
 </section>
 
