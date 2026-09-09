@@ -749,6 +749,12 @@ body{margin:0;padding:24px 12px;display:block;}
 .stage-inner{position:relative;width:100%;}
 .poster{position:absolute;top:0;left:0;transform-origin:top left;}
 
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
 </style>
 </head>
 <body>

@@ -520,7 +520,21 @@
             .prose-section { padding: 3rem 1.25rem; }
             .thesis-block { padding: 3rem 1.25rem; }
         }
-    </style>
+
+    /* Class-based grids with a fixed column count do not collapse on their own,
+       so their tracks stayed wider than the viewport on phones. */
+    @media (max-width: 720px) {
+      .stat-row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+</style>
 </head>
 <body>
 

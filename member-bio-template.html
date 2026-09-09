@@ -399,7 +399,28 @@
                 font-size: 0.9rem;
             }
         }
-    </style>
+    
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+
+    /* On pages where the nav cannot rely on a hamburger, or where the desktop
+       nav stays visible, let it wrap rather than push the page sideways. */
+    @media (max-width: 860px) {
+      nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
+    }
+
+    /* Grid and flex children default to min-width:auto and refuse to shrink
+       below min-content, which let the footer track exceed the viewport. */
+    [class*="footer-container"] > *,
+    [class*="footer-links-group"] > * { min-width: 0; }
+    @media (max-width: 720px) {
+      [class*="footer-links-group"] { flex-wrap: wrap; }
+      [class*="footer-icons"] { flex-wrap: wrap; }
+    }
+</style>
 </head>
 <body>
     <!-- Header -->

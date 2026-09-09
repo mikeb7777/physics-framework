@@ -99,7 +99,31 @@
     .footer-bottom{max-width:1200px;margin:.5rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);text-align:center;color:rgba(255,255,255,.5);font-size:.8rem;}
     .footer-bottom a{color:rgba(255,255,255,.6);text-decoration:none;}
     .footer-bottom a:hover{color:white;}
-  </style>
+  
+    /* Grid and flex children default to min-width:auto, so they refuse to
+       shrink below their min-content width. The footer link columns are three
+       nowrap flex items, giving the footer grid track a 378px floor inside a
+       311px container, which pushed the whole document wider than the viewport
+       on phones. Letting them shrink and wrap fixes it at the source. */
+    .footer-container > *,
+    .footer-links-group > * { min-width: 0; }
+    @media (max-width: 720px) {
+      .footer-links-group { flex-wrap: wrap; }
+      .footer-icons { flex-wrap: wrap; }
+    }
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+
+    /* This page has no hamburger, so the nav cannot be hidden on small screens.
+       Let it wrap instead of overflowing the viewport. */
+    @media (max-width: 860px) {
+      nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
+    }
+</style>
 </head>
 <body>
   <header class="site-header">
