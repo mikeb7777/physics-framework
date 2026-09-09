@@ -3,13 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media &amp; Press | Ic² Research Institute</title>
-    <meta name="description" content="Media resources, press coverage, conference appearances, and visual assets for the Ic² Research Institute and The Big TOE framework.">
+    <title>Gallery | Ic² Research Institute</title>
+    <meta name="description" content="Reels, video, and photographs from the Ic² Research Institute: talks, conferences, projects, and the people doing the work.">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200" rel="stylesheet">
 
     <style>
+    /* ---- Gallery ---------------------------------------------------------- */
+    .section-intro { font-size: 1.05rem; line-height: 1.8; color: var(--text-light); max-width: 720px; margin-bottom: 2rem; }
+    .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+    .gal-card { display: block; text-decoration: none; color: inherit; }
+    .gal-card-frame {
+      position: relative; overflow: hidden; border-radius: 8px; aspect-ratio: 4 / 5;
+      background: #0d0d1f; border-bottom: 4px solid #00838f;
+    }
+    .gal-card-frame img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+    .gal-card:hover .gal-card-frame img { transform: scale(1.05); }
+    .gal-card-noimg { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+    .gal-play {
+      position: absolute; top: 50%; left: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px;
+      border-radius: 50%; background: rgba(13,13,31,.62); border: 2px solid rgba(255,255,255,.9);
+    }
+    .gal-play::after {
+      content: ""; position: absolute; top: 50%; left: 54%; transform: translate(-50%,-50%);
+      border-left: 16px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+    }
+    .gal-cap { margin-top: .7rem; font-size: .9rem; line-height: 1.55; color: var(--text-dark); }
+    .gal-cap strong { display: block; }
+    .gal-cap span { color: var(--muted); }
+    .gal-empty {
+      border: 1px dashed rgba(0,131,143,.45); border-radius: 8px; padding: 2.25rem 1.75rem;
+      background: rgba(0,131,143,.05); max-width: 720px;
+    }
+    .gal-empty p { color: var(--text-light); line-height: 1.8; margin: 0 0 1.25rem; }
+    .gal-embed { position: relative; padding-top: 56.25%; border-radius: 8px; overflow: hidden; background: #0d0d1f; }
+    .gal-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .gal-video-lead { margin-bottom: 2.5rem; }
+    .gal-subhead { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin: 0 0 1rem; }
+    @media (prefers-reduced-motion: reduce) { .gal-card-frame img { transition: none; } }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
@@ -374,275 +407,120 @@
 <!-- ── Hero ── -->
 <section class="page-hero">
     <div class="page-hero-content" data-aos="fade-up">
-        <h1>Media and Press</h1>
-        <p>News coverage, conference appearances, press resources, and the growing story of independent physics research done differently.</p>
+        <h1>Gallery</h1>
+        <p>Reels, video, and photographs from the work: talks and conferences, projects in progress, and the people doing it. For news coverage and press resources, see the <a href="media.html" style="color:#f1e303;">media page</a>.</p>
     </div>
 </section>
 
-<!-- ── Featured Story ── -->
+<!-- ── Reels ── -->
 <section class="section">
-    <div class="section-inner">
-        <p class="section-label">Featured</p>
-        <h2 class="section-title">In the News</h2>
-        <p class="section-subtitle">Coverage, announcements, and notable moments from the Ic² Research Institute and The Big TOE framework.</p>
+    <div class="section-container">
+        <p class="tagline" data-aos="fade-up">Short form</p>
+        <h2 class="section-title" data-aos="fade-up">Reels</h2>
+        <p class="section-intro" data-aos="fade-up">Short explainers and framework pieces published to Instagram. Each card opens the original post in a new tab.</p>
 
-        <!-- Featured Big Card -->
-        <div class="featured-card" data-aos="fade-up">
-            <div class="featured-card-image">
-                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=900&q=80" alt="Dark energy cosmos">
-                <span class="featured-badge">⭐ Featured</span>
-            </div>
-            <div class="featured-card-body">
-                <div class="news-card-meta">January 2025 &nbsp;·&nbsp; Prediction Validation</div>
-                <div class="news-card-title">Dark Energy Prediction Confirmed: DESI Results Match Framework Forecast Made a Year Early</div>
-                <div class="news-card-excerpt">A January 2024 notarized prediction that dark energy is dynamically evolving was confirmed by the Dark Energy Spectroscopic Instrument in January 2025, representing a genuine advance forecast over one of the year's most significant cosmological findings.</div>
-                <a href="validation.html#desi" class="btn btn-primary">Read the Validation →</a>
-            </div>
-        </div>
-
-        <!-- News Grid -->
-        <div class="filter-bar" data-aos="fade-up">
-            <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
-            <button class="filter-btn" onclick="filterCards('prediction', this)">Predictions</button>
-            <button class="filter-btn" onclick="filterCards('research', this)">Research</button>
-            <button class="filter-btn" onclick="filterCards('community', this)">Community</button>
-        </div>
-
-        <div class="news-grid" id="newsGrid">
-
-            <div class="news-card" data-category="prediction" data-aos="fade-up">
-                <div class="news-card-image">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80" alt="Quantum computing">
-                    <span class="category-badge">Prediction</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-meta">December 2024</div>
-                    <div class="news-card-title">Google Willow Confirms Quantum Error Correction Scaling Prediction</div>
-                    <div class="news-card-excerpt">Google's Willow chip demonstrated the exact scaling behavior documented by the framework in August 2024, four months before publication.</div>
-                    <a href="validation.html#willow" class="news-card-link">View Validation →</a>
-                </div>
-            </div>
-
-            <div class="news-card" data-category="prediction" data-aos="fade-up" data-aos-delay="100">
-                <div class="news-card-image">
-                    <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&q=80" alt="James Webb Space Telescope">
-                    <span class="category-badge">Prediction</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-meta">2024–2025 &nbsp;·&nbsp; JWST</div>
-                    <div class="news-card-title">JWST Finds Massive Early Galaxies — Just as the Framework Said It Would</div>
-                    <div class="news-card-excerpt">Predictions of anomalous early galaxy formation, documented March 2024, were repeatedly corroborated by James Webb observations throughout 2024 and into 2025.</div>
-                    <a href="validation.html#jwst" class="news-card-link">View Validation →</a>
-                </div>
-            </div>
-
-            <div class="news-card" data-category="research" data-aos="fade-up" data-aos-delay="200">
-                <div class="news-card-image">
-                    <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=600&q=80" alt="CMB analysis">
-                    <span class="category-badge">Research</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-meta">2025 &nbsp;·&nbsp; Zenodo Publication</div>
-                    <div class="news-card-title">CMB Analysis Published: Geometric Imprints in the Cosmic Microwave Background</div>
-                    <div class="news-card-excerpt">Independent CMB analysis examining potential geometric signatures consistent with the COSMIC Framework, published openly on Zenodo with full data repository.</div>
-                    <a href="https://zenodo.org/doi/10.5281/zenodo.16376121" class="news-card-link" target="_blank" rel="noopener">View on Zenodo →</a>
-                </div>
-            </div>
-
-            <div class="news-card" data-category="community" data-aos="fade-up">
-                <div class="news-card-image">
-                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" alt="Book">
-                    <span class="category-badge">Community</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-meta">2026 &nbsp;·&nbsp; Book Release</div>
-                    <div class="news-card-title">The Big TOE Released Free via Honor System — Physics for Everyone</div>
-                    <div class="news-card-excerpt">A Quest for the Big TOE: The COSMIC Framework's Theory of Everything is distributed freely at www.eequalsicsquared.com. Pay what feels right, or nothing at all.</div>
-                    <a href="book.html" class="news-card-link">Get the Book →</a>
-                </div>
-            </div>
-
-            <div class="news-card" data-category="research" data-aos="fade-up" data-aos-delay="100">
-                <div class="news-card-image">
-                    <img src="https://images.unsplash.com/photo-1514820402329-de527fdd2e6d?w=600&q=80" alt="Research institute">
-                    <span class="category-badge">Research</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-meta">2026 &nbsp;·&nbsp; DESI DR2</div>
-                    <div class="news-card-title">DESI DR2 Strengthens Dark Energy Signal to 4.2σ, Consistent with Framework</div>
-                    <div class="news-card-excerpt">The second data release from DESI deepened the statistical case for evolving dark energy, further corroborating the framework's January 2024 prediction.</div>
-                    <a href="validation.html" class="news-card-link">View Full Analysis →</a>
-                </div>
-            </div>
-
-
-        </div><!-- /news-grid -->
-    </div>
-</section>
-
-<!-- ── Pull Quote ── -->
-<div style="max-width: var(--max-width); margin: 0 auto; padding: 0 2rem;">
-    <div class="pull-quote" data-aos="fade-up">
-        <blockquote>"Four documented predictions confirmed by independent experiments. Not retrofitted. Not adjusted. Made first, published openly, confirmed later."</blockquote>
-        <cite>— Michael K. Baines, ORCID: 0009-0001-8084-3870</cite>
-    </div>
-</div>
-
-<!-- ── Conferences ── -->
-<section class="section bg-light" id="conferences">
-    <div class="section-inner">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
-            <div data-aos="fade-right">
-                <p class="section-label">Conferences &amp; Events</p>
-                <h2 class="section-title">Where the Work Gets Out</h2>
-                <p class="section-subtitle">Independent research needs independent venues. The institute is building a presence in the physics and consciousness science communities.</p>
-                <div class="conference-timeline">
-
-                    <div class="conf-item upcoming">
-                        <div class="conf-date">December 2026</div>
-                        <div class="conf-name">International Conference on Applied Quantum and Statistical Physics (ICAQSP)</div>
-                        <div class="conf-location">📍 Bangkok, Thailand</div>
-                        <div class="conf-desc">Target venue for a first formal presentation of the QMM/substrate dynamics material. Small working conference format; direct conversations with specialists in quantum and statistical physics. Abstract submission target: October 2026.</div>
-                        <span class="conf-tag tag-upcoming">Upcoming Target</span>
-                    </div>
-
-                    <div class="conf-item planned">
-                        <div class="conf-date">2027 (location TBA)</div>
-                        <div class="conf-name">The Science of Consciousness (TSC)</div>
-                        <div class="conf-location">📍 Announced at consciousness.arizona.edu</div>
-                        <div class="conf-desc">The premier interdisciplinary forum for consciousness science, neuroscience, quantum physics, and philosophy of mind. Directed by Stuart Hameroff. An Asian location in 2027 would make this accessible. The framework's information-substrate approach to consciousness fits the program directly.</div>
-                        <span class="conf-tag tag-target">Priority Target</span>
-                    </div>
-
-                    <div class="conf-item planned">
-                        <div class="conf-date">May 2027</div>
-                        <div class="conf-name">21st Siam Physics Congress (SPC2027)</div>
-                        <div class="conf-location">📍 Thailand (venue TBA)</div>
-                        <div class="conf-desc">Thailand's flagship annual physics event, organized by the Thai Physics Society and SLRI. The 2026 edition ran at the Dusit Thani Hua Hin — practically next door. SPC2027 is a natural local entry point for the Thai physics community. Abstract submission opens approximately January 2027.</div>
-                        <span class="conf-tag tag-target">Local Priority</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <div data-aos="fade-left">
-                <p class="section-label">YouTube Channel</p>
-                <h2 class="section-title" style="font-size: 1.75rem;">Video Content</h2>
-                <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">The Ic² YouTube channel brings the framework to a wider audience with short-form explainers and the full six-act documentary series <em>The Cracks: What Physics Cannot Explain.</em> The channel is being populated now — subscribe to follow along as new content is added.</p>
-
-                <!-- Live playlist embed -->
-                <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; margin-bottom:1.25rem; background:#0d0d1f;">
-                    <iframe
-                        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:8px;"
-                        src="https://www.youtube.com/embed/videoseries?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3"
-                        title="Ic² Research Institute — YouTube Playlist"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
-                </div>
-
-                <div style="margin-top:1.25rem; display:flex; gap:.75rem; flex-wrap:wrap;">
-                    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:0.85rem;">
-                        ▶&nbsp; Watch on YouTube
-                    </a>
-                    <a href="blog.html" class="btn btn-outline" style="font-size:0.85rem;">Read the Blog</a>
-                </div>
-            </div>
+        <div id="reels-grid" class="gal-grid" data-aos="fade-up" hidden></div>
+        <div id="reels-empty" class="gal-empty" hidden>
+            <p>No reels collected here yet. They are published to Instagram first and gathered here as the series grows.</p>
+            <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="btn btn-primary">Follow on Instagram</a>
         </div>
     </div>
 </section>
 
-<!-- ── Media Kit ── -->
-<section class="section" id="mediakit">
-    <div class="section-inner">
-        <p class="section-label" data-aos="fade-up">Press Resources</p>
-        <h2 class="section-title" data-aos="fade-up">Media Kit</h2>
-        <p class="section-subtitle" data-aos="fade-up">Everything journalists, bloggers, and collaborators need to cover the institute and the research.</p>
+<!-- ── YouTube ── -->
+<section class="section" style="background: var(--bg-light);">
+    <div class="section-container">
+        <p class="tagline" data-aos="fade-up">Long form</p>
+        <h2 class="section-title" data-aos="fade-up">Video</h2>
+        <p class="section-intro" data-aos="fade-up">Short explainers and the six-act documentary series <em>The Cracks: What Physics Cannot Explain</em>. The channel is being populated as new pieces are finished.</p>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;">
-
-            <div data-aos="fade-up" data-aos-delay="0" style="background:#005ba5; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #f1e303; box-shadow:0 4px 20px rgba(0,91,165,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#f1e303; display:block; margin-bottom:.75rem;">article</span>
-                <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">One-Page Summary</div>
-                <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">A concise overview of the COSMIC Framework, the institute's mission, and the confirmed predictions, ready for editorial use.</div>
-                <a href="framework.html" style="color:#f1e303; font-weight:700; font-size:.85rem; text-decoration:none;">View Framework →</a>
-            </div>
-
-            <div data-aos="fade-up" data-aos-delay="80" style="background:#8B0000; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #00838f; box-shadow:0 4px 20px rgba(139,0,0,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#00838f; display:block; margin-bottom:.75rem;">fact_check</span>
-                <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Prediction Dossier</div>
-                <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">Full documentation of all advance predictions with timestamps, notarization records, and independent confirmation sources.</div>
-                <a href="validation.html" style="color:#00838f; font-weight:700; font-size:.85rem; text-decoration:none;">View Validation →</a>
-            </div>
-
-            <div data-aos="fade-up" data-aos-delay="160" style="background:#1a5c2a; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #b01558; box-shadow:0 4px 20px rgba(26,92,42,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#b01558; display:block; margin-bottom:.75rem;">menu_book</span>
-                <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">The Book (Free)</div>
-                <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;"><em>A Quest for the Big TOE</em> — the full manuscript, free to download and share. 21 elements covering information, gravity, consciousness, and spacetime.</div>
-                <a href="book.html" style="color:#b01558; font-weight:700; font-size:.85rem; text-decoration:none;">Get the Book →</a>
-            </div>
-
-            <div data-aos="fade-up" data-aos-delay="0" style="background:#005f6e; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #c62828; box-shadow:0 4px 20px rgba(0,95,110,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#c62828; display:block; margin-bottom:.75rem;">public</span>
-                <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Zenodo Publications</div>
-                <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">Peer-accessible research data and papers published openly on Zenodo, including the CMB geometric analysis and supporting datasets.</div>
-                <a href="https://zenodo.org/doi/10.5281/zenodo.16376121" target="_blank" style="color:#c62828; font-weight:700; font-size:.85rem; text-decoration:none;">View on Zenodo →</a>
-            </div>
-
-            <div data-aos="fade-up" data-aos-delay="80" style="background:#8e0c45; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #1a7a36; box-shadow:0 4px 20px rgba(142,12,69,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#2e7d32; display:block; margin-bottom:.75rem;">person</span>
-                <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Author Bio</div>
-                <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">Michael K. Baines — independent researcher, ORCID 0009-0001-8084-3870. Long-form and short-form bios available for editorial use on request.</div>
-                <a href="about-page.html" style="color:#2e7d32; font-weight:700; font-size:.85rem; text-decoration:none;">About the Author →</a>
-            </div>
-
-            <div data-aos="fade-up" data-aos-delay="160" style="background:#7a5000; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #1565c0; box-shadow:0 4px 20px rgba(122,80,0,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#1565c0; display:block; margin-bottom:.75rem;">alternate_email</span>
-                <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Press Contact</div>
-                <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">For interview requests, fact-checking, collaboration enquiries, or any media-related questions, reach us directly.</div>
-                <a href="#press-contact" style="color:#1565c0; font-weight:700; font-size:.85rem; text-decoration:none;">Contact Us →</a>
-            </div>
-
+        <div class="gal-embed" data-aos="fade-up">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3"
+                    title="Ic&sup2; Research Institute video playlist" loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
     </div>
 </section>
 
-<!-- ── Press Contact ── -->
-<section class="section bg-light" id="press-contact">
-    <div class="section-inner">
-        <p class="section-label" data-aos="fade-up">Get in Touch</p>
-        <h2 class="section-title" data-aos="fade-up">Press &amp; Media Enquiries</h2>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem;" data-aos="fade-up">
+<!-- ── From the Institute ── -->
+<section class="section">
+    <div class="section-container">
+        <p class="tagline" data-aos="fade-up">From the Institute</p>
+        <h2 class="section-title" data-aos="fade-up">Talks, Projects, and People</h2>
+        <p class="section-intro" data-aos="fade-up">Photographs and clips from conferences, project work, and the occasional day out, contributed by the people who were there.</p>
 
-            <div style="border-radius:8px; overflow:hidden; box-shadow:0 4px 18px rgba(0,0,0,.12);">
-                <div style="background:#8B0000; padding:.9rem 1.25rem; display:flex; align-items:center; gap:.6rem;">
-                    <span class="material-symbols-outlined" style="font-size:1.2rem; color:#00838f; flex-shrink:0;">headset_mic</span>
-                    <h3 style="color:white; font-size:1rem; font-weight:700; margin:0;">Media Contact</h3>
-                </div>
-                <div style="background:white; padding:1.5rem;">
-                    <p style="color:#2c3e50; font-size:.95rem; line-height:1.75; margin-bottom:1rem;">For interview requests, review copies of the book, or background information on the framework and its predictions, please use the contact details below. Response time is typically within 48 hours.</p>
-                    <p style="color:#2c3e50; font-size:.9rem; line-height:1.75; margin-bottom:.4rem;"><strong>Website:</strong> <a href="https://www.eequalsicsquared.com" style="color:#8B0000;">www.eequalsicsquared.com</a></p>
-                    <p style="color:#2c3e50; font-size:.9rem; line-height:1.75; margin-bottom:.4rem;"><strong>Email:</strong> <a href="mailto:mkb.info@proton.me" style="color:#8B0000;">mkb.info@proton.me</a></p>
-                    <p style="color:#2c3e50; font-size:.9rem; line-height:1.75; margin-bottom:.4rem;"><strong>Research DOI:</strong> <a href="https://zenodo.org/doi/10.5281/zenodo.16376121" target="_blank" style="color:#8B0000;">10.5281/zenodo.16376121</a></p>
-                    <p style="color:#2c3e50; font-size:.9rem; line-height:1.75;"><strong>ORCID:</strong> <a href="https://orcid.org/0009-0001-8084-3870" target="_blank" style="color:#8B0000;">0009-0001-8084-3870</a></p>
-                </div>
-            </div>
-
-            <div style="border-radius:8px; overflow:hidden; box-shadow:0 4px 18px rgba(0,0,0,.12);">
-                <div style="background:#1a5c2a; padding:.9rem 1.25rem; display:flex; align-items:center; gap:.6rem;">
-                    <span class="material-symbols-outlined" style="font-size:1.2rem; color:#b01558; flex-shrink:0;">topic</span>
-                    <h3 style="color:white; font-size:1rem; font-weight:700; margin:0;">What We're Happy to Discuss</h3>
-                </div>
-                <div style="background:white; padding:1.5rem;">
-                    <p style="color:#2c3e50; font-size:.95rem; line-height:1.75; margin-bottom:1rem;">The confirmed advance predictions and the documentation process. The information-first approach to unifying physics. The open publishing model and why independent research matters. The COSMIC Framework's position on dark energy, quantum error correction, and early galaxy formation. Upcoming predictions and how to follow along.</p>
-                    <a href="contribute.html" style="display:inline-block; background:#1a5c2a; color:white; padding:.5rem 1.25rem; border-radius:6px; font-weight:700; font-size:.85rem; text-decoration:none;">Support the Research →</a>
-                </div>
-            </div>
-
+        <div id="internal-grid" class="gal-grid" data-aos="fade-up" hidden></div>
+        <div id="internal-empty" class="gal-empty" hidden>
+            <p>Nothing here yet. This fills up as the Institute does: talks given, experiments run, people met. Check back as it grows.</p>
+            <a href="contribute.html" class="btn btn-outline">Get involved</a>
         </div>
     </div>
 </section>
+
+<script>
+/* Both grids are driven by gallery-data.json so photographs and reels can be
+   added without touching this page. An absent or empty list shows that
+   section's own empty state rather than a broken grid. */
+(function () {
+  function card(item, isVideo) {
+    var a = document.createElement('a');
+    a.className = 'gal-card';
+    if (item.url) { a.href = item.url; a.target = '_blank'; a.rel = 'noopener'; }
+    var frame = document.createElement('div');
+    frame.className = 'gal-card-frame';
+    if (item.thumb) {
+      var img = document.createElement('img');
+      img.src = item.thumb;
+      img.alt = item.alt || item.title || '';
+      img.loading = 'lazy';
+      frame.appendChild(img);
+    } else {
+      frame.classList.add('gal-card-noimg');
+    }
+    if (isVideo) {
+      var play = document.createElement('span');
+      play.className = 'gal-play';
+      play.setAttribute('aria-hidden', 'true');
+      frame.appendChild(play);
+    }
+    a.appendChild(frame);
+    if (item.title || item.caption) {
+      var cap = document.createElement('div');
+      cap.className = 'gal-cap';
+      if (item.title) {
+        var t = document.createElement('strong');
+        t.textContent = item.title;
+        cap.appendChild(t);
+      }
+      if (item.caption) {
+        var c = document.createElement('span');
+        c.textContent = item.caption;
+        cap.appendChild(c);
+      }
+      a.appendChild(cap);
+    }
+    return a;
+  }
+
+  function fill(list, gridId, emptyId, isVideo) {
+    var grid = document.getElementById(gridId);
+    var empty = document.getElementById(emptyId);
+    if (!grid || !empty) { return; }
+    if (!list || !list.length) { grid.hidden = true; empty.hidden = false; return; }
+    list.forEach(function (item) { grid.appendChild(card(item, isVideo)); });
+    grid.hidden = false;
+    empty.hidden = true;
+  }
+
+  fetch('gallery-data.json', { cache: 'no-cache' })
+    .then(function (r) { return r.ok ? r.json() : {}; })
+    .catch(function () { return {}; })
+    .then(function (data) {
+      fill(data.reels, 'reels-grid', 'reels-empty', true);
+      fill(data.internal, 'internal-grid', 'internal-empty', false);
+    });
+})();
+</script>
 
 <!-- ── Footer ── -->
     <footer>

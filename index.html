@@ -516,9 +516,54 @@
             opacity: 1;
         }
 
+        /* Once the slide-in has finished, the animation takes over transform.
+           Two cycles at different periods so the drift and the light do not
+           breathe in lockstep. Scale stays above 1.03 so the rotation never
+           exposes an edge. */
+        .atacama-img.is-visible {
+            animation: atacama-drift 46s ease-in-out 1s infinite,
+                       atacama-light 19s ease-in-out 1s infinite;
+        }
+
+        @keyframes atacama-drift {
+            0%, 100% { transform: scale(1.05) rotate(-0.6deg); }
+            50%      { transform: scale(1.11) rotate(0.6deg); }
+        }
+
+        @keyframes atacama-light {
+            0%, 100% { filter: brightness(0.93) saturate(1.02); }
+            50%      { filter: brightness(1.08) saturate(1.07); }
+        }
+
         .atacama-wrapper:hover .atacama-img {
-            transform: scale(1.04);
-            transition: transform 0.6s ease;
+            filter: brightness(1.12) saturate(1.1);
+        }
+
+        /* ---- Hero tagline ---- */
+        .hero-tagline {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            margin: 0 0 1rem;
+            background: linear-gradient(100deg,
+                        #8fa0b0 0%, #8fa0b0 30%, #f1e303 44%, #ffffff 50%,
+                        #f1e303 56%, #8fa0b0 70%, #8fa0b0 100%);
+            background-size: 320% 100%;
+            -webkit-background-clip: text;
+                    background-clip: text;
+            color: transparent;
+            animation: tagline-sheen 11s ease-in-out infinite;
+        }
+
+        @keyframes tagline-sheen {
+            0%, 100% { background-position: 140% 0; }
+            50%      { background-position: -40% 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .atacama-img.is-visible { animation: none; }
+            .hero-tagline { animation: none; color: #f1e303; background: none; }
         }
 
         /* Footer */
@@ -676,6 +721,7 @@
     <section class="homepage-hero">
         <div class="hero-background"></div>
         <div class="hero-content" data-aos="fade-up">
+            <p class="hero-tagline">Information is Physical</p>
             <h1>Pioneering the Future<br>of Theoretical Physics</h1>
             <p>The Ic² Research Institute develops falsifiable predictions in theoretical physics and publishes the results openly. The COSMIC Framework retains every confirmed result from quantum mechanics, general relativity, and thermodynamics. It follows those results further than the theories that produced them have gone, into the gaps they each acknowledge: the incompatibility between quantum mechanics and gravity, the origin of dark energy, the nature of the singularity, and the absence of the observer from fundamental theory.</p>
             <p>Our predictions are tested on the same instruments every other research program uses: DESI, JWST, Google’s quantum hardware, the Einstein Telescope, Euclid, and the Vera Rubin Observatory. The tests are run by independent teams who do not know the predictions exist. The framework is open, the data is public, and the book is free.</p>
@@ -715,12 +761,14 @@
             </a>
         </div>
     </div>
-  <!-- Colour code banner. Links to the full explanation on the About page.
-       Styles are inline so the banner can be dropped into any page without
-       touching that page's stylesheet. -->
-  <aside class="colour-banner" style="background:#141c2b;border-top:1px solid rgba(140,190,250,.16);
-         border-bottom:1px solid rgba(140,190,250,.16);border-left:4px solid #00838f;padding:.95rem 1.5rem;">
-    <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.25rem;">
+  <!-- Color code banner. Links to the full explanation on the About page.
+       Gunmetal is the site's canonical separator gradient, the same one the
+       "Impact by the Numbers" section on index.html uses. Styles are inline so
+       the banner drops into any page without touching its stylesheet. -->
+  <aside class="color-banner" style="background:linear-gradient(135deg, #8fa0b0 0%, #5a6878 100%);
+         border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(13,27,42,.18);
+         border-left:4px solid #00838f;padding:.9rem 1.5rem;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.15rem;">
       <span style="display:flex;gap:4px;flex:0 0 auto;" aria-hidden="true">
         <span style="width:14px;height:14px;border-radius:3px;background:#8B0000;"></span>
         <span style="width:14px;height:14px;border-radius:3px;background:#1a5c2a;"></span>
@@ -729,14 +777,13 @@
         <span style="width:14px;height:14px;border-radius:3px;background:#b01558;"></span>
         <span style="width:14px;height:14px;border-radius:3px;background:#f1e303;"></span>
       </span>
-      <p style="margin:0;flex:1 1 340px;color:rgba(226,238,255,.84);font-size:.92rem;line-height:1.55;">
-        <strong style="color:#fff;">The colours on this page are a code.</strong>
-        Every panel pairs a quark colour charge with its anticolour, the same additive logic the
-        Rubin Observatory uses to turn six filter bands into one image.
+      <p style="margin:0;flex:1 1 200px;color:#fff;font-size:.95rem;font-weight:600;line-height:1.5;
+                text-shadow:0 1px 3px rgba(13,27,42,.72);">
+        These colors are a code.
       </p>
-      <a href="about-page.html#colors" style="flex:0 0 auto;color:#7fe4f2;font-size:.88rem;font-weight:700;
-         text-decoration:none;border:1px solid rgba(0,131,143,.7);border-radius:4px;padding:.45rem .9rem;
-         white-space:nowrap;">How to read them &rarr;</a>
+      <a href="about-page.html#colors" style="flex:0 0 auto;color:#fff;font-size:.88rem;font-weight:700;
+         text-decoration:none;border:1px solid rgba(255,255,255,.75);border-radius:4px;padding:.4rem .95rem;
+         white-space:nowrap;text-shadow:0 1px 3px rgba(13,27,42,.72);">more &rarr;</a>
     </div>
   </aside>
 
@@ -919,6 +966,7 @@
                     <ul>
                         <li><a href="book.html">The Big TOE</a></li>
                         <li><a href="media.html">Media</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="faq-page.html">FAQ</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
