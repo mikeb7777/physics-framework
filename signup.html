@@ -455,6 +455,18 @@
     </script>
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+
+    /* On pages where the nav cannot rely on a hamburger, or where the desktop
+       nav stays visible, let it wrap rather than push the page sideways. */
+    @media (max-width: 860px) {
+      nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
+    }
 </style>
 <noscript><style>[data-aos]{opacity:1!important;transform:none!important;}</style></noscript>
 <script id="aos-failsafe-script">

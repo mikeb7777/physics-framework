@@ -614,6 +614,7 @@
               <ul>
                   <li><a href="book.html">The Big TOE</a></li>
                   <li><a href="media.html">Media</a></li>
+                  <li><a href="gallery.html">Gallery</a></li>
                   <li><a href="blog.html">Blog</a></li>
                   <li><a href="faq-page.html">FAQ</a></li>
                   <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -688,6 +689,30 @@
   </button>
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+
+    /* Grid and flex children default to min-width:auto, so they refuse to
+       shrink below their min-content width. The footer link columns are three
+       nowrap flex items, giving the footer grid track a 378px floor inside a
+       311px container, which pushed the whole document wider than the viewport
+       on phones. Letting them shrink and wrap fixes it at the source. */
+    .footer-container > *,
+    .footer-links-group > * { min-width: 0; }
+    @media (max-width: 720px) {
+      .footer-links-group { flex-wrap: wrap; }
+      .footer-icons { flex-wrap: wrap; }
+    }
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+
+    /* On pages where the nav cannot rely on a hamburger, or where the desktop
+       nav stays visible, let it wrap rather than push the page sideways. */
+    @media (max-width: 860px) {
+      nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
+    }
 </style>
 <noscript><style>[data-aos]{opacity:1!important;transform:none!important;}</style></noscript>
 <script id="aos-failsafe-script">

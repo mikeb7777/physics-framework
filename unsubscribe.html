@@ -721,6 +721,21 @@
 
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+
+    /* Grid and flex children default to min-width:auto and refuse to shrink
+       below min-content, which let the footer track exceed the viewport. */
+    [class*="footer-container"] > *,
+    [class*="footer-links-group"] > * { min-width: 0; }
+    @media (max-width: 720px) {
+      [class*="footer-links-group"] { flex-wrap: wrap; }
+      [class*="footer-icons"] { flex-wrap: wrap; }
+    }
 </style>
 <noscript><style>[data-aos]{opacity:1!important;transform:none!important;}</style></noscript>
 <script id="aos-failsafe-script">

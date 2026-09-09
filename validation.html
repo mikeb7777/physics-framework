@@ -1101,28 +1101,29 @@
   </div><!-- /hero-inner -->
 </div><!-- /dash-hero -->
 
-  <!-- Colour code banner. Links to the full explanation on the About page.
-       Styles are inline so the banner can be dropped into any page without
-       touching that page's stylesheet. -->
-  <aside class="colour-banner" style="background:#141c2b;border-top:1px solid rgba(140,190,250,.16);
-         border-bottom:1px solid rgba(140,190,250,.16);border-left:4px solid #00838f;padding:.95rem 1.5rem;">
-    <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.25rem;">
+  <!-- Color code banner. Links to the full explanation on the About page.
+       Gunmetal is the site's canonical separator gradient, the same one the
+       "Impact by the Numbers" section on index.html uses. Styles are inline so
+       the banner drops into any page without touching its stylesheet. -->
+  <aside class="color-banner" style="background:linear-gradient(135deg, #8fa0b0 0%, #5a6878 100%);
+         border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(13,27,42,.18);
+         border-left:4px solid #00838f;padding:.9rem 1.5rem;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.15rem;">
       <span style="display:flex;gap:4px;flex:0 0 auto;" aria-hidden="true">
-        <span style="width:14px;height:14px;border-radius:3px;background:#8B0000;"></span>
-        <span style="width:14px;height:14px;border-radius:3px;background:#1a5c2a;"></span>
-        <span style="width:14px;height:14px;border-radius:3px;background:#005ba5;"></span>
-        <span style="width:14px;height:14px;border-radius:3px;background:#00838f;"></span>
-        <span style="width:14px;height:14px;border-radius:3px;background:#b01558;"></span>
-        <span style="width:14px;height:14px;border-radius:3px;background:#f1e303;"></span>
+        <span style="width:14px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.45);background:#8B0000;"></span>
+        <span style="width:14px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.45);background:#1a5c2a;"></span>
+        <span style="width:14px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.45);background:#005ba5;"></span>
+        <span style="width:14px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.45);background:#00838f;"></span>
+        <span style="width:14px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.45);background:#b01558;"></span>
+        <span style="width:14px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.45);background:#f1e303;"></span>
       </span>
-      <p style="margin:0;flex:1 1 340px;color:rgba(226,238,255,.84);font-size:.92rem;line-height:1.55;">
-        <strong style="color:#fff;">The colours on this page are a code.</strong>
-        Every panel pairs a quark colour charge with its anticolour, the same additive logic the
-        Rubin Observatory uses to turn six filter bands into one image.
+      <p style="margin:0;flex:1 1 200px;color:#fff;font-size:.95rem;font-weight:600;line-height:1.5;
+                text-shadow:0 1px 3px rgba(13,27,42,.72);">
+        These colors are a code.
       </p>
-      <a href="about-page.html#colors" style="flex:0 0 auto;color:#7fe4f2;font-size:.88rem;font-weight:700;
-         text-decoration:none;border:1px solid rgba(0,131,143,.7);border-radius:4px;padding:.45rem .9rem;
-         white-space:nowrap;">How to read them &rarr;</a>
+      <a href="about-page.html#colors" style="flex:0 0 auto;color:#fff;font-size:.88rem;font-weight:700;
+         text-decoration:none;border:1px solid rgba(255,255,255,.75);border-radius:4px;padding:.4rem .95rem;
+         white-space:nowrap;text-shadow:0 1px 3px rgba(13,27,42,.72);">more &rarr;</a>
     </div>
   </aside>
 
@@ -1867,7 +1868,7 @@
           </div>
           <div class="pred-entry">
             <strong>Process Continuity: Black Hole Mass Distributions at High Redshift</strong>
-            <p class="content-text">Supermassive black holes at z &gt; 10 should show mass distributions inconsistent with stellar collapse seeding. JWST CAPERS and UNCOVER survey data tested against maximum achievable mass from stellar seeding at each redshift. Preliminary evidence already present in CAPERS-LRD-z9.</p>
+            <p class="content-text">Supermassive black holes at z &gt; 10 should show mass distributions inconsistent with stellar collapse seeding. JWST CAPERS and UNCOVER survey data tested against maximum achievable mass from stellar seeding at each redshift. Suggestive evidence in CAPERS-LRD-z9, a broad-line AGN at z = 9.288, which sits just below the z &gt; 10 threshold this prediction addresses. One object is not a distribution; the test is the full z &gt; 8 sample.</p>
             <p class="pdate">Documented June 8, 2026 &bull; Active · JWST CAPERS · 3&ndash;5 Year Timeline</p>
           </div>
           <div class="pred-entry">
@@ -2030,6 +2031,7 @@
                     <ul>
                         <li><a href="book.html">The Big TOE</a></li>
                         <li><a href="media.html">Media</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="faq-page.html">FAQ</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -2377,8 +2379,54 @@ document.querySelectorAll('.gallery-item').forEach(function(item){
 </script>
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+
+    /* Grid and flex children default to min-width:auto, so they refuse to
+       shrink below their min-content width. The footer link columns are three
+       nowrap flex items, giving the footer grid track a 378px floor inside a
+       311px container, which pushed the whole document wider than the viewport
+       on phones. Letting them shrink and wrap fixes it at the source. */
+    .footer-container > *,
+    .footer-links-group > * { min-width: 0; }
+    @media (max-width: 720px) {
+      .footer-links-group { flex-wrap: wrap; }
+      .footer-icons { flex-wrap: wrap; }
+    }
+
+    /* Class-based grids with a fixed column count do not collapse on their own,
+       so their tracks stayed wider than the viewport on phones. */
+    @media (max-width: 720px) {
+      .gallery-grid,
+      .kpi-strip,
+      .oc3,
+      .vv-how-row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Inline grid-template-columns cannot be reached by a media query, so fixed
+       column counts never collapsed and forced the document wider than the
+       viewport on phones. Matches any inline grid except auto-fit/auto-fill,
+       which already reflow on their own. */
+    @media (max-width: 720px) {
+      [style*="grid-template-columns"]:not([style*="auto-fit"]):not([style*="auto-fill"]) {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+
+    /* On pages where the nav cannot rely on a hamburger, or where the desktop
+       nav stays visible, let it wrap rather than push the page sideways. */
+    @media (max-width: 860px) {
+      nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
+    }
 </style>
-<noscript><style>[data-aos]{opacity:1!important;transform:none!important;}</style></noscript>
+<noscript><style>[data-aos]{opacity:1!important;transform:none!important;}
+</style></noscript>
 <script id="aos-failsafe-script">
 (function(){
   /* Content must be visible at rest. AOS parks [data-aos] elements at
