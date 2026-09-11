@@ -448,6 +448,21 @@
       nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
     }
 </style>
+    <style id="title-cubes">
+      /* Two faint turning Metatron's Cubes in the empty sides of the title
+         panel, the same figure as the Validation page header. They sit behind
+         the text (negative z-index inside an isolated panel) and are hidden on
+         narrower screens, where the panel has no empty space to fill. */
+      .page-header, .page-hero { position: relative; isolation: isolate; overflow: hidden; }
+      .title-cube {
+        position: absolute; top: 50%; z-index: -1;
+        width: clamp(140px, 16vw, 210px); height: auto;
+        opacity: .38; pointer-events: none;
+      }
+      .title-cube-l { left: clamp(1rem, 5vw, 5rem); transform: translateY(-50%); }
+      .title-cube-r { right: clamp(1rem, 5vw, 5rem); transform: translateY(-50%) scaleX(-1); }
+      @media (max-width: 1100px) { .title-cube { display: none; } }
+    </style>
 </head>
 <body>
     <!-- Site Header -->
@@ -471,6 +486,8 @@
 
     <!-- Page Header -->
     <section class="page-header">
+    <img src="metatron-spin.svg" class="title-cube title-cube-l" alt="" aria-hidden="true">
+    <img src="metatron-spin.svg" class="title-cube title-cube-r" alt="" aria-hidden="true">
       <h1>Our Members</h1>
       <p>A collaborative community of researchers, professionals, and observers advancing open science in theoretical physics and consciousness studies.</p>
     </section>
