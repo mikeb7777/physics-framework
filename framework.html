@@ -601,41 +601,47 @@ line-height: 1.6;
     .tl-track.cf .tl-vert-name { color: rgba(255,235,120,0.96); }
     .tl-track.cf .tl-vert-step:last-child .tl-vert-name { color: #f1e303; font-weight: 700; font-size: 1rem; }
 
-    /* Glow animations */
-    @keyframes smGlow { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); } }
-    @keyframes cfGlow { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); } }
-    @keyframes cfGlowFinal { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.22); box-shadow: 0 0 6px #fff, 0 0 14px rgba(241,227,3,.95), 0 0 26px rgba(241,200,3,.55), 0 0 40px rgba(241,200,3,.25); } }
-    /* Once a dot is lit it stays lit. The loop only varies brightness between
-       about four fifths and full, so the track reads as a lit sequence with a
-       slow swell travelling down it, never as a row of blinking lamps. One
-       full breath takes an eighth of a turn of the spinner. */
-    @keyframes smPulse {
-        0%, 100% { opacity: 0.8; transform: scale(1.04); box-shadow: 0 0 4px rgba(255,255,255,.55), 0 0 9px rgba(150,200,255,.4), 0 0 15px rgba(0,91,165,.28); }
-        50%      { opacity: 1; transform: scale(1.18); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); }
+    /* The sequence reads top to bottom: each light comes up in turn, the
+       track holds lit, then the lights go out in the same order and the run
+       begins again. One cycle is thirty seconds, a third of a turn of the
+       spinner, so nothing on the page hurries. */
+    @keyframes smSeq {
+        0%, 3%    { opacity: 0.16; transform: scale(0.72); box-shadow: none; }
+        9%        { opacity: 1; transform: scale(1.18); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); }
+        76%       { opacity: 1; transform: scale(1.12); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); }
+        90%, 100% { opacity: 0.16; transform: scale(0.72); box-shadow: none; }
     }
-    @keyframes cfPulse {
-        0%, 100% { opacity: 0.8; transform: scale(1.04); box-shadow: 0 0 4px rgba(255,255,255,.55), 0 0 9px rgba(241,227,3,.45), 0 0 15px rgba(241,200,3,.28); }
-        50%      { opacity: 1; transform: scale(1.18); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); }
+    @keyframes cfSeq {
+        0%, 3%    { opacity: 0.16; transform: scale(0.72); box-shadow: none; }
+        9%        { opacity: 1; transform: scale(1.18); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); }
+        76%       { opacity: 1; transform: scale(1.12); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); }
+        90%, 100% { opacity: 0.16; transform: scale(0.72); box-shadow: none; }
     }
-
-    /* SM sequence ,  nth-child targets .tl-vert-step elements */
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(2) .tl-vert-dot { animation: smGlow 0.45s ease 0.1s both; }
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(3) .tl-vert-dot { animation: smGlow 0.45s ease 0.4s both; }
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(4) .tl-vert-dot { animation: smGlow 0.45s ease 0.7s both; }
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(5) .tl-vert-dot { animation: smGlow 0.45s ease 1.0s both; }
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(6) .tl-vert-dot { animation: smGlow 0.45s ease 1.3s both; }
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(7) .tl-vert-dot { animation: smGlow 0.45s ease 1.6s both; }
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(8) .tl-vert-dot { animation: smGlow 0.45s ease 1.9s both; }
-    .tl-animate .tl-track.sm .tl-vert-step:nth-child(9) .tl-vert-dot { animation: smGlow 0.45s ease 2.2s both; }
-    /* CF sequence */
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(2) .tl-vert-dot { animation: cfGlow 0.45s ease 0.25s both; }
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(3) .tl-vert-dot { animation: cfGlow 0.45s ease 0.55s both; }
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(4) .tl-vert-dot { animation: cfGlow 0.45s ease 0.85s both; }
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(5) .tl-vert-dot { animation: cfGlow 0.45s ease 1.15s both; }
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(6) .tl-vert-dot { animation: cfGlow 0.45s ease 1.45s both; }
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(7) .tl-vert-dot { animation: cfGlow 0.45s ease 1.75s both; }
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(8) .tl-vert-dot { animation: cfGlow 0.45s ease 2.05s both; }
-    .tl-animate .tl-track.cf .tl-vert-step:nth-child(9) .tl-vert-dot { animation: cfGlowFinal 0.7s ease 2.35s both; }
+    @keyframes cfSeqFinal {
+        0%, 3%    { opacity: 0.16; transform: scale(0.72); box-shadow: none; }
+        9%        { opacity: 1; transform: scale(1.34); box-shadow: 0 0 6px #fff, 0 0 16px rgba(241,227,3,.95), 0 0 30px rgba(241,200,3,.6); }
+        76%       { opacity: 1; transform: scale(1.28); box-shadow: 0 0 6px #fff, 0 0 16px rgba(241,227,3,.95), 0 0 30px rgba(241,200,3,.6); }
+        90%, 100% { opacity: 0.16; transform: scale(0.72); box-shadow: none; }
+    }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(2) .tl-vert-dot { animation: smSeq 30s ease-in-out 0.0s infinite; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(3) .tl-vert-dot { animation: smSeq 30s ease-in-out 1.2s infinite; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(4) .tl-vert-dot { animation: smSeq 30s ease-in-out 2.4s infinite; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(5) .tl-vert-dot { animation: smSeq 30s ease-in-out 3.6s infinite; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(6) .tl-vert-dot { animation: smSeq 30s ease-in-out 4.8s infinite; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(7) .tl-vert-dot { animation: smSeq 30s ease-in-out 6.0s infinite; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(8) .tl-vert-dot { animation: smSeq 30s ease-in-out 7.2s infinite; }
+    .tl-animate .tl-track.sm .tl-vert-step:nth-child(9) .tl-vert-dot { animation: smSeq 30s ease-in-out 8.4s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(2) .tl-vert-dot { animation: cfSeq 30s ease-in-out 0.6s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(3) .tl-vert-dot { animation: cfSeq 30s ease-in-out 1.8s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(4) .tl-vert-dot { animation: cfSeq 30s ease-in-out 3.0s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(5) .tl-vert-dot { animation: cfSeq 30s ease-in-out 4.2s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(6) .tl-vert-dot { animation: cfSeq 30s ease-in-out 5.4s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(7) .tl-vert-dot { animation: cfSeq 30s ease-in-out 6.6s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(8) .tl-vert-dot { animation: cfSeq 30s ease-in-out 7.8s infinite; }
+    .tl-animate .tl-track.cf .tl-vert-step:nth-child(9) .tl-vert-dot { animation: cfSeqFinal 30s ease-in-out 9.0s infinite; }
+    @media (prefers-reduced-motion: reduce) {
+        .tl-animate .tl-vert-dot { animation: none !important; opacity: 1; transform: scale(1.12); }
+    }
 
     @media (max-width: 768px) {
         .tl-two-col { grid-template-columns: 1fr; }
@@ -1196,7 +1202,7 @@ line-height: 1.6;
 
     <p class="content-text">Silicon-based artificial intelligence approaches this from a different direction. It uses statistical regularities in large datasets to produce outputs that resemble directed, model-based behavior, but without the sensorimotor grounding, continuous feedback loops, or embodied integration that biological intelligence developed through evolutionary selection. It is a powerful approximation. It is not the same process. The distinction that matters for the framework is architectural: whether the system is genuinely building and updating a world model through closed-loop physical interaction, or pattern-matching against frozen training data. Most current AI is the latter. Cortical Labs' work begins to close this gap.</p>
 
-    <div style="background: #0d0d1f; border-radius: 8px; padding: 1.5rem 1.75rem; margin: 1.75rem 0; border-left: 4px solid #f1e303;">
+    <div style="background: #0d0d1f; border-radius: 8px; padding: 1.5rem; margin: 1.75rem 0; border-left: 4px solid #f1e303;">
         <p style="font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.55); margin-bottom: .5rem;">Current Frontier</p>
         <p style="color: white; font-size: 1rem; line-height: 1.8; margin-bottom: .75rem;"><strong style="color: #f1e303;">Cortical Labs (Melbourne, Australia)</strong> has produced the CL1, the world's first commercially available biological computer. 800,000 human neurons, reprogrammed from skin or blood samples, are grown on a silicon multi-electrode array. The neurons form networks, receive electrical stimuli as inputs, and produce outputs through the same biological signaling mechanisms that govern neural processing in the brain. Cortical Labs' earlier DishBrain system showed in 2022 that such neurons could learn to play Pong. The commercial product began shipping in mid-2025 at $35,000 per unit.</p>
         <p style="color: rgba(255,255,255,.82); font-size: .95rem; line-height: 1.75; margin: 0;">No government agency has issued regulatory guidance specific to living neural tissue used as an active compute substrate. No welfare protocols for neuronal cultures in commercial settings have been published. Existing frameworks for tissue research were not designed for this use case. The product exists. The oversight does not.</p>
@@ -1223,62 +1229,62 @@ line-height: 1.6;
     <p class="content-text" style="color: rgba(255,255,255,0.85);">No gatekeeping. From 2026, every prediction is publicly documented before the result is known. Papers and prediction records are deposited on Zenodo with permanent DOIs. Every methodology is written for replication. We do not ask you to trust our conclusions. We ask you to examine our process. The data is yours, the methods are yours, and participation is open to anyone with something to contribute. Nothing is hidden, held back for review, or accessible only to credentialed institutions.</p>
     <div class="intro-cards-grid" style="margin-top: 2rem;">
 
-        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18); background: #fff; display: flex; flex-direction: column;">
             <div style="background: #8B0000; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #00838f; flex-shrink: 0;">event_available</span>
                 <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Pre-Registration</h3>
             </div>
-            <div style="background: white; padding: 1.25rem 1.5rem;">
+            <div style="background: white; padding: 1.5rem; flex: 1;">
                 <p style="color: #8B0000; font-size: 0.92rem; line-height: 1.75; margin: 0;">From 2026, every prediction is pre-registered: deposited on Zenodo with a DOI before the results that test it are published. No retrofitting, no retroactive claims. An audit in September 2026 found that the framework's four earlier matches with published results were not on record in advance, so they are listed as consistent results, not validations.</p>
             </div>
         </div>
 
-        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18); background: #fff; display: flex; flex-direction: column;">
             <div style="background: #1a5c2a; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #b01558; flex-shrink: 0;">check_circle</span>
                 <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Falsifiability First</h3>
             </div>
-            <div style="background: white; padding: 1.25rem 1.5rem;">
+            <div style="background: white; padding: 1.5rem; flex: 1;">
                 <p style="color: #1a5c2a; font-size: 0.92rem; line-height: 1.75; margin: 0;">Each COSMIC prediction states the result that would count against it. If DESI had shown constant dark energy density, the framework would be refuted. We actively seek ways to break it.</p>
             </div>
         </div>
 
-        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18); background: #fff; display: flex; flex-direction: column;">
             <div style="background: #005ba5; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #f1e303; flex-shrink: 0;">hub</span>
                 <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Multi-Domain Testing</h3>
             </div>
-            <div style="background: white; padding: 1.25rem 1.5rem;">
+            <div style="background: white; padding: 1.5rem; flex: 1;">
                 <p style="color: #005ba5; font-size: 0.92rem; line-height: 1.75; margin: 0;">Predictions span independent domains: cosmology, particle physics, quantum computing, thermodynamics and cognition. 52 predictions are open, and the first pre-registered results arrive from late 2026.</p>
             </div>
         </div>
 
-        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18); background: #fff; display: flex; flex-direction: column;">
             <div style="background: #005f6e; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #c62828; flex-shrink: 0;">group</span>
                 <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Independent Testing</h3>
             </div>
-            <div style="background: white; padding: 1.25rem 1.5rem;">
+            <div style="background: white; padding: 1.5rem; flex: 1;">
                 <p style="color: #005f6e; font-size: 0.92rem; line-height: 1.75; margin: 0;">Every test is decided by independent research teams with no connection to the Institute: DESI, the Vera C. Rubin Observatory, the Simons Observatory and other billion-dollar programs under rigorous peer review.</p>
             </div>
         </div>
 
-        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18); background: #fff; display: flex; flex-direction: column;">
             <div style="background: #8e0c45; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #1a7a36; flex-shrink: 0;">cloud_download</span>
                 <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Open Data</h3>
             </div>
-            <div style="background: white; padding: 1.25rem 1.5rem;">
+            <div style="background: white; padding: 1.5rem; flex: 1;">
                 <p style="color: #8e0c45; font-size: 0.92rem; line-height: 1.75; margin: 0;">Papers, analyses and prediction records are published on Zenodo with permanent DOIs, so anyone can check the work from the data to the conclusions.</p>
             </div>
         </div>
 
-        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18);">
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.18); background: #fff; display: flex; flex-direction: column;">
             <div style="background: #7a5000; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.6rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #1565c0; flex-shrink: 0;">stacks</span>
                 <h3 style="color: white; font-size: 0.95rem; font-weight: 700; margin: 0;">Statistical Rigor</h3>
             </div>
-            <div style="background: white; padding: 1.25rem 1.5rem;">
+            <div style="background: white; padding: 1.5rem; flex: 1;">
                 <p style="color: #7a5000; font-size: 0.92rem; line-height: 1.75; margin: 0;">Quantitative predictions with confidence intervals and Bayesian analysis. The minimum bar for a claimed pass is 3σ, and only pre-registered predictions count.</p>
             </div>
         </div>
@@ -1293,13 +1299,13 @@ line-height: 1.6;
     <h2 class="section-title">Predictions &amp; Validation</h2>
     <p class="content-text">Every prediction is now documented before observation and tracked publicly. 52 are open, nine of them in active testing, across cosmology, particle physics, quantum computing, thermodynamics and cognition.</p>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;">
-        <a href="validation.html" style="display: block; background: var(--primary-color); border-radius: 8px; padding: 2rem 1.75rem; text-decoration: none; border-bottom: 4px solid #00838f; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 8px 28px rgba(139,0,0,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <a href="validation.html" style="display: block; background: var(--primary-color); border-radius: 8px; padding: 1.5rem; text-decoration: none; border-bottom: 4px solid #00838f; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 8px 28px rgba(139,0,0,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
             <span class="material-symbols-outlined" style="font-size: 2rem; color: rgba(255,255,255,0.85); display: block; margin-bottom: 0.75rem;">verified</span>
             <h3 style="color: white; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem;">Results and Tests</h3>
             <p style="color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.25rem;">Four published results are consistent with the framework, and the pre-registered tests that will decide it report from late 2026. Review the record, the dates and the decision rules.</p>
             <span style="color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">View Validations &rarr;</span>
         </a>
-        <a href="testing-schedule.html" style="display: block; background: #005ba5; border-radius: 8px; padding: 2rem 1.75rem; text-decoration: none; border-bottom: 4px solid #f1e303; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 8px 28px rgba(0,91,165,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <a href="testing-schedule.html" style="display: block; background: #005ba5; border-radius: 8px; padding: 1.5rem; text-decoration: none; border-bottom: 4px solid #f1e303; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 8px 28px rgba(0,91,165,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
             <span class="material-symbols-outlined" style="font-size: 2rem; color: rgba(255,255,255,0.85); display: block; margin-bottom: 0.75rem;">science</span>
             <h3 style="color: white; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem;">Testing Schedule</h3>
             <p style="color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.25rem;">52 open predictions, from DESI and the Rubin Observatory to laboratory thermodynamics, each with a documented date and an expected decision date.</p>
@@ -1489,17 +1495,6 @@ function toggleFoundation(header) {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('tl-animate');
                     tlObserver.unobserve(entry.target);
-                    // After initial sequence completes, switch to continuous pulse
-                    setTimeout(() => {
-                        const smDots = entry.target.querySelectorAll('.tl-track.sm .tl-vert-dot');
-                        const cfDots = entry.target.querySelectorAll('.tl-track.cf .tl-vert-dot');
-                        smDots.forEach((dot, i) => {
-                            dot.style.animation = 'smPulse 11.25s ease-in-out ' + (-i * 1.1) + 's infinite';
-                        });
-                        cfDots.forEach((dot, i) => {
-                            dot.style.animation = 'cfPulse 11.25s ease-in-out ' + (-i * 1.1 - 0.55) + 's infinite';
-                        });
-                    }, 3200);
                 }
             });
         }, { threshold: 0.5, rootMargin: '0px 0px -60px 0px' });
