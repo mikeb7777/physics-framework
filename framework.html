@@ -692,21 +692,20 @@ line-height: 1.6;
           padding: 4rem 2rem; color: white; text-align: left;
           position: relative; isolation: isolate; overflow: hidden; }
         .framework-header-inner { max-width: var(--max-width); margin: 0 auto; }
-        .framework-header .fh-tagline { font-size: .78rem; font-weight: 700; letter-spacing: .28em;
-          text-transform: uppercase; color: #f1e303; margin: 0 0 1rem; max-width: none; }
-        .framework-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .framework-header h1.fh-mark { margin: 0 0 1.25rem; line-height: 1; }
+        .framework-header h1.fh-mark img { height: 86px; width: auto; display: block; }
         .framework-header .fh-lead { font-size: 1.25rem; opacity: .9; max-width: 760px; margin: 0; }
         .framework-header .fh-note { font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.8;
           max-width: 800px; margin: 2.25rem 0 0; padding-top: 1.5rem;
           border-top: 1px solid rgba(255,255,255,.1); }
         .framework-header .fh-note strong { color: #fff; font-size: 1.1rem; letter-spacing: .02em; }
-        .title-cube { position: absolute; top: 50%; z-index: -1;
-          width: clamp(140px, 16vw, 210px); height: auto; opacity: .38; pointer-events: none;
-          transform: translateY(-50%); animation: cube-drift 150s linear infinite; }
-        @keyframes cube-drift { from { left: -18%; } to { left: 118%; } }
+        /* The text is left aligned, so the cube keeps to the clear right-hand
+           side of the panel and turns there rather than crossing the words. */
+        .title-cube { position: absolute; top: 50%; right: clamp(1rem, 6vw, 7rem); z-index: -1;
+          width: clamp(150px, 17vw, 230px); height: auto; opacity: .38; pointer-events: none;
+          transform: translateY(-50%); }
         @media (max-width: 1100px) { .title-cube { display: none; } }
-        @media (max-width: 768px) { .framework-header h1 { font-size: 2rem; } }
-        @media (prefers-reduced-motion: reduce) { .title-cube { animation: none; left: 6%; } }
+        @media (max-width: 768px) { .framework-header h1.fh-mark img { height: 58px; } }
         /* This page's own mark sits in the header's logo slot; the institute
            logo moves into the link row beside it, at link height. */
         .nav-ic2 img { height: 24px; width: auto; display: block; }
@@ -775,8 +774,7 @@ line-height: 1.6;
     <section class="page-header framework-header">
     <img src="metatron-spin.svg" class="title-cube" alt="" aria-hidden="true">
     <div class="framework-header-inner">
-        <p class="fh-tagline">The Framework</p>
-        <h1>The COSMIC Framework</h1>
+        <h1 class="fh-mark"><img src="framework-white.png" alt="The COSMIC Framework"></h1>
         <p class="fh-lead">One substrate, one principle, carried across every scale: information first, and every claim written down before the data that will test it.</p>
         <p class="fh-note"><strong>COSMIC</strong> (Computational Optimization of Spacetime through Mathematical Intelligence and Constants) proposes that information processing is the fundamental substrate of physical reality.</p>
     </div>
