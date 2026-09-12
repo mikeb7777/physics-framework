@@ -494,6 +494,30 @@
             z-index: 1;
         }
 
+        /* The spinner mark in the empty right-hand side of the title panel. It
+           turns at the same rate as the Metatron's Cubes on the other pages
+           (90 seconds) and is about the same size. The paragraphs pull in on
+           wide screens so nothing runs underneath it. */
+        .hero-spinner {
+            position: absolute;
+            top: 50%;
+            right: clamp(1rem, 4vw, 5rem);
+            width: clamp(150px, 17vw, 215px);
+            height: auto;
+            opacity: .85;
+            pointer-events: none;
+            animation: hero-spin 90s linear infinite;
+        }
+        @keyframes hero-spin {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to   { transform: translateY(-50%) rotate(360deg); }
+        }
+        @media (min-width: 1181px) {
+            .homepage-hero .hero-content p { max-width: calc(100% - 250px); }
+        }
+        @media (max-width: 1180px) { .hero-spinner { display: none; } }
+        @media (prefers-reduced-motion: reduce) { .hero-spinner { animation: none; transform: translateY(-50%); } }
+
         /* Atacama Image Slide-in */
         .atacama-wrapper {
             overflow: hidden;
@@ -723,6 +747,7 @@
     <!-- Hero Section -->
     <section class="homepage-hero">
         <div class="hero-background"></div>
+        <img src="our logo.png" class="hero-spinner" alt="" aria-hidden="true">
         <div class="hero-content" data-aos="fade-up">
             <p class="hero-tagline">Information is Physical</p>
             <h1>Theoretical Physics,<br>Tested in Public</h1>
