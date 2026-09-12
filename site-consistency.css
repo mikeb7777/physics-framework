@@ -12,6 +12,33 @@
    tp-log     the program results logs, which are denser than the rest
    ───────────────────────────────────────────────────────────────────────── */
 
+/* ── Typeface ───────────────────────────────────────────────────────────
+   The pages used to inherit whatever sans and whatever monospace the
+   visitor's system supplied, so the same page arrived in Segoe UI and
+   Consolas on Windows and in Helvetica and Menlo on a Mac. IBM Plex Sans
+   and IBM Plex Mono replace both. They were drawn as one family for a
+   research institution, and the mono matches the sans in weight and figure
+   width, which the pages need where prose sits beside sigma values, DOIs
+   and SHA-256 hashes. The poster, the essay-set blog post and the press
+   releases keep their own typography and do not load this file. */
+:root {
+  --font-ui:   'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+}
+body { font-family: var(--font-ui); }
+h1, h2, h3, h4, h5, h6,
+.site-header, .main-navigation, .logo-navbar,
+button, input, select, textarea, .btn { font-family: var(--font-ui); }
+code, pre, kbd, samp { font-family: var(--font-mono); }
+/* Plex's lining figures line up in columns; tabular numerals keep the
+   sigma values, dates and hash prefixes from shifting between rows. */
+table, .stat-card, .kpi-val, .sigma-current { font-variant-numeric: tabular-nums; }
+
+/* Where a mark sits inside the link row instead of the logo slot, as the
+   institute and Big TOE marks do on the framework page, it takes link height
+   rather than logo height, or it swamps the words beside it. */
+.site-header .main-navigation li img { height: 22px; width: auto; }
+
 /* One header height everywhere the standard nav header is used. */
 .site-header .header-container { padding: 0.5rem 2rem; }
 /* every logo in a standard header, however it is marked up: the single mark,
