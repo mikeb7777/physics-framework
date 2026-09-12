@@ -32,7 +32,7 @@
     }
 
     body {
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background: #f0f2f5;
@@ -596,7 +596,7 @@ line-height: 1.6;
     .tl-track.cf .tl-vert-dot { background: radial-gradient(circle at 35% 30%, #fff 0%, #f1e303 45%, #cc8800 80%); }
 
     /* Step name */
-    .tl-vert-name { font-size: 1rem; line-height: 1.5; font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"Segoe UI", Roboto, sans-serif; }
+    .tl-vert-name { font-size: 1rem; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont,"Segoe UI", Roboto, sans-serif; }
     .tl-track.sm .tl-vert-name { color: #ffffff; }
     .tl-track.cf .tl-vert-name { color: rgba(255,235,120,0.96); }
     .tl-track.cf .tl-vert-step:last-child .tl-vert-name { color: #f1e303; font-weight: 700; font-size: 1rem; }
@@ -604,17 +604,18 @@ line-height: 1.6;
     /* Glow animations */
     @keyframes smGlow { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); } }
     @keyframes cfGlow { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); } }
-    @keyframes cfGlowFinal { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.5); box-shadow: 0 0 8px #fff, 0 0 18px rgba(241,227,3,1), 0 0 36px rgba(241,200,3,.7), 0 0 55px rgba(241,200,3,.3); } }
-    /* A long, smooth swell rather than an on/off blink: the dot never goes
-       dark, and one full breath takes as long as an eighth of a turn of the
-       spinner, so the two movements on the page belong to the same clock. */
+    @keyframes cfGlowFinal { from { opacity: 0.18; transform: scale(0.7); box-shadow: none; } to { opacity: 1; transform: scale(1.22); box-shadow: 0 0 6px #fff, 0 0 14px rgba(241,227,3,.95), 0 0 26px rgba(241,200,3,.55), 0 0 40px rgba(241,200,3,.25); } }
+    /* Once a dot is lit it stays lit. The loop only varies brightness between
+       about four fifths and full, so the track reads as a lit sequence with a
+       slow swell travelling down it, never as a row of blinking lamps. One
+       full breath takes an eighth of a turn of the spinner. */
     @keyframes smPulse {
-        0%, 100% { opacity: 0.32; transform: scale(0.88); box-shadow: none; }
-        50%      { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); }
+        0%, 100% { opacity: 0.8; transform: scale(1.04); box-shadow: 0 0 4px rgba(255,255,255,.55), 0 0 9px rgba(150,200,255,.4), 0 0 15px rgba(0,91,165,.28); }
+        50%      { opacity: 1; transform: scale(1.18); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(150,200,255,.7), 0 0 22px rgba(0,91,165,.5); }
     }
     @keyframes cfPulse {
-        0%, 100% { opacity: 0.32; transform: scale(0.88); box-shadow: none; }
-        50%      { opacity: 1; transform: scale(1.15); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); }
+        0%, 100% { opacity: 0.8; transform: scale(1.04); box-shadow: 0 0 4px rgba(255,255,255,.55), 0 0 9px rgba(241,227,3,.45), 0 0 15px rgba(241,200,3,.28); }
+        50%      { opacity: 1; transform: scale(1.18); box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px rgba(241,227,3,.8), 0 0 22px rgba(241,200,3,.5); }
     }
 
     /* SM sequence ,  nth-child targets .tl-vert-step elements */
@@ -726,7 +727,7 @@ line-height: 1.6;
     <link rel="stylesheet" href="site-consistency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&display=swap">
 </head>
 <body>
     <!-- Header -->
@@ -1491,10 +1492,10 @@ function toggleFoundation(header) {
                         const smDots = entry.target.querySelectorAll('.tl-track.sm .tl-vert-dot');
                         const cfDots = entry.target.querySelectorAll('.tl-track.cf .tl-vert-dot');
                         smDots.forEach((dot, i) => {
-                            dot.style.animation = 'smPulse 11.25s ease-in-out ' + (i * 1.1) + 's infinite';
+                            dot.style.animation = 'smPulse 11.25s ease-in-out ' + (-i * 1.1) + 's infinite';
                         });
                         cfDots.forEach((dot, i) => {
-                            dot.style.animation = 'cfPulse 11.25s ease-in-out ' + (i * 1.1 + 0.55) + 's infinite';
+                            dot.style.animation = 'cfPulse 11.25s ease-in-out ' + (-i * 1.1 - 0.55) + 's infinite';
                         });
                     }, 3200);
                 }
