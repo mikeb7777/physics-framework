@@ -451,6 +451,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
+    <style id="title-cubes">
+      /* One Metatron's Cube drifting across the open area of the title panel,
+         the same figure as the Validation page header. It turns on its own
+         axis (inside the SVG) while it travels, passes beyond both edges, and
+         sits behind the text. The negative delay starts it part-way across, so
+         it is already in the panel when the page opens rather than arriving a
+         quarter of a minute later. Hidden on narrower screens, where the panel
+         has no open area to cross. */
+      .page-header, .page-hero { position: relative; isolation: isolate; overflow: hidden; }
+      .title-cube {
+        position: absolute; top: 50%; z-index: -1;
+        width: clamp(140px, 16vw, 210px); height: auto;
+        opacity: .38; pointer-events: none;
+        transform: translateY(-50%);
+        animation: cube-drift 150s linear -30s infinite;
+      }
+      @keyframes cube-drift {
+        from { left: -18%; }
+        to   { left: 118%; }
+      }
+      @media (max-width: 1100px) { .title-cube { display: none; } }
+      @media (prefers-reduced-motion: reduce) { .title-cube { animation: none; left: 6%; } }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -486,6 +509,7 @@
     </header>
 
     <div class="page-header tp-center">
+    <img src="metatron-spin.svg" class="title-cube" alt="" aria-hidden="true">
       <h1>References</h1>
       <p>Comprehensive Bibliography & Citations</p>
     </div>

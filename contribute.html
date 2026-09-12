@@ -527,7 +527,7 @@
         width: clamp(140px, 16vw, 210px); height: auto;
         opacity: .38; pointer-events: none;
         transform: translateY(-50%);
-        animation: cube-drift 150s linear infinite;
+        animation: cube-drift 150s linear -30s infinite;
       }
       @keyframes cube-drift {
         from { left: -18%; }
@@ -558,6 +558,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
+    <style id="thanks-marks">
+      /* The Spinner and the cube fill the column beside the thank-you text.
+         Both turn once every ninety seconds, the rate used everywhere else on
+         the site. The cube is the light-panel version of the figure: the
+         standard one is drawn in white and would vanish here. PayPal renders
+         the institute logo at the top of its hosted button, which put a third
+         copy of that mark in the same column, so it is hidden. */
+      .thanks-marks {
+        display: flex; flex-direction: column; align-items: center;
+        justify-content: center; gap: 2.75rem; height: 100%; padding: .5rem 0;
+      }
+      .thanks-marks img { display: block; height: auto; }
+      .thanks-spinner { width: clamp(130px, 15vw, 190px); animation: thanks-turn 90s linear infinite; }
+      /* the cube carries padding inside its own viewBox, so it needs a
+         wider box than the Spinner to read at the same visual size */
+      .thanks-cube { width: clamp(170px, 19vw, 250px); }
+      @keyframes thanks-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) { .thanks-spinner { animation: none; } }
+      @media (max-width: 860px) { .thanks-marks { display: none; } }
+      #paypal-container-QTHVYSS4D3QD6 [id^="carousel-container"] { display: none !important; }
+    </style>
 </head>
 <body>
 
@@ -630,6 +651,10 @@
         <p style="font-size:1.05rem; line-height:1.85; color:#2c3e50; margin-bottom:1rem;">The Ic² Research Institute was founded on a simple conviction: <strong style="color:#1a1a2e;">scientific knowledge should be open to everyone.</strong> All research, predictions and validation data are open to everyone, because money should never be a barrier to discovery.</p>
         <p style="font-size:1.05rem; line-height:1.85; color:#2c3e50; margin-bottom:0;">Four published results are consistent with the framework, and 52 pre-registered predictions are open, the first due to report from late 2026. Your support, in whatever form it takes, helps keep that work going.</p>
       </div>
+      <div class="thanks-marks" aria-hidden="true">
+        <img src="our logo.png" class="thanks-spinner" alt="">
+        <img src="metatron-spin-dark.svg" class="thanks-cube" alt="">
+      </div>
       </div>
     </section>
 
@@ -644,7 +669,7 @@
           <p style="font-size:1rem; line-height:1.85; color:rgba(255,255,255,0.75); margin-bottom:0;"><strong style="color:white;">The amount is entirely up to you.</strong> Academic physics books of similar scope typically sell for $40 to $150. We chose an honor system instead.</p>
         </div>
         <!-- Right: payment card floated up to straddle the boundary -->
-        <div style="background:transparent; border-radius:8px; border:none; padding:2rem; margin-top:-24rem; position:relative; z-index:10; text-align:center;">
+        <div style="background:transparent; border-radius:8px; border:none; padding:2rem 2rem 0; margin-top:1.5rem; position:relative; z-index:10; text-align:center;">
           <p style="color:rgba(255,255,255,0.65); font-size:0.85rem; margin-bottom:1.25rem;">Secure payment through PayPal.</p>
           <div id="paypal-container-QTHVYSS4D3QD6"></div>
           <script>
