@@ -338,6 +338,25 @@
     .footer-bottom a { color:rgba(255,255,255,.6); text-decoration:none; }
     .footer-bottom a:hover { color:white; }
     </style>
+    <link rel="stylesheet" href="site-consistency.css">
+    <style id="panel-spinner">
+      /* The spinner mark in the clear right-hand side of the title panel,
+         turning at the same rate as the Metatron's Cubes elsewhere. */
+      .panel-spinner {
+        position: absolute; top: 50%; right: clamp(1rem, 5vw, 6rem);
+        width: clamp(150px, 16vw, 200px); height: auto;
+        opacity: .85; pointer-events: none;
+        animation: panel-spin 90s linear infinite;
+      }
+      @keyframes panel-spin {
+        from { transform: translateY(-50%) rotate(0deg); }
+        to   { transform: translateY(-50%) rotate(360deg); }
+      }
+      @media (max-width: 1100px) { .panel-spinner { display: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        .panel-spinner { animation: none; transform: translateY(-50%); }
+      }
+    </style>
 </head>
 <body>
     <!-- Site Header -->
@@ -379,7 +398,8 @@
     </header>
 
     <!-- Page Header -->
-    <section class="page-header">
+    <section class="page-header tp-left">
+    <img src="our logo.png" class="panel-spinner" alt="" aria-hidden="true">
       <div class="section-container">
         <h1>Prediction Forecast and Testing Schedule</h1>
         <p>A forward-looking public record of where the COSMIC Framework expects to be tested next. Predictions are documented here before experimental results arrive. This page shows what the framework anticipates. The <a href="validation.html" style="color:inherit; text-decoration:underline;">Validation page</a> records every result, pass or fail.</p>

@@ -347,6 +347,25 @@
     .result-table td { padding:.6rem .9rem; }
   }
   </style>
+    <link rel="stylesheet" href="site-consistency.css">
+    <style id="panel-spinner">
+      /* The spinner mark in the clear right-hand side of the title panel,
+         turning at the same rate as the Metatron's Cubes elsewhere. */
+      .panel-spinner {
+        position: absolute; top: 50%; right: clamp(1rem, 5vw, 6rem);
+        width: clamp(150px, 16vw, 200px); height: auto;
+        opacity: .85; pointer-events: none;
+        animation: panel-spin 90s linear infinite;
+      }
+      @keyframes panel-spin {
+        from { transform: translateY(-50%) rotate(0deg); }
+        to   { transform: translateY(-50%) rotate(360deg); }
+      }
+      @media (max-width: 1100px) { .panel-spinner { display: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        .panel-spinner { animation: none; transform: translateY(-50%); }
+      }
+    </style>
 </head>
 <body>
 
@@ -388,7 +407,8 @@
   </div>
 
   <!-- Hero -->
-  <section class="page-hero">
+  <section class="page-hero tp-left">
+    <img src="our logo.png" class="panel-spinner" alt="" aria-hidden="true">
     <div class="hero-bg"></div>
     <div class="hero-content" data-aos="fade-up">
       <h1>Results Registry</h1>
