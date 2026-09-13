@@ -420,3 +420,19 @@ footer:not(.rb-a):not(.rb-b) { padding-top: var(--band); margin-top: 0; }
   footer li:not(.rb-a) > a:not(.rb-a) { display: inline-block; padding-top: 11px; padding-bottom: 11px; line-height: 1.25; }
 }
 /* == phone:end == */
+
+/* == a11y:start == */
+/* -- Keyboard access -------------------------------------------------------
+   A skip link that stays out of sight until a keyboard user reaches it, and a
+   visible ring on whatever has keyboard focus. Mouse and touch users see no
+   change, because :focus-visible only matches keyboard focus. */
+.skip-link {
+  position: absolute; left: 1rem; top: -100px; z-index: 10000;
+  background: #1a1a2e; color: #ffffff; padding: .75rem 1.25rem; border-radius: 6px;
+  font: 600 1rem/1.2 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-decoration: none; box-shadow: 0 4px 14px rgba(0, 0, 0, .3);
+}
+.skip-link:focus { top: 1rem; }
+:focus-visible { outline: 3px solid #f1e303; outline-offset: 3px; box-shadow: 0 0 0 5px #1a1a2e; }
+[tabindex="-1"]:focus { outline: none; box-shadow: none; }
+/* == a11y:end == */

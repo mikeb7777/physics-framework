@@ -427,8 +427,29 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- seo:start -->
+    <meta name="robots" content="noindex, follow">
+    <!-- seo:end -->
+<style>
+/* == a11y:start == */
+/* -- Keyboard access -------------------------------------------------------
+   A skip link that stays out of sight until a keyboard user reaches it, and a
+   visible ring on whatever has keyboard focus. Mouse and touch users see no
+   change, because :focus-visible only matches keyboard focus. */
+.skip-link {
+  position: absolute; left: 1rem; top: -100px; z-index: 10000;
+  background: #1a1a2e; color: #ffffff; padding: .75rem 1.25rem; border-radius: 6px;
+  font: 600 1rem/1.2 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-decoration: none; box-shadow: 0 4px 14px rgba(0, 0, 0, .3);
+}
+.skip-link:focus { top: 1rem; }
+:focus-visible { outline: 3px solid #f1e303; outline-offset: 3px; box-shadow: 0 0 0 5px #1a1a2e; }
+[tabindex="-1"]:focus { outline: none; box-shadow: none; }
+/* == a11y:end == */
+</style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Header -->
     <header class="site-header">
         <div class="header-container">
@@ -446,7 +467,7 @@
     </header>
 
     <!-- Back Navigation -->
-    <div class="back-nav">
+    <div id="main-content" tabindex="-1" class="back-nav">
         <a href="members.html" class="back-link">← Back to Members</a>
     </div>
 
@@ -650,6 +671,7 @@
                     <li><a href="about-page.html">About</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="faq-page.html">FAQ</a></li>
+                    <li><a href="search.html">Search</a></li>
                     <li><a href="members.html">Our Members</a></li>
                 </ul>
             </div>
@@ -659,7 +681,7 @@
                     <li><a href="contribute.html">Contribute</a></li>
                     <li><a href="discussions-page.html">Discussions</a></li>
                     <li><a href="become-member.html">Become a Member</a></li>
-                    <li><a href="mailto:mkb.info@proton.me">Contact</a></li>
+                    <li><a href="mailto:ic2.info@proton.me">Contact</a></li>
                 </ul>
             </div>
         </div>
