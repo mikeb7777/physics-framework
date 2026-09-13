@@ -153,3 +153,214 @@ a.btn, button.btn, .btn.btn-primary, .btn.btn-secondary, .btn.btn-outline,
 .info-box, .intro-card { padding: 1.5rem; }
 .highlight-box, .warning-box { padding: 1.25rem 1.5rem; }
 .tier-card { border-radius: 8px; }
+
+/* == rhythm:start == */
+/* -- Section rhythm ------------------------------------------------------
+   One measure sets the space on each side of every line where a page changes
+   from one section to the next: 4rem on desktop, 3rem on phones. Each band
+   takes that padding top and bottom, its own outer margins go to zero, and the
+   first and last things inside it drop their outer margins, so the distance
+   from the line to the words is the padding and nothing else. Slim strips (the
+   colour-code bar, the quick-nav strips, the search bar) keep their own
+   tighter, symmetric padding, and the home page hero keeps the overlap its
+   tiles are designed around. The two :not() clauses only add weight, so these
+   rules outrank page rules that carry two classes. */
+:root { --band: 4rem; }
+@media (max-width: 768px) { :root { --band: 3rem; } }
+
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container
+):not(.rb-a):not(.rb-b) {
+  padding-top: var(--band);
+  padding-bottom: var(--band);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* title panels: the same measure, and no margin pushing the next section away */
+:is(.page-header, .page-hero, section.book-hero):not(.homepage-hero):not(.rb-a) {
+  padding-top: var(--band);
+  padding-bottom: var(--band);
+  margin-bottom: 0;
+}
+
+/* the footer opens with the same space as every other section */
+footer:not(.rb-a):not(.rb-b) { padding-top: var(--band); margin-top: 0; }
+
+/* a transparent column that holds bands of its own adds nothing: the bands
+   inside carry the rhythm, or the two paddings would stack */
+:is(main.content-container, main.blog-container, div.content-wrapper, div.content, main.content, article.article-container, body > div.container, body > div.page-bg, div.login-container, div.signup-container):has(> :is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container
+)):not(.rb-a):not(.rb-b):not(.rb-c) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* inner containers that repeat their section's padding */
+.logo-section > .logo-content,
+.page-bg > .container { padding-top: 0; padding-bottom: 0; }
+
+/* side-by-side columns: whichever column runs longer ends the section, so the
+   last thing in every column drops its bottom margin, not only the last column */
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) :is(.two-column, .two-col, .grid-2) > * > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) { margin-bottom: 0; }
+
+/* the first and last rendered things inside a band, down to five levels,
+   carry no outer margin; scripts and styles are skipped when finding them */
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) { margin-top: 0; }
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))),
+:is(
+  section.content-section, section.section, section.sec, section.cta-section,
+  section.social-section, section.contact-section, section.related-section, section.features-section,
+  section.validation-section, section.past-events, section.press-releases, section.quest-section,
+  section.logo-section, section.suggest-edit-section, section.detective-section, section.cost-section,
+  section.programs-section, section.submit-section, section.validation-banner, section.press-banner,
+  section.upcoming-events, section.events-section, div.intro-panel, div.instructions-band,
+  div.band, section.band, main.content-container, main.blog-container,
+  div.content-wrapper, div.content, main.content, article.article-container,
+  body > div.container, body > div.page-bg, div.login-container, div.signup-container,
+  .page-header, .page-hero, section.book-hero
+) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) { margin-bottom: 0; }
+
+/* list components whose last item is not the last child several levels up:
+   the final entry still ends its section, so it drops its bottom margin */
+.conference-timeline > :nth-last-child(1 of :not(script, style, template, link, noscript, [hidden], .state-panel:not(.active))) { margin-bottom: 0; }
+
+/* where two sections sit on the same ground there is no edge to see, so a
+   hairline marks it, halfway through the space */
+.band-rule { border-top: 1px solid rgba(127, 140, 160, 0.28); }
+/* the heading rule is superseded by the band rhythm and band-rule */
+.sec-rule { padding-top: 0; border-top: 0; margin-bottom: 1.5rem; }
+/* == rhythm:end == */

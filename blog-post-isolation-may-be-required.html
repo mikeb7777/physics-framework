@@ -286,6 +286,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&display=swap">
+    <style id="section-rhythm">
+      /* The same section rhythm as the shared stylesheet, which this page does
+         not load: 4rem each side of a section line, 3rem on phones. The :not()
+         clause lifts these above the page's own single-class rules. */
+      :root { --band: 4rem; }
+      @media (max-width: 768px) { :root { --band: 3rem; } }
+      body > :is(section, main, article, header, footer):not(.site-header) {
+        padding-top: var(--band); padding-bottom: var(--band); margin-top: 0; margin-bottom: 0;
+      }
+      body > :is(section, main, article):not(.site-header) > :nth-child(1 of :not(script, style, template)) { margin-top: 0; }
+      body > :is(section, main, article):not(.site-header) > :nth-last-child(1 of :not(script, style, template)) { margin-bottom: 0; }
+    </style>
 </head>
 <body>
     <header class="header">
