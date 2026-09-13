@@ -94,7 +94,7 @@
     .prediction-meta span { font-size: .78rem; color: rgba(255,255,255,.65); }
 
     /* Status badges */
-    .status-badge { display: inline-block; padding: .25rem 0.875rem; border-radius: 20px; font-size: .72rem; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: .3px; }
+    .status-badge { display: inline-block; padding: .25rem 0.875rem; border-radius: 20px; font-size: .75rem; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: .3px; }
     .status-badge.validated { background: var(--accent-green); color: white; }
     .status-badge.near-term { background: var(--accent-orange); color: white; }
     .status-badge.long-term { background: var(--accent-blue); color: white; }
@@ -360,6 +360,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&display=swap">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
     <!-- Site Header -->
@@ -2920,7 +2923,7 @@
     <script>
     // Ensure AOS fires after full page load including CDN assets
     function initAOS() {
-        AOS.init({
+        window.AOS && AOS.init({
             duration: 900,
             once: true,
             offset: 60,
@@ -2928,7 +2931,7 @@
             disable: false
         });
         // Force refresh after a short delay for Cloudflare-hosted pages
-        setTimeout(function() { AOS.refresh(); }, 500);
+        setTimeout(function() { window.AOS && AOS.refresh(); }, 500);
     }
     if (document.readyState === 'complete') {
         initAOS();

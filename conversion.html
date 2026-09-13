@@ -181,7 +181,7 @@
     @media (max-width: 768px) {
       .social-content { grid-template-columns: 1fr; gap: 1rem; }
       .header-container { padding: 1rem; }
-      .main-navigation ul { display: none; } /* hide nav on small screens for simplicity */
+      .main-navigation ul { display: none; } /* the phone menu takes over here */
     }
 
     </style>
@@ -189,13 +189,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&display=swap">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
     <!-- Starfield canvas from book.html (kept; z-index places it behind content) -->
     <canvas id="stars-canvas"></canvas>
 
     <!-- Header copied from book.html (replaces previous simple header). Note: removed the "Back to Book" link. -->
-    <header class="site-header">
+    <header class="site-header" data-phone-menu>
       <div class="header-container">
         <div class="site-logo">
           <a href="book.html">
@@ -557,7 +560,7 @@
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-    AOS.init();
+    window.AOS && AOS.init();
     </script>
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
@@ -602,5 +605,6 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 })();
 </script>
 
+<script src="phone-menu.js" defer></script>
 </body>
 </html>

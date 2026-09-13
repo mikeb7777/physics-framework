@@ -364,3 +364,59 @@ footer:not(.rb-a):not(.rb-b) { padding-top: var(--band); margin-top: 0; }
 /* the heading rule is superseded by the band rhythm and band-rule */
 .sec-rule { padding-top: 0; border-top: 0; margin-bottom: 1.5rem; }
 /* == rhythm:end == */
+
+/* == phone:start == */
+/* -- Phones and tablets --------------------------------------------------
+   The phone menu for headers that opt in with data-phone-menu (the button and
+   list are added by phone-menu.js), a tap size of 44px for every hamburger,
+   and footer links a finger can hit. The :not() clauses only add weight. */
+.pm-toggle, .pm-menu { display: none; }
+
+@media (max-width: 900px) {
+  .site-header[data-phone-menu] .main-navigation { display: none; }
+  .site-header[data-phone-menu] .header-container {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .pm-toggle {
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 44px; height: 44px; padding: 0; margin: 0 -8px 0 0;
+    background: none; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .pm-toggle span {
+    display: block; width: 24px; height: 2.5px; border-radius: 2px;
+    background: currentColor; transition: transform .3s ease, opacity .3s ease;
+  }
+  .pm-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .pm-toggle.open span:nth-child(2) { opacity: 0; }
+  .pm-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+  .pm-menu {
+    display: block; position: absolute; left: 0; right: 0; top: 100%; z-index: 999;
+    max-height: 0; overflow: hidden; transition: max-height .35s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+  }
+  .pm-menu.open { max-height: 80vh; overflow-y: auto; }
+  .pm-menu ul { list-style: none; margin: 0; padding: .25rem 0; display: block; }
+  .pm-menu li { margin: 0; }
+  .pm-menu a {
+    display: flex; align-items: center; min-height: 48px; padding: 0 1.5rem;
+    color: inherit; font-size: 1rem; text-decoration: none; background: none;
+    border: 0; border-top: 1px solid rgba(127, 140, 160, .18); border-radius: 0;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;
+  }
+  .pm-menu a:is(.login-link, .cta-button, .btn-login) { font-weight: 600; }
+}
+
+@media (max-width: 968px) {
+  .hamburger:not(.rb-a) {
+    min-width: 44px; min-height: 44px; box-sizing: border-box;
+    justify-content: center; align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  /* each footer link gets a 40px row; the padding replaces the list spacing */
+  footer li:not(.rb-a):not(.rb-b) { margin-top: 0; margin-bottom: 0; }
+  footer li:not(.rb-a) > a:not(.rb-a) { display: inline-block; padding-top: 11px; padding-bottom: 11px; line-height: 1.25; }
+}
+/* == phone:end == */

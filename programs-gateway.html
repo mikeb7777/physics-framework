@@ -65,7 +65,7 @@
     .pc-head { padding: 1.25rem 1.5rem; }
     .pc-head h3 { font-size: 1.1rem; font-weight: 700; color: white; margin: .3rem 0 .2rem; display: flex; align-items: center; gap: .5rem; }
     .pc-head .pc-domain { font-size: .8rem; color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: 1px; }
-    .pc-phase { display: inline-block; font-size: .72rem; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; padding: .25rem .7rem; border-radius: 20px; background: var(--cs, rgba(255,255,255,.18)); color: var(--bt, white); margin-bottom: .4rem; }
+    .pc-phase { display: inline-block; font-size: .75rem; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; padding: .25rem .7rem; border-radius: 20px; background: var(--cs, rgba(255,255,255,.18)); color: var(--bt, white); margin-bottom: .4rem; }
 
     .pc-body { padding: 1.25rem 1.5rem; flex: 1; }
     .pc-desc { font-size: 1rem; line-height: 1.75; color: var(--text); margin-bottom: 1rem; }
@@ -78,7 +78,7 @@
     .pc-cost-note { font-size: .88rem; color: var(--text-dark); margin-bottom: 1rem; }
 
     .pc-foot { padding: 1rem 1.5rem; border-top: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
-    .funding-badge { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: .3rem .8rem; border-radius: 20px; flex-shrink: 0; }
+    .funding-badge { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: .3rem .8rem; border-radius: 20px; flex-shrink: 0; }
     .funding-badge.funded    { background: #1a5c2a; color: white; border: 1px solid #134520; }
     .funding-badge.not-req   { background: #1a5c2a; color: white; border: 1px solid #134520; }
     .funding-badge.seeking   { background: #8B0000; color: #f1e303; border: 1px solid #6b0000; }
@@ -172,11 +172,14 @@
       @media (max-width: 1100px) { .title-cube { display: none; } }
       @media (prefers-reduced-motion: reduce) { .title-cube { animation: none; left: 6%; } }
     </style>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
   <!-- Nav -->
-  <header class="site-header">
+  <header class="site-header" data-phone-menu>
     <div class="header-container">
       <a href="index.html" class="site-logo">
         <img src="ic2-logo.png" alt="Ic² Research Institute">
@@ -590,7 +593,7 @@
     </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 700, once: true, offset: 50 });</script>
+  <script>window.AOS && AOS.init({ duration: 700, once: true, offset: 50 });</script>
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
 
@@ -665,5 +668,6 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 })();
 </script>
 
+<script src="phone-menu.js" defer></script>
 </body>
 </html>

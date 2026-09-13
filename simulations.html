@@ -118,7 +118,7 @@
        container, so position:sticky keeps working; hidden would break it. */
     html, body { overflow-x: clip; }
 
-    /* This page has no hamburger, so the nav cannot be hidden on small screens.
+    /* Below 900px the phone menu replaces this row (phone-menu.js).
        Let it wrap instead of overflowing the viewport. */
     @media (max-width: 860px) {
       nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
@@ -148,9 +148,12 @@
       @media (max-width: 1100px) { .title-cube { display: none; } }
       @media (prefers-reduced-motion: reduce) { .title-cube { animation: none; left: 6%; } }
     </style>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" data-phone-menu>
     <div class="header-container">
       <a href="index.html" class="site-logo"><img src="ic2-logo.png" alt="Ic² Research Institute"></a>
       <nav class="main-navigation">
@@ -187,7 +190,7 @@
       
     <div class="color-key" style="max-width:1200px;margin:0 auto 2rem;padding:1.25rem 1.5rem;
          background:#0d1520;border:1px solid rgba(140,190,250,.22);border-left:4px solid #005f6e;border-radius:6px;">
-      <div style="font-family: monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+      <div style="font-family: monospace;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
                   color:#8fd0ff;margin-bottom:.6rem;">How to read the colors</div>
       <p style="color:rgba(226,238,255,.86);font-size:.95rem;line-height:1.6;margin:0 0 .9rem;">
         Panel colors are not decorative. They cycle through two physical color systems:
@@ -197,19 +200,19 @@
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
         <span style="display:inline-flex;align-items:center;gap:.45rem;background:#c62828;color:#fff;
-              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">RED &middot; color charge</span>
+              font-size:.75rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">RED &middot; color charge</span>
         <span style="display:inline-flex;align-items:center;gap:.45rem;background:#1a5c2a;color:#fff;
-              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">GREEN &middot; color charge</span>
+              font-size:.75rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">GREEN &middot; color charge</span>
         <span style="display:inline-flex;align-items:center;gap:.45rem;background:#005ba5;color:#fff;
-              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">BLUE &middot; color charge</span>
+              font-size:.75rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">BLUE &middot; color charge</span>
         <span style="display:inline-flex;align-items:center;gap:.45rem;background:#005f6e;color:#fff;
-              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">g / r band</span>
+              font-size:.75rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">g / r band</span>
         <span style="display:inline-flex;align-items:center;gap:.45rem;background:#8e0c45;color:#fff;
-              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">i band</span>
+              font-size:.75rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">i band</span>
         <span style="display:inline-flex;align-items:center;gap:.45rem;background:#8B0000;color:#fff;
-              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">z band</span>
+              font-size:.75rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">z band</span>
         <span style="display:inline-flex;align-items:center;gap:.45rem;background:#7a5000;color:#fff;
-              font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">y band</span>
+              font-size:.75rem;font-weight:700;letter-spacing:.06em;padding:.3rem .7rem;border-radius:3px;">y band</span>
       </div>
       <p style="color:rgba(190,215,245,.6);font-size:.82rem;line-height:1.5;margin:.9rem 0 0;">
         Field maps use <strong style="color:#c8e6ff;">viridis</strong>, which is monotonic in lightness: apparent brightness tracks the value, so no false boundary appears where the data is smooth.
@@ -958,7 +961,7 @@ function viridis(t){
           Math.round(a[2]+(b[2]-a[2])*f)];
 }
 
-    AOS.init({duration:800,once:true,offset:50,easing:'ease-out-quad'});
+    window.AOS && AOS.init({duration:800,once:true,offset:50,easing:'ease-out-quad'});
     function toggleFoundation(header) {
     var acc = header.parentElement;
     var wasActive = acc.classList.contains('active');
@@ -2589,5 +2592,6 @@ window.addEventListener('load', function(){
   }, 400);
 });
 </script>
+<script src="phone-menu.js" defer></script>
 </body>
 </html>
