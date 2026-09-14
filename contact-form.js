@@ -55,7 +55,8 @@
       }).then(function (response) {
         if (response.ok) {
           form.reset();
-          say('Thank you. Your message has been sent, and we will reply by email.', 'ok');
+          form.dispatchEvent(new Event('contact-form:sent'));
+          say(form.getAttribute('data-success') || 'Thank you. Your message has been sent, and we will reply by email.', 'ok');
           return;
         }
         return response.json().then(function (data) {

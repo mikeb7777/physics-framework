@@ -1030,6 +1030,40 @@
     <meta property="og:image:alt" content="Ic² Research Institute, eequalsicsquared.com">
     <meta name="twitter:card" content="summary_large_image">
     <!-- seo:end -->
+<style>
+      /* == about-contact:start == */
+      /* The message form under the contact cards. The anchor clears the sticky header. */
+      #contact { scroll-margin-top: 80px; }
+      .about-form { background: #fff; border-radius: 8px; padding: 2.5rem; max-width: 760px; margin: 2.5rem auto 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,.2); border-bottom: 4px solid #8B0000; }
+      .about-form h3 { font-size: 1.5rem; color: var(--text-dark); margin-bottom: .5rem; text-align: center; }
+      .about-form > p { text-align: center; color: var(--text-dark); margin-bottom: 1.75rem; line-height: 1.6; }
+      .about-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.25rem; }
+      .about-form .form-group { margin-bottom: 1.25rem; }
+      .about-form .form-group label { display: block; margin-bottom: .45rem; font-weight: 600; color: var(--text-dark); }
+      .about-form .form-group input, .about-form .form-group textarea, .about-form .form-group select {
+        width: 100%; padding: .75rem; border: 2px solid #d5dbe2; border-radius: 6px; font-size: 1rem; font-family: inherit;
+        color: var(--text-dark); background: #fff; box-sizing: border-box; min-height: 48px; transition: border-color .3s; }
+      .about-form .form-group input:focus, .about-form .form-group textarea:focus, .about-form .form-group select:focus { outline: none; border-color: #8B0000; }
+      .about-form .form-group textarea { min-height: 150px; resize: vertical; }
+      .about-form .submit-btn { width: 100%; min-height: 52px; padding: .9rem; background: #8B0000; color: #fff; border: none; border-radius: 50px;
+        font-size: 1.05rem; font-weight: 600; cursor: pointer; letter-spacing: .5px; text-transform: uppercase; transition: background .3s, box-shadow .3s; }
+      .about-form .submit-btn:hover { background: #6B0000; box-shadow: 0 4px 12px rgba(139,0,0,.3); }
+      .about-form .submit-btn[disabled] { opacity: .7; cursor: progress; }
+      .about-form .form-note { text-align: center; margin-top: 1rem; font-size: .9rem; color: #4a5868; line-height: 1.6; }
+      .about-form .form-note a { color: #8B0000; }
+      .form-status { margin-top: 1rem; font-size: .95rem; line-height: 1.6; }
+      .form-status:empty { display: none; }
+      .form-status-info { color: #2c3e50; background: #f5f7fa; border-left: 3px solid #5a6878; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-ok { color: #14532d; background: #ecf8f0; border-left: 3px solid #2f8f4e; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-error { color: #7f1d1d; background: #fdf0f0; border-left: 3px solid #8B0000; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status a { color: inherit; font-weight: 600; }
+      @media (max-width: 720px) {
+        .about-form { padding: 1.75rem 1.25rem; }
+        .about-form .form-row { grid-template-columns: 1fr; }
+      }
+      /* == about-contact:end == */
+    </style>
 </head>
 
 <body>
@@ -1792,7 +1826,7 @@
     <div class="contact-container">
       <div class="contact-header" data-aos="fade-up">
         <h2>Get in Touch</h2>
-        <p>Connect through any of these channels</p>
+        <p>Send a message below, or reach us through any of these channels</p>
       </div>
       <div class="contact-grid">
 
@@ -1829,6 +1863,42 @@
           <a href="https://orcid.org/0009-0001-8084-3870" target="_blank" class="contact-link">0009-0001-8084-3870</a>
         </div>
 
+      </div>
+      <div class="contact-form-section about-form" data-aos="fade-up">
+        <h3>Send a message</h3>
+        <p>Questions, corrections, collaboration or press. Write here and the reply will come to the address you give.</p>
+        <form data-contact-form action="https://formspree.io/f/mnpqkjqo" method="POST">
+          <input type="hidden" name="_subject" value="New message from eequalsicsquared.com">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="category">Topic</label>
+            <select id="category" name="category">
+              <option value="general">General question</option>
+              <option value="correction">Correction or challenge</option>
+              <option value="research">Research collaboration</option>
+              <option value="programs">Program inquiry</option>
+              <option value="media">Media and press</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Your message *</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send message</button>
+          <p class="form-note">Your name, email and message are sent to us through Formspree so we can reply. See the <a href="privacy-policy.html">Privacy Policy</a>.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -1891,6 +1961,7 @@
                         <li><a href="events.html">Events</a></li>
                         <li><a href="become-member.html">Become a Member</a></li>
                         <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+                        <li><a href="about-page.html#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -2033,5 +2104,6 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 })();
 </script>
 
+<script src="contact-form.js" defer></script>
 </body>
 </html>

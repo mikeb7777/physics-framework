@@ -689,6 +689,20 @@
     <meta property="og:image:alt" content="Ic² Research Institute, eequalsicsquared.com">
     <meta name="twitter:card" content="summary_large_image">
     <!-- seo:end -->
+<style>
+      /* == edit-form:start == */
+      .edit-form .form-note { text-align: center; margin: 0; font-size: .9rem; line-height: 1.6; color: rgba(255,255,255,.75); }
+      .edit-form .form-note a { color: #f1e303; }
+      .edit-form .btn-submit-edit { justify-self: center; min-height: 48px; }
+      .edit-form .btn-submit-edit[disabled] { opacity: .7; cursor: progress; }
+      .form-status { margin: 0; font-size: .95rem; line-height: 1.6; }
+      .form-status:empty { display: none; }
+      .form-status-info { color: #2c3e50; background: #f5f7fa; border-left: 3px solid #5a6878; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-ok { color: #14532d; background: #ecf8f0; border-left: 3px solid #2f8f4e; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-error { color: #7f1d1d; background: #fdf0f0; border-left: 3px solid #8B0000; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status a { color: inherit; font-weight: 600; }
+      /* == edit-form:end == */
+    </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -763,7 +777,9 @@
         <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Suggest an Edit</p>
         <p class="section-note" data-aos="fade-up" data-aos-delay="150">Accepted edits will appear in the following revision.</p>
         
-        <form class="edit-form" id="editForm" data-aos="fade-up" data-aos-delay="200">
+        <form class="edit-form" id="editForm" data-aos="fade-up" data-aos-delay="200" data-contact-form action="https://formspree.io/f/mnpqkjqo" method="POST" data-success="Thank you. Your suggestion has been received and will be reviewed for the next revision.">
+          <input type="hidden" name="_subject" value="Edit suggestion from eequalsicsquared.com">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
           <div class="form-row">
             <div class="form-group">
               <label for="editType">Edit What?</label>
@@ -798,20 +814,18 @@
           <div class="form-row">
             <div class="form-group">
               <label for="editorName">Your Name (optional)</label>
-              <input type="text" id="editorName" name="editorName" placeholder="For acknowledgment in revision notes">
+              <input type="text" id="editorName" name="name" placeholder="For acknowledgment in revision notes">
             </div>
             <div class="form-group">
               <label for="editorEmail">Email (optional)</label>
-              <input type="email" id="editorEmail" name="editorEmail" placeholder="If you'd like a response">
+              <input type="email" id="editorEmail" name="email" placeholder="If you would like a response">
             </div>
           </div>
           
           <button type="submit" class="btn-submit-edit">Submit Suggestion</button>
+          <p class="form-note">Your suggestion, and your name and email if you give them, are sent to us through Formspree. See the <a href="privacy-policy.html">Privacy Policy</a>.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
         </form>
-        
-        <div class="edit-form-success" id="editFormSuccess">
-          ✓ Thank you! Your suggestion has been received and will be reviewed for the next revision.
-        </div>
       </div>
     </section>
     <div class="content-wrapper">
@@ -1213,38 +1227,6 @@
             behavior: 'smooth'
         });
     }
-    
-    // Suggest an Edit form handler
-    const editForm = document.getElementById('editForm');
-    const editFormSuccess = document.getElementById('editFormSuccess');
-    
-    editForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Collect form data
-        const formData = {
-            editType: document.getElementById('editType').value,
-            pageNumber: document.getElementById('pageNumber').value,
-            presentText: document.getElementById('presentText').value,
-            suggestedText: document.getElementById('suggestedText').value,
-            editorName: document.getElementById('editorName').value,
-            editorEmail: document.getElementById('editorEmail').value
-        };
-        
-        // For now, log to console (replace with actual endpoint when ready)
-        console.log('Edit suggestion submitted:', formData);
-        
-        // Show success message
-        editForm.style.display = 'none';
-        editFormSuccess.style.display = 'block';
-        
-        // Reset and show form again after 5 seconds
-        setTimeout(function() {
-            editForm.reset();
-            editForm.style.display = 'grid';
-            editFormSuccess.style.display = 'none';
-        }, 5000);
-    });
     </script>
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
@@ -1299,5 +1281,6 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 })();
 </script>
 
+<script src="contact-form.js" defer></script>
 </body>
 </html>
