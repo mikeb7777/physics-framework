@@ -253,6 +253,19 @@
     <meta property="og:image:alt" content="Ic² Research Institute, eequalsicsquared.com">
     <meta name="twitter:card" content="summary_large_image">
     <!-- seo:end -->
+<style>
+      /* == join-form:start == */
+      .membership-form .form-note { margin: 1rem auto 0; max-width: 620px; font-size: .9rem; line-height: 1.6; color: rgba(255,255,255,.85); }
+      .membership-form .form-note a { color: #f1e303; }
+      .membership-form .btn-submit[disabled] { opacity: .7; cursor: progress; }
+      .form-status { margin: 1rem auto 0; max-width: 620px; font-size: .95rem; line-height: 1.6; text-align: left; }
+      .form-status:empty { display: none; }
+      .form-status-info { color: #2c3e50; background: #f5f7fa; border-left: 3px solid #5a6878; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-ok { color: #14532d; background: #ecf8f0; border-left: 3px solid #2f8f4e; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-error { color: #7f1d1d; background: #fdf0f0; border-left: 3px solid #8B0000; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status a { color: inherit; font-weight: 600; }
+      /* == join-form:end == */
+    </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -271,7 +284,7 @@
           <li><a href="discussions-page.html">Discussion</a></li>
           <li><a href="about-page.html">About</a></li>
           <li><a href="contribute.html">Contribute</a></li>
-          <li><a href="login.html" class="login-link">Login</a></li>
+          <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
         </ul>
       </nav>
       <div class="hamburger"><span></span><span></span><span></span></div>
@@ -289,7 +302,7 @@
       <li><a href="discussions-page.html">Discussion</a></li>
       <li><a href="about-page.html">About</a></li>
       <li><a href="contribute.html">Contribute</a></li>
-      <li><a href="login.html" class="login-link">Login</a></li>
+      <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
     </ul>
   </div>
 
@@ -784,7 +797,9 @@
       <h2 class="form-section-heading">Membership Application</h2>
       <p style="color:rgba(255,255,255,0.88); margin-bottom:1.5rem; font-size:1rem; line-height:1.8;">Applications are reviewed by the institute. Research and support member applications are typically processed within two to three weeks. We will contact you at the email address you provide.</p>
 
-      <form class="membership-form" id="membershipForm">
+      <form class="membership-form" id="membershipForm" data-contact-form action="https://formspree.io/f/mnpqkjqo" method="POST" data-success="Thank you for your application. We will review it and reply by email, usually within two to three weeks.">
+        <input type="hidden" name="_subject" value="Membership application from eequalsicsquared.com">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
 
         <!-- Personal Information -->
         <div class="form-block">
@@ -977,13 +992,9 @@
         <div class="form-block">
           <h3>Supporting Documents (Optional)</h3>
           <div class="form-group">
-            <div class="file-upload" onclick="document.getElementById('resumeUpload').click()">
-              <label style="cursor:pointer; display:block; font-weight:normal;">
-                📄 CV or Resume
-                <div class="file-info">PDF or DOCX, max 10MB</div>
-              </label>
-              <input type="file" id="resumeUpload" name="resume" accept=".pdf,.doc,.docx">
-            </div>
+            <label for="cvLink">Link to your CV or resume (Optional)</label>
+            <input type="url" id="cvLink" name="cvLink" placeholder="https:// a shared Google Drive, OneDrive or Dropbox link">
+            <div class="file-info">Share a view-only link. Files cannot be attached to this form.</div>
           </div>
         </div>
 
@@ -1000,6 +1011,8 @@
 
         <div style="text-align:center; margin-top:2rem;">
           <button type="submit" class="btn-submit">Submit Application</button>
+          <p class="form-note">Your application, including your name, email and phone if given, is sent to us through Formspree so we can review it and reply. See the <a href="privacy-policy.html">Privacy Policy</a>.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
         </div>
       </form>
     </section>
@@ -1121,18 +1134,8 @@
       if (obsInterest) type === 'observer' ? obsInterest.setAttribute('required','required') : obsInterest.removeAttribute('required');
     }
 
-    document.getElementById('membershipForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for your application. We will review your submission and contact you within 2–3 weeks.');
-      this.reset();
-      updateFormSections();
-    });
+    document.getElementById('membershipForm').addEventListener('contact-form:sent', updateFormSections);
 
-    document.getElementById('resumeUpload').addEventListener('change', function(e) {
-      if (e.target.files.length > 0) {
-        this.closest('.file-upload').querySelector('label').innerHTML = `✓ ${e.target.files[0].name}<div class="file-info">Click to change</div>`;
-      }
-    });
 
     const btt = document.getElementById('backToTop');
     window.addEventListener('scroll', () => btt.classList.toggle('visible', window.pageYOffset > 400));
@@ -1192,5 +1195,6 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 })();
 </script>
 
+<script src="contact-form.js" defer></script>
 </body>
 </html>

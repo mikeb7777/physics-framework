@@ -421,6 +421,24 @@ footer:not(.rb-a):not(.rb-b) { padding-top: var(--band); margin-top: 0; }
 }
 /* == phone:end == */
 
+/* == header-fit:start == */
+/* -- The header row at in-between widths ---------------------------------
+   Between a tablet held sideways and a small laptop the header links used to
+   break onto two lines or run off the right edge. Links now never break
+   inside themselves, the space between them tightens a little below 1180px
+   (the type stays the same size), and the Member Login pill reads just
+   "Login" up to 1320px. Wider screens, phone menus and footers keep the full
+   "Member Login". */
+header nav a { white-space: nowrap; }
+@media (min-width: 769px) and (max-width: 1180px) {
+  .site-header .main-navigation ul, header nav ul { gap: .95rem !important; column-gap: .95rem !important; }
+  .site-header .main-navigation ul li, header nav ul li { margin-left: 0 !important; margin-right: 0 !important; }
+}
+@media (min-width: 769px) and (max-width: 1320px) {
+  header nav .ml-word { display: none; }
+}
+/* == header-fit:end == */
+
 /* == a11y:start == */
 /* -- Keyboard access -------------------------------------------------------
    A skip link that stays out of sight until a keyboard user reaches it, and a
