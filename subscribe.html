@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subscribe | Ic² Research Institute</title>
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --primary-color: #8B0000;
+      --secondary-color: #2c3e50;
+      --text-dark: #2c3e50;
+      --text-light: #666;
+      --bg-light: #f8f9fa;
+      --max-width: 1200px;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Unified Header */
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .header-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .site-logo img {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+    
+    .site-logo a {
+      display: block;
+      text-decoration: none;
+    }
+    
+    .main-navigation ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .main-navigation a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .main-navigation a:hover {
+      color: var(--primary-color);
+    }
+    
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 3rem;
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.9);
+    }
+    
+    /* Main Content */
+    .content-container {
+      flex: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      width: 100%;
+    }
+    
+    .coming-soon-box {
+      background: white;
+      border-radius: 8px;
+      padding: 3rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    
+    .coming-soon-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .coming-soon-box h2 {
+      font-size: 2rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .coming-soon-box p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    
+    .features-list {
+      text-align: left;
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #f8f9fa;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    
+    .features-list h3 {
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .features-list ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .features-list li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    
+    .features-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    
+    /* Contact Form */
+    .contact-form-section {
+      background: white;
+      border-radius: 8px;
+      padding: 3rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    
+    .contact-form-section h3 {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .contact-form-section p {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .submit-btn:hover {
+      background: #6B0000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    }
+    
+    .form-note {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--secondary-color);
+      color: white;
+      padding: 2.5rem 2rem 1rem;
+      margin-top: auto;
+      text-align: center;
+    }
+    
+    footer h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+    
+    footer p, footer a {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .main-navigation ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      
+      .page-header h1 {
+        font-size: 1.75rem;
+      }
+      
+      .coming-soon-box,
+      .contact-form-section {
+        padding: 2rem 1.5rem;
+      }
+      
+      .coming-soon-box h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+    <style id="title-cubes">
+      /* One Metatron's Cube drifting across the open area of the title panel,
+         the same figure as the Validation page header. It turns on its own
+         axis (inside the SVG) while it travels, passes beyond both edges, and
+         sits behind the text. Hidden on narrower screens, where the panel has
+         no open area to cross. */
+      .page-header, .page-hero { position: relative; isolation: isolate; overflow: hidden; }
+      .title-cube {
+        position: absolute; top: 50%; z-index: -1;
+        width: clamp(140px, 16vw, 210px); height: auto;
+        opacity: .38; pointer-events: none;
+        transform: translateY(-50%);
+        animation: cube-drift 150s linear -30s infinite;
+      }
+      @keyframes cube-drift {
+        from { left: -18%; }
+        to   { left: 118%; }
+      }
+      @media (max-width: 1100px) { .title-cube { display: none; } }
+      @media (prefers-reduced-motion: reduce) { .title-cube { animation: none; left: 6%; } }
+    </style>
+    <link rel="stylesheet" href="site-consistency.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&display=swap">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="description" content="Subscribe for occasional email updates from the Ic² Research Institute: prediction results, new papers and events.">
+    <!-- seo:start -->
+    <link rel="canonical" href="https://eequalsicsquared.com/subscribe.html">
+    <meta property="og:site_name" content="Ic² Research Institute">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Subscribe | Ic² Research Institute">
+    <meta property="og:description" content="Subscribe for occasional email updates from the Ic² Research Institute: prediction results, new papers and events.">
+    <meta property="og:url" content="https://eequalsicsquared.com/subscribe.html">
+    <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Ic² Research Institute, eequalsicsquared.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- seo:end -->
+    <style>
+      /* == subscribe:start == */
+      .subscribe-box { max-width: 640px; margin: 0 auto 2rem; }
+      .subscribe-box form { text-align: left; }
+      .subscribe-box .form-group input { min-height: 48px; box-sizing: border-box; }
+      .subscribe-box .submit-btn[disabled] { opacity: .7; cursor: progress; }
+      .subscribe-box .form-note { text-align: left; line-height: 1.6; }
+      .subscribe-box .form-note a { color: #8B0000; }
+      .form-status { margin-top: 1rem; font-size: .95rem; line-height: 1.6; }
+      .form-status:empty { display: none; }
+      .form-status-info { color: #2c3e50; background: #f5f7fa; border-left: 3px solid #5a6878; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-ok { color: #14532d; background: #ecf8f0; border-left: 3px solid #2f8f4e; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status-error { color: #7f1d1d; background: #fdf0f0; border-left: 3px solid #8B0000; padding: .75rem 1rem; border-radius: 4px; }
+      .form-status a { color: inherit; font-weight: 600; }
+      /* == subscribe:end == */
+    </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <!-- Unified Header -->
+  <header class="site-header" data-phone-menu>
+    <div class="header-container">
+      <div class="site-logo">
+        <a href="index.html">
+          <img src="ic2-logo.png" alt="Ic² Research Institute" />
+        </a>
+      </div>
+      <nav class="main-navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="book.html">The Big TOE</a></li>
+          <li><a href="validation.html">Validation</a></li>
+          <li><a href="testing-schedule.html">Testing</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Page Header -->
+  <section id="main-content" tabindex="-1" class="page-header tp-center">
+    <img src="metatron-spin.svg" class="title-cube" alt="" aria-hidden="true">
+      <h1>Subscribe</h1>
+      <p>Email updates when something real happens: a prediction reports, a paper is published, or an event is announced.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="content-container">
+
+      <div class="contact-form-section subscribe-box" data-aos="fade-up">
+        <h3>Research updates by email</h3>
+        <p>A few emails a year, sent only when there is news: a pre-registered prediction reports its result, a new paper is published, or an event is announced.</p>
+        <form data-contact-form action="https://formspree.io/f/mnpqkjqo" method="POST" data-success="Thank you. You are subscribed, and the next update will come to the address you gave.">
+          <input type="hidden" name="_subject" value="Newsletter subscription from eequalsicsquared.com">
+          <input type="hidden" name="request" value="subscribe">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Name (optional)</label>
+            <input type="text" id="name" name="name" autocomplete="name">
+          </div>
+          <button type="submit" class="submit-btn">Subscribe</button>
+          <p class="form-note">Your email is used only to send these updates. It is never sold or shared, and the emails carry no tracking. You can <a href="unsubscribe.html">unsubscribe</a> at any time. Sign-ups are collected through Formspree; see the <a href="privacy-policy.html">Privacy Policy</a>.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="coming-soon-box" data-aos="fade-up">
+        <h2>Looking for something else?</h2>
+        <div class="features-list">
+          <ul>
+            <li><strong>Discussion</strong>: the community forum opens soon, with its own sign-up; see <a href="discussions-page.html">Discussions</a>.</li>
+            <li><strong>Helping with testing</strong>: volunteers apply through the <a href="members.html">Members page</a>.</li>
+            <li><strong>Questions</strong>: <a href="about-page.html#contact">contact us</a>.</li>
+          </ul>
+        </div>
+      </div>
+
+    </main>
+  
+  <!-- Unified Footer -->
+  <footer>
+    <h3>Ic² Research Institute</h3>
+    <p>A collaborative workspace of independent researchers. Members retain 100% rights to their work and may publish under the institute's auspices or independently.</p>
+    <p>© 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a> | <a href="about-page.html#contact">Contact</a></p>
+  </footer>
+  
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    window.AOS && AOS.init({ duration: 800, once: true, offset: 80 });
+  </script>
+<style id="aos-failsafe-style">
+html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+
+    /* AOS parks fade-left and fade-right elements with a horizontal translate
+       until they are revealed, which lets a phone briefly scroll sideways
+       before the animation triggers. clip stops that without creating a scroll
+       container, so position:sticky keeps working; hidden would break it. */
+    html, body { overflow-x: clip; }
+
+    /* On pages where the nav cannot rely on a hamburger, or where the desktop
+       nav stays visible, let it wrap rather than push the page sideways. */
+    @media (max-width: 860px) {
+      nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
+    }
+</style>
+<noscript><style>[data-aos]{opacity:1!important;transform:none!important;}</style></noscript>
+<script id="aos-failsafe-script">
+(function(){
+  /* Content must be visible at rest. AOS parks [data-aos] elements at
+     opacity:0 and only reveals them on scroll, so link previews, crawlers,
+     archiving tools and any reader who does not scroll saw a blank page.
+     Styles are set on the elements directly - a stylesheet rule loses to
+     AOS's own doubled-attribute selector. */
+  var reveal = function(){
+    document.documentElement.classList.add('aos-failsafe');
+    var els = document.querySelectorAll('[data-aos]');
+    for (var i = 0; i < els.length; i++){
+      els[i].style.setProperty('transition','none','important');
+      els[i].style.setProperty('animation','none','important');
+      els[i].style.setProperty('opacity','1','important');
+      els[i].style.setProperty('transform','none','important');
+    }
+  };
+  var t = setTimeout(reveal, 1200);
+  window.addEventListener('load', function(){
+    if (!window.AOS){ clearTimeout(t); reveal(); return; }
+    setTimeout(function(){
+      if (!document.querySelector('[data-aos].aos-animate')){ clearTimeout(t); reveal(); }
+    }, 900);
+  });
+})();
+</script>
+
+<script src="phone-menu.js" defer></script>
+<script src="contact-form.js" defer></script>
+</body>
+</html>

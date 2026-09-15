@@ -718,7 +718,7 @@
         return;
       }
       if (!isValidEmail(email)) {
-        showError('That doesn\'t look like a valid email address. Please double-check and try again.');
+        showError('That does not look like a valid email address. Please double-check and try again.');
         emailInput.focus();
         return;
       }
@@ -729,33 +729,30 @@
       // Show loading state
       setState('loading');
 
-      // ─────────────────────────────────────────────────────────────────────
-      // INTEGRATION NOTE:
-      // Replace the setTimeout below with your actual email provider API call.
-      // Most providers (Mailchimp, ConvertKit, Buttondown, etc.) have an
-      // unsubscribe endpoint. Example for a generic POST:
-      //
-      //   fetch('/api/unsubscribe', {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     body: JSON.stringify({ email, reason })
-      //   })
-      //   .then(res => res.ok ? showSuccess(email) : showError('...'))
-      //   .catch(() => showError('...'));
-      //
-      // Until then, this simulates the request and shows the success state.
-      // ─────────────────────────────────────────────────────────────────────
-
+      // Send the request to the institute through Formspree.
       const reason = document.querySelector('input[name="unsub-reason"]:checked');
       const reasonValue = reason ? reason.value : 'not-provided';
-
-      // Log for debugging / future webhook integration
-      console.log('Unsubscribe request:', { email, reason: reasonValue });
-
-      setTimeout(function() {
-        document.getElementById('confirmed-email-display').textContent = email;
-        setState('success');
-      }, 1400);
+      const data = new FormData();
+      data.append('email', email);
+      data.append('reason', reasonValue);
+      data.append('request', 'unsubscribe');
+      data.append('_subject', 'Unsubscribe request from eequalsicsquared.com');
+      fetch('https://formspree.io/f/mnpqkjqo', { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+        .then(function (res) {
+          btn.disabled = false;
+          if (res.ok) {
+            document.getElementById('confirmed-email-display').textContent = email;
+            setState('success');
+          } else {
+            setState('form');
+            showError('Your request could not be sent. Please try again, or email ic2.info@proton.me.');
+          }
+        })
+        .catch(function () {
+          btn.disabled = false;
+          setState('form');
+          showError('Your request could not be sent. Please check your connection and try again, or email ic2.info@proton.me.');
+        });
     }
 
     // Allow Enter key to submit
