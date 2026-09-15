@@ -1010,6 +1010,17 @@
       .logo-navbar a.login-link:hover { color: #fff; }
       @media (max-width: 860px) { .logo-navbar { display: none; } }
     </style>
+    <style id="start-here-style">
+      .start-btn{display:inline-block;padding:.8rem 1.5rem;border-radius:4px;font-weight:700;font-size:1rem;line-height:1.2;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease;}
+      .start-btn-primary{background:#f1e303;color:#1a1a2e !important;border:2px solid #f1e303;}
+      .start-btn-outline{background:transparent;color:#fff !important;border:2px solid #fff;}
+      .start-btn:hover,.start-btn:focus-visible{transform:translateY(-2px);box-shadow:0 6px 16px rgba(13,27,42,.35);}
+      .start-btn:focus-visible{outline:3px solid #fff;outline-offset:2px;}
+      .start-path a{color:rgba(255,255,255,.88);text-decoration:underline;text-underline-offset:3px;}
+      .start-path a[aria-current="page"]{color:#fff;font-weight:700;text-decoration:none;}
+      .start-path a:focus-visible{outline:2px solid #f1e303;outline-offset:2px;}
+      @media (prefers-reduced-motion:reduce){.start-btn{transition:none;}.start-btn:hover{transform:none;}}
+    </style>
     <link rel="stylesheet" href="site-consistency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1145,6 +1156,17 @@
       <p>The Ic² Research Institute is an independent organization advancing the COSMIC Framework through falsifiable predictions and open science. The framework proposes information as the substrate underlying both quantum mechanics and general relativity. The work is ongoing and publicly documented.</p>
     </div>
   </section>
+
+  <!-- start-here:path (shown only when the visitor arrived through Start Here) -->
+  <nav class="start-path" aria-label="Start Here path" style="display:none;background:#1a1a2e;border-bottom:3px solid #f1e303;padding:.7rem 1.5rem;">
+    <ol style="max-width:1200px;margin:0 auto;padding:0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.4rem;color:rgba(255,255,255,.88);font-size:.95rem;">
+      <li style="color:#f1e303;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;">Start Here</li>
+      <li><a href="about-page.html?start=1" aria-current="page">1. About</a></li>
+      <li><a href="framework.html?start=1">2. The Framework</a></li>
+      <li>3. <a href="download.html">The Book</a> or <a href="programs-gateway.html">Research Programs</a></li>
+    </ol>
+  </nav>
+  <script>(function(){ if (/[?&]start\b/.test(location.search)) { var n = document.querySelector('.start-path'); if (n) n.style.display = 'block'; } })();</script>
 
   <!-- The Quest. Sets up everything below it, so it sits directly under the header. -->
   <section class="quest-section">
@@ -1817,6 +1839,20 @@
             <p class="content-text"><strong>Want to contribute?</strong> See the <a href="contribute.html" style="color:#005ba5;">Contributions page</a> for how to get involved.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- start-here:next -->
+  <section class="start-next" aria-labelledby="start-next-title" style="background:linear-gradient(135deg, #5a6878 0%, #4a5868 100%);border-left:4px solid #f1e303;padding:2.5rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.25rem 2.5rem;">
+      <div style="flex:1 1 420px;min-width:0;">
+        <p style="margin:0 0 .4rem;color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;"><span aria-hidden="true" style="display:inline-block;width:18px;height:3px;background:#f1e303;vertical-align:middle;margin-right:.55rem;"></span>Start Here · Next step</p>
+        <h2 id="start-next-title" style="margin:0 0 .5rem;color:#fff;font-size:1.65rem;line-height:1.25;text-wrap:balance;">The COSMIC Framework</h2>
+        <p style="margin:0;max-width:62ch;color:#fff;font-size:1rem;line-height:1.65;text-shadow:0 1px 3px rgba(13,27,42,.55);">A short overview of the idea behind the institute: information as the physical layer beneath quantum mechanics, gravity and thermodynamics, and the predictions that put it to the test.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+      <a href="framework.html?start=1" class="start-btn start-btn-primary">Read the Overview &rarr;</a>
       </div>
     </div>
   </section>

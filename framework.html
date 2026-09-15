@@ -730,6 +730,17 @@ line-height: 1.6;
         .main-navigation ul { gap: 1.45rem; }
         .main-navigation ul li a { white-space: nowrap; }
     </style>
+    <style id="start-here-style">
+      .start-btn{display:inline-block;padding:.8rem 1.5rem;border-radius:4px;font-weight:700;font-size:1rem;line-height:1.2;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease;}
+      .start-btn-primary{background:#f1e303;color:#1a1a2e !important;border:2px solid #f1e303;}
+      .start-btn-outline{background:transparent;color:#fff !important;border:2px solid #fff;}
+      .start-btn:hover,.start-btn:focus-visible{transform:translateY(-2px);box-shadow:0 6px 16px rgba(13,27,42,.35);}
+      .start-btn:focus-visible{outline:3px solid #fff;outline-offset:2px;}
+      .start-path a{color:rgba(255,255,255,.88);text-decoration:underline;text-underline-offset:3px;}
+      .start-path a[aria-current="page"]{color:#fff;font-weight:700;text-decoration:none;}
+      .start-path a:focus-visible{outline:2px solid #f1e303;outline-offset:2px;}
+      @media (prefers-reduced-motion:reduce){.start-btn{transition:none;}.start-btn:hover{transform:none;}}
+    </style>
     <link rel="stylesheet" href="site-consistency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -824,6 +835,17 @@ line-height: 1.6;
         <p class="fh-body">It keeps the established results of quantum mechanics, general relativity and thermodynamics, and asks what lies beneath them, at the points where those theories stop agreeing with each other: why gravity and quantum theory will not combine, what dark energy is, what happens at a singularity, and where the observer belongs in physical law. The 21 elements below set out the argument in full. From 2026, every prediction the framework makes is published before the data that will test it, together with the result that would prove it wrong.</p>
     </div>
     </section>
+
+  <!-- start-here:path (shown only when the visitor arrived through Start Here) -->
+  <nav class="start-path" aria-label="Start Here path" style="display:none;background:#1a1a2e;border-bottom:3px solid #f1e303;padding:.7rem 1.5rem;">
+    <ol style="max-width:1200px;margin:0 auto;padding:0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.4rem;color:rgba(255,255,255,.88);font-size:.95rem;">
+      <li style="color:#f1e303;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;">Start Here</li>
+      <li><a href="about-page.html?start=1">1. About</a></li>
+      <li><a href="framework.html?start=1" aria-current="page">2. The Framework</a></li>
+      <li>3. <a href="download.html">The Book</a> or <a href="programs-gateway.html">Research Programs</a></li>
+    </ol>
+  </nav>
+  <script>(function(){ if (/[?&]start\b/.test(location.search)) { var n = document.querySelector('.start-path'); if (n) n.style.display = 'block'; } })();</script>
 
   <!-- Color code banner. Links to the full explanation on the About page.
        Gunmetal is the site's canonical separator gradient, the same one the
@@ -1334,7 +1356,7 @@ line-height: 1.6;
         <a href="testing-schedule.html" style="display: block; background: #005ba5; border-radius: 8px; padding: 1.5rem; text-decoration: none; border-bottom: 4px solid #f1e303; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 8px 28px rgba(0,91,165,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
             <span class="material-symbols-outlined" style="font-size: 2rem; color: rgba(255,255,255,0.85); display: block; margin-bottom: 0.75rem;">science</span>
             <h3 style="color: white; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem;">Testing Schedule</h3>
-            <p style="color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.25rem;">52 open predictions, from DESI and the Rubin Observatory to laboratory thermodynamics, each with a documented date and an expected decision date.</p>
+            <p style="color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.25rem;">51 open predictions, from DESI and the Rubin Observatory to laboratory thermodynamics, each with a documented date and an expected decision date.</p>
             <span style="color: rgba(255,255,255,0.65); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">View Schedule &rarr;</span>
         </a>
     </div>
@@ -1364,13 +1386,28 @@ line-height: 1.6;
         </div>
         <div class="intro-card" style="background: #005f6e; box-shadow: 0 4px 20px rgba(0,95,110,0.2); border-bottom: 4px solid #c62828;">
             <h3>Risk Profile</h3>
-            <p style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 0.75rem;">Distributed Across 52 Open Predictions</p>
+            <p style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 0.75rem;">Distributed Across 51 Open Predictions</p>
             <p>No single prediction carries the entire argument. The breadth of pre-registered testing across cosmology, quantum computing, and thermodynamics means each new result, positive or negative, sharpens the picture.</p>
         </div>
     </div>
     <p class="content-text" style="margin-top: 2.5rem; text-align: center;"><a href="contribute.html" class="btn btn-primary">Investment Inquiry</a></p>
     </div>
     </section>
+
+  <!-- start-here:next -->
+  <section class="start-next" aria-labelledby="start-next-title" style="background:linear-gradient(135deg, #5a6878 0%, #4a5868 100%);border-left:4px solid #f1e303;padding:2.5rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.25rem 2.5rem;">
+      <div style="flex:1 1 420px;min-width:0;">
+        <p style="margin:0 0 .4rem;color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;"><span aria-hidden="true" style="display:inline-block;width:18px;height:3px;background:#f1e303;vertical-align:middle;margin-right:.55rem;"></span>Start Here · Next step</p>
+        <h2 id="start-next-title" style="margin:0 0 .5rem;color:#fff;font-size:1.65rem;line-height:1.25;text-wrap:balance;">Go Deeper</h2>
+        <p style="margin:0;max-width:62ch;color:#fff;font-size:1rem;line-height:1.65;text-shadow:0 1px 3px rgba(13,27,42,.55);">Read the full argument in <em>A Quest for The Big TOE</em>, offered on an honor system, or see the research programs where the predictions are being tested.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+      <a href="download.html" class="start-btn start-btn-primary">Download the Book</a>
+      <a href="programs-gateway.html" class="start-btn start-btn-outline">View Research Programs</a>
+      </div>
+    </div>
+  </section>
 
     <!-- CTA Section -->
     <section class="content-section" id="get-involved" style="background: #0d0d1f;">
