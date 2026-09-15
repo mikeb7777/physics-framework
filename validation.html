@@ -1571,15 +1571,19 @@
   </div>
 </section>
 
-<!-- ══ TRAFFIC LIGHT TILES: index-style float, split dark/white background ══ -->
-<div class="band tl-split-section" data-aos="fade-up">
-  <div class="white-riser"></div>
+<!-- ══ TRAFFIC LIGHT TILES: built like the home page hero and card row. The cards
+     rise out of the white band into the dark one above; the white ends where
+     the cards end. ══ -->
+<div class="tl-split-section">
   <div class="tl-split-inner">
     <p class="tl-eyebrow">How each test result moves the sigma indicator</p>
-    <div class="vv-how-row">
+  </div>
+</div>
+<div class="tl-white">
+  <div class="vv-how-row" data-aos="fade-up">
 
       <!-- GREEN tile -->
-      <div class="tl-tile" style="--tc:#1e7e34;" data-aos="fade-up" data-aos-delay="0" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+      <div class="tl-tile" style="--tc:#1e7e34;">
         <div class="tl-icon"><svg viewBox="0 0 24 24" fill="#1e7e34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
         <h4>Green: Confirmation</h4>
         <p>Prediction matches observation within the stated confidence interval. No revision to the framework is required. If the prediction was pre-registered, the test is logged as a pass and enters the cumulative significance calculation.</p>
@@ -1587,7 +1591,7 @@
       </div>
 
       <!-- YELLOW tile -->
-      <div class="tl-tile" style="--tc:#e6b800; --ts:#7a6000;" data-aos="fade-up" data-aos-delay="100" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+      <div class="tl-tile" style="--tc:#e6b800; --ts:#7a6000;">
         <div class="tl-icon"><svg viewBox="0 0 24 24" fill="#e6b800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10zm1-17.93c3.94.49 7 3.85 7 7.93s-3.05 7.44-7 7.93V4.07z"/></svg></div>
         <h4>Yellow: Partial Match</h4>
         <p>Observation confirms the core claim but at different parameter values than predicted. A letter revision (e.g. 6B) refines the predicted range with no change to postulates or edition number. Logged as a partial validation pass.</p>
@@ -1595,14 +1599,13 @@
       </div>
 
       <!-- RED tile -->
-      <div class="tl-tile" style="--tc:#e33d2f;" data-aos="fade-up" data-aos-delay="200" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+      <div class="tl-tile" style="--tc:#e33d2f;">
         <div class="tl-icon"><svg viewBox="0 0 24 24" fill="#e33d2f" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg></div>
         <h4>Red: Falsification</h4>
         <p>Observation does not match the prediction. A numbered edition revision is triggered. The failing postulate is identified, revised, and published. A failed validation gate initiates formal corrective action that ultimately improves accuracy on the next test cycle.</p>
         <div class="tl-sigma">Revision → better model → Sigma ↑ later</div>
       </div>
 
-    </div>
   </div>
 </div>
 
@@ -2544,33 +2547,27 @@ document.querySelectorAll('.gallery-item').forEach(function(item){
 </script>
     <style>
       /* == tl-cards:start == */
-      /* The green, yellow and red cards rest on white, as the home page's five
-         cards do below its hero: the dark band covers only their top third and
-         the white runs on under them to the Bayesian Engine's gray. The white
-         is a full-width layer behind the card row, so it lines up with the
-         cards at every width. The cards lift on hover like the home page's. */
+      /* Same construction as the home page: a dark band, then a white band whose
+         card row is pulled up into the dark by a negative top margin. The white
+         ends at the bottom of the cards, where the Bayesian Engine begins. The
+         row fades up into place and each card lifts on hover, as on the home page. */
       .tl-split-section {
-        background: var(--dark) !important;
-        padding-top: var(--band, 4rem) !important; padding-bottom: 4rem !important;
-        margin-top: 0 !important; overflow-x: clip !important; overflow-y: visible !important;
+        background: var(--dark) !important; margin: 0 !important; overflow: visible !important;
+        padding: var(--band, 4rem) 2rem 134px !important;
       }
-      .tl-split-section .white-riser { display: none; }
-      .tl-split-section .tl-eyebrow { padding-top: 0; }
-      .tl-split-section .vv-how-row {
-        position: relative; z-index: 0;
-        max-width: 1040px; margin: 0 auto; gap: 1.5rem; align-items: stretch;
-      }
-      .tl-split-section .vv-how-row::before {
-        content: ""; position: absolute; z-index: -1; pointer-events: none;
-        top: 110px; bottom: -4rem; left: calc(50% - 50vw); right: calc(50% - 50vw);
-        background: #ffffff;
+      .tl-split-section .tl-eyebrow { padding: 0; margin: 0; }
+      .tl-white { background: #ffffff; padding: 0 2rem; display: flow-root; position: relative; z-index: 4; } /* flow-root keeps the row's negative margin from collapsing through the white band; the z-index lifts the cards above the dark band */
+      .tl-split-section { z-index: 0 !important; }
+      .tl-white .vv-how-row {
+        position: relative; z-index: 2; max-width: 1040px; margin: -110px auto 0;
+        gap: 1.5rem; align-items: stretch;
       }
       .tl-tile {
         display: flex; flex-direction: column; align-items: center; text-align: center;
         padding: 1.75rem 1.5rem 1.5rem; border-radius: 8px; border-bottom: 4px solid var(--tc);
         box-shadow: 0 4px 20px rgba(0,0,0,.12); transition: transform .3s ease, box-shadow .3s ease;
       }
-      .tl-split-section .tl-tile:hover { transform: translateY(-8px) !important; box-shadow: 0 8px 30px rgba(0,0,0,.18); }
+      .tl-tile:hover { transform: translateY(-8px); box-shadow: 0 8px 30px rgba(0,0,0,.18); }
       .tl-icon { margin: 0 auto 1rem; line-height: 0; }
       .tl-tile .tl-icon svg { width: 60px; height: 60px; margin: 0; }
       .tl-tile h4 { font-size: 1.1rem; margin-bottom: .6rem; }
@@ -2580,8 +2577,9 @@ document.querySelectorAll('.gallery-item').forEach(function(item){
         background: rgba(0,0,0,.05); background: color-mix(in srgb, var(--tc) 12%, white);
       }
       @media (max-width: 768px) {
-        .tl-split-section { padding-left: 1rem !important; padding-right: 1rem !important; padding-bottom: 3rem !important; }
-        .tl-split-section .vv-how-row::before { top: 90px; bottom: -3rem; }
+        .tl-split-section { padding: var(--band, 3rem) 1rem 110px !important; }
+        .tl-white { padding: 0 1rem; }
+        .tl-white .vv-how-row { margin-top: -90px; }
       }
       /* == tl-cards:end == */
     </style>
