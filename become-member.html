@@ -69,7 +69,7 @@
 
     /* ── Container ── */
     .container { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem 3rem; background: transparent; }
-    .membership-band { background: #2c3e50; width: 100%; }
+    .membership-band { background: linear-gradient(135deg, #5a6878 0%, #4a5868 100%); width: 100%; }
 
     /* ── Member tier cards ── */
     .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
@@ -254,6 +254,17 @@
       /* == join-form:end == */
     </style>
     <meta name="robots" content="noindex, follow">
+    <style id="member-band-fix">
+      /* The page background wrapper around the band carried section padding,
+         which showed as thin dark strips above and below it. The band now
+         owns that space itself, so its cards sit clear of both edges. */
+      .page-bg:has(> .membership-band) { padding-top: 0 !important; padding-bottom: 0 !important; }
+      .membership-band { padding: var(--band, 4rem) 0 !important; }
+      .membership-band .tier-grid { margin-bottom: 0; }
+      /* both cards run the full row height, so no band color shows under the shorter one */
+      .membership-band .tier-card { display: flex; flex-direction: column; }
+      .membership-band .tier-body { flex: 1; }
+    </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -1078,12 +1089,14 @@
                   <li><a href="events.html">Events</a></li>
                   <li><a href="subscribe.html">Subscribe</a></li>
                   <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+                  <li><a href="members.html">Our Members</a></li>
+                  <li><a href="become-member.html">Work With Us</a></li>
                   <li><a href="about-page.html#contact">Contact</a></li>
               </ul>
           </div>
       </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
+      <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
     </div>
   </footer>
 
@@ -1184,5 +1197,8 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 </script>
 
 <script src="contact-form.js" defer></script>
+<!-- goatcounter:start -->
+<script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- goatcounter:end -->
 </body>
 </html>

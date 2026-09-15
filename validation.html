@@ -1580,9 +1580,9 @@
 
       <!-- GREEN tile -->
       <div class="tl-tile" style="--tc:#1e7e34;" data-aos="fade-up" data-aos-delay="0" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
-        <svg viewBox="0 0 24 24" fill="#1e7e34" xmlns="http://www.w3.org/2000/svg">
+        <div class="tl-icon"><svg viewBox="0 0 24 24" fill="#1e7e34" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-        </svg>
+        </svg></div>
         <h4>Green: Confirmation</h4>
         <p>Prediction matches observation within the stated confidence interval. No revision to the framework is required. If the prediction was pre-registered, the test is logged as a pass and enters the cumulative significance calculation.</p>
         <div class="tl-sigma">Sigma ↑ increases</div>
@@ -1590,9 +1590,9 @@
 
       <!-- YELLOW tile -->
       <div class="tl-tile" style="--tc:#e6b800; --ts:#7a6000;" data-aos="fade-up" data-aos-delay="100" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
-        <svg viewBox="0 0 24 24" fill="#e6b800" xmlns="http://www.w3.org/2000/svg">
+        <div class="tl-icon"><svg viewBox="0 0 24 24" fill="#e6b800" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/>
-        </svg>
+        </svg></div>
         <h4>Yellow: Partial Match</h4>
         <p>Observation confirms the core claim but at different parameter values than predicted. A letter revision (e.g. 6B) refines the predicted range with no change to postulates or edition number. Logged as a partial validation pass.</p>
         <div class="tl-sigma">Sigma → holds or ↑ slightly</div>
@@ -1600,9 +1600,9 @@
 
       <!-- RED tile -->
       <div class="tl-tile" style="--tc:#e33d2f;" data-aos="fade-up" data-aos-delay="200" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
-        <svg viewBox="0 0 24 24" fill="#e33d2f" xmlns="http://www.w3.org/2000/svg">
+        <div class="tl-icon"><svg viewBox="0 0 24 24" fill="#e33d2f" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-        </svg>
+        </svg></div>
         <h4>Red: Falsification</h4>
         <p>Observation does not match the prediction. A numbered edition revision is triggered. The failing postulate is identified, revised, and published. A failed validation gate initiates formal corrective action that ultimately improves accuracy on the next test cycle.</p>
         <div class="tl-sigma">Revision → better model → Sigma ↑ later</div>
@@ -2217,12 +2217,14 @@
                         <li><a href="events.html">Events</a></li>
                         <li><a href="subscribe.html">Subscribe</a></li>
                         <li><a href="https://www.michaelkbaines.com" target="_blank">Author's Website</a></li>
+                        <li><a href="members.html">Our Members</a></li>
+                        <li><a href="become-member.html">Work With Us</a></li>
                         <li><a href="about-page.html#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a></p>
+            <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
         </div>
     </footer>
 
@@ -2546,6 +2548,45 @@ document.querySelectorAll('.gallery-item').forEach(function(item){
   });
 });
 </script>
+    <style>
+      /* == tl-cards:start == */
+      /* The green, yellow and red cards straddle the line between the dark
+         band and the Bayesian Engine's gray, as the home page's five cards
+         straddle its hero, with clear space below them before the next
+         heading. The cards share the home page card: white, 8px corners,
+         a 4px color edge along the bottom, a soft shadow. */
+      .tl-split-section {
+        background: linear-gradient(to bottom, var(--dark) 0, var(--dark) calc(100% - 9rem), var(--mid) calc(100% - 9rem), var(--mid) 100%) !important;
+        padding-top: var(--band, 4rem) !important; padding-bottom: 4rem !important;
+        margin-top: 0 !important; overflow: visible !important;
+      }
+      .tl-split-section .white-riser { display: none; }
+      .tl-split-section .tl-eyebrow { padding-top: 0; }
+      #refinement-engine { padding-top: 0 !important; }
+      .vv-how-row { align-items: stretch; }
+      .tl-tile {
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        padding: 2rem 1.75rem 1.75rem; border-radius: 8px; border-bottom: 4px solid var(--tc);
+        box-shadow: 0 8px 28px rgba(0,0,0,.28);
+      }
+      .tl-icon {
+        width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 1.1rem;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(0,0,0,.05); background: color-mix(in srgb, var(--tc) 14%, white);
+      }
+      .tl-tile .tl-icon svg { width: 40px; height: 40px; margin: 0; }
+      .tl-tile h4 { font-size: 1.15rem; margin-bottom: .7rem; }
+      .tl-tile p { margin-bottom: 1.1rem; }
+      .tl-tile .tl-sigma {
+        margin-top: auto; padding: .45rem 1rem; border-radius: 999px; font-size: .85rem;
+        background: rgba(0,0,0,.05); background: color-mix(in srgb, var(--tc) 12%, white);
+      }
+      @media (max-width: 768px) {
+        .tl-split-section { background: linear-gradient(to bottom, var(--dark) 0, var(--dark) calc(100% - 7rem), var(--mid) calc(100% - 7rem), var(--mid) 100%) !important;
+          padding-left: 1rem !important; padding-right: 1rem !important; padding-bottom: 3rem !important; }
+      }
+      /* == tl-cards:end == */
+    </style>
 <style id="aos-failsafe-style">
 html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
 
@@ -2623,5 +2664,8 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 })();
 </script>
 
+<!-- goatcounter:start -->
+<script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- goatcounter:end -->
 </body>
 </html>
