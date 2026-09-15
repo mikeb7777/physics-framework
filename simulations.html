@@ -124,6 +124,14 @@
       nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
     }
 </style>
+    <style id="chamber-model-style">
+      .ch-presets{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem;}
+      .ch-preset.is-on{background:#86f5b8;color:#06120c;border-color:#86f5b8;font-weight:700;}
+      .ch-select{font-size:.9rem;padding:.3rem .45rem;border-radius:4px;background:#1a1a2e;color:#fff;border:1px solid rgba(255,255,255,.35);}
+      #w-chamber{height:460px;}
+      #w-chamber canvas{height:100%;touch-action:none;}
+      @media (max-width:600px){#w-chamber{height:auto;aspect-ratio:1/1;max-width:100%;}#chamber-model .sim-label{flex-wrap:wrap;max-width:100%;}.ch-select{max-width:100%;}#ch-freq{width:9rem;max-width:100%;}#w-chamber .sim-tr{top:auto;bottom:8px;}}
+    </style>
     <link rel="stylesheet" href="site-consistency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -853,12 +861,72 @@
     <div class="highlight">
       <h3>Visualization Features:</h3>
       <ul>
-        <li><strong>6 real-time 3D simulations</strong>: drag to orbit, fully touch-enabled for mobile</li>
+        <li><strong>7 real-time 3D simulations</strong>: six framework simulations and one experiment model, drag to orbit, fully touch-enabled for mobile</li>
         <li><strong>7 Plotly data charts</strong> with error bars and confidence intervals grounded in real WMAP data</li>
         <li><strong>Framework equations</strong> rendered accurately per element, directly from the published book</li>
         <li><strong>Multi-scale representations</strong> from quantum spin to cosmic-scale phase transitions</li>
         <li><strong>Open science</strong>: all data and analysis code available through Zenodo</li>
       </ul>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         PART IV · EXPERIMENT MODELS (standard physics)
+    ════════════════════════════════════════════ -->
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-rule">
+    <h2 style="margin-top:8px;">Experiment Models</h2>
+    <p class="lead">Standard physics only. These models make no COSMIC Framework assumptions; they are used to plan experiments and to check predictions before any data exist.</p>
+
+    <div class="foundation-accordion" id="chamber-model" style="--acc-color:#005f6e; border-left:4px solid #7a5000;" data-lazy-sim="chamber">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#7a5000;margin-right:.4rem;">graphic_eq</span>
+          Microgravity Acoustic Chamber
+          <span style="display:inline-block;font-size:.75rem;font-weight:700;padding:.2rem .65rem;border-radius:20px;background:#1a1a2e;color:#86f5b8;vertical-align:middle;margin-left:.5rem;letter-spacing:.04em;text-transform:uppercase;">CYM-002 · Standard physics</span>
+        </h3>
+        <span class="toggle-indicator">▼</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
+    <div class="figure-container">
+      <div class="figure-title">Model: Where Particles Gather in a Resonating Sphere Without Gravity</div>
+      <div class="highlight">
+        <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> The chamber planned for the CYM-002 microgravity experiment: a 40 cm rigid-walled sphere with four transducers (gold) at the corners of a tetrahedron. The model builds the sound field inside the sphere from its resonant modes and moves each particle (green) with the acoustic radiation force, which pushes small particles toward the low-energy regions of the field. Faint blue points mark where the pressure is zero.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">Controls:</strong> The preset buttons tune the drive to the patterns in CYM-002 Predictions 1 to 3. Frequency sets the drive directly. Earth gravity shows why the experiment needs microgravity: at these frequencies gravity outweighs the acoustic force and the particles fall.<br><br>
+        <strong style="color:#005ba5;font-weight:700;">This is standard acoustics.</strong> It makes no framework assumptions. The predictions made from it are on the <a href="testing-schedule.html#cymatics-prediction" style="color:#005ba5;font-weight:600;">Testing Schedule</a>, and the experiment is described on the <a href="program-cymatics.html" style="color:#005ba5;font-weight:600;">program page</a>.</p>
+      </div>
+      <div class="plot-container" style="padding:16px;">
+        <div class="sim-controls">
+          <label class="sim-label">Medium:
+            <select id="ch-medium" class="ch-select">
+              <option value="mist">Water mist in air</option>
+              <option value="bubbles">Soap bubbles in air</option>
+              <option value="beads">Polystyrene beads in water</option>
+            </select>
+          </label>
+          <label class="sim-label">Frequency: <input type="range" id="ch-freq" min="160" max="3300" step="1" value="1226" style="vertical-align:middle;accent-color:#86f5b8;"> <span id="ch-freq-val" class="sim-val" style="color:#86f5b8;">1,226 Hz</span></label>
+          <label class="sim-label"><input type="checkbox" id="ch-gravity" style="vertical-align:middle;accent-color:#ff6b6b;"> Earth gravity</label>
+          <button type="button" id="ch-scatter" class="viz-btn viz-btn-ghost">Scatter particles</button>
+        </div>
+        <div class="ch-presets" role="group" aria-label="Tune to a predicted pattern">
+          <button type="button" class="viz-btn ch-preset is-on" data-preset="shell1">One shell</button>
+          <button type="button" class="viz-btn ch-preset" data-preset="shell2">Two shells</button>
+          <button type="button" class="viz-btn ch-preset" data-preset="shell3">Three shells</button>
+          <button type="button" class="viz-btn ch-preset" data-preset="four">Four clusters</button>
+          <button type="button" class="viz-btn ch-preset" data-preset="twelve">Twelve clusters</button>
+          <button type="button" class="viz-btn ch-preset" data-preset="twentyfour">Twenty-four clusters</button>
+        </div>
+        <div class="sim-wrap" id="w-chamber">
+          <canvas id="c-chamber" aria-label="Three-dimensional view of particles inside the resonating sphere. Drag to rotate."></canvas>
+          <div class="sim-tl"><div class="sim-live"><div class="sim-dot"></div>Live · drag to orbit</div></div>
+          <div class="sim-tr"><span class="sim-pill" id="ch-pill">40 cm sphere · Q 1,000</span></div>
+        </div>
+        <div id="ch-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#86f5b8;">Open this panel to load the chamber model.</div>
+      </div>
+      <div class="figure-caption">In the single-shell mode, water mist collects on a sphere at 0.59 of the radius, inside the pressure node at 0.70, because the radiation force also depends on how the air moves; polystyrene beads in water sit almost on the node. Tuned 0.2% below that mode, mist gathers into four clusters facing the transducers. At the next two resonances it forms twelve and then twenty-four clusters. The shell modes are not harmonics: two and three shells appear at 1.72 and 2.43 times the first shell frequency. The model assumes rigid walls, a chamber quality factor of 1,000 and a 3 kPa pressure amplitude. In water an acrylic wall is not rigid, so the water results are indicative only. The model code is open: <a href="cymatics-model.js" style="color:#005ba5;">cymatics-model.js</a>.</div>
     </div>
 
   </div><!-- /.container -->
@@ -879,7 +947,7 @@
       <p style="color:rgba(255,255,255,.65);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;">The complete picture</p>
       <h2 style="color:white;font-size:1.75rem;font-weight:700;margin-bottom:1.25rem;line-height:1.3;">The Master Field Equation</h2>
 
-      <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.9;margin-bottom:1.25rem;">Every simulation on this page is a window into one piece of a larger picture. This equation is the whole picture. It is the COSMIC Framework's most general statement about reality: that the state of everything, everywhere, at every scale, can be described as a function of the information being processed at that point in space and time.</p>
+      <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.9;margin-bottom:1.25rem;">Every framework simulation on this page is a window into one piece of a larger picture. This equation is the whole picture. It is the COSMIC Framework's most general statement about reality: that the state of everything, everywhere, at every scale, can be described as a function of the information being processed at that point in space and time.</p>
 
       <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.9;margin-bottom:1.5rem;">You do not need to read the mathematics to understand the idea. The equation says: take the baseline state of a region of space (the Phi zero term), then add up the contribution of every mathematical pattern that is being processed there, weighted by how strongly each pattern couples to physical reality at that temperature, frequency, and scale. The result is the total state of the universe at that point. Gravity, quantum mechanics, consciousness, and the arrow of time are all consequences of how that sum plays out at different scales.</p>
 
@@ -2611,6 +2679,186 @@ window.addEventListener('load', function(){
 });
 </script>
 <script src="phone-menu.js" defer></script>
+<script>
+/* ── Experiment model: CYM-002 chamber (standard acoustics, loads cymatics-model.js on first open) ── */
+window._simInit = window._simInit || {};
+window._simInit.chamber = function () {
+  if (window._simInit.chamber._done) return;
+  window._simInit.chamber._done = true;
+  var status = document.getElementById('ch-status');
+  status.textContent = 'Loading the chamber model...';
+  var tag = document.createElement('script');
+  tag.src = 'cymatics-model.js';
+  tag.onload = start;
+  tag.onerror = function () { status.textContent = 'The chamber model could not load. Refresh the page to try again.'; };
+  document.head.appendChild(tag);
+
+  function start() {
+    var M = window.SphereModel;
+    if (!window.THREE || !M) { status.textContent = 'This browser could not start the 3D view.'; return; }
+    var A = 0.2, Q = 1000, P0 = 3000, NP = 6000;
+    var MEDIA = {
+      mist: { fluid: 'air', particle: 'water', R: 50e-6, label: 'air' },
+      bubbles: { fluid: 'air', particle: 'soapBubble', R: 1e-3, label: 'air' },
+      beads: { fluid: 'water', particle: 'polystyrene', R: 50e-6, label: 'water' }
+    };
+    var PRESETS = {
+      shell1: M.modeX(0, 1), shell2: M.modeX(0, 2), shell3: M.modeX(0, 3),
+      four: M.modeX(0, 1) * 0.998, twelve: M.modeX(3, 1), twentyfour: M.modeX(4, 1)
+    };
+    var q = [0, 1, 2, 3].map(function () { return { re: 1, im: 0 }; });
+    var state = { medium: 'mist', x: PRESETS.shell1, gravity: false };
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var wrap = document.getElementById('w-chamber'), canvas = document.getElementById('c-chamber');
+    var acc = wrap.closest('.foundation-accordion');
+    var freq = document.getElementById('ch-freq'), freqVal = document.getElementById('ch-freq-val');
+
+    function c() { return M.FLUIDS[MEDIA[state.medium].fluid].c; }
+    function fOf(x) { return x * c() / (2 * Math.PI * A); }
+    function xOf(f) { return f * 2 * Math.PI * A / c(); }
+    function hz(f) { return Math.round(f).toLocaleString('en-US') + ' Hz'; }
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x070b0a);
+    var camera = new THREE.PerspectiveCamera(34, 1, 0.1, 50);
+    camera.up.set(0, 0, 1);
+    var orbit = { theta: -0.65, phi: 1.2, dist: 4.4, drag: false, ox: 0, oy: 0 };
+    function placeCamera() {
+      camera.position.set(orbit.dist * Math.sin(orbit.phi) * Math.cos(orbit.theta), orbit.dist * Math.sin(orbit.phi) * Math.sin(orbit.theta), orbit.dist * Math.cos(orbit.phi));
+      camera.lookAt(0, 0, 0);
+    }
+    function dragTo(x, y) {
+      orbit.theta -= (x - orbit.ox) * 0.008;
+      orbit.phi = Math.max(0.1, Math.min(Math.PI - 0.1, orbit.phi - (y - orbit.oy) * 0.008));
+      orbit.ox = x; orbit.oy = y;
+    }
+    canvas.addEventListener('mousedown', function (e) { orbit.drag = true; orbit.ox = e.clientX; orbit.oy = e.clientY; });
+    window.addEventListener('mouseup', function () { orbit.drag = false; });
+    canvas.addEventListener('mousemove', function (e) { if (orbit.drag) dragTo(e.clientX, e.clientY); });
+    canvas.addEventListener('touchstart', function (e) { orbit.drag = true; orbit.ox = e.touches[0].clientX; orbit.oy = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener('touchend', function () { orbit.drag = false; });
+    canvas.addEventListener('touchmove', function (e) { if (orbit.drag) dragTo(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+
+    function resize() {
+      var r = wrap.getBoundingClientRect();
+      if (!r.width) return;
+      renderer.setSize(r.width, r.height, false);
+      camera.aspect = r.width / r.height;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', resize);
+
+    var ringMat = new THREE.LineBasicMaterial({ color: 0x33463f });
+    [[0, 0, 0], [Math.PI / 2, 0, 0], [0, Math.PI / 2, 0]].forEach(function (rot) {
+      var pts = [];
+      for (var i = 0; i <= 160; i++) { var t = i / 160 * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(t), Math.sin(t), 0)); }
+      var line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), ringMat);
+      line.rotation.set(rot[0], rot[1], rot[2]);
+      scene.add(line);
+    });
+    scene.add(new THREE.Mesh(new THREE.SphereGeometry(1, 48, 32), new THREE.MeshBasicMaterial({ color: 0x9fd8c0, transparent: true, opacity: 0.035, depthWrite: false, side: THREE.BackSide })));
+    var tMat = new THREE.MeshBasicMaterial({ color: 0xf0a13a });
+    M.TETRA.forEach(function (v) { var m = new THREE.Mesh(new THREE.SphereGeometry(0.045, 20, 14), tMat); m.position.set(v[0], v[1], v[2]); scene.add(m); });
+
+    var dotCanvas = document.createElement('canvas'); dotCanvas.width = dotCanvas.height = 64;
+    var g2 = dotCanvas.getContext('2d'), gr = g2.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.4, 'rgba(255,255,255,0.85)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    g2.fillStyle = gr; g2.fillRect(0, 0, 64, 64);
+    var dot = new THREE.CanvasTexture(dotCanvas);
+
+    var pos = new Float32Array(NP * 3);
+    var partGeo = new THREE.BufferGeometry(); partGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(partGeo, new THREE.PointsMaterial({ color: 0x86f5b8, size: 0.026, map: dot, transparent: true, opacity: 0.85, depthWrite: false, blending: THREE.AdditiveBlending })));
+    var nodeGeo = new THREE.BufferGeometry();
+    scene.add(new THREE.Points(nodeGeo, new THREE.PointsMaterial({ color: 0x7f9fc4, size: 0.02, map: dot, transparent: true, opacity: 0.3, depthWrite: false, blending: THREE.AdditiveBlending })));
+
+    var field = null, budget = null, tmp = new Float64Array(3);
+    function scatter() {
+      for (var i = 0; i < NP; i++) {
+        var x, y, z;
+        do { x = Math.random() * 2 - 1; y = Math.random() * 2 - 1; z = Math.random() * 2 - 1; } while (x * x + y * y + z * z > 0.94);
+        pos[i * 3] = x; pos[i * 3 + 1] = y; pos[i * 3 + 2] = z;
+      }
+      partGeo.attributes.position.needsUpdate = true;
+    }
+    function step(n) {
+      if (!field || !(field.maxF > 0)) return;
+      var gw = state.gravity ? Math.min(budget.ratio, 6) : 0, s = 0.0035, inv = 1 / field.maxF;
+      for (var it = 0; it < n; it++) {
+        for (var i = 0; i < NP; i++) {
+          var o = i * 3, x = pos[o], y = pos[o + 1], z = pos[o + 2];
+          M.sampleForce(field, x, y, z, tmp);
+          var fx = tmp[0] * inv, fy = tmp[1] * inv, fz = tmp[2] * inv, fm = Math.sqrt(fx * fx + fy * fy + fz * fz);
+          if (fm > 1.5) { fx *= 1.5 / fm; fy *= 1.5 / fm; fz *= 1.5 / fm; }
+          x += s * fx + (Math.random() - 0.5) * 0.0012;
+          y += s * fy + (Math.random() - 0.5) * 0.0012;
+          z += s * (fz - gw) + (Math.random() - 0.5) * 0.0012;
+          var r = Math.sqrt(x * x + y * y + z * z);
+          if (r > 0.975) { var k = 0.975 / r; x *= k; y *= k; z *= k; }
+          pos[o] = x; pos[o + 1] = y; pos[o + 2] = z;
+        }
+      }
+      partGeo.attributes.position.needsUpdate = true;
+    }
+
+    function compute(fine) {
+      var md = MEDIA[state.medium];
+      var con = M.contrast(md.fluid, M.particleProps(md.particle, md.R, md.fluid));
+      field = M.field({ X: state.x, Q: Q, q: q, f1: con.f1, f2: con.f2, N: fine ? 48 : 30 });
+      budget = M.forceBudget({ fluid: md.fluid, particle: md.particle, R: md.R, f: fOf(state.x), p0: P0 });
+      var nodes = M.nodePoints(field, 0.035, 30000);
+      nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodes, 3));
+      nodeGeo.computeBoundingSphere();
+      var top = field.shares.slice(0, 2).filter(function (sh) { return sh.share >= 0.02; }).map(function (sh) {
+        var name = sh.n === 0 ? 'uniform compression' : (sh.l === 0 ? (sh.n === 1 ? 'one-shell mode' : sh.n + '-shell mode') : 'l = ' + sh.l + ' mode');
+        return name + ' ' + Math.round(sh.share * 100) + '%';
+      });
+      status.textContent = hz(fOf(state.x)) + ' · ka ' + state.x.toFixed(3) + ' · field: ' + top.join(', ') +
+        (state.gravity ? ' · Earth gravity is ' + budget.ratio.toFixed(1) + ' times the peak acoustic force' : ' · microgravity');
+      freqVal.textContent = hz(fOf(state.x));
+    }
+    function syncSlider() {
+      freq.min = Math.round(fOf(1.5)); freq.max = Math.round(fOf(12));
+      freq.value = Math.round(fOf(state.x));
+      document.getElementById('ch-pill').textContent = '40 cm sphere · ' + MEDIA[state.medium].label + ' · Q 1,000';
+    }
+    function markPreset(key) {
+      document.querySelectorAll('.ch-preset').forEach(function (b) { var on = b.getAttribute('data-preset') === key; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    }
+
+    var pending = 0;
+    freq.addEventListener('input', function () {
+      state.x = xOf(+freq.value); markPreset(null);
+      if (!pending) pending = requestAnimationFrame(function () { pending = 0; compute(false); });
+    });
+    freq.addEventListener('change', function () { compute(true); });
+    document.getElementById('ch-medium').addEventListener('change', function (e) { state.medium = e.target.value; syncSlider(); compute(true); scatter(); step(160); });
+    document.getElementById('ch-gravity').addEventListener('change', function (e) { state.gravity = e.target.checked; compute(true); });
+    document.getElementById('ch-scatter').addEventListener('click', scatter);
+    document.querySelectorAll('.ch-preset').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var key = b.getAttribute('data-preset');
+        state.x = PRESETS[key]; markPreset(key); syncSlider(); compute(true); scatter(); step(160);
+      });
+    });
+
+    resize(); placeCamera(); syncSlider(); compute(true); scatter(); step(260);
+    (function frame() {
+      requestAnimationFrame(frame);
+      if (!acc.classList.contains('active')) return;
+      var r = wrap.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      if (r.width && Math.abs(renderer.domElement.width / (window.devicePixelRatio > 2 ? 2 : (window.devicePixelRatio || 1)) - r.width) > 2) resize();
+      step(2);
+      if (!orbit.drag && !reduced) orbit.theta += 0.0025;
+      placeCamera();
+      renderer.render(scene, camera);
+    })();
+  }
+};
+</script>
 <!-- goatcounter:start -->
 <script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- goatcounter:end -->
