@@ -57,5 +57,5 @@
   btn.addEventListener('click', function () { set(!menu.classList.contains('open')); });
   menu.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
-  window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > (header.classList.contains("bigtoe-header") ? 1100 : 900)) set(false); });
 })();

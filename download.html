@@ -681,34 +681,38 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
-    <header class="site-header">
-      <div class="header-container">
+    <header class="site-header bigtoe-header" data-phone-menu>
+    <div class="header-container">
         <div class="site-logo">
-          <a href="book.html">
-            <img src="bigtoeindexlogoyel.png" alt="The Big TOE">
-          </a>
+            <a href="book.html"><img src="bigtoeindexlogoyel.png" alt="The Big TOE"></a>
         </div>
-        
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        
-        <nav class="main-navigation" id="mainNav">
-          <ul>
-            <li><a href="book.html">Home</a></li>
-            <li><a href="about-page.html">About</a></li>
+        <nav class="main-navigation" id="mainNav" aria-label="Main navigation">
+            <ul>
+            <li><a href="framework.html">Framework</a></li>
+            <li><a href="book.html" aria-current="true">Big TOE</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
             <li><a href="blog.html">Blog</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="appendix.html">Appendix</a></li>
-            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="discussions-page.html">Discussion</a></li>
+            <li><a href="about-page.html">About</a></li>
             <li><a href="contribute.html">Contribute</a></li>
             <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="btn-login"><span class="ml-word">Member </span>Login</a></li>
-          </ul>
+            </ul>
         </nav>
-      </div>
-    </header>
+    </div>
+    <nav class="book-bar" aria-label="The Big TOE">
+        <ul>
+        <li><a href="book.html">Overview</a></li>
+        <li><a href="download.html" aria-current="page">Download</a></li>
+        <li><a href="conversion.html">Formats</a></li>
+        <li><a href="references.html">References</a></li>
+        <li><a href="appendix.html">Appendices</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+        <li><a href="faq-page.html">FAQ</a></li>
+        </ul>
+    </nav>
+</header>
     
     <div id="main-content" tabindex="-1" class="page-header tp-center">
       <h1>Download A Quest for The Big TOE</h1>
@@ -1158,7 +1162,7 @@
     window.AOS && AOS.init();
     
     // Hamburger menu toggle
-    const hamburger = document.getElementById('hamburger');
+    const hamburger = document.getElementById('hamburger') || document.createElement('div');
     const mainNav = document.getElementById('mainNav');
     
     hamburger.addEventListener('click', function() {
@@ -1260,5 +1264,6 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 <!-- goatcounter:start -->
 <script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- goatcounter:end -->
+<script src="phone-menu.js" defer></script>
 </body>
 </html>
