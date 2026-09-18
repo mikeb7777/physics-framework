@@ -64,6 +64,7 @@
     .quick-nav-inner a[href="#privacy"]    { background: #005ba5; }
     .quick-nav-inner a[href="#financial"]  { background: #005f6e; }
     .quick-nav-inner a[href="#commerce"]   { background: #8e0c45; }
+    .quick-nav-inner a[href="#open-science"] { background: #4a5868; }
     .quick-nav-inner a[href="#disclaimer"] { background: #7a5000; }
     .quick-nav-inner a[href="#copyright"]  { background: #c62828; }
 
@@ -79,6 +80,7 @@
     #privacy    .section-header { background: #005ba5; }
     #financial  .section-header { background: #005f6e; }
     #commerce   .section-header { background: #8e0c45; }
+    #open-science .section-header { background: #4a5868; }
     #disclaimer .section-header { background: #7a5000; }
     #copyright  .section-header { background: #c62828; }
 
@@ -88,6 +90,7 @@
     #privacy    .section-body { background: rgba(0,91,165,0.88); }
     #financial  .section-body { background: rgba(0,95,110,0.88); }
     #commerce   .section-body { background: rgba(142,12,69,0.88); }
+    #open-science .section-body { background: rgba(74,88,104,0.92); }
     #disclaimer .section-body { background: rgba(122,80,0,0.88); }
     #copyright  .section-body { background: rgba(198,40,40,0.88); }
 
@@ -166,7 +169,8 @@
       .section-header { padding: 1rem 1.25rem 0.75rem; }
       .section-body { padding: 1.25rem; }
     }
-  </style>
+      .legal-section { scroll-margin-top: 90px; }
+</style>
     <style id="title-cubes">
       /* One Metatron's Cube drifting across the open area of the title panel,
          the same figure as the Validation page header. It turns on its own
@@ -270,6 +274,7 @@
       <a href="#privacy">Privacy Policy</a>
       <a href="#financial">Financial Disclosures</a>
       <a href="#commerce">Commerce &amp; Sales</a>
+      <a href="#open-science">Open Science Policy</a>
       <a href="#disclaimer">Research Disclaimer</a>
       <a href="#copyright">Copyright &amp; Licensing</a>
     </div>
@@ -539,6 +544,49 @@
       </div>
     </div>
 
+    <!-- OPEN SCIENCE POLICY -->
+    <div id="open-science" class="legal-section" data-aos="fade-up">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-header-text"><h2>Open Science Policy</h2><span class="last-updated">Last Updated: September 2026 &nbsp;|&nbsp; Effective Date: September 18, 2026</span></div>
+        <svg class="section-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+      </div>
+      <div class="section-body">
+        <h3>1. Purpose</h3>
+        <p>The institute's values of doing science in the open and without gatekeeping are policy, not aspiration. This policy states the rules that follow from them. It applies to the COSMIC Framework, to the Quest, and to all work published under the institute's name.</p>
+
+        <h3>2. Predictions Before Data</h3>
+        <p>New predictions are pre-registered, dated and made public before the data that tests them is released.</p>
+
+        <h3>3. Every Outcome Reported</h3>
+        <p>Every result is published, whether it supports the framework, requires it to change or contradicts it. Nothing is withheld to protect a narrative.</p>
+
+        <h3>4. Revisions Logged</h3>
+        <p>Changes to predictions, papers and claims are logged with a date and a reason. The public record is never silently amended.</p>
+
+        <h3>5. Free Access</h3>
+        <p>Everything the institute publishes is free to read. There is no paywall and no registration to read it.</p>
+
+        <h3>6. No Gatekeeping</h3>
+        <p>No degree, affiliation or membership is needed to read, question or contribute. Contributions are judged on their merit, and questions and criticism are welcome in public.</p>
+
+        <h3>7. Ownership and Credit</h3>
+        <p>Contributors keep ownership of their work and are credited in the public record.</p>
+
+        <h3>8. The Quest Record</h3>
+        <p>The institute documents its own route through science: submissions, applications, proposals and partnerships in academia, government programs, business and independent channels. For each one it records what was asked, how long it took, what it cost and what came back, including rejections.</p>
+
+        <h3>9. Respect for Others in the Record</h3>
+        <p>The Quest documents the process, not private people. Correspondence is summarized rather than published unless the sender agrees. People are named only with their consent or where the information is already public.</p>
+
+        <h3>10. Funding and Partnerships</h3>
+        <p>Funding and commercial partnerships do not decide what is published. Where an agreement or a patent filing requires a result to be held back, it is held only for a limited period stated in advance and is then published. The institute will not accept an agreement that would suppress a result permanently.</p>
+
+        <div class="important-notice">
+          <p><strong>Knowledge is the quest.</strong> A prediction that holds, one that has to change and one that fails are all reported the same way: as what was learned.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- RESEARCH DISCLAIMER -->
     <div id="disclaimer" class="legal-section" data-aos="fade-up">
       <div class="section-header" onclick="toggleSection(this)">
@@ -711,6 +759,23 @@
     function toggleSection(header) {
       const section = header.closest('.legal-section');
       section.classList.toggle('open');
+    }
+
+    // A deep link such as legal.html#open-science opens its section
+    if (location.hash) {
+      try {
+        const hashTarget = document.querySelector(location.hash);
+        if (hashTarget && hashTarget.classList.contains('legal-section')) {
+          hashTarget.classList.add('open');
+          // the jump skips the scroll event AOS reveals on, so reveal it here
+          window.addEventListener('load', function () {
+            hashTarget.classList.add('aos-animate');
+            hashTarget.style.transition = 'none';
+            hashTarget.style.transform = 'none';
+            hashTarget.scrollIntoView();
+          });
+        }
+      } catch (e) {}
     }
 
     // Quick-nav links open their target section if closed
