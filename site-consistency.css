@@ -440,6 +440,111 @@ header nav a { white-space: nowrap; }
 }
 /* == header-fit:end == */
 
+/* == display-type:start == */
+/* -- Headlines --------------------------------------------------------------
+   Page and section titles are set in Source Serif 4, the way research
+   journals and institutes set theirs; body text, header links and footers
+   keep their sans. A page that gives a heading its own face keeps it,
+   because this rule sits on the element and loses to any class rule. */
+h1, h2 {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  font-optical-sizing: auto;
+  letter-spacing: -.005em;
+}
+:is(header, nav, footer, .pm-menu) :is(h1, h2) {
+  font-family: inherit;
+  letter-spacing: normal;
+}
+/* == display-type:end == */
+
+/* == plate-motif:start == */
+/* -- The Chladni plate ------------------------------------------------------
+   The institute's own mark: the nodal lines of a square plate vibrating in
+   mode (6, 9), computed from the plate equation, not drawn. It sits faintly
+   in the navy title panels, behind any glow a page already paints there.
+   The wide working pages (tp-left) carry a turning mark instead. */
+.page-header.tp-center, .page-hero.tp-center, .page-header.tp-log {
+  position: relative; overflow: hidden; isolation: isolate;
+}
+.page-header.tp-center::after, .page-hero.tp-center::after, .page-header.tp-log::after {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  top: 50%; right: -140px; left: auto; bottom: auto;
+  width: 560px; height: 560px; transform: translateY(-50%);
+  border: 0; border-radius: 0;
+  background: url('chladni-plate.svg') center / contain no-repeat;
+  opacity: .1;
+}
+.page-header.tp-log::after { width: 420px; height: 420px; right: -110px; }
+@media (max-width: 768px) {
+  .page-header.tp-center::after, .page-hero.tp-center::after, .page-header.tp-log::after {
+    width: 340px; height: 340px; right: -130px; opacity: .08;
+  }
+}
+/* == plate-motif:end == */
+
+/* == eyebrow:start == */
+/* -- Section labels ---------------------------------------------------------
+   The small capitals above a section title now carry a hairline that runs
+   out to the edge of the column, in the label's own colour. Centred labels
+   get a short rule on each side instead. */
+.eyebrow { display: flex; align-items: center; gap: .9rem; }
+.eyebrow::after {
+  content: ''; flex: 1 1 auto; height: 1px; min-width: 2rem;
+  background: currentColor; opacity: .35;
+}
+.eyebrow.eyebrow-center { justify-content: center; }
+.eyebrow.eyebrow-center::before,
+.eyebrow.eyebrow-center::after { content: ''; flex: 0 0 2.5rem; height: 1px; background: currentColor; opacity: .35; }
+/* == eyebrow:end == */
+
+/* == login-pill:start == */
+/* -- The Member Login pill -------------------------------------------------
+   Pages had drifted to a solid red, a gradient, three paddings and three
+   type sizes. Every header pill now takes the home page's: the dark red
+   gradient, yellow type, 25px corners. The Big TOE pages sit on a black
+   header, so theirs keeps the same shape and size but reads white with red
+   type. Phone menus keep their full-width rows. */
+@media (min-width: 769px) {
+  header a.login-link,
+  .logo-navbar a.login-link,
+  header a.btn-login {
+    display: inline-block;
+    padding: .5rem 1.25rem !important;
+    border: 0 !important;
+    border-radius: 25px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+    text-decoration: none;
+    transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  }
+  header a.login-link,
+  .logo-navbar a.login-link {
+    background: linear-gradient(135deg, #8B0000 0%, #a00000 100%) !important;
+    color: #f1e303 !important;
+    box-shadow: 0 2px 8px rgba(139, 0, 0, .3);
+  }
+  header a.login-link:hover,
+  .logo-navbar a.login-link:hover {
+    background: linear-gradient(135deg, #a00000 0%, #8B0000 100%) !important;
+    color: #f1e303 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, .4);
+  }
+  header a.btn-login {
+    background: #ffffff !important;
+    color: #8B0000 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+  }
+  header a.btn-login:hover {
+    background: #ffffff !important;
+    color: #8B0000 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+  }
+}
+/* == login-pill:end == */
+
 /* == a11y:start == */
 /* -- Keyboard access -------------------------------------------------------
    A skip link that stays out of sight until a keyboard user reaches it, and a

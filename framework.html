@@ -527,38 +527,10 @@ line-height: 1.6;
     height: 45px;
     }
     }
-    /* Scroll to top */
-    .scroll-top {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(139,0,0,0.85);
-    color: #f1e303;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 800;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    font-family: 'Material Symbols Outlined';
-    font-size: 28px;
-    }
-
-    .scroll-top:hover {
-    background: var(--primary-color);
-    transform: translateX(-50%) translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    }
-
-    .scroll-top.visible {
-    display: flex;
-    }
+    /* Back to top */
+    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: #8B0000; color: #ffffff; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s, visibility 0.3s, background 0.3s; z-index: 900; }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { background: #6b0000; transform: translateY(-3px); }
 
     /* Intro cards */
     .intro-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 2rem 0; animation: slideUp 0.6s ease-out; }
@@ -744,7 +716,7 @@ line-height: 1.6;
     <link rel="stylesheet" href="site-consistency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -920,7 +892,7 @@ line-height: 1.6;
 
     <!-- Reality is Relational -->
     <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.5); font-weight: 700; margin-bottom: 0.6rem;">Element 1 | A Quest for The Big TOE</p>
+        <p class="eyebrow" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.5); font-weight: 700; margin-bottom: 0.6rem;">Element 1 | A Quest for The Big TOE</p>
         <h3 style="font-size: 1.6rem; font-weight: 700; color: white; margin: 0 0 1.25rem; line-height: 1.25;">Reality Is Relational</h3>
         <p style="color: rgba(255,255,255,0.88); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1.25rem;">Take anything, any object, any force, any property, and reduce it to its components. A rock reduces to molecules, molecules to atoms, atoms to subatomic particles, particles to quantum fields. At the bottom you do not find stuff. You find relationships: probabilities and interaction properties, pure information about how things behave relative to each other. Energy follows the same path. It is not a substance but a measure of capacity, a relationship between states. E=mc² is an informational relationship between mass, energy, and the speed of light. An equation, not a thing. Run this reduction on anything and the result is always the same. No exception presents itself because none is possible.</p>
         <p style="color: rgba(255,255,255,0.88); font-size: 1.05rem; line-height: 1.9;">This relational structure operates simultaneously across quantum, classical, and cosmic scales. There is no level where things with independent properties suddenly appear. The same structural logic that generates the Fibonacci sequence in a sunflower generates it in a spiral galaxy arm. They are not analogous. They are the same sequence running in different substrates, which is what it means to say that reality is fundamentally relational. The Foundations below document the evidence, address the gaps, and follow the logical chain wherever it leads.</p>
@@ -1547,7 +1519,7 @@ function toggleFoundation(header) {
 </script>
 
     <!-- Scroll to top button -->
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">expand_less</button>
+    <button class="back-to-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg></button>
     <script>
     const scrollBtn = document.getElementById('scrollTop');
     window.addEventListener('scroll', () => {
