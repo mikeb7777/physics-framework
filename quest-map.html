@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Quest Map | Ic² Research Institute</title>
+  <meta name="description" content="Where the COSMIC Framework stands on the road from an idea to acceptance, rejection or modification: the stages, the four routes and the data still to come.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary-color: #8B0000; --yellow: #f1e303; --max-width: 1200px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6; color: #ffffff; overflow-x: clip; }
+    #stars-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1;
+      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+    a { color: var(--yellow); }
+
+    /* header: the Big TOE band */
+    .site-header { background: rgba(0,0,0,.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.1);
+      position: sticky; top: 0; z-index: 1000; }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: .5rem 2rem; display: flex;
+      justify-content: space-between; align-items: center; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.75rem; align-items: center; }
+    .main-navigation a { color: #ffffff; text-decoration: none; }
+    .main-navigation a:hover { color: var(--yellow); }
+    .quest-bar .bar-label { color: var(--yellow); font: 700 .72rem/1 'IBM Plex Sans', sans-serif; letter-spacing: .14em;
+      text-transform: uppercase; align-self: center; padding-right: .25rem; }
+
+    /* Start Here strip, shown when the visitor arrives with ?start */
+    .start-path { display: none; background: #1a1a2e; border-bottom: 3px solid var(--yellow); padding: .7rem 1.5rem; }
+    .start-path ol { max-width: var(--max-width); margin: 0 auto; list-style: none; display: flex; flex-wrap: wrap;
+      align-items: center; gap: .4rem 1.4rem; color: rgba(255,255,255,.88); font-size: .95rem; }
+    .start-path .start-label { color: var(--yellow); font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+    .start-path a { color: rgba(255,255,255,.88); text-underline-offset: 3px; }
+    .start-path a[aria-current="page"] { color: #ffffff; font-weight: 700; text-decoration: none; }
+    .start-path .start-side { color: rgba(255,255,255,.6); font-size: .85rem; }
+
+    /* page */
+    .q-hero { padding: 5rem 2rem 3rem; text-align: center; }
+    .q-emblem { display: block; width: 150px; height: 150px; margin: 0 auto 1.5rem; }
+    .q-hero .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      max-width: 520px; margin: 0 auto 1rem; }
+    .q-hero h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 1rem; }
+    .q-hero p { font-size: 1.2rem; color: rgba(255,255,255,.88); max-width: 720px; margin: 0 auto; }
+    .q-hero .updated { font-size: .85rem; color: rgba(255,255,255,.55); margin-top: 1rem; }
+    .q-section { padding: 3rem 2rem; }
+    .q-inner { max-width: var(--max-width); margin: 0 auto; }
+    .q-section h2 { font-size: 2rem; margin-bottom: .5rem; }
+    .q-section .lede { color: rgba(255,255,255,.8); max-width: 760px; margin-bottom: 2rem; }
+    .q-light { background: #ffffff; color: #2c3e50; }
+    .q-light .lede { color: #5a6878; }
+    .q-light a { color: #8B0000; }
+    .q-light .eyebrow { color: var(--primary-color); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+    .q-section:not(.q-light) .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+
+    /* the road */
+    .road { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: stage; position: relative; }
+    .stage { position: relative; padding: 0 .75rem; text-align: center; }
+    .stage::before { content: ''; position: absolute; top: 22px; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.18); z-index: 0; }
+    .stage:first-child::before { left: 50%; }
+    .stage:last-child::before { right: 50%; }
+    .stage .dot { position: relative; z-index: 1; width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 1rem;
+      display: grid; place-items: center; font-weight: 700; background: #1a1a2e; border: 3px solid rgba(255,255,255,.35); }
+    .stage.here .dot { border-color: var(--yellow); color: var(--yellow); box-shadow: 0 0 0 6px rgba(241,227,3,.15); }
+    .stage h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+    .stage p { font-size: .9rem; color: rgba(255,255,255,.75); }
+    .stage .where { margin-top: .6rem; font-size: .82rem; color: var(--yellow); font-weight: 600; }
+    .outcomes { display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; margin-top: .6rem; }
+    .outcomes span { font-size: .75rem; padding: .15rem .6rem; border-radius: 12px; border: 1px solid rgba(255,255,255,.35); }
+
+    /* the four routes */
+    .routes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .route { background: #ffffff; border: 1px solid #e0e0e0; border-top: 4px solid var(--c); border-radius: 8px; padding: 1.5rem; }
+    .route h3 { font-size: 1.2rem; margin-bottom: .5rem; color: #2c3e50; }
+    .route .what { font-size: .92rem; color: #5a6878; margin-bottom: 1rem; }
+    .route .status-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8fa0b0; margin-bottom: .25rem; }
+    .route .status { font-size: .95rem; color: #2c3e50; }
+    .route .status.pending { color: #8fa0b0; font-style: italic; }
+
+    /* waiting list */
+    .waiting { display: grid; gap: 1rem; }
+    .wait { display: grid; grid-template-columns: 64px 1fr auto; gap: 1.25rem; align-items: center;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 1rem 1.25rem; }
+    .wait img { width: 64px; height: 64px; }
+    .wait h3 { font-size: 1.1rem; }
+    .wait .id { color: rgba(255,255,255,.6); font-size: .85rem; font-weight: 500; }
+    .wait p { font-size: .92rem; color: rgba(255,255,255,.8); }
+    .wait .when { text-align: right; color: var(--yellow); font-weight: 700; white-space: nowrap; }
+    .wait .when small { display: block; color: rgba(255,255,255,.55); font-weight: 400; }
+
+    /* follow page */
+    .channels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .channel { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 2rem; }
+    .channel h3 { font-size: 1.4rem; margin-bottom: .5rem; }
+    .channel p { color: rgba(255,255,255,.8); margin-bottom: 1.25rem; }
+    .chapters { columns: 2; column-gap: 2.5rem; list-style: none; }
+    .chapters li { break-inside: avoid; padding: .6rem 0; border-top: 1px solid #e0e0e0; }
+    .chapters strong { color: #2c3e50; }
+    .chapters span { display: block; color: #5a6878; font-size: .92rem; }
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .principles div { border-left: 3px solid var(--primary-color); padding-left: 1rem; }
+    .principles h3 { font-size: 1.05rem; color: #2c3e50; margin-bottom: .3rem; }
+    .principles p { font-size: .92rem; color: #5a6878; }
+    .episode { display: flex; gap: 1.5rem; align-items: center; background: rgba(255,255,255,.06);
+      border: 1px dashed rgba(241,227,3,.5); border-radius: 10px; padding: 1.5rem; }
+    .episode .num { font: 700 2.5rem/1 'Source Serif 4', Georgia, serif; color: var(--yellow); }
+    .episode h3 { font-size: 1.25rem; }
+    .episode p { color: rgba(255,255,255,.75); font-size: .95rem; }
+
+    .q-btn { display: inline-block; padding: .8rem 1.6rem; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .q-btn-primary { background: var(--primary-color); color: #ffffff; }
+    .q-btn-primary:hover { background: #6b0000; }
+    .q-btn-yt { background: #FF0000; color: #ffffff; }
+    .q-btn-mail { background: #0072C6; color: #ffffff; }
+    .note { font-size: .9rem; color: rgba(255,255,255,.6); margin-top: 1rem; }
+    .q-light .note { color: #8fa0b0; }
+
+    .start-next { background: linear-gradient(135deg, #5a6878 0%, #4a5868 100%); border-left: 4px solid var(--yellow); padding: 2.5rem 1.5rem; }
+    .start-next-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1.25rem 2.5rem; }
+    .start-next-inner > div { flex: 1 1 420px; }
+    .start-next .eyebrow { color: #ffffff; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .4rem; }
+    .start-next h2 { font-size: 1.65rem; margin-bottom: .5rem; }
+    .start-next p { max-width: 62ch; }
+
+    @media (max-width: 900px) {
+      .road { grid-template-columns: 1fr; gap: 1.5rem; }
+      .stage { display: grid; grid-template-columns: 46px 1fr; gap: 0 1rem; text-align: left; padding: 0; }
+      .stage::before { display: none; }
+      .stage .dot { margin: 0; grid-row: span 4; }
+      .outcomes { justify-content: flex-start; }
+      .routes { grid-template-columns: repeat(2, 1fr); }
+      .channels, .principles { grid-template-columns: 1fr; }
+      .chapters { columns: 1; }
+    }
+    @media (max-width: 600px) {
+      .q-hero { padding: 3.5rem 1.25rem 2rem; }
+      .q-hero h1 { font-size: 2.2rem; }
+      .q-emblem { width: 112px; height: 112px; margin-bottom: 1.1rem; }
+      .q-section { padding: 2.5rem 1.25rem; }
+      .routes { grid-template-columns: 1fr; }
+      .wait { grid-template-columns: 48px 1fr; }
+      .wait img { width: 48px; height: 48px; }
+      .wait .when { grid-column: 2; text-align: left; }
+    }
+
+    /* footer, as on the book pages */
+.social-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+.social-content {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+.quick-links h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    }
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+    }
+.quick-links li {
+    margin-bottom: 0.75rem;
+    }
+.quick-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+    }
+.quick-links a:hover {
+    color: white;
+    }
+.social-main {
+    text-align: center;
+    }
+.social-main h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    }
+.social-main p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    }
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    }
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    }
+.copyright a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+.copyright a:hover {
+    color: rgba(255, 255, 255, 0.9);
+    }
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: white;
+    }
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+.social-btn.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+.social-btn.youtube {
+    background: #FF0000;
+    }
+.social-btn.email {
+    background: #0072C6;
+    }
+.social-icon {
+    width: 24px;
+    height: 24px;
+    }
+.social-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+.quick-links {
+    text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="site-consistency.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="canonical" href="https://eequalsicsquared.com/quest-map.html">
+  <meta property="og:site_name" content="Ic² Research Institute">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Quest Map | Ic² Research Institute">
+  <meta property="og:description" content="Where the COSMIC Framework stands on the road from an idea to acceptance, rejection or modification: the stages, the four routes and the data still to come.">
+  <meta property="og:url" content="https://eequalsicsquared.com/quest-map.html">
+  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header bigtoe-header" data-phone-menu>
+    <div class="header-container">
+        <div class="site-logo">
+            <a href="book.html"><img src="bigtoeindexlogoyel.png" alt="The Big TOE"></a>
+        </div>
+        <nav class="main-navigation" aria-label="Main navigation">
+            <ul>
+            <li><a href="framework.html">Framework</a></li>
+            <li><a href="book.html">Big TOE</a></li>
+            <li><a href="validation.html">Validation</a></li>
+            <li><a href="testing-schedule.html">Testing</a></li>
+            <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="discussions-page.html">Discussion</a></li>
+            <li><a href="about-page.html">About</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="btn-login"><span class="ml-word">Member </span>Login</a></li>
+            </ul>
+        </nav>
+    </div>
+    <nav class="book-bar quest-bar" aria-label="The Quest">
+        <ul>
+        <li class="bar-label" aria-hidden="true">The Quest</li>
+        <li><a href="quest-map.html" aria-current="page">Map</a></li>
+        <li><a href="quest-follow.html#episodes">Episodes</a></li>
+        <li><a href="quest-follow.html">Follow</a></li>
+        </ul>
+    </nav>
+</header>
+
+  <nav class="start-path" aria-label="Start Here path">
+    <ol>
+      <li class="start-label">Start Here</li>
+      <li><a href="about-page.html?start=1">1. About</a></li>
+      <li><a href="framework.html?start=1">2. The Framework</a></li>
+      <li><a href="quest-map.html?start=1" aria-current="page">3. The Quest Map</a></li>
+      <li><a href="quest-follow.html?start=1">4. Follow the Quest</a></li>
+      <li class="start-side">Side trips: <a href="book.html">The Book</a> · <a href="programs-gateway.html">Research Programs</a></li>
+    </ol>
+  </nav>
+  <script>(function(){ if (/[?&]start\b/.test(location.search)) { var n = document.querySelector('.start-path'); if (n) n.style.display = 'block'; } })();</script>
+
+  <main id="main-content" tabindex="-1">
+
+    <section class="q-hero">
+      <img src="quest-emblem.svg" class="q-emblem" width="150" height="150" alt="The Quest emblem: a footprint within the words The Quest for The Big TOE">
+      <p class="eyebrow eyebrow-center">The Quest</p>
+      <h1>The Quest Map</h1>
+      <p>Where the COSMIC Framework stands on the road every theory travels, from an idea to acceptance, rejection or modification. The map is updated with every episode.</p>
+      <p class="updated">Last updated 19 September 2026</p>
+    </section>
+
+    <section class="q-section">
+      <div class="q-inner">
+        <p class="eyebrow">The road</p>
+        <h2>From an Idea to an Answer</h2>
+        <p class="lede">Every theory passes the same stages. Yellow marks where the framework is now. However a test turns out, the result is recorded as what was learned.</p>
+        <div class="road">
+          <div class="stage">
+            <div class="dot">1</div>
+            <h3>Idea</h3>
+            <p>A question and a first answer to it.</p>
+          </div>
+          <div class="stage">
+            <div class="dot">2</div>
+            <h3>Written down</h3>
+            <p>Published in full so anyone can read and question it.</p>
+            <p class="where"><a href="book.html">A Quest for The Big TOE</a> and the framework papers</p>
+          </div>
+          <div class="stage here">
+            <div class="dot">3</div>
+            <h3>Pre-registered</h3>
+            <p>Predictions dated and public before the data that tests them.</p>
+            <p class="where">Three active missions</p>
+          </div>
+          <div class="stage">
+            <div class="dot">4</div>
+            <h3>Tested</h3>
+            <p>Independent data arrives and is compared with the prediction.</p>
+            <p class="where">First data expected 2027</p>
+          </div>
+          <div class="stage">
+            <div class="dot">5</div>
+            <h3>Learned</h3>
+            <p>The prediction holds, the framework changes, or the idea is set aside.</p>
+            <div class="outcomes"><span>Accepted</span><span>Modified</span><span>Rejected</span></div>
+          </div>
+        </div>
+        <p class="note">Four earlier results agree with the framework but were not recorded before they were published, so they are counted as consistent, not predicted. <a href="validation.html">See the record</a>.</p>
+      </div>
+    </section>
+
+    <section class="q-section q-light">
+      <div class="q-inner">
+        <p class="eyebrow">The four routes</p>
+        <h2>Different Roads to the Same Test</h2>
+        <p class="lede">A theory can reach the world by more than one road. The Quest follows all four and records what each one asks for, how long it takes and what comes back.</p>
+        <div class="routes">
+          <div class="route" style="--c:#005ba5;">
+            <h3>Academia</h3>
+            <p class="what">Journals, peer review, preprint servers, conferences and work with university researchers.</p>
+            <p class="status-label">Where we are</p>
+            <p class="status">Framework papers and the pre-registrations are public on <a href="zenodo-papers.html">Zenodo</a>.</p>
+          </div>
+          <div class="route" style="--c:#1a5c2a;">
+            <h3>Government programs</h3>
+            <p class="what">Research grants, national laboratories, and proposals for time on public telescopes and data archives.</p>
+            <p class="status-label">Where we are</p>
+            <p class="status pending">Update coming with Episode 1.</p>
+          </div>
+          <div class="route" style="--c:#8B0000;">
+            <h3>Business</h3>
+            <p class="what">Industry partners, private funding, patents and products built on the research.</p>
+            <p class="status-label">Where we are</p>
+            <p class="status pending">Update coming with Episode 1.</p>
+          </div>
+          <div class="route" style="--c:#7a5000;">
+            <h3>Outsiders</h3>
+            <p class="what">Independent researchers, public data, citizen science and the open routes any person can use.</p>
+            <p class="status-label">Where we are</p>
+            <p class="status">An independent institute testing against public data, with a workspace for testing volunteers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="q-section">
+      <div class="q-inner">
+        <p class="eyebrow">What we are waiting for</p>
+        <h2>The Next Answers</h2>
+        <p class="lede">Each test is a mission, named for good and never reused. These are the data releases that will decide the three active missions.</p>
+        <div class="waiting">
+          <a class="wait" href="testing-schedule.html#COSMIC-008" style="text-decoration:none;color:inherit;">
+            <img src="mission-marks/midnight-phoenix.svg" alt="">
+            <div><h3>Midnight Phoenix <span class="id">COSMIC-008</span></h3><p>A polarization signature in the cosmic microwave background, at an angular scale derived from the framework.</p></div>
+            <div class="when">Early 2027<small>Simons Observatory</small></div>
+          </a>
+          <a class="wait" href="testing-schedule.html#COSMIC-005" style="text-decoration:none;color:inherit;">
+            <img src="mission-marks/midnight-eridanus.svg" alt="">
+            <div><h3>Midnight Eridanus <span class="id">COSMIC-005</span></h3><p>Whether the change in dark energy that DESI reported persists in its five-year data.</p></div>
+            <div class="when">2027<small>DESI DR3</small></div>
+          </a>
+          <a class="wait" href="testing-schedule.html#COSMIC-007" style="text-decoration:none;color:inherit;">
+            <img src="mission-marks/midnight-orion.svg" alt="">
+            <div><h3>Midnight Orion <span class="id">COSMIC-007</span></h3><p>A preferred direction in galaxy distributions beyond 100 Mpc, toward (l, b) ≈ (210°, −20°).</p></div>
+            <div class="when">Mid-2028<small>Rubin DR1</small></div>
+          </a>
+        </div>
+        <p class="note">Dates are the observatories' own estimates and move when theirs do. Full details are on the <a href="testing-schedule.html">testing schedule</a>.</p>
+      </div>
+    </section>
+
+    <section class="start-next" aria-labelledby="start-next-title">
+    <div class="start-next-inner">
+      <div>
+        <p class="eyebrow">Start Here · Next step</p>
+        <h2 id="start-next-title">Follow the Quest</h2>
+        <p>The Quest is told as a video series, with a written companion here for every episode. Follow it on YouTube or by email.</p>
+      </div>
+      <a href="quest-follow.html?start=1" class="q-btn q-btn-primary">Follow the Quest</a>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Social Section -->
+    <section class="social-section">
+    <div class="social-container">
+    <div class="social-content">
+    <div class="quick-links">
+    <h3>Quick Links</h3>
+    <ul>
+    <li><a href="about-page.html">About</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contribute.html">Contribute</a></li>
+    </ul>
+    </div>
+    
+    <div class="social-main">
+    <h2 data-aos="fade-up">Stay Connected</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Questions, corrections and challenges are welcome by email. Community discussions open soon.</p>
+    
+    <div class="social-buttons" data-aos="fade-up" data-aos-delay="200">
+    <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+    Instagram
+    </a>
+    
+    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&amp;si=vSqcIFxxo68LdkWD" target="_blank" rel="noopener" class="social-btn youtube">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+    YouTube
+    </a>
+    
+    <a href="mailto:ic2.info@proton.me" class="social-btn email">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>
+    Email Us
+    </a>
+    </div>
+    </div>
+    
+    <div class="quick-links">
+    <h3>More Links</h3>
+    <ul>
+    <li><a href="https://michaelkbaines.com">Author's Website</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="simulations.html">Simulations</a></li>
+    <li><a href="framework.html">Framework</a></li>
+    <li><a href="legal.html">Legal</a></li>
+    </ul>
+    </div>
+    </div>
+    
+    <div class="copyright">
+    <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a></p>
+    </div>
+    </div>
+    </section>
+
+  <script>
+    // Starfield, as on the book pages
+    (function () {
+      var c = document.getElementById('stars-canvas'); if (!c) return;
+      var x = c.getContext('2d'), s = [];
+      function size() { c.width = innerWidth; c.height = innerHeight; }
+      size(); addEventListener('resize', size);
+      for (var i = 0; i < 180; i++) s.push({ x: Math.random() * c.width, y: Math.random() * c.height,
+        r: Math.random() * 1.5, vx: Math.random() * .4 - .2, vy: Math.random() * .4 - .2, o: Math.random() });
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      (function draw() {
+        x.clearRect(0, 0, c.width, c.height); x.fillStyle = '#fff';
+        s.forEach(function (p) {
+          x.globalAlpha = p.o; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill();
+          if (still) return;
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > c.width) p.vx *= -1; if (p.y < 0 || p.y > c.height) p.vy *= -1;
+          p.o = Math.max(.2, Math.min(1, p.o + (Math.random() - .5) * .02));
+        });
+        x.globalAlpha = 1; if (!still) requestAnimationFrame(draw);
+      })();
+    })();
+  </script>
+  <script src="phone-menu.js" defer></script>
+<!-- goatcounter:start -->
+<script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- goatcounter:end -->
+</body>
+</html>
