@@ -506,32 +506,39 @@ h1, h2 {
    public section. On a phone the menu folds into the shared phone menu and
    the family bar stays in view. */
 .bigtoe-header .main-navigation a[aria-current] { color: #f1e303; }
-.family-bar { border-bottom: 1px solid rgba(255, 255, 255, .1); background: rgba(255, 255, 255, .03); }
+.family-bar { border-bottom: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .05); }
 .family-bar ul {
-  list-style: none; margin: 0 auto; padding: .3rem 2rem; max-width: 1200px;
-  display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .25rem 1.5rem;
+  list-style: none; margin: 0 auto; padding: .45rem 2rem; max-width: 1200px;
+  display: flex; align-items: center; flex-wrap: wrap; gap: .4rem 1.75rem;
 }
 .family-bar li { margin: 0; }
-.family-bar a {
-  color: rgba(255, 255, 255, .62); text-decoration: none; white-space: nowrap;
-  font: 500 .8rem/1.5 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  letter-spacing: .02em; transition: color .2s ease;
+.family-bar img { height: 24px; width: auto; display: block; opacity: .88; transition: opacity .2s ease; }
+.family-bar a:hover img, .family-bar a:focus-visible img { opacity: 1; }
+/* the sibling public section, with a line saying why to go there */
+.family-bar .fam-feature { margin-left: auto; }
+.family-bar .fam-feature img { height: 26px; opacity: 1; }
+.family-bar .fam-text {
+  color: rgba(255, 255, 255, .85); white-space: nowrap;
+  font: 500 .85rem/1.3 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-bottom: 1px solid rgba(241, 227, 3, .5); transition: color .2s ease;
 }
-.family-bar a:hover { color: #ffffff; }
+.family-bar .fam-feature a:hover .fam-text { color: #f1e303; }
 .quest-header .site-logo img { height: 40px; width: auto; }
 /* one header height on every public page, whatever the page's own rules say */
 .bigtoe-header .header-container { padding: .5rem 2rem !important; }
-.bigtoe-header .family-bar ul { margin: 0 auto !important; padding: .3rem 2rem !important; }
-.bigtoe-header .family-bar a { display: inline; padding: 0 !important; margin: 0 !important; }
+.bigtoe-header .family-bar ul { margin: 0 auto !important; padding: .45rem 2rem !important; }
+.bigtoe-header .family-bar a { display: inline-flex; align-items: center; gap: .6rem; padding: 0 !important; margin: 0 !important; text-decoration: none; }
 @media (max-width: 900px) {
   .bigtoe-header .header-container { padding: .5rem 1rem !important; }
-  .bigtoe-header .family-bar ul { padding: .3rem 1rem !important; }
+  .bigtoe-header .family-bar ul { padding: .4rem 1rem !important; }
 }
 html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 @media (max-width: 900px) {
-  .family-bar ul { justify-content: center; gap: .2rem 1.1rem; padding: .3rem 1rem; }
+  .family-bar ul { gap: .3rem 1.1rem; }
+  .family-bar img { height: 20px; }
+  .family-bar .fam-feature img { height: 22px; }
 }
-@media (max-width: 480px) { .family-bar .fb-long { display: none; } }
+@media (max-width: 560px) { .family-bar .fam-text { display: none; } }
 /* the Quest has three links, so its menu stays out until phone width */
 @media (min-width: 901px) and (max-width: 1100px) {
   .quest-header.bigtoe-header[data-phone-menu] .main-navigation { display: block; }
