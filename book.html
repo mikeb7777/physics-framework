@@ -665,6 +665,51 @@
     text-align: center;
     }
     }
+
+    /* Read the Opening */
+    .book-read { background: #ffffff; padding: 5rem 2rem; }
+    .read-wrap { max-width: 820px; }
+    .book-read .tagline, .book-read .section-title { color: var(--primary-color); }
+    .book-read .section-title { margin-bottom: 2rem; }
+    .excerpt { margin: 0; }
+    .excerpt blockquote { margin: 0; padding: 0 0 0 1.75rem; border-left: 4px solid var(--primary-color); }
+    .excerpt p { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.2rem; line-height: 1.8; color: #2c3e50; margin: 0 0 1.1rem; }
+    .excerpt .excerpt-turn { font-weight: 700; font-size: 1.35rem; color: var(--primary-color); }
+    .excerpt .excerpt-gap { text-align: center; color: #8fa0b0; letter-spacing: .5em; margin: 1.5rem 0; }
+    .excerpt figcaption { margin-top: 1.25rem; padding-left: 1.75rem; color: #5a6878; font-size: .95rem; }
+    .excerpt cite { font-style: italic; }
+    .read-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.5rem; }
+    .read-cta .read-secondary { background: #ffffff; color: var(--primary-color); border: 2px solid var(--primary-color); }
+    .read-cta .read-secondary:hover { background: var(--primary-color); color: #ffffff; }
+
+    /* Twenty-One Elements */
+    .book-contents { padding: 5rem 2rem; }
+    .contents-lede { max-width: 760px; margin: -1.5rem auto 2.5rem; text-align: center; color: rgba(255,255,255,.85); font-size: 1.05rem; line-height: 1.75; }
+    .contents-list { list-style: none; max-width: 1000px; margin: 0 auto; padding: 0; columns: 2; column-gap: 3rem; }
+    .contents-list li { break-inside: avoid; display: flex; gap: .9rem; align-items: baseline; padding: .55rem 0; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.9); }
+    .contents-list .num { flex: 0 0 2.6rem; color: #f1e303; font-weight: 700; font-size: .9rem; }
+    .contents-list .contents-intro { color: #ffffff; font-weight: 600; }
+    .start-tag { flex: none; margin-left: auto; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1a1a2e; background: #f1e303; border-radius: 10px; padding: .1rem .5rem; }
+
+    /* A Living Book, Why We Test, About the Author */
+    .book-why { background: #ffffff; padding: 4.5rem 2rem; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .why-col { border-top: 4px solid var(--primary-color); padding-top: 1.25rem; }
+    .why-col .tagline { color: var(--primary-color); text-align: left; }
+    .why-col h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: #2c3e50; margin-bottom: .75rem; }
+    .why-col p { color: #2c3e50; line-height: 1.75; margin-bottom: 1rem; }
+    .why-link { color: var(--primary-color); font-weight: 600; text-decoration: none; }
+    .author-photo { float: right; width: 96px; height: 120px; object-fit: cover; object-position: 50% 20%; border-radius: 6px; margin: 0 0 .75rem 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+    .why-link:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+    .contents-list { columns: 1; }
+    .why-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+    .book-read, .book-contents, .book-why { padding: 3.5rem 1.25rem; }
+    .excerpt blockquote { padding-left: 1.1rem; }
+    .excerpt p { font-size: 1.08rem; }
+    }
     </style>
     <link rel="stylesheet" href="site-consistency.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -744,58 +789,88 @@
     </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="band-rule features-section">
-    <div class="section-container">
-    <p class="tagline eyebrow eyebrow-center" data-aos="fade-up">Inside the Book</p>
-    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">A Comprehensive Framework</h2>
-    
-    <div class="features-grid">
-    <div class="feature-card" style="--accent-color: #f1e303;" data-aos="fade-up" data-aos-delay="200">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f1e303'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" class="feature-icon" alt="Testable Predictions">
-    <h3>Accessible Language</h3>
-    <p>Hard ideas in plain language, for any reader curious about how the universe works.</p>
-    </div>
-    
-    <div class="feature-card" style="--accent-color: #005ba5;" data-aos="fade-up" data-aos-delay="300">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23005ba5'%3E%3Cpath d='M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z'/%3E%3C/svg%3E" class="feature-icon" alt="Timeline">
-    <h3>Simulated Concepts</h3>
-    <p>Simulations and diagrams that make abstract mathematics easier to picture.</p>
-    </div>
-    
-    <div class="feature-card" style="--accent-color: #e33d2f;" data-aos="fade-up" data-aos-delay="400">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e33d2f'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E" class="feature-icon" alt="Mathematical Framework">
-    <h3>Explorative Nature</h3>
-    <p>An invitation to question the foundations of reality, built on testable predictions and a transparent method.</p>
-    </div>
+    <!-- Read the Opening -->
+    <section id="read" class="band-rule book-read">
+    <div class="section-container read-wrap">
+    <p class="tagline eyebrow eyebrow-center" data-aos="fade-up">Read the Opening</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Nothing Is Touching Anything</h2>
+    <figure class="excerpt" data-aos="fade-up" data-aos-delay="150">
+    <blockquote>
+    <p>Right now, stop reading and press your finger firmly against this page or your screen. Feel that resistance: solid, immediate, undeniable. Your senses are telling you that two separate objects are making contact, that matter is touching matter.</p>
+    <p class="excerpt-turn">Your senses are wrong.</p>
+    <p>Nothing is touching anything. What you’re feeling is an electromagnetic standoff. The electron clouds in your fingertip and the electron clouds in the screen are holding each other at bay across distances measured in billionths of a meter.</p>
+    <p>The sensation of “solid contact” is your nervous system’s interpretation of a dynamic equilibrium between repulsive fields, a relationship rather than a collision. There is no touch. There is only the appearance of touch, assembled in real time by your brain from information about forces it can never directly perceive.</p>
+    <p>That’s the deepest illusion in existence. And it runs all the way down.</p>
+    <p class="excerpt-gap" aria-hidden="true">· · ·</p>
+    <p>Color, perhaps, offers the clearest case; it exists nowhere until particular wavelengths of electromagnetic radiation meet the particular photoreceptors in your particular visual system. The apple carries reflectance properties. The color is the meeting.</p>
+    <p>Structural coloration makes this even more precise. The Morpho butterfly’s wings contain no blue pigment. Their iridescent blue exists entirely in the geometry of microscopic, layered structures that interact with light through interference.</p>
+    <p>Remove the structure and the color vanishes completely.</p>
+    </blockquote>
+    <figcaption>From Element 1, <cite>Reality is Fundamentally Relational</cite></figcaption>
+    </figure>
+    <div class="read-cta">
+    <a href="download.html" class="btn btn-primary">Download the Book</a>
+    <a href="conversion.html" class="btn read-secondary">Other Formats</a>
     </div>
     </div>
     </section>
 
-    <!-- Validation Section -->
-    <section class="band-rule validation-section">
+    <!-- What's Inside -->
+    <section id="contents" class="band-rule book-contents">
     <div class="section-container">
-    <p class="tagline eyebrow eyebrow-center" data-aos="fade-up">What We Keep</p>
-    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Conventional Physics</h2>
-    
-    <div class="validation-cards">
-    <div class="validation-card" style="--accent-color: #e33d2f;">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e33d2f'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z'/%3E%3C/svg%3E" alt="No Extra Dimensions" style="height: 60px;">
-    <h3>No Extra<br>Dimensions</h3>
-    <p>The COSMIC Framework works entirely within the four dimensions we observe: three spatial dimensions and time. No hidden dimensions required.</p>
+    <p class="tagline eyebrow eyebrow-center" data-aos="fade-up">Inside the Book</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Twenty-One Elements</h2>
+    <p class="contents-lede" data-aos="fade-up" data-aos-delay="150">An introduction, twenty-one elements that each follow one idea as far as the evidence goes, and a conclusion. The framework keeps what physics has already confirmed: the four dimensions we observe, with no hidden ones, and the Standard Model and quantum mechanics intact. New to physics? Elements 1, 2 and 3 need little background, so start there.</p>
+    <ol class="contents-list" data-aos="fade-up" data-aos-delay="200">
+            <li class="contents-intro"><span class="num">Intro</span>The First Distinction: Where One Thing Becomes Everything</li>
+            <li><span class="num">1</span>Reality is Fundamentally Relational <span class="start-tag">Start here</span></li>
+            <li><span class="num">2</span>Landauer’s Principle: Physical Information <span class="start-tag">Start here</span></li>
+            <li><span class="num">3</span>The Universe Processes Information Necessarily <span class="start-tag">Start here</span></li>
+            <li><span class="num">4</span>Rotation and Circular Optimization in Nature</li>
+            <li><span class="num">5</span>Four Forces as a Complete Information System</li>
+            <li><span class="num">6</span>Consciousness as a Cosmic Interface</li>
+            <li><span class="num">7</span>Neural Network Cosmos</li>
+            <li><span class="num">8</span>Gravity Emerges from Information Patterns</li>
+            <li><span class="num">9</span>Quantization from Information Optimization</li>
+            <li><span class="num">10</span>CMB Mathematical Patterns</li>
+            <li><span class="num">11</span>Cross-Frequency Validation</li>
+            <li><span class="num">12</span>The Time Gradient</li>
+            <li><span class="num">13</span>Quantum Memory Matrix: A Theoretical Framework</li>
+            <li><span class="num">14</span>Mathematical Constants in Physics</li>
+            <li><span class="num">15</span>Information and Spacetime</li>
+            <li><span class="num">16</span>Universal Precision: The Fine-Tuning Mystery</li>
+            <li><span class="num">17</span>Vision as Reality Construction</li>
+            <li><span class="num">18</span>Enhancement Through Mathematical Fields</li>
+            <li><span class="num">19</span>Black Hole Information: The Ultimate Test</li>
+            <li><span class="num">20</span>Quantum Information Scrambling: How Fast Does Information Spread?</li>
+            <li><span class="num">21</span>Quantum Error Correction: Information Preservation in Practice</li>
+            <li class="contents-intro"><span class="num">End</span>Conclusion: An Information-First Framework for Physics</li>
+    </ol>
     </div>
-    
-    <div class="validation-card" style="--accent-color: #005ba5;">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23005ba5'%3E%3Ccircle cx='12' cy='12' r='10' stroke='%23005ba5' stroke-width='2' fill='none'/%3E%3C/svg%3E" alt="Standard Model" style="height: 60px;">
-    <h3>Standard<br>Model</h3>
-    <p>Keeps the Standard Model and quantum mechanics intact. Established physics stays valid in every domain where it has been tested.</p>
+    </section>
+
+    <!-- A Living Book, Why We Test, About the Author -->
+    <section class="band-rule book-why">
+    <div class="section-container why-grid">
+    <div class="why-col" data-aos="fade-up">
+    <p class="tagline eyebrow">A Living Book</p>
+    <h3>Revised in Public</h3>
+    <p>The book is revised in the open. Readers can suggest corrections, accepted changes are credited, and every edition is kept with a note of what changed and why, so anyone can see when an idea first appeared.</p>
+    <a href="download.html#versions" class="why-link">See every edition</a>
     </div>
-    
-    <div class="validation-card" style="--accent-color: #f1e303;">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f1e303'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E" alt="Mathematical Rigor" style="height: 60px;">
-    <h3>Mathematical<br>Rigor</h3>
-    <p>Worked derivations from stated principles. Every prediction is published with the result that would count against it.</p>
+    <div class="why-col" data-aos="fade-up" data-aos-delay="100">
+    <p class="tagline eyebrow">Why We Test</p>
+    <h3>Questions We Could Not Ask Before</h3>
+    <p>We have an idea. We know it is not completely wrong, because most of what it rests on is the Standard Model, among the most thoroughly tested theories in science. What we do not yet know is which of the new parts will hold. The path toward that answer will raise questions we could not have formulated without asking the first ones. That is why we test: not to win or lose, but to find out.</p>
+    <a href="quest-map.html" class="why-link">Follow the tests on the Quest Map</a>
     </div>
+    <div class="why-col" data-aos="fade-up" data-aos-delay="200">
+    <p class="tagline eyebrow">About the Author</p>
+    <!-- placeholder photo from michaelkbaines.com until a portrait is supplied -->
+    <img src="https://www.michaelkbaines.com/michael-k-baines-photo.jpg" alt="Michael K. Baines" class="author-photo" width="120" height="150" loading="lazy">
+    <h3>Michael K. Baines</h3>
+    <p>An aerospace engineer by training, with a career at Bombardier in Montreal on the C Series program, at Boeing and at Jacobs Engineering Group. In aerospace, every design change is documented and every part is tested before it flies. This book is written the same way. He is an independent researcher based in Bangkok and founded the Ic² Research Institute.</p>
+    <a href="https://orcid.org/0009-0001-8084-3870" target="_blank" rel="noopener" class="why-link">ORCID profile</a>
     </div>
     </div>
     </section>
