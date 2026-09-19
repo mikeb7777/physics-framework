@@ -506,15 +506,13 @@ h1, h2 {
    public section. On a phone the menu folds into the shared phone menu and
    the family bar stays in view. */
 .bigtoe-header .main-navigation a[aria-current] { color: #f1e303; }
-.family-bar { border-bottom: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .05); }
+.family-bar { border-bottom: 1px solid #e0e0e0; background: #ffffff; }
 .family-bar ul {
   list-style: none; margin: 0 auto; padding: .45rem 2rem; max-width: 1200px;
   display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: .4rem 1.75rem;
 }
 .family-bar li { margin: 0; }
 .family-bar img { height: 24px; width: auto; display: block; transition: transform .2s ease; }
-/* the Framework logo carries room for its outlined O, so it runs a little taller */
-.family-bar img[src*="framework-logo-white"] { height: 28px; }
 .family-bar a:hover img, .family-bar a:focus-visible img { transform: translateY(-1px); }
 .quest-header .site-logo img { height: 40px; width: auto; }
 /* one header height on every public page, whatever the page's own rules say */
@@ -529,7 +527,6 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 @media (max-width: 900px) {
   .family-bar ul { gap: .3rem 1.1rem; }
   .family-bar img { height: 20px; }
-  .family-bar img[src*="framework-logo-white"] { height: 23px; }
 }
 @media (max-width: 560px) { .family-bar ul { justify-content: center; } }
 /* the Quest has three links, so its menu stays out until phone width */
@@ -572,6 +569,56 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 /* In the phone menu each link is a flex row, which drops the space inside
    "Member " and reads "MemberLogin"; this puts it back. */
 .pm-menu .ml-word { margin-right: .28em; }
+/* The Quest carries its logo in the white bar, where its red reads best; the
+   black row below holds its links on the left and the member button right. */
+.family-bar .fam-lead { margin-right: auto; }
+.family-bar .fam-lead img { height: 34px; }
+.quest-header .header-container { min-height: 56px; }
+.quest-header .main-navigation { flex: 1; }
+.quest-header .main-navigation ul { justify-content: flex-start; width: 100%; }
+.quest-header .main-navigation .nav-member { margin-left: auto; }
+.quest-header .family-bar ul { justify-content: flex-end !important; }
+@media (max-width: 900px) { .family-bar .fam-lead img { height: 28px; } }
+/* on a phone the Quest bar keeps only its own logo; the footer links the rest */
+@media (max-width: 560px) { .quest-header .family-bar li:not(.fam-lead) { display: none; } }
+
+/* -- The public footer ------------------------------------------------------
+   One footer for the Book and the Quest: the book and the contact buttons on
+   the left, link columns in the bottom right as on the institute pages. */
+.pub-footer { background: #000000 !important; color: #ffffff; padding: 3rem 2rem 1.25rem; margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, .1); text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+.pub-footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.25fr; gap: 3rem; align-items: start; }
+.pub-logo { height: 44px; width: auto; display: block; margin-bottom: 1rem; }
+.pub-about p { color: rgba(255, 255, 255, .78); font-size: .95rem; line-height: 1.7; max-width: 440px; margin: 0 0 1.25rem; }
+.pub-social { display: flex; flex-wrap: wrap; gap: .6rem; }
+.pub-social a { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem 1rem; border-radius: 6px;
+  color: #ffffff; font-weight: 600; font-size: .9rem; text-decoration: none; transition: transform .2s ease; }
+.pub-social a:hover { transform: translateY(-2px); }
+.pub-social svg { width: 20px; height: 20px; }
+.pub-social .instagram { background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
+.pub-social .youtube { background: #FF0000; }
+.pub-social .email { background: #0072C6; }
+.pub-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; justify-self: end; width: 100%; max-width: 580px; }
+.pub-links h3 { color: #ffffff; margin: 0 0 .9rem; letter-spacing: .01em;
+  font: 600 1rem/1.3 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+.pub-links ul { list-style: none; margin: 0; padding: 0; }
+.pub-links li { margin: 0 0 .5rem; }
+.pub-links a { color: rgba(255, 255, 255, .72); text-decoration: none; font-size: .92rem; transition: color .2s ease; }
+.pub-links a:hover { color: #f1e303; }
+.pub-footer-bottom { max-width: 1200px; margin: 2.5rem auto 0; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, .1);
+  text-align: center; color: rgba(255, 255, 255, .5); font-size: .82rem; }
+.pub-footer-bottom p { margin: 0; }
+.pub-footer-bottom a { color: rgba(255, 255, 255, .62); text-decoration: none; }
+.pub-footer-bottom a:hover { color: #ffffff; }
+@media (max-width: 900px) {
+  .pub-footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .pub-links { justify-self: start; }
+}
+@media (max-width: 560px) {
+  .pub-footer { padding: 2.5rem 1.25rem 1rem; }
+  .pub-links { grid-template-columns: 1fr 1fr; }
+}
 /* == bigtoe-header:end == */
 
 /* == login-pill:start == */
@@ -637,3 +684,16 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 :focus-visible { outline: 3px solid #f1e303; outline-offset: 3px; box-shadow: 0 0 0 5px #1a1a2e; }
 [tabindex="-1"]:focus { outline: none; box-shadow: none; }
 /* == a11y:end == */
+
+/* == button-shapes:start == */
+/* -- Two button shapes ------------------------------------------------------
+   Actions (download, start, send, subscribe, contact) are rounded rectangles
+   with 6px corners, the site's standard. Pills are kept for Member Login and
+   for filter chips, which are on/off choices rather than actions. The
+   back-to-top button stays a circle. */
+a.start-btn, a.btn-sm, a.social-btn, .pub-social a, a.cta-button, a.cta-button-large,
+a.btn-pill, a.path-btn, button.submit-btn, button.btn-submit, button.btn-submit-edit,
+button.sf-submit-btn, button.toggle-button, .quick-nav-inner a, .contact-box a, .cta-section > a,
+a[href$="cosmic-framework-poster.pdf"] { border-radius: 6px !important; }
+button.category-btn { border-radius: 999px !important; }
+/* == button-shapes:end == */
