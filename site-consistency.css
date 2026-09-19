@@ -498,31 +498,44 @@ h1, h2 {
 /* == eyebrow:end == */
 
 /* == bigtoe-header:start == */
-/* -- The Big TOE pages -----------------------------------------------------
-   Book, download, formats, references, appendices and glossary share one
-   header: the site's main menu on the black band, "Big TOE" lit in yellow,
-   and a book bar underneath with the book's own pages. On a phone the main
-   menu folds into the shared phone menu and the book bar scrolls sideways. */
+/* -- The public pages: the Book and the Quest ------------------------------
+   The Book and the Quest are for the public; the Ic² Research Institute is
+   where the ideas are tested, developed and analyzed. Their headers carry
+   only their own pages, lit in yellow for the current one, and a slim family
+   bar at the top links back to the institute, the Framework and the other
+   public section. On a phone the menu folds into the shared phone menu and
+   the family bar stays in view. */
 .bigtoe-header .main-navigation a[aria-current] { color: #f1e303; }
-.book-bar { border-top: 1px solid rgba(255, 255, 255, .12); }
-.book-bar ul {
-  list-style: none; margin: 0 auto; padding: 0 2rem; max-width: 1200px;
-  display: flex; justify-content: center; gap: 1.75rem;
-  overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+.family-bar { border-bottom: 1px solid rgba(255, 255, 255, .1); background: rgba(255, 255, 255, .03); }
+.family-bar ul {
+  list-style: none; margin: 0 auto; padding: .3rem 2rem; max-width: 1200px;
+  display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .25rem 1.5rem;
 }
-.book-bar ul::-webkit-scrollbar { display: none; }
-.book-bar li { margin: 0; }
-.book-bar a {
-  display: block; padding: .6rem 0 .5rem; border-bottom: 2px solid transparent;
-  color: rgba(255, 255, 255, .72); text-decoration: none;
-  font: 500 .875rem/1.2 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  letter-spacing: .02em; transition: color .2s ease, border-color .2s ease;
+.family-bar li { margin: 0; }
+.family-bar a {
+  color: rgba(255, 255, 255, .62); text-decoration: none; white-space: nowrap;
+  font: 500 .8rem/1.5 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: .02em; transition: color .2s ease;
 }
-.book-bar a:hover { color: #ffffff; }
-.book-bar a[aria-current="page"] { color: #f1e303; border-bottom-color: #f1e303; }
-html:has(.bigtoe-header) { scroll-padding-top: 7.5rem; }
+.family-bar a:hover { color: #ffffff; }
+.quest-header .site-logo img { height: 40px; width: auto; }
+/* one header height on every public page, whatever the page's own rules say */
+.bigtoe-header .header-container { padding: .5rem 2rem !important; }
+.bigtoe-header .family-bar ul { margin: 0 auto !important; padding: .3rem 2rem !important; }
+.bigtoe-header .family-bar a { display: inline; padding: 0 !important; margin: 0 !important; }
 @media (max-width: 900px) {
-  .book-bar ul { justify-content: flex-start; gap: 1.35rem; padding: 0 1rem; }
+  .bigtoe-header .header-container { padding: .5rem 1rem !important; }
+  .bigtoe-header .family-bar ul { padding: .3rem 1rem !important; }
+}
+html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
+@media (max-width: 900px) {
+  .family-bar ul { justify-content: center; gap: .2rem 1.1rem; padding: .3rem 1rem; }
+}
+@media (max-width: 480px) { .family-bar .fb-long { display: none; } }
+/* the Quest has three links, so its menu stays out until phone width */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .quest-header.bigtoe-header[data-phone-menu] .main-navigation { display: block; }
+  .quest-header.bigtoe-header .pm-toggle { display: none; }
 }
 /* The Big TOE logo is wider than the institute's, so its header folds into
    the phone menu below 1100px instead of 900px. Same rules, wider range. */
