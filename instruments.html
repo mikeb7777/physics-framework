@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Instruments | The Quest</title>
+  <meta name="description" content="The telescopes and surveys that will decide the COSMIC Framework's registered predictions: what each instrument is, who built it, what it has already found, and which mission it settles.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary-color: #8B0000; --yellow: #f1e303; --max-width: 1200px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6; color: #ffffff; overflow-x: clip; }
+    #stars-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1;
+      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+    a { color: var(--yellow); }
+
+    /* header: the Big TOE band */
+    .site-header { background: rgba(0,0,0,.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.1);
+      position: sticky; top: 0; z-index: 1000; }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: .5rem 2rem; display: flex;
+      justify-content: space-between; align-items: center; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.75rem; align-items: center; }
+    .main-navigation a { color: #ffffff; text-decoration: none; }
+    .main-navigation a:hover { color: var(--yellow); }
+    .quest-bar .bar-label { color: var(--yellow); font: 700 .72rem/1 'IBM Plex Sans', sans-serif; letter-spacing: .14em;
+      text-transform: uppercase; align-self: center; padding-right: .25rem; }
+
+    /* Start Here strip, shown when the visitor arrives with ?start */
+    .start-path { display: none; background: #1a1a2e; border-bottom: 3px solid var(--yellow); padding: .7rem 1.5rem; }
+    .start-path ol { max-width: var(--max-width); margin: 0 auto; list-style: none; display: flex; flex-wrap: wrap;
+      align-items: center; gap: .4rem 1.4rem; color: rgba(255,255,255,.88); font-size: .95rem; }
+    .start-path .start-label { color: var(--yellow); font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+    .start-path a { color: rgba(255,255,255,.88); text-underline-offset: 3px; }
+    .start-path a[aria-current="page"] { color: #ffffff; font-weight: 700; text-decoration: none; }
+    .start-path .start-side { color: rgba(255,255,255,.6); font-size: .85rem; }
+
+    /* page */
+    .q-hero { padding: 5rem 2rem 3rem; text-align: center; }
+    .q-logo { display: block; width: min(440px, 90%); height: auto; margin: 0 auto 1.75rem; }
+    .q-hero .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      max-width: 520px; margin: 0 auto 1rem; }
+    /* page titles set like the Quest logo: Impact, brand red, a pale outline */
+    .q-hero h1 { font-family: Impact, 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; font-size: 4.25rem;
+      line-height: 1.05; letter-spacing: .01em; color: #8B0000; margin-bottom: 1.25rem;
+      text-shadow: 2px 0 #fff4c2, -2px 0 #fff4c2, 0 2px #fff4c2, 0 -2px #fff4c2,
+        1.5px 1.5px #fff4c2, -1.5px -1.5px #fff4c2, 1.5px -1.5px #fff4c2, -1.5px 1.5px #fff4c2; }
+    .q-hero p { font-size: 1.2rem; color: rgba(255,255,255,.88); max-width: 720px; margin: 0 auto; }
+    .q-hero .updated { font-size: .85rem; color: rgba(255,255,255,.55); margin-top: 1rem; }
+    .q-section { padding: 3rem 2rem; }
+    .q-inner { max-width: var(--max-width); margin: 0 auto; }
+    .q-section h2 { font-size: 2rem; margin-bottom: .5rem; }
+    .q-section .lede { color: rgba(255,255,255,.8); max-width: 760px; margin-bottom: 2rem; }
+    .q-light { background: #ffffff; color: #2c3e50; }
+    .q-light .lede { color: #5a6878; }
+    .q-light a { color: #8B0000; }
+    .q-light .eyebrow { color: var(--primary-color); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+    .q-section:not(.q-light) .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+
+    /* instrument cards: QCD pairs, color on the bottom edge */
+    .rigs { display: grid; gap: 1.5rem; }
+    .rig { background: var(--bg); border-bottom: 5px solid var(--edge); border-radius: 10px; overflow: hidden; }
+    .rig-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; padding: 1.4rem 1.6rem .6rem; }
+    .rig-head h3 { font: 700 1.5rem/1.2 'Source Serif 4', Georgia, serif; color: #ffffff; }
+    .rig-where { color: rgba(255,255,255,.8); font-size: .95rem; }
+    .rig-mission { margin-left: auto; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: #1a1a2e; background: var(--yellow); border-radius: 12px; padding: .2rem .7rem; white-space: nowrap; }
+    .rig-body { padding: 0 1.6rem 1.5rem; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .rig-body h4 { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: .4rem; }
+    .rig-body p { color: rgba(255,255,255,.92); line-height: 1.7; font-size: .97rem; }
+    .rig-body p + p { margin-top: .6rem; }
+    .rig-spec { list-style: none; }
+    .rig-spec li { color: rgba(255,255,255,.92); font-size: .95rem; padding: .3rem 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .rig-spec li:last-child { border-bottom: 0; }
+    .rig-spec b { color: #ffffff; }
+
+    /* the two-sided ledger */
+    .ledger { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 1.5rem; }
+    .led { border-radius: 10px; padding: 1.5rem; }
+    .led-works { background: #0f3d2e; border-bottom: 5px solid #f1e303; }
+    .led-slips { background: #5a2a00; border-bottom: 5px solid #00bcd4; }
+    .led h3 { font: 700 1.2rem/1.3 'Source Serif 4', Georgia, serif; color: #ffffff; margin-bottom: .75rem; }
+    .led p, .led li { color: rgba(255,255,255,.9); font-size: .95rem; line-height: 1.7; }
+    .led ul { list-style: none; }
+    .led li { padding-left: 1.1rem; position: relative; margin-bottom: .5rem; }
+    .led li::before { content: ''; position: absolute; left: 0; top: .65em; width: .4rem; height: .4rem;
+      background: var(--yellow); border-radius: 50%; }
+    .balance { background: rgba(255,255,255,.06); border-left: 4px solid var(--yellow); border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem; }
+    .balance p { color: rgba(255,255,255,.9); line-height: 1.75; max-width: 80ch; }
+    .balance p + p { margin-top: .75rem; }
+
+    /* sources */
+    .srcs { list-style: none; counter-reset: s; }
+    .srcs li { counter-increment: s; color: rgba(255,255,255,.75); font-size: .88rem; line-height: 1.7;
+      padding-left: 1.8rem; position: relative; margin-bottom: .4rem; }
+    .srcs li::before { content: counter(s) "."; position: absolute; left: 0; color: var(--yellow); font-weight: 700; }
+    .q-light .srcs li { color: #5a6878; }
+    .q-light .srcs li::before { color: var(--primary-color); }
+
+    @media (max-width: 700px) {
+      .q-hero h1 { font-size: 2.6rem; }
+      .rig-mission { margin-left: 0; }
+    }
+
+    /* footer, as on the book pages */
+.social-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+.social-content {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+.quick-links h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    }
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+    }
+.quick-links li {
+    margin-bottom: 0.75rem;
+    }
+.quick-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+    }
+.quick-links a:hover {
+    color: white;
+    }
+.social-main {
+    text-align: center;
+    }
+.social-main h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    }
+.social-main p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    }
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    }
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    }
+.copyright a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+.copyright a:hover {
+    color: rgba(255, 255, 255, 0.9);
+    }
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: white;
+    }
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+.social-btn.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+.social-btn.youtube {
+    background: #FF0000;
+    }
+.social-btn.email {
+    background: #0072C6;
+    }
+.social-icon {
+    width: 24px;
+    height: 24px;
+    }
+.social-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+.quick-links {
+    text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="site-consistency.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="canonical" href="https://eequalsicsquared.com/quest-map.html">
+  <meta property="og:site_name" content="Ic² Research Institute">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Quest Map | Ic² Research Institute">
+  <meta property="og:description" content="Where the COSMIC Framework stands on the road from an idea to acceptance, rejection or modification: the stages, the four routes and the data still to come.">
+  <meta property="og:url" content="https://eequalsicsquared.com/quest-map.html">
+  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header bigtoe-header quest-header" data-phone-menu>
+    <nav class="family-bar" aria-label="The Quest and related sites">
+        <ul>
+        <li class="fam-lead"><a href="quest-map.html"><img src="quest-logo-color.svg" alt="The Quest"></a></li>
+        <li><a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a></li>
+        <li><a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a></li>
+        <li><a href="book.html"><img src="bigtoeindexlogo.png" alt="A Quest for The Big TOE"></a></li>
+        </ul>
+    </nav>
+    <div class="header-container">
+        <nav class="main-navigation" aria-label="The Quest">
+            <ul>
+            <li><a href="quest-map.html">Map</a></li>
+            <li><a href="instruments.html" aria-current="page">Instruments</a></li>
+            <li><a href="quest-follow.html#episodes">Episodes</a></li>
+            <li><a href="quest-follow.html">Follow</a></li>
+            <li class="nav-member"><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="btn-login"><span class="ml-word">Member </span>Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+  <main id="main-content" tabindex="-1">
+
+    <section class="q-hero">
+      <p class="eyebrow">The Quest</p>
+      <h1>THE INSTRUMENTS</h1>
+      <p>We do not own a telescope. Every prediction this institute has registered will be decided by
+      machines other people designed, funded and built, using data they release to anyone who asks.
+      These are those machines.</p>
+      <p class="updated">Last updated 21 September 2026</p>
+    </section>
+
+    <section class="q-section">
+      <div class="q-inner">
+        <p class="eyebrow">Why this page exists</p>
+        <h2>Our tests are only as good as somebody else's engineering</h2>
+        <p class="lede">An outsider cannot apply for instrument time, so the outsider's strategy is to
+        predict something that a major survey is going to measure anyway, say it in public before the
+        data arrives, and then accept the answer. That makes these instruments the deciding authority in
+        the Quest. It is worth knowing what they are, who built them, and what they have already found,
+        because the answer arrives on their schedule, not ours.</p>
+      </div>
+    </section>
+
+    <section class="q-section">
+      <div class="q-inner">
+        <p class="eyebrow">The platforms</p>
+        <h2>Three machines, three registered missions</h2>
+        <div class="rigs">
+
+          <div class="rig" style="--bg:#005ba5; --edge:#f1e303;">
+            <div class="rig-head">
+              <h3>DESI</h3>
+              <span class="rig-where">Dark Energy Spectroscopic Instrument &middot; Kitt Peak, Arizona</span>
+              <span class="rig-mission">Midnight Eridanus &middot; COSMIC-005</span>
+            </div>
+            <div class="rig-body">
+              <div>
+                <h4>Bio</h4>
+                <p>DESI sits on the 4-meter Mayall Telescope, a 1970s instrument given a second life.
+                Its focal plane holds 5,000 robotic fiber positioners, in ten petals of 500, and each one
+                aims a fiber-optic cable at a single galaxy. The whole plane re-aims itself between
+                observations, roughly every twenty minutes, which is what makes the survey's scale
+                possible. Over its run it will take spectra of about 35 million galaxies and quasars
+                across 14,000 square degrees of sky. Lawrence Berkeley National Laboratory leads the
+                construction and operations, with a collaboration of several hundred researchers.</p>
+                <p>A spectrum gives a redshift, a redshift gives a distance, and millions of distances
+                give a three-dimensional map of how fast the universe has been expanding at different
+                times. That is the measurement.</p>
+              </div>
+              <div>
+                <h4>Position in the Quest</h4>
+                <p>DESI's third data release decides <strong>Midnight Eridanus</strong>, our first
+                pre-registered mission. The prediction was deposited before the data exists, and we have
+                committed to publishing the outcome either way.</p>
+                <h4 style="margin-top:1rem">What it has already found</h4>
+                <p>Its 2024 and 2025 results reported a hint that dark energy may not be constant after
+                all, worded carefully by the collaboration and still contested. Those results are what
+                made this test worth registering.</p>
+                <ul class="rig-spec">
+                  <li><b>Deciding release</b> DR3 cosmology, expected 2027, month not yet announced</li>
+                  <li><b>Data access</b> Public releases, free to anyone</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="rig" style="--bg:#8B0000; --edge:#00838f;">
+            <div class="rig-head">
+              <h3>Vera C. Rubin Observatory</h3>
+              <span class="rig-where">Simonyi Survey Telescope &middot; Cerro Pach&oacute;n, Chile</span>
+              <span class="rig-mission">Midnight Orion &middot; COSMIC-007</span>
+            </div>
+            <div class="rig-body">
+              <div>
+                <h4>Bio</h4>
+                <p>An 8.4-meter telescope built for one job: photographing the entire southern sky, over
+                and over, for ten years. Its LSST Camera is the largest digital camera ever built, at
+                3,200 megapixels, and each exposure covers more than forty times the area of the full
+                moon. The camera was lifted into place in March 2025 and the first images were released
+                that June. Over the survey, the sky will be imaged roughly 800 times.</p>
+                <p>The result is not a picture but a movie, and a public alert stream of everything that
+                moves or changes brightness. Where DESI measures expansion history, Rubin measures how
+                structure grew, by tracking billions of galaxies.</p>
+              </div>
+              <div>
+                <h4>Position in the Quest</h4>
+                <p>Rubin's first data release decides <strong>Midnight Orion</strong>, our second
+                pre-registered mission.</p>
+                <h4 style="margin-top:1rem">What it has already found</h4>
+                <p>It is only beginning. Its first images already contained millions of previously
+                uncatalogued objects, including thousands of new asteroids in a few nights of
+                observation, which is a fair measure of how much of the sky nobody had looked at
+                carefully.</p>
+                <ul class="rig-spec">
+                  <li><b>Deciding release</b> DR1, estimated mid-2028</li>
+                  <li><b>Data access</b> Public alert stream now, staged data releases after</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="rig" style="--bg:#005f6e; --edge:#c62828;">
+            <div class="rig-head">
+              <h3>Simons Observatory</h3>
+              <span class="rig-where">Cerro Toco, Atacama Desert, Chile &middot; 5,190 m</span>
+              <span class="rig-mission">Midnight Phoenix &middot; COSMIC-008</span>
+            </div>
+            <div class="rig-body">
+              <div>
+                <h4>Bio</h4>
+                <p>Four telescopes on a ridge three and a half miles above sea level, where the air is
+                dry enough to see microwaves from the early universe: one 6-meter Large Aperture
+                Telescope and three half-meter Small Aperture Telescopes, all with detectors cooled to
+                near absolute zero. Two of the small telescopes began observing in late 2023 and the
+                third in August 2024. The large telescope reached first light in February 2025, on an
+                image of Mars. Further telescopes funded by Japan and the United Kingdom are being added.</p>
+                <p>What it measures is the polarization of the cosmic microwave background, the oldest
+                light there is, to a precision nobody has reached before.</p>
+              </div>
+              <div>
+                <h4>Position in the Quest</h4>
+                <p>Simons Observatory results would decide <strong>Midnight Phoenix</strong>, and this is
+                the one place on this page where the work is ours, not theirs. COSMIC-008 is not yet
+                stated sharply enough to pass or fail cleanly. We have given ourselves until
+                <strong>31 December 2026</strong> to fix that or withdraw the mission. If the instrument
+                is ready before the prediction is, the prediction does not count.</p>
+                <ul class="rig-spec">
+                  <li><b>Deciding release</b> First results, estimated early 2027</li>
+                  <li><b>Our deadline</b> Sharpen or withdraw COSMIC-008 by 31 December 2026</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="q-section">
+      <div class="q-inner">
+        <p class="eyebrow">Keeping it honest</p>
+        <h2>What the institutional path is worth</h2>
+        <p class="lede">The Quest is blunt about how hard the institutional path is on an outsider, and
+        about what funding can do to a conclusion. None of that is an argument that the path does not
+        work. It plainly does, and the three instruments above are the proof: no independent researcher
+        was ever going to build them. Here is the ledger with both columns showing.</p>
+
+        <div class="ledger">
+          <div class="led led-works">
+            <h3>What it delivers</h3>
+            <ul>
+              <li>The Higgs boson was proposed in 1964 and found at CERN in 2012. Forty-eight years of
+              sustained institutional effort, and a prediction that could have failed.</li>
+              <li>Einstein predicted gravitational waves in 1916. LIGO detected them in 2015. A century
+              of patience, and then a signal matching the prediction almost exactly.</li>
+              <li>These three instruments exist at all, and they publish their data to anyone, including
+              people with no affiliation. That policy is what makes our missions possible.</li>
+            </ul>
+          </div>
+          <div class="led led-slips">
+            <h3>Where it slips</h3>
+            <ul>
+              <li>When 100 psychology studies were repeated in 2015, 97 of the originals had reported
+              statistically significant results, and 36 percent of the replications did.</li>
+              <li>In preclinical cancer biology, a project that repeated 50 experiments from 23 papers
+              found 46 percent of effects replicated on more criteria than they failed, and replication
+              effect sizes averaged 85 percent smaller than the originals.</li>
+              <li>Industry-funded drug and device research is about twice as likely to report favorable
+              results, and roughly two and a half times as likely to reach favorable conclusions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="balance">
+          <p>Those two columns are not in contradiction. The difference between them is mostly the
+          difference between a shared instrument and a private one. Where the equipment is expensive,
+          the data is public and hundreds of people are looking at the same numbers, a wrong result gets
+          caught. Where a study is cheap, small, run once and never repeated, it does not.</p>
+          <p>That is the useful lesson for us, and it cuts against our own convenience. Our advantage is
+          that we test against public data from shared instruments, so anyone can check our arithmetic.
+          Our exposure is that we are small, unfunded and want our own framework to be right. The
+          protection is the same one the good column relies on: state the prediction before the data,
+          publish the outcome either way, and leave the record where we cannot quietly edit it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="q-section">
+      <div class="q-inner">
+        <p class="eyebrow">Why we work in the open</p>
+        <h2>And sometimes the data is simply false</h2>
+        <p class="lede">Everything above is about honest error and quiet bias. There is a third thing,
+        and it has to be said plainly, because anyone who believes the process is self-correcting by
+        nature will not understand why we bother publishing our predictions before we have the answers.
+        Some published data was never measured at all.</p>
+
+        <div class="ledger">
+          <div class="rig" style="--bg:#7a5000; --edge:#1565c0;">
+            <div class="rig-head"><h3>The volume</h3></div>
+            <div class="rig-body" style="grid-template-columns:1fr">
+              <div>
+                <p>More than 10,000 papers were retracted in 2023, a record. Over 8,000 of those came
+                from journals owned by a single publisher, withdrawn over what it called systematic
+                manipulation of the publication and peer-review process.</p>
+                <p>Behind much of it are paper mills: businesses that sell authorship on fabricated
+                research. Estimates of how many submitted papers come from them run from 2 to 20 percent,
+                which is a wide range because nobody knows the true figure.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rig" style="--bg:#1a5c2a; --edge:#b01558;">
+            <div class="rig-head"><h3>Physics is not exempt</h3></div>
+            <div class="rig-body" style="grid-template-columns:1fr">
+              <div>
+                <p><strong>Bell Labs, 2002.</strong> An independent committee led by the physicist Malcolm
+                Beasley examined 24 allegations against Jan Hendrik Sch&ouml;n, a rising star in
+                semiconductor physics, and found falsification or fabrication in 16 of them. Twenty-eight
+                papers were retracted. His doctorate was revoked in 2004.</p>
+                <p><strong>Superconductivity, 2020 to 2024.</strong> Two papers claiming
+                room-temperature superconductivity were published in <em>Nature</em> and both were
+                retracted. An investigation commissioned by the University of Rochester at the request of
+                the National Science Foundation, which <em>Nature</em>'s news team found in court
+                documents, reported data fabrication, falsification and plagiarism. The lead author
+                denies any misconduct.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="balance">
+          <p>Notice what did not catch either case. Both sets of papers passed peer review at the most
+          selective journals in the field, repeatedly, for years. What caught them was other groups
+          trying to reproduce the results and failing, and outsiders examining the published figures
+          closely enough to see that they did not add up. The correction came from outside the gate, not
+          from the gatekeeper.</p>
+          <p><strong>That is our motivation, stated exactly.</strong> We are not working in public
+          because we are unusually virtuous. We are working in public because it is the only check that
+          has a record of working. So the prediction goes on a public, dated deposit before the data
+          exists, the derivation is published so anyone can follow the arithmetic, and the outcome gets
+          reported whichever way it falls. If we ever fabricate or fudge anything, the material for
+          catching us is already in your hands.</p>
+          <p>It cuts the other way too, and this is the part worth holding on to: a field that publishes
+          10,000 retractions is a field that is looking. The fraud gets found because science keeps the
+          receipts. A path that never retracts anything is not more honest. It is less examined.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="q-section q-light">
+      <div class="q-inner">
+        <p class="eyebrow">Where to go next</p>
+        <h2>Follow the trail</h2>
+        <p class="lede">These instruments sit at the end of the road. The
+        <a href="quest-map.html">Quest Map</a> shows the whole road, including the five paths an idea can
+        travel and which of them is actually paid to find the truth. The
+        <a href="testing-schedule.html">Testing Schedule</a> lists the registered missions and their
+        dates, and <a href="quest-follow.html">Follow the Quest</a> is how to get the result when it
+        lands.</p>
+        <h3 style="font-family:'Source Serif 4',Georgia,serif;margin:1.5rem 0 .75rem">Sources for this page</h3>
+        <ol class="srcs">
+          <li>DESI instrument and survey design: NOIRLab and Lawrence Berkeley National Laboratory
+          releases on the 5,000 fiber positioners and the Mayall Telescope; DESI survey operations
+          papers on arXiv.</li>
+          <li>Rubin Observatory: NSF-DOE Vera C. Rubin Observatory, LSST Camera installation March 2025
+          and First Look, June 2025.</li>
+          <li>Simons Observatory: Simons Foundation, Large Aperture Telescope first light, March 2025;
+          observatory status reports on the Small Aperture Telescopes.</li>
+          <li>Open Science Collaboration, "Estimating the reproducibility of psychological science,"
+          <em>Science</em> 349 (2015). doi:10.1126/science.aac4716</li>
+          <li>Errington, T. M. et al., "Investigating the replicability of preclinical cancer biology,"
+          <em>eLife</em> 10 (2021) e71601.</li>
+          <li>Lundh, A. et al., "Industry sponsorship and research outcome," <em>Cochrane Database of
+          Systematic Reviews</em> (2017). doi:10.1002/14651858.MR000033.pub3</li>
+          <li>Van Noorden, R., "More than 10,000 research papers were retracted in 2023, a new record,"
+          <em>Nature</em> (2023).</li>
+          <li>Sch&ouml;n case: Beasley committee report, Bell Labs, September 2002, reported in
+          <em>Physics Today</em> and <em>Science</em>.</li>
+          <li>Superconductivity case: <em>Nature</em> news investigation, 2024, on the University of
+          Rochester research misconduct report, and the retraction notices for the 2020 and 2023 papers.</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-footer-inner">
+      <div class="pub-about">
+        <a href="book.html"><img src="bigtoeindexlogoyel.png" alt="A Quest for The Big TOE" class="pub-logo"></a>
+        <p><em>A Quest for The Big TOE</em> sets out the COSMIC Framework. The Quest follows its ideas as they are tested in public. Questions, corrections and challenges are welcome.</p>
+        <div class="pub-social">
+        <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+    Instagram
+    </a>
+    
+    <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3&amp;si=vSqcIFxxo68LdkWD" target="_blank" rel="noopener" class="social-btn youtube">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+    YouTube
+    </a>
+    
+    <a href="mailto:ic2.info@proton.me" class="social-btn email">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>
+    Email Us
+    </a>
+        </div>
+      </div>
+      <nav class="pub-links" aria-label="Site links">
+        <div><h3>The Book</h3><ul><li><a href="book.html">Overview</a></li><li><a href="download.html">Download</a></li><li><a href="conversion.html">Formats</a></li><li><a href="references.html">References</a></li><li><a href="appendix.html">Appendices</a></li><li><a href="glossary.html">Glossary</a></li><li><a href="faq-page.html">FAQ</a></li></ul></div>
+        <div><h3>The Quest</h3><ul><li><a href="quest-map.html">Quest Map</a></li><li><a href="instruments.html">The Instruments</a></li><li><a href="quest-follow.html#episodes">Episodes</a></li><li><a href="quest-follow.html">Follow the Quest</a></li></ul></div>
+        <div><h3>Ic² Institute</h3><ul><li><a href="index.html">Home</a></li><li><a href="framework.html">The Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing Schedule</a></li><li><a href="about-page.html">About</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="pub-footer-bottom">
+      <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Starfield, as on the book pages
+    (function () {
+      var c = document.getElementById('stars-canvas'); if (!c) return;
+      var x = c.getContext('2d'), s = [];
+      function size() { c.width = innerWidth; c.height = innerHeight; }
+      size(); addEventListener('resize', size);
+      for (var i = 0; i < 180; i++) s.push({ x: Math.random() * c.width, y: Math.random() * c.height,
+        r: Math.random() * 1.5, vx: Math.random() * .4 - .2, vy: Math.random() * .4 - .2, o: Math.random() });
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      (function draw() {
+        x.clearRect(0, 0, c.width, c.height); x.fillStyle = '#fff';
+        s.forEach(function (p) {
+          x.globalAlpha = p.o; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill();
+          if (still) return;
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > c.width) p.vx *= -1; if (p.y < 0 || p.y > c.height) p.vy *= -1;
+          p.o = Math.max(.2, Math.min(1, p.o + (Math.random() - .5) * .02));
+        });
+        x.globalAlpha = 1; if (!still) requestAnimationFrame(draw);
+      })();
+    })();
+  </script>
+  <script src="phone-menu.js" defer></script>
+<!-- goatcounter:start -->
+<script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- goatcounter:end -->
+</body>
+</html>
