@@ -73,7 +73,7 @@
 
     /* the four routes */
     .routes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .route { background: #ffffff; border: 1px solid #e0e0e0; border-top: 4px solid var(--c); border-radius: 8px; padding: 1.5rem; }
+    .route { background: var(--c); color: #ffffff; border-bottom: 5px solid var(--edge); border-radius: 8px; padding: 1.5rem; }
     .route h3 { font-size: 1.2rem; margin-bottom: .5rem; color: #2c3e50; }
     .route .what { font-size: .92rem; color: #5a6878; margin-bottom: 1rem; }
     .route .status-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8fa0b0; margin-bottom: .25rem; }
@@ -84,6 +84,21 @@
     .route-note h3 { color: #2c3e50; font-size: 1.15rem; margin-bottom: .5rem; }
     .route-note p { color: #2c3e50; font-size: .98rem; line-height: 1.75; }
     .route-note p + p { margin-top: .75rem; }
+
+    /* the five paths */
+    .paths { display: grid; gap: 1rem; }
+    .path { background: var(--bg); border-bottom: 5px solid var(--edge); border-radius: 8px; color: #ffffff; overflow: hidden; }
+    .path summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem 1rem; padding: 1.1rem 1.4rem; cursor: pointer; list-style: none; }
+    .path summary::-webkit-details-marker { display: none; }
+    .path-name { font: 700 1.25rem/1.2 'Source Serif 4', Georgia, serif; }
+    .path-line { color: rgba(255,255,255,.82); font-size: .95rem; }
+    .path-open { margin-left: auto; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: #1a1a2e; background: #ffffff; border-radius: 12px; padding: .15rem .6rem; }
+    .path[open] .path-open::after { content: ''; }
+    .path[open] .path-open { background: #f1e303; }
+    .path-body { padding: 0 1.4rem 1.3rem; }
+    .path-body p { color: rgba(255,255,255,.92); line-height: 1.75; margin-bottom: .85rem; max-width: 78ch; }
+    .path-body strong { color: #ffffff; }
 
     /* waiting list */
     .waiting { display: grid; gap: 1rem; }
@@ -98,7 +113,7 @@
 
     /* follow page */
     .channels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    .channel { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 2rem; }
+    .channel { background: var(--bg, #005f6e); border-bottom: 5px solid var(--edge, #c62828); border-radius: 10px; padding: 2rem; }
     .channel h3 { font-size: 1.4rem; margin-bottom: .5rem; }
     .channel p { color: rgba(255,255,255,.8); margin-bottom: 1.25rem; }
     .chapters { columns: 2; column-gap: 2.5rem; list-style: none; }
@@ -109,8 +124,8 @@
     .principles div { border-left: 3px solid var(--primary-color); padding-left: 1rem; }
     .principles h3 { font-size: 1.05rem; color: #2c3e50; margin-bottom: .3rem; }
     .principles p { font-size: .92rem; color: #5a6878; }
-    .episode { display: flex; gap: 1.5rem; align-items: center; background: rgba(255,255,255,.06);
-      border: 1px dashed rgba(241,227,3,.5); border-radius: 10px; padding: 1.5rem; }
+    .episode { display: flex; gap: 1.5rem; align-items: center; background: #8e0c45;
+      border-bottom: 5px solid #1a7a36; border-radius: 10px; padding: 1.5rem; }
     .episode .num { font: 700 2.5rem/1 'Source Serif 4', Georgia, serif; color: var(--yellow); }
     .episode h3 { font-size: 1.25rem; }
     .episode p { color: rgba(255,255,255,.75); font-size: .95rem; }
@@ -318,12 +333,12 @@
     <section class="q-section">
       <div class="q-inner">
         <div class="channels">
-          <div class="channel">
+          <div class="channel" style="--bg:#c62828; --edge:#00bcd4;">
             <h3>On YouTube</h3>
             <p>Every episode is published on the institute's YouTube channel. Subscribe there to see each one as it comes out.</p>
             <a href="https://youtube.com/playlist?list=PL1SOE_6Rn0dwFbCKEGOZZsc3xrTSmUHs3" target="_blank" rel="noopener" class="q-btn q-btn-yt">Watch on YouTube</a>
           </div>
-          <div class="channel">
+          <div class="channel" style="--bg:#005ba5; --edge:#f1e303;">
             <h3>By email</h3>
             <p>A short note when a new episode is out, with a link to the video and its written companion. Nothing else, and you can leave at any time.</p>
             <a href="subscribe.html" class="q-btn q-btn-mail">Subscribe by email</a>
