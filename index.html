@@ -365,27 +365,41 @@
            as the night scene on the about page: one radial gradient does the
            fade, so the photograph has no visible edge anywhere. */
         #the-quest { position: relative; overflow: hidden; }
+        .quest-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
         .quest-print {
             position: absolute;
             top: 50%;
-            right: -2%;
+            right: 0;
             transform: translateY(-50%);
-            width: min(46%, 560px);
-            aspect-ratio: 1 / 1;
+            height: 118%;
+            max-height: 340px;
+            aspect-ratio: 760 / 1198;
             pointer-events: none;
             z-index: 0;
         }
+        /* Multiply, so the light regolith drops out against the page and only
+           the pressed shadow and the tread survive. That is what makes the
+           print readable at a glance instead of a grey smudge. */
         .quest-print img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            filter: grayscale(1) contrast(1.15) brightness(1.05);
-            opacity: .17;
-            -webkit-mask-image: radial-gradient(ellipse 58% 58% at 52% 48%, #000 0%, #000 26%, transparent 100%);
-                    mask-image: radial-gradient(ellipse 58% 58% at 52% 48%, #000 0%, #000 26%, transparent 100%);
+            filter: grayscale(1) contrast(1.32);
+            opacity: .78;
+            mix-blend-mode: multiply;
+            -webkit-mask-image: radial-gradient(ellipse 64% 62% at 50% 50%, #000 0%, #000 46%, transparent 100%);
+                    mask-image: radial-gradient(ellipse 64% 62% at 50% 50%, #000 0%, #000 46%, transparent 100%);
         }
-        #the-quest .section-container { position: relative; z-index: 1; }
+        /* The copy keeps clear of it rather than running underneath. */
+        @media (min-width: 900px) {
+            .quest-container { max-width: 1140px; padding-right: 300px; }
+        }
+        .quest-container > :not(.quest-print) { position: relative; z-index: 1; }
         .quest-print-credit {
             margin-top: 1.25rem;
             font-size: .72rem;
@@ -394,9 +408,10 @@
             color: var(--text-light);
             opacity: .75;
         }
-        @media (max-width: 900px) {
-            .quest-print { width: 74%; right: -18%; }
-            .quest-print img { opacity: .1; }
+        @media (max-width: 899px) {
+            .quest-print { position: static; transform: none; height: auto; width: 168px;
+                max-height: none; margin: 0 0 1.25rem auto; }
+            .quest-print img { opacity: .85; }
         }
 
 
@@ -1027,10 +1042,10 @@
 
     <!-- The Quest -->
     <section class="content-section" id="the-quest" data-aos="fade-up">
+        <div class="section-container quest-container">
             <div class="quest-print" aria-hidden="true">
                 <img src="apollo-bootprint.jpg" alt="" loading="lazy" decoding="async">
             </div>
-        <div class="section-container" style="max-width: 900px;">
             <p class="tagline eyebrow">The Quest</p>
             <h2 class="section-title">How an Idea Meets the World</h2>
             <p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
