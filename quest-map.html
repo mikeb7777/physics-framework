@@ -105,6 +105,40 @@
       .aims td:first-child { color: #8B0000; }
     }
 
+    /* lifecycle map */
+    .lc-wrap { overflow-x: auto; border-radius: 12px; }
+    .lifecycle { display: block; min-width: 1400px; width: 100%; height: auto; }
+    .lifecycle .lnode { cursor: pointer; }
+    .lifecycle .lnode rect, .lifecycle .lnode path { transition: filter .18s; }
+    .lifecycle .lnode:hover rect, .lifecycle .lnode:hover path,
+    .lifecycle .lnode:focus rect, .lifecycle .lnode:focus path { filter: brightness(1.3); }
+    .lifecycle .lnode.on > rect, .lifecycle .lnode.on > path { stroke: #f1e303; stroke-width: 4; }
+    .lifecycle .lnode:focus { outline: none; }
+    .lc-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; align-items: center; margin: .9rem 0 1rem;
+      font-size: .82rem; color: rgba(255,255,255,.62); }
+    .lc-legend .lk { display: inline-block; width: 15px; height: 12px; margin-right: .45rem; vertical-align: -1px; }
+    .lk-box { background: #1f3448; border: 2px solid #8fa0b0; border-radius: 3px; }
+    .lk-dia { background: #7a5000; border: 2px solid #f1e303; transform: rotate(45deg) scale(.8); }
+    .lk-pill { background: #0f3d2e; border: 2px solid #f1e303; border-radius: 6px; }
+    .lk-foot { background: rgba(241,227,3,.9); border-radius: 50% 50% 45% 45%; width: 9px; }
+    .lc-scroll { margin-left: auto; font-style: italic; }
+    .lc-hint { color: rgba(255,255,255,.5); font-size: .9rem; font-style: italic; margin-bottom: 1rem; }
+    .lc-panel { background: rgba(255,255,255,.055); border-left: 4px solid var(--yellow); border-radius: 0 10px 10px 0;
+      padding: 1.35rem 1.6rem; }
+    .lc-panel h4 { font: 700 1.3rem/1.35 'Source Serif 4', Georgia, serif; color: #fff; margin-bottom: .7rem; }
+    .lc-panel p, .lc-panel li { color: rgba(255,255,255,.9); line-height: 1.75; max-width: 82ch; }
+    .lc-panel p + p { margin-top: .7rem; }
+    .lc-panel ul { list-style: none; margin: .5rem 0 .2rem; }
+    .lc-panel li { padding-left: 1.1rem; position: relative; margin-bottom: .35rem; }
+    .lc-panel li::before { content: ''; position: absolute; left: 0; top: .68em; width: .4rem; height: .4rem;
+      background: var(--yellow); border-radius: 50%; }
+    .lc-tag { font-size: .72rem !important; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.6) !important; margin-bottom: .3rem; }
+    .lc-dot { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .5rem; }
+    .lc-panel .src { font-size: .85rem !important; color: rgba(255,255,255,.62) !important;
+      border-top: 1px solid rgba(255,255,255,.12); padding-top: .6rem; margin-top: .85rem; }
+    @media (max-width: 700px) { .lc-legend { font-size: .75rem; } .lc-scroll { margin-left: 0; } }
+
     /* swimlane map */
     .lane-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); margin-bottom: 1rem; }
     .lane-map { display: block; min-width: 900px; width: 100%; height: auto; }
@@ -389,205 +423,216 @@
 
     <section class="q-section">
       <div class="q-inner">
-        <p class="eyebrow">The road</p>
-        <h2>From an Idea to an Answer</h2>
-        <p class="lede">Every theory passes the same stages. Yellow marks where the framework is now. However a test turns out, the result is recorded as what was learned.</p>
-        <div class="road">
-          <div class="stage">
-            <div class="dot">1</div>
-            <h3>Idea</h3>
-            <p>A question and a first answer to it.</p>
-          </div>
-          <div class="stage">
-            <div class="dot">2</div>
-            <h3>Written down</h3>
-            <p>Published in full so anyone can read and question it.</p>
-            <p class="where"><a href="book.html">A Quest for The Big TOE</a> and the framework papers</p>
-          </div>
-          <div class="stage here">
-            <div class="dot">3</div>
-            <h3>Pre-registered</h3>
-            <p>Predictions dated and public before the data that tests them.</p>
-            <p class="where">Three active missions</p>
-          </div>
-          <div class="stage">
-            <div class="dot">4</div>
-            <h3>Tested</h3>
-            <p>Independent data arrives and is compared with the prediction.</p>
-            <p class="where">First data expected 2027</p>
-          </div>
-          <div class="stage">
-            <div class="dot">5</div>
-            <h3>Learned</h3>
-            <p>The prediction holds, the framework changes, or the idea is set aside.</p>
-            <div class="outcomes"><span>Accepted</span><span>Modified</span><span>Rejected</span></div>
-          </div>
-        </div>
-        <p class="note">Every idea above travels one of the five paths below. Four earlier results agree with the framework but were not recorded before they were published, so they are counted as consistent, not predicted. <a href="validation.html">See the record</a>.</p>
-      </div>
-    </section>
-
-    <section class="q-section">
-      <div class="q-inner">
         <p class="eyebrow">The map</p>
         <h2>The Route of a Result</h2>
-        <p class="lede">The same idea takes a different road depending on who is holding it. Three lanes, seven stages, and the crossings marked. <strong>Select any box to open what it actually involves</strong>, with links to the sources and the data behind each claim.</p>
+        <p class="lede">One idea, three starting positions, one shared road. This is the lifecycle of a physics
+        result from first thought to publication or abandonment, drawn as a trail: the footprints show the
+        direction of travel. <strong>Select any box to read what that stage really involves</strong>, with the
+        costs, the success rates, and links to the sources.</p>
 
-        <div class="lane-wrap">
-          <svg class="lane-map" viewBox="0 0 1384 492" role="img" aria-label="Swimlane map of how a physics result travels, by whether the author is affiliated, in industry, or independent">
-          <defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/></pattern><marker id="foot" markerWidth="13" markerHeight="13" refX="6" refY="6" orient="auto"><path d="M6 1c2 0 3 2 3 4s-1 5-3 5-3-3-3-5 1-4 3-4z" fill="rgba(241,227,3,.85)"/></marker></defs>
-          <rect x="0" y="0" width="1384" height="492" fill="#0d1520"/>
-          <rect x="0" y="0" width="1384" height="492" fill="url(#grid)"/>
-          <g class="rose" transform="translate(1322 40)">
-          <circle r="26" fill="none" stroke="rgba(241,227,3,.45)" stroke-width="1.2"/>
-          <circle r="20" fill="none" stroke="rgba(241,227,3,.25)" stroke-width="1"/>
-          <path d="M0 -24 L5 0 L0 24 L-5 0 Z" fill="#f1e303"/>
-          <path d="M-24 0 L0 -4 L24 0 L0 4 Z" fill="rgba(255,255,255,.55)"/>
-          <text x="0" y="-30" text-anchor="middle" font-size="9" fill="#f1e303">N</text>
-          </g>
-          <text x="1288" y="26" text-anchor="end" font-size="11" fill="rgba(255,255,255,.55)" letter-spacing="2">THE ROUTE OF A RESULT</text>
-          <text x="236" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#f1e303" letter-spacing="1.5">IDEA</text>
-          <line x1="150" y1="60" x2="150" y2="474" stroke="rgba(255,255,255,.08)"/>
-          <text x="408" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#f1e303" letter-spacing="1.5">MONEY</text>
-          <line x1="322" y1="60" x2="322" y2="474" stroke="rgba(255,255,255,.08)"/>
-          <text x="580" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#f1e303" letter-spacing="1.5">PREDICTION</text>
-          <line x1="494" y1="60" x2="494" y2="474" stroke="rgba(255,255,255,.08)"/>
-          <text x="752" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#f1e303" letter-spacing="1.5">DATA</text>
-          <line x1="666" y1="60" x2="666" y2="474" stroke="rgba(255,255,255,.08)"/>
-          <text x="924" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#f1e303" letter-spacing="1.5">PREPRINT</text>
-          <line x1="838" y1="60" x2="838" y2="474" stroke="rgba(255,255,255,.08)"/>
-          <text x="1096" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#f1e303" letter-spacing="1.5">REVIEW</text>
-          <line x1="1010" y1="60" x2="1010" y2="474" stroke="rgba(255,255,255,.08)"/>
-          <text x="1268" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#f1e303" letter-spacing="1.5">AFTER</text>
-          <line x1="1182" y1="60" x2="1182" y2="474" stroke="rgba(255,255,255,.08)"/>
-          <rect x="0" y="74" width="1384" height="120" fill="#8B0000" opacity=".10"/>
-          <rect x="0" y="74" width="6" height="120" fill="#00838f"/>
-          <text x="18" y="108" font-size="15" font-weight="700" fill="#fff">Affiliated</text>
-          <text x="18" y="126" font-size="10.5" fill="rgba(255,255,255,.6)"><tspan>A post at a university or national lab</tspan></text>
-          <path d="M138 140 H1332" stroke="rgba(241,227,3,.28)" stroke-width="2" fill="none" marker-end="url(#foot)" marker-mid="url(#foot)"/>
-          <g class="node" tabindex="0" role="button" data-node="aff-0" aria-label="Affiliated: Inside a program">
-          <rect x="160" y="114" width="150" height="52" rx="7" fill="#8B0000" stroke="#00838f" stroke-width="2"/>
-          <text x="235" y="136" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Inside a program</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="aff-1" aria-label="Affiliated: Grant cycle">
-          <rect x="332" y="114" width="150" height="52" rx="7" fill="#8B0000" stroke="#00838f" stroke-width="2"/>
-          <text x="407" y="136" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Grant cycle</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="aff-2" aria-label="Affiliated: Optional">
-          <rect x="504" y="114" width="150" height="52" rx="7" fill="#8B0000" stroke="#00838f" stroke-width="2"/>
-          <text x="579" y="136" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Optional</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="aff-3" aria-label="Affiliated: Instrument time">
-          <rect x="676" y="114" width="150" height="52" rx="7" fill="#8B0000" stroke="#00838f" stroke-width="2"/>
-          <text x="751" y="136" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Instrument time</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="aff-4" aria-label="Affiliated: arXiv, same day">
-          <rect x="848" y="114" width="150" height="52" rx="7" fill="#8B0000" stroke="#00838f" stroke-width="2"/>
-          <text x="923" y="136" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">arXiv, same day</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="aff-5" aria-label="Affiliated: Peer review">
-          <rect x="1020" y="114" width="150" height="52" rx="7" fill="#8B0000" stroke="#00838f" stroke-width="2"/>
-          <text x="1095" y="136" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Peer review</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="aff-6" aria-label="Affiliated: Citation and career">
-          <rect x="1192" y="114" width="150" height="52" rx="7" fill="#8B0000" stroke="#00838f" stroke-width="2"/>
-          <text x="1267" y="130" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Citation and</text>
-          <text x="1267" y="144" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">career</text>
-          </g>
-          <rect x="0" y="202" width="1384" height="120" fill="#005ba5" opacity=".10"/>
-          <rect x="0" y="202" width="6" height="120" fill="#f1e303"/>
-          <text x="18" y="236" font-size="15" font-weight="700" fill="#fff">Industry</text>
-          <text x="18" y="254" font-size="10.5" fill="rgba(255,255,255,.6)"><tspan>A corporate research lab</tspan></text>
-          <path d="M138 268 H1332" stroke="rgba(241,227,3,.28)" stroke-width="2" fill="none" marker-end="url(#foot)" marker-mid="url(#foot)"/>
-          <g class="node" tabindex="0" role="button" data-node="ind-0" aria-label="Industry: Product-shaped">
-          <rect x="160" y="242" width="150" height="52" rx="7" fill="#005ba5" stroke="#f1e303" stroke-width="2"/>
-          <text x="235" y="264" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Product-shaped</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="ind-1" aria-label="Industry: Internal budget">
-          <rect x="332" y="242" width="150" height="52" rx="7" fill="#005ba5" stroke="#f1e303" stroke-width="2"/>
-          <text x="407" y="264" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Internal budget</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="ind-2" aria-label="Industry: Internal review">
-          <rect x="504" y="242" width="150" height="52" rx="7" fill="#005ba5" stroke="#f1e303" stroke-width="2"/>
-          <text x="579" y="264" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Internal review</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="ind-3" aria-label="Industry: Own hardware">
-          <rect x="676" y="242" width="150" height="52" rx="7" fill="#005ba5" stroke="#f1e303" stroke-width="2"/>
-          <text x="751" y="264" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Own hardware</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="ind-4" aria-label="Industry: After clearance">
-          <rect x="848" y="242" width="150" height="52" rx="7" fill="#005ba5" stroke="#f1e303" stroke-width="2"/>
-          <text x="923" y="264" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">After clearance</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="ind-5" aria-label="Industry: Prestige journals">
-          <rect x="1020" y="242" width="150" height="52" rx="7" fill="#005ba5" stroke="#f1e303" stroke-width="2"/>
-          <text x="1095" y="264" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Prestige journals</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="ind-6" aria-label="Industry: IP and press">
-          <rect x="1192" y="242" width="150" height="52" rx="7" fill="#005ba5" stroke="#f1e303" stroke-width="2"/>
-          <text x="1267" y="264" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">IP and press</text>
-          </g>
-          <rect x="0" y="330" width="1384" height="120" fill="#1a5c2a" opacity=".10"/>
-          <rect x="0" y="330" width="6" height="120" fill="#b01558"/>
-          <text x="18" y="364" font-size="15" font-weight="700" fill="#fff">Independent</text>
-          <text x="18" y="382" font-size="10.5" fill="rgba(255,255,255,.6)"><tspan>No institution behind you</tspan></text>
-          <path d="M138 396 H1332" stroke="rgba(241,227,3,.28)" stroke-width="2" fill="none" marker-end="url(#foot)" marker-mid="url(#foot)"/>
-          <g class="node" tabindex="0" role="button" data-node="unaff-0" aria-label="Independent: Free choice">
-          <rect x="160" y="370" width="150" height="52" rx="7" fill="#1a5c2a" stroke="#b01558" stroke-width="2"/>
-          <text x="235" y="392" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Free choice</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="unaff-1" aria-label="Independent: Self-funded">
-          <rect x="332" y="370" width="150" height="52" rx="7" fill="#1a5c2a" stroke="#b01558" stroke-width="2"/>
-          <text x="407" y="392" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Self-funded</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="unaff-2" aria-label="Independent: Pre-register, in public">
-          <rect x="504" y="370" width="150" height="52" rx="7" fill="#1a5c2a" stroke="#b01558" stroke-width="2"/>
-          <text x="579" y="386" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Pre-register, in</text>
-          <text x="579" y="400" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">public</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="unaff-3" aria-label="Independent: Public data">
-          <rect x="676" y="370" width="150" height="52" rx="7" fill="#1a5c2a" stroke="#b01558" stroke-width="2"/>
-          <text x="751" y="392" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Public data</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="unaff-4" aria-label="Independent: Endorsement wall">
-          <rect x="848" y="370" width="150" height="52" rx="7" fill="#1a5c2a" stroke="#b01558" stroke-width="2"/>
-          <text x="923" y="392" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Endorsement wall</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="unaff-5" aria-label="Independent: Desk rejection, and the bill">
-          <rect x="1020" y="370" width="150" height="52" rx="7" fill="#1a5c2a" stroke="#b01558" stroke-width="2"/>
-          <text x="1095" y="386" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Desk rejection,</text>
-          <text x="1095" y="400" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">and the bill</text>
-          </g>
-          <g class="node" tabindex="0" role="button" data-node="unaff-6" aria-label="Independent: Needs a bridge">
-          <rect x="1192" y="370" width="150" height="52" rx="7" fill="#1a5c2a" stroke="#b01558" stroke-width="2"/>
-          <text x="1267" y="392" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">Needs a bridge</text>
-          </g>
-          </svg>
+        <div class="lc-wrap">
+        <svg class="lifecycle" viewBox="0 0 1860 960" role="img" aria-label="Lifecycle of a physics result, by lane: affiliated, industry and independent, converging on an internal check, preprint, journal submission and peer review, with a rejection loop and a sigma threshold before publication">
+        <defs>
+        <pattern id="lgrid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0v26" fill="none" stroke="rgba(255,255,255,.045)"/></pattern>
+        <marker id="fp" markerWidth="15" markerHeight="15" refX="7.5" refY="7.5" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(7.5 7.5)"><g transform="rotate(90) scale(0.085) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(241,227,3,.92)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(241,227,3,.92)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(241,227,3,.92)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(241,227,3,.92)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(241,227,3,.92)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(241,227,3,.92)"/></g></g></marker>
+        <marker id="fpr" markerWidth="15" markerHeight="15" refX="7.5" refY="7.5" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(7.5 7.5)"><g transform="rotate(90) scale(0.085) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(224,107,122,.95)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(224,107,122,.95)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(224,107,122,.95)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(224,107,122,.95)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(224,107,122,.95)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(224,107,122,.95)"/></g></g></marker>
+        <marker id="fpg" markerWidth="15" markerHeight="15" refX="7.5" refY="7.5" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(7.5 7.5)"><g transform="rotate(90) scale(0.085) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(120,220,170,.95)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(120,220,170,.95)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(120,220,170,.95)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(120,220,170,.95)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(120,220,170,.95)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(120,220,170,.95)"/></g></g></marker>
+        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter>
+        </defs>
+        <rect width="1860" height="960" fill="#0b131d"/>
+        <rect width="1860" height="960" fill="url(#lgrid)"/>
+        <rect x="8" y="8" width="1844" height="944" fill="none" stroke="rgba(241,227,3,.22)" stroke-width="2"/>
+        <rect x="15" y="15" width="1830" height="930" fill="none" stroke="rgba(241,227,3,.12)"/>
+        <text x="40" y="46" font-size="15" font-weight="700" fill="#f1e303" letter-spacing="3">THE ROUTE OF A RESULT</text>
+        <text x="40" y="66" font-size="11.5" fill="rgba(255,255,255,.55)">Three lanes, one shared road. Select any box.</text>
+        <rect x="30" y="80" width="1800" height="240" fill="#8B0000" opacity=".085"/>
+        <rect x="30" y="80" width="10" height="240" fill="#00838f" opacity=".85"/>
+        <line x1="30" y1="80" x2="1830" y2="80" stroke="rgba(255,255,255,.10)"/>
+        <g transform="translate(66 200) rotate(-90)"><text text-anchor="middle" font-size="19" font-weight="700" fill="#fff" letter-spacing="1">Affiliated</text><text text-anchor="middle" y="18" font-size="11.5" fill="rgba(255,255,255,.6)">University or national laboratory</text></g>
+        <rect x="30" y="320" width="1800" height="240" fill="#005ba5" opacity=".085"/>
+        <rect x="30" y="320" width="10" height="240" fill="#f1e303" opacity=".85"/>
+        <line x1="30" y1="320" x2="1830" y2="320" stroke="rgba(255,255,255,.10)"/>
+        <g transform="translate(66 440) rotate(-90)"><text text-anchor="middle" font-size="19" font-weight="700" fill="#fff" letter-spacing="1">Industry</text><text text-anchor="middle" y="18" font-size="11.5" fill="rgba(255,255,255,.6)">Corporate research laboratory</text></g>
+        <rect x="30" y="560" width="1800" height="240" fill="#1a5c2a" opacity=".085"/>
+        <rect x="30" y="560" width="10" height="240" fill="#b01558" opacity=".85"/>
+        <line x1="30" y1="560" x2="1830" y2="560" stroke="rgba(255,255,255,.10)"/>
+        <g transform="translate(66 680) rotate(-90)"><text text-anchor="middle" font-size="19" font-weight="700" fill="#fff" letter-spacing="1">Independent</text><text text-anchor="middle" y="18" font-size="11.5" fill="rgba(255,255,255,.6)">No institution behind the work</text></g>
+        <line x1="30" y1="800" x2="1830" y2="800" stroke="rgba(255,255,255,.10)"/>
+        <text x="180" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(241,227,3,.85)" letter-spacing="2">THE IDEA</text>
+        <text x="400" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(241,227,3,.85)" letter-spacing="2">THE MONEY</text>
+        <text x="620" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(241,227,3,.85)" letter-spacing="2">THE COMMITMENT</text>
+        <text x="840" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(241,227,3,.85)" letter-spacing="2">THE WORK</text>
+        <text x="1380" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(241,227,3,.8)" letter-spacing="2">THE SHARED ROAD</text>
+        <line x1="1000" y1="80" x2="1000" y2="800" stroke="rgba(241,227,3,.18)" stroke-dasharray="6 6"/>
+        <path d="M270 200 L290 200 L310 200" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M490 200 L510 200 L530 200" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M710 200 L730 200 L750 200" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M270 440 L290 440 L310 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M490 440 L510 440 L530 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M710 440 L730 440 L750 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M270 680 L290 680 L310 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M490 680 L510 680 L530 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M710 680 L730 680 L750 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M930 200 C1000 200 995 330 1030 405" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-end="url(#fp)"/>
+        <path d="M930 440 L957.5 440 L985 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M930 680 C1000 680 995 550 1030 475" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-end="url(#fp)"/>
+        <path d="M1135 440 L1157.5 440 L1180 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M1360 440 L1380 440 L1400 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M1580 440 L1602.5 440 L1625 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M1700 395 L1700 236" fill="none" stroke="rgba(224,107,122,.5)" stroke-width="2" marker-end="url(#fpr)"/>
+        <text x="1726" y="320" text-anchor="middle" font-size="12" font-weight="700" fill="rgba(255,255,255,.75)">Reject</text>
+        <path d="M1610 200 L1570 200 L1530 200" fill="none" stroke="rgba(224,107,122,.5)" stroke-width="2" marker-mid="url(#fpr)" />
+        <path d="M1350 200 C1200 200 1120 290 1062 390" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-end="url(#fp)"/>
+        <text x="1180" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="rgba(255,255,255,.75)">resubmit</text>
+        <path d="M1700 176 L1700 98" fill="none" stroke="rgba(224,107,122,.5)" stroke-width="2" marker-end="url(#fpr)"/>
+        <text x="1742" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="rgba(255,255,255,.75)">abandon</text>
+        <path d="M1700 485 L1700 643" fill="none" stroke="rgba(120,220,170,.5)" stroke-width="2" marker-end="url(#fpg)"/>
+        <text x="1728" y="570" text-anchor="middle" font-size="12" font-weight="700" fill="rgba(255,255,255,.75)">Pass</text>
+        <path d="M1625 690 L1582.5 690 L1540 690" fill="none" stroke="rgba(120,220,170,.5)" stroke-width="2" marker-mid="url(#fpg)" />
+        <text x="1582.5" y="690" text-anchor="middle" font-size="12" font-weight="700" fill="rgba(255,255,255,.75)">Met</text>
+        <path d="M1700 737 L1700 800 C1700 828 1668 845 1620 845 L1258 845" fill="none" stroke="rgba(224,107,122,.5)" stroke-width="2" marker-end="url(#fpr)"/>
+        <text x="1560" y="868" text-anchor="middle" font-size="12" font-weight="700" fill="rgba(255,255,255,.75)">Not met</text>
+        <path d="M1050 845 C930 845 906 770 866 716" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-end="url(#fp)"/>
+        <text x="966" y="800" text-anchor="middle" font-size="12" font-weight="700" fill="rgba(255,255,255,.75)">more data</text>
+        <g class="lnode" tabindex="0" role="button" data-n="a1" aria-label="Affiliated: where the idea comes from">
+        <rect x="90" y="167" width="180" height="66" rx="9" fill="#8B0000" stroke="#00838f" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="180" y="204" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Idea generation</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="a2" aria-label="Affiliated: public money, and what reaches the work">
+        <rect x="310" y="167" width="180" height="66" rx="9" fill="#8B0000" stroke="#00838f" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="400" y="204" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Grant funding</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="a3" aria-label="Affiliated: pre-registration is optional, and usually skipped">
+        <rect x="530" y="167" width="180" height="66" rx="9" fill="#8B0000" stroke="#00838f" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="620" y="196" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Pre-registration</text>
+        <text x="620" y="212" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">(optional)</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="a4" aria-label="Affiliated: instrument time is the real currency">
+        <rect x="750" y="167" width="180" height="66" rx="9" fill="#8B0000" stroke="#00838f" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="840" y="196" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Experiment and</text>
+        <text x="840" y="212" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">verification</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="i1" aria-label="Industry: the question is product-shaped">
+        <rect x="90" y="407" width="180" height="66" rx="9" fill="#005ba5" stroke="#f1e303" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="180" y="444" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Idea generation</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="i2" aria-label="Industry: no grant cycle at all">
+        <rect x="310" y="407" width="180" height="66" rx="9" fill="#005ba5" stroke="#f1e303" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="400" y="436" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Corporate R&amp;D</text>
+        <text x="400" y="452" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">budget</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="i3" aria-label="Industry: protect first, publish second">
+        <rect x="530" y="407" width="180" height="66" rx="9" fill="#005ba5" stroke="#f1e303" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="620" y="436" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">IP and patent</text>
+        <text x="620" y="452" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">clearance</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="i4" aria-label="Industry: the instrument belongs to the company">
+        <rect x="750" y="407" width="180" height="66" rx="9" fill="#005ba5" stroke="#f1e303" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="840" y="436" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Experiment and</text>
+        <text x="840" y="452" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">verification</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="u1" aria-label="Independent: the one genuine advantage">
+        <rect x="90" y="647" width="180" height="66" rx="9" fill="#1a5c2a" stroke="#b01558" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="180" y="684" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Idea generation</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="u2" aria-label="Independent: the hardest wall on the chart">
+        <rect x="310" y="647" width="180" height="66" rx="9" fill="#1a5c2a" stroke="#b01558" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="400" y="684" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Self-funding</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="u3" aria-label="Independent: the compensating move">
+        <rect x="530" y="647" width="180" height="66" rx="9" fill="#1a5c2a" stroke="#b01558" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="620" y="676" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Falsifiability and</text>
+        <text x="620" y="692" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">public deposit</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="u4" aria-label="Independent: use the instruments without owning them">
+        <rect x="750" y="647" width="180" height="66" rx="9" fill="#1a5c2a" stroke="#b01558" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="840" y="676" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Test against public</text>
+        <text x="840" y="692" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">data</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="s1" aria-label="Every lane meets here">
+        <path d="M1060 394 L1138 440 L1060 486 L982 440 Z" fill="#1f3448" stroke="#8fa0b0" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1060" y="444" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Internal check</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="s2" aria-label="arXiv, and the endorsement wall">
+        <rect x="1180" y="407" width="180" height="66" rx="9" fill="#1f3448" stroke="#8fa0b0" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1270" y="444" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Preprint server</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="s3" aria-label="Submission, and what the journal is actually for">
+        <rect x="1400" y="407" width="180" height="66" rx="9" fill="#1f3448" stroke="#8fa0b0" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1490" y="444" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Journal submission</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="s4" aria-label="Two or three people decide">
+        <path d="M1700 394 L1778 440 L1700 486 L1622 440 Z" fill="#1f3448" stroke="#8fa0b0" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1700" y="444" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Peer review</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="r1" aria-label="Rejection is the normal case">
+        <rect x="1610" y="168" width="180" height="64" rx="9" fill="#7a1020" stroke="#e06b7a" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1700" y="204" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Rejection letter</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="r2" aria-label="The loop, which is where most papers live">
+        <rect x="1350" y="167" width="180" height="66" rx="9" fill="#1f3448" stroke="#8fa0b0" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1440" y="204" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Revise and resubmit</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="r3" aria-label="Some work stops here">
+        <rect x="1605" y="44" width="190" height="52" rx="26" fill="#2b3440" stroke="#8fa0b0" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1700" y="74" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Abandon or archive</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="g1" aria-label="How strong is strong enough">
+        <path d="M1700 644 L1778 690 L1700 736 L1622 690 Z" fill="#7a5000" stroke="#f1e303" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1700" y="694" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Sigma criterion</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="p1" aria-label="Accepted, and then the bill">
+        <rect x="1340" y="655" width="200" height="70" rx="35" fill="#0f3d2e" stroke="#f1e303" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1440" y="686" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Publication and open</text>
+        <text x="1440" y="702" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">access</text>
+        </g>
+        <g class="lnode" tabindex="0" role="button" data-n="t1" aria-label="Not strong enough yet">
+        <rect x="1060" y="812" width="180" height="66" rx="9" fill="#1f3448" stroke="#8fa0b0" stroke-width="2.5" filter="url(#soft)"/>
+        <text x="1150" y="841" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">Addendum or further</text>
+        <text x="1150" y="857" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">testing</text>
+        </g>
+        <g class="here"><path d="M840 713 L840 742" stroke="#f1e303" stroke-width="2"/><rect x="560" y="742" width="470" height="34" rx="17" fill="#f1e303"/><text x="795" y="764" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e">Ic² is here: registered, waiting for data in 2027</text></g>
+        <text x="40" y="892" font-size="11" font-weight="700" fill="rgba(241,227,3,.8)" letter-spacing="2">WHAT COUNTS AS AN ENDING</text>
+        <rect x="40" y="906" width="132" height="32" rx="16" fill="#0f3d2e" stroke="rgba(255,255,255,.3)"/><text x="106" y="927" text-anchor="middle" font-size="13" fill="#fff">Accepted</text>
+        <rect x="190" y="906" width="132" height="32" rx="16" fill="#005ba5" stroke="rgba(255,255,255,.3)"/><text x="256" y="927" text-anchor="middle" font-size="13" fill="#fff">Modified</text>
+        <rect x="340" y="906" width="132" height="32" rx="16" fill="#2b3440" stroke="rgba(255,255,255,.3)"/><text x="406" y="927" text-anchor="middle" font-size="13" fill="#fff">Set aside</text>
+        <text x="500" y="928" font-size="12.5" fill="rgba(255,255,255,.6)">All three are results. Only the first is usually called one.</text>
+        <g transform="translate(1770 890)"><circle r="46" fill="rgba(11,19,29,.9)" stroke="rgba(241,227,3,.4)" stroke-width="1.5"/><circle r="37" fill="none" stroke="rgba(241,227,3,.22)"/><path d="M0 -40 L8 0 L0 40 L-8 0 Z" fill="#f1e303" opacity=".9"/><path d="M-40 0 L0 -7 L40 0 L0 7 Z" fill="rgba(255,255,255,.5)"/><circle r="4" fill="#0b131d" stroke="#f1e303"/><text y="-50" text-anchor="middle" font-size="11" font-weight="700" fill="#f1e303">N</text></g>
+        </svg>
         </div>
 
-        <div class="lane-hint" id="laneHint">Select a box on the map.</div>
-        <div class="lane-panels">
-          <div class="lane-panel" id="panel-aff-0" hidden><p class="lp-where"><span class="lp-dot" style="background:#00838f"></span>Affiliated &middot; Idea</p><h4>Inside a program</h4><p>An idea arrives already shaped by the group you are in, the grant you are on and what your supervisor can defend. That is not a criticism: it is why the work is fundable and why it connects to what the field is already doing.</p></div>
-          <div class="lane-panel" id="panel-aff-1" hidden><p class="lp-where"><span class="lp-dot" style="background:#00838f"></span>Affiliated &middot; Money</p><h4>Grant cycle</h4><p>Public money, applied for on a schedule. The NSF funded about 27 percent of competitive proposals in 2024; the NIH funded 13.0 percent of R01 applications in 2025. A cycle runs most of a year, and a large share of the award goes to institutional overhead rather than the work.</p><p class='src'>Sources: <a href='https://www.nsf.gov/about/budget' target='_blank' rel='noopener'>NSF budget and funding rates</a> &middot; <a href='https://report.nih.gov/funding/nih-budget-and-spending-data-past-fiscal-years/success-rates' target='_blank' rel='noopener'>NIH success rates</a></p></div>
-          <div class="lane-panel" id="panel-aff-2" hidden><p class="lp-where"><span class="lp-dot" style="background:#00838f"></span>Affiliated &middot; Prediction</p><h4>Optional</h4><p>Physics rarely pre-registers. It is growing for data-heavy work, borrowed from medicine and psychology where it was introduced to stop analysis being chosen after the result is known.</p><p class='src'>Source: <a href='https://www.cos.io/initiatives/prereg' target='_blank' rel='noopener'>Center for Open Science, preregistration</a></p></div>
-          <div class="lane-panel" id="panel-aff-3" hidden><p class="lp-where"><span class="lp-dot" style="background:#00838f"></span>Affiliated &middot; Data</p><h4>Instrument time</h4><p>Applied for and allocated by committee, and heavily oversubscribed. Telescope and beamline time is the scarcer currency, and an allocation usually requires a team and an institution behind it.</p><p class='src'>Example: <a href='https://www.stsci.edu/jwst/science-execution/approved-programs' target='_blank' rel='noopener'>JWST approved programs</a></p></div>
-          <div class="lane-panel" id="panel-aff-4" hidden><p class="lp-where"><span class="lp-dot" style="background:#00838f"></span>Affiliated &middot; Preprint</p><h4>arXiv, same day</h4><p>In physics the preprint usually goes up the day the paper is submitted to a journal, so priority is established immediately and the community starts reading before review finishes.</p><p class='src'>Source: <a href='https://arxiv.org' target='_blank' rel='noopener'>arXiv.org</a></p></div>
-          <div class="lane-panel" id="panel-aff-5" hidden><p class="lp-where"><span class="lp-dot" style="background:#00838f"></span>Affiliated &middot; Review</p><h4>Peer review</h4><p>Two or three unpaid specialists, chosen by an editor, usually from the same small field. Fees for open access are paid from the grant or a library agreement, so the price is invisible to the author.</p><p class='src'>Cost: <a href='https://www.nature.com/nature/for-authors/publishing-options' target='_blank' rel='noopener'>Nature publishing charges</a></p></div>
-          <div class="lane-panel" id="panel-aff-6" hidden><p class="lp-where"><span class="lp-dot" style="background:#00838f"></span>Affiliated &middot; After</p><h4>Citation and career</h4><p>The result feeds the next grant, the next student and the next hire. This is the loop that makes a field self-sustaining, and the same loop that makes a field hard to turn.</p></div>
-          <div class="lane-panel" id="panel-ind-0" hidden><p class="lp-where"><span class="lp-dot" style="background:#f1e303"></span>Industry &middot; Idea</p><h4>Product-shaped</h4><p>The question is chosen where the science and the roadmap overlap. Google Quantum AI works on error correction because a usable quantum computer requires it, and the physics gets done on the way.</p></div>
-          <div class="lane-panel" id="panel-ind-1" hidden><p class="lp-where"><span class="lp-dot" style="background:#f1e303"></span>Industry &middot; Money</p><h4>Internal budget</h4><p>No grant cycle and no overhead argument: the decision is made inside the company on its own timetable, which can be far faster than a funding round.</p></div>
-          <div class="lane-panel" id="panel-ind-2" hidden><p class="lp-where"><span class="lp-dot" style="background:#f1e303"></span>Industry &middot; Prediction</p><h4>Internal review</h4><p>Technical review boards, then legal. The claim is checked before anyone outside sees it, which catches errors early and also means the public never sees what was cut.</p></div>
-          <div class="lane-panel" id="panel-ind-3" hidden><p class="lp-where"><span class="lp-dot" style="background:#f1e303"></span>Industry &middot; Data</p><h4>Own hardware</h4><p>The instrument belongs to the company. No allocation committee, no queue, and no obligation to release the raw data.</p></div>
-          <div class="lane-panel" id="panel-ind-4" hidden><p class="lp-where"><span class="lp-dot" style="background:#f1e303"></span>Industry &middot; Preprint</p><h4>After clearance</h4><p>The preprint waits for patent filing and legal clearance. Publication is often deliberate and well-timed, and the accompanying paper may appear in a top journal on the same day.</p><p class='src'>Example: <a href='https://www.nature.com/articles/s41586-024-08449-y' target='_blank' rel='noopener'>Google Willow, Nature 2024</a></p></div>
-          <div class="lane-panel" id="panel-ind-5" hidden><p class="lp-where"><span class="lp-dot" style="background:#f1e303"></span>Industry &middot; Review</p><h4>Prestige journals</h4><p>Aimed at the most visible venues, with fees no obstacle. The reputational return on a Nature paper is the point.</p><p class='src'>On funded conclusions: <a href='https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.MR000033.pub3/full' target='_blank' rel='noopener'>Cochrane review of industry sponsorship</a></p></div>
-          <div class="lane-panel" id="panel-ind-6" hidden><p class="lp-where"><span class="lp-dot" style="background:#f1e303"></span>Industry &middot; After</p><h4>IP and press</h4><p>The result becomes a patent, a product claim and a press cycle. Independent replication may be impossible if the hardware is proprietary.</p></div>
-          <div class="lane-panel" id="panel-unaff-0" hidden><p class="lp-where"><span class="lp-dot" style="background:#b01558"></span>Independent &middot; Idea</p><h4>Free choice</h4><p>The one genuine advantage, and it is a real one. No committee decides the question, no roadmap constrains it, and no supervisor has to be persuaded first.</p></div>
-          <div class="lane-panel" id="panel-unaff-1" hidden><p class="lp-where"><span class="lp-dot" style="background:#b01558"></span>Independent &middot; Money</p><h4>Self-funded</h4><p>Almost every grant requires an institution to receive the money, so the usual answer is your own pocket. This is the hardest wall in the whole chart, and it is administrative rather than intellectual.</p></div>
-          <div class="lane-panel" id="panel-unaff-2" hidden><p class="lp-where"><span class="lp-dot" style="background:#b01558"></span>Independent &middot; Prediction</p><h4>Pre-register, in public</h4><p>The compensating move. With no institution to vouch for you, a dated public deposit is the only thing that separates a prediction from a story told afterward. Zenodo, run by CERN, issues a permanent DOI and a date you cannot edit.</p><p class='src'>Ours: <a href='https://zenodo.org' target='_blank' rel='noopener'>Zenodo</a> &middot; <a href='testing-schedule.html'>our registered missions</a></p></div>
-          <div class="lane-panel" id="panel-unaff-3" hidden><p class="lp-where"><span class="lp-dot" style="background:#b01558"></span>Independent &middot; Data</p><h4>Public data</h4><p>No instrument time, so the strategy is to test against data somebody else already paid for and released. DESI, Rubin and the Simons Observatory all publish, and that is what makes the work possible at all.</p><p class='src'>Data: <a href='https://data.desi.lbl.gov/public/' target='_blank' rel='noopener'>DESI public releases</a> &middot; <a href='https://rubinobservatory.org/for-scientists/data-products' target='_blank' rel='noopener'>Rubin data products</a> &middot; <a href='instruments.html'>the instruments</a></p></div>
-          <div class="lane-panel" id="panel-unaff-4" hidden><p class="lp-where"><span class="lp-dot" style="background:#b01558"></span>Independent &middot; Preprint</p><h4>Endorsement wall</h4><p>arXiv requires a new author to be endorsed by an established one before posting in a field. In January 2026 the rules tightened further: an institutional email address alone no longer qualifies anyone to endorse. The unmoderated alternatives carry no standing.</p><p class='src'>Source: <a href='https://info.arxiv.org/help/endorsement.html' target='_blank' rel='noopener'>arXiv endorsement</a> &middot; <a href='https://blog.arxiv.org/2026/01/21/attention-authors-updated-endorsement-policy/' target='_blank' rel='noopener'>2026 policy change</a></p></div>
-          <div class="lane-panel" id="panel-unaff-5" hidden><p class="lp-where"><span class="lp-dot" style="background:#b01558"></span>Independent &middot; Review</p><h4>Desk rejection, and the bill</h4><p>Most submissions are rejected before review, and an unaffiliated address starts further back. If a paper is accepted, the open-access charge arrives personally: about 12,850 US dollars at Nature, commonly 2,000 to 6,000 elsewhere. Waivers exist and are worth asking for.</p><p class='src'>Cost: <a href='https://www.nature.com/nature/for-authors/publishing-options' target='_blank' rel='noopener'>Nature charges</a></p></div>
-          <div class="lane-panel" id="panel-unaff-6" hidden><p class="lp-where"><span class="lp-dot" style="background:#b01558"></span>Independent &middot; After</p><h4>Needs a bridge</h4><p>An independent result travels only when a credentialed group picks it up and repeats it. That is the narrowest line on this map, and it is the one you cannot build alone.</p></div>
+        <div class="lc-legend">
+          <span><i class="lk lk-box"></i> a stage</span>
+          <span><i class="lk lk-dia"></i> a decision</span>
+          <span><i class="lk lk-pill"></i> an ending</span>
+          <span><i class="lk lk-foot"></i> direction of travel</span>
+          <span class="lc-scroll">Drag the map sideways on a small screen.</span>
+        </div>
+
+        <div class="lc-hint" id="lcHint">Nothing selected yet. Pick any box on the map above.</div>
+        <div class="lc-panels">
+        <div class="lc-panel" id="lc-a1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#00838f"></span>Idea generation</p><h4>Affiliated: where the idea comes from</h4><p>The question arrives already shaped by the group you sit in, the grant you are paid from, and what a supervisor can defend at a committee. That is not a criticism. It is why the work is fundable on day one and why it connects to what the field is already arguing about.</p><p><strong>The trade.</strong> You inherit a running start and you inherit the direction with it.</p></div>
+        <div class="lc-panel" id="lc-a2" hidden><p class="lc-tag"><span class="lc-dot" style="background:#00838f"></span>Grant funding</p><h4>Affiliated: public money, and what reaches the work</h4><p>Applied for on a fixed cycle, judged by panel, and awarded to the institution rather than to you.</p><ul><li><strong>NSF</strong>: about 27 percent of competitive proposals funded in 2024; roughly a quarter for research grants alone.</li><li><strong>NIH</strong>: 13.0 percent of R01 applications funded in 2025.</li><li><strong>Time</strong>: most of a year from submission to money, and most proposals are rewritten and resubmitted at least once.</li></ul><p><strong>The part rarely mentioned.</strong> A large share never reaches the research. Negotiated overhead rates have commonly run 50 to 65 percent; across NIH-funded institutions the negotiated average was about 58 percent with roughly 42 percent effectively paid. In May 2025 the NSF capped its rate at 15 percent for universities, which tells you how much was riding on that number.</p><p class='src'>Sources: <a href='https://www.nsf.gov/about/budget' target='_blank' rel='noopener'>NSF funding rates</a> &middot; <a href='https://report.nih.gov/funding/nih-budget-and-spending-data-past-fiscal-years/success-rates' target='_blank' rel='noopener'>NIH success rates</a> &middot; <a href='https://www.nsf.gov/policies/document/indirect-cost-rate' target='_blank' rel='noopener'>NSF 15% indirect cost policy</a></p></div>
+        <div class="lc-panel" id="lc-a3" hidden><p class="lc-tag"><span class="lc-dot" style="background:#00838f"></span>Pre-registration (optional)</p><h4>Affiliated: pre-registration is optional, and usually skipped</h4><p>Physics rarely pre-registers. The practice grew in medicine and psychology, where it was introduced to stop the analysis being chosen after the result is known, and it is spreading into data-heavy physics.</p><p><strong>Why it matters here.</strong> Without it, a claim's date is the date it was published, not the date it was thought of. Every argument about priority on this site turns on that distinction.</p><p class='src'>Source: <a href='https://www.cos.io/initiatives/prereg' target='_blank' rel='noopener'>Center for Open Science, preregistration</a></p></div>
+        <div class="lc-panel" id="lc-a4" hidden><p class="lc-tag"><span class="lc-dot" style="background:#00838f"></span>Experiment and verification</p><h4>Affiliated: instrument time is the real currency</h4><p>Money is not the scarcest resource. Time on the instrument is, and it is allocated by committee to teams with institutions behind them.</p><p><strong>The competition.</strong> For JWST Cycle 5, 2,639 proposals asked for 101,751 hours against roughly 8,000 available: about thirteen requests for every hour on offer.</p><p class='src'>Source: <a href='https://www.stsci.edu/jwst/science-execution/approved-programs' target='_blank' rel='noopener'>STScI, JWST programs</a></p></div>
+        <div class="lc-panel" id="lc-i1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#f1e303"></span>Idea generation</p><h4>Industry: the question is product-shaped</h4><p>The subject is chosen where the physics and the roadmap overlap. Google Quantum AI works on error correction because a useful quantum computer cannot exist without it, and genuine physics gets done on the way to a product.</p><p><strong>The trade.</strong> Enormous resources, aimed only where they pay.</p></div>
+        <div class="lc-panel" id="lc-i2" hidden><p class="lc-tag"><span class="lc-dot" style="background:#f1e303"></span>Corporate R&amp;D budget</p><h4>Industry: no grant cycle at all</h4><p>The decision is internal and can be made in a week. There is no panel, no resubmission, no overhead argument, and no public record of what was declined.</p><p><strong>What it buys.</strong> Speed, and hardware nobody else has.</p><p><strong>What it costs.</strong> The funder chooses the question, and the record shows that matters: across 75 studies, industry-funded drug and device research was about twice as likely to report favorable results and about two and a half times as likely to reach favorable conclusions.</p><p class='src'>Source: <a href='https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.MR000033.pub3/full' target='_blank' rel='noopener'>Cochrane, industry sponsorship and research outcome</a></p></div>
+        <div class="lc-panel" id="lc-i3" hidden><p class="lc-tag"><span class="lc-dot" style="background:#f1e303"></span>IP and patent clearance</p><h4>Industry: protect first, publish second</h4><p>In most countries a public disclosure before filing can destroy the right to a patent, so the paper waits for the lawyers. Applications publish about eighteen months after filing, which is why competitors' filings are readable long before their products ship.</p><p><strong>The hard edge.</strong> In the United States a patent application can be placed under a secrecy order, and the work disappears from public science entirely.</p></div>
+        <div class="lc-panel" id="lc-i4" hidden><p class="lc-tag"><span class="lc-dot" style="background:#f1e303"></span>Experiment and verification</p><h4>Industry: the instrument belongs to the company</h4><p>No allocation committee and no queue. Also no obligation to release the raw data, which is the reason some industry results cannot be independently replicated even in principle.</p><p><strong>Worked example.</strong> The Willow quantum error-correction result was published in <em>Nature</em> in December 2024, on hardware only Google has.</p><p class='src'>Source: <a href='https://www.nature.com/articles/s41586-024-08449-y' target='_blank' rel='noopener'>Willow, Nature 2024</a></p></div>
+        <div class="lc-panel" id="lc-u1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#b01558"></span>Idea generation</p><h4>Independent: the one genuine advantage</h4><p>Nobody has to approve the question. No roadmap constrains it, no committee scores it, no supervisor has to be persuaded first. This is real and it is the reason independent work exists at all.</p><p><strong>Road stage 1: the idea.</strong> A question, and a first answer to it.</p></div>
+        <div class="lc-panel" id="lc-u2" hidden><p class="lc-tag"><span class="lc-dot" style="background:#b01558"></span>Self-funding</p><h4>Independent: the hardest wall on the chart</h4><p>Almost every research grant requires an institution to receive the money. With no institution, the usual answer is your own pocket.</p><p><strong>Note what kind of wall this is.</strong> It is administrative, not intellectual. Nobody has judged the work; the form simply has no box for you.</p><p><strong>Road stage 2: written down.</strong> The framework is published in full so anyone can read and question it, which costs nothing but time.</p><p class='src'><a href='book.html'>A Quest for The Big TOE</a> &middot; <a href='download.html'>every version, dated</a></p></div>
+        <div class="lc-panel" id="lc-u3" hidden><p class="lc-tag"><span class="lc-dot" style="background:#b01558"></span>Falsifiability and public deposit</p><h4>Independent: the compensating move</h4><p>With no institution to vouch for you, a dated public deposit is the only thing separating a prediction from a story told afterward. Zenodo, run by CERN, issues a permanent DOI and a date that cannot be edited later.</p><p><strong>What has to be in it.</strong> A number, an uncertainty, a named instrument that could contradict it, and the outcome you will accept either way.</p><p><strong>Road stage 3: pre-registered.</strong> Three missions are registered and waiting.</p><p class='src'><a href='https://zenodo.org' target='_blank' rel='noopener'>Zenodo</a> &middot; <a href='testing-schedule.html'>our registered missions</a></p></div>
+        <div class="lc-panel" id="lc-u4" hidden><p class="lc-tag"><span class="lc-dot" style="background:#b01558"></span>Test against public data</p><h4>Independent: use the instruments without owning them</h4><p>No instrument time, so the strategy is to predict something a major survey is going to measure anyway, and then accept the answer.</p><p>This only works because the large collaborations publish. DESI, Rubin and the Simons Observatory all release data to anyone, which is the single policy that makes independent cosmology possible.</p><p><strong>Road stage 4: tested.</strong> First deciding data expected 2027.</p><p class='src'><a href='https://data.desi.lbl.gov/public/' target='_blank' rel='noopener'>DESI public data</a> &middot; <a href='https://rubinobservatory.org/for-scientists/data-products' target='_blank' rel='noopener'>Rubin data products</a> &middot; <a href='instruments.html'>the instruments</a></p></div>
+        <div class="lc-panel" id="lc-s1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#8fa0b0"></span>Internal check</p><h4>Every lane meets here</h4><p>Before anything goes out, someone checks it: a co-author, a review board, or in the independent case only you and whoever you can persuade to read it.</p><p><strong>This is where the lanes stop being equal.</strong> Industry has a formal technical review. A university group has co-authors and a seminar. An independent researcher has no one by default, which is exactly the gap an adversarial pre-check is meant to fill: do the units balance, does the derivation close, has this already been refuted, could the prediction fail.</p></div>
+        <div class="lc-panel" id="lc-s2" hidden><p class="lc-tag"><span class="lc-dot" style="background:#8fa0b0"></span>Preprint server</p><h4>arXiv, and the endorsement wall</h4><p>Launched on 14 August 1991 by Paul Ginsparg, free to read and to post, past two million papers by the end of 2021. Physics runs on it: most papers appear here before, or instead of, a journal, and posting establishes priority immediately.</p><p><strong>Who may post.</strong> A new author must be endorsed by an established author in that subject area. About 300 volunteer moderators screen submissions; roughly 6 percent are held and about 2 percent rejected.</p><p><strong>Changed January 2026.</strong> arXiv no longer accepts an institutional email address as the qualifier for endorsement, after a rise in non-scientific submissions. Affiliation alone will not open this door any more; only a person who reads the work will.</p><p>Unmoderated alternatives exist and carry no standing with anyone you are trying to convince.</p><p class='src'><a href='https://info.arxiv.org/help/endorsement.html' target='_blank' rel='noopener'>arXiv endorsement</a> &middot; <a href='https://blog.arxiv.org/2026/01/21/attention-authors-updated-endorsement-policy/' target='_blank' rel='noopener'>the 2026 change</a></p></div>
+        <div class="lc-panel" id="lc-s3" hidden><p class="lc-tag"><span class="lc-dot" style="background:#8fa0b0"></span>Journal submission</p><h4>Submission, and what the journal is actually for</h4><p>Not distribution: the internet solved that in 1991. A journal supplies the version of record, a documented review, and the currency that hiring committees, promotion panels and funders count.</p><p><strong>Who reads it first.</strong> An editor, who desk-rejects most of what arrives before any reviewer sees it. A 2017 study of 713 editors at 52 influential US medical journals found 51 percent had received general payments from industry in 2014.</p><p class='src'>Source: Liu et al., <em>BMJ</em> 359 (2017) j4619</p></div>
+        <div class="lc-panel" id="lc-s4" hidden><p class="lc-tag"><span class="lc-dot" style="background:#8fa0b0"></span>Peer review</p><h4>Two or three people decide</h4><p>Peer review is two or three unpaid specialists, chosen by an editor, usually from the same small field as the author, sometimes competitors for the same grants. It has no investigators, no subpoena power and no budget. It runs on the assumption that a reviewer's interests are disclosed.</p><p><strong>Who those people are.</strong> A 2024 study of 1,962 physician peer reviewers at the BMJ, NEJM, JAMA and the Lancet found more than half had received industry payments between 2020 and 2022, totalling 1.06 billion dollars.</p><p><strong>What it does not catch.</strong> Both of physics's famous fabrication cases passed peer review repeatedly at the most selective journals. What caught them was replication failure and outsiders reading the figures.</p><p class='src'>Source: <em>JAMA</em> (2024), payments to peer reviewers &middot; <a href='blog.html#never-the-present'>related reading</a></p></div>
+        <div class="lc-panel" id="lc-r1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#e06b7a"></span>Rejection letter</p><h4>Rejection is the normal case</h4><p>Most submissions to a selective journal are rejected, and a large share never reach a reviewer at all. An unaffiliated address starts further back: the 1982 Peters and Ceci experiment resubmitted already-published papers under unknown names and affiliations, and most were rejected.</p><p><strong>Measured version.</strong> In a randomized trial at a 2017 conference, reviewers who could see author identities were significantly more likely to recommend acceptance for famous authors (odds multiplier 1.63), top universities (1.58) and top companies (2.10), on the same papers.</p><p class='src'>Source: Tomkins, Zhang and Heavlin, <em>PNAS</em> 114(48) (2017) 12708</p></div>
+        <div class="lc-panel" id="lc-r2" hidden><p class="lc-tag"><span class="lc-dot" style="background:#8fa0b0"></span>Revise and resubmit</p><h4>The loop, which is where most papers live</h4><p>Papers are rarely abandoned on rejection. They go back to the preprint for community comment, get rewritten, and are submitted to a different journal, often one tier down. Two or three rounds is ordinary and a year can pass.</p><p><strong>Why the loop matters to us.</strong> Every pass through it is time in which the dated public record is the only thing establishing when the claim was made.</p></div>
+        <div class="lc-panel" id="lc-r3" hidden><p class="lc-tag"><span class="lc-dot" style="background:#8fa0b0"></span>Abandon or archive</p><h4>Some work stops here</h4><p>A result that cannot find a venue is not necessarily wrong, and it is not necessarily right either. It stops being part of the conversation, which in practice is the same as not existing.</p><p>Where a public deposit exists, the record survives even when the paper does not.</p></div>
+        <div class="lc-panel" id="lc-g1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#f1e303"></span>Sigma criterion</p><h4>How strong is strong enough</h4><p>Particle physics sets its bar explicitly, which most fields do not.</p><ul><li><strong>3 sigma</strong> is called evidence: roughly a 1 in 740 chance of arising from noise.</li><li><strong>5 sigma</strong> is called discovery: roughly 1 in 3.5 million. The Higgs boson was announced in July 2012 at 5 sigma.</li></ul><p><strong>Where our own tests sit.</strong> DESI's evolving dark energy runs about 2.8 to 4.2 sigma depending on which supernova compilation is combined. That is evidence, and it is not discovery, and saying so plainly is the whole discipline.</p><p class='src'><a href='https://home.cern/science/physics/higgs-boson' target='_blank' rel='noopener'>CERN on the Higgs</a> &middot; <a href='validation.html'>our record</a></p></div>
+        <div class="lc-panel" id="lc-p1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#f1e303"></span>Publication and open access</p><h4>Accepted, and then the bill</h4><p>Acceptance is not the end. Open access is paid by the author: about 12,850 US dollars at <em>Nature</em>, 7,350 at <em>Nature Communications</em>, 2,850 at <em>Scientific Reports</em>, and commonly 2,000 to 6,000 elsewhere.</p><p><strong>Who feels it.</strong> A university pays from a grant or a library deal, so the author never sees the invoice. A company pays without noticing. An independent researcher pays personally, or asks for a waiver. Identical obstacle, three different meanings.</p><p><strong>And then it is paid for twice.</strong> Libraries subscribe as well. RELX, Elsevier's parent, reported about 1.17 billion pounds of adjusted operating profit on 3.05 billion of revenue in its scientific division, a margin near 38 percent. Authors and peer reviewers are paid nothing.</p><p class='src'><a href='https://www.nature.com/nature/for-authors/publishing-options' target='_blank' rel='noopener'>Nature charges</a></p></div>
+        <div class="lc-panel" id="lc-t1" hidden><p class="lc-tag"><span class="lc-dot" style="background:#8fa0b0"></span>Addendum or further testing</p><h4>Not strong enough yet</h4><p>A result below the bar is not a failure. It is routed back: more data, a tighter analysis, or a narrower claim. Most results in physics live here for years.</p><p><strong>The honest risk.</strong> This is also where a result can be quietly reshaped until it agrees with the data. The protection is the same one this institute relies on everywhere: the prediction was registered, with a date, before the data existed.</p></div>
         </div>
       </div>
     </section>
@@ -821,23 +866,24 @@
     })();
   </script>
 
+
   <script>
   (function () {
-    var hint = document.getElementById('laneHint');
+    var hint = document.getElementById('lcHint');
     if (!hint) return;
-    var nodes = document.querySelectorAll('.lane-map .node');
-    function open(id) {
-      document.querySelectorAll('.lane-panel').forEach(function (p) { p.hidden = true; });
+    var nodes = document.querySelectorAll('.lifecycle .lnode');
+    function show(id) {
+      document.querySelectorAll('.lc-panel').forEach(function (p) { p.hidden = true; });
       nodes.forEach(function (n) { n.classList.remove('on'); });
-      var panel = document.getElementById('panel-' + id);
-      var node = document.querySelector('[data-node="' + id + '"]');
+      var panel = document.getElementById('lc-' + id);
+      var node = document.querySelector('.lifecycle [data-n="' + id + '"]');
       if (panel) { panel.hidden = false; hint.style.display = 'none'; }
       if (node) node.classList.add('on');
     }
     nodes.forEach(function (n) {
-      n.addEventListener('click', function () { open(n.dataset.node); });
+      n.addEventListener('click', function () { show(n.dataset.n); });
       n.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(n.dataset.node); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(n.dataset.n); }
       });
     });
   })();
