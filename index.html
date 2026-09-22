@@ -361,6 +361,45 @@
             padding: 5rem 2rem;
         }
 
+        /* The Apollo 11 bootprint behind the Quest section. Masked the same way
+           as the night scene on the about page: one radial gradient does the
+           fade, so the photograph has no visible edge anywhere. */
+        #the-quest { position: relative; overflow: hidden; }
+        .quest-print {
+            position: absolute;
+            top: 50%;
+            right: -2%;
+            transform: translateY(-50%);
+            width: min(46%, 560px);
+            aspect-ratio: 1 / 1;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .quest-print img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(1) contrast(1.15) brightness(1.05);
+            opacity: .17;
+            -webkit-mask-image: radial-gradient(ellipse 58% 58% at 52% 48%, #000 0%, #000 26%, transparent 100%);
+                    mask-image: radial-gradient(ellipse 58% 58% at 52% 48%, #000 0%, #000 26%, transparent 100%);
+        }
+        #the-quest .section-container { position: relative; z-index: 1; }
+        .quest-print-credit {
+            margin-top: 1.25rem;
+            font-size: .72rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            opacity: .75;
+        }
+        @media (max-width: 900px) {
+            .quest-print { width: 74%; right: -18%; }
+            .quest-print img { opacity: .1; }
+        }
+
+
         .content-section.bg-light {
             background: var(--bg-light);
         }
@@ -988,6 +1027,9 @@
 
     <!-- The Quest -->
     <section class="content-section" id="the-quest" data-aos="fade-up">
+            <div class="quest-print" aria-hidden="true">
+                <img src="apollo-bootprint.jpg" alt="" loading="lazy" decoding="async">
+            </div>
         <div class="section-container" style="max-width: 900px;">
             <p class="tagline eyebrow">The Quest</p>
             <h2 class="section-title">How an Idea Meets the World</h2>
@@ -999,6 +1041,7 @@
                 <a href="quest-follow.html" class="btn btn-outline" style="color: var(--primary-color); border-color: var(--primary-color);">Follow the Quest</a>
             </div>
             <p style="margin-top: 1rem; font-size: .95rem; color: var(--text-light);">More: <a href="about-page.html#the-quest" style="color: var(--primary-color);">about the Quest</a> and the <a href="legal.html#open-science" style="color: var(--primary-color);">Open Science Policy</a> it follows.</p>
+            <p class="quest-print-credit">Background: Apollo 11 bootprint in lunar soil, 20 July 1969. NASA, AS11-40-5878.</p>
         </div>
     </section>
 
