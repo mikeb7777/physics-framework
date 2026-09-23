@@ -176,7 +176,56 @@
       opacity: 0.95;
       max-width: 800px;
       margin: 0 auto;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.94);
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 10px rgba(0,0,0,.75);
+    }
+
+    .page-header h1 { position: relative; z-index: 2; text-shadow: 0 2px 14px rgba(0,0,0,.6); }
+
+    /* The scene sits inside the title panel, where it can be full width and
+       where its edges have somewhere to disappear to: the panel's own navy.
+       That is what the small version could not do. A dark wash keeps the
+       headline legible over it. */
+    .page-header { min-height: 300px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; }
+    .ph-scene {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 42%;
+      opacity: .72;
+      z-index: 0;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(ellipse 78% 92% at 50% 52%, #000 0%, rgba(0,0,0,.95) 34%, rgba(0,0,0,.45) 72%, transparent 100%);
+              mask-image: radial-gradient(ellipse 78% 92% at 50% 52%, #000 0%, rgba(0,0,0,.95) 34%, rgba(0,0,0,.45) 72%, transparent 100%);
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(ellipse 66% 74% at 50% 44%, rgba(8,12,24,.82) 0%, rgba(8,12,24,.55) 52%, rgba(8,12,24,.12) 100%);
+      pointer-events: none;
+    }
+    /* Credit where a credit belongs on a photograph: small, in the corner,
+       out of the way of the headline. */
+    .ph-credit {
+      position: absolute !important;
+      right: 1rem;
+      bottom: .55rem;
+      margin: 0 !important;
+      max-width: none !important;
+      font-size: .58rem !important;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      text-align: right;
+      color: rgba(255,255,255,.5) !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,.9);
+      z-index: 2;
     }
     
     /* Main Content */
@@ -187,90 +236,19 @@
       padding: 0 2rem 4rem;
       width: 100%;
     }
+
+
     
-    /* Blog Introduction */
-    .blog-intro {
-      position: relative;
-      margin: 0 0 3rem;
-      padding: 0;
-      background: none;
-      border: 0;
-      box-shadow: none;
-      border-radius: 0;
-    }
 
-    .blog-intro-head { display: none; }
+    
 
-    /* The intro scene: the Cosmic Cliffs behind, the control room in front,
-       composed as one image so the feather between the two photographs is an
-       alpha ramp in pixels rather than a mask in a stylesheet. The wrapper
-       mask then dissolves the whole thing into the page, the way .quest-sky
-       does on the about page. */
-    .bi-console {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      width: min(36%, 350px);
-      aspect-ratio: 1000 / 670;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      -webkit-mask-image: radial-gradient(ellipse 74% 76% at 52% 48%, #000 0%, rgba(0,0,0,.97) 26%, rgba(0,0,0,.6) 60%, transparent 97%);
-              mask-image: radial-gradient(ellipse 74% 76% at 52% 48%, #000 0%, rgba(0,0,0,.97) 26%, rgba(0,0,0,.6) 60%, transparent 97%);
-    }
-    .bi-console img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(1.1);
-    }
+    
 
-    .bi-credit {
-      margin-top: 1.1rem;
-      font-size: .72rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      opacity: .8;
-    }
-    @media (max-width: 760px) {
-      .bi-console { position: static; transform: none; width: 100%; margin: 0 0 1.5rem; }
-    }
+    
 
+    
 
-    .blog-intro-body { position: relative; z-index: 1; max-width: 58ch; }
-
-    .blog-intro p {
-      margin-bottom: 0.9rem;
-      line-height: 1.85;
-      font-size: 1.05rem;
-      color: var(--text-dark);
-    }
-
-    .blog-intro .bi-lead {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.45rem;
-      line-height: 1.45;
-      color: var(--text-dark);
-      margin-bottom: 1rem;
-    }
-
-    .blog-intro p:last-child {
-      margin-bottom: 0;
-    }
-
-    .blog-intro a {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px solid rgba(139,0,0,0.35);
-      transition: border-color 0.3s;
-    }
-
-    .blog-intro a:hover { border-bottom-color: var(--primary-color); }
+    
     
     /* Blog Index */
     .blog-index {
@@ -761,25 +739,15 @@
   
   <!-- Page Header -->
   <section id="main-content" tabindex="-1" class="page-header tp-center">
+    <img src="blog-banner.jpg" class="ph-scene" alt="" aria-hidden="true">
     <img src="metatron-spin.svg" class="title-cube" alt="" aria-hidden="true">
     <h1>Research Blog</h1>
-    <p>Exploring ideas, speculations, and discussions beyond the framework</p>
+    <p>Posts explore a wide range of subjects, most of them applications of what the science implies. Write your own and send it to us.</p>
+    <p class="ph-credit">Artemis II flight control, April 2026, with Webb's Cosmic Cliffs in Carina. NASA, jsc2026e021924; NASA/ESA/CSA/STScI.</p>
   </section>
   
   <!-- Main Content -->
   <main class="blog-container">
-    
-    <!-- Blog Introduction -->
-    <div class="blog-intro" data-aos="fade-up">
-      <div class="blog-intro-head"><h3>About This Blog</h3></div>
-      <div class="bi-console" aria-hidden="true"><img src="blog-scene.jpg" alt="" loading="lazy" decoding="async"></div>
-      <div class="blog-intro-body">
-        <p class="bi-lead">Ideas get worked out here in public, before they are settled.</p>
-        <p>Some posts test the framework. Some examine how science itself operates, and what that costs the people inside it. Some take a speculative idea seriously enough to find out where it breaks. Every claim is sourced, and every post says plainly which parts are established, which are contested, and which are ours and still untested.</p>
-        <p>Anyone can submit an article. If you have an idea, an observation or an argument worth putting in front of people who will check it, <a href="about-page.html#contact">send it to us</a>.</p>
-        <p class="bi-credit">Background: the Artemis II flight control team, April 2026, with the Cosmic Cliffs in the Carina Nebula. NASA, jsc2026e021924 and NASA/ESA/CSA/STScI.</p>
-      </div>
-    </div>
     
     <!-- Blog Index -->
     <div class="blog-index" data-aos="fade-up">
