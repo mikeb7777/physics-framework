@@ -697,3 +697,36 @@ button.sf-submit-btn, button.toggle-button, .quick-nav-inner a, .contact-box a, 
 a[href$="cosmic-framework-poster.pdf"] { border-radius: 6px !important; }
 button.category-btn { border-radius: 999px !important; }
 /* == button-shapes:end == */
+
+/* ── Measure ────────────────────────────────────────────────────────────
+   Long-form text wants 60 to 75 characters a line. Measured 23 Sep 2026,
+   the prose containers were running to 119 and 133 characters, which is
+   what makes a page tiring to read: past about 80 the eye starts missing
+   the next line on the return sweep. Capping the text blocks, not the
+   containers, so cards, tables and headings keep their existing width and
+   the left edge still lines up with the headings above it.
+   == measure:start == */
+.foundation-inner p, .foundation-inner li,
+.fa-inner p, .fa-inner li,
+.intro-panel-inner p,
+.pred-entry p, .vcard-body p,
+.framework-header-inner p, .framework-overviews > p,
+.quest-inner > p, .logo-content p,
+.section-container > p,
+.editorial-notice p, .honor-system-box p,
+.content > p, .content > ul > li,
+.hero-content p, .validation-content p,
+.prediction-body p, .prediction-body li,
+section.band > p, .intro-panel p {
+  max-width: 68ch;
+}
+
+/* Centred panels keep their centring: the block narrows, but stays centred
+   rather than sliding to the left. */
+.tp-center p, .page-header p, .page-hero p,
+.honor-system-box p, .hero-statement p,
+[style*="text-align: center"] > p, [style*="text-align:center"] > p {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* == measure:end == */
