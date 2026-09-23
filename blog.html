@@ -538,6 +538,37 @@
       margin-right: auto;
     }
 
+    /* A diagram is not prose and does not want a 68-character measure. Once
+       there is room, let figures use the full width of the article, which is
+       the difference between labels at 9px and labels at 13px. */
+    @media (min-width: 1000px) {
+      .blog-post figure {
+        width: 740px;
+        /* not margin-left: these figures carry an inline margin shorthand,
+           which would win */
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    /* On a phone no arrangement makes a wide diagram legible in a 263px
+       column, so the figure opens on its own where it can be pinched. */
+    .blog-post figure a.fig-open { display: block; text-decoration: none; }
+    .blog-post figure a.fig-open img { display: block; }
+    .blog-post figure .fig-tap { display: none; }
+    @media (max-width: 720px) {
+      .blog-post figure .fig-tap {
+        display: block;
+        font-size: .82rem;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        color: #8B0000;
+        font-weight: 700;
+        margin-top: .5rem;
+      }
+    }
+
     .post-content.collapsed {
       max-height: 0;
       opacity: 0;
@@ -546,6 +577,9 @@
     .post-content.expanded {
       max-height: 20000px;
       opacity: 1;
+      /* hidden overflow is only needed while the post is collapsing; once open
+         it would clip a figure that reaches past the prose measure */
+      overflow: visible;
     }
     
     .expand-hint {
@@ -943,6 +977,12 @@
 
         <p>That's the right word for it. A photograph isn't taken at an instant either. The shutter stays open for a while, and whatever moves during that time is gathered into a single image. Your present works the same way, and like a photographer, your brain changes the exposure to suit the light.</p>
 
+        <figure style="margin: 2rem 0; text-align: center;">
+          <a class="fig-open" href="time-specious-present.svg" target="_blank" rel="noopener" aria-label="Open figure 1 full size"><img src="time-specious-present.svg" alt="Two panels. Above, the familiar picture: a line with the past to the left, the future to the right, a marker at t equals zero, and arrows flowing right to left as events pass from future into past. Below, what perception delivers: the experienced present is a band with real width lying entirely to the left of t equals zero, separated from it by the roughly one tenth of a second it takes anything to become conscious, and the band's width keeps changing." style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"></a>
+          <span class="fig-tap">Tap to open full size</span>
+          <figcaption style="font-size: 0.92rem; color: #5a6878; margin-top: 0.75rem; line-height: 1.6;">Figure 1: The top panel is the picture everyone carries. The bottom panel is the one the evidence supports. Nothing you are experiencing sits at t&nbsp;=&nbsp;0; all of it lies behind the line, and the window keeps changing width.</figcaption>
+        </figure>
+
         <h3>Your Brain Edits Backward</h3>
 
         <p>Here's where it stops being just a lag and starts being a construction.</p>
@@ -952,6 +992,12 @@
         <p>Read that again slowly, because the order is the strange part. The movement you saw between the two dots was put together after the second dot had already appeared. Your brain showed you a smooth journey through a place where nothing was ever displayed, and it couldn't have done so until it knew where the journey ended.</p>
 
         <p>This sounds like fiction. It isn't. It's one of the most reliably reproduced effects in all of perception, and you have watched it happen every time a cursor jumps across a screen and you see it travel.</p>
+
+        <figure style="margin: 2rem 0; text-align: center;">
+          <a class="fig-open" href="time-postdiction.svg" target="_blank" rel="noopener" aria-label="Open figure 2 full size"><img src="time-postdiction.svg" alt="A chart with time running left to right and screen position bottom to top. Two dots are all that is ever displayed: one at time t one, a second at a different position at time t two, with nothing between them. What is experienced is a single dot travelling smoothly from the first position to the second, and an arrow pointing back in time from t two shows that the journey can only have been assembled after the second dot appeared." style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"></a>
+          <span class="fig-tap">Tap to open full size</span>
+          <figcaption style="font-size: 0.92rem; color: #5a6878; margin-top: 0.75rem; line-height: 1.6;">Figure 2: Two flashes are all that is ever shown. The smooth journey between them is written afterwards, backwards, into a stretch of time that had already passed &mdash; which is why the red arrow points the way it does.</figcaption>
+        </figure>
 
         <p>This is <strong>postdiction</strong>: a later event changing what you consciously experience of an earlier one. The same thing shows up when a moving object appears to lead a flash that was physically aligned with it, and in the cutaneous rabbit, where a series of taps on the wrist and elbow is felt as something hopping up the arm, including at spots never touched.<sup><a href="#pres-ref-2">[2]</a></sup></p>
 

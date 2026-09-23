@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 536" width="900" height="536" role="img" aria-labelledby="fig1title fig1desc">
+  <title id="fig1title">The line you think you live on, and the window you actually live in</title>
+  <desc id="fig1desc">Two panels. The upper panel shows the familiar picture of time: a horizontal line with a vertical marker at t equals zero, the past to the left, the future to the right, and arrows flowing from right to left as events pass from future into past. The lower panel shows what perception actually delivers: the experienced present is a band of real width lying entirely to the left of t equals zero, separated from it by the delay it takes a signal to become conscious, and the band's width changes from moment to moment.</desc>
+
+  <style>
+    .s   { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+    .eyebrow { font-size: 15px; font-weight: 700; letter-spacing: .14em; fill: #8fa0b0; }
+    .axlbl   { font-size: 17px; font-weight: 700; letter-spacing: .16em; fill: #5a6878; }
+    .t0      { font-size: 20px; font-weight: 700; fill: #8B0000; letter-spacing: .04em; }
+    .note    { font-size: 16px; fill: #4a5868; }
+    .small   { font-size: 14px; fill: #7d8b99; }
+    .band-ttl{ font-size: 17px; font-weight: 700; letter-spacing: .12em; fill: #005ba5; }
+    .lag     { font-size: 15px; font-weight: 700; fill: #8B0000; letter-spacing: .04em; }
+
+    @keyframes flow { to { transform: translateX(-72px); } }
+    .flow { animation: flow 1.9s linear infinite; }
+
+    /* the aperture opens and closes: the window is not one fixed width */
+    @keyframes breathe {
+      0%, 100% { transform: scaleX(.72); }
+      50%      { transform: scaleX(1.12); }
+    }
+    .breathe {
+      animation: breathe 7s ease-in-out infinite;
+      transform-origin: 396px 380px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .breathe { animation: none; }
+    }
+  </style>
+
+  <defs>
+    <g id="chev">
+      <path d="M 7 -8 L -3 0 L 7 8" fill="none" stroke="#8fa0b0" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <clipPath id="clipA"><rect x="60" y="108" width="780" height="46"/></clipPath>
+    <clipPath id="clipB"><rect x="60" y="358" width="780" height="46"/></clipPath>
+  </defs>
+
+  <rect width="900" height="536" fill="#ffffff"/>
+
+  <!-- ================= PANEL A: the picture everyone carries ================= -->
+  <text class="s eyebrow" x="60" y="42">HOW IT FEELS</text>
+
+  <!-- the line -->
+  <line x1="60" y1="131" x2="840" y2="131" stroke="#5a6878" stroke-width="2.5"/>
+
+  <!-- events flowing out of the future and into the past -->
+  <g clip-path="url(#clipA)">
+    <g class="flow">
+      <use href="#chev" x="-12" y="131"/><use href="#chev" x="60"  y="131"/>
+      <use href="#chev" x="132" y="131"/><use href="#chev" x="204" y="131"/>
+      <use href="#chev" x="276" y="131"/><use href="#chev" x="348" y="131"/>
+      <use href="#chev" x="420" y="131"/><use href="#chev" x="492" y="131"/>
+      <use href="#chev" x="564" y="131"/><use href="#chev" x="636" y="131"/>
+      <use href="#chev" x="708" y="131"/><use href="#chev" x="780" y="131"/>
+      <use href="#chev" x="852" y="131"/><use href="#chev" x="924" y="131"/>
+    </g>
+  </g>
+
+  <!-- t = 0 -->
+  <line x1="450" y1="92" x2="450" y2="170" stroke="#8B0000" stroke-width="3.5" stroke-linecap="round"/>
+  <text class="s t0" x="450" y="80" text-anchor="middle">t = 0</text>
+
+  <text class="s axlbl" x="215" y="164" text-anchor="middle">PAST</text>
+  <text class="s axlbl" x="690" y="164" text-anchor="middle">FUTURE</text>
+
+  <text class="s note" x="60" y="203">Events arrive out of the future and fall away into the past. You sit on the line at t = 0.</text>
+
+  <!-- divider -->
+  <line x1="60" y1="238" x2="840" y2="238" stroke="#e3e9ee" stroke-width="2"/>
+
+  <!-- ================= PANEL B: what perception actually delivers ============ -->
+  <text class="s eyebrow" x="60" y="284">WHAT YOU ACTUALLY GET</text>
+
+  <line x1="60" y1="381" x2="840" y2="381" stroke="#5a6878" stroke-width="2.5"/>
+
+  <g clip-path="url(#clipB)">
+    <g class="flow">
+      <use href="#chev" x="-12" y="381"/><use href="#chev" x="60"  y="381"/>
+      <use href="#chev" x="132" y="381"/><use href="#chev" x="204" y="381"/>
+      <use href="#chev" x="276" y="381"/><use href="#chev" x="348" y="381"/>
+      <use href="#chev" x="420" y="381"/><use href="#chev" x="492" y="381"/>
+      <use href="#chev" x="564" y="381"/><use href="#chev" x="636" y="381"/>
+      <use href="#chev" x="708" y="381"/><use href="#chev" x="780" y="381"/>
+      <use href="#chev" x="852" y="381"/><use href="#chev" x="924" y="381"/>
+    </g>
+  </g>
+
+  <!-- the experienced window: entirely in the past, and breathing -->
+  <g class="breathe">
+    <rect x="236" y="349" width="160" height="64" rx="5"
+          fill="#005ba5" fill-opacity=".13" stroke="#005ba5" stroke-width="2.5"/>
+  </g>
+
+  <text class="s band-ttl" x="316" y="337" text-anchor="middle">YOUR &#8220;NOW&#8221;</text>
+
+  <!-- t = 0 -->
+  <line x1="450" y1="342" x2="450" y2="420" stroke="#8B0000" stroke-width="3.5" stroke-linecap="round"/>
+  <text class="s t0" x="450" y="330" text-anchor="middle">t = 0</text>
+
+  <!-- the lag, dimensioned -->
+  <line x1="396" y1="437" x2="450" y2="437" stroke="#8B0000" stroke-width="2"/>
+  <line x1="396" y1="429" x2="396" y2="445" stroke="#8B0000" stroke-width="2"/>
+  <line x1="450" y1="429" x2="450" y2="445" stroke="#8B0000" stroke-width="2"/>
+  <text class="s lag" x="423" y="466" text-anchor="middle">the lag</text>
+
+  <text class="s note" x="316" y="441" text-anchor="middle">0.3 to 3 s wide</text>
+
+  <text class="s note" x="60" y="497">Everything you are experiencing lies to the left of t = 0, and never closer to it than about a tenth of a second.</text>
+  <text class="s small" x="60" y="519">Horizontal spacing is illustrative, not to scale.</text>
+</svg>

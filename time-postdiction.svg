@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" role="img" aria-labelledby="fig2title fig2desc">
+  <title id="fig2title">Apparent motion: the journey your brain adds after the fact</title>
+  <desc id="fig2desc">A chart with time running left to right and screen position running bottom to top. Two dots are all that is ever displayed: one at time t one, another at a different position at time t two. Nothing is shown between them. What is experienced is a single dot travelling smoothly from the first position to the second. That travel can only be assembled after the second dot has appeared, so the conscious experience of the earlier interval is written after the later event, shown here by an arrow pointing back in time from t two.</desc>
+
+  <style>
+    .s     { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+    .eyebrow { font-size: 15px; font-weight: 700; letter-spacing: .14em; fill: #8fa0b0; }
+    .axlbl { font-size: 14px; font-weight: 700; letter-spacing: .14em; fill: #7d8b99; }
+    .tick  { font-size: 17px; font-weight: 700; fill: #5a6878; }
+    .note  { font-size: 16px; fill: #4a5868; }
+    .small { font-size: 14px; fill: #7d8b99; }
+    .shown { font-size: 15px; font-weight: 700; fill: #4a5868; letter-spacing: .06em; }
+    .seen  { font-size: 15px; font-weight: 700; fill: #005ba5; letter-spacing: .06em; }
+    .back  { font-size: 16px; font-weight: 700; fill: #8B0000; }
+
+    /* one 6s cycle: dot one, dot two, then the invented journey between them */
+    @keyframes dotA  { 0%,4% {opacity:0} 8%,100% {opacity:1} }
+    @keyframes dotB  { 0%,26% {opacity:0} 30%,100% {opacity:1} }
+    @keyframes draw  { 0%,34% {stroke-dashoffset:340} 62%,100% {stroke-dashoffset:0} }
+    @keyframes fadeIn{ 0%,60% {opacity:0} 72%,100% {opacity:1} }
+
+    .dotA  { animation: dotA  6s linear infinite; }
+    .dotB  { animation: dotB  6s linear infinite; }
+    .trail { stroke-dasharray: 340; animation: draw 6s linear infinite; }
+    .late  { animation: fadeIn 6s linear infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dotA, .dotB, .late { animation: none; opacity: 1; }
+      .trail { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+
+  <defs>
+    <marker id="backhead" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8B0000"/>
+    </marker>
+    <marker id="timehead" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6878"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="500" fill="#ffffff"/>
+
+  <text class="s eyebrow" x="60" y="42">WHAT THE SCREEN SHOWED, AND WHAT YOU SAW</text>
+
+  <!-- axes -->
+  <line x1="130" y1="72" x2="130" y2="410" stroke="#8fa0b0" stroke-width="2"/>
+  <line x1="130" y1="410" x2="830" y2="410" stroke="#5a6878" stroke-width="2.5" marker-end="url(#timehead)"/>
+  <text class="s axlbl" x="112" y="240" text-anchor="middle" transform="rotate(-90 112 240)">POSITION ON SCREEN</text>
+  <text class="s axlbl" x="828" y="436" text-anchor="end">TIME</text>
+
+  <!-- when each dot was actually displayed -->
+  <line x1="330" y1="72" x2="330" y2="410" stroke="#cfd8e0" stroke-width="2" stroke-dasharray="5 6"/>
+  <line x1="630" y1="72" x2="630" y2="410" stroke="#cfd8e0" stroke-width="2" stroke-dasharray="5 6"/>
+  <text class="s tick" x="330" y="436" text-anchor="middle">t&#8321;</text>
+  <text class="s tick" x="630" y="436" text-anchor="middle">t&#8322;</text>
+
+  <!-- the journey nobody displayed -->
+  <line class="trail" x1="330" y1="140" x2="630" y2="300"
+        stroke="#005ba5" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- the only two things ever shown -->
+  <circle class="dotA" cx="330" cy="140" r="15" fill="#4a5868"/>
+  <circle class="dotB" cx="630" cy="300" r="15" fill="#4a5868"/>
+
+  <text class="s shown" x="330" y="112" text-anchor="middle">SHOWN</text>
+  <text class="s shown" x="630" y="272" text-anchor="middle">SHOWN</text>
+  <text class="s seen"  x="446" y="200">SEEN &#8212; but never displayed</text>
+
+  <!-- the revision, pointing back in time -->
+  <g class="late">
+    <path d="M 624 352 C 560 384, 400 384, 340 352"
+          fill="none" stroke="#8B0000" stroke-width="3" marker-end="url(#backhead)"/>
+    <text class="s back" x="482" y="398" text-anchor="middle">assembled only after t&#8322;</text>
+  </g>
+
+  <text class="s note" x="60" y="470">Nothing was ever displayed between the two flashes.</text>
+</svg>
