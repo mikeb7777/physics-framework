@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200&icon_names=account_tree,analytics,blur_on,bolt,compare,device_hub,flare,functions,grass,hub,join_inner,layers,radar,rotate_right,science,show_chart,shuffle,travel_explore" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200&icon_names=account_tree,analytics,blur_on,bolt,compare,device_hub,flare,functions,graphic_eq,grass,hub,join_inner,layers,motion_photos_on,radar,rotate_right,schedule,science,show_chart,shuffle,travel_explore" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{--primary-color:#8B0000;--accent-blue:#005ba5;--text-dark:#2c3e50;--max-width:1200px;}
@@ -935,6 +935,84 @@
   </div><!-- /.section-container -->
 </section>
 
+        </div>
+      </div>
+    </div>
+
+    <div class="foundation-accordion" id="now-window" style="--acc-color:#005ba5; border-left:4px solid #f1e303;" data-lazy-sim="nowwin">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#f1e303;margin-right:.4rem;">schedule</span>
+          Where Your &ldquo;Now&rdquo; Actually Is
+          <span style="display:inline-block;font-size:.75rem;font-weight:700;padding:.2rem .65rem;border-radius:20px;background:#1a1a2e;color:#86f5b8;vertical-align:middle;margin-left:.5rem;letter-spacing:.04em;text-transform:uppercase;">Established physics</span>
+        </h3>
+        <span class="toggle-indicator">&#9660;</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
+          <div class="figure-container">
+            <div class="figure-title">The conscious present, drawn against the instant it is supposed to occupy</div>
+            <div class="highlight">
+              <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> Events stream out of the future, cross t&nbsp;=&nbsp;0, and fall into the past. The blue band is the only part you are conscious of. It never touches t&nbsp;=&nbsp;0, because nothing reaches awareness instantly, and it has real width, because a system with no duration cannot experience anything at all.<br><br>
+              <strong style="color:#005ba5;font-weight:700;">Controls:</strong> <em>Conscious delay</em> is how long a signal takes to become an experience; about 70&ndash;100&nbsp;ms just to reach the visual cortex, longer to reach awareness. <em>Width of the present</em> is the specious present, measured anywhere from a few hundred milliseconds to a few seconds depending on the task and the sense. Widen it and watch how much of the past you are holding at once; narrow it and watch the stream break into separate events.<br><br>
+              <strong style="color:#005ba5;font-weight:700;">Read about it:</strong> <a href="blog.html#never-the-present" style="color:#005ba5;font-weight:600;">You Never Experience the Present</a></p>
+            </div>
+            <div class="plot-container" style="padding:16px;">
+              <div class="sim-controls">
+                <label class="sim-label">Conscious delay: <input type="range" id="nw-lag" min="40" max="300" step="10" value="100" style="vertical-align:middle;accent-color:#ff6b6b;"> <span id="nw-lag-val" class="sim-val" style="color:#ff6b6b;font-weight:600;">100 ms</span></label>
+                <label class="sim-label">Width of the present: <input type="range" id="nw-win" min="150" max="3000" step="50" value="600" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="nw-win-val" class="sim-val" style="color:#4fc3f7;font-weight:600;">600 ms</span></label>
+                <button onclick="nowWinReset()" class="viz-btn viz-btn-ghost">Reset</button>
+              </div>
+              <div class="canvas-wrap" style="position:relative;">
+                <div class="canvas-loader" id="c-nowwin-loader">
+                  <div class="loader-ring"></div>
+                  <div class="loader-text">INITIALIZING</div>
+                </div>
+                <canvas id="c-nowwin" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
+              </div>
+              <div id="nw-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#4fc3f7;">Initializing simulation...</div>
+            </div>
+            <div class="figure-caption">Nothing sitting on the red line has reached you. The amber events have happened and are still on their way to awareness; the blue ones are what you are experiencing, and all of them are already over. The window is drawn as a fixed width while you hold the slider still, but in a living brain it changes from moment to moment with the task, the sense and the attention paid. Delay and width are independent: a long delay does not make the window wider, it only pushes it further back.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foundation-accordion" id="phi-motion" style="--acc-color:#8e0c45; border-left:4px solid #1a7a36;" data-lazy-sim="phimotion">
+      <div class="foundation-header" onclick="toggleFoundation(this)">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#1a7a36;margin-right:.4rem;">motion_photos_on</span>
+          The Journey That Was Never Shown
+          <span style="display:inline-block;font-size:.75rem;font-weight:700;padding:.2rem .65rem;border-radius:20px;background:#1a1a2e;color:#86f5b8;vertical-align:middle;margin-left:.5rem;letter-spacing:.04em;text-transform:uppercase;">Established physics</span>
+        </h3>
+        <span class="toggle-indicator">&#9660;</span>
+      </div>
+      <div class="foundation-content">
+        <div class="foundation-inner">
+          <div class="figure-container">
+            <div class="figure-title">Beta apparent motion: watch your own brain fill in the gap</div>
+            <div class="highlight">
+              <p style="color:#1a1a2e;margin:0;font-size:1rem;line-height:1.85;"><strong style="color:#005ba5;font-weight:700;">What you are seeing:</strong> Two positions, lit one after the other. That is all that is ever drawn. At a short gap you will not see two lights taking turns, you will see one light moving between them, travelling through a space where nothing is ever displayed. This is the effect described in the post, and the point is that you cannot choose to switch it off.<br><br>
+              <strong style="color:#005ba5;font-weight:700;">Controls:</strong> <em>Gap between flashes</em> is the dark interval. Short gaps produce motion; lengthen it and the movement breaks down into two separate events, though where that happens differs from person to person and depends on your screen's refresh rate. <em>Separation</em> changes the distance, which trades off against the gap: a wider jump needs a longer interval to still read as movement. <em>Show the record</em> draws what was actually displayed.<br><br>
+              <strong style="color:#005ba5;font-weight:700;">Read about it:</strong> <a href="blog.html#never-the-present" style="color:#005ba5;font-weight:600;">You Never Experience the Present</a></p>
+            </div>
+            <div class="plot-container" style="padding:16px;">
+              <div class="sim-controls">
+                <label class="sim-label">Gap between flashes: <input type="range" id="phi-isi" min="0" max="500" step="10" value="60" style="vertical-align:middle;accent-color:#ffd700;"> <span id="phi-isi-val" class="sim-val" style="color:#ffd700;font-weight:600;">60 ms</span></label>
+                <label class="sim-label">Separation: <input type="range" id="phi-sep" min="15" max="80" step="5" value="45" style="vertical-align:middle;accent-color:#4fc3f7;"> <span id="phi-sep-val" class="sim-val" style="color:#4fc3f7;font-weight:600;">45%</span></label>
+                <button onclick="phiToggleRecord()" class="viz-btn viz-btn-ghost" id="phi-rec-btn">Show the record</button>
+              </div>
+              <div class="canvas-wrap" style="position:relative;">
+                <div class="canvas-loader" id="c-phi-loader">
+                  <div class="loader-ring"></div>
+                  <div class="loader-text">INITIALIZING</div>
+                </div>
+                <canvas id="c-phi" style="width:100%;height:320px;display:block;border-radius:6px;background:#030312;"></canvas>
+              </div>
+              <div id="phi-status" style="text-align:center;margin-top:8px;font-family:'Courier New',monospace;font-size:0.82em;color:#ffd700;">Initializing simulation...</div>
+            </div>
+            <div class="figure-caption">The strip along the bottom is the honest record: two pulses with nothing between them. Whatever you saw crossing the gap was assembled by you, and it could not have been assembled until the second flash had already appeared, which means the experience of the earlier interval was written after the later event. That is postdiction, and it is one of the most reproducible findings in perception. How strong the effect is varies between people and between displays, so treat your own impression as a demonstration rather than a measurement.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2859,6 +2937,263 @@ window._simInit.chamber = function () {
     })();
   }
 };
+
+/* ══════════════════════════════════════════════════════════
+   PERCEPTION MODELS — established psychophysics, no framework content.
+   Companions to the blog post "You Never Experience the Present".
+   ══════════════════════════════════════════════════════════ */
+
+function nowWinReset() {
+  var l = document.getElementById('nw-lag'), w = document.getElementById('nw-win');
+  if (l) { l.value = 100; l.dispatchEvent(new Event('input')); }
+  if (w) { w.value = 600; w.dispatchEvent(new Event('input')); }
+}
+window.nowWinReset = nowWinReset;
+
+window._simInit.nowwin = function () {
+  if (window._simInit.nowwin._done) return; window._simInit.nowwin._done = true;
+  initCanvas('c-nowwin', function (cv) {
+    var ctx = cv.ctx, W = cv.w, H = cv.h;
+    var acc = document.getElementById('now-window');
+    var status = document.getElementById('nw-status');
+
+    function bind(id, outId, suffix) {
+      var e = document.getElementById(id), o = document.getElementById(outId);
+      if (e && o) { var f = function () { o.textContent = e.value + suffix; }; e.addEventListener('input', f); f(); }
+    }
+    bind('nw-lag', 'nw-lag-val', ' ms');
+    bind('nw-win', 'nw-win-val', ' ms');
+    function num(id, d) { var e = document.getElementById(id); return e ? parseFloat(e.value) : d; }
+
+    var SPAN = 4200;                 // ms of time visible across the canvas
+    var X0 = W * 0.80;               // where t = 0 sits
+    var PPM = W / SPAN;              // pixels per millisecond
+    var axisY = H * 0.40;
+    var now = 0, prev = 0;
+
+    // events arriving out of the future, at irregular intervals
+    var ev = [];
+    (function seed() {
+      for (var k = -SPAN * 0.9; k < SPAN * 0.3; k += 90 + Math.random() * 230) ev.push(k);
+    })();
+
+    function label(txt, x, y, col, size, align) {
+      ctx.fillStyle = col;
+      ctx.font = '600 ' + (size || 11) + 'px "Segoe UI", system-ui, sans-serif';
+      ctx.textAlign = align || 'center';
+      ctx.fillText(txt, x, y);
+    }
+
+    function draw() {
+      var lag = num('nw-lag', 100), win = num('nw-win', 600);
+      var bandR = X0 - lag * PPM;
+      var bandL = bandR - win * PPM;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#030312'; ctx.fillRect(0, 0, W, H);
+
+      // the future, faintly separated
+      ctx.fillStyle = 'rgba(255,255,255,.028)';
+      ctx.fillRect(X0, 0, W - X0, H);
+
+      // the conscious window
+      ctx.fillStyle = 'rgba(79,195,247,.15)';
+      ctx.fillRect(bandL, axisY - 46, bandR - bandL, 92);
+      ctx.strokeStyle = '#4fc3f7'; ctx.lineWidth = 2;
+      ctx.strokeRect(bandL, axisY - 46, bandR - bandL, 92);
+
+      // the line itself
+      ctx.strokeStyle = 'rgba(255,255,255,.28)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(0, axisY); ctx.lineTo(W, axisY); ctx.stroke();
+
+      // events
+      for (var i = 0; i < ev.length; i++) {
+        var x = X0 - (now - ev[i]) * PPM;
+        if (x < -30) { ev[i] = now + SPAN * 0.25 + Math.random() * 400; continue; }
+        var r = 4, col;
+        if (x > X0) { col = 'rgba(255,255,255,.20)'; }
+        else if (x > bandR) { col = '#ffb74d'; r = 4.5; }
+        else if (x >= bandL) { col = '#4fc3f7'; r = 6; }
+        else { col = 'rgba(255,255,255,.10)'; }
+        if (x >= bandL && x <= bandR) {
+          ctx.shadowColor = '#4fc3f7'; ctx.shadowBlur = 12;
+        }
+        ctx.beginPath(); ctx.arc(x, axisY, r, 0, Math.PI * 2);
+        ctx.fillStyle = col; ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // t = 0
+      ctx.strokeStyle = '#ff6b6b'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(X0, axisY - 68); ctx.lineTo(X0, axisY + 68); ctx.stroke();
+      label('t = 0', X0, axisY - 78, '#ff6b6b', 13);
+
+      // the lag, dimensioned between the window and the line
+      var ly = axisY + 62;
+      ctx.strokeStyle = '#ff6b6b'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(bandR, ly); ctx.lineTo(X0, ly);
+      ctx.moveTo(bandR, ly - 5); ctx.lineTo(bandR, ly + 5);
+      ctx.moveTo(X0, ly - 5); ctx.lineTo(X0, ly + 5);
+      ctx.stroke();
+      label('delay', (bandR + X0) / 2, ly + 17, '#ff6b6b', 11);
+
+      label('YOUR "NOW"', (bandL + bandR) / 2, axisY - 56, '#4fc3f7', 12);
+      label('PAST', 40, axisY + 30, 'rgba(255,255,255,.40)', 11, 'left');
+      label('FUTURE', W - 12, axisY + 30, 'rgba(255,255,255,.40)', 11, 'right');
+
+      // the three states of an event, along the bottom where there is room
+      var ly2 = H - 30, keys = [
+        ['#4fc3f7', 'what you are conscious of'],
+        ['#ffb74d', 'happened, not conscious yet'],
+        ['rgba(255,255,255,.22)', 'gone']
+      ];
+      var cw = W / keys.length;
+      for (var k = 0; k < keys.length; k++) {
+        var kx = cw * k + 22;
+        ctx.beginPath(); ctx.arc(kx, ly2 - 4, 5, 0, Math.PI * 2);
+        ctx.fillStyle = keys[k][0]; ctx.fill();
+        label(keys[k][1], kx + 13, ly2, 'rgba(255,255,255,.62)', 11, 'left');
+      }
+
+      if (status) {
+        status.innerHTML = 'You are conscious of what happened between <b>' + lag.toFixed(0) +
+          '</b> and <b>' + (lag + win).toFixed(0) + ' ms ago</b>. Nothing on the red line has reached you yet.';
+      }
+    }
+
+    prev = performance.now();
+    (function frame(ts) {
+      requestAnimationFrame(frame);
+      if (!acc || !acc.classList.contains('active')) { prev = performance.now(); return; }
+      var r = cv.c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) { prev = performance.now(); return; }
+      var t = ts || performance.now();
+      var dt = Math.min(t - prev, 60); prev = t;
+      now += dt;
+      draw();
+    })();
+  });
+};
+
+/* ── Beta apparent motion ─────────────────────────────────────────────── */
+var phiShowRecord = false;
+function phiToggleRecord() {
+  phiShowRecord = !phiShowRecord;
+  var b = document.getElementById('phi-rec-btn');
+  if (b) b.textContent = phiShowRecord ? 'Hide the record' : 'Show the record';
+}
+window.phiToggleRecord = phiToggleRecord;
+
+window._simInit.phimotion = function () {
+  if (window._simInit.phimotion._done) return; window._simInit.phimotion._done = true;
+  initCanvas('c-phi', function (cv) {
+    var ctx = cv.ctx, W = cv.w, H = cv.h;
+    var acc = document.getElementById('phi-motion');
+    var status = document.getElementById('phi-status');
+
+    function bind(id, outId, suffix) {
+      var e = document.getElementById(id), o = document.getElementById(outId);
+      if (e && o) { var f = function () { o.textContent = e.value + suffix; }; e.addEventListener('input', f); f(); }
+    }
+    bind('phi-isi', 'phi-isi-val', ' ms');
+    bind('phi-sep', 'phi-sep-val', '%');
+    function num(id, d) { var e = document.getElementById(id); return e ? parseFloat(e.value) : d; }
+
+    var FLASH = 60;                 // ms each position stays lit
+    var clock = 0, prev = performance.now();
+    var cy = H * 0.40;
+
+    function draw() {
+      var isi = num('phi-isi', 60), sep = num('phi-sep', 45) / 100;
+      var period = 2 * (FLASH + isi);
+      var ph = period > 0 ? (clock % period) : 0;
+      var lit = -1;
+      if (ph < FLASH) lit = 0;
+      else if (ph >= FLASH + isi && ph < 2 * FLASH + isi) lit = 1;
+
+      var xL = W * (0.5 - sep / 2), xR = W * (0.5 + sep / 2);
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#030312'; ctx.fillRect(0, 0, W, H);
+
+      if (phiShowRecord) {
+        ctx.setLineDash([4, 5]);
+        ctx.strokeStyle = 'rgba(255,255,255,.22)'; ctx.lineWidth = 1;
+        [xL, xR].forEach(function (x) {
+          ctx.beginPath(); ctx.arc(x, cy, 20, 0, Math.PI * 2); ctx.stroke();
+        });
+        ctx.setLineDash([]);
+      }
+
+      if (lit >= 0) {
+        var x = lit === 0 ? xL : xR;
+        ctx.shadowColor = '#ffeb3b'; ctx.shadowBlur = 28;
+        ctx.beginPath(); ctx.arc(x, cy, 17, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffeb3b'; ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // the record: what was actually put on the screen
+      if (phiShowRecord) {
+        var ty = H - 58, tx0 = W * 0.10, tw = W * 0.80;
+        ctx.strokeStyle = 'rgba(255,255,255,.30)'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(tx0, ty); ctx.lineTo(tx0 + tw, ty); ctx.stroke();
+        var f1 = tw * (FLASH / period), gap = tw * (isi / period);
+        ctx.fillStyle = '#ffeb3b';
+        ctx.fillRect(tx0, ty - 20, Math.max(f1, 2), 20);
+        ctx.fillRect(tx0 + f1 + gap, ty - 20, Math.max(f1, 2), 20);
+        ctx.fillStyle = 'rgba(255,255,255,.55)';
+        ctx.font = '600 11px "Segoe UI", system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('nothing displayed here', tx0 + f1 + gap / 2, ty + 17);
+        ctx.textAlign = 'left';
+        ctx.fillText('what the screen actually did', tx0, ty - 28);
+      }
+
+      if (status) {
+        var msg;
+        if (isi <= 40) msg = 'Very short gap: often read as one object flickering in place, or barely moving.';
+        else if (isi <= 130) msg = 'Most people see a single light travelling across the gap. Nothing is drawn there.';
+        else if (isi <= 260) msg = 'The movement is breaking down. Some see travel, some see two lights.';
+        else msg = 'Two separate flashes. The gap is too long for the brain to bridge.';
+        status.textContent = msg;
+      }
+    }
+
+    prev = performance.now();
+    (function frame(ts) {
+      requestAnimationFrame(frame);
+      if (!acc || !acc.classList.contains('active')) { prev = performance.now(); return; }
+      var r = cv.c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) { prev = performance.now(); return; }
+      var t = ts || performance.now();
+      var dt = Math.min(t - prev, 60); prev = t;
+      clock += dt;
+      draw();
+    })();
+  });
+};
+
+/* Open and reveal a simulation that was linked to directly, so a link from the
+   blog lands on an open model rather than a closed heading. */
+(function openFromHash() {
+  function go() {
+    var id = (location.hash || '').replace('#', '');
+    if (!id) return;
+    var acc = document.getElementById(id);
+    if (!acc || !acc.classList.contains('foundation-accordion')) return;
+    if (!acc.classList.contains('active')) {
+      var h = acc.querySelector('.foundation-header');
+      if (h) toggleFoundation(h);
+    }
+    setTimeout(function () { acc.scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 360);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+  else go();
+  window.addEventListener('hashchange', go);
+})();
+
 </script>
 <!-- goatcounter:start -->
 <script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
