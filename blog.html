@@ -201,47 +201,31 @@
 
     .blog-intro-head { display: none; }
 
-    /* The intro scene, built like .quest-sky on the about page: a dark pool
-       for the stars to sit on, drawn stars over it, then the photograph in
-       screen blend so its dark areas stay transparent and the stars show
-       through them. One mask on the wrapper feathers all three layers along
-       the same edge, so nothing has a border against the light page. */
+    /* The intro scene: the Cosmic Cliffs behind, the control room in front,
+       composed as one image so the feather between the two photographs is an
+       alpha ramp in pixels rather than a mask in a stylesheet. The wrapper
+       mask then dissolves the whole thing into the page, the way .quest-sky
+       does on the about page. */
     .bi-console {
       position: absolute;
       top: 50%;
       right: 0;
       transform: translateY(-50%);
-      width: min(33%, 320px);
-      aspect-ratio: 900 / 603;
+      width: min(36%, 350px);
+      aspect-ratio: 1000 / 670;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
-      -webkit-mask-image: radial-gradient(ellipse 72% 74% at 52% 48%, #000 0%, rgba(0,0,0,.96) 24%, rgba(0,0,0,.55) 58%, transparent 96%);
-              mask-image: radial-gradient(ellipse 72% 74% at 52% 48%, #000 0%, rgba(0,0,0,.96) 24%, rgba(0,0,0,.55) 58%, transparent 96%);
-      border-radius: 0;
+      -webkit-mask-image: radial-gradient(ellipse 74% 76% at 52% 48%, #000 0%, rgba(0,0,0,.97) 26%, rgba(0,0,0,.6) 60%, transparent 97%);
+              mask-image: radial-gradient(ellipse 74% 76% at 52% 48%, #000 0%, rgba(0,0,0,.97) 26%, rgba(0,0,0,.6) 60%, transparent 97%);
     }
-    .bi-console .bi-pool {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 46%, #101b2e 0%, #080d17 70%, #05080f 100%);
-    }
-    .bi-console .bi-stars {
+    .bi-console img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: .95;
-    }
-    .bi-console .bi-shot {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      mix-blend-mode: screen;
-      opacity: .88;
-      filter: saturate(1.25) contrast(1.05);
+      filter: saturate(1.1);
     }
 
     .bi-credit {
@@ -788,16 +772,12 @@
     <!-- Blog Introduction -->
     <div class="blog-intro" data-aos="fade-up">
       <div class="blog-intro-head"><h3>About This Blog</h3></div>
-      <div class="bi-console" aria-hidden="true">
-        <div class="bi-pool"></div>
-        <img class="bi-stars" src="blog-starfield.svg" alt="" loading="lazy" decoding="async">
-        <img class="bi-shot" src="mission-console.jpg" alt="" loading="lazy" decoding="async">
-      </div>
+      <div class="bi-console" aria-hidden="true"><img src="blog-scene.jpg" alt="" loading="lazy" decoding="async"></div>
       <div class="blog-intro-body">
         <p class="bi-lead">Ideas get worked out here in public, before they are settled.</p>
         <p>Some posts test the framework. Some examine how science itself operates, and what that costs the people inside it. Some take a speculative idea seriously enough to find out where it breaks. Every claim is sourced, and every post says plainly which parts are established, which are contested, and which are ours and still untested.</p>
         <p>Anyone can submit an article. If you have an idea, an observation or an argument worth putting in front of people who will check it, <a href="about-page.html#contact">send it to us</a>.</p>
-        <p class="bi-credit">Background: the Artemis II flight control team during the lunar flyby, April 2026. NASA, jsc2026e021924.</p>
+        <p class="bi-credit">Background: the Artemis II flight control team, April 2026, with the Cosmic Cliffs in the Carina Nebula. NASA, jsc2026e021924 and NASA/ESA/CSA/STScI.</p>
       </div>
     </div>
     
