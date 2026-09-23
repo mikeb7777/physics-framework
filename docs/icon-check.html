@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Icon Check</title>
+<style>
+  :root {
+    --ink: #2c3e50; --dim: #5a6878; --faint: #8fa0b0; --line: #dfe6ec;
+    --bad: #8B0000; --good: #1a5c2a; --warn: #7a5000; --paper: #ffffff; --wash: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2.5rem 1.5rem 4rem; background: var(--wash); color: var(--ink);
+    font: 16px/1.7 "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  h1 { font-family: Georgia, "Source Serif 4", serif; font-size: 2rem; margin: 0 0 .25rem; }
+  .eyebrow {
+    font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: .4rem;
+  }
+  p.lede { color: var(--dim); max-width: 68ch; margin: .6rem 0 1.4rem; }
+  .card { background: var(--paper); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem;
+          box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+  .banner { border-left: 5px solid var(--faint); font-weight: 600; }
+  .banner.ok   { border-left-color: var(--good); }
+  .banner.fail { border-left-color: var(--bad); color: var(--bad); }
+  .banner.busy { border-left-color: var(--warn); }
+  table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+  th, td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; width: 4.5rem; }
+  tr.bad td { background: #fdf3f3; }
+  .pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .06em;
+          text-transform: uppercase; padding: .15rem .5rem; border-radius: 20px; }
+  .pill.ok   { background: #e7f3ea; color: var(--good); }
+  .pill.bad  { background: #f7e3e3; color: var(--bad); }
+  .pill.warn { background: #f8efdc; color: var(--warn); }
+  code, pre { font-family: "Cascadia Mono", Consolas, "Courier New", monospace; font-size: .86rem; }
+  pre { background: #0d1522; color: #e6edf3; padding: .9rem 1rem; border-radius: 6px; overflow-x: auto;
+        white-space: pre-wrap; word-break: break-all; margin: .6rem 0 0; }
+  button { font: inherit; font-size: .88rem; font-weight: 600; cursor: pointer;
+           background: var(--bad); color: #fff; border: 0; border-radius: 6px; padding: .45rem 1rem; }
+  button.ghost { background: transparent; color: var(--bad); border: 1px solid rgba(139,0,0,.35); }
+  .note { font-size: .88rem; color: var(--dim); }
+  .note strong { color: var(--ink); }
+  #frames { position: fixed; left: -4000px; top: 0; width: 1200px; height: 900px; }
+  .prog { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-top: .6rem; }
+  .prog i { display: block; height: 100%; width: 0; background: var(--bad); transition: width .2s; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Site tooling &middot; not part of the site</p>
+  <h1>Icon Check</h1>
+  <p class="lede">The Material Symbols font is requested with an explicit list of the icons a page wants.
+  It saves weight, and it fails silently: an icon left off the list renders as its own name, in capitals,
+  in the middle of a heading. Nothing appears in the console. This page loads every page in the sitemap and
+  measures each icon to see whether a glyph actually arrived.</p>
+
+  <div class="card banner busy" id="banner">Ready.</div>
+
+  <div class="card">
+    <button id="run">Run the check</button>
+    <button class="ghost" id="showall">Show every page</button>
+    <div class="prog"><i id="bar"></i></div>
+    <p class="note" id="prog" style="margin:.6rem 0 0;">Serve the site over http:// for this to work &mdash;
+    opened straight from a file, the browser will not let this page read the pages it loads.</p>
+  </div>
+
+  <div id="out"></div>
+
+  <div class="card">
+    <p class="eyebrow">How it decides</p>
+    <p class="note">A rendered icon glyph is almost exactly <strong>one em wide</strong>. The literal name is
+    several times that, so the test measures each icon's text and compares it with the font size. It measures
+    the <strong>text node</strong> through a Range, not the element box: these spans are <code>display:block</code>
+    and stretch to their container, so the element can report 310px while the glyph is 32px. Measuring the
+    element instead produces confident false alarms, which is how this check was first written and why it is
+    written down here.</p>
+    <p class="note">The list comparison alone is not enough either. It catches a name missing from
+    <code>icon_names</code>, but not a name that is on the list and simply is not an icon. Only rendering
+    catches both, so the two run together.</p>
+  </div>
+
+</div>
+<div id="frames"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ICON_SEL = '.material-symbols-outlined, .material-icons';
+  var RATIO = 1.35;            // a glyph is ~1em; anything wider is the name as text
+  var showAll = false;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); };
+
+  function banner(kind, html) {
+    var b = $('banner');
+    b.className = 'card banner ' + kind;
+    b.innerHTML = html;
+  }
+
+  /* Every page in the sitemap, as same-origin paths. Auto-discovery keeps this
+     honest when pages are added; nothing here has to be maintained by hand. */
+  function pages() {
+    return fetch('../sitemap.xml', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('sitemap.xml: HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (txt) {
+        var xml = new DOMParser().parseFromString(txt, 'application/xml');
+        var locs = [].slice.call(xml.getElementsByTagName('loc'));
+        var seen = {}, out = [];
+        locs.forEach(function (l) {
+          var p;
+          try { p = new URL(l.textContent.trim(), location.origin).pathname; }
+          catch (e) { return; }
+          if (!/\.html$|\/$/.test(p)) return;
+          if (seen[p]) return;
+          seen[p] = 1; out.push(p);
+        });
+        return out;
+      });
+  }
+
+  function inspect(path) {
+    return new Promise(function (resolve) {
+      var f = document.createElement('iframe');
+      var done = false;
+      function finish(v) { if (done) return; done = true; try { f.remove(); } catch (e) {} resolve(v); }
+      var bail = setTimeout(function () { finish({ path: path, error: 'timed out' }); }, 15000);
+
+      f.onload = function () {
+        var d;
+        try { d = f.contentDocument; } catch (e) {
+          clearTimeout(bail); return finish({ path: path, error: 'cross-origin; serve over http://' });
+        }
+        if (!d) { clearTimeout(bail); return finish({ path: path, error: 'no document' }); }
+
+        var ready = (d.fonts && d.fonts.ready) ? d.fonts.ready : Promise.resolve();
+        ready.catch(function () {}).then(function () {
+          setTimeout(function () {
+            clearTimeout(bail);
+            var spans = [].slice.call(d.querySelectorAll(ICON_SEL));
+            var used = {}, asText = [];
+
+            spans.forEach(function (s) {
+              var name = (s.textContent || '').trim().toLowerCase();
+              if (!/^[a-z0-9_]+$/.test(name)) return;
+              used[name] = 1;
+              var tn = null, i;
+              for (i = 0; i < s.childNodes.length; i++) {
+                if (s.childNodes[i].nodeType === 3) { tn = s.childNodes[i]; break; }
+              }
+              if (!tn) return;
+              var fs = parseFloat(getComputedStyle(s).fontSize) || 16;
+              var rg = d.createRange(); rg.selectNodeContents(tn);
+              var w = rg.getBoundingClientRect().width;
+              if (fs > 0 && w / fs > RATIO) asText.push({ name: name, em: +(w / fs).toFixed(1) });
+            });
+
+            // what the page asked the font service for
+            var link = null, names = null;
+            [].slice.call(d.querySelectorAll('link[rel="stylesheet"]')).forEach(function (l) {
+              var h = l.getAttribute('href') || '';
+              if (/fonts\.googleapis\.com\/css2\?family=Material\+/i.test(h)) link = h;
+            });
+            if (link) {
+              var m = /[?&]icon_names=([a-z0-9_,]+)/i.exec(link);
+              if (m) names = m[1].split(',');
+            }
+
+            var usedList = Object.keys(used).sort();
+            var loaded = null;
+            try { loaded = d.fonts ? d.fonts.check('24px "Material Symbols Outlined"') : null; } catch (e) {}
+
+            finish({
+              path: path,
+              icons: spans.length,
+              used: usedList,
+              requested: names,
+              hasLink: !!link,
+              fontLoaded: loaded,
+              asText: asText,
+              missing: names ? usedList.filter(function (n) { return names.indexOf(n) < 0; }) : [],
+              unused: names ? names.filter(function (n) { return usedList.indexOf(n) < 0; }) : [],
+              linkBase: link ? link.split('&icon_names=')[0] : null
+            });
+          }, 350);
+        });
+      };
+      f.onerror = function () { clearTimeout(bail); finish({ path: path, error: 'failed to load' }); };
+      f.src = path + (path.indexOf('?') < 0 ? '?' : '&') + 'iconcheck=' + Date.now();
+      $('frames').appendChild(f);
+    });
+  }
+
+  function row(r) {
+    var problems = [], cls = '';
+    if (r.error) { problems.push('<span class="pill warn">' + esc(r.error) + '</span>'); cls = 'bad'; }
+    if (r.asText && r.asText.length) {
+      cls = 'bad';
+      problems.push('<span class="pill bad">renders as text</span> ' +
+        r.asText.map(function (a) { return '<code>' + esc(a.name) + '</code> (' + a.em + 'em)'; }).join(', '));
+    }
+    if (r.icons && !r.hasLink) {
+      cls = 'bad';
+      problems.push('<span class="pill bad">no icon font loaded</span>');
+    }
+    if (r.fontLoaded === false && r.hasLink) {
+      problems.push('<span class="pill warn">font not ready</span>');
+    }
+    if (r.unused && r.unused.length) {
+      problems.push('<span class="pill warn">' + r.unused.length + ' requested, unused</span> ' +
+        r.unused.map(function (n) { return '<code>' + esc(n) + '</code>'; }).join(', '));
+    }
+    if (!problems.length) problems.push('<span class="pill ok">ok</span>');
+
+    var fix = '';
+    if (r.missing && r.missing.length && r.linkBase) {
+      fix = '<pre>' + esc(r.linkBase + '&icon_names=' + r.used.join(',')) + '</pre>';
+    }
+    return '<tr class="' + cls + '"><td><code>' + esc(r.path) + '</code></td>' +
+           '<td class="n">' + (r.icons || 0) + '</td><td>' + problems.join('<br>') + fix + '</td></tr>';
+  }
+
+  function render(results) {
+    var interesting = results.filter(function (r) {
+      return r.error || (r.asText && r.asText.length) || (r.icons && !r.hasLink) ||
+             (r.unused && r.unused.length);
+    });
+    var withIcons = results.filter(function (r) { return r.icons; });
+    var shown = showAll ? withIcons : (interesting.length ? interesting : withIcons);
+
+    $('out').innerHTML =
+      '<div class="card"><p class="eyebrow">' +
+      (showAll ? 'Every page that uses icons' : (interesting.length ? 'Needs attention' : 'Every page that uses icons')) +
+      '</p><table><thead><tr><th>Page</th><th class="n">Icons</th><th>Result</th></tr></thead><tbody>' +
+      shown.map(row).join('') + '</tbody></table></div>';
+  }
+
+  function run() {
+    $('run').disabled = true;
+    banner('busy', 'Loading the sitemap&hellip;');
+    $('out').innerHTML = '';
+
+    pages().then(function (list) {
+      var results = [], i = 0;
+      function next() {
+        if (i >= list.length) {
+          $('run').disabled = false;
+          $('bar').style.width = '100%';
+          var total = 0, broken = 0, pagesWithIcons = 0;
+          results.forEach(function (r) {
+            total += r.icons || 0;
+            broken += (r.asText || []).length;
+            if (r.icons) pagesWithIcons++;
+          });
+          var errs = results.filter(function (r) { return r.error; }).length;
+          if (broken || errs) {
+            banner('fail', broken + ' icon' + (broken === 1 ? '' : 's') + ' rendering as literal text' +
+              (errs ? ', and ' + errs + ' page' + (errs === 1 ? '' : 's') + ' could not be read' : '') +
+              '. The corrected request is under each page below.');
+          } else {
+            banner('ok', 'All ' + total + ' icons across ' + pagesWithIcons +
+              ' pages render as glyphs. Nothing to fix.');
+          }
+          $('prog').textContent = 'Checked ' + list.length + ' pages from sitemap.xml.';
+          render(results);
+          window.__iconCheck = results;   // for scripted runs
+          return;
+        }
+        var p = list[i++];
+        $('prog').textContent = 'Checking ' + p + '  (' + i + ' of ' + list.length + ')';
+        $('bar').style.width = (i / list.length * 100).toFixed(1) + '%';
+        inspect(p).then(function (r) { results.push(r); next(); });
+      }
+      next();
+    }).catch(function (e) {
+      $('run').disabled = false;
+      banner('fail', 'Could not read the sitemap: ' + esc(e.message) +
+        '<br><span class="note">Serve the site over http:// rather than opening this file directly.</span>');
+    });
+  }
+
+  $('run').addEventListener('click', run);
+  $('showall').addEventListener('click', function () {
+    showAll = !showAll;
+    this.textContent = showAll ? 'Only problems' : 'Show every page';
+    if (window.__iconCheck) render(window.__iconCheck);
+  });
+
+  if (location.protocol !== 'file:') run();
+  else banner('fail', 'Opened from a file. Serve the site over http:// and reload, ' +
+    'or this page cannot read the pages it loads.');
+})();
+</script>
+</body>
+</html>
