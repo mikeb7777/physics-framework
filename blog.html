@@ -201,31 +201,49 @@
 
     .blog-intro-head { display: none; }
 
-    /* The console sits behind the intro the way the bootprint sits behind the
-       Quest section on the index: grayscale, masked to no edge, and faint
-       enough that the copy stays the loudest thing on the page. This is a
-       dark-room photograph, so it is held at normal blend rather than
-       multiply, which would turn it to mud on a light background. */
+    /* The intro scene, built like .quest-sky on the about page: a dark pool
+       for the stars to sit on, drawn stars over it, then the photograph in
+       screen blend so its dark areas stay transparent and the stars show
+       through them. One mask on the wrapper feathers all three layers along
+       the same edge, so nothing has a border against the light page. */
     .bi-console {
       position: absolute;
       top: 50%;
       right: 0;
       transform: translateY(-50%);
-      width: min(36%, 330px);
-      aspect-ratio: 820 / 550;
+      width: min(33%, 320px);
+      aspect-ratio: 900 / 603;
       pointer-events: none;
       z-index: 0;
+      overflow: hidden;
+      -webkit-mask-image: radial-gradient(ellipse 72% 74% at 52% 48%, #000 0%, rgba(0,0,0,.96) 24%, rgba(0,0,0,.55) 58%, transparent 96%);
+              mask-image: radial-gradient(ellipse 72% 74% at 52% 48%, #000 0%, rgba(0,0,0,.96) 24%, rgba(0,0,0,.55) 58%, transparent 96%);
+      border-radius: 0;
     }
-    .bi-console img {
+    .bi-console .bi-pool {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 46%, #101b2e 0%, #080d17 70%, #05080f 100%);
+    }
+    .bi-console .bi-stars {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
-      filter: grayscale(1) contrast(1.3) brightness(1.04);
-      opacity: .5;
-      -webkit-mask-image: radial-gradient(ellipse 62% 64% at 50% 50%, #000 0%, #000 40%, transparent 100%);
-              mask-image: radial-gradient(ellipse 62% 64% at 50% 50%, #000 0%, #000 40%, transparent 100%);
+      opacity: .95;
     }
+    .bi-console .bi-shot {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: screen;
+      opacity: .88;
+      filter: saturate(1.25) contrast(1.05);
+    }
+
     .bi-credit {
       margin-top: 1.1rem;
       font-size: .72rem;
@@ -235,12 +253,11 @@
       opacity: .8;
     }
     @media (max-width: 760px) {
-      .bi-console { position: static; transform: none; width: 100%; margin: 0 0 1.25rem; }
-      .bi-console img { opacity: .5; }
+      .bi-console { position: static; transform: none; width: 100%; margin: 0 0 1.5rem; }
     }
 
 
-    .blog-intro-body { position: relative; z-index: 1; max-width: 62ch; }
+    .blog-intro-body { position: relative; z-index: 1; max-width: 58ch; }
 
     .blog-intro p {
       margin-bottom: 0.9rem;
@@ -771,7 +788,11 @@
     <!-- Blog Introduction -->
     <div class="blog-intro" data-aos="fade-up">
       <div class="blog-intro-head"><h3>About This Blog</h3></div>
-      <div class="bi-console" aria-hidden="true"><img src="mission-console.jpg" alt="" loading="lazy" decoding="async"></div>
+      <div class="bi-console" aria-hidden="true">
+        <div class="bi-pool"></div>
+        <img class="bi-stars" src="blog-starfield.svg" alt="" loading="lazy" decoding="async">
+        <img class="bi-shot" src="mission-console.jpg" alt="" loading="lazy" decoding="async">
+      </div>
       <div class="blog-intro-body">
         <p class="bi-lead">Ideas get worked out here in public, before they are settled.</p>
         <p>Some posts test the framework. Some examine how science itself operates, and what that costs the people inside it. Some take a speculative idea seriously enough to find out where it breaks. Every claim is sourced, and every post says plainly which parts are established, which are contested, and which are ours and still untested.</p>
