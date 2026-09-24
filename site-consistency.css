@@ -423,19 +423,28 @@ footer:not(.rb-a):not(.rb-b) { padding-top: var(--band); margin-top: 0; }
 /* == phone:end == */
 
 /* == header-fit:start == */
-/* -- The header row at in-between widths ---------------------------------
-   Between a tablet held sideways and a small laptop the header links used to
-   break onto two lines or run off the right edge. Links now never break
-   inside themselves, the space between them tightens a little below 1180px
-   (the type stays the same size), and the Member Login pill reads just
-   "Login" up to 1320px. Wider screens, phone menus and footers keep the full
-   "Member Login". */
+/* -- The header row ------------------------------------------------------
+   The header links used to break onto two lines or run off the right edge
+   between a tablet held sideways and a small laptop. The tighter spacing was
+   applied below 1180px, and the Member Login pill dropped the word "Member"
+   below 1320px.
+
+   September 2026: the navigation gained Join, and several pages gained Quest,
+   which takes the widest version to twelve items. Measured at 1200 through
+   1920, the row then ran about 80px past the 1200px header container on every
+   one of them, so the nav no longer lined up with the logo or the content
+   column beneath it. The constraint is the container, not the screen, so a
+   wider monitor never helps and the old upper bounds had nothing left to do.
+
+   Both rules therefore now apply across the whole desktop range: the gap
+   tightens, and the pill reads "Login". Measured again at the same widths,
+   the row sits 32px inside the container with nothing wrapped. The full
+   "Member Login" is kept where there is room for it, in the phone menu and
+   in the footer. */
 header nav a { white-space: nowrap; }
-@media (min-width: 769px) and (max-width: 1180px) {
+@media (min-width: 769px) {
   .site-header .main-navigation ul, header nav ul { gap: .95rem !important; column-gap: .95rem !important; }
   .site-header .main-navigation ul li, header nav ul li { margin-left: 0 !important; margin-right: 0 !important; }
-}
-@media (min-width: 769px) and (max-width: 1320px) {
   header nav .ml-word { display: none; }
 }
 /* == header-fit:end == */

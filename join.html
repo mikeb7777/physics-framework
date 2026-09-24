@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Discussions | Ic² Research Institute</title>
-  <meta name="description" content="Community discussions are coming soon. Share your thoughts and ideas with us in the meantime." />
+  <title>Join | Ic² Research Institute</title>
   
   <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -306,6 +305,51 @@
         font-size: 1.5rem;
       }
     }
+
+    /* ── the three ways in ─────────────────────────────────────────────── */
+    .doors { display: grid; gap: 1.5rem; margin: 0 0 2rem; }
+    @media (min-width: 900px) { .doors { grid-template-columns: repeat(3, 1fr); } }
+    .door {
+      background: #fff; border: 1px solid #e3e9ee; border-top: 5px solid var(--edge, #8fa0b0);
+      border-radius: 8px; padding: 1.5rem 1.6rem 1.7rem; display: flex; flex-direction: column;
+    }
+    .door h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.3rem; color: #2c3e50; margin-bottom: .2rem; }
+    .door .who { font-size: .95rem; color: #4f5d6b; line-height: 1.75; margin: .7rem 0 0; }
+    .door dl { margin: 1rem 0 0; font-size: .93rem; line-height: 1.7; }
+    .door dt {
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: #8fa0b0; margin-top: .75rem;
+    }
+    .door dd { margin: .1rem 0 0; color: #45525f; }
+    .door .spacer { flex: 1 1 auto; min-height: 1rem; }
+    .door-state {
+      display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .22rem .7rem; border-radius: 20px; margin-bottom: .55rem;
+    }
+    .state-open  { background: #e7f3ea; color: #1a5c2a; }
+    .state-soon  { background: #f8efdc; color: #7a5000; }
+    .state-apply { background: #eaf1f8; color: #005ba5; }
+    .door-btn {
+      display: inline-block; margin-top: 1.1rem; padding: .7rem 1.5rem; border-radius: 30px;
+      background: var(--edge, #8B0000); color: #fff; font-weight: 600; font-size: .95rem;
+      text-decoration: none; text-align: center;
+    }
+    .door-btn:hover { filter: brightness(1.12); }
+    .door-none {
+      margin-top: 1.1rem; padding: .7rem 0 0; border-top: 1px dashed #e3e9ee;
+      font-size: .9rem; color: #7d8b99; line-height: 1.7;
+    }
+    .signin-strip {
+      background: #f4f6f8; border-left: 5px solid #8B0000; border-radius: 0 8px 8px 0;
+      padding: 1.3rem 1.6rem; margin: 0 0 2rem; display: flex; flex-wrap: wrap;
+      align-items: center; gap: 1rem 1.5rem;
+    }
+    .signin-strip p { margin: 0; flex: 1 1 22rem; line-height: 1.75; color: #2c3e50; }
+    .signin-strip a.btn {
+      display: inline-block; padding: .7rem 1.7rem; border-radius: 30px; background: #8B0000;
+      color: #fff; font-weight: 600; text-decoration: none; white-space: nowrap;
+    }
+    .one-each { font-size: .95rem; color: #4f5d6b; line-height: 1.8; max-width: 68ch; }
   </style>
     <style id="title-cubes">
       /* One Metatron's Cube drifting across the open area of the title panel,
@@ -335,19 +379,35 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.png" type="image/png" sizes="100x100">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="description" content="Subscribe for occasional email updates from the Ic² Research Institute: prediction results, new papers and events.">
     <!-- seo:start -->
-    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://eequalsicsquared.com/subscribe.html">
+    <meta property="og:site_name" content="Ic² Research Institute">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Subscribe | Ic² Research Institute">
+    <meta property="og:description" content="Subscribe for occasional email updates from the Ic² Research Institute: prediction results, new papers and events.">
+    <meta property="og:url" content="https://eequalsicsquared.com/subscribe.html">
+    <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Ic² Research Institute, eequalsicsquared.com">
+    <meta name="twitter:card" content="summary_large_image">
     <!-- seo:end -->
-<style>
-      /* == contact-form:start == */
+    <style>
+      /* == subscribe:start == */
+      .subscribe-box { max-width: 640px; margin: 0 auto 2rem; }
+      .subscribe-box form { text-align: left; }
+      .subscribe-box .form-group input { min-height: 48px; box-sizing: border-box; }
+      .subscribe-box .submit-btn[disabled] { opacity: .7; cursor: progress; }
+      .subscribe-box .form-note { text-align: left; line-height: 1.6; }
+      .subscribe-box .form-note a { color: #8B0000; }
       .form-status { margin-top: 1rem; font-size: .95rem; line-height: 1.6; }
       .form-status:empty { display: none; }
       .form-status-info { color: #2c3e50; background: #f5f7fa; border-left: 3px solid #5a6878; padding: .75rem 1rem; border-radius: 4px; }
       .form-status-ok { color: #14532d; background: #ecf8f0; border-left: 3px solid #2f8f4e; padding: .75rem 1rem; border-radius: 4px; }
       .form-status-error { color: #7f1d1d; background: #fdf0f0; border-left: 3px solid #8B0000; padding: .75rem 1rem; border-radius: 4px; }
       .form-status a { color: inherit; font-weight: 600; }
-      .submit-btn[disabled] { opacity: .7; cursor: progress; }
-      /* == contact-form:end == */
+      /* == subscribe:end == */
     </style>
 </head>
 <body>
@@ -371,7 +431,7 @@
           <li><a href="events.html">Events</a></li>
           <li><a href="contribute.html">Contribute</a></li>
           <li><a href="join.html">Join</a></li>
-                    <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
+          <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
         </ul>
       </nav>
     </div>
@@ -380,79 +440,81 @@
   <!-- Page Header -->
   <section id="main-content" tabindex="-1" class="page-header tp-center">
     <img src="metatron-spin.svg" class="title-cube" alt="" aria-hidden="true">
-    <h1>Community Discussions</h1>
-    <p>Connect, collaborate, and explore ideas with fellow researchers</p>
-  </section>
-  
-  <!-- Main Content -->
-  <main class="content-container">
-    
-    <!-- Coming Soon Box -->
-    <div class="coming-soon-box" data-aos="fade-up">
-      <div class="coming-soon-icon">🚀</div>
-      <h2>Discussions Platform Coming Soon</h2>
-      <p>We are building a dedicated community discussion platform where researchers, enthusiasts, and curious minds can connect, share ideas, and collaborate on theoretical physics research.</p>
-      
-      <div class="features-list">
-        <h3>What to Expect:</h3>
-        <ul>
-          <li>Discussion forums for theoretical physics topics</li>
-          <li>Direct interaction with research community members</li>
-          <li>Share your own research and hypotheses</li>
-          <li>Collaborative exploration of speculative ideas</li>
-          <li>Real-time notifications and updates</li>
-          <li>User profiles and networking capabilities</li>
-        </ul>
+      <h1>Join</h1>
+      <p>There are three ways in, and most people want only one of them. Here is what each one is, and which is open today.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="content-container">
+
+      <div class="signin-strip" data-aos="fade-up">
+        <p><strong>Already a member?</strong> The member workspace is where the research conversation happens. Sign in there directly.</p>
+        <a class="btn" href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener">Member sign in</a>
       </div>
-      
-      <p><strong>In the meantime</strong>, we would love to hear from you. Use the form below to share your thoughts, questions, or ideas.</p>
-    </div>
-    
-    <!-- Contact Form -->
-    <div class="contact-form-section" data-aos="fade-up" data-aos-delay="100">
-      <h3>Share Your Thoughts</h3>
-      <p>Have questions, ideas, or feedback? Send us a message and we will get back to you.</p>
-      
-      <form data-contact-form action="https://formspree.io/f/mnpqkjqo" method="POST">
-        <input type="hidden" name="_subject" value="New message from eequalsicsquared.com">
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
-        <div class="form-group">
-          <label for="name">Name *</label>
-          <input type="text" id="name" name="name" required>
+
+      <div class="doors">
+
+        <div class="door" style="--edge:#005ba5;" data-aos="fade-up">
+          <span class="door-state state-open">Open now</span>
+          <h3>The Quest</h3>
+          <p class="who">The newsletter. For anyone who wants to follow the work without taking part in it: what was predicted, what the instruments said, and what we got wrong.</p>
+          <dl>
+            <dt>Who it is for</dt><dd>Anyone at all.</dd>
+            <dt>What it takes</dt><dd>An email address. No account, no approval.</dd>
+            <dt>How often</dt><dd>Every two months, plus a special issue when a prediction reports.</dd>
+          </dl>
+          <div class="spacer"></div>
+          <a class="door-btn" href="subscribe.html">Subscribe</a>
         </div>
-        
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="email" required>
+
+        <div class="door" style="--edge:#7a5000;" data-aos="fade-up">
+          <span class="door-state state-soon">Opening soon</span>
+          <h3>Community discussion</h3>
+          <p class="who">The open forum. For asking questions, arguing with the work, and talking to other readers. No application and no vetting: anyone who signs up can post.</p>
+          <dl>
+            <dt>Who it is for</dt><dd>Anyone who wants to talk about the research.</dd>
+            <dt>What it takes</dt><dd>A sign-up, once it exists.</dd>
+            <dt>Where it stands</dt><dd>Not open yet, so there is nothing to sign up to.</dd>
+          </dl>
+          <div class="spacer"></div>
+          <p class="door-none">We would rather say this plainly than give you a button that goes nowhere. Until it opens, the newsletter carries the updates and <a href="about-page.html#contact">questions by email</a> are answered.</p>
         </div>
-        
-        <div class="form-group">
-          <label for="category">Topic Category</label>
-          <select id="category" name="category">
-            <option value="general">General Question</option>
-            <option value="cosmic-framework">COSMIC Framework</option>
-            <option value="validation">Prediction Validation</option>
-            <option value="research">Research Collaboration</option>
-            <option value="membership">Membership Inquiry</option>
-            <option value="feedback">Feedback/Suggestions</option>
-            <option value="other">Other</option>
-          </select>
+
+        <div class="door" style="--edge:#8B0000;" data-aos="fade-up">
+          <span class="door-state state-apply">By application</span>
+          <h3>Research membership</h3>
+          <p class="who">For people who will contribute to the work: conducting research, or providing the professional support that makes research possible. This one is not a reading membership.</p>
+          <dl>
+            <dt>Who it is for</dt><dd>Researchers and professionals who want to contribute.</dd>
+            <dt>What it takes</dt><dd>An application, read by a person. Approval is required.</dd>
+            <dt>Where the work happens</dt><dd>The member workspace, once you are approved.</dd>
+          </dl>
+          <div class="spacer"></div>
+          <a class="door-btn" href="become-member.html">See what is involved</a>
         </div>
-        
-        <div class="form-group">
-          <label for="message">Your Message *</label>
-          <textarea id="message" name="message" required></textarea>
+
+      </div>
+
+      <div class="coming-soon-box" data-aos="fade-up">
+        <h2>They are three separate things</h2>
+        <p class="one-each">Signing up for one does not create the others. The newsletter is an email list and nothing more. Research membership is an application, and approval gives you an account in the member workspace. The community forum, when it opens, will have its own sign-up that has nothing to do with either.</p>
+        <p class="one-each" style="margin-top:1rem;">If you are not sure, the newsletter is the right place to start. It costs nothing, asks for nothing but an address, and you can <a href="unsubscribe.html">leave</a> whenever you like.</p>
+      </div>
+
+      <div class="coming-soon-box" data-aos="fade-up">
+        <h2>Looking for something else?</h2>
+        <div class="features-list">
+          <ul>
+            <li><strong>Helping with testing</strong>: volunteers apply through the <a href="members.html">Members page</a>.</li>
+            <li><strong>Supporting the work</strong>: see <a href="contribute.html">Contribute</a>.</li>
+            <li><strong>How a result travels</strong>: the <a href="quest-map.html">Quest Map</a> follows an idea from first thought to published paper.</li>
+            <li><strong>Anything else</strong>: <a href="about-page.html#contact">contact us</a>.</li>
+          </ul>
         </div>
-        
-        <button type="submit" class="submit-btn">Send Message</button>
-        
-        <p class="form-note">Your name, email and message are sent to us through Formspree so we can reply. See the <a href="privacy-policy.html">Privacy Policy</a>.</p>
-            <p class="form-status" role="status" aria-live="polite"></p>
-          </form>
-    </div>
-    
-  </main>
-  
+      </div>
+
+    </main>
+
   <!-- Unified Footer -->
   <footer>
     <h3>Ic² Research Institute</h3>
@@ -508,11 +570,11 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 })();
 </script>
 
+<script src="phone-menu.js" defer></script>
 <script src="contact-form.js" defer></script>
 <!-- goatcounter:start -->
 <script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- goatcounter:end -->
-<script src="phone-menu.js" defer></script>
   <script src="back-to-top.js" defer></script>
 </body>
 </html>
