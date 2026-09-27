@@ -697,6 +697,22 @@
       border-left: 4px solid #005f6e;
     }
     .cf-svg { display: block; width: 100%; max-width: 260px; margin: 0 auto .9rem; }
+    .cf-spinner {
+      display: block;
+      width: 62%;
+      max-width: 170px;
+      margin: 1.4rem auto 1.1rem;
+      animation: cf-rotate 64s linear infinite;
+    }
+    .cf-label-html {
+      text-align: center;
+      font-size: 11px;
+      font-family: monospace;
+      letter-spacing: .06em;
+      color: var(--muted, #6b7280);
+      margin: 0 0 .9rem;
+    }
+    .cf-cap code { font-size: .82em; background: #e6eaee; padding: .05em .3em; border-radius: 3px; }
     .cf-label {
       font-size: 11px;
       font-family: monospace;
@@ -793,6 +809,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .cf-spin-slow,
+      .cf-spinner,
       .cf-band-w,
       .cf-pulse,
       .qs-tw,
@@ -921,44 +938,60 @@
       font-size: 2.5rem;
       margin-bottom: 2rem;
     }
-    
+
     .logo-section h3 {
       color: white;
       font-weight: 600;
       margin-bottom: 1rem;
       font-size: 1.4rem;
     }
-    
+
+    /* The Spinner never sits directly on gray or dark: all three of its
+       colors fall below 3:1 there. It rides on a light disc instead
+       (red 5.3, green 4.9, blue 6.6 on #f8f9fa); the disc turns with it. */
+    .spinner-disc {
+      background: #f8f9fa;
+      border-radius: 50%;
+      padding: 38px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .25);
+    }
+    .spinner-swatch {
+      display: inline-block;
+      width: .8em;
+      height: .8em;
+      border-radius: 3px;
+      margin-right: .55rem;
+      vertical-align: -.05em;
+      box-shadow: 0 0 0 2px #f8f9fa;
+    }
+    .logo-section code {
+      color: white;
+      background: rgba(0, 0, 0, .25);
+      padding: .05em .35em;
+      border-radius: 3px;
+      font-size: .9em;
+    }
+
     .logo-section p {
-      color: rgba(255, 255, 255, 0.95);
+      color: white;
       line-height: 1.8;
       margin-bottom: 1rem;
     }
-    
-    .logo-section strong {
-      color: white;
-    }
-    
-    .logo-section em {
-      color: rgba(255, 255, 255, 0.95);
-    }
-    
-    .logo-highlight-box {
-      background: rgba(255, 255, 255, 0.1);
+
+    /* Colored callouts: one QCD pair each (quark background, antiquark
+       bottom border), white text. */
+    .qcd-box {
+      border-radius: 8px;
       padding: 1.5rem;
-      border-radius: 6px;
       margin: 2rem 0;
-      border-left: 4px solid rgba(255, 255, 255, 0.3);
     }
-    
-    .logo-highlight-box h3 {
-      color: white;
-      margin-bottom: 1rem;
-    }
-    
-    .logo-highlight-box p {
-      color: rgba(255, 255, 255, 0.95);
-    }
+    .qcd-box h3,
+    .qcd-box p,
+    .qcd-box strong,
+    .qcd-box em { color: white; }
+    .qcd-box p { font-size: 1.02rem; font-weight: 400; line-height: 1.75; margin: 0 0 .9rem; }
+    .qcd-box h3 { font-weight: 600; margin-bottom: .75rem; }
     
     /* Foundation Accordion (from framework page) */
     .foundation-accordion {
@@ -1456,7 +1489,7 @@
       <h2>Our Logo and Colors</h2>
       
       <div class="logo-art">
-        <img src="our logo.png" alt="The Spinner - Ic² Research Institute Logo" style="width:280px; height:280px; object-fit:contain; animation: metatron-rotate 20s linear infinite;">
+        <img src="our logo.png" class="spinner-disc" alt="The Spinner - Ic² Research Institute Logo" style="width:280px; height:280px; object-fit:contain; animation: metatron-rotate 20s linear infinite;">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="280" height="280" style="display:block;" role="img" aria-label="Metatron's Cube">
         <g id="metatron-spin" style="transform-origin:100px 100px;">
           <g id="mc-lines">      <line x1="100" y1="100" x2="100.0" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
@@ -1557,17 +1590,17 @@
       <p>Our logo, known as The Spinner, embodies the three foundational pillars of our research framework through its distinctive triangular form. Each element represents one of the three aspects of reality we investigate, while the overall structure illustrates their inseparable unity. To the right is Metatron's Cube: the same circular geometry and triangular relationships the Spinner is constructed from, expressed in full. The same structure appears at the quantum scale in QCD color space, as described below.</p>
 
       <div style="margin: 2rem 0;">
-        <h3 style="color: #f1e303;">Yellow: Information</h3>
-        <p>The yellow element represents Information as the fundamental substrate of reality. This is not information <em>about</em> reality: it <em>is</em> reality at its most basic level. Just as energy and matter are interconvertible (E=mc²), we understand physical reality as patterns of information that can be processed, transformed, and measured. From quantum mechanics to cosmology, information provides the common language that unifies seemingly disparate phenomena.</p>
+        <h3><span class="spinner-swatch" style="background:#005ba5;" aria-hidden="true"></span>Blue: Information</h3>
+        <p>The blue element represents Information, and it is the same navy as the Ic² wordmark, where the I stands for Information. Information is the fundamental substrate of reality. This is not information <em>about</em> reality: it <em>is</em> reality at its most basic level. Just as energy and matter are interconvertible (E=mc²), we understand physical reality as patterns of information that can be processed, transformed, and measured. From quantum mechanics to cosmology, information provides the common language that unifies seemingly disparate phenomena.</p>
       </div>
 
       <div style="margin: 2rem 0;">
-        <h3 style="color: #a1cd5f;">Green: Computation</h3>
+        <h3><span class="spinner-swatch" style="background:#2e7d32;" aria-hidden="true"></span>Green: Computation</h3>
         <p>The green element represents Computation as the dynamic optimization process through which information evolves. Reality does not just exist. It continuously optimizes according to physical laws that can be understood as computational constraints. From the path integral formulation of quantum mechanics (nature exploring all possible paths to find optimal ones) to thermodynamic evolution toward maximum entropy, the universe operates as a vast optimization engine.</p>
       </div>
 
       <div style="margin: 2rem 0;">
-        <h3 style="color: #ff6b6b;">Red: Consciousness</h3>
+        <h3><span class="spinner-swatch" style="background:#c62828;" aria-hidden="true"></span>Red: Consciousness</h3>
         <p>The red element symbolizes Consciousness as self-referential information processing, represented by the "²" (squared) in Ic². This is not simple duplication but the strange loop of information processing that models itself. We are not separate from the universe; our consciousness is completely composed of and integrated with it. On this view there is no boundary between "mind" and "physical reality": consciousness is physical reality, a specific pattern of information processing in quantum and electromagnetic fields.</p>
         
         <p style="margin-top: 1rem;">When information patterns become complex enough to represent and modify their own processing, consciousness emerges. This is not mystical. It is a natural consequence of information systems achieving sufficient self-referential complexity. What we experience as thoughts, emotions and awareness would then be information processing patterns that are not separate from physics but part of it.</p>
@@ -1577,13 +1610,13 @@
         <p style="margin-top: 1rem;">The implications would be large. How we treat each other would shape physical reality, not only our feelings about it. Caring communities would leave a measurable physical trace, and so would trauma. The atmosphere of a place would be a real pattern in the information structure of space. The mind-body problem would dissolve, because there was never a separation to bridge: subjective experience and objective measurement would be the same information patterns seen from two sides. The framework suggests that beauty, ethics and physics align because all three track information coherence.</p>
       </div>
 
-      <div style="background:#005f6e; border-radius:8px; padding:1.5rem; margin:2rem 0; border-bottom:4px solid #c62828;">
+      <div class="qcd-box" style="background:#005f6e; border-bottom:4px solid #c62828;">
         <h3 style="color:white; font-weight:600; margin-bottom:1rem;">The Triangular Form: Inseparable Unity</h3>
         <p>The three elements form a triangle because they are not separate domains but three aspects of a single unified reality. Information without computation is static and inert. Computation without consciousness remains mechanical optimization. Consciousness without information substrate has nothing to process. They exist only in relationship to each other. You cannot have one without the others.</p>
         <p style="margin-top: 1rem;">This geometric unity mirrors the deep insight from modern physics: reality is fundamentally relational. Nothing exists in isolation. Properties emerge from relationships. The triangle itself is the message: separation is the illusion; integration is the reality.</p>
       </div>
 
-      <div style="background:#8e0c45; border-radius:8px; padding:1.5rem; margin:2rem 0; border-bottom:4px solid #1a7a36;">
+      <div class="qcd-box" style="background:#8e0c45; border-bottom:4px solid #1a7a36;">
         <h3 style="color:white; font-weight:600; margin-bottom:1rem;">The Open Center: Emergence and Incompleteness</h3>
         <p>The hexagonal space at the center where the three elements meet is deliberately open: not empty, but unfinished. This openness represents several crucial concepts:</p>
         <p style="margin-top: 1rem;"><strong>Emergence:</strong> When information, consciousness, and computation interact, something greater than their sum emerges. The open center is where subjective experience arises from objective processes, where meaning emerges from pattern, where novelty appears from deterministic laws.</p>
@@ -1591,21 +1624,21 @@
         <p style="margin-top: 1rem;"><strong>Incompleteness:</strong> Gödel showed that any consistent formal system rich enough to describe arithmetic contains true statements it cannot prove from within itself. The open center acknowledges that our framework, no matter how comprehensive, cannot fully capture all of reality from within reality. There will always be something more, something that emerges from the interaction but cannot be reduced to the components.</p>
       </div>
 
-      <div style="background:#c62828; border-radius:8px; padding:1.5rem; margin:2rem 0; border-bottom:4px solid #00bcd4;">
+      <div class="qcd-box" style="background:#c62828; border-bottom:4px solid #00bcd4;">
         <h3 style="color:white; font-weight:600; margin-bottom:1rem;">The Spinning Motion: Continuous Process</h3>
         <p>"The Spinner" is not static. It represents perpetual motion, continuous transformation. Reality is not a fixed structure but an ongoing process. Information patterns continuously update, computation continuously optimizes, consciousness continually integrates new information and modifies its own processing.</p>
         <p style="margin-top: 1rem;">This spinning mirrors fundamental physics: quantum fields fluctuate, particles decay and transform, entropy relentlessly increases, galaxies rotate, consciousness flows. Even what seems permanent is actually dynamic equilibrium, stable patterns maintained by continuous energy flow, like a whirlpool that maintains its shape while the water constantly changes.</p>
         <p style="margin-top: 1rem;">The spinning also represents iteration and recursion: the same patterns appearing at different scales, the same principles applying from quantum to cosmic domains. Each revolution of understanding brings us back to the same questions at a deeper level, revealing new layers of complexity within apparent simplicity.</p>
       </div>
 
-      <div style="background:#005ba5; border-radius:8px; padding:1.5rem; margin:2rem 0; border-bottom:4px solid #f1e303;">
+      <div class="qcd-box" style="background:#005ba5; border-bottom:4px solid #f1e303;">
         <h3 style="color:white; font-weight:600; margin-bottom:1rem;">E = Ic²: A Parallel to E=mc²</h3>
         <p>The visual similarity to Einstein's famous equation is intentional. Just as E=mc² revealed the deep relationship between energy and matter, showing they are different manifestations of the same underlying reality, Ic² suggests that Energy emerges from the interaction of Information (I), Consciousness (c), and Computation (²).</p>
         <p style="margin-top: 1rem;">Where E=mc² unified physics by showing matter and energy are interconvertible, Ic² proposes an even deeper unification: reality itself emerges from information processing that achieves self-awareness through computational optimization. This is not replacing E=mc² but contextualizing it. Mass-energy equivalence becomes a special case of information-consciousness-computation dynamics.</p>
         <p style="margin-top: 1rem;">The equation is not only a symbolic parallel. It is a testable hypothesis about the fundamental structure of reality, with specific predictions about quantum mechanics, consciousness, cosmology, and the relationship between physical and mental phenomena.</p>
       </div>
 
-      <p style="margin-top: 2rem; font-style: italic; color: rgba(255, 255, 255, 0.85);">The Spinner logo thus encodes our entire research program in a single geometric form: three irreducible aspects forming a unified dynamic process, with emergent properties arising from their interaction, all in continuous motion through time. It is not just a symbol of what we study. It is a visual representation of how reality works.</p>
+      <p style="margin-top: 2rem; font-style: italic; color: white;">The Spinner logo thus encodes our entire research program in a single geometric form: three irreducible aspects forming a unified dynamic process, with emergent properties arising from their interaction, all in continuous motion through time. It is not just a symbol of what we study. It is a visual representation of how reality works.</p>
     </div>
   </section>
 
@@ -1631,7 +1664,7 @@
                    overlap and the colorless result never drift apart. -->
               <g class="cf-spin-slow">
                 <circle cx="110" cy="82"  r="56" fill="#c62828" opacity=".78"/>
-                <circle cx="82"  cy="132" r="56" fill="#1a7a36" opacity=".78"/>
+                <circle cx="82"  cy="132" r="56" fill="#2e7d32" opacity=".78"/>
                 <circle cx="138" cy="132" r="56" fill="#005ba5" opacity=".78"/>
                 <circle cx="110" cy="115" r="18" fill="#ffffff" class="cf-pulse"/>
               </g>
@@ -1677,11 +1710,24 @@
             <figcaption class="cf-cap"><strong>LSST passbands.</strong> Six real wavelength bins running from near-ultraviolet to near-infrared. Two of the six are invisible to the eye, so any color image is three of them chosen and assigned to red, green and blue.</figcaption>
           </div>
 
+          <div class="color-figure-cell">
+            <img src="our logo.png" class="cf-spinner" alt="The Spinner: three arms in red, green and blue.">
+            <p class="cf-label-html">R + G + B &#8594; one mark</p>
+            <figcaption class="cf-cap"><strong>The Spinner.</strong> The three color charges and nothing else: red <code>#c62828</code>, green <code>#2e7d32</code>, blue <code>#005ba5</code>. Together they are colorless, the way three quarks make a colorless proton: three distinctions resolving into one.</figcaption>
+          </div>
+
         </div>
-        <figcaption class="color-figure-note">Two unrelated domains, one structure. Neither diagram shows a color anything actually has. Both assign three channels that sum to neutral, because that is the arrangement which makes the combination readable. This site&rsquo;s palette is the third instance.</figcaption>
+        <figcaption class="color-figure-note">Two unrelated domains and our own mark, one structure. Neither of the first two diagrams shows a color anything actually has. All three assign three channels that sum to neutral, because that is the arrangement which makes the combination readable. The Spinner is the third instance, and the rest of this site&rsquo;s palette follows from it.</figcaption>
       </figure>
 
       <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.75rem;" data-aos="fade-up">The design system on this website uses the same pairs for the same structural reason. Each card's primary color and its accent are a quark-antiquark pair. Together they produce a visually neutral, stable unit. The logic is the same whether the domain is a photon wavelength, a strong-force charge, or a section border. The Rubin Observatory is among the instruments expected to test framework predictions as its survey matures. That the color framework of the instrument, the color framework of the physics it is testing, and the color framework of this website all operate on the same additive logic is not planned. It is simply what happens when the same structural solution appears in independent contexts.</p>
+      <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.75rem;" data-aos="fade-up">The Spinner sits at the top of this system, and it follows the same physics by the other route. Nature makes colorless particles in two ways. A meson pairs one color with its anticolor. A baryon, such as the proton, combines all three colors. Every card on this site is a meson: one color with its anticolor. The Spinner is the baryon: red, green and blue together, with no anticolor beside them, and it is the only place the three appear as a set. Its colors are fixed, and backgrounds adapt to it rather than the reverse. On a gray or dark section it rides on a light disc, because all three of its colors read clearly only against a light background.</p>
+
+      <div class="qcd-box" style="background:#7a5000; border-bottom:4px solid #1565c0;" data-aos="fade-up">
+        <h3 style="font-size:1.1rem;">A Coincidence Worth Enjoying: 3, 6, 9</h3>
+        <p>On the color wheel your screen uses, pure red, green and blue, the primaries the Spinner's three colors are named for, sit exactly 120 degrees apart: green at 120, blue at 240, red at 360. Add the digits of each and you get 3, 6 and 9. That part is pure coincidence. Hue angles are a convention of how displays describe color, and nothing in physics depends on them.</p>
+        <p style="margin-bottom:0;">The coincidence lands in good company, though. The equal spacing is real physics: in the mathematics of the strong force, the three color charges sit at the corners of an equilateral triangle, 120 degrees apart. And the counting is real too: 3 color charges; 6 once the anticolors are included; 9 color-anticolor combinations, which sort into the 8 gluons and 1 colorless state. The digit sums are luck. The 3, 6, 9 of the strong force is not. We like that they rhyme.</p>
+      </div>
       <p style="font-size:1.125rem; line-height:1.8; color:var(--text-dark); margin-bottom:1.75rem;" data-aos="fade-up">What makes QCD color mathematically striking is what Element 4 establishes. There are eight gluon types, corresponding to the eight generators of SU(3) color symmetry. Each gluon type performs a specific rotation in three-dimensional complex color space. Together they form a complete gate set: any color transformation can be decomposed from operations in this set. The quarks are the qutrits, units with three states rather than a qubit's two. The gluons are the gates. The hadron is the stable output state of the computation. Physical rotation is state space rotation. The color labels are not decorative. They name the dimensions of the space in which the computation runs.</p>
 
       <p style="font-size:.8rem; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:1rem; font-weight:600;" data-aos="fade-up">Nine QCD pairs in use on this site</p>
