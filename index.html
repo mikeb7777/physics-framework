@@ -561,11 +561,13 @@
             pointer-events: none;
             animation: hero-spin 90s linear infinite;
         }
-        /* A natural glow behind the Spinner, not part of it: a nebula core
-           with starburst rays. It stays still while the Spinner turns over
-           it. The core is bright where the arms sit, because all three
-           Spinner colors fail 3:1 on the navy hero directly. Sized and
-           placed from the Spinner's own width so the two stay centered. */
+        /* A natural glow behind the Spinner, not part of it: an irregular
+           nebula with uneven starburst rays (hero-glow.png, drawn by
+           tools/make_hero_glow.py; CSS gradients looked too even). It stays
+           still while the Spinner turns over it. The core is bright where
+           the arms sit, because all three Spinner colors fall below 3:1 on the
+           navy hero directly. Sized and placed from the Spinner's own width
+           so the two stay centered. */
         .hero-glow {
             --spin-w: clamp(150px, 17vw, 215px);
             position: absolute;
@@ -576,35 +578,12 @@
             transform: translate(50%, -50%);
             z-index: 0;
             pointer-events: none;
-            border-radius: 50%;
-            background:
-                radial-gradient(circle at 50% 50%, rgba(255,255,255,.97) 0%, rgba(250,252,255,.93) 17%, rgba(226,240,255,.78) 23%, rgba(186,214,255,.42) 30%, rgba(150,170,255,.16) 38%, rgba(120,110,220,0) 50%),
-                radial-gradient(ellipse 34% 22% at 36% 40%, rgba(170,140,255,.30), rgba(170,140,255,0) 100%),
-                radial-gradient(ellipse 30% 20% at 66% 62%, rgba(110,210,255,.26), rgba(110,210,255,0) 100%),
-                radial-gradient(ellipse 22% 30% at 58% 32%, rgba(255,190,230,.16), rgba(255,190,230,0) 100%);
-            filter: blur(2px);
-            animation: hero-glow-breathe 9s ease-in-out infinite;
-        }
-        .hero-glow::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background:
-                repeating-conic-gradient(from 7deg, rgba(255,255,255,.55) 0deg 0.9deg, rgba(255,255,255,0) 1.6deg 11.25deg),
-                repeating-conic-gradient(from 1deg, rgba(210,228,255,.35) 0deg 0.6deg, rgba(210,228,255,0) 1.2deg 7.5deg);
-            -webkit-mask: radial-gradient(circle, #000 12%, rgba(0,0,0,.55) 30%, transparent 50%);
-                    mask: radial-gradient(circle, #000 12%, rgba(0,0,0,.55) 30%, transparent 50%);
-            filter: blur(1.2px);
-            animation: hero-rays 14s ease-in-out infinite;
+            background: url("hero-glow.png?v=2") center / 100% 100% no-repeat;
+            animation: hero-glow-breathe 11s ease-in-out infinite;
         }
         @keyframes hero-glow-breathe {
-            0%, 100% { opacity: .92; }
-            50%      { opacity: 1; }
-        }
-        @keyframes hero-rays {
-            0%, 100% { opacity: .75; transform: rotate(0deg); }
-            50%      { opacity: 1;   transform: rotate(4deg); }
+            0%, 100% { opacity: .9;  transform: translate(50%, -50%) scale(1); }
+            50%      { opacity: 1;   transform: translate(50%, -50%) scale(1.025); }
         }
         @keyframes hero-spin {
             from { transform: translateY(-50%) rotate(0deg); }
@@ -616,7 +595,7 @@
         @media (max-width: 1180px) { .hero-spinner, .hero-glow { display: none; } }
         @media (prefers-reduced-motion: reduce) {
             .hero-spinner { animation: none; transform: translateY(-50%); }
-            .hero-glow, .hero-glow::after { animation: none; }
+            .hero-glow { animation: none; }
         }
 
         /* Atacama Image Slide-in */
@@ -1077,7 +1056,7 @@
                 <div>
                     <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: #f1e303; font-weight: 600; margin-bottom: 0.75rem;">From A Quest for The Big TOE: Introduction</p>
                     <p style="font-size: 1rem; line-height: 1.85; color: white; margin-bottom: 1rem;">String theory remains experimentally inaccessible. Loop quantum gravity faces persistent challenges in generating testable predictions. Inflation relies on hypothetical entities that have never been detected. The multiverse compounds rather than solves the problem it was invented to address.</p>
-                    <p style="font-size: 1rem; line-height: 1.85; color: white; margin-bottom: 1.5rem;">These are not four separate failures. They share a root. Every one of them attempts to solve the unification problem by adding more structure to existing frameworks. None asks whether the frameworks themselves rest on a mistaken assumption about what is fundamental.</p>
+                    <p style="font-size: 1rem; line-height: 1.85; color: white; margin-bottom: 1.5rem;">These are not four separate problems. They share a root. Every one of them attempts to solve the unification problem by adding more structure to existing frameworks. None asks whether the frameworks themselves rest on a mistaken assumption about what is fundamental.</p>
                     <a href="book.html" class="btn btn-outline">Read The Big TOE</a>
                 </div>
                 <div style="border-left: 1px solid rgba(255,255,255,0.15); padding-left: 3rem; text-align: center;">
@@ -1183,7 +1162,7 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h3>Ic² Research Institute</h3>
-                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish our failures alongside our successes.</p>
+                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent platform advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish every result, including the ones that do not hold.</p>
                 <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. No gatekeeping. No institutional barriers.</p>
             </div>
             <div class="footer-icons">
