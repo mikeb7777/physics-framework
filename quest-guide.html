@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Quest Guide | Ic² Research Institute</title>
+  <meta name="description" content="Every gate on the road from an idea to a published physics result: how it works, the way through, and where to go. arXiv endorsement, journals, preprint servers, public data and the tools of the trade.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary-color: #8B0000; --yellow: #f1e303; --max-width: 1200px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6; color: #ffffff; overflow-x: clip; }
+    #stars-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1;
+      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+    a { color: var(--yellow); }
+
+    /* header: the Big TOE band */
+    .site-header { background: rgba(0,0,0,.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.1);
+      position: sticky; top: 0; z-index: 1000; }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: .5rem 2rem; display: flex;
+      justify-content: space-between; align-items: center; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.75rem; align-items: center; }
+    .main-navigation a { color: #ffffff; text-decoration: none; }
+    .main-navigation a:hover { color: var(--yellow); }
+    .quest-bar .bar-label { color: var(--yellow); font: 700 .72rem/1 'IBM Plex Sans', sans-serif; letter-spacing: .14em;
+      text-transform: uppercase; align-self: center; padding-right: .25rem; }
+
+    /* Start Here strip, shown when the visitor arrives with ?start */
+    .start-path { display: none; background: #1a1a2e; border-bottom: 3px solid var(--yellow); padding: .7rem 1.5rem; }
+    .start-path ol { max-width: var(--max-width); margin: 0 auto; list-style: none; display: flex; flex-wrap: wrap;
+      align-items: center; gap: .4rem 1.4rem; color: rgba(255,255,255,.88); font-size: .95rem; }
+    .start-path .start-label { color: var(--yellow); font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+    .start-path a { color: rgba(255,255,255,.88); text-underline-offset: 3px; }
+    .start-path a[aria-current="page"] { color: #ffffff; font-weight: 700; text-decoration: none; }
+    .start-path .start-side { color: rgba(255,255,255,.6); font-size: .85rem; }
+
+    /* page */
+    .q-hero { padding: 5rem 2rem 3rem; text-align: center; }
+    .q-logo { display: block; width: min(440px, 90%); height: auto; margin: 0 auto 1.75rem; }
+    .q-hero .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      max-width: 520px; margin: 0 auto 1rem; }
+    /* page titles set like the Quest logo: Impact, brand red, a pale outline */
+    .q-hero h1 { font-family: Impact, 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; font-size: 4.25rem;
+      line-height: 1.05; letter-spacing: .01em; color: #8B0000; margin-bottom: 1.25rem;
+      text-shadow: 2px 0 #fff4c2, -2px 0 #fff4c2, 0 2px #fff4c2, 0 -2px #fff4c2,
+        1.5px 1.5px #fff4c2, -1.5px -1.5px #fff4c2, 1.5px -1.5px #fff4c2, -1.5px 1.5px #fff4c2; }
+    .q-hero p { font-size: 1.2rem; color: rgba(255,255,255,.88); max-width: 720px; margin: 0 auto; }
+    .q-hero .updated { font-size: .85rem; color: rgba(255,255,255,.55); margin-top: 1rem; }
+    .q-thesis { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.08rem; font-style: italic;
+      color: rgba(255,255,255,.82); max-width: 760px; margin: 1.25rem auto 0; padding-top: 1.1rem;
+      border-top: 1px solid rgba(241,227,3,.45); }
+    .q-section { padding: 3rem 2rem; }
+    .q-inner { max-width: var(--max-width); margin: 0 auto; }
+    .q-section h2 { font-size: 2rem; margin-bottom: .5rem; }
+    .q-section .lede { color: rgba(255,255,255,.8); max-width: 760px; margin-bottom: 2rem; }
+    .q-light { background: #ffffff; color: #2c3e50; }
+    .q-light .lede { color: #5a6878; }
+    .q-light a { color: #8B0000; }
+    .q-light .eyebrow { color: var(--primary-color); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+    .q-section:not(.q-light) .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+
+    /* the road */
+    .road { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: stage; position: relative; }
+    .stage { position: relative; padding: 0 .75rem; text-align: center; }
+    .stage::before { content: ''; position: absolute; top: 22px; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.18); z-index: 0; }
+    .stage:first-child::before { left: 50%; }
+    .stage:last-child::before { right: 50%; }
+    .stage .dot { position: relative; z-index: 1; width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 1rem;
+      display: grid; place-items: center; font-weight: 700; background: #1a1a2e; border: 3px solid rgba(255,255,255,.35); }
+    .stage.here .dot { border-color: var(--yellow); color: var(--yellow); box-shadow: 0 0 0 6px rgba(241,227,3,.15); }
+    .stage h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+    .stage p { font-size: .9rem; color: rgba(255,255,255,.75); }
+    .stage .where { margin-top: .6rem; font-size: .82rem; color: var(--yellow); font-weight: 600; }
+    .outcomes { display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; margin-top: .6rem; }
+    .outcomes span { font-size: .75rem; padding: .15rem .6rem; border-radius: 12px; border: 1px solid rgba(255,255,255,.35); }
+
+    /* the four routes */
+    .routes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .route { background: var(--c); color: #ffffff; border-bottom: 5px solid var(--edge); border-radius: 8px; padding: 1.5rem; }
+    .route h3 { font-size: 1.2rem; margin-bottom: .5rem; color: #2c3e50; }
+    .route .what { font-size: .92rem; color: #5a6878; margin-bottom: 1rem; }
+    .route .status-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8fa0b0; margin-bottom: .25rem; }
+    .route .status { font-size: .95rem; color: #2c3e50; }
+    .route .status.pending { color: #8fa0b0; font-style: italic; }
+
+    .route-note { margin-top: 2rem; background: #f4f6f8; border-left: 4px solid #7a5000; border-radius: 8px; padding: 1.5rem 1.75rem; }
+    .route-note h3 { color: #2c3e50; font-size: 1.15rem; margin-bottom: .5rem; }
+    .route-note p { color: #2c3e50; font-size: .98rem; line-height: 1.75; }
+    .route-note p + p { margin-top: .75rem; }
+
+    /* not the same quest */
+    .not-same { background: #f4f6f8; border-bottom: 5px solid #8B0000; border-radius: 8px; padding: 1.5rem 1.75rem; margin-bottom: 2rem; }
+    .not-same h3 { color: #2c3e50; font-size: 1.3rem; margin-bottom: .5rem; }
+    .not-same > p { color: #2c3e50; line-height: 1.75; margin-bottom: 1rem; }
+    .aims { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    .aims th, .aims td { text-align: left; vertical-align: top; padding: .6rem .75rem; border-top: 1px solid #d8dee6; font-size: .95rem; color: #2c3e50; }
+    .aims th { font-weight: 700; color: #1a1a2e; border-top: 0; }
+    .aims td:first-child { font-weight: 700; white-space: nowrap; }
+    .aims-note { color: #5a6878; font-size: .95rem; line-height: 1.75; margin: 0; }
+    @media (max-width: 700px) {
+      .aims, .aims tbody, .aims tr, .aims td { display: block; width: 100%; }
+      .aims thead { display: none; }
+      .aims tr { border-top: 1px solid #d8dee6; padding: .5rem 0; }
+      .aims td { border: 0; padding: .15rem 0; }
+      .aims td:first-child { color: #8B0000; }
+    }
+
+    /* lifecycle map */
+    .lc-wrap { overflow-x: auto; border-radius: 12px; }
+    .lifecycle { display: block; min-width: 1400px; width: 100%; height: auto; }
+    .lifecycle .lnode { cursor: pointer; }
+    .lifecycle .lnode rect, .lifecycle .lnode path { transition: filter .18s; }
+    .lifecycle .lnode:hover rect, .lifecycle .lnode:hover path,
+    .lifecycle .lnode:focus rect, .lifecycle .lnode:focus path { filter: brightness(1.3); }
+    .lifecycle .lnode.on > rect, .lifecycle .lnode.on > path { stroke: #f1e303; stroke-width: 4; }
+    .lifecycle .lnode:focus { outline: none; }
+    .lc-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; align-items: center; margin: .9rem 0 1rem;
+      font-size: .82rem; color: rgba(255,255,255,.62); }
+    .lc-legend .lk { display: inline-block; width: 15px; height: 12px; margin-right: .45rem; vertical-align: -1px; }
+    .lk-box { background: #1f3448; border: 2px solid #8fa0b0; border-radius: 3px; }
+    .lk-dia { background: #7a5000; border: 2px solid #f1e303; transform: rotate(45deg) scale(.8); }
+    .lk-pill { background: #0f3d2e; border: 2px solid #f1e303; border-radius: 6px; }
+    .lk-foot { background: rgba(241,227,3,.9); border-radius: 50% 50% 45% 45%; width: 9px; }
+    .lc-scroll { margin-left: auto; font-style: italic; }
+    .lc-hint { color: rgba(255,255,255,.5); font-size: .9rem; font-style: italic; margin-bottom: 1rem; }
+    .lc-panel { background: rgba(255,255,255,.055); border-left: 4px solid var(--yellow); border-radius: 0 10px 10px 0;
+      padding: 1.35rem 1.6rem; }
+    .lc-panel h4 { font: 700 1.3rem/1.35 'Source Serif 4', Georgia, serif; color: #fff; margin-bottom: .7rem; }
+    .lc-panel p, .lc-panel li { color: rgba(255,255,255,.9); line-height: 1.75; max-width: 68ch; }
+    .lc-panel p + p { margin-top: .7rem; }
+    .lc-panel ul { list-style: none; margin: .5rem 0 .2rem; }
+    .lc-panel li { padding-left: 1.1rem; position: relative; margin-bottom: .35rem; }
+    .lc-panel li::before { content: ''; position: absolute; left: 0; top: .68em; width: .4rem; height: .4rem;
+      background: var(--yellow); border-radius: 50%; }
+    .lc-tag { font-size: .72rem !important; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.6) !important; margin-bottom: .3rem; }
+    .lc-dot { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .5rem; }
+    .lc-panel .src { font-size: .85rem !important; color: rgba(255,255,255,.62) !important;
+      border-top: 1px solid rgba(255,255,255,.12); padding-top: .6rem; margin-top: .85rem; }
+    @media (max-width: 700px) { .lc-legend { font-size: .75rem; } .lc-scroll { margin-left: 0; } }
+
+    /* swimlane map */
+    .lane-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); margin-bottom: 1rem; }
+    .lane-map { display: block; min-width: 900px; width: 100%; height: auto; }
+    .lane-map .node { cursor: pointer; }
+    .lane-map .node rect { transition: filter .2s, transform .2s; }
+    .lane-map .node:hover rect, .lane-map .node:focus rect { filter: brightness(1.25); }
+    .lane-map .node.on rect { stroke: #f1e303; stroke-width: 3.5; }
+    .lane-map .node:focus { outline: none; }
+    .lane-hint { color: rgba(255,255,255,.55); font-size: .9rem; font-style: italic; margin-bottom: 1rem; }
+    .lane-panel { background: rgba(255,255,255,.06); border-left: 4px solid var(--yellow); border-radius: 0 10px 10px 0; padding: 1.25rem 1.5rem; }
+    .lane-panel h4 { font: 700 1.25rem/1.3 'Source Serif 4', Georgia, serif; color: #fff; margin-bottom: .6rem; }
+    .lane-panel p { color: rgba(255,255,255,.9); line-height: 1.75; max-width: 68ch; }
+    .lane-panel p + p { margin-top: .7rem; }
+    .lp-where { font-size: .72rem !important; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6) !important; margin-bottom: .35rem; }
+    .lp-dot { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .5rem; vertical-align: baseline; }
+    .lane-panel .src { font-size: .85rem !important; color: rgba(255,255,255,.65) !important; border-top: 1px solid rgba(255,255,255,.12); padding-top: .6rem; margin-top: .8rem; }
+    @media (max-width: 700px) { .lane-wrap { border: 0; } .lane-hint { font-size: .82rem; } }
+
+    /* the five paths */
+    .paths { display: grid; gap: 1rem; }
+    .path { background: var(--bg); border-bottom: 5px solid var(--edge); border-radius: 8px; color: #ffffff; overflow: hidden; }
+    .path summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem 1rem; padding: 1.1rem 1.4rem; cursor: pointer; list-style: none; }
+    .path summary::-webkit-details-marker { display: none; }
+    .path-name { font: 700 1.25rem/1.2 'Source Serif 4', Georgia, serif; }
+    .path-line { color: rgba(255,255,255,.82); font-size: .95rem; }
+    .path-open { margin-left: auto; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: #1a1a2e; background: #ffffff; border-radius: 12px; padding: .15rem .6rem; }
+    .path[open] .path-open::after { content: ''; }
+    .path[open] .path-open { background: #f1e303; }
+    .path-body { padding: 0 1.4rem 1.3rem; }
+    .path-body p { color: rgba(255,255,255,.92); line-height: 1.75; margin-bottom: .85rem; max-width: 68ch; }
+    .path-body strong { color: #ffffff; }
+
+    /* the shared machinery */
+    .shared { margin-top: 2.5rem; }
+    .shared h3 { color: #2c3e50; font-size: 1.4rem; margin-bottom: .5rem; }
+    .shared > p { color: #5a6878; line-height: 1.75; margin-bottom: 1.25rem; max-width: 68ch; }
+    .mach { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .mach-card { background: var(--bg); border-bottom: 5px solid var(--edge); border-radius: 8px; padding: 1.4rem 1.5rem; }
+    .mach-card h4 { color: #ffffff; font: 700 1.2rem/1.3 'Source Serif 4', Georgia, serif; margin-bottom: .75rem; }
+    .mach-card p { color: rgba(255,255,255,.92); font-size: .93rem; line-height: 1.7; }
+    .mach-card p + p { margin-top: .7rem; }
+    .mach-card strong { color: #ffffff; }
+    .mach-card em { color: rgba(255,255,255,.95); }
+    .cross { list-style: none; margin-bottom: 1rem; }
+    .cross li { color: #2c3e50; font-size: .97rem; line-height: 1.7; padding-left: 1.2rem; position: relative; margin-bottom: .55rem; }
+    .cross li::before { content: ''; position: absolute; left: 0; top: .6em; width: .45rem; height: .45rem;
+      background: #8B0000; border-radius: 50%; }
+    .cross strong { color: #1a1a2e; }
+
+    /* where else to look */
+    .elsewhere { display: grid; gap: 1.25rem; margin: 1.5rem 0 1rem; }
+    @media (min-width: 900px) { .elsewhere { grid-template-columns: repeat(2, 1fr); } }
+    .ew { background: #fff; border: 1px solid #e3e9ee; border-left: 4px solid #005ba5; border-radius: 8px; padding: 1.35rem 1.5rem; }
+    .ew h3 { font: 700 1.15rem/1.35 'Source Serif 4', Georgia, serif; color: #2c3e50; margin-bottom: .15rem; }
+    .ew h3 a { color: #8B0000; text-decoration: none; border-bottom: 1px solid rgba(139,0,0,.3); }
+    .ew-src { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8fa0b0; margin-bottom: .7rem; }
+    .ew p { font-size: .96rem; line-height: 1.75; color: #4f5d6b; margin-bottom: .6rem; max-width: 68ch; }
+    .ew-stop { border-top: 1px dashed #e3e9ee; padding-top: .6rem; margin-bottom: 0 !important; color: #45525f !important; }
+    .ew-stop strong { color: #7a5000; }
+
+    /* waiting list */
+    .waiting { display: grid; gap: 1rem; }
+    .wait { display: grid; grid-template-columns: 64px 1fr auto; gap: 1.25rem; align-items: center;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 1rem 1.25rem; }
+    .wait img { width: 64px; height: 64px; }
+    .wait h3 { font-size: 1.1rem; }
+    .wait .id { color: rgba(255,255,255,.6); font-size: .85rem; font-weight: 500; }
+    .wait p { font-size: .92rem; color: rgba(255,255,255,.8); }
+    .wait .when { text-align: right; color: var(--yellow); font-weight: 700; white-space: nowrap; }
+    .wait .when small { display: block; color: rgba(255,255,255,.55); font-weight: 400; }
+
+    /* follow page */
+    .channels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .channel { background: var(--bg, #005f6e); border-bottom: 5px solid var(--edge, #c62828); border-radius: 10px; padding: 2rem; }
+    .channel h3 { font-size: 1.4rem; margin-bottom: .5rem; }
+    .channel p { color: rgba(255,255,255,.8); margin-bottom: 1.25rem; }
+    .chapters { columns: 2; column-gap: 2.5rem; list-style: none; }
+    .chapters li { break-inside: avoid; padding: .6rem 0; border-top: 1px solid #e0e0e0; }
+    .chapters strong { color: #2c3e50; }
+    .chapters span { display: block; color: #5a6878; font-size: .92rem; }
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .principles div { border-left: 3px solid var(--primary-color); padding-left: 1rem; }
+    .principles h3 { font-size: 1.05rem; color: #2c3e50; margin-bottom: .3rem; }
+    .principles p { font-size: .92rem; color: #5a6878; }
+    .episode { display: flex; gap: 1.5rem; align-items: center; background: #8e0c45;
+      border-bottom: 5px solid #1a7a36; border-radius: 10px; padding: 1.5rem; }
+    .episode .num { font: 700 2.5rem/1 'Source Serif 4', Georgia, serif; color: var(--yellow); }
+    .episode h3 { font-size: 1.25rem; }
+    .episode p { color: rgba(255,255,255,.75); font-size: .95rem; }
+
+    .q-btn { display: inline-block; padding: .8rem 1.6rem; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .q-btn-primary { background: var(--primary-color); color: #ffffff; }
+    .q-btn-primary:hover { background: #6b0000; }
+    .q-btn-yt { background: #FF0000; color: #ffffff; }
+    .q-btn-mail { background: #0072C6; color: #ffffff; }
+    .note { font-size: .9rem; color: rgba(255,255,255,.6); margin-top: 1rem; }
+    .q-light .note { color: #8fa0b0; }
+
+    .start-next { background: linear-gradient(135deg, #5a6878 0%, #4a5868 100%); border-left: 4px solid var(--yellow); padding: 2.5rem 1.5rem; }
+    .start-next-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1.25rem 2.5rem; }
+    .start-next-inner > div { flex: 1 1 420px; }
+    .start-next .eyebrow { color: #ffffff; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .4rem; }
+    .start-next h2 { font-size: 1.65rem; margin-bottom: .5rem; }
+    .start-next p { max-width: 62ch; }
+
+    @media (max-width: 900px) {
+      .road { grid-template-columns: 1fr; gap: 1.5rem; }
+      .stage { display: grid; grid-template-columns: 46px 1fr; gap: 0 1rem; text-align: left; padding: 0; }
+      .stage::before { display: none; }
+      .stage .dot { margin: 0; grid-row: span 4; }
+      .outcomes { justify-content: flex-start; }
+      .routes { grid-template-columns: repeat(2, 1fr); }
+      .channels, .principles { grid-template-columns: 1fr; }
+      .chapters { columns: 1; }
+    }
+    @media (max-width: 600px) {
+      .q-hero { padding: 3.5rem 1.25rem 2rem; }
+      .q-hero h1 { font-size: 2.9rem; }
+      .q-logo { margin-bottom: 1.25rem; }
+      .q-section { padding: 2.5rem 1.25rem; }
+      .routes { grid-template-columns: 1fr; }
+      .wait { grid-template-columns: 48px 1fr; }
+      .wait img { width: 48px; height: 48px; }
+      .wait .when { grid-column: 2; text-align: left; }
+    }
+
+    /* footer, as on the book pages */
+.social-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+.social-content {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+.quick-links h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    }
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+    }
+.quick-links li {
+    margin-bottom: 0.75rem;
+    }
+.quick-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+    }
+.quick-links a:hover {
+    color: white;
+    }
+.social-main {
+    text-align: center;
+    }
+.social-main h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    }
+.social-main p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    }
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    }
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    }
+.copyright a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+.copyright a:hover {
+    color: rgba(255, 255, 255, 0.9);
+    }
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: white;
+    }
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+.social-btn.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+.social-btn.youtube {
+    background: #FF0000;
+    }
+.social-btn.email {
+    background: #0072C6;
+    }
+.social-icon {
+    width: 24px;
+    height: 24px;
+    }
+.social-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+.quick-links {
+    text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="site-consistency.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <link rel="icon" href="favicon.svg?v=rgb" type="image/svg+xml">
+  <link rel="icon" href="favicon.png?v=rgb" type="image/png" sizes="100x100">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=rgb">
+  <link rel="canonical" href="https://eequalsicsquared.com/quest-guide.html">
+  <meta property="og:site_name" content="Ic² Research Institute">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Quest Guide">
+  <meta property="og:description" content="Where the COSMIC Framework stands on the road from an idea to acceptance, rejection or modification: the stages, the four routes and the data still to come.">
+  <meta property="og:url" content="https://eequalsicsquared.com/quest-map.html">
+  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <style id="q-head">
+    /* Quest title panel: the Framework page's pattern on light gray. */
+    .q-head { background: #f3f4f6; color: #1a252f; padding: 4rem 2rem; text-align: left;
+      position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid #dfe3e8; }
+    .q-head-inner { max-width: var(--max-width, 1200px); margin: 0 auto; }
+    .q-head h1.q-head-mark { margin: 0 0 1.25rem; line-height: 1; }
+    .q-head h1.q-head-mark img { height: 86px; width: auto; display: block; }
+    .q-head .q-head-lead { font-size: 1.25rem; line-height: 1.7; max-width: 820px; margin: 0 0 1rem; color: #1a252f; }
+    .q-head .q-head-lead strong { color: #8B0000; }
+    .q-head .q-head-body { font-size: 1rem; line-height: 1.8; max-width: 820px; margin: 0; color: #4a5868; }
+    .q-head .q-head-updated { font-size: .85rem; color: #5a6878; margin: 1rem 0 0; }
+    .q-head-cube { position: absolute; top: 50%; right: clamp(1rem, 6vw, 7rem); z-index: -1;
+      width: clamp(150px, 17vw, 230px); height: auto; opacity: .6; pointer-events: none; transform: translateY(-50%); }
+    @media (max-width: 1100px) { .q-head-cube { display: none; } }
+    @media (max-width: 768px) { .q-head { padding: 2.5rem 1.25rem; } .q-head h1.q-head-mark img { height: 58px; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header bigtoe-header quest-header" data-phone-menu>
+    <nav class="family-bar" aria-label="The Quest and related sites">
+        <ul>
+        <li class="fam-lead"><a href="quest-map.html"><img src="quest-logo-color.svg" alt="The Quest"></a></li>
+        <li><a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a></li>
+        <li><a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a></li>
+        <li><a href="book.html"><img src="bigtoeindexlogo.png?v=rgb" alt="A Quest for The Big TOE"></a></li>
+        </ul>
+    </nav>
+    <div class="header-container">
+        <nav class="main-navigation" aria-label="The Quest">
+            <ul>
+            <li><a href="quest-map.html">Map</a></li>
+            <li><a href="quest-guide.html" aria-current="page">Guide</a></li>
+            <li><a href="quest-follow.html#episodes">Episodes</a></li>
+            <li><a href="quest-follow.html">Follow</a></li>
+            <li><a href="join.html">Join</a></li>
+            <li class="nav-member"><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="btn-login"><span class="ml-word">Member </span>Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+  <nav class="start-path" aria-label="Start Here path">
+    <ol>
+      <li class="start-label">Start Here</li>
+      <li><a href="about-page.html?start=1">1. About</a></li>
+      <li><a href="framework.html?start=1">2. The Framework</a></li>
+      <li><a href="quest-map.html?start=1">3. The Quest Map</a></li>
+      <li><a href="quest-follow.html?start=1">4. Follow the Quest</a></li>
+      <li class="start-side">Side trips: <a href="book.html">The Book</a> · <a href="programs-gateway.html">Research Programs</a></li>
+    </ol>
+  </nav>
+  <script>(function(){ if (/[?&]start\b/.test(location.search)) { var n = document.querySelector('.start-path'); if (n) n.style.display = 'block'; } })();</script>
+
+  <main id="main-content" tabindex="-1">
+    <section class="q-head">
+      <img src="metatron-spin.svg" class="q-head-cube" alt="" aria-hidden="true">
+      <div class="q-head-inner">
+        <h1 class="q-head-mark"><img src="quest-logo-color.svg" alt="The Quest"></h1>
+        <p class="q-head-lead"><strong>The Quest Guide</strong>: every gate on the road from an idea to a published result, how it works, the way through, and where to go.</p>
+        <p class="q-head-body">The Quest Map shows the road. This guide walks it, one gate at a time, with the tools, the servers, the journals and the public data an independent researcher can use today.</p>
+        <p class="q-head-updated">Checked 29 September 2026</p>
+      </div>
+    </section>
+
+    <section class="q-section">
+    <div class="q-inner qg">
+      <style>
+        .qg > p { color: rgba(255,255,255,.86); line-height: 1.75; max-width: 780px; }
+        .qg h2 { font-family: 'Source Serif 4', Georgia, serif; color: #fff; font-size: 1.85rem; margin: 3rem 0 .6rem; }
+        .qg-jump { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.25rem 0 0; }
+        .qg-jump a { font-size: .88rem; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: .3rem .8rem; text-decoration: none; }
+        .qg-jump a:hover { background: rgba(255,255,255,.18); }
+        .qg-gates { display: grid; gap: 1rem; margin-top: 1.25rem; }
+        .qg-gate { background: #fff; border-radius: 8px; padding: 1.2rem 1.4rem; scroll-margin-top: 110px; }
+        .qg-num { margin: 0; font: 700 .75rem 'IBM Plex Sans', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #8B0000; }
+        .qg-gate h3 { font-family: 'Source Serif 4', Georgia, serif; color: #1a252f; font-size: 1.3rem; margin: .1rem 0 .7rem; }
+        .qg-gate dl { display: grid; grid-template-columns: 11rem 1fr; gap: .55rem 1.2rem; margin: 0; }
+        .qg-gate dt { font: 700 .78rem 'IBM Plex Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #4a5868; padding-top: .2rem; }
+        .qg-gate dt.qg-wall { color: #8B0000; }
+        .qg-gate dt.qg-way { color: #2e7d32; }
+        .qg-gate dd { margin: 0; color: #2c3e50; line-height: 1.7; }
+        .qg-links { display: flex; flex-wrap: wrap; gap: .4rem; }
+        a.qg-go { display: inline-block; font-size: .88rem; font-weight: 600; color: #005ba5; border: 1.5px solid #005ba5; border-radius: 999px; padding: .2rem .75rem; text-decoration: none; }
+        a.qg-go:hover { background: #005ba5; color: #fff; }
+        .qg-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+        .qg-tool { background: #fff; border-radius: 8px; padding: 1rem 1.2rem; border-top: 4px solid #005ba5; }
+        .qg-tool:nth-child(3n+2) { border-top-color: #2e7d32; }
+        .qg-tool:nth-child(3n) { border-top-color: #c62828; }
+        .qg-kind { margin: 0; font: 700 .72rem 'IBM Plex Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #4a5868; }
+        .qg-tool h3 { font-size: 1.1rem; color: #1a252f; margin: .15rem 0 .35rem; }
+        .qg-tool p { color: #2c3e50; font-size: .95rem; line-height: 1.6; margin: 0 0 .7rem; }
+        .qg-table-wrap { overflow-x: auto; margin-top: 1rem; }
+        .qg table { width: 100%; min-width: 640px; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }
+        .qg th, .qg td { text-align: left; padding: .7rem .9rem; border-bottom: 1px solid #e3e9ee; color: #2c3e50; font-size: .95rem; line-height: 1.5; vertical-align: top; }
+        .qg thead th { background: #2d4053; color: #fff; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
+        .qg tbody th a { color: #005ba5; font-weight: 700; }
+        .qg h3.qg-sub { color: #fff; font-size: 1.2rem; margin: 1.75rem 0 .2rem; }
+        .qg-check { background: #fff; border-left: 5px solid #7a5000; border-radius: 0 8px 8px 0; padding: 1rem 1.3rem; margin-top: 1rem; }
+        .qg-check p, .qg-check li { color: #2c3e50; line-height: 1.7; }
+        .qg-check ul { margin: .4rem 0 0; padding-left: 1.2rem; }
+        .qg-check a { color: #005f6e; }
+        .qg-coming { color: rgba(255,255,255,.86); line-height: 1.75; padding-left: 1.2rem; max-width: 780px; }
+        .qg-coming strong { color: #fff; }
+        .qg > p a { color: #f1e303; }
+        @media (max-width: 700px) { .qg-gate dl { grid-template-columns: 1fr; gap: .2rem; } .qg-gate dd { margin-bottom: .5rem; } }
+      </style>
+
+      <p>Every result in physics passes the same gates, whichever road it starts on. Inside a university most of them are opened by the institution without the researcher noticing. Outside, each one has to be opened by hand. For every gate this guide gives four things: how it works, where it stops people, the way through, and where to go next.</p>
+      <nav class="qg-jump" aria-label="The gates"><a href="#g-idea">1. The idea</a> <a href="#g-money">2. The money</a> <a href="#g-prereg">3. Registering the prediction</a> <a href="#g-data">4. The data</a> <a href="#g-check">5. The internal check</a> <a href="#g-arxiv">6. The preprint server</a> <a href="#g-submit">7. Journal submission</a> <a href="#g-review">8. Peer review</a> <a href="#g-reject">9. Rejection and resubmission</a> <a href="#g-sigma">10. How strong is strong enough</a> <a href="#g-open">11. Publication and open access</a> <a href="#g-after">12. After publication</a></nav>
+
+      <h2>The gates</h2>
+      <div class="qg-gates">
+        <article class="qg-gate" id="g-idea">
+          <p class="qg-num">Gate 1</p>
+          <h3>The idea</h3>
+          <dl>
+            <dt>How it works</dt><dd>An idea becomes science when it is written as a claim that data could contradict.</dd>
+            <dt class="qg-wall">The gate</dt><dd>Nobody reviews an idea. Until it is stated as a testable claim, there is nothing for anyone to check, fund or publish.</dd>
+            <dt class="qg-way">The way through</dt><dd>Write the claim, the data that would decide it, and what each outcome would mean. Date it in a public archive so the order of events can be checked later.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://zenodo.org" target="_blank" rel="noopener">Zenodo</a> <a class="qg-go" href="https://osf.io/registries" target="_blank" rel="noopener">OSF Registries</a> <a class="qg-go" href="knowledge-tree.html">The Knowledge Tree</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-money">
+          <p class="qg-num">Gate 2</p>
+          <h3>The money</h3>
+          <dl>
+            <dt>How it works</dt><dd>Research grants are awarded to institutions, which then employ the researcher. Panels judge the applicant as well as the idea.</dd>
+            <dt class="qg-wall">The gate</dt><dd>Most programs require an institution to receive the money, and many require the lead researcher to hold a faculty-level post. FQxI&rsquo;s grants, for example, accept independent researchers only as co-investigators, not as the lead.</dd>
+            <dt class="qg-way">The way through</dt><dd>Affiliate with a body that accepts independent scholars; join a proposal led by a faculty member as co-investigator; ask for small, specific grants; or work with a fiscal sponsor, a nonprofit that receives a grant on a project&rsquo;s behalf.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://www.ncis.org" target="_blank" rel="noopener">NCIS</a> <a class="qg-go" href="https://ronininstitute.org" target="_blank" rel="noopener">Ronin Institute</a> <a class="qg-go" href="https://fqxi.org/programs/" target="_blank" rel="noopener">FQxI programs</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-prereg">
+          <p class="qg-num">Gate 3</p>
+          <h3>Registering the prediction</h3>
+          <dl>
+            <dt>How it works</dt><dd>A pre-registration fixes the claim, the measure and the decision rule before the data exists.</dd>
+            <dt class="qg-wall">The gate</dt><dd>There is no gate: physics rarely requires it, so it is easy to skip. The cost of skipping is that nobody can tell a prediction from a story told afterward.</dd>
+            <dt class="qg-way">The way through</dt><dd>Deposit the record with a permanent DOI before the data arrives. Some journals now accept Registered Reports, where the method is reviewed and accepted before the results exist.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://osf.io/registries" target="_blank" rel="noopener">OSF Registries</a> <a class="qg-go" href="https://zenodo.org" target="_blank" rel="noopener">Zenodo</a> <a class="qg-go" href="https://www.cos.io/initiatives/registered-reports" target="_blank" rel="noopener">Registered Reports</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-data">
+          <p class="qg-num">Gate 4</p>
+          <h3>The data</h3>
+          <dl>
+            <dt>How it works</dt><dd>Large instruments are run by collaborations. Observing time is awarded by proposal, mostly to members.</dd>
+            <dt class="qg-wall">The gate</dt><dd>Instrument time is the real currency of experimental physics, and an independent cannot usually apply for it.</dd>
+            <dt class="qg-way">The way through</dt><dd>Predict something a survey will measure anyway, register it before the release, and use the public data when it arrives. Many of the largest experiments publish their data to everyone at once.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://data.desi.lbl.gov" target="_blank" rel="noopener">DESI data</a> <a class="qg-go" href="https://gwosc.org" target="_blank" rel="noopener">LIGO/Virgo/KAGRA open data</a> <a class="qg-go" href="https://opendata.cern.ch" target="_blank" rel="noopener">CERN Open Data</a> <a class="qg-go" href="https://pla.esac.esa.int" target="_blank" rel="noopener">Planck Legacy Archive</a> <a class="qg-go" href="https://archive.stsci.edu" target="_blank" rel="noopener">MAST (Hubble, Webb)</a> <a class="qg-go" href="https://www.sdss.org" target="_blank" rel="noopener">SDSS</a> <a class="qg-go" href="instruments.html">The Instruments</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-check">
+          <p class="qg-num">Gate 5</p>
+          <h3>The internal check</h3>
+          <dl>
+            <dt>How it works</dt><dd>Inside an institution, a result is questioned by colleagues long before a referee sees it.</dd>
+            <dt class="qg-wall">The gate</dt><dd>An independent researcher has no corridor. Errors that a colleague would catch in five minutes reach the journal instead.</dd>
+            <dt class="qg-way">The way through</dt><dd>Ask narrow questions about one step, not the whole idea; post the derivation where others can check it; recruit a statistician for the analysis. Physics Stack Exchange answers precise questions about established physics and closes posts that promote a personal theory, so ask about a single step.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://physics.stackexchange.com" target="_blank" rel="noopener">Physics Stack Exchange</a> <a class="qg-go" href="https://pubpeer.com" target="_blank" rel="noopener">PubPeer</a> <a class="qg-go" href="join.html">Join the Institute</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-arxiv">
+          <p class="qg-num">Gate 6</p>
+          <h3>The preprint server</h3>
+          <dl>
+            <dt>How it works</dt><dd>arXiv is where physics papers appear first, usually before or alongside journal submission. Moderators check that a paper is on topic and scholarly; it is not peer review.</dd>
+            <dt class="qg-wall">The gate</dt><dd>Since 21 January 2026, a university email address alone no longer qualifies a new author. A new submitter needs either prior authorship in that subject area plus an institutional address, or a personal endorsement from an established arXiv author in the same area.</dd>
+            <dt class="qg-way">The way through</dt><dd>Ask for endorsement from an author whose work you cite and who can see the paper is serious; send the paper, not a request alone. Meanwhile, Zenodo and OSF Preprints give the paper a DOI and a date, though far fewer physicists read them.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://info.arxiv.org/help/endorsement.html" target="_blank" rel="noopener">arXiv endorsement</a> <a class="qg-go" href="https://blog.arxiv.org/2026/01/21/attention-authors-updated-endorsement-policy/" target="_blank" rel="noopener">arXiv policy update, 2026</a> <a class="qg-go" href="https://osf.io/preprints" target="_blank" rel="noopener">OSF Preprints</a> <a class="qg-go" href="https://zenodo.org" target="_blank" rel="noopener">Zenodo</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-submit">
+          <p class="qg-num">Gate 7</p>
+          <h3>Journal submission</h3>
+          <dl>
+            <dt>How it works</dt><dd>An editor reads the paper first and decides whether to send it to referees.</dd>
+            <dt class="qg-wall">The gate</dt><dd>Many papers are returned without review (&ldquo;desk rejection&rdquo;) because of scope, format or an unfamiliar author, sometimes within days.</dd>
+            <dt class="qg-way">The way through</dt><dd>Choose a journal whose recent issues contain papers like yours; follow its template exactly; write a cover letter that states the claim and why this journal. Journals with open review publish the reports, so the reasoning is visible either way.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://scipost.org" target="_blank" rel="noopener">SciPost</a> <a class="qg-go" href="https://astro.theoj.org" target="_blank" rel="noopener">Open Journal of Astrophysics</a> <a class="qg-go" href="https://link.springer.com/journal/10701" target="_blank" rel="noopener">Foundations of Physics</a> <a class="qg-go" href="https://thinkchecksubmit.org" target="_blank" rel="noopener">Think. Check. Submit.</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-review">
+          <p class="qg-num">Gate 8</p>
+          <h3>Peer review</h3>
+          <dl>
+            <dt>How it works</dt><dd>Two or three referees, usually anonymous, report to the editor, who decides.</dd>
+            <dt class="qg-wall">The gate</dt><dd>The decision rests on a few people, and their reports are usually never seen by anyone else.</dd>
+            <dt class="qg-way">The way through</dt><dd>Answer every point in writing, change what is right, and explain what is not. Open-review journals publish the reports and replies, which protects both sides.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://scipost.org" target="_blank" rel="noopener">SciPost open review</a> <a class="qg-go" href="https://pubpeer.com" target="_blank" rel="noopener">PubPeer</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-reject">
+          <p class="qg-num">Gate 9</p>
+          <h3>Rejection and resubmission</h3>
+          <dl>
+            <dt>How it works</dt><dd>Most papers are rejected at least once. Revise and resubmit is the normal path, not a failure of it.</dd>
+            <dt class="qg-wall">The gate</dt><dd>Each round takes months, and each journal has its own format.</dd>
+            <dt class="qg-way">The way through</dt><dd>Keep every version public with dates (arXiv versions, Zenodo versions), move to the next journal with the reports addressed, and record what changed and why.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://help.zenodo.org" target="_blank" rel="noopener">Zenodo versioning</a> <a class="qg-go" href="https://arxiv.org" target="_blank" rel="noopener">arXiv</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-sigma">
+          <p class="qg-num">Gate 10</p>
+          <h3>How strong is strong enough</h3>
+          <dl>
+            <dt>How it works</dt><dd>Physics reports the strength of a result in sigma. Three sigma is called evidence; five sigma, a chance of about one in 3.5 million of a fluke, is the convention for a discovery.</dd>
+            <dt class="qg-wall">The gate</dt><dd>A result below five sigma is not a discovery, however suggestive.</dd>
+            <dt class="qg-way">The way through</dt><dd>State the measure and the threshold before the data, as a registered prediction does, and report the significance whichever way it comes out.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="validation.html">The Validation page</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-open">
+          <p class="qg-num">Gate 11</p>
+          <h3>Publication and open access</h3>
+          <dl>
+            <dt>How it works</dt><dd>Accepted papers are published either behind a subscription or open to all readers, often for an article processing charge.</dd>
+            <dt class="qg-wall">The gate</dt><dd>Open-access charges run to thousands of dollars per paper, which an unfunded author pays personally.</dd>
+            <dt class="qg-way">The way through</dt><dd>Publish in a diamond open-access journal, free to authors and readers; ask for a fee waiver; or keep the accepted version open on arXiv or Zenodo where the journal allows.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://doaj.org" target="_blank" rel="noopener">DOAJ (filter: no charges)</a> <a class="qg-go" href="https://treemaps.openapc.net" target="_blank" rel="noopener">OpenAPC fees data</a> <a class="qg-go" href="https://scipost.org" target="_blank" rel="noopener">SciPost</a> <a class="qg-go" href="https://astro.theoj.org" target="_blank" rel="noopener">Open Journal of Astrophysics</a></dd>
+          </dl>
+        </article>
+        <article class="qg-gate" id="g-after">
+          <p class="qg-num">Gate 12</p>
+          <h3>After publication</h3>
+          <dl>
+            <dt>How it works</dt><dd>A published paper is found through indexes, cited, questioned and built on.</dd>
+            <dt class="qg-wall">The gate</dt><dd>A paper nobody can find does not enter the conversation.</dd>
+            <dt class="qg-way">The way through</dt><dd>Link every paper to an ORCID record; claim it on Google Scholar, and on INSPIRE (high-energy physics) or NASA ADS (astronomy); keep the data and code public with a DOI.</dd>
+            <dt>Where to go</dt><dd class="qg-links"><a class="qg-go" href="https://orcid.org" target="_blank" rel="noopener">ORCID</a> <a class="qg-go" href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a> <a class="qg-go" href="https://inspirehep.net" target="_blank" rel="noopener">INSPIRE</a> <a class="qg-go" href="https://ui.adsabs.harvard.edu" target="_blank" rel="noopener">NASA ADS</a></dd>
+          </dl>
+        </article>
+      </div>
+
+      <h2>Tools of the trade</h2>
+      <p>What working physicists actually use, and what each costs. Everything here is free or has a free tier.</p>
+      <div class="qg-tools">
+        <div class="qg-tool"><p class="qg-kind">LaTeX, in the browser</p><h3>Overleaf</h3><p>Physics is written in LaTeX. Overleaf runs it online with templates for most journals; a free plan covers single authors.</p><a class="qg-go" href="https://www.overleaf.com" target="_blank" rel="noopener">Open Overleaf</a></div>
+        <div class="qg-tool"><p class="qg-kind">LaTeX, on your computer</p><h3>TeX Live or MiKTeX</h3><p>Free installations for offline work. arXiv asks for the TeX source of papers written in TeX, not only the PDF.</p><a class="qg-go" href="https://tug.org/texlive/" target="_blank" rel="noopener">Get TeX Live</a></div>
+        <div class="qg-tool"><p class="qg-kind">References</p><h3>Zotero</h3><p>Free reference manager that exports BibTeX for LaTeX and collects papers from arXiv and journals in one click.</p><a class="qg-go" href="https://www.zotero.org" target="_blank" rel="noopener">Open Zotero</a></div>
+        <div class="qg-tool"><p class="qg-kind">Your identity</p><h3>ORCID</h3><p>A permanent researcher ID that journals, arXiv and funders read. Free.</p><a class="qg-go" href="https://orcid.org" target="_blank" rel="noopener">Open ORCID</a></div>
+        <div class="qg-tool"><p class="qg-kind">Dated records and DOIs</p><h3>Zenodo</h3><p>Free archive run by CERN. Every upload gets a DOI and a date; versions are kept.</p><a class="qg-go" href="https://zenodo.org" target="_blank" rel="noopener">Open Zenodo</a></div>
+        <div class="qg-tool"><p class="qg-kind">Registrations and projects</p><h3>OSF</h3><p>Free platform for pre-registration, project files and preprints.</p><a class="qg-go" href="https://osf.io" target="_blank" rel="noopener">Open OSF</a></div>
+        <div class="qg-tool"><p class="qg-kind">Code</p><h3>GitHub with Zenodo</h3><p>Version control for analysis code; linking a repository to Zenodo gives each release a DOI.</p><a class="qg-go" href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content" target="_blank" rel="noopener">How to cite code</a></div>
+        <div class="qg-tool"><p class="qg-kind">Literature</p><h3>INSPIRE and NASA ADS</h3><p>The databases physicists and astronomers actually search, with citation tracking.</p><a class="qg-go" href="https://inspirehep.net" target="_blank" rel="noopener">Open INSPIRE</a></div>
+      </div>
+
+      <h2>Where to publish</h2>
+      <h3 class="qg-sub">Preprint servers</h3>
+      <div class="qg-table-wrap"><table>
+        <thead><tr><th scope="col">Server</th><th scope="col">Fields</th><th scope="col">Moderation</th><th scope="col">What it gives you</th></tr></thead>
+        <tbody>
+<tr><th scope="row"><a href="https://arxiv.org" target="_blank" rel="noopener">arXiv</a></th><td>Physics, mathematics, computer science</td><td>Endorsement for new authors (2026 rules above)</td><td>The one most physicists read daily.</td></tr>
+<tr><th scope="row"><a href="https://osf.io/preprints" target="_blank" rel="noopener">OSF Preprints</a></th><td>All fields</td><td>Light moderation</td><td>DOI and date; small physics readership.</td></tr>
+<tr><th scope="row"><a href="https://zenodo.org" target="_blank" rel="noopener">Zenodo</a></th><td>All fields, any output</td><td>None beyond basic checks</td><td>DOI, versions and data together; read mainly through links.</td></tr>
+<tr><th scope="row"><a href="https://vixra.org" target="_blank" rel="noopener">viXra</a></th><td>Any</td><td>No moderation</td><td>Accepts everything; physicists rarely read it, so it does not solve the reach problem.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 class="qg-sub">Journals</h3>
+      <p>A starting list for foundational physics and cosmology, not a ranking. Read a few recent papers in any journal before submitting; scope matters more than prestige.</p>
+      <div class="qg-table-wrap"><table>
+        <thead><tr><th scope="col">Journal</th><th scope="col">Scope</th><th scope="col">Cost to authors</th><th scope="col">Review</th></tr></thead>
+        <tbody>
+<tr><th scope="row"><a href="https://scipost.org" target="_blank" rel="noopener">SciPost Physics</a></th><td>All of physics</td><td>Free to publish and to read</td><td>Open: reports and replies are public</td></tr>
+<tr><th scope="row"><a href="https://astro.theoj.org" target="_blank" rel="noopener">Open Journal of Astrophysics</a></th><td>Astrophysics and cosmology</td><td>Free to publish and to read (arXiv overlay)</td><td>Conventional</td></tr>
+<tr><th scope="row"><a href="https://link.springer.com/journal/10701" target="_blank" rel="noopener">Foundations of Physics</a></th><td>Foundational and conceptual physics</td><td>Subscription, with an optional open-access charge</td><td>Conventional</td></tr>
+<tr><th scope="row"><a href="https://journals.aps.org" target="_blank" rel="noopener">Physical Review journals (APS)</a></th><td>All of physics</td><td>Subscription, with an optional open-access charge</td><td>Conventional</td></tr>
+<tr><th scope="row"><a href="https://iopscience.iop.org/journal/1475-7516" target="_blank" rel="noopener">Journal of Cosmology and Astroparticle Physics</a></th><td>Cosmology</td><td>Subscription, with an optional open-access charge</td><td>Conventional</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="qg-check">
+        <p><strong>Checking a journal before you submit.</strong> Some publishers take fees without real review. The warning signs:</p>
+        <ul>
+          <li>An unsolicited email inviting you to submit, often with flattering language.</li>
+          <li>A promise of acceptance or of review within days.</li>
+          <li>Fees that appear only after acceptance, or no clear statement of them.</li>
+          <li>No named editorial board you can verify, or an editor outside the field.</li>
+        </ul>
+        <p style="margin-top:.6rem">Use the <a href="https://thinkchecksubmit.org" target="_blank" rel="noopener">Think. Check. Submit.</a> checklist, and look the journal up in the <a href="https://doaj.org" target="_blank" rel="noopener">Directory of Open Access Journals</a>.</p>
+      </div>
+
+      <h2>Coming to this guide</h2>
+      <ul class="qg-coming">
+<li><strong>Funding in depth.</strong> Who funds independent work, how panels decide, fiscal sponsorship, and what an application really costs.</li>
+<li><strong>The academic route.</strong> From a degree to graduate school, the advisor, qualifying exams, research and teaching assistantships, the postdoc and a faculty post, and where graduate students find help.</li>
+<li><strong>The industry route.</strong> Research inside a company: patents before publication, confidentiality, and who owns the result.</li>
+<li><strong>Routes that went another way.</strong> Sourced accounts of people who reached the result by an unusual road, from the patent office to the preprint server.</li>
+<li><strong>The Institute&rsquo;s own route.</strong> Each milestone as it happens: recognition, endorsement, incorporation, the first grant application and its answer.</li>
+      </ul>
+      <p>Each section is added as it is checked. <a href="about-page.html#contact">Tell us</a> about a gate, a tool or a way through that belongs here.</p>
+    </div>
+    </section>
+
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-footer-inner">
+      <div class="pub-about">
+        <a href="book.html"><img src="bigtoeindexlogoyel.png?v=rgb" alt="A Quest for The Big TOE" class="pub-logo"></a>
+        <p><em>A Quest for The Big TOE</em> sets out the COSMIC Framework. The Quest follows its ideas as they are tested in public. Questions, corrections and challenges are welcome.</p>
+        <div class="pub-social">
+        <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+    Instagram
+    </a>
+    
+    <a href="https://www.youtube.com/@IC2ResearchInstitute" target="_blank" rel="noopener" class="social-btn youtube">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+    YouTube
+    </a>
+    
+    <a href="mailto:ic2.info@proton.me" class="social-btn email">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>
+    Email Us
+    </a>
+        </div>
+      </div>
+      <nav class="pub-links" aria-label="Site links">
+        <div><h3>The Book</h3><ul><li><a href="book.html">Overview</a></li><li><a href="download.html">Download</a></li><li><a href="conversion.html">Formats</a></li><li><a href="references.html">References</a></li><li><a href="appendix.html">Appendices</a></li><li><a href="glossary.html">Glossary</a></li><li><a href="faq-page.html">FAQ</a></li></ul></div>
+        <div><h3>The Quest</h3><ul><li><a href="quest-map.html">Quest Map</a></li><li><a href="instruments.html">The Instruments</a></li><li><a href="quest-follow.html#episodes">Episodes</a></li><li><a href="quest-follow.html">Follow the Quest</a></li></ul></div>
+        <div><h3>Ic² Institute</h3><ul><li><a href="index.html">Home</a></li><li><a href="framework.html">The Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing Schedule</a></li><li><a href="about-page.html">About</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="pub-footer-bottom">
+      <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Starfield, as on the book pages
+    (function () {
+      var c = document.getElementById('stars-canvas'); if (!c) return;
+      var x = c.getContext('2d'), s = [];
+      function size() { c.width = innerWidth; c.height = innerHeight; }
+      size(); addEventListener('resize', size);
+      for (var i = 0; i < 180; i++) s.push({ x: Math.random() * c.width, y: Math.random() * c.height,
+        r: Math.random() * 1.5, vx: Math.random() * .4 - .2, vy: Math.random() * .4 - .2, o: Math.random() });
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      (function draw() {
+        x.clearRect(0, 0, c.width, c.height); x.fillStyle = '#fff';
+        s.forEach(function (p) {
+          x.globalAlpha = p.o; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill();
+          if (still) return;
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > c.width) p.vx *= -1; if (p.y < 0 || p.y > c.height) p.vy *= -1;
+          p.o = Math.max(.2, Math.min(1, p.o + (Math.random() - .5) * .02));
+        });
+        x.globalAlpha = 1; if (!still) requestAnimationFrame(draw);
+      })();
+    })();
+  </script>
+
+
+  <script>
+  (function () {
+    var hint = document.getElementById('lcHint');
+    if (!hint) return;
+    var nodes = document.querySelectorAll('.lifecycle .lnode');
+    function show(id) {
+      document.querySelectorAll('.lc-panel').forEach(function (p) { p.hidden = true; });
+      nodes.forEach(function (n) { n.classList.remove('on'); });
+      var panel = document.getElementById('lc-' + id);
+      var node = document.querySelector('.lifecycle [data-n="' + id + '"]');
+      if (panel) { panel.hidden = false; hint.style.display = 'none'; }
+      if (node) node.classList.add('on');
+    }
+    nodes.forEach(function (n) {
+      n.addEventListener('click', function () { show(n.dataset.n); });
+      n.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(n.dataset.n); }
+      });
+    });
+  })();
+  </script>
+  <script src="phone-menu.js" defer></script>
+<!-- goatcounter:start -->
+<script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- goatcounter:end -->
+  <script src="back-to-top.js" defer></script>
+<script src="contact-form.js" defer></script>
+</body>
+</html>
