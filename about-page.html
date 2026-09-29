@@ -913,10 +913,14 @@
         align-items: start;
       }
       .logo-content > * { grid-column: 1; }
-      .logo-content > h2 { grid-column: 1 / -1; }
+      /* The title owns row 1. The art spans down from row 2. (It used to say
+         2 / -1, but with no defined rows -1 is line 1, so the art claimed
+         rows 1-2, the title could not fit beside it, and the title and all
+         the text were pushed below the art.) */
+      .logo-content > h2 { grid-column: 1 / -1; grid-row: 1; }
       .logo-content > .logo-art {
         grid-column: 2;
-        grid-row: 2 / -1;
+        grid-row: 2 / span 40;
         position: sticky;
         top: 6.5rem;
         margin: 0;
@@ -924,8 +928,8 @@
         gap: 2.25rem;
         align-self: start;
       }
-      .logo-content > .logo-art img,
-      .logo-content > .logo-art svg { width: 250px; height: auto; }
+      .logo-content > .logo-art .spinner-stage { width: 250px; height: 250px; }
+      .logo-content > .logo-art > svg { width: 250px; height: auto; }
     }
 
     .logo-content {
@@ -948,18 +952,25 @@
       font-size: 1.4rem;
     }
 
-    /* The Spinner never sits directly on gray or dark: all three of its
-       colors fall below 3:1 there. It rides on a light disc instead
-       (red 5.3, green 4.9, blue 6.6 on #f8f9fa); the disc turns with it. */
-    .spinner-disc {
-      background: #f8f9fa;
-      border-radius: 50%;
-      /* spinner-centered.png turns about its own centre of symmetry, so the
-         tips sweep a fixed circle (98% of the image's half-width) and never
-         leave the disc */
-      padding: 30px;
-      box-sizing: border-box;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, .25);
+    /* The Spinner never sits bare on gray or dark: all three of its colors
+       fall below 3:1 there. Here it turns over a real sky, the Red Spider
+       Nebula (sky-about.png, from tools/make_spinner_skies.py), lit at the
+       centre where the arms are and fading out with no edge. The sky stays
+       still; the Spinner (spinner-centered.png) turns in place over it. */
+    .spinner-stage { position: relative; width: 280px; height: 280px; }
+    .spinner-stage .spinner-sky {
+      position: absolute; left: -30%; top: -30%; width: 160%; height: 160%;
+      pointer-events: none; z-index: 0;
+    }
+    .spinner-stage .spinner-turn {
+      position: relative; z-index: 1; display: block;
+      width: 100%; height: 100%; padding: 17%; box-sizing: border-box;
+      animation: metatron-rotate 20s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce) { .spinner-stage .spinner-turn { animation: none; } }
+    .spinner-stage .sky-credit {
+      position: absolute; left: -20%; right: -20%; bottom: -3.2rem; margin: 0;
+      font-size: .7rem; line-height: 1.4; text-align: center; color: rgba(255, 255, 255, .6);
     }
     .spinner-swatch {
       display: inline-block;
@@ -1495,7 +1506,11 @@
       <h2>Our Logo: The Spinner</h2>
       
       <div class="logo-art">
-        <img src="spinner-centered.png?v=1" class="spinner-disc" alt="The Spinner, the Ic² Research Institute logo: three arms in red, green and blue." style="width:280px; height:280px; object-fit:contain; animation: metatron-rotate 20s linear infinite;">
+        <div class="spinner-stage">
+          <img src="sky-about.png?v=1" class="spinner-sky" alt="" aria-hidden="true">
+          <img src="spinner-centered.png?v=1" class="spinner-turn" alt="The Spinner, the Ic² Research Institute logo: three arms in red, green and blue.">
+          <p class="sky-credit">Behind it: the Red Spider Nebula. ESA/Webb, NASA &amp; CSA, J.&nbsp;H.&nbsp;Kast</p>
+        </div>
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="280" height="280" style="display:block;" role="img" aria-label="Metatron's Cube">
         <g id="metatron-spin" style="transform-origin:100px 100px;">
           <g id="mc-lines">      <line x1="100" y1="100" x2="100.0" y2="68.6" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>

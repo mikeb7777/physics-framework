@@ -342,10 +342,26 @@
     <style id="panel-spinner">
       /* The spinner mark in the clear right-hand side of the title panel,
          turning at the same rate as the Metatron's Cubes elsewhere. */
+      /* A real sky behind the Spinner (tools/make_spinner_skies.py), still
+         while the Spinner turns over it, lit where the arms sit so all three
+         colors read on the navy panel. Centred on the Spinner by construction. */
+      .panel-sky {
+        --spin-w: clamp(150px, 16vw, 200px);
+        position: absolute; top: 50%;
+        right: calc(clamp(1rem, 5vw, 6rem) + var(--spin-w) / 2);
+        width: calc(var(--spin-w) * 2.1); height: auto;
+        transform: translate(50%, -50%); pointer-events: none; z-index: 0;
+      }
+      .panel-sky-credit {
+        position: absolute; right: clamp(1rem, 5vw, 6rem); bottom: .55rem; margin: 0; z-index: 1;
+        font-size: .68rem; color: rgba(255, 255, 255, .55); max-width: 320px; text-align: right;
+      }
+      @media (max-width: 1100px) { .panel-sky, .panel-sky-credit { display: none; } }
       .panel-spinner {
         position: absolute; top: 50%; right: clamp(1rem, 5vw, 6rem);
-        width: clamp(150px, 16vw, 200px); height: auto;
-        opacity: .85; pointer-events: none;
+        width: clamp(150px, 16vw, 200px); height: auto; z-index: 1;
+        padding: clamp(18px, 2vw, 26px); box-sizing: border-box;
+        pointer-events: none;
         animation: panel-spin 90s linear infinite;
       }
       @keyframes panel-spin {
@@ -421,7 +437,9 @@
 
     <!-- Page Header -->
     <section id="main-content" tabindex="-1" class="page-header tp-left">
-    <img src="our logo.png?v=rgb" class="panel-spinner" alt="" aria-hidden="true">
+    <img src="sky-testing.png?v=1" class="panel-sky" alt="" aria-hidden="true">
+    <img src="spinner-centered.png?v=1" class="panel-spinner" alt="" aria-hidden="true">
+    <p class="panel-sky-credit">Behind the Spinner: Terzan 5. NASA, ESA, CSA, STScI, G.&nbsp;Zullo</p>
       <div class="section-container">
         <p class="eyebrow page-label">Testing Schedule</p>
       <h1>What gets tested next, and when</h1>
