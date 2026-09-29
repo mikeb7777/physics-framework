@@ -110,7 +110,7 @@
                 
                 // Check for errors
                 if (error) {
-                    showError(`Authentication failed: ${error}`);
+                    showError(`Sign-in did not complete: ${error}`);
                     return;
                 }
                 
@@ -130,7 +130,7 @@
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Failed to exchange token');
+                    throw new Error('Could not exchange token');
                 }
                 
                 const data = await response.json();
@@ -145,7 +145,7 @@
                 });
                 
                 if (!userResponse.ok) {
-                    throw new Error('Failed to fetch user information');
+                    throw new Error('Could not fetch user information');
                 }
                 
                 const userData = await userResponse.json();
