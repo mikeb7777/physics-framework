@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Quest, Issue 2: Testing and marketing | Ic² Research Institute</title>
+  <meta name="description" content="The Quest, Issue 2 (January 2027): How a registered prediction meets the data, and how to tell people about it without saying more than the data does.">
+  <meta name="robots" content="noindex">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary-color: #8B0000; --yellow: #f1e303; --max-width: 1200px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6; color: #ffffff; overflow-x: clip; }
+    #stars-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1;
+      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+    a { color: var(--yellow); }
+
+    /* header: the Big TOE band */
+    .site-header { background: rgba(0,0,0,.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.1);
+      position: sticky; top: 0; z-index: 1000; }
+    .header-container { max-width: var(--max-width); margin: 0 auto; padding: .5rem 2rem; display: flex;
+      justify-content: space-between; align-items: center; }
+    .main-navigation ul { list-style: none; display: flex; gap: 1.75rem; align-items: center; }
+    .main-navigation a { color: #ffffff; text-decoration: none; }
+    .main-navigation a:hover { color: var(--yellow); }
+    .quest-bar .bar-label { color: var(--yellow); font: 700 .72rem/1 'IBM Plex Sans', sans-serif; letter-spacing: .14em;
+      text-transform: uppercase; align-self: center; padding-right: .25rem; }
+
+    /* Start Here strip, shown when the visitor arrives with ?start */
+    .start-path { display: none; background: #1a1a2e; border-bottom: 3px solid var(--yellow); padding: .7rem 1.5rem; }
+    .start-path ol { max-width: var(--max-width); margin: 0 auto; list-style: none; display: flex; flex-wrap: wrap;
+      align-items: center; gap: .4rem 1.4rem; color: rgba(255,255,255,.88); font-size: .95rem; }
+    .start-path .start-label { color: var(--yellow); font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+    .start-path a { color: rgba(255,255,255,.88); text-underline-offset: 3px; }
+    .start-path a[aria-current="page"] { color: #ffffff; font-weight: 700; text-decoration: none; }
+    .start-path .start-side { color: rgba(255,255,255,.6); font-size: .85rem; }
+
+    /* page */
+    .q-hero { padding: 5rem 2rem 3rem; text-align: center; }
+    .q-logo { display: block; width: min(440px, 90%); height: auto; margin: 0 auto 1.75rem; }
+    .q-hero .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      max-width: 520px; margin: 0 auto 1rem; }
+    /* page titles set like the Quest logo: Impact, brand red, a pale outline */
+    .q-hero h1 { font-family: Impact, 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; font-size: 4.25rem;
+      line-height: 1.05; letter-spacing: .01em; color: #8B0000; margin-bottom: 1.25rem;
+      text-shadow: 2px 0 #fff4c2, -2px 0 #fff4c2, 0 2px #fff4c2, 0 -2px #fff4c2,
+        1.5px 1.5px #fff4c2, -1.5px -1.5px #fff4c2, 1.5px -1.5px #fff4c2, -1.5px 1.5px #fff4c2; }
+    .q-hero p { font-size: 1.2rem; color: rgba(255,255,255,.88); max-width: 720px; margin: 0 auto; }
+    .q-hero .updated { font-size: .85rem; color: rgba(255,255,255,.55); margin-top: 1rem; }
+    .q-thesis { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.08rem; font-style: italic;
+      color: rgba(255,255,255,.82); max-width: 760px; margin: 1.25rem auto 0; padding-top: 1.1rem;
+      border-top: 1px solid rgba(241,227,3,.45); }
+    /* the print on the moon */
+    .q-print { padding-top: 1rem; padding-bottom: 2rem; }
+    .moonfig { margin: 0; }
+    .moonfig img { display: block; width: 100%; height: auto; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12); box-shadow: 0 10px 34px rgba(0,0,0,.45); }
+    .moonfig figcaption { color: rgba(255,255,255,.72); font-size: .95rem; line-height: 1.8;
+      max-width: 68ch; margin: 1rem auto 0; text-align: center; font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic; }
+    @media (max-width: 700px) { .moonfig figcaption { text-align: left; font-size: .9rem; } }
+
+    .q-section { padding: 3rem 2rem; }
+    .q-inner { max-width: var(--max-width); margin: 0 auto; }
+    .q-section h2 { font-size: 2rem; margin-bottom: .5rem; }
+    .q-section .lede { color: rgba(255,255,255,.8); max-width: 760px; margin-bottom: 2rem; }
+    .q-light { background: #ffffff; color: #2c3e50; }
+    .q-light .lede { color: #5a6878; }
+    .q-light a { color: #8B0000; }
+    .q-light .eyebrow { color: var(--primary-color); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+    .q-section:not(.q-light) .eyebrow { color: var(--yellow); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
+
+    /* the road */
+    .road { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: stage; position: relative; }
+    .stage { position: relative; padding: 0 .75rem; text-align: center; }
+    .stage::before { content: ''; position: absolute; top: 22px; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.18); z-index: 0; }
+    .stage:first-child::before { left: 50%; }
+    .stage:last-child::before { right: 50%; }
+    .stage .dot { position: relative; z-index: 1; width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 1rem;
+      display: grid; place-items: center; font-weight: 700; background: #1a1a2e; border: 3px solid rgba(255,255,255,.35); }
+    .stage.here .dot { border-color: var(--yellow); color: var(--yellow); box-shadow: 0 0 0 6px rgba(241,227,3,.15); }
+    .stage h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+    .stage p { font-size: .9rem; color: rgba(255,255,255,.75); }
+    .stage .where { margin-top: .6rem; font-size: .82rem; color: var(--yellow); font-weight: 600; }
+    .outcomes { display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; margin-top: .6rem; }
+    .outcomes span { font-size: .75rem; padding: .15rem .6rem; border-radius: 12px; border: 1px solid rgba(255,255,255,.35); }
+
+    /* the four routes */
+    .routes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .route { background: var(--c); color: #ffffff; border-bottom: 5px solid var(--edge); border-radius: 8px; padding: 1.5rem; }
+    .route h3 { font-size: 1.2rem; margin-bottom: .5rem; color: #2c3e50; }
+    .route .what { font-size: .92rem; color: #5a6878; margin-bottom: 1rem; }
+    .route .status-label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8fa0b0; margin-bottom: .25rem; }
+    .route .status { font-size: .95rem; color: #2c3e50; }
+    .route .status.pending { color: #8fa0b0; font-style: italic; }
+
+    .route-note { margin-top: 2rem; background: #f4f6f8; border-left: 4px solid #7a5000; border-radius: 8px; padding: 1.5rem 1.75rem; }
+    .route-note h3 { color: #2c3e50; font-size: 1.15rem; margin-bottom: .5rem; }
+    .route-note p { color: #2c3e50; font-size: .98rem; line-height: 1.75; }
+    .route-note p + p { margin-top: .75rem; }
+
+    /* not the same quest */
+    .not-same { background: #f4f6f8; border-bottom: 5px solid #8B0000; border-radius: 8px; padding: 1.5rem 1.75rem; margin-bottom: 2rem; }
+    .not-same h3 { color: #2c3e50; font-size: 1.3rem; margin-bottom: .5rem; }
+    .not-same > p { color: #2c3e50; line-height: 1.75; margin-bottom: 1rem; }
+    .aims { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    .aims th, .aims td { text-align: left; vertical-align: top; padding: .6rem .75rem; border-top: 1px solid #d8dee6; font-size: .95rem; color: #2c3e50; }
+    .aims th { font-weight: 700; color: #1a1a2e; border-top: 0; }
+    .aims td:first-child { font-weight: 700; white-space: nowrap; }
+    .aims-note { color: #5a6878; font-size: .95rem; line-height: 1.75; margin: 0; }
+    @media (max-width: 700px) {
+      .aims, .aims tbody, .aims tr, .aims td { display: block; width: 100%; }
+      .aims thead { display: none; }
+      .aims tr { border-top: 1px solid #d8dee6; padding: .5rem 0; }
+      .aims td { border: 0; padding: .15rem 0; }
+      .aims td:first-child { color: #8B0000; }
+    }
+
+    /* the five paths */
+    .paths { display: grid; gap: 1rem; }
+    .path { background: var(--bg); border-bottom: 5px solid var(--edge); border-radius: 8px; color: #ffffff; overflow: hidden; }
+    .path summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem 1rem; padding: 1.1rem 1.4rem; cursor: pointer; list-style: none; }
+    .path summary::-webkit-details-marker { display: none; }
+    .path-name { font: 700 1.25rem/1.2 'Source Serif 4', Georgia, serif; }
+    .path-line { color: rgba(255,255,255,.82); font-size: .95rem; }
+    .path-open { margin-left: auto; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: #1a1a2e; background: #ffffff; border-radius: 12px; padding: .15rem .6rem; }
+    .path[open] .path-open::after { content: ''; }
+    .path[open] .path-open { background: #f1e303; }
+    .path-body { padding: 0 1.4rem 1.3rem; }
+    .path-body p { color: rgba(255,255,255,.92); line-height: 1.75; margin-bottom: .85rem; max-width: 68ch; }
+    .path-body strong { color: #ffffff; }
+
+    /* waiting list */
+    .waiting { display: grid; gap: 1rem; }
+    .wait { display: grid; grid-template-columns: 64px 1fr auto; gap: 1.25rem; align-items: center;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 1rem 1.25rem; }
+    .wait img { width: 64px; height: 64px; }
+    .wait h3 { font-size: 1.1rem; }
+    .wait .id { color: rgba(255,255,255,.6); font-size: .85rem; font-weight: 500; }
+    .wait p { font-size: .92rem; color: rgba(255,255,255,.8); }
+    .wait .when { text-align: right; color: var(--yellow); font-weight: 700; white-space: nowrap; }
+    .wait .when small { display: block; color: rgba(255,255,255,.55); font-weight: 400; }
+
+    /* follow page */
+    .channels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .channel { background: var(--bg, #005f6e); border-bottom: 5px solid var(--edge, #c62828); border-radius: 10px; padding: 2rem; }
+    .channel h3 { font-size: 1.4rem; margin-bottom: .5rem; }
+    .channel p { color: rgba(255,255,255,.8); margin-bottom: 1.25rem; }
+    .chapters { columns: 2; column-gap: 2.5rem; list-style: none; }
+    .chapters li { break-inside: avoid; padding: .6rem 0; border-top: 1px solid #e0e0e0; }
+    .chapters strong { color: #2c3e50; }
+    .chapters span { display: block; color: #5a6878; font-size: .92rem; }
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .principles div { border-left: 3px solid var(--primary-color); padding-left: 1rem; }
+    .principles h3 { font-size: 1.05rem; color: #2c3e50; margin-bottom: .3rem; }
+    .principles p { font-size: .92rem; color: #5a6878; }
+    .episode { display: flex; gap: 1.5rem; align-items: center; background: #8e0c45;
+      border-bottom: 5px solid #1a7a36; border-radius: 10px; padding: 1.5rem; }
+    .episode .num { font: 700 2.5rem/1 'Source Serif 4', Georgia, serif; color: var(--yellow); }
+    .episode h3 { font-size: 1.25rem; }
+    .episode p { color: rgba(255,255,255,.75); font-size: .95rem; }
+
+    .q-btn { display: inline-block; padding: .8rem 1.6rem; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .q-btn-primary { background: var(--primary-color); color: #ffffff; }
+    .q-btn-primary:hover { background: #6b0000; }
+    .q-btn-yt { background: #FF0000; color: #ffffff; }
+    .q-btn-mail { background: #0072C6; color: #ffffff; }
+    .note { font-size: .9rem; color: rgba(255,255,255,.6); margin-top: 1rem; }
+    .q-light .note { color: #8fa0b0; }
+
+    .start-next { background: linear-gradient(135deg, #5a6878 0%, #4a5868 100%); border-left: 4px solid var(--yellow); padding: 2.5rem 1.5rem; }
+    .start-next-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1.25rem 2.5rem; }
+    .start-next-inner > div { flex: 1 1 420px; }
+    .start-next .eyebrow { color: #ffffff; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .4rem; }
+    .start-next h2 { font-size: 1.65rem; margin-bottom: .5rem; }
+    .start-next p { max-width: 62ch; }
+
+    @media (max-width: 900px) {
+      .road { grid-template-columns: 1fr; gap: 1.5rem; }
+      .stage { display: grid; grid-template-columns: 46px 1fr; gap: 0 1rem; text-align: left; padding: 0; }
+      .stage::before { display: none; }
+      .stage .dot { margin: 0; grid-row: span 4; }
+      .outcomes { justify-content: flex-start; }
+      .routes { grid-template-columns: repeat(2, 1fr); }
+      .channels, .principles { grid-template-columns: 1fr; }
+      .chapters { columns: 1; }
+    }
+    @media (max-width: 600px) {
+      .q-hero { padding: 3.5rem 1.25rem 2rem; }
+      .q-hero h1 { font-size: 2.9rem; }
+      .q-logo { margin-bottom: 1.25rem; }
+      .q-section { padding: 2.5rem 1.25rem; }
+      .routes { grid-template-columns: 1fr; }
+      .wait { grid-template-columns: 48px 1fr; }
+      .wait img { width: 48px; height: 48px; }
+      .wait .when { grid-column: 2; text-align: left; }
+    }
+
+    /* footer, as on the book pages */
+.social-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    }
+.social-content {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+.quick-links h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    }
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+    }
+.quick-links li {
+    margin-bottom: 0.75rem;
+    }
+.quick-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+    }
+.quick-links a:hover {
+    color: white;
+    }
+.social-main {
+    text-align: center;
+    }
+.social-main h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    }
+.social-main p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    }
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    }
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    }
+.copyright a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+.copyright a:hover {
+    color: rgba(255, 255, 255, 0.9);
+    }
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: white;
+    }
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+.social-btn.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+.social-btn.youtube {
+    background: #FF0000;
+    }
+.social-btn.email {
+    background: #0072C6;
+    }
+.social-icon {
+    width: 24px;
+    height: 24px;
+    }
+.social-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+.quick-links {
+    text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="site-consistency.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <link rel="icon" href="favicon.svg?v=rgb" type="image/svg+xml">
+  <link rel="icon" href="favicon.png?v=rgb" type="image/png" sizes="100x100">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=rgb">
+  <link rel="canonical" href="https://eequalsicsquared.com/quest-issue-2.html">
+  <meta property="og:site_name" content="Ic² Research Institute">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Quest, Issue 2: Testing and marketing | Ic² Research Institute">
+  <meta property="og:description" content="The Quest, Issue 2 (January 2027): How a registered prediction meets the data, and how to tell people about it without saying more than the data does.">
+  <meta property="og:url" content="https://eequalsicsquared.com/quest-issue-2.html">
+  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <style id="q-head">
+    /* Quest title panel: the Framework page's pattern on light gray. */
+    .q-head { background: #f3f4f6; color: #1a252f; padding: 4rem 2rem; text-align: left;
+      position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid #dfe3e8; }
+    .q-head-inner { max-width: var(--max-width, 1200px); margin: 0 auto; }
+    .q-head h1.q-head-mark { margin: 0 0 1.25rem; line-height: 1; }
+    .q-head h1.q-head-mark img { height: 86px; width: auto; display: block; }
+    .q-head .q-head-lead { font-size: 1.25rem; line-height: 1.7; max-width: 820px; margin: 0 0 1rem; color: #1a252f; }
+    .q-head .q-head-lead strong { color: #8B0000; }
+    .q-head .q-head-body { font-size: 1rem; line-height: 1.8; max-width: 820px; margin: 0; color: #4a5868; }
+    .q-head .q-head-updated { font-size: .85rem; color: #5a6878; margin: 1rem 0 0; }
+    .q-head-cube { position: absolute; top: 50%; right: clamp(1rem, 6vw, 7rem); z-index: -1;
+      width: clamp(150px, 17vw, 230px); height: auto; opacity: .6; pointer-events: none; transform: translateY(-50%); }
+    @media (max-width: 1100px) { .q-head-cube { display: none; } }
+    @media (max-width: 768px) { .q-head { padding: 2.5rem 1.25rem; } .q-head h1.q-head-mark img { height: 58px; } }
+  </style>
+  <style id="q-issue">
+    /* a newsletter issue: the written companion to an episode */
+    .qi-draft { background: #8B0000; color: #fff; text-align: center; padding: .6rem 1rem; font-size: .9rem; }
+    .qi-draft strong { color: #f1e303; }
+    .qi-meta { display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; margin: 1.1rem 0 0; font-size: .9rem; color: #4a5868; }
+    .qi-meta b { color: #1a252f; }
+    .qi-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.4rem; }
+    .qi-btn { display: inline-block; padding: .55rem 1.1rem; border-radius: 6px; font-weight: 700; font-size: .9rem;
+      text-decoration: none; background: #1a1a2e; color: #fff; border: 0; cursor: pointer; font-family: inherit; }
+    .qi-btn.alt { background: transparent; color: #1a1a2e; border: 2px solid #1a1a2e; }
+    .qi-jump { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: 1.2rem; font-size: .9rem; }
+    .qi-jump a { color: #8B0000; }
+    .qi-body { max-width: 760px; }
+    .qi-body h2 { font: 700 1.9rem/1.25 'Source Serif 4', Georgia, serif; margin-bottom: 1.2rem; }
+    .qi-body h3 { font: 700 1.25rem/1.3 'Source Serif 4', Georgia, serif; margin: 2.2rem 0 .7rem; }
+    .qi-body h3 .qi-ch { display: block; font: 700 .72rem/1 -apple-system, 'Segoe UI', sans-serif; letter-spacing: .14em;
+      text-transform: uppercase; color: #8B0000; margin-bottom: .45rem; }
+    .q-section:not(.q-light) .qi-body h3 .qi-ch { color: #f1e303; }
+    .qi-body p, .qi-body li { line-height: 1.8; margin-bottom: .8rem; }
+    .qi-body ul, .qi-body ol { padding-left: 1.3rem; }
+    .qi-body table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: .5rem 0 1rem; }
+    .qi-body th, .qi-body td { text-align: left; vertical-align: top; padding: .55rem .6rem; border-bottom: 1px solid #e0e0e0; }
+    .qi-body th { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: #5a6878; }
+    .qi-scroll { overflow-x: auto; }
+    .qi-tag { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: .1rem .45rem; border-radius: 4px; white-space: nowrap; }
+    .qi-tag.real { background: #0f3d2e; color: #fff; }
+    .qi-tag.comp { background: #e8e1ff; color: #3b2a7a; }
+    .qi-ed { background: #fff8d6; border-left: 4px solid #f1e303; color: #5a4a00; padding: .7rem 1rem; border-radius: 0 6px 6px 0;
+      font-size: .92rem; margin: .4rem 0 1rem; }
+    .qi-ed::before { content: 'To write: '; font-weight: 700; }
+    .q-section:not(.q-light) .qi-ed { background: rgba(241,227,3,.12); color: #fff4c2; }
+    .q-section:not(.q-light) .qi-body p, .q-section:not(.q-light) .qi-body li { color: rgba(255,255,255,.9); }
+    .q-section:not(.q-light) .qi-body table th { color: rgba(255,255,255,.6); }
+    .q-section:not(.q-light) .qi-body td, .q-section:not(.q-light) .qi-body th { border-color: rgba(255,255,255,.15); }
+    .q-section:not(.q-light)#data, .q-section:not(.q-light)#options { background: #0b131d; }
+    .q-section:not(.q-light) .qi-body h2 { color: #fff; }
+    [id] { scroll-margin-top: 110px; }
+    @media print {
+      .site-header, .start-path, .start-next, .pub-footer, #stars-canvas, .qi-actions, .qi-jump, .qi-draft, .skip-link { display: none !important; }
+      body, .q-section, .q-head { background: #fff !important; color: #000 !important; }
+      .q-section .qi-body h2 { color: #000 !important; }
+      .q-section:not(.q-light) .qi-body p, .q-section:not(.q-light) .qi-body li { color: #000 !important; }
+      .q-section { padding: 1rem 0 !important; break-inside: auto; }
+      a { color: #000 !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header bigtoe-header quest-header" data-phone-menu>
+    <nav class="family-bar" aria-label="The Quest and related sites">
+        <ul>
+        <li class="fam-lead"><a href="quest-map.html"><img src="quest-logo-color.svg" alt="The Quest"></a></li>
+        <li><a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a></li>
+        <li><a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a></li>
+        <li><a href="book.html"><img src="bigtoeindexlogo.png?v=rgb" alt="A Quest for The Big TOE"></a></li>
+        </ul>
+    </nav>
+    <div class="header-container">
+        <nav class="main-navigation" aria-label="The Quest">
+            <ul>
+            <li><a href="quest-map.html">Map</a></li>
+            <li><a href="quest-guide.html">Guide</a></li>
+            <li><a href="instruments.html">Instruments</a></li>
+            <li><a href="quest-follow.html#episodes" aria-current="page">Episodes</a></li>
+            <li><a href="quest-follow.html">Follow</a></li>
+            <li><a href="join.html">Join</a></li>
+            <li class="nav-member"><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="btn-login"><span class="ml-word">Member </span>Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+  <nav class="start-path" aria-label="Start Here path">
+    <ol>
+      <li class="start-label">Start Here</li>
+      <li><a href="about-page.html?start=1">1. About</a></li>
+      <li><a href="framework.html?start=1">2. The Framework</a></li>
+      <li><a href="quest-map.html?start=1">3. The Quest Map</a></li>
+      <li><a href="quest-follow.html?start=1">4. Follow the Quest</a></li>
+      <li class="start-side">Side trips: <a href="book.html">The Book</a> · <a href="programs-gateway.html">Research Programs</a></li>
+    </ol>
+  </nav>
+  <script>(function(){ if (/[?&]start\b/.test(location.search)) { var n = document.querySelector('.start-path'); if (n) n.style.display = 'block'; } })();</script>
+
+  <main id="main-content" tabindex="-1">
+
+    <div class="qi-draft"><strong>Draft.</strong> This issue is an outline. Sections marked &ldquo;To write&rdquo; are still to be filled in.</div>
+
+    <section class="q-head">
+      <img src="metatron-spin.svg" class="q-head-cube" alt="" aria-hidden="true">
+      <div class="q-head-inner">
+        <h1 class="q-head-mark"><img src="quest-logo-color.svg" alt="The Quest"></h1>
+        <p class="q-head-lead"><strong>Issue 2: Testing and marketing.</strong> How a registered prediction meets the data, and how to tell people about it without saying more than the data does.</p>
+        <p class="qi-meta"><span><b>January 2027</b></span><span>On the map: Independent lane, between Falsifiability and public deposit and Test against public data</span></p>
+        <div class="qi-actions">
+          <a class="qi-btn" href="#newsletter">Read the issue</a>
+          <button class="qi-btn alt" type="button" onclick="window.print()">Download as PDF</button>
+          <a class="qi-btn alt" href="quest-map.html">Back to the map</a>
+        </div>
+        <ul class="qi-jump">
+          <li><a href="#newsletter">1. Newsletter</a></li>
+          <li><a href="#data">2. What the data says</a></li>
+          <li><a href="#links">3. Important links</a></li>
+          <li><a href="#options">4. Options</a></li>
+          <li><a href="#sources">5. Sources and references</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="q-section q-light" id="newsletter">
+      <div class="q-inner qi-body">
+        <p class="eyebrow">The newsletter</p>
+        <h2>Testing and marketing</h2>
+        <h3><span class="qi-ch">Previously on the Quest</span>Setting Out</h3>
+        <p>Issue 1 told how the Quest started, and why four results once called confirmations are now recorded as consistent with the framework and found after the data. <a href="quest-issue-1.html">Read Issue 1</a>.</p>
+        <h3><span class="qi-ch">Where we stand</span>What changed on each lane</h3>
+        <p class="qi-ed">A short update on each lane since Issue 1.</p>
+        <h3><span class="qi-ch">The main story</span>Testing, and telling people about it</h3>
+        <p class="qi-ed">How a registered prediction is actually tested against public data, and how an independent institute gets attention without overclaiming. The releases of October 2025 are the cautionary example; what the Institute does differently now.</p>
+        <h3><span class="qi-ch">Feature</span>[Title]</h3>
+        <p class="qi-ed">A story from science, or a reader&rsquo;s contribution.</p>
+        <h3><span class="qi-ch">People</span>The travellers</h3>
+        <p>Each issue follows a small group of travellers, one or more on each lane of the map, through the same gates. Some are real people, who have agreed to take part. Some are composites: not real people, but built from the published figures for someone of that background on that lane, and every composite says so. The figures at each gate come from the sources listed below, not from the travellers. The travellers show what those figures look like in a life.</p>
+        <div class="qi-scroll"><table>
+          <thead><tr><th>Traveller</th><th>Lane</th><th>Who</th><th>Where they are now</th><th>What usually happens next</th><th>What may be lost</th></tr></thead>
+          <tbody>
+            <tr><td>The author <span class="qi-tag real">Real</span></td><td>Independent</td><td>[Age band, country, background, how the work is funded]</td><td>Test against public data</td><td>First deciding data expected 2027</td><td>[Your answer]</td></tr>
+            <tr><td>[Name] <span class="qi-tag comp">Composite</span></td><td>Affiliated</td><td>[e.g. physics PhD student, first in family at university]</td><td>[Gate]</td><td>[Figure, with source]</td><td>[e.g. years, health, the question itself]</td></tr>
+            <tr><td>[Name] <span class="qi-tag comp">Composite</span></td><td>Affiliated</td><td>[e.g. postdoc on a third fixed-term contract]</td><td>[Gate]</td><td>[Figure, with source]</td><td>[ ]</td></tr>
+            <tr><td>[Name] <span class="qi-tag comp">Composite</span></td><td>Industry</td><td>[e.g. corporate lab researcher]</td><td>[Gate]</td><td>[Figure, with source]</td><td>[e.g. the right to publish]</td></tr>
+            <tr><td>[Name] <span class="qi-tag comp">Composite</span></td><td>Independent</td><td>[e.g. retired engineer with a theory]</td><td>[Gate]</td><td>[Figure, with source]</td><td>[ ]</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3><span class="qi-ch">From readers</span>Your questions and corrections</h3>
+        <p class="qi-ed">Questions and corrections received since Issue 1.</p>
+        <h3><span class="qi-ch">What we are waiting for</span>The next dates</h3>
+        <p class="qi-ed">Data releases and the date of Issue 3.</p>
+        <h3><span class="qi-ch">What we learned</span>The running list</h3>
+        <p class="qi-ed">New entries, continuing the numbering from Issue 1.</p>
+
+      </div>
+    </section>
+
+    <section class="q-section" id="data">
+      <div class="q-inner qi-body">
+        <p class="eyebrow">2 · What the data says</p>
+        <h2>At this point on the trail</h2>
+        <p>This footprint sits between <em>Falsifiability and public deposit</em> and <em>Test against public data</em> on the independent lane.</p>
+        <p class="qi-ed">The figures at this gate, with sources.</p>
+      </div>
+    </section>
+
+    <section class="q-section q-light" id="links">
+      <div class="q-inner qi-body">
+        <p class="eyebrow">3 · Important links</p>
+        <h2>Read further</h2>
+        <ul>
+          <li><a href="testing-schedule.html">Testing Schedule</a></li>
+          <li><a href="instruments.html">The Instruments</a></li>
+          <li><a href="quest-guide.html#g-data">Quest Guide, Gate 4: The data</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="q-section" id="options">
+      <div class="q-inner qi-body">
+        <p class="eyebrow">4 · Options</p>
+        <h2>If you are standing here</h2>
+        <ul>
+          <li><strong>Use the instruments without owning them.</strong> Predict something a survey will measure anyway, register it before the release, and use the public data: <a href="https://data.desi.lbl.gov" target="_blank" rel="noopener">DESI</a>, <a href="https://opendata.cern.ch" target="_blank" rel="noopener">CERN Open Data</a>, <a href="https://archive.stsci.edu" target="_blank" rel="noopener">MAST (Hubble, Webb)</a>.</li>
+        </ul>
+        <p class="qi-ed">Options on the marketing side.</p>
+      </div>
+    </section>
+
+    <section class="q-section q-light" id="sources">
+      <div class="q-inner qi-body">
+        <p class="eyebrow">5 · Sources and references</p>
+        <h2>Where this issue comes from</h2>
+        <p class="qi-ed">A source for every figure in sections 1 and 2.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pub-footer">
+    <div class="pub-footer-inner">
+      <div class="pub-about">
+        <a href="book.html"><img src="bigtoeindexlogoyel.png?v=rgb" alt="A Quest for The Big TOE" class="pub-logo"></a>
+        <p><em>A Quest for The Big TOE</em> sets out the COSMIC Framework. The Quest follows its ideas as they are tested in public. Questions, corrections and challenges are welcome.</p>
+        <div class="pub-social">
+        <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+    Instagram
+    </a>
+    
+    <a href="https://www.youtube.com/@IC2ResearchInstitute" target="_blank" rel="noopener" class="social-btn youtube">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+    YouTube
+    </a>
+    
+    <a href="mailto:ic2.info@proton.me" class="social-btn email">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>
+    Email Us
+    </a>
+        </div>
+      </div>
+      <nav class="pub-links" aria-label="Site links">
+        <div><h3>The Book</h3><ul><li><a href="book.html">Overview</a></li><li><a href="download.html">Download</a></li><li><a href="conversion.html">Formats</a></li><li><a href="references.html">References</a></li><li><a href="appendix.html">Appendices</a></li><li><a href="glossary.html">Glossary</a></li><li><a href="faq-page.html">FAQ</a></li></ul></div>
+        <div><h3>The Quest</h3><ul><li><a href="quest-map.html">Quest Map</a></li><li><a href="instruments.html">The Instruments</a></li><li><a href="quest-follow.html#episodes">Episodes</a></li><li><a href="quest-follow.html">Follow the Quest</a></li></ul></div>
+        <div><h3>Ic² Institute</h3><ul><li><a href="index.html">Home</a></li><li><a href="framework.html">The Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing Schedule</a></li><li><a href="about-page.html">About</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="pub-footer-bottom">
+      <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Starfield, as on the book pages
+    (function () {
+      var c = document.getElementById('stars-canvas'); if (!c) return;
+      var x = c.getContext('2d'), s = [];
+      function size() { c.width = innerWidth; c.height = innerHeight; }
+      size(); addEventListener('resize', size);
+      for (var i = 0; i < 180; i++) s.push({ x: Math.random() * c.width, y: Math.random() * c.height,
+        r: Math.random() * 1.5, vx: Math.random() * .4 - .2, vy: Math.random() * .4 - .2, o: Math.random() });
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      (function draw() {
+        x.clearRect(0, 0, c.width, c.height); x.fillStyle = '#fff';
+        s.forEach(function (p) {
+          x.globalAlpha = p.o; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill();
+          if (still) return;
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > c.width) p.vx *= -1; if (p.y < 0 || p.y > c.height) p.vy *= -1;
+          p.o = Math.max(.2, Math.min(1, p.o + (Math.random() - .5) * .02));
+        });
+        x.globalAlpha = 1; if (!still) requestAnimationFrame(draw);
+      })();
+    })();
+  </script>
+  <script src="phone-menu.js" defer></script>
+<!-- goatcounter:start -->
+<script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- goatcounter:end -->
+  <script src="back-to-top.js" defer></script>
+
+  <script>if (/[?&]print\b/.test(location.search)) addEventListener('load', function () { setTimeout(function () { window.print(); }, 300); });</script>
+</body>
+</html>
