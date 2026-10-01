@@ -1,24 +1,28 @@
-// Renders reel.html to an Instagram reel: 1080 x 1920, 30 fps, H.264 MP4.
-// Usage (from the repo root, with a local server on port 8765):
+// Renders a reel page to an Instagram reel: 1080 x 1920, 30 fps, H.264 MP4.
+// A reel page draws every frame with REEL.render(t) and lists REEL.duration
+// (seconds) and REEL.stills (times for layout checks).
+//
+// Usage, from the repo root with a local server on port 8765:
 //   python3 -m http.server 8765 &
-//   node social/framework-reel/render.js [out.mp4] [--stills]
-// --stills writes one PNG per scene instead, for checking the layout.
+//   node social/render-reel.js social/rubin-reel/reel.html rubin-reel.mp4
+//   node social/render-reel.js social/rubin-reel/reel.html rubin-reel.mp4 --stills
+// --stills writes one PNG per entry in REEL.stills instead of the video.
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 
 (async () => {
-  const out = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : 'framework-reel.mp4';
+  const [pagePath, out = 'reel.mp4'] = process.argv.slice(2).filter(a => !a.startsWith('--'));
   const stills = process.argv.includes('--stills');
   const FPS = 30;
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
-  await page.goto('http://localhost:8765/social/framework-reel/reel.html');
+  await page.goto('http://localhost:8765/' + pagePath);
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(800);
-  const duration = await page.evaluate(() => REEL.duration);
+  const { duration, times } = await page.evaluate(() => ({ duration: REEL.duration, times: REEL.stills || [] }));
 
   if (stills) {
-    for (const [i, t] of [3.6, 7.8, 12.6, 16.8, 21.6, 25.2].entries()) {
+    for (const [i, t] of times.entries()) {
       await page.evaluate(t => REEL.render(t), t);
       await page.screenshot({ path: out.replace(/\.mp4$/, '') + `-scene${i + 1}.png` });
     }

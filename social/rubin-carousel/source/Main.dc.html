@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #04060f; color: #fff; -webkit-font-smoothing: antialiased; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; }
+    a { color: #ffd700; } a:hover { color: #ffe600; }
+    .card { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #04060f; }
+    .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .scrim, .tint, .scan { position: absolute; inset: 0; pointer-events: none; }
+    .tint { mix-blend-mode: screen; }
+    .scan { background: repeating-linear-gradient(0deg, rgba(170,235,255,.05) 0 1px, transparent 1px 4px);
+      mix-blend-mode: overlay; }
+    .bloom { position: absolute; border-radius: 50%; filter: blur(105px); pointer-events: none; }
+    .vig { position: absolute; inset: 0; pointer-events: none; background:
+      radial-gradient(ellipse 82% 66% at 50% 44%, transparent 0%, rgba(4,6,15,.40) 72%, rgba(4,6,15,.88) 100%); }
+    .hud { position: absolute; width: 56px; height: 56px; border: 5px solid;
+      border-image: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%) 1; filter: drop-shadow(0 0 12px rgba(0,224,255,.85)); }
+    .hud.tl { top: 40px; left: 40px; border-right: 0; border-bottom: 0; }
+    .hud.tr { top: 40px; right: 40px; border-left: 0; border-bottom: 0; }
+    .hud.bl { bottom: 40px; left: 40px; border-right: 0; border-top: 0; }
+    .hud.br { bottom: 40px; right: 40px; border-left: 0; border-top: 0; }
+    .inner { position: absolute; inset: 0; padding: 112px 84px 0; display: flex; flex-direction: column; }
+    .brandbar { display: flex; align-items: center; justify-content: space-between; }
+    .brandbar img.ic2 { height: 62px; filter: drop-shadow(0 0 16px rgba(150,225,255,.45)); }
+    .rightmark { display: flex; align-items: center; gap: 20px; }
+    .rightmark img.spin { height: 56px; filter: drop-shadow(0 0 14px rgba(255,200,60,.55)); }
+    .pagenum { display: flex; align-items: center; gap: 14px; }
+    .pagenum .bar { width: 46px; height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 20px rgba(0,224,255,.85); }
+    .pagenum .n { font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 21px; letter-spacing: .18em;
+      color: #4fe6ff; text-shadow: 0 0 22px rgba(0,224,255,.60); }
+    .tag { display: flex; align-items: center; gap: 16px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700;
+      font-size: 24px; letter-spacing: .18em; text-transform: uppercase; color: #ffd23d;
+      text-shadow: 0 0 26px rgba(255,180,40,.55); }
+    .tag .bar { width: 56px; height: 8px; flex-shrink: 0; background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%);
+      box-shadow: 0 0 20px rgba(255,140,26,.85); }
+    .tag.c { color: #5ef2ff; text-shadow: 0 0 26px rgba(0,224,255,.60); }
+    .tag.c .bar { background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 20px rgba(0,224,255,.85); }
+    .d { font-family: Anton, Impact, Haettenschweiler, "Arial Narrow", sans-serif; font-weight: 400;
+      text-transform: uppercase; line-height: .92; letter-spacing: .004em; color: #fff;
+      text-shadow: 0 0 26px rgba(110,190,255,.20); }
+    .d .cool { color: #00e0ff; text-shadow: 0 0 30px rgba(0,224,255,.65), 0 0 68px rgba(0,224,255,.34); }
+    .d .hot { color: #ffc83d; text-shadow: 0 0 30px rgba(255,180,40,.60), 0 0 68px rgba(255,120,26,.30); }
+    .rule { height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 22px rgba(0,224,255,.85); }
+    .rule.hot { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 22px rgba(255,140,26,.85); }
+    .dek { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 33px; line-height: 1.40; color: rgba(255,255,255,.95); }
+    .dek b { font-weight: 700; color: #fff; }
+    .dek .k { color: #5ef2ff; font-weight: 700; text-shadow: 0 0 26px rgba(0,224,255,.75); }
+    .dek .g { color: #ffd23d; font-weight: 700; text-shadow: 0 0 26px rgba(255,170,30,.70); }
+
+    /* --- stat cards: the numbers are designed objects, not loose type ------ */
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .q { display: flex; padding: 2px; background: linear-gradient(170deg, rgba(0,224,255,.75) 0%, rgba(0,230,118,.30) 60%, rgba(0,224,255,.10) 100%);
+      box-shadow: 0 0 26px rgba(0,224,255,.18);
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); }
+    .q.h { background: linear-gradient(170deg, rgba(255,215,0,.75) 0%, rgba(255,60,26,.30) 60%, rgba(255,138,26,.10) 100%);
+      box-shadow: 0 0 26px rgba(255,140,26,.16); }
+    .q > .in { position: relative; flex-grow: 1; background: rgba(5,10,22,.90); padding: 22px 18px 20px;
+      clip-path: polygon(0 0, calc(100% - 19px) 0, 100% 19px, 100% 100%, 19px 100%, 0 calc(100% - 19px)); }
+    .q .top { position: absolute; left: 0; top: 0; width: 62%; height: 5px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%);
+      box-shadow: 0 0 16px rgba(0,224,255,.85); }
+    .q.h .top { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 16px rgba(255,140,26,.85); }
+    .q .ix { position: absolute; right: 16px; top: 18px; font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600;
+      font-size: 15px; letter-spacing: .12em; color: rgba(140,220,255,.42); }
+    .q .n { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 64px;
+      line-height: .9; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); -webkit-background-clip: text; background-clip: text;
+      color: transparent; filter: drop-shadow(0 0 22px rgba(0,224,255,.60)); }
+    .q .l { display: block; margin-top: 10px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 20px;
+      letter-spacing: .05em; text-transform: uppercase; color: rgba(226,244,255,.88); }
+
+    /* --- neon statement panel --------------------------------------------- */
+    .np { display: flex; padding: 2px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 38px rgba(0,224,255,.28);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .np.h { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 38px rgba(255,140,26,.26); }
+    .np > .in { flex-grow: 1; display: flex; flex-direction: column; background: rgba(5,9,20,.94);
+      padding: 24px 28px;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .np .lbl { display: block; margin-bottom: 10px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 20px;
+      letter-spacing: .16em; text-transform: uppercase; color: #5ef2ff; text-shadow: 0 0 22px rgba(0,224,255,.70); }
+    .np.h .lbl { color: #ffd23d; text-shadow: 0 0 22px rgba(255,170,30,.70); }
+    .np p { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 28px; line-height: 1.38; color: rgba(255,255,255,.95); }
+
+    .optics { display: flex; padding: 2px; background: linear-gradient(160deg, rgba(0,224,255,.55) 0%, rgba(0,230,118,.18) 55%, rgba(0,224,255,.08) 100%);
+      box-shadow: 0 0 40px rgba(0,224,255,.22);
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px)); }
+    .optics > .in { flex-grow: 1; display: flex; align-items: center; justify-content: center;
+      background: rgba(4,9,20,.92);
+      clip-path: polygon(0 0, calc(100% - 23px) 0, 100% 23px, 100% 100%, 23px 100%, 0 calc(100% - 23px)); }
+    .shot { display: flex; padding: 2px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 40px rgba(0,224,255,.26);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .shot > .in { position: relative; flex-grow: 1; overflow: hidden; background: #04060f;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 16px;
+      background: linear-gradient(0deg, rgba(4,6,15,.92) 0%, rgba(4,6,15,0) 100%);
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 17px; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(220,242,255,.92); }
+    .flare { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; z-index: 2; }
+    .flare .fh { position: absolute; right: -250px; top: 700px; width: 470px; height: 470px;
+      border-radius: 50%; filter: blur(54px); background: radial-gradient(circle,
+      rgba(150,230,255,.34) 0%, rgba(0,180,255,.14) 34%, transparent 64%); }
+    .flare .fp { position: absolute; right: -84px; top: 838px; width: 176px; height: 176px;
+      border-radius: 50%; filter: blur(15px); background: radial-gradient(circle,
+      rgba(255,255,255,.95) 0%, rgba(198,248,255,.62) 24%, rgba(0,196,255,.24) 46%, transparent 68%); }
+    .flare .fs { position: absolute; right: -84px; top: 918px; width: 880px; height: 11px;
+      filter: blur(7px); background: linear-gradient(90deg, transparent 0%,
+      rgba(150,232,255,.08) 30%, rgba(206,250,255,.58) 78%, rgba(255,255,255,.85) 95%, transparent 100%); }
+    .flare .fx { position: absolute; right: -70px; top: 892px; width: 250px; height: 74px;
+      border-radius: 50%; filter: blur(26px); background: radial-gradient(circle,
+      rgba(255,198,104,.30) 0%, transparent 66%); }
+    .flare .fg { position: absolute; border-radius: 50%; filter: blur(8px); }
+
+    .claim { display: flex; padding: 2px; background: linear-gradient(160deg,
+      rgba(255,215,0,.95) 0%, rgba(255,90,26,.62) 52%, rgba(255,138,26,.40) 100%);
+      box-shadow: 0 0 46px rgba(255,140,26,.24);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .claim > .in { flex-grow: 1; background: rgba(5,9,20,.80); padding: 24px 30px 28px;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .claim .chip { display: inline-block; font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 16px;
+      letter-spacing: .22em; text-transform: uppercase; color: #0a0f1e; background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%);
+      padding: 8px 15px; box-shadow: 0 0 28px rgba(255,150,30,.60);
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+    .claim .line { margin-top: 16px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 29px; line-height: 1.24;
+      color: rgba(255,255,255,.88); }
+    .claim .hit { margin-top: 2px; font-family: Anton, Impact, "Arial Narrow", sans-serif;
+      font-size: 56px; line-height: .98; letter-spacing: .004em; text-transform: uppercase;
+      color: #ffc83d; text-shadow: 0 0 30px rgba(255,180,40,.62), 0 0 66px rgba(255,120,26,.30); }
+    .claim .sub { margin-top: 12px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 26px; line-height: 1.3;
+      color: rgba(255,255,255,.80); }
+    .mark { position: relative; width: 560px; height: 560px; }
+    .mark .ic2big { position: absolute; left: 50%; top: 50%; width: 360px;
+      transform: translate(-50%, -50%); filter: drop-shadow(0 0 30px rgba(150,225,255,.55)); }
+    .url { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 54px; line-height: 1;
+      text-transform: uppercase; letter-spacing: .01em; color: #ffc83d;
+      text-shadow: 0 0 30px rgba(255,180,40,.62), 0 0 68px rgba(255,120,26,.30); }
+    .footline { display: flex; align-items: center; gap: 24px; }
+    .footline .bar { flex-grow: 1; height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 22px rgba(0,224,255,.80); }
+    .footline .bar.hot { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 22px rgba(255,140,26,.80); }
+    .footline .u { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 24px; letter-spacing: .14em;
+      text-transform: uppercase; color: #5ef2ff; white-space: nowrap; text-shadow: 0 0 24px rgba(0,224,255,.70); }
+    .footline .u.g { color: #ffd23d; text-shadow: 0 0 24px rgba(255,170,30,.70); }
+    .doi { font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 19px; letter-spacing: .03em;
+      color: #7ef4ff; text-shadow: 0 0 20px rgba(0,224,255,.55); white-space: nowrap; }
+    .credit { position: absolute; left: 84px; right: 84px; bottom: 42px; font-family: "IBM Plex Mono", "Courier New", monospace;
+      font-size: 12.5px; line-height: 1.5; color: rgba(200,225,255,.52); }
+    .credit .dis { color: rgba(200,225,255,.40); }
+    .spacer { flex-grow: 1; }
+
+  </style>
+</helmet>
+<div class="card">
+  <img class="photo" src="plate-dome.jpg" style="filter: {{photoFilter}}">
+  <div class="scrim" style="background: linear-gradient(180deg, rgba(4,6,15,.90) 0%, rgba(4,6,15,.70) 26%, rgba(4,6,15,.46) 48%, rgba(4,6,15,.22) 68%, rgba(4,6,15,.62) 88%, rgba(4,6,15,.94) 100%)"></div>
+  <div class="tint" style="background: radial-gradient(ellipse 46% 28% at 76% 66%, rgba(0,180,245,.52) 0%, transparent 72%)"></div>
+  <div class="bloom" style="width: 640px; height: 560px; right: -120px; top: 560px; background: rgba(0,190,255,.30)"></div>
+  <div class="bloom" style="width: 520px; height: 420px; left: -180px; top: 240px; background: rgba(255,150,30,.13)"></div>
+  <div class="vig"></div>
+  <div class="flare">
+    <div class="fh"></div>
+    <div class="fx"></div>
+    <div class="fs"></div>
+    <div class="fp"></div>
+    <div class="fg" style="left: 732px; top: 762px; width: 60px; height: 60px; background: rgba(255,198,104,.24)"></div><div class="fg" style="left: 586px; top: 684px; width: 36px; height: 36px; background: rgba(170,242,255,.26)"></div><div class="fg" style="left: 384px; top: 552px; width: 104px; height: 104px; background: rgba(120,215,255,.10)"></div><div class="fg" style="left: 258px; top: 492px; width: 28px; height: 28px; background: rgba(255,212,116,.20)"></div><div class="fg" style="left: 116px; top: 396px; width: 68px; height: 68px; background: rgba(130,220,255,.08)"></div>
+  </div>
+  <div class="scan"></div>
+  <div class="hud tl"></div><div class="hud tr"></div><div class="hud bl"></div><div class="hud br"></div>
+
+  <div class="inner">
+    <div class="brandbar">
+      <img class="ic2" src="logo-ic2.png">
+      <div class="rightmark">
+        
+        <div class="pagenum"><span class="bar"></span><span class="n">01 / 05</span></div>
+      </div>
+    </div>
+
+    <div style="height: 48px"></div>
+    <div class="tag"><span class="bar"></span><span>Prediction registered · July 31, 2025</span></div>
+
+    <div style="height: 26px"></div>
+    <div class="d" style="font-size: 116px">Is spacetime<br>made of<br><span class="cool">information?</span></div>
+
+    <div style="height: 30px"></div>
+    <div class="rule" style="width: 330px"></div>
+
+    <div style="height: 26px"></div>
+    <div class="claim" style="max-width: 706px">
+      <div class="in">
+        <span class="chip">On the record</span>
+        <div class="line">A prediction filed</div>
+        <div class="hit">before the data arrives</div>
+        <div class="sub">— and the survey that will test it.</div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="stats">
+      <div class="q "><div class="in"><span class="top"></span><span class="ix">01</span><span class="n">8.4</span><span class="l">Metre mirror</span></div></div>
+      <div class="q "><div class="in"><span class="top"></span><span class="ix">02</span><span class="n">3.2</span><span class="l">Gigapixel cam</span></div></div>
+      <div class="q "><div class="in"><span class="top"></span><span class="ix">03</span><span class="n">18K</span><span class="l">Sq deg of sky</span></div></div>
+      <div class="q "><div class="in"><span class="top"></span><span class="ix">04</span><span class="n">10</span><span class="l">Year survey</span></div></div>
+    </div>
+
+    <div style="height: 34px"></div>
+    <div class="footline">
+      <span class="u">Swipe — what we predict</span>
+      <span class="bar"></span>
+    </div>
+    <div style="height: 140px"></div>
+  </div>
+
+  <div class="credit">Image: NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA/P.&nbsp;Horálek (Institute of Physics in Opava) · CC BY 4.0</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"lift":{"editor":"range","default":168,"min":60,"max":220,"step":2,"unit":"%","section":"Plate"},"$preview":{"width":1080,"height":1350}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const lift = this.props.lift ?? 168;
+    const photoFilter = 'brightness(' + (lift / 100).toFixed(2) + ') contrast(1.16) saturate(1.42)';
+
+    return { photoFilter: photoFilter };
+  }
+}
+</script>
+</body>
+</html>
