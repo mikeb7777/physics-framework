@@ -229,6 +229,21 @@
     return { lg: lg, c: c, redraw: draw, mode: function () { return c.screens[mode]; } };
   }
 
+  /* an unpowered logger for an empty bay: same chassis, everything dark, waiting for the next test */
+  function offLogger(slot) {
+    var lg = document.createElement('article');
+    lg.className = 'lg lg-off'; lg.setAttribute('aria-label', 'Slot ' + slot + ': a logger switched off, reserved for the next test');
+    lg.innerHTML =
+      '<div class="lg-term"><div class="lg-screw"><i></i><b>&nbsp;</b></div><div class="lg-screw"><i></i><b>&nbsp;</b></div></div>' +
+      '<div class="lg-body"><div class="lg-top"><div class="lg-vent"></div><div class="lg-leds"><span class="lg-led"><i></i>Power</span><span class="lg-led"><i></i>Armed</span><span class="lg-led"><i></i>Result</span></div></div>' +
+        '<div class="lg-face"><div><div class="lg-brand">Ic<sup>2</sup> TEST LOGGER</div><div class="lg-lcd lg-dark"><span>NO SIGNAL</span></div>' +
+          '<div class="lg-model"><b>Slot ' + slot + '</b> logger &middot; reserved for the next test</div></div>' +
+        '<div class="lg-keys"><span class="lg-key">&#9664; Mode</span><span class="lg-key">Mode &#9654;</span><span class="lg-key red">Record</span><span class="lg-key">Review</span>' +
+          '<div class="lg-pad"><span class="pad up">&#9650;</span><span class="pad lt">&#9664;</span><span class="pad ent">ENTER</span><span class="pad rt">&#9654;</span><span class="pad dn">&#9660;</span></div>' +
+          '<span class="lg-start">OFF<small>no test assigned</small></span></div></div></div>';
+    return lg;
+  }
+
   function tick(list) {
     var now = new Date(), clk = now.toLocaleString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
     list.forEach(function (L) {
@@ -253,8 +268,7 @@
       var shelf = document.createElement('div'); shelf.className = 'lg-shelf';
       shelf.innerHTML = '<span class="lg-ear l"><i></i><i></i></span><span class="lg-ear r"><i></i><i></i></span>';
       list.slice(i, i + 2).forEach(function (L) { shelf.appendChild(L.lg); });
-      if (list.length - i === 1) { var blank = document.createElement('div'); blank.className = 'lg-blank'; blank.setAttribute('aria-hidden', 'true');
-        blank.innerHTML = '<span>SLOT ' + (list.length + 1) + '</span><b>Reserved for the next test</b>'; shelf.appendChild(blank); }
+      if (list.length - i === 1) shelf.appendChild(offLogger(list.length + 1));
       rack.appendChild(shelf);
     }
     var foot = document.createElement('div'); foot.className = 'lg-rack-foot'; rack.appendChild(foot);
