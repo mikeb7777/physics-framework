@@ -1,5 +1,5 @@
 {
-  "_about": "Field Watch topics: what the weekly search looks for, tied to the test each topic bears on. Edit freely. arxiv = arXiv API search_query (abs:, ti:, cat:, AND/OR/ANDNOT; quote phrases). crossref = free-text query for journals arXiv does not cover. terms = words that score a paper's title and abstract; min_score = how many must appear. Read by tools/field_watch.py. require = groups of words; a paper must contain at least one word from every group. exclude = words that rule a paper out.",
+  "_about": "Field Watch topics: what the weekly search looks for, tied to the test each topic bears on. Edit freely. arxiv = arXiv API search_query (abs:, ti:, cat:, AND/OR/ANDNOT; quote phrases). crossref = free-text query for journals arXiv does not cover. terms = words that score a paper's title and abstract; min_score = how many must appear. Read by tools/field_watch.py. require = groups of words; a paper must contain at least one word from every group. exclude = words that rule a paper out. baseline = the arXiv area a topic is measured against for share of interest. pubmed = PubMed search for interest in topics arXiv barely covers; nsf / nih = phrases for funding trends (each phrase searched separately, awards counted once) (tools/field_trends.py).",
   "topics": [
     {
       "id": "dark-energy",
@@ -37,6 +37,10 @@
           "evolving",
           "dynamical"
         ]
+      ],
+      "baseline": "cat:astro-ph.CO",
+      "nsf": [
+        "\"dark energy\""
       ]
     },
     {
@@ -72,6 +76,11 @@
           "anisotrop",
           "inhomogene"
         ]
+      ],
+      "baseline": "cat:astro-ph.CO",
+      "nsf": [
+        "\"Hubble constant\"",
+        "\"Hubble tension\""
       ]
     },
     {
@@ -107,6 +116,12 @@
           "overabundance",
           "abundance"
         ]
+      ],
+      "baseline": "cat:astro-ph.GA",
+      "nsf": [
+        "\"early galaxies\"",
+        "\"first galaxies\"",
+        "\"galaxy formation\" JWST"
       ]
     },
     {
@@ -139,6 +154,11 @@
           "intracluster",
           "heat"
         ]
+      ],
+      "baseline": "cat:astro-ph.GA",
+      "nsf": [
+        "protocluster",
+        "\"galaxy clusters\" formation"
       ]
     },
     {
@@ -169,6 +189,10 @@
           "polariz",
           "birefringence"
         ]
+      ],
+      "baseline": "cat:astro-ph.CO",
+      "nsf": [
+        "\"cosmic microwave background\""
       ]
     },
     {
@@ -204,6 +228,11 @@
           "string breaking",
           "flux tube"
         ]
+      ],
+      "baseline": "cat:hep-ph OR cat:hep-lat OR cat:nucl-th",
+      "nsf": [
+        "\"lattice QCD\"",
+        "\"quark-gluon plasma\""
       ]
     },
     {
@@ -244,6 +273,12 @@
         "landauer formula",
         "landauer conductance",
         "büttiker"
+      ],
+      "baseline": "cat:cond-mat.stat-mech OR cat:quant-ph",
+      "nsf": [
+        "\"thermodynamics of information\"",
+        "\"Landauer\"",
+        "\"stochastic thermodynamics\""
       ]
     },
     {
@@ -287,7 +322,18 @@
           "synap",
           "living"
         ]
-      ]
+      ],
+      "baseline": "cat:q-bio* OR cat:physics.bio-ph",
+      "nsf": [
+        "\"thermodynamics\" brain",
+        "\"energetics of computation\""
+      ],
+      "nih": [
+        "\"synaptic homeostasis\"",
+        "\"synaptic downscaling\"",
+        "\"brain energy metabolism\""
+      ],
+      "pubmed": "\"thermodynamic cost\"[tiab] OR Landauer[tiab] OR \"information thermodynamics\"[tiab] OR \"synaptic homeostasis\"[tiab] OR \"synaptic downscaling\"[tiab]"
     },
     {
       "id": "error-correction",
@@ -325,6 +371,11 @@
       ],
       "exclude": [
         "classical error correct"
+      ],
+      "baseline": "cat:quant-ph",
+      "nsf": [
+        "\"quantum error correction\"",
+        "\"fault-tolerant quantum\""
       ]
     },
     {
@@ -357,6 +408,11 @@
           "it from bit",
           "holograph"
         ]
+      ],
+      "baseline": "cat:gr-qc OR cat:hep-th",
+      "nsf": [
+        "\"quantum gravity\"",
+        "\"quantum information\" gravity"
       ]
     },
     {
@@ -391,7 +447,14 @@
           "retention",
           "encoding"
         ]
-      ]
+      ],
+      "nsf": [
+        "\"working memory\""
+      ],
+      "nih": [
+        "\"working memory capacity\""
+      ],
+      "pubmed": "\"working memory capacity\"[tiab]"
     }
   ]
 }
