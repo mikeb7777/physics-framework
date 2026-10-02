@@ -15,7 +15,7 @@
    The prediction and outcome text is the record's own (moved from validation.html). */
 (function () {
   var T = {
-    rc1: { id: 'COSMIC-005', topic: 'dark-energy', record: 'https://doi.org/10.5281/zenodo.22719514', stage: 'waiting', result: null,
+    rc1: { program: 'COSMIC-005', id: 'COSMIC-005', topic: 'dark-energy', record: 'https://doi.org/10.5281/zenodo.22719514', stage: 'waiting', result: null,
            inputs: ['DESI BAO', 'CMB'], target: '2026-12-01T09:00:00', targetLabel: 'est. analysis window opens', documented: '2026-09-12',
            screens: ['gauge', 'quadrant', 'history', 'review', 'timeline'],
            lamps: { green: '≥ DR2 3.1σ, in quadrant', yellow: '2–3.1σ, in quadrant', red: '< 2σ or out of quadrant' },
@@ -24,28 +24,28 @@
            /* DESI DR2 (arXiv:2503.14738) and DR1 (arXiv:2404.03002): DESI BAO + CMB, no supernovae */
            quadrant: { x: [-1.6, 0.2], y: [-3.5, 1.5], fit: { x: -0.42, sx: 0.21, y: -1.75, sy: 0.58, rho: -0.9, label: 'DR2' } },
            history: [['DR1', 'Apr 2024', 2.6], ['DR2', 'Mar 2025', 3.1], ['DR3', '2027', null]] },
-    rc2: { id: null, topic: 'working-memory', record: null, stage: 'documented', result: null,
+    rc2: { program: 'COG-AUG I', id: null, topic: 'working-memory', record: null, stage: 'documented', result: null,
            inputs: ['INTERNAL STUDY'], target: '2027-02-01T09:00:00', targetLabel: 'testing begins', documented: '2026-01-31',
            screens: ['timeline', 'review'], lamps: { green: 'Transfer-rate advantage', yellow: 'Advantage in some modalities', red: 'No measurable advantage' } },
-    rc3: { id: 'COSMIC-008', topic: 'cmb-polarization', record: null, stage: 'documented', result: null,
+    rc3: { program: 'COSMIC-008', id: 'COSMIC-008', topic: 'cmb-polarization', record: null, stage: 'documented', result: null,
            inputs: ['SIMONS OBS'], target: '2027-03-01T14:00:00', targetLabel: 'est. first results', documented: '2026-05-01',
            screens: ['timeline', 'review'], lamps: { green: 'Signature at predicted scale', yellow: 'Pattern at another scale', red: 'No predicted pattern' } },
-    rc4: { id: 'COSMIC-013', topic: 'landauer-biology', record: null, stage: 'documented', result: null,
+    rc4: { program: 'COSMIC-013', id: 'COSMIC-013', topic: 'landauer-biology', record: null, stage: 'documented', result: null,
            inputs: ['INTERNAL STUDY'], target: '2027-04-01T12:00:00', targetLabel: 'testing window opens', documented: '2026-01-24',
            screens: ['timeline', 'review'], lamps: { green: 'Landauer heat detected', yellow: 'Below predicted size', red: 'No detectable signal' } },
-    rc9: { id: 'COSMIC-007', topic: null, record: 'https://doi.org/10.5281/zenodo.22720954', stage: 'waiting', result: null,
+    rc9: { program: 'COSMIC-007', id: 'COSMIC-007', topic: null, record: 'https://doi.org/10.5281/zenodo.22720954', stage: 'waiting', result: null,
            inputs: ['RUBIN LSST', 'EUCLID'], target: '2028-07-01T12:00:00', targetLabel: 'est. Data Release 1', documented: '2026-09-12',
            screens: ['timeline'], lamps: { green: '> 3σ at predicted scale and axis', yellow: 'Other scale or axis, or < 3σ', red: 'Statistically isotropic' } },
-    rc5: { id: 'COSMIC-SD-001', topic: 'landauer', record: null, stage: 'documented', result: null,
+    rc5: { program: 'COSMIC-SD-001', id: 'COSMIC-SD-001', topic: 'landauer', record: null, stage: 'documented', result: null,
            inputs: ['LHCb', 'ATLAS', 'CMS'], target: '2027-05-01T12:00:00', targetLabel: 'target data comparison', documented: '2026-05-21',
            screens: ['timeline', 'review'], lamps: { green: 'Landauer heat excess', yellow: 'Partial, below prediction', red: 'No Landauer excess' } },
-    rc6: { id: 'COSMIC-SD-002', topic: null, record: null, stage: 'documented', result: null,
+    rc6: { program: 'COSMIC-SD-002', id: 'COSMIC-SD-002', topic: null, record: null, stage: 'documented', result: null,
            inputs: ['PDG CKM'], target: '2027-06-01T12:00:00', targetLabel: 'derivation target', documented: '2026-05-21',
            screens: ['timeline'], lamps: { green: 'Matches PDG CKM values', yellow: 'Approximate match', red: 'No information structure' } },
-    rc7: { id: 'COSMIC-SD-003', topic: 'qcd-entanglement', record: null, stage: 'documented', result: null,
+    rc7: { program: 'COSMIC-SD-003', id: 'COSMIC-SD-003', topic: 'qcd-entanglement', record: null, stage: 'documented', result: null,
            inputs: ['LATTICE QCD', 'EIC'], target: '2027-04-01T12:00:00', targetLabel: 'lattice QCD comparison', documented: '2026-05-21',
            screens: ['timeline', 'review'], lamps: { green: 'Scaling matches cosmology', yellow: 'Different functional form', red: 'No relationship' } },
-    rc8: { id: 'COSMIC-SD-004', topic: 'qcd-entanglement', record: null, stage: 'documented', result: null,
+    rc8: { program: 'COSMIC-SD-004', id: 'COSMIC-SD-004', topic: 'qcd-entanglement', record: null, stage: 'documented', result: null,
            inputs: ['RHIC', 'ALICE'], target: '2027-02-01T12:00:00', targetLabel: 'RHIC / ALICE analysis', documented: '2026-05-21',
            screens: ['timeline', 'review'], lamps: { green: 'Entropy drop beyond thermal', yellow: 'Drop, different size', red: 'Fully thermal' } }
   };
@@ -179,7 +179,7 @@
         '<div class="lg-face"><div>' +
           '<div class="lg-brand">Ic<sup>2</sup> TEST LOGGER</div>' +
           '<div class="lg-lcd">' +
-            '<div class="lg-hdr"><span class="md"></span><span class="id">' + esc(c.id || 'INTERNAL') + '</span><span class="clk"></span></div>' +
+            '<div class="lg-hdr"><span class="md"></span><span class="id">' + esc(c.program) + '</span><span class="clk"></span></div>' +
             '<div class="lg-main"><div class="lg-plot"></div><div class="lg-read">' +
               '<div class="ttl">READOUT</div>' +
               (c.big ? '<div class="lg-big"><span class="k">' + esc(c.big.k) + '</span><span class="v">' + esc(c.big.v) + '<span class="u"> ' + esc(c.big.u) + '</span></span></div>'
@@ -192,7 +192,7 @@
             '</div></div>' +
             '<div class="lg-foot">OUTCOME <span class="lamp green' + (c.result === 'green' ? ' on' : '') + '" title="Green: ' + esc(c.lamps.green) + '"></span><span class="lamp yellow' + (c.result === 'yellow' ? ' on' : '') + '" title="Yellow: ' + esc(c.lamps.yellow) + '"></span><span class="lamp red' + (c.result === 'red' ? ' on' : '') + '" title="Red: ' + esc(c.lamps.red) + '"></span><span class="rule">G ' + esc(c.lamps.green) + '</span></div>' +
           '</div>' +
-          '<div class="lg-model"><b>' + esc(mname.trim()) + '</b> logger &middot; ' + esc(title) + '</div>' +
+          '<div class="lg-model">' + (patch ? '<img src="' + esc(patch) + '" alt="" width="30" height="30">' : '') + '<span><b>' + esc(c.program + ': ' + mname.trim()) + '</b><small>' + esc(title) + '</small></span></div>' +
         '</div>' +
         '<div class="lg-keys">' +
           '<button class="lg-key prev" type="button">&#9664; Mode</button><button class="lg-key next" type="button">Mode &#9654;</button>' +
@@ -237,7 +237,7 @@
       '<div class="lg-term"><div class="lg-screw"><i></i><b>&nbsp;</b></div><div class="lg-screw"><i></i><b>&nbsp;</b></div></div>' +
       '<div class="lg-body"><div class="lg-top"><div class="lg-vent"></div><div class="lg-leds"><span class="lg-led"><i></i>Power</span><span class="lg-led"><i></i>Armed</span><span class="lg-led"><i></i>Result</span></div></div>' +
         '<div class="lg-face"><div><div class="lg-brand">Ic<sup>2</sup> TEST LOGGER</div><div class="lg-lcd lg-dark"><span>NO SIGNAL</span></div>' +
-          '<div class="lg-model"><b>Slot ' + slot + '</b> logger &middot; reserved for the next test</div></div>' +
+          '<div class="lg-model"><span><b>Slot ' + slot + ': unassigned</b><small>Reserved for the next test</small></span></div></div>' +
         '<div class="lg-keys"><span class="lg-key">&#9664; Mode</span><span class="lg-key">Mode &#9654;</span><span class="lg-key red">Record</span><span class="lg-key">Review</span>' +
           '<div class="lg-pad"><span class="pad up">&#9650;</span><span class="pad lt">&#9664;</span><span class="pad ent">ENTER</span><span class="pad rt">&#9654;</span><span class="pad dn">&#9660;</span></div>' +
           '<span class="lg-start">OFF<small>no test assigned</small></span></div></div></div>';
