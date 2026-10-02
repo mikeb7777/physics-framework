@@ -136,6 +136,18 @@
     .fc-play { font: 700 .85rem 'IBM Plex Sans', sans-serif; padding: .45rem 1rem; min-height: 40px; border-radius: 6px; border: 2px solid #f1e303; background: transparent; color: #f1e303; cursor: pointer; }
     .fc-readout { flex-basis: 100%; margin: 0; font: 500 .85rem 'IBM Plex Mono', monospace; color: #b8c4d4; }
     @media (max-width: 760px) { .fc-grid { grid-template-columns: minmax(0, 1fr); } .fc-3d { height: 320px; } .fc-cut { max-width: 340px; width: 100%; justify-self: center; } .fc-3d .sim-tr { display: none; } .fc-controls input[type=range] { width: 100%; } .fc-controls label { flex: 1 1 100%; } }
+
+    /* Moving thumbnail gallery (sim-thumbs/, tools/sim_gallery.py) */
+    .sim-gallery { max-width: 1200px; margin: 0 auto 2rem; }
+    .foundation-accordion { scroll-margin-top: 90px; }
+    .sg-intro { color: #4a5868; margin: 0 0 1rem; }
+    .sg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 1rem; }
+    .sg-tile { position: relative; display: block; padding: 0; border: 1px solid #1f2a3a; border-radius: 8px; overflow: hidden; background: #020408; cursor: pointer; aspect-ratio: 16 / 9; transition: transform .2s ease, box-shadow .2s ease; }
+    .sg-tile:hover, .sg-tile:focus-visible { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+    .sg-tile:focus-visible { outline: 3px solid #f1e303; outline-offset: 2px; }
+    .sg-tile video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sg-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.4rem .75rem .55rem; text-align: left; font: 600 .9rem 'IBM Plex Sans', sans-serif; color: #fff; background: linear-gradient(transparent, rgba(2,4,8,.92)); }
+    @media (max-width: 560px) { .sg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; } .sg-label { font-size: .75rem; padding: 1rem .5rem .4rem; } }
 </style>
     <style id="chamber-model-style">
       .ch-presets{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem;}
@@ -240,6 +252,63 @@
   <section class="content-section">
     <div class="section-container">
       
+    
+    <div class="sim-gallery" aria-label="Simulations at a glance">
+      <p class="eyebrow">Watch them move</p>
+      <h2 style="margin:.25rem 0 .5rem;">Every simulation, running</h2>
+      <p class="sg-intro">Each tile is a few seconds of the live simulation. Click one to open it below, where you can turn it, change its settings and read what it shows.</p>
+      <div class="sg-grid">
+        <button type="button" class="sg-tile" data-open="peg3d">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-field.jpg" data-src="sim-thumbs/c-field.mp4" aria-hidden="true"></video>
+          <span class="sg-label">A · The field in 3D, cut any way</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="ent3d">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-ent.jpg" data-src="sim-thumbs/c-ent.mp4" aria-hidden="true"></video>
+          <span class="sg-label">B · Space from entanglement</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="rot3d">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-rot.jpg" data-src="sim-thumbs/c-rot.mp4" aria-hidden="true"></video>
+          <span class="sg-label">C · Spin across scales</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="four3d">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-four.jpg" data-src="sim-thumbs/c-four.mp4" aria-hidden="true"></video>
+          <span class="sg-label">D · Four forces</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="scram3d">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-scram.jpg" data-src="sim-thumbs/c-scram.mp4" aria-hidden="true"></video>
+          <span class="sg-label">E · Information scrambling</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="bang3d">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-bang.jpg" data-src="sim-thumbs/c-bang.mp4" aria-hidden="true"></video>
+          <span class="sg-label">F · Spacetime crystallizes</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="bamboo">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-bamboo.jpg" data-src="sim-thumbs/c-bamboo.mp4" aria-hidden="true"></video>
+          <span class="sg-label">G · The Bamboo Principle</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="bell">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-bell.jpg" data-src="sim-thumbs/c-bell.mp4" aria-hidden="true"></video>
+          <span class="sg-label">H · Bell correlation</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="subplanck">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-subplanck.jpg" data-src="sim-thumbs/c-subplanck.mp4" aria-hidden="true"></video>
+          <span class="sg-label">I · Sub-Planck substrate</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="chamber">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-chamber.jpg" data-src="sim-thumbs/c-chamber.mp4" aria-hidden="true"></video>
+          <span class="sg-label">Model · Acoustic chamber</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="nowwin">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-nowwin.jpg" data-src="sim-thumbs/c-nowwin.mp4" aria-hidden="true"></video>
+          <span class="sg-label">Where your “now” is</span>
+        </button>
+        <button type="button" class="sg-tile" data-open="phimotion">
+          <video muted loop playsinline preload="none" poster="sim-thumbs/c-phi.jpg" data-src="sim-thumbs/c-phi.mp4" aria-hidden="true"></video>
+          <span class="sg-label">The journey never shown</span>
+        </button>
+      </div>
+    </div>
+    <hr class="section-rule">
     <div class="color-key" style="max-width:1200px;margin:0 auto 2rem;padding:1.25rem 1.5rem;
          background:#0d1520;border:1px solid rgba(140,190,250,.22);border-left:4px solid #005f6e;border-radius:6px;">
       <div style="font-family: monospace;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
@@ -3200,5 +3269,27 @@ window._simInit.phimotion = function () {
 <!-- goatcounter:end -->
   <script src="back-to-top.js" defer></script>
 <script src="field-cut.js"></script>
+<script>
+/* Simulation gallery: play tiles only while visible; click opens the matching panel. */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.sg-tile').forEach(function (tile) {
+    var v = tile.querySelector('video');
+    tile.addEventListener('click', function () {
+      var acc = document.querySelector('.foundation-accordion[data-lazy-sim="' + tile.getAttribute('data-open') + '"]');
+      if (!acc) return;
+      if (!acc.classList.contains('active')) acc.querySelector('.foundation-header').click();
+      setTimeout(function () { acc.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, 360);
+    });
+    if (reduce || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { if (!v.src) v.src = v.getAttribute('data-src'); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      });
+    }, { rootMargin: '100px' }).observe(tile);
+  });
+})();
+</script>
 </body>
 </html>
