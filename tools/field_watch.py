@@ -37,8 +37,19 @@ def get(url, tries=3):
     return None
 
 
+TEX = {r"\sim": "~", r"\approx": "≈", r"\times": "×", r"\pm": "±", r"\lesssim": "≲", r"\gtrsim": "≳", r"\leq": "≤", r"\geq": "≥",
+       r"\Lambda": "Λ", r"\sigma": "σ", r"\alpha": "α", r"\beta": "β", r"\gamma": "γ", r"\mu": "μ", r"\varphi": "φ", r"\phi": "φ",
+       r"\Omega": "Ω", r"\omega": "ω", r"\Delta": "Δ", r"\delta": "δ", r"\nu": "ν", r"\tau": "τ", r"\rho": "ρ", r"\,": " ", r"\%": "%",
+       r"\Msun": "M☉", r"\odot": "☉", r"\prime": "′", r"\star": "*", r"\ast": "*", r"\circ": "°", r"\langle": "⟨", r"\rangle": "⟩",
+       r"\log": "log", r"\le ": "≤ ", r"\ge ": "≥ ", r"\Mbh": "M_BH", r"\rm ": "", r"\it ": "", r"\bar": "", r"\rm": "", r"\,": " "}
+
+
 def clean(s):
     s = re.sub(r"<[^>]+>", " ", s or "")
+    s = re.sub(r"\\(?:textit|textbf|textsc|emph|mathrm|mathcal|mathbf|mathbb|text|rm|it|bar)\s*\{([^{}]*)\}", r"\1", s)   # LaTeX markup from arXiv
+    for k, v in TEX.items():
+        s = s.replace(k, v)
+    s = s.replace("$", "")
     return re.sub(r"\s+", " ", s).strip()
 
 

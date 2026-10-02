@@ -382,22 +382,24 @@
         /* Field Watch */
         .fw-meta { font-size:.85rem; color:var(--text-light); margin:-1rem 0 1.5rem; }
         .fw-list { display:grid; gap:1rem; }
-        .fw-item { background:#fff; border:1px solid #e3e6ea; border-left:4px solid #8fa0b0; border-radius:10px; padding:1rem 1.25rem; }
-        .fw-item.reviewed { border-left-color:#005ba5; }
-        .fw-top { display:flex; flex-wrap:wrap; gap:.4rem .75rem; align-items:center; font-size:.8rem; color:var(--text-light); margin-bottom:.35rem; }
-        .fw-title { display:block; font-weight:700; font-size:1.02rem; line-height:1.35; color:#1a1d33; text-decoration:none; }
-        .fw-title:hover { color:#005ba5; text-decoration:underline; }
-        .fw-authors { font-size:.85rem; color:var(--text-light); margin:.25rem 0 .4rem; }
+        /* Paper cards: QCD pair B+Yw (quark #005ba5, antiquark #f1e303) */
+        .fw-item { background:#005ba5; color:#fff; border:0; border-left:5px solid #f1e303; border-radius:10px; padding:1rem 1.25rem; }
+        .fw-item.reviewed { box-shadow:inset 0 0 0 2px #f1e303; }
+        .fw-top { display:flex; flex-wrap:wrap; gap:.4rem .75rem; align-items:center; font-size:.8rem; color:rgba(255,255,255,.82); margin-bottom:.35rem; }
+        .fw-title { display:block; font-weight:700; font-size:1.02rem; line-height:1.35; color:#fff; text-decoration:none; }
+        .fw-title:hover { color:#f1e303; text-decoration:underline; }
+        .fw-authors { font-size:.85rem; color:rgba(255,255,255,.85); margin:.25rem 0 .4rem; }
         .fw-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
-        .fw-tag { font-size:.75rem; font-weight:600; padding:.15rem .6rem; border-radius:20px; background:#eef2f6; color:#2d4053; text-decoration:none; }
-        a.fw-tag:hover { background:#1a1d33; color:#fff; }
-        .fw-rel { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.15rem .6rem; border-radius:20px; color:#fff; }
-        .fw-rel.consistent { background:#005ba5; } .fw-rel.tension { background:#4a5868; } .fw-rel.independent-test { background:#1a1d33; }
-        .fw-rel.method, .fw-rel.context, .fw-rel.contact { background:#8fa0b0; }
-        .fw-unread { font-size:.72rem; font-weight:600; color:#5a6878; }
-        .fw-note { font-size:.92rem; margin:.5rem 0 .2rem; color:#1a1d33; }
-        .fw-item details { margin-top:.4rem; font-size:.88rem; color:#4a5868; }
-        .fw-item summary { cursor:pointer; font-weight:600; color:#2d4053; }
+        .fw-tag { font-size:.75rem; font-weight:600; padding:.15rem .6rem; border-radius:20px; background:rgba(255,255,255,.14); color:#fff; text-decoration:none; }
+        a.fw-tag { color:#f1e303; box-shadow:inset 0 0 0 1px rgba(241,227,3,.55); background:transparent; }
+        a.fw-tag:hover { background:#f1e303; color:#1a1d33; }
+        .fw-rel { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.15rem .6rem; border-radius:20px; background:#f1e303; color:#1a1d33; }
+        .fw-unread { font-size:.72rem; font-weight:600; color:#f1e303; }
+        .fw-note { font-size:.92rem; margin:.5rem 0 .2rem; color:#fff; }
+        .fw-item details { margin-top:.4rem; font-size:.88rem; color:rgba(255,255,255,.9); }
+        .fw-item summary { cursor:pointer; font-weight:600; color:#fff; }
+        .fw-item summary:hover { color:#f1e303; }
+        .fw-item summary:focus-visible, .fw-title:focus-visible, a.fw-tag:focus-visible { outline:2px solid #f1e303; outline-offset:2px; }
         .fw-more { margin-top:1.5rem; }
         @media (max-width:640px) {
             #fw-filters { flex-wrap:nowrap; overflow-x:auto; margin-bottom:1.5rem; padding-bottom:.4rem; scrollbar-width:thin; }
