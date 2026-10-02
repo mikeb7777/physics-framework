@@ -849,3 +849,18 @@ footer.site-footer { background: #1a1d33 !important; color: #ffffff; margin: 0 !
 .site-header:not(.bigtoe-header) .main-navigation a[aria-current="page"],
 .logo-navbar a[aria-current="page"], .mobile-menu a[aria-current="page"] {
   color: #8B0000 !important; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+
+/* -- Phones (2 Oct 2026 phone audit) -------------------------------------------
+   Every standalone link and small button gets a 40px row to tap; footnote markers
+   get a larger tap area without changing how they look. */
+@media (max-width: 768px) {
+  .fw-tag, .ml-link, .news-card-link, .contact-link, .why-link, .member-link, .back-link,
+  .qg-go, .viz-btn, .filter-btn, .family-bar a, .view-source,
+  a[style*="display:inline-block"], a[style*="display: inline-block"] {
+    min-height: 40px; display: inline-flex !important; align-items: center; }
+  sup > a, a.cite, a[href^="#ref"] { display: inline-block; padding: 10px 5px; margin: -10px -5px; }
+  .sky-credit, .panel-sky-credit { max-width: calc(100% - 2rem); white-space: normal; overflow-wrap: anywhere; }
+}
+@media (max-width: 768px) {
+  p a, li a, td a { overflow-wrap: anywhere; }   /* long URLs and emails wrap instead of running off a phone screen */
+}
