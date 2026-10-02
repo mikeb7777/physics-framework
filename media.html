@@ -324,6 +324,18 @@
     .footer-bottom a { color:rgba(255,255,255,.6); text-decoration:none; }
     .footer-bottom a:hover { color:white; }
     
+        /* Horizon Scanner panels */
+        .hs-head { margin-bottom:.5rem; }
+        .hs-toggle { all:unset; box-sizing:border-box; display:flex; width:100%; align-items:center; justify-content:space-between; gap:1rem; cursor:pointer; font:inherit; color:inherit; }
+        .hs-toggle:focus-visible { outline:3px solid #005ba5; outline-offset:4px; border-radius:4px; }
+        .hs-chev { flex:0 0 auto; width:36px; height:36px; border-radius:50%; border:2px solid #cfd6de; position:relative; transition:transform .2s, border-color .2s; }
+        .hs-chev::before { content:""; position:absolute; left:50%; top:45%; width:10px; height:10px; border-right:2.5px solid #1a1d33; border-bottom:2.5px solid #1a1d33; transform:translate(-50%, -50%) rotate(45deg); }
+        .hs-toggle[aria-expanded="true"] .hs-chev { transform:rotate(180deg); border-color:#005ba5; }
+        .hs-toggle:hover .hs-chev { border-color:#005ba5; }
+        .hs-body { padding-top:.5rem; }
+        #field-watch .section-subtitle, #field-trends .section-subtitle, #field-regions .section-subtitle { margin-bottom:.5rem; }
+        #field-trends, #field-regions { padding-top:2.5rem; padding-bottom:2.5rem; }
+        #field-watch { padding-bottom:2.5rem; }
         /* Around the World */
         .rg-controls { display:flex; flex-wrap:wrap; gap:.75rem 1.25rem; align-items:center; margin-bottom:1rem; }
         .rg-controls label { font-size:.8rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#5a6878; display:flex; flex-direction:column; gap:.3rem; }
@@ -362,7 +374,7 @@
         .ft-row { margin-top:.55rem; }
         .ft-k { display:flex; justify-content:space-between; align-items:baseline; font-size:.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#5a6878; }
         .ft-v { font-size:.8rem; font-weight:700; letter-spacing:0; text-transform:none; }
-        .ft-up { color:#2e7d32; } .ft-down { color:#c62828; } .ft-flat { color:#5a6878; }
+        .ft-up { color:#005ba5; } .ft-down { color:#4a5868; } .ft-flat { color:#8fa0b0; }
         .ft-sub { font-size:.78rem; color:var(--text-light); margin-top:.15rem; }
         .ft-card svg { display:block; width:100%; height:56px; margin-top:.3rem; }
         .ft-rising { background:#fff; border:1px solid #e3e6ea; border-left:4px solid #005ba5; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; font-size:.95rem; }
@@ -374,14 +386,14 @@
         .fw-item.reviewed { border-left-color:#005ba5; }
         .fw-top { display:flex; flex-wrap:wrap; gap:.4rem .75rem; align-items:center; font-size:.8rem; color:var(--text-light); margin-bottom:.35rem; }
         .fw-title { display:block; font-weight:700; font-size:1.02rem; line-height:1.35; color:#1a1d33; text-decoration:none; }
-        .fw-title:hover { color:#8B0000; text-decoration:underline; }
+        .fw-title:hover { color:#005ba5; text-decoration:underline; }
         .fw-authors { font-size:.85rem; color:var(--text-light); margin:.25rem 0 .4rem; }
         .fw-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
         .fw-tag { font-size:.75rem; font-weight:600; padding:.15rem .6rem; border-radius:20px; background:#eef2f6; color:#2d4053; text-decoration:none; }
         a.fw-tag:hover { background:#1a1d33; color:#fff; }
         .fw-rel { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.15rem .6rem; border-radius:20px; color:#fff; }
-        .fw-rel.consistent { background:#2e7d32; } .fw-rel.tension { background:#c62828; } .fw-rel.independent-test { background:#005ba5; }
-        .fw-rel.method, .fw-rel.context, .fw-rel.contact { background:#5a6878; }
+        .fw-rel.consistent { background:#005ba5; } .fw-rel.tension { background:#4a5868; } .fw-rel.independent-test { background:#1a1d33; }
+        .fw-rel.method, .fw-rel.context, .fw-rel.contact { background:#8fa0b0; }
         .fw-unread { font-size:.72rem; font-weight:600; color:#5a6878; }
         .fw-note { font-size:.92rem; margin:.5rem 0 .2rem; color:#1a1d33; }
         .fw-item details { margin-top:.4rem; font-size:.88rem; color:#4a5868; }
@@ -501,8 +513,9 @@
 <section class="section bg-light" id="field-watch">
     <div class="section-inner">
         <p class="section-label eyebrow">Living Review</p>
-        <h2 class="section-title">What the Field Is Finding</h2>
+        <h2 class="section-title hs-head"><button class="hs-toggle" aria-expanded="true" aria-controls="field-watch-body">What the Field Is Finding<span class="hs-chev" aria-hidden="true"></span></button></h2>
         <p class="section-subtitle">Our predictions are kept under living review. Every week an automated search reads new papers on arXiv and in journals for work that bears on our registered tests. Other groups are testing the same questions, and their results can support, challenge or sharpen ours. Papers are listed as they are found; a relation appears only after one of us has read the paper.</p>
+        <div class="hs-body" id="field-watch-body">
         <p class="fw-meta" id="fw-meta">Loading the latest search&hellip;</p>
         <div class="filter-bar" id="fw-filters"></div>
         <div class="fw-list" id="fw-list"></div>
@@ -511,6 +524,7 @@
             <strong>Working on one of these questions?</strong> If your measurements or analysis bear on one of our tests, we would like to compare notes and cite your work.
             <a href="contact.html" class="news-card-link">Get in touch &rarr;</a>
         </div>
+        </div>
     </div>
 </section>
 
@@ -518,11 +532,13 @@
 <section class="section" id="field-trends">
     <div class="section-inner">
         <p class="section-label eyebrow">Trends</p>
-        <h2 class="section-title">How the Field Is Moving</h2>
+        <h2 class="section-title hs-head"><button class="hs-toggle" aria-expanded="false" aria-controls="field-trends-body">How the Field Is Moving<span class="hs-chev" aria-hidden="true"></span></button></h2>
         <p class="section-subtitle">Interest and funding for each question we test, followed over time: how many papers each year, what share of their field they make up, and how much new public funding goes to the work.</p>
+        <div class="hs-body" id="field-trends-body" hidden>
         <div class="ft-rising" id="ft-rising" hidden></div>
         <div class="ft-grid" id="ft-grid"><p>Loading the trends&hellip;</p></div>
         <p class="ft-notes" id="ft-notes"></p>
+        </div>
     </div>
 </section>
 
@@ -530,8 +546,9 @@
 <section class="section bg-light" id="field-regions">
     <div class="section-inner">
         <p class="section-label eyebrow">Around the World</p>
-        <h2 class="section-title">Who Is Researching What</h2>
+        <h2 class="section-title hs-head"><button class="hs-toggle" aria-expanded="false" aria-controls="field-regions-body">Who Is Researching What<span class="hs-chev" aria-hidden="true"></span></button></h2>
         <p class="section-subtitle">Research and investment in each of our fields, country by country, from OpenAlex: an open index of scholarly work in every language. Specialization shows how strongly a country focuses on a field compared with its research overall, so smaller and non-Western countries that lead a field stand out, not only the largest producers.</p>
+        <div class="hs-body" id="field-regions-body" hidden>
         <div class="rg-controls">
             <label>Field <select id="rg-field"></select></label>
             <label>Year <select id="rg-year"></select></label>
@@ -551,6 +568,7 @@
             <div class="rg-panel"><h3 id="rg-fund-title">Funders acknowledged most</h3><ol class="rg-funders" id="rg-funders"></ol></div>
         </div>
         <p class="ft-notes" id="rg-notes"></p>
+        </div>
     </div>
 </section>
 
@@ -990,6 +1008,24 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 <!-- goatcounter:end -->
   <script src="back-to-top.js" defer></script>
 <script>
+/* Horizon Scanner panels: open and close; a link to a panel opens it; the choice is remembered. */
+(function () {
+  const KEY = 'hs-panels';
+  let saved = {}; try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  const set = (btn, open) => { btn.setAttribute('aria-expanded', String(open)); document.getElementById(btn.getAttribute('aria-controls')).hidden = !open; };
+  document.querySelectorAll('.hs-toggle').forEach(btn => {
+    const id = btn.getAttribute('aria-controls');
+    if (id in saved) set(btn, saved[id]);
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true'; set(btn, open);
+      saved[id] = open; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+  const fromHash = () => { const sec = location.hash && document.querySelector(location.hash + ' .hs-toggle'); if (sec) set(sec, true); };
+  fromHash(); window.addEventListener('hashchange', fromHash);
+})();
+</script>
+<script>
 /* Around the World: field-regions.json from tools/field_regions.py (OpenAlex). d3 and the map load when the section is near. */
 (function () {
   const sec = document.getElementById('field-regions'); if (!sec) return;
@@ -1027,8 +1063,8 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       if (M === 'share') return r.share; if (M === 'fund') return r.fund ?? null; return r.n >= MIN ? r.spec : null; };
     const fmt = v => v == null ? 'n/a' : M === 'spec' ? v.toFixed(2) + '×' : (v * 100).toFixed(v < .01 ? 2 : 1) + '%';
     const colorFor = () => {
-      if (M === 'spec') return d3.scaleDiverging([0.25, 1, 4], t => d3.interpolateRgbBasis(['#b26a00', '#f3efe6', '#005ba5'])(t)).clamp(true).unknown('#e3e6ea');
-      return d3.scaleSqrt([0, 0.25], ['#eef2f6', M === 'fund' ? '#2e7d32' : '#005ba5']).clamp(true);
+      if (M === 'spec') return d3.scaleDiverging([0.25, 1, 4], t => d3.interpolateRgbBasis(['#8fa0b0', '#f3f5f8', '#005ba5'])(t)).clamp(true).unknown('#e3e6ea');
+      return d3.scaleSqrt([0, 0.25], ['#eef2f6', M === 'fund' ? '#1a1d33' : '#005ba5']).clamp(true);
     };
     const feats = topojson.feature(world, world.objects.countries).features.filter(f => f.id !== '010');
     const W = 800, H = 400, proj = d3.geoNaturalEarth1().fitSize([W, H], { type: 'FeatureCollection', features: feats }), path = d3.geoPath(proj);
@@ -1062,13 +1098,13 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       const label = { share: 'Share of the world’s papers', spec: 'Specialization (1× = world average)', fund: 'Share of funding acknowledgments, by funder country' }[M];
       $('rg-map-title').textContent = `${label}, ${Y}`;
       $('rg-legend').innerHTML = M === 'spec'
-        ? `<span>0.25×</span><span class="bar" style="background:linear-gradient(90deg,#b26a00,#f3efe6,#005ba5)"></span><span>4×</span><span>&middot; gray: fewer than ${MIN} papers</span>`
-        : `<span>0%</span><span class="bar" style="background:linear-gradient(90deg,#eef2f6,${M === 'fund' ? '#2e7d32' : '#005ba5'})"></span><span>25%+</span>`;
+        ? `<span>0.25×</span><span class="bar" style="background:linear-gradient(90deg,#8fa0b0,#f3f5f8,#005ba5)"></span><span>4×</span><span>&middot; gray: fewer than ${MIN} papers</span>`
+        : `<span>0%</span><span class="bar" style="background:linear-gradient(90deg,#eef2f6,${M === 'fund' ? '#1a1d33' : '#005ba5'})"></span><span>25%+</span>`;
       const rows = Object.keys(s).map(c => [c, val(s, c)]).filter(r => r[1] != null).sort((a, b) => b[1] - a[1]).slice(0, 15);
       const mx = Math.max(...rows.map(r => r[1]), 1e-9);
       $('rg-rank-title').textContent = M === 'spec' ? `Most specialized, ${Y}` : `Leading countries, ${Y}`;
       $('rg-rank').innerHTML = rows.map(([c, v], i) => `<li data-c="${c}"${c === SEL ? ' style="background:#eef2f6"' : ''}><span class="n">${i + 1}</span><span class="nm">${esc(NAME[c] || c)}</span>` +
-        `<span class="b" style="width:${Math.max(v / mx * 100, 2)}%;background:${M === 'spec' ? col(v) : M === 'fund' ? '#2e7d32' : '#005ba5'}"></span><span class="v">${fmt(v)}</span></li>`).join('');
+        `<span class="b" style="width:${Math.max(v / mx * 100, 2)}%;background:${M === 'spec' ? col(v) : M === 'fund' ? '#1a1d33' : '#005ba5'}"></span><span class="v">${fmt(v)}</span></li>`).join('');
       $('rg-insight').innerHTML = insight(s);
       lines(); continents(); funders();
     }
@@ -1078,7 +1114,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       if (SEL && !top.includes(SEL)) top = top.slice(0, 5).concat(SEL);
       const series = top.map(c => years.map(y => (F.years[y].countries[c] || 0) / F.years[y].known));
       const W = 420, H = 230, m = { l: 40, r: 104, t: 8, b: 22 }, x = d3.scalePoint(years, [m.l, W - m.r]), y = d3.scaleLinear([0, d3.max(series.flat()) * 1.08], [H - m.b, m.t]);
-      const pal = ['#005ba5', '#c62828', '#2e7d32', '#7a5000', '#5a6878', '#8B0000'];
+      const pal = ['#005ba5', '#1a1d33', '#005ba5', '#1a1d33', '#5a6878', '#8fa0b0'], dash = ['', '', '6 4', '6 4', '', '2 3'];
       const el = d3.select('#rg-lines').html('').append('svg').attr('viewBox', `0 0 ${W} ${H}`);
       el.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(years.filter((_, i) => i % 2 === 0))).attr('font-size', 12);
       el.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('.0%'))).attr('font-size', 12);
@@ -1087,7 +1123,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       const labelY = Object.fromEntries(ly);
       series.forEach((v, i) => {
         const c = top[i], w = c === SEL ? 3.5 : 2;
-        el.append('path').attr('d', d3.line((d, j) => x(years[j]), d => y(d))(v)).attr('fill', 'none').attr('stroke', pal[i % 6]).attr('stroke-width', w);
+        el.append('path').attr('d', d3.line((d, j) => x(years[j]), d => y(d))(v)).attr('fill', 'none').attr('stroke', pal[i % 6]).attr('stroke-dasharray', dash[i % 6]).attr('stroke-width', w);
         el.append('text').attr('x', W - m.r + 4).attr('y', labelY[i]).attr('font-size', 13).attr('font-weight', c === SEL ? 700 : 500).attr('fill', pal[i % 6]).text(NAME[c] || c);
       });
     }
@@ -1129,7 +1165,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'B' : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : v >= 1e3 ? '$' + Math.round(v / 1e3) + 'K' : '$' + v;
   const pct = (a, b) => b ? Math.round((a - b) / b * 100) : null;
-  const chg = p => p === null ? '' : `<span class="ft-v ${p > 4 ? 'ft-up' : p < -4 ? 'ft-down' : 'ft-flat'}">${p > 0 ? '+' : ''}${p}%</span>`;
+  const chg = p => p === null ? '' : `<span class="ft-v ${p > 4 ? 'ft-up' : p < -4 ? 'ft-down' : 'ft-flat'}">${p > 4 ? '\u25b2 ' : p < -4 ? '\u25bc ' : ''}${p > 0 ? '+' : ''}${p}%</span>`;
   function bars(vals, labels, color, last) {
     const W = 300, H = 56, n = vals.length, max = Math.max(...vals, 1), bw = W / n;
     return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(labels[0] + ' to ' + labels[n - 1])}">` +
@@ -1164,7 +1200,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
         html += `<div class="ft-row"><div class="ft-k">Papers, ${full[full.length - 1]} ${chg(pct(a, b))}</div>` +
           bars(v, ys, '#005ba5', true) + `<div class="ft-sub">${(a || 0).toLocaleString()} in PubMed in ${full[full.length - 1]}, by year since ${ys[0]}</div></div>`;
       }
-      for (const [src, name, col] of [['nsf', 'NSF', '#2e7d32'], ['nih', 'NIH', '#8B0000']]) {
+      for (const [src, name, col] of [['nsf', 'NSF', '#1a1d33'], ['nih', 'NIH', '#5a6878']]) {
         const f = t[src]; if (!f || !Object.keys(f).length) continue;
         const ys = Object.keys(f).sort(), full = ys.filter(y => +y < thisYear);
         const a = f[full[full.length - 1]], b = f[full[full.length - 2]];
