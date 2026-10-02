@@ -192,7 +192,7 @@
             '</div></div>' +
             '<div class="lg-foot">OUTCOME <span class="lamp green' + (c.result === 'green' ? ' on' : '') + '" title="Green: ' + esc(c.lamps.green) + '"></span><span class="lamp yellow' + (c.result === 'yellow' ? ' on' : '') + '" title="Yellow: ' + esc(c.lamps.yellow) + '"></span><span class="lamp red' + (c.result === 'red' ? ' on' : '') + '" title="Red: ' + esc(c.lamps.red) + '"></span><span class="rule">G ' + esc(c.lamps.green) + '</span></div>' +
           '</div>' +
-          '<div class="lg-model">' + (patch ? '<img src="' + esc(patch) + '" alt="" width="30" height="30">' : '') + '<span><b>' + esc(c.program + ': ' + mname.trim()) + '</b><small>' + esc(title) + '</small></span></div>' +
+          '<div class="lg-model">' + (patch ? '<img src="' + esc(patch) + '" alt="" width="40" height="40">' : '') + '<span><b>' + esc(c.program + ': ' + mname.trim()) + '</b><small>' + esc(title) + '</small></span></div>' +
         '</div>' +
         '<div class="lg-keys">' +
           '<button class="lg-key prev" type="button">&#9664; Mode</button><button class="lg-key next" type="button">Mode &#9654;</button>' +
