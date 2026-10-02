@@ -379,6 +379,23 @@
         .ft-card svg { display:block; width:100%; height:56px; margin-top:.3rem; }
         .ft-rising { background:#fff; border:1px solid #e3e6ea; border-left:4px solid #005ba5; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; font-size:.95rem; }
         .ft-notes { font-size:.8rem; color:var(--text-light); margin-top:1.25rem; line-height:1.5; }
+        /* Trends and Around the World cards: QCD pair B+Yw, as the Living Review cards */
+        .ft-card, .ft-rising, .rg-panel, .rg-insight { background:#005ba5 !important; color:#fff; border:0 !important; border-left:5px solid #f1e303 !important; }
+        .ft-card h3 { color:#fff; }
+        .ft-tests a { color:#f1e303; }
+        .ft-k, .rg-panel h3 { color:rgba(255,255,255,.82) !important; }
+        .ft-sub, .ft-notes-on-card { color:rgba(255,255,255,.85) !important; }
+        .ft-up { color:#f1e303 !important; } .ft-down { color:#cfd8e2 !important; } .ft-flat { color:rgba(255,255,255,.7) !important; }
+        .ft-rising strong, .rg-insight strong { color:#f1e303; }
+        .rg-legend, .rg-tip { color:rgba(255,255,255,.88) !important; }
+        .rg-tip strong { color:#f1e303; }
+        .rg-rank li:hover { background:rgba(255,255,255,.1) !important; }
+        .rg-rank .n { color:rgba(255,255,255,.6) !important; }
+        #rg-map path.c { stroke:#005ba5 !important; }
+        #rg-map path.c:hover, #rg-map path.c.sel { stroke:#f1e303 !important; stroke-width:1.6 !important; }
+        .rg-panel .domain, .rg-panel .tick line { stroke:rgba(255,255,255,.55); }
+        .rg-panel .tick text { fill:rgba(255,255,255,.85); }
+        .rg-funders li span { color:#f1e303 !important; }
         /* Field Watch */
         .fw-meta { font-size:.85rem; color:var(--text-light); margin:-1rem 0 1.5rem; }
         .fw-list { display:grid; gap:1rem; }
@@ -534,9 +551,9 @@
 <section class="section" id="field-trends">
     <div class="section-inner">
         <p class="section-label eyebrow">Trends</p>
-        <h2 class="section-title hs-head"><button class="hs-toggle" aria-expanded="false" aria-controls="field-trends-body">How the Field Is Moving<span class="hs-chev" aria-hidden="true"></span></button></h2>
+        <h2 class="section-title">How the Field Is Moving</h2>
         <p class="section-subtitle">Interest and funding for each question we test, followed over time: how many papers each year, what share of their field they make up, and how much new public funding goes to the work.</p>
-        <div class="hs-body" id="field-trends-body" hidden>
+        <div id="field-trends-body">
         <div class="ft-rising" id="ft-rising" hidden></div>
         <div class="ft-grid" id="ft-grid"><p>Loading the trends&hellip;</p></div>
         <p class="ft-notes" id="ft-notes"></p>
@@ -548,9 +565,9 @@
 <section class="section bg-light" id="field-regions">
     <div class="section-inner">
         <p class="section-label eyebrow">Around the World</p>
-        <h2 class="section-title hs-head"><button class="hs-toggle" aria-expanded="false" aria-controls="field-regions-body">Who Is Researching What<span class="hs-chev" aria-hidden="true"></span></button></h2>
+        <h2 class="section-title">Who Is Researching What</h2>
         <p class="section-subtitle">Research and investment in each of our fields, country by country, from OpenAlex: an open index of scholarly work in every language. Specialization shows how strongly a country focuses on a field compared with its research overall, so smaller and non-Western countries that lead a field stand out, not only the largest producers.</p>
-        <div class="hs-body" id="field-regions-body" hidden>
+        <div id="field-regions-body">
         <div class="rg-controls">
             <label>Field <select id="rg-field"></select></label>
             <label>Year <select id="rg-year"></select></label>
@@ -1065,8 +1082,8 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       if (M === 'share') return r.share; if (M === 'fund') return r.fund ?? null; return r.n >= MIN ? r.spec : null; };
     const fmt = v => v == null ? 'n/a' : M === 'spec' ? v.toFixed(2) + '×' : (v * 100).toFixed(v < .01 ? 2 : 1) + '%';
     const colorFor = () => {
-      if (M === 'spec') return d3.scaleDiverging([0.25, 1, 4], t => d3.interpolateRgbBasis(['#8fa0b0', '#f3f5f8', '#005ba5'])(t)).clamp(true).unknown('#e3e6ea');
-      return d3.scaleSqrt([0, 0.25], ['#eef2f6', M === 'fund' ? '#1a1d33' : '#005ba5']).clamp(true);
+      if (M === 'spec') return d3.scaleDiverging([0.25, 1, 4], t => d3.interpolateRgbBasis(['#4a5868', '#e8eef5', '#f1e303'])(t)).clamp(true).unknown('rgba(255,255,255,.16)');
+      return d3.scaleSqrt([0, 0.25], ['#3f80bf', M === 'fund' ? '#ffffff' : '#f1e303']).clamp(true);
     };
     const feats = topojson.feature(world, world.objects.countries).features.filter(f => f.id !== '010');
     const W = 800, H = 400, proj = d3.geoNaturalEarth1().fitSize([W, H], { type: 'FeatureCollection', features: feats }), path = d3.geoPath(proj);
@@ -1095,18 +1112,18 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
     function draw() {
       setYears();
       const s = stats(F, Y), col = colorFor();
-      paths.attr('fill', f => { const c = A2[String(+f.id)], v = c ? val(s, c) : null; return v == null ? '#e3e6ea' : col(v); })
+      paths.attr('fill', f => { const c = A2[String(+f.id)], v = c ? val(s, c) : null; return v == null ? 'rgba(255,255,255,.16)' : col(v); })
            .classed('sel', f => A2[String(+f.id)] === SEL);
       const label = { share: 'Share of the world’s papers', spec: 'Specialization (1× = world average)', fund: 'Share of funding acknowledgments, by funder country' }[M];
       $('rg-map-title').textContent = `${label}, ${Y}`;
       $('rg-legend').innerHTML = M === 'spec'
-        ? `<span>0.25×</span><span class="bar" style="background:linear-gradient(90deg,#8fa0b0,#f3f5f8,#005ba5)"></span><span>4×</span><span>&middot; gray: fewer than ${MIN} papers</span>`
-        : `<span>0%</span><span class="bar" style="background:linear-gradient(90deg,#eef2f6,${M === 'fund' ? '#1a1d33' : '#005ba5'})"></span><span>25%+</span>`;
+        ? `<span>0.25×</span><span class="bar" style="background:linear-gradient(90deg,#4a5868,#e8eef5,#f1e303)"></span><span>4×</span><span>&middot; gray: fewer than ${MIN} papers</span>`
+        : `<span>0%</span><span class="bar" style="background:linear-gradient(90deg,#3f80bf,${M === 'fund' ? '#ffffff' : '#f1e303'})"></span><span>25%+</span>`;
       const rows = Object.keys(s).map(c => [c, val(s, c)]).filter(r => r[1] != null).sort((a, b) => b[1] - a[1]).slice(0, 15);
       const mx = Math.max(...rows.map(r => r[1]), 1e-9);
       $('rg-rank-title').textContent = M === 'spec' ? `Most specialized, ${Y}` : `Leading countries, ${Y}`;
-      $('rg-rank').innerHTML = rows.map(([c, v], i) => `<li data-c="${c}"${c === SEL ? ' style="background:#eef2f6"' : ''}><span class="n">${i + 1}</span><span class="nm">${esc(NAME[c] || c)}</span>` +
-        `<span class="b" style="width:${Math.max(v / mx * 100, 2)}%;background:${M === 'spec' ? col(v) : M === 'fund' ? '#1a1d33' : '#005ba5'}"></span><span class="v">${fmt(v)}</span></li>`).join('');
+      $('rg-rank').innerHTML = rows.map(([c, v], i) => `<li data-c="${c}"${c === SEL ? ' style="background:rgba(255,255,255,.14)"' : ''}><span class="n">${i + 1}</span><span class="nm">${esc(NAME[c] || c)}</span>` +
+        `<span class="b" style="width:${Math.max(v / mx * 100, 2)}%;background:${M === 'spec' ? col(v) : M === 'fund' ? '#ffffff' : '#f1e303'}"></span><span class="v">${fmt(v)}</span></li>`).join('');
       $('rg-insight').innerHTML = insight(s);
       lines(); continents(); funders();
     }
@@ -1116,7 +1133,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       if (SEL && !top.includes(SEL)) top = top.slice(0, 5).concat(SEL);
       const series = top.map(c => years.map(y => (F.years[y].countries[c] || 0) / F.years[y].known));
       const W = 420, H = 230, m = { l: 40, r: 104, t: 8, b: 22 }, x = d3.scalePoint(years, [m.l, W - m.r]), y = d3.scaleLinear([0, d3.max(series.flat()) * 1.08], [H - m.b, m.t]);
-      const pal = ['#005ba5', '#1a1d33', '#005ba5', '#1a1d33', '#5a6878', '#8fa0b0'], dash = ['', '', '6 4', '6 4', '', '2 3'];
+      const pal = ['#f1e303', '#ffffff', '#f1e303', '#ffffff', '#8fa0b0', '#8fa0b0'], dash = ['', '', '6 4', '6 4', '', '2 3'];
       const el = d3.select('#rg-lines').html('').append('svg').attr('viewBox', `0 0 ${W} ${H}`);
       el.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(years.filter((_, i) => i % 2 === 0))).attr('font-size', 12);
       el.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('.0%'))).attr('font-size', 12);
@@ -1138,12 +1155,12 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       const el = d3.select('#rg-cont').html('').append('svg').attr('viewBox', `0 0 ${W} ${H}`);
       cs.forEach((k, i) => {
         const yy = m.t + i * bh;
-        el.append('text').attr('x', m.l - 6).attr('y', yy + bh / 2 + 4).attr('text-anchor', 'end').attr('font-size', 13).attr('fill', '#2d4053').text(k);
+        el.append('text').attr('x', m.l - 6).attr('y', yy + bh / 2 + 4).attr('text-anchor', 'end').attr('font-size', 13).attr('fill', '#ffffff').text(k);
         el.append('rect').attr('x', m.l).attr('y', yy + 3).attr('height', bh / 2 - 4).attr('width', x(a[i]) - m.l).attr('fill', '#8fa0b0');
-        el.append('rect').attr('x', m.l).attr('y', yy + bh / 2).attr('height', bh / 2 - 4).attr('width', x(b[i]) - m.l).attr('fill', '#005ba5');
-        el.append('text').attr('x', x(b[i]) + 4).attr('y', yy + bh - 6).attr('font-size', 12).attr('fill', '#1a1d33').text((b[i] * 100).toFixed(0) + '%');
+        el.append('rect').attr('x', m.l).attr('y', yy + bh / 2).attr('height', bh / 2 - 4).attr('width', x(b[i]) - m.l).attr('fill', '#f1e303');
+        el.append('text').attr('x', x(b[i]) + 4).attr('y', yy + bh - 6).attr('font-size', 12).attr('fill', '#ffffff').text((b[i] * 100).toFixed(0) + '%');
       });
-      el.append('text').attr('x', W - 4).attr('y', H - 4).attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#5a6878').text(`gray ${y0} · blue ${Y}`);
+      el.append('text').attr('x', W - 4).attr('y', H - 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'rgba(255,255,255,.8)').text(`gray ${y0} · yellow ${Y}`);
     }
     function funders() {
       const fy = fundYears.includes(Y) ? Y : fundYears[fundYears.length - 1];
@@ -1194,15 +1211,15 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
           if (s0) rising.push([t.label, pct(s1, s0)]);
         }
         html += `<div class="ft-row"><div class="ft-k">Papers, last 12 months ${chg(pct(last12, prev12))}</div>` +
-          bars(qk.map(q => qs[q]), qk, '#005ba5', !lastQFull) +
+          bars(qk.map(q => qs[q]), qk, '#f1e303', !lastQFull) +
           `<div class="ft-sub">${last12.toLocaleString()} on arXiv in the last 12 months, by quarter since ${qk[0].slice(0, 4)}</div>${share}</div>`;
       } else if (t.papers_yearly && Object.keys(t.papers_yearly).length) {
         const ys = Object.keys(t.papers_yearly).sort(), v = ys.map(y => t.papers_yearly[y]);
         const full = ys.filter(y => +y < thisYear), a = t.papers_yearly[full[full.length - 1]], b = t.papers_yearly[full[full.length - 2]];
         html += `<div class="ft-row"><div class="ft-k">Papers, ${full[full.length - 1]} ${chg(pct(a, b))}</div>` +
-          bars(v, ys, '#005ba5', true) + `<div class="ft-sub">${(a || 0).toLocaleString()} in PubMed in ${full[full.length - 1]}, by year since ${ys[0]}</div></div>`;
+          bars(v, ys, '#f1e303', true) + `<div class="ft-sub">${(a || 0).toLocaleString()} in PubMed in ${full[full.length - 1]}, by year since ${ys[0]}</div></div>`;
       }
-      for (const [src, name, col] of [['nsf', 'NSF', '#1a1d33'], ['nih', 'NIH', '#5a6878']]) {
+      for (const [src, name, col] of [['nsf', 'NSF', '#ffffff'], ['nih', 'NIH', '#8fa0b0']]) {
         const f = t[src]; if (!f || !Object.keys(f).length) continue;
         const ys = Object.keys(f).sort(), full = ys.filter(y => +y < thisYear);
         const a = f[full[full.length - 1]], b = f[full[full.length - 2]];
