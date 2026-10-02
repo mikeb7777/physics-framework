@@ -123,6 +123,19 @@
     @media (max-width: 860px) {
       nav.main-navigation ul { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
     }
+
+    /* Sim A: the field in 3D and its cut (field-cut.js) */
+    .fc-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: .75rem; background: #020408; padding: .75rem; border-radius: 8px 8px 0 0; }
+    .fc-3d { position: relative; height: 420px; }
+    .fc-3d canvas { width: 100%; height: 100%; display: block; cursor: grab; }
+    .fc-cut { position: relative; aspect-ratio: 1 / 1; align-self: center; }
+    .fc-cut canvas { width: 100%; height: 100%; display: block; border-radius: 6px; border: 2px solid #f1e303; }
+    .fc-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; padding: .9rem 1rem .8rem; background: #0b1020; border-radius: 0 0 8px 8px; }
+    .fc-controls label { display: flex; align-items: center; gap: .6rem; font: 600 .9rem 'IBM Plex Sans', sans-serif; color: #e8edf5; }
+    .fc-controls input[type=range] { width: 160px; accent-color: #f1e303; }
+    .fc-play { font: 700 .85rem 'IBM Plex Sans', sans-serif; padding: .45rem 1rem; min-height: 40px; border-radius: 6px; border: 2px solid #f1e303; background: transparent; color: #f1e303; cursor: pointer; }
+    .fc-readout { flex-basis: 100%; margin: 0; font: 500 .85rem 'IBM Plex Mono', monospace; color: #b8c4d4; }
+    @media (max-width: 760px) { .fc-grid { grid-template-columns: minmax(0, 1fr); } .fc-3d { height: 320px; } .fc-cut { max-width: 340px; width: 100%; justify-self: center; } .fc-3d .sim-tr { display: none; } .fc-controls input[type=range] { width: 100%; } .fc-controls label { flex: 1 1 100%; } }
 </style>
     <style id="chamber-model-style">
       .ch-presets{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem;}
@@ -481,15 +494,28 @@
       <div class="foundation-content">
         <div class="foundation-inner">
     <div class="figure-container">
-      <div class="figure-title">Sim A: Spacetime Mesh Deforming Around Information Density Wells</div>
+      <div class="figure-title">Sim A: The Information-Density Field in 3D, Cut Any Way You Like</div>
       <div class="plot-container" style="padding:0;">
-        <div class="sim-wrap" id="w-peg">
-          <canvas id="c-peg"></canvas>
-          <div class="sim-tl"><div class="sim-live"><div class="sim-dot"></div>Live · drag to orbit</div></div>
-          <div class="sim-tr"><span class="sim-pill">g_μν = η_μν + α∇∇P(x,t)</span><span class="sim-pill">Landauer → curvature</span></div>
+        <div class="fc-grid">
+          <div class="sim-wrap fc-3d" id="w-field">
+            <canvas id="c-field" aria-label="Three-dimensional view of the information-density field and the cut plane. Drag to turn it."></canvas>
+            <div class="sim-tl"><div class="sim-live"><div class="sim-dot"></div>Live · drag to turn</div></div>
+            <div class="sim-tr"><span class="sim-pill">The field in 3D</span></div>
+          </div>
+          <div class="fc-cut">
+            <canvas id="c-cut" width="480" height="480" aria-label="Heatmap of the field on the cut plane, changing over time."></canvas>
+            <div class="sim-tl"><span class="sim-pill" style="background:rgba(241,227,3,.9);color:#1a1a2e;">The cut</span></div>
+          </div>
+        </div>
+        <div class="fc-controls">
+          <label>Direction <input type="range" id="cut-angle" min="0" max="180" value="0"></label>
+          <label>Tilt <input type="range" id="cut-tilt" min="-90" max="90" value="90"></label>
+          <label>Position <input type="range" id="cut-offset" min="-90" max="90" value="0"></label>
+          <button type="button" id="cut-play" class="fc-play" aria-pressed="false">Pause</button>
+          <p id="cut-readout" class="fc-readout"></p>
         </div>
       </div>
-      <div class="figure-caption">Three information-density wells warp the spacetime mesh in real time. Color encodes curvature depth: gold nodes are high-density regions acting as "cosmic data centers." The metric perturbation grows with local information density, exactly as Landauer's principle requires: information processing carries energy cost, and energy curves spacetime. In this picture, massive objects are not just mass; they are enormous concentrations of quantum states processing information.</div>
+      <div class="figure-caption">Three information-density wells drift on slow orbits inside a volume of space. The density is highest at each well and falls off with distance, the pull inward that the framework identifies with gravity, while ripples move outward through time. On the left, the field as a glowing cloud: drag to turn it. On the right, the yellow plane’s cut through it, in viridis, where brightness tracks density. Move the sliders to cut along any direction. A flat, stretched sheet is the usual picture of curved space, but it is only one cut through something that fills every direction. An illustration of the framework’s equations, not measured data.</div>
     </div>
     <div class="highlight" style="margin-top:1.25rem;">
       <p style="color:#1a1a2e;font-size:1rem;line-height:1.85;margin-bottom:0.75rem;"><strong style="color:#1a1a2e;">The Field Equation</strong></p>
@@ -504,7 +530,7 @@
         <li style="margin-bottom:0.35rem;"><strong>Each Planck area ≈ 1 bit</strong>. from the Bekenstein bound: the maximum information content of a region of space scales with its surface area, not its volume</li>
         <li style="margin-bottom:0;"><strong>I<sub>μν</sub></strong>. the information tensor: counts bits processed per unit volume, playing the same role for information that the stress-energy tensor T<sub>μν</sub> plays for mass and energy in standard GR</li>
       </ul>
-      <p style="color:#1a1a2e;font-size:0.92rem;line-height:1.8;margin-top:0.75rem;margin-bottom:0;">The simulation above renders this equation directly. Each of the three wells you see is a region of elevated P(x,t). The mesh deforms in proportion to ∇<sub>μ</sub>∇<sub>ν</sub>P, the gradient of that information field, just as mass deforms spacetime in standard GR. The gold coloring marks regions where the correction term is largest.</p>
+      <p style="color:#1a1a2e;font-size:0.92rem;line-height:1.8;margin-top:0.75rem;margin-bottom:0;">The simulation above illustrates this equation. Each gold well is a region of elevated P(x,t); the correction term grows with how sharply P changes across space, ∇<sub>μ</sub>∇<sub>ν</sub>P, so the brightest bands in the cut are where it is largest. In standard general relativity, mass and energy play the role that information density plays here.</p>
     </div>
 
     <!-- ── SIM B: ENTANGLEMENT AS SPACETIME ── -->
@@ -3173,5 +3199,6 @@ window._simInit.phimotion = function () {
 <script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- goatcounter:end -->
   <script src="back-to-top.js" defer></script>
+<script src="field-cut.js"></script>
 </body>
 </html>
