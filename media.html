@@ -1273,6 +1273,9 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       filter = b.dataset.f; shown = STEP; draw();
     });
     document.getElementById('fw-more').addEventListener('click', () => { shown += STEP; draw(); });
+    const want = new URLSearchParams(location.search).get('fw');   /* media.html?fw=<topic> preselects a topic (the validation rack's PAPERS button) */
+    const pre = want && bar.querySelector(`[data-f="${CSS.escape(want)}"]`);
+    if (pre) { bar.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === pre)); filter = want; }
     draw();
   }).catch(() => { document.getElementById('fw-meta').textContent = 'The latest search could not be loaded.'; });
 })();
