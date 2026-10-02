@@ -7,7 +7,9 @@
    (the pull inward) and carries outgoing ripples, so the field changes through time.
    Left: the field as a glowing 3D cloud (drag to turn it) and the cut plane. Right: the
    cut itself as a live heatmap in viridis. An illustration of the framework's equations,
-   not measured data. Requires three.js (already on the page). */
+   not measured data. The sheet button redraws the current cut as the familiar rubber
+   sheet, density as depth, so the usual picture is shown as what it is: one slice.
+   Requires three.js (already on the page). */
 (function () {
   var WELLS = [
     { r: 0.62, w: 0.35, ph: 0.0, tilt: 0.5, m: 1.0 },
@@ -77,6 +79,19 @@
     var rim = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(2.6, 2.6)), new THREE.LineBasicMaterial({ color: 0xf1e303 }));
     plane.add(rim); scene.add(plane);
 
+    /* the usual picture: the same cut drawn as a stretched sheet, density as depth */
+    var SG = 64, sheetGeo = new THREE.PlaneGeometry(2.6, 2.6, SG, SG), sheetUV = sheetGeo.attributes.position.array.slice();
+    sheetGeo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(sheetUV.length), 3));
+    var sheet = new THREE.Mesh(sheetGeo, new THREE.MeshBasicMaterial({ vertexColors: true, wireframe: true, transparent: true, opacity: 0.9 }));
+    sheet.frustumCulled = false; sheet.visible = false; scene.add(sheet);
+    var sheetMode = false, sBtn = document.getElementById('cut-sheet');
+    if (sBtn) sBtn.addEventListener('click', function () {
+      sheetMode = !sheetMode; sheet.visible = sheetMode; plane.visible = !sheetMode;
+      cloud.material.opacity = sheetMode ? 0.25 : 1;
+      sBtn.textContent = sheetMode ? 'Show the full field' : 'Show the cut as a sheet';
+      sBtn.setAttribute('aria-pressed', String(sheetMode));
+    });
+
     /* orbit by dragging */
     var theta = 0.7, phi = 1.15, drag = false, ox = 0, oy = 0, idleSpin = true;
     function cam() { camera.position.set(dist * Math.sin(phi) * Math.sin(theta), dist * Math.cos(phi), dist * Math.sin(phi) * Math.cos(theta)); camera.lookAt(0, 0, 0); }
@@ -124,6 +139,17 @@
       /* the cut */
       var B = basis();
       plane.position.copy(B.c); plane.lookAt(B.c.clone().add(B.n));
+      if (sheetMode) {
+        var sp = sheetGeo.attributes.position.array, sc = sheetGeo.attributes.color.array;
+        for (var si = 0; si < sp.length; si += 3) {
+          var a1 = sheetUV[si], a2 = sheetUV[si + 1];
+          var qx = B.c.x + B.u.x * a1 + B.v.x * a2, qy = B.c.y + B.u.y * a1 + B.v.y * a2, qz = B.c.z + B.u.z * a1 + B.v.z * a2;
+          var inside = Math.abs(qx) <= 1 && Math.abs(qy) <= 1 && Math.abs(qz) <= 1, fv = inside ? field(qx, qy, qz, t, P) : 0, dep = Math.max(0, fv - 0.3) * 1.1;
+          sp[si] = qx - B.n.x * dep; sp[si + 1] = qy - B.n.y * dep; sp[si + 2] = qz - B.n.z * dep;
+          var vc = inside ? viridis(fv) : [2, 4, 8]; sc[si] = vc[0] / 255; sc[si + 1] = vc[1] / 255; sc[si + 2] = vc[2] / 255;   // off the box: background
+        }
+        sheetGeo.attributes.position.needsUpdate = true; sheetGeo.attributes.color.needsUpdate = true;
+      }
       for (var yy = 0; yy < HN; yy++) for (var xx = 0; xx < HN; xx++) {
         var s1 = -1.3 + 2.6 * xx / (HN - 1), s2 = 1.3 - 2.6 * yy / (HN - 1);
         var px = B.c.x + B.u.x * s1 + B.v.x * s2, py = B.c.y + B.u.y * s1 + B.v.y * s2, pz = B.c.z + B.u.z * s1 + B.v.z * s2;
