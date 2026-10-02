@@ -222,8 +222,9 @@
     lg.querySelector('.prev').onclick = function () { step(-1); }; lg.querySelector('.lt').onclick = function () { step(-1); };
     lg.querySelector('.next').onclick = function () { step(1); }; lg.querySelector('.rt').onclick = function () { step(1); };
     lg.querySelector('.ent').onclick = function () { var o = lg.classList.toggle('open'); this.setAttribute('aria-expanded', String(o)); };
-    lg.querySelector('.up').onclick = function () { var p = lg.previousElementSibling; if (p) p.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
-    lg.querySelector('.dn').onclick = function () { var n = lg.nextElementSibling; if (n) n.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+    function go(d) { var all = Array.prototype.slice.call(document.querySelectorAll('.lg')), n = all[all.indexOf(lg) + d]; if (n) n.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    lg.querySelector('.up').onclick = function () { go(-1); };
+    lg.querySelector('.dn').onclick = function () { go(1); };
     draw();
     return { lg: lg, c: c, redraw: draw, mode: function () { return c.screens[mode]; } };
   }
@@ -243,6 +244,20 @@
     var src = document.getElementById('lg-src'), grid = document.getElementById('lg-grid'); if (!src || !grid) return;
     var list = ORDER.map(function (k) { return build(k, src, grid); }).filter(Boolean);
     src.parentNode.removeChild(src);
+    /* mount them in a rack: a header plate, then shelves of two, each shelf screwed to the rails */
+    var rack = grid; rack.className = 'lg-rack';
+    var head = document.createElement('div'); head.className = 'lg-rack-head';
+    head.innerHTML = '<span class="lg-ear l"><i></i><i></i></span><span class="lg-plate">Ic<sup>2</sup> RESEARCH INSTITUTE · TEST BENCH · ' + list.length + ' LOGGERS</span><span class="lg-ear r"><i></i><i></i></span>';
+    rack.insertBefore(head, rack.firstChild);
+    for (var i = 0; i < list.length; i += 2) {
+      var shelf = document.createElement('div'); shelf.className = 'lg-shelf';
+      shelf.innerHTML = '<span class="lg-ear l"><i></i><i></i></span><span class="lg-ear r"><i></i><i></i></span>';
+      list.slice(i, i + 2).forEach(function (L) { shelf.appendChild(L.lg); });
+      if (list.length - i === 1) { var blank = document.createElement('div'); blank.className = 'lg-blank'; blank.setAttribute('aria-hidden', 'true');
+        blank.innerHTML = '<span>SLOT ' + (list.length + 1) + '</span><b>Reserved for the next test</b>'; shelf.appendChild(blank); }
+      rack.appendChild(shelf);
+    }
+    var foot = document.createElement('div'); foot.className = 'lg-rack-foot'; rack.appendChild(foot);
     tick(list); setInterval(function () { tick(list); }, 1000);
     fetch('field-watch.json').then(function (r) { return r.json(); }).then(function (d) {
       FW = d; var now = new Date(d.updated);
