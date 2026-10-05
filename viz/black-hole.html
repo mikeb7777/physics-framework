@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Hole Anatomy. Ic² Research Institute</title>
+<meta name="description" content="A black hole computed in your browser from general relativity, with a guided tour of its parts. Ic² Research Institute.">
+<link rel="canonical" href="https://eequalsicsquared.com/viz/black-hole.html">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#1a1d33; --ink:#e8edf5; --muted:rgba(232,237,245,.72); --cyan:#00bcd4; --magenta:#e91e63; --amber:#f1e303; --lime:#8bc34a; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:#05070d; color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; }
+  .bh { max-width:1280px; margin:0 auto; }
+  .stage { position:relative; width:100%; aspect-ratio:16/9; background:#000; overflow:hidden; }
+  .stage canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .stage svg { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  .stage .hit { pointer-events:all; cursor:pointer; fill:transparent; }
+  .lbl { position:absolute; width:300px; padding:8px 11px 9px; background:rgba(5,7,13,.82); border:1px solid var(--c,#00bcd4); border-radius:6px;
+         box-shadow:0 0 14px color-mix(in srgb, var(--c,#00bcd4) 45%, transparent); opacity:0; transition:opacity .4s ease; pointer-events:none; }
+  .lbl.on { opacity:1; }
+  .lbl h3 { margin:0 0 3px; font-size:15px; font-weight:700; color:var(--c,#00bcd4); letter-spacing:.02em; text-shadow:0 0 8px color-mix(in srgb, var(--c) 60%, transparent); }
+  .lbl p { margin:0; font-size:14px; line-height:1.38; color:var(--ink); }
+  .lbl .fw { display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#1a1d33; background:var(--amber); border-radius:3px; padding:1px 5px; margin-left:6px; vertical-align:2px; }
+  .lbl a { color:var(--amber); pointer-events:all; }
+  .wm { position:absolute; right:10px; bottom:8px; font:600 11px/1.2 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:.04em; color:rgba(255,255,255,.82); background:rgba(10,15,30,.55); padding:3px 7px; border-radius:3px; pointer-events:none; }
+  .busy { position:absolute; left:12px; top:10px; font-size:12px; color:var(--muted); }
+  .start { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(5,7,13,.78); color:#fff; border:2px solid var(--amber);
+           border-radius:30px; padding:12px 26px; font:700 16px 'IBM Plex Sans',system-ui,sans-serif; cursor:pointer; }
+  .start:focus-visible, .bar button:focus-visible, .bar input:focus-visible { outline:3px solid var(--amber); outline-offset:2px; }
+  .bar { display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; padding:10px 12px; background:#0b0f1a; border-top:1px solid rgba(255,255,255,.08); }
+  .bar button { background:#1a1d33; color:#fff; border:1px solid rgba(255,255,255,.25); border-radius:6px; padding:7px 12px; font:600 14px 'IBM Plex Sans',system-ui,sans-serif; cursor:pointer; min-height:40px; }
+  .bar button[aria-pressed="true"] { background:#8B0000; border-color:#8B0000; }
+  .bar .pos { font-size:13px; color:var(--muted); min-width:64px; }
+  .bar label { font-size:13px; color:var(--muted); display:flex; align-items:center; gap:8px; margin-left:auto; }
+  .bar input[type=range] { width:150px; accent-color:#00bcd4; }
+  .panel { display:none; padding:12px 14px; background:#0b0f1a; border-top:1px solid rgba(255,255,255,.08); min-height:84px; }
+  .panel h3 { margin:0 0 4px; font-size:15px; color:var(--c,#00bcd4); }
+  .panel p { margin:0; font-size:14px; line-height:1.45; }
+  .panel .fw { display:inline-block; font-size:10.5px; font-weight:700; text-transform:uppercase; color:#1a1d33; background:var(--amber); border-radius:3px; padding:1px 5px; margin-left:6px; }
+  .panel a { color:var(--amber); }
+  .note { padding:10px 14px 14px; font-size:13px; line-height:1.55; color:var(--muted); background:#0b0f1a; }
+  .note strong { color:var(--ink); }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  @media (max-width:640px) {
+    .stage { aspect-ratio:4/5; }
+    .lbl, .ld { display:none; }
+    .panel { display:block; }
+    .bar label { margin-left:0; width:100%; }
+    .bar input[type=range] { flex:1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .lbl { transition:none; } }
+</style>
+</head>
+<body>
+<div class="bh" id="bh">
+  <div class="stage" id="stage">
+    <canvas id="gl" aria-label="A black hole computed from general relativity: a dark shadow ringed by bent light, with a glowing disk whose far side is lensed over the top."></canvas>
+    <svg id="ov" aria-hidden="true"></svg>
+    <div id="labels"></div>
+    <div class="busy" id="busy">Computing light paths&hellip;</div>
+    <button class="start" id="start" type="button">Play tour</button>
+    <div class="wm" aria-hidden="true">Ic&sup2; Research Institute &middot; Simulated</div>
+  </div>
+  <div class="panel" id="panel" aria-live="polite"><p style="color:var(--muted)">Press Play tour, use Back and Next, or tap a part of the black hole.</p></div>
+  <div class="bar" role="toolbar" aria-label="Tour controls">
+    <button type="button" id="play" aria-pressed="false">Play</button>
+    <button type="button" id="back" aria-label="Previous label">Back</button>
+    <button type="button" id="next" aria-label="Next label">Next</button>
+    <span class="pos" id="pos" aria-live="polite">Overview</span>
+    <button type="button" id="explore" aria-pressed="false">Explore</button>
+    <label for="inc">View angle <input type="range" id="inc" min="55" max="88" step="1" value="80"> <span id="incv">80&deg;</span></label>
+  </div>
+  <div class="note">
+    <strong>Computed, not painted.</strong> Each pixel follows a ray of light backward through the curved spacetime of a non-spinning black hole (the Schwarzschild solution of general relativity) until it falls in, hits the disk, or escapes to the stars. The disk's brightness includes gravitational redshift and Doppler beaming. Simplifications: a thin disk, no spin (so no ergosphere and no jets, which need spin and magnetic fields), and colors scaled to visible light; real disks around stellar black holes glow mostly in X-rays.
+  </div>
+  <ul class="sr" id="srlist"></ul>
+</div>
+<script>
+(function () {
+'use strict';
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var RIN = 6.0, ROUT = 20.0, ROBS = 60.0;
+
+/* ---------------- labels (copy from the handoff, adapted to a non-spinning hole) ---------------- */
+var L = [
+ { id:'singularity', c:'#e91e63', t:'Singularity', d:'Predicted point of infinite density where general relativity fails. Never observed.' },
+ { id:'horizon', c:'#00bcd4', t:'Event horizon', d:'The boundary beyond which escape would require exceeding light speed. Not a surface.' },
+ { id:'photon', c:'#f1e303', t:'Photon sphere', d:'At 1.5 times the horizon radius, light can circle the hole. The orbits are unstable.' },
+ { id:'shadow', c:'#8bc34a', t:'Shadow', d:'The dark silhouette we observe. Lensing makes it about 2.6 times the horizon’s size.' },
+ { id:'isco', c:'#00bcd4', t:'Innermost stable orbit', d:'At 3 times the horizon radius. Inside it, matter can no longer orbit and plunges in.' },
+ { id:'disk', c:'#f1e303', t:'Accretion disk', d:'Infalling gas heated by friction and compression to millions of degrees, glowing in X-rays.' },
+ { id:'doppler', c:'#e91e63', t:'Doppler beaming', d:'Gas moving toward us near light speed appears brighter; gas moving away appears dimmer.' },
+ { id:'lensed', c:'#8bc34a', t:'Lensed far side', d:'Light from the disk’s far side, bent up over the hole. We see behind it.' },
+ { id:'hawking', c:'#00bcd4', t:'Hawking radiation', d:'Predicted quantum emission from just outside the horizon. Too faint to detect so far.' },
+ { id:'info', c:'#f1e303', t:'Information paradox', fw:true, d:'Does evaporation destroy what fell in? The framework proposes information is preserved.', link:'../book.html' }
+];
+
+/* ---------------- WebGL ray tracer ---------------- */
+var cv = document.getElementById('gl');
+var gl = cv.getContext('webgl', { preserveDrawingBuffer:true }) || cv.getContext('experimental-webgl');
+var VS = 'attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }';
+var FS = [
+'precision highp float;',
+'uniform vec2 uRes; uniform vec3 uCam, uFwd, uRight, uUp; uniform float uTan, uFmax;',
+'const float RIN = 6.0; const float ROUT = 20.0;',
+'float hash(vec3 p){ p = fract(p*0.3183099+0.1); p *= 17.0; return fract(p.x*p.y*p.z*(p.x+p.y+p.z)); }',
+'vec3 bb(float T){ float t = T/100.0; float r,g,b;',
+'  if(t<=66.0){ r=255.0; g=99.4708*log(t)-161.1196; } else { r=329.6987*pow(t-60.0,-0.1332); g=288.1222*pow(t-60.0,-0.0755); }',
+'  if(t>=66.0) b=255.0; else if(t<=19.0) b=0.0; else b=138.5177*log(t-10.0)-305.0448;',
+'  return clamp(vec3(r,g,b)/255.0,0.0,1.0); }',
+'vec3 sky(vec3 d){ vec3 q = floor(d*900.0); float h = hash(q); vec3 s = vec3(0.0);',
+'  if(h>0.9993){ float m = (h-0.9993)/0.0007; s = mix(vec3(0.7,0.8,1.0),vec3(1.0,0.9,0.75),hash(q+3.1))*m*1.3; }',
+'  return s + vec3(0.004,0.005,0.012); }',
+'vec3 disk(vec3 hp, float r, float Lp){',
+'  float Om = pow(r,-1.5);',
+'  float g = sqrt(max(1.0-3.0/r,1e-4)) / (1.0 - Om*Lp);',
+'  float f = pow(r,-3.0)*(1.0-sqrt(RIN/r));',
+'  float fn = max(f/uFmax, 0.0);',
+'  float ang = atan(hp.z, hp.x);',
+'  float n = 0.9 + 0.1*sin(r*2.1 + 1.5*sin(ang*2.0 + 0.7*r));',
+'  float T = 6000.0*pow(fn,0.25)*g;',
+'  float I = fn*pow(g,4.0)*n;',
+'  return bb(max(T,1000.0))*I*0.9; }',
+'void main(){',
+'  vec2 p = (gl_FragCoord.xy - 0.5*uRes)/(0.5*uRes.x);',
+'  vec3 v = normalize(uFwd + uTan*(p.x*uRight + p.y*uUp));',
+'  vec3 x = uCam; vec3 hv = cross(x,v); float h2 = dot(hv,hv); float Lp = -hv.y;',
+'  vec3 col = vec3(0.0);',
+'  for(int i=0;i<1400;i++){',
+'    float r = length(x);',
+'    float dt = clamp(0.035*r*r/(r+4.0), 0.01, 1.5);',
+'    vec3 a = -1.5*h2*x/pow(r,5.0);',
+'    vec3 xn = x + v*dt + 0.5*a*dt*dt;',
+'    float rn = length(xn);',
+'    vec3 an = -1.5*h2*xn/pow(rn,5.0);',
+'    v = v + 0.5*(a+an)*dt;',
+'    if(x.y*xn.y < 0.0){ float t = x.y/(x.y-xn.y); vec3 hp = mix(x,xn,t); float rh = length(hp);',
+'      if(rh>RIN && rh<ROUT){ col = disk(hp,rh,Lp); break; } }',
+'    x = xn;',
+'    if(rn < 2.0){ break; }',
+'    if(rn > 90.0 && dot(x,v) > 0.0){ col = sky(normalize(v)); break; }',
+'  }',
+'  col = vec3(1.0) - exp(-col*1.25);',
+'  gl_FragColor = vec4(pow(col, vec3(1.0/1.6)), 1.0); }'
+].join('\n');
+
+function sh(t, s) { var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o);
+  if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; }
+var prog;
+if (gl) {
+  prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog);
+  gl.useProgram(prog);
+  var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+}
+var FMAX = (function () { var m = 0; for (var r = RIN; r < ROUT; r += 0.01) { var f = Math.pow(r, -3) * (1 - Math.sqrt(RIN / r)); if (f > m) m = f; } return m; })();
+
+/* camera */
+var cam = {};
+function setCam(incDeg) {
+  var el = (90 - incDeg) * Math.PI / 180;             // elevation above the disk plane
+  var pos = [0, ROBS * Math.sin(el), ROBS * Math.cos(el)];
+  var f = norm([-pos[0], -pos[1], -pos[2]]);
+  var right = norm(cross(f, [0, 1, 0]));
+  var up = cross(right, f);
+  cam = { pos:pos, f:f, right:right, up:up, tan:Math.tan(0.5 * 48 * Math.PI / 180) };
+}
+function cross(a, b) { return [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]]; }
+function norm(a) { var l = Math.hypot(a[0], a[1], a[2]); return [a[0]/l, a[1]/l, a[2]/l]; }
+
+function draw() {
+  var st = document.getElementById('stage');
+  var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  var W = Math.round(st.clientWidth * dpr), H = Math.round(st.clientHeight * dpr);
+  var cap = 1600 / Math.max(W, 1); if (cap < 1) { W = Math.round(W * cap); H = Math.round(H * cap); }
+  cv.width = W; cv.height = H;
+  if (!gl) return;
+  gl.viewport(0, 0, W, H);
+  gl.uniform2f(gl.getUniformLocation(prog, 'uRes'), W, H);
+  gl.uniform3fv(gl.getUniformLocation(prog, 'uCam'), cam.pos);
+  gl.uniform3fv(gl.getUniformLocation(prog, 'uFwd'), cam.f);
+  gl.uniform3fv(gl.getUniformLocation(prog, 'uRight'), cam.right);
+  gl.uniform3fv(gl.getUniformLocation(prog, 'uUp'), cam.up);
+  gl.uniform1f(gl.getUniformLocation(prog, 'uTan'), tanFor(W, H));
+  gl.uniform1f(gl.getUniformLocation(prog, 'uFmax'), FMAX);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+/* keep the black hole the same size on wide and tall screens: field of view set by the narrow side */
+function tanFor(W, H) { return W >= H ? cam.tan : cam.tan * (H / W) * 0.82; }
+
+/* ---------------- the same tracer in JavaScript, for label anchors ---------------- */
+function trace(px, py, W, H) {          // px, py in the shader's coordinates (x in -1..1)
+  var t = tanFor(W, H);
+  var v = norm([cam.f[0] + t*(px*cam.right[0] + py*cam.up[0]), cam.f[1] + t*(px*cam.right[1] + py*cam.up[1]), cam.f[2] + t*(px*cam.right[2] + py*cam.up[2])]);
+  var x = cam.pos.slice(); var hv = cross(x, v); var h2 = hv[0]*hv[0] + hv[1]*hv[1] + hv[2]*hv[2]; var Lp = -hv[1];
+  for (var i = 0; i < 1400; i++) {
+    var r = Math.hypot(x[0], x[1], x[2]);
+    var dt = Math.min(1.5, Math.max(0.01, 0.035 * r * r / (r + 4)));
+    var k = -1.5 * h2 / Math.pow(r, 5), a = [k*x[0], k*x[1], k*x[2]];
+    var xn = [x[0] + v[0]*dt + .5*a[0]*dt*dt, x[1] + v[1]*dt + .5*a[1]*dt*dt, x[2] + v[2]*dt + .5*a[2]*dt*dt];
+    var rn = Math.hypot(xn[0], xn[1], xn[2]); var kn = -1.5 * h2 / Math.pow(rn, 5);
+    v = [v[0] + .5*(a[0] + kn*xn[0])*dt, v[1] + .5*(a[1] + kn*xn[1])*dt, v[2] + .5*(a[2] + kn*xn[2])*dt];
+    if (x[1] * xn[1] < 0) {
+      var s = x[1] / (x[1] - xn[1]); var hp = [x[0] + (xn[0]-x[0])*s, 0, x[2] + (xn[2]-x[2])*s]; var rh = Math.hypot(hp[0], hp[2]);
+      if (rh > RIN && rh < ROUT) {
+        var Om = Math.pow(rh, -1.5), g = Math.sqrt(1 - 3/rh) / (1 - Om*Lp);
+        return { k:'disk', r:rh, g:g, back: hp[2] < 0 };
+      }
+    }
+    x = xn;
+    if (rn < 2) return { k:'hole' };
+    if (rn > 90 && (x[0]*v[0] + x[1]*v[1] + x[2]*v[2]) > 0) return { k:'sky' };
+  }
+  return { k:'hole' };
+}
+
+/* find anchors in shader coordinates, then convert to fractions of the stage */
+var A = {}; 
+function anchors() {
+  var st = document.getElementById('stage'); var W = st.clientWidth, H = st.clientHeight; var ar = H / W;
+  function frac(px, py) { return { x: 0.5 + 0.5*px, y: 0.5 - 0.5*py/ar }; }
+  // shadow edge: walk out along a diagonal until the ray is no longer captured
+  function edge(ang) { var lo = 0, hi = 0.9; for (var i = 0; i < 22; i++) { var m = (lo + hi)/2; var t = trace(m*Math.cos(ang), m*Math.sin(ang), W, H); if (t.k === 'hole') lo = m; else hi = m; } return hi; }
+  var e1 = edge(2.4), e2 = edge(0.75), e3 = edge(-0.6);
+  A.singularity = frac(0, 0);
+  A.horizon = frac(0.35*e1*Math.cos(2.4), 0.35*e1*Math.sin(2.4));
+  A.photon = frac(e2*Math.cos(0.75)*1.01, e2*Math.sin(0.75)*1.01);
+  A.shadow = frac(0.78*e1*Math.cos(2.4), 0.78*e1*Math.sin(2.4));
+  A.hawking = frac(e3*Math.cos(-0.6)*1.06, e3*Math.sin(-0.6)*1.06);
+  A.info = frac(0.12*e2, -0.1*e2);
+  // lensed far side: straight up from the center, the first disk hit beyond the shadow
+  var y; A.lensed = null;
+  for (y = e2*0.9; y < 0.9; y += 0.004) { var t = trace(0, y, W, H); if (t.k === 'disk') { A.lensed = frac(0, y + 0.02); break; } }
+  // innermost stable orbit: below the center, the direct image of the inner edge (hit radius near 6)
+  var best = null, bd = 9;
+  for (y = -e2*1.05; y > -0.95; y -= 0.003) { var u = trace(0, y, W, H); if (u.k === 'disk' && !u.back && Math.abs(u.r - RIN) < bd) { bd = Math.abs(u.r - RIN); best = y; } }
+  A.isco = best !== null ? frac(0, best) : frac(0, -e2*1.4);
+  // disk and Doppler: left and right along a line just below center, at radius about 13
+  function side(sgn) { for (var xx = 0.05; xx < 0.98; xx += 0.004) { var q = trace(sgn*xx, -0.02, W, H); if (q.k === 'disk' && !q.back && q.r > 12) return { x: sgn*xx, g: q.g }; } return { x: sgn*0.6, g: 1 }; }
+  var lft = side(-1), rgt = side(1);
+  var bright = lft.g > rgt.g ? lft : rgt, dim = lft.g > rgt.g ? rgt : lft;
+  A.doppler = frac(bright.x, -0.02);
+  A.disk = frac(dim.x, -0.02);
+}
+
+/* ---------------- overlay ---------------- */
+var ov = document.getElementById('ov'), labs = document.getElementById('labels'), panel = document.getElementById('panel');
+var NS = 'http://www.w3.org/2000/svg';
+function build() {
+  ov.innerHTML = ''; labs.innerHTML = '';
+  var st = document.getElementById('stage'); var W = st.clientWidth, H = st.clientHeight;
+  ov.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  L.forEach(function (l, i) {
+    var a = A[l.id] || { x:.5, y:.5 }; var ax = a.x*W, ay = a.y*H;
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'mk'); g.dataset.i = i; g.style.opacity = 0;
+    if (!reduce) g.style.transition = 'opacity .4s ease';
+    var ring = document.createElementNS(NS, 'circle'); ring.setAttribute('cx', ax); ring.setAttribute('cy', ay); ring.setAttribute('r', 7);
+    ring.setAttribute('fill', 'none'); ring.setAttribute('stroke', l.c); ring.setAttribute('stroke-width', 2);
+    ring.style.filter = 'drop-shadow(0 0 5px ' + l.c + ')';
+    var dot = document.createElementNS(NS, 'circle'); dot.setAttribute('cx', ax); dot.setAttribute('cy', ay); dot.setAttribute('r', 2.5); dot.setAttribute('fill', l.c);
+    // label box placement: outer margins, away from the hole, stacked by slot
+    var leftSide = a.x < 0.5;
+    // boxes sit in the empty sky: top corner if the feature is in the lower half, bottom corner otherwise
+    var bw = 300, bh = 74, bx = leftSide ? 14 : W - bw - 14;
+    var by = (a.y >= 0.5 || a.y < 0.42) ? 12 : H - bh - 30;
+    var lx = leftSide ? bx + bw * 0.6 : bx + bw * 0.4, ly = by < H / 2 ? by + bh : by;
+    var line = document.createElementNS(NS, 'line'); line.setAttribute('x1', lx); line.setAttribute('y1', ly); line.setAttribute('x2', ax); line.setAttribute('y2', ay);
+    line.setAttribute('class', 'ld'); line.setAttribute('stroke', l.c); line.setAttribute('stroke-width', 1.2); line.style.filter = 'drop-shadow(0 0 3px ' + l.c + ')';
+    g.appendChild(line); g.appendChild(ring); g.appendChild(dot);
+    var hit = document.createElementNS(NS, 'circle'); hit.setAttribute('cx', ax); hit.setAttribute('cy', ay); hit.setAttribute('r', 22); hit.setAttribute('class', 'hit');
+    hit.addEventListener('mouseenter', function () { if (mode === 'explore') show(i); });
+    hit.addEventListener('click', function (e) { e.stopPropagation(); setMode('explore'); show(i); });
+    ov.appendChild(g); ov.appendChild(hit);
+    var box = document.createElement('div'); box.className = 'lbl'; box.style.setProperty('--c', l.c);
+    box.style.left = bx + 'px'; box.style.top = by + 'px';
+    box.innerHTML = '<h3>' + l.t + (l.fw ? '<span class="fw">framework proposal</span>' : '') + '</h3><p>' + l.d + (l.link ? ' <a href="' + l.link + '" target="_top">Element 19</a>' : '') + '</p>';
+    labs.appendChild(box);
+  });
+  var sr = document.getElementById('srlist'); sr.innerHTML = '';
+  L.forEach(function (l) { var li = document.createElement('li'); li.textContent = l.t + ': ' + l.d + (l.fw ? ' (framework proposal)' : ''); sr.appendChild(li); });
+  show(cur, true);
+}
+
+var cur = -1, mode = 'idle', timer = null;
+function show(i, quiet) {
+  cur = i;
+  var marks = ov.querySelectorAll('.mk'), boxes = labs.querySelectorAll('.lbl');
+  for (var k = 0; k < L.length; k++) {
+    var on = k === i;
+    if (marks[k]) marks[k].style.opacity = on ? 1 : 0;
+    if (boxes[k]) boxes[k].classList.toggle('on', on);
+  }
+  document.getElementById('pos').textContent = i < 0 ? 'Overview' : (i + 1) + ' of ' + L.length;
+  if (i >= 0) {
+    var l = L[i]; panel.style.setProperty('--c', l.c);
+    panel.innerHTML = '<h3>' + l.t + (l.fw ? '<span class="fw">framework proposal</span>' : '') + '</h3><p>' + l.d + (l.link ? ' <a href="' + l.link + '" target="_top">Element 19</a>' : '') + '</p>';
+  } else if (!quiet) {
+    panel.innerHTML = '<p style="color:var(--muted)">Overview. Press Play tour, use Back and Next, or tap a part of the black hole.</p>';
+  }
+}
+function setMode(m) {
+  mode = m; clearInterval(timer); timer = null;
+  document.getElementById('play').setAttribute('aria-pressed', m === 'play');
+  document.getElementById('play').textContent = m === 'play' ? 'Pause' : 'Play';
+  document.getElementById('explore').setAttribute('aria-pressed', m === 'explore');
+  if (m === 'play') {
+    if (cur < 0 || cur >= L.length - 1) show(0); else show(cur + 1);
+    timer = setInterval(function () { show(cur >= L.length - 1 ? -1 : cur + 1); }, 6000);
+  }
+  if (m === 'explore') show(-1, true);
+  document.getElementById('start').style.display = 'none';
+}
+document.getElementById('start').addEventListener('click', function () { setMode('play'); });
+document.getElementById('play').addEventListener('click', function () { setMode(mode === 'play' ? 'step' : 'play'); });
+document.getElementById('next').addEventListener('click', function () { setMode('step'); show(cur >= L.length - 1 ? -1 : cur + 1); });
+document.getElementById('back').addEventListener('click', function () { setMode('step'); show(cur <= -1 ? L.length - 1 : cur - 1); });
+document.getElementById('explore').addEventListener('click', function () { setMode(mode === 'explore' ? 'step' : 'explore'); });
+document.getElementById('stage').addEventListener('click', function (e) {
+  if (e.target.id === 'start') return;
+  if (mode === 'play') setMode('step'); else if (mode === 'explore') show(-1, true);
+});
+document.addEventListener('keydown', function (e) {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === ' ') { e.preventDefault(); setMode(mode === 'play' ? 'step' : 'play'); }
+  else if (e.key === 'ArrowRight') { setMode('step'); show(cur >= L.length - 1 ? -1 : cur + 1); }
+  else if (e.key === 'ArrowLeft') { setMode('step'); show(cur <= -1 ? L.length - 1 : cur - 1); }
+  else if (e.key === 'Escape') { setMode('explore'); }
+  else if (mode === 'play') setMode('step');
+});
+
+/* ---------------- render and resize ---------------- */
+var busy = document.getElementById('busy'), inc = document.getElementById('inc');
+function render() {
+  busy.style.display = '';
+  setTimeout(function () {
+    setCam(+inc.value); draw(); anchors(); build(); busy.style.display = 'none';
+    try { parent.postMessage({ bhHeight: document.getElementById('bh').offsetHeight }, '*'); } catch (e) {}
+  }, 30);
+}
+var rt = null;
+inc.addEventListener('input', function () { document.getElementById('incv').textContent = inc.value + '°'; clearTimeout(rt); rt = setTimeout(render, 120); });
+window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 200); });
+if (!gl) { busy.textContent = 'This view needs WebGL, which this browser has turned off.'; }
+render();
+})();
+</script>
+</body>
+</html>

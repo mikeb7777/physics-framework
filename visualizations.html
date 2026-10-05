@@ -260,6 +260,9 @@
     .viz-play-btn { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:68px; height:48px; border-radius:12px; background:#cc0000; color:#fff; font-size:22px; line-height:48px; text-align:center; }
     .viz-play-note { position:absolute; left:10px; bottom:8px; font:600 11px/1.2 'IBM Plex Sans',system-ui,sans-serif; color:#fff; background:rgba(10,15,30,.65); padding:3px 7px; border-radius:3px; }
     .viz-play:focus-visible { outline:3px solid #005ba5; outline-offset:-3px; }
+    .viz-embed { background:#05070d; }
+    .viz-embed iframe { display:block; width:100%; border:0; }
+    .viz-link { font-weight:600; color:#005ba5; }
     /* Watermark: names the Institute and the kind of visual, on the image itself */
     .viz-wm { position:absolute; right:10px; bottom:8px; z-index:5; pointer-events:none; font:600 11px/1.2 'IBM Plex Sans',system-ui,sans-serif; letter-spacing:.04em; color:rgba(255,255,255,.82); background:rgba(10,15,30,.55); padding:3px 7px; border-radius:3px; }
     .viz-lightbox { position:fixed; inset:0; background:rgba(10,15,30,.94); display:none; align-items:center; justify-content:center; z-index:2000; padding:2rem; }
@@ -479,7 +482,22 @@
       <h2 class="category-title">Simulations</h2>
       <p class="category-intro">Computed forward from established physics. They are realistic in their statistics or their mechanics, not portraits of a specific place. The chamber model uses established acoustics only and makes no framework assumptions.</p>
       
-      <div class="viz-stack"><div class="foundation-accordion" data-prov="simulated" id="chamber-model" style="--acc-color:#005f6e; border-left:4px solid #7a5000;" data-lazy-sim="chamber">
+      <div class="viz-stack"><article class="viz-card" data-prov="simulated" id="black-hole">
+        <div class="viz-embed"><iframe src="viz/black-hole.html" title="Black hole anatomy: computed from general relativity, with a guided tour" loading="lazy" style="height:620px"></iframe></div>
+        <div class="viz-body">
+          <div class="viz-tags"><span class="tag tag-simulated">Simulated</span></div>
+          <h3>Black hole anatomy, computed in your browser</h3>
+          <p>This black hole is not a painting. Every pixel follows a ray of light backward through the curved spacetime of a non-spinning black hole, as general relativity describes it, until the light falls in, strikes the disk, or escapes to the stars. That is why the far side of the disk appears arched over the top, and why one side of the disk is brighter than the other.</p>
+          <p>Press Play tour for a guided walk from the singularity outward, step through the parts with Back and Next, or explore by tapping. Change the view angle to see the lensing shift. The last stop, the information paradox, is marked as the framework's proposal; everything else is established physics.</p>
+          <dl class="viz-meta">
+            <div><dt>Method: </dt><dd>Light paths in the Schwarzschild geometry; thin disk with gravitational redshift and Doppler beaming. No spin, so no ergosphere or jets. Colors scaled to visible light.</dd></div>
+            <div><dt>Source: </dt><dd>Ic&sup2; Research Institute. Label wording from the Big TOE visualization brief.</dd></div>
+            <div><dt>In the book: </dt><dd>Element 19, Black Hole Information</dd></div>
+            <div><a class="viz-link" href="viz/black-hole.html" target="_blank" rel="noopener">Open full screen</a></div>
+          </dl>
+        </div>
+      </article>
+      <div class="foundation-accordion" data-prov="simulated" id="chamber-model" style="--acc-color:#005f6e; border-left:4px solid #7a5000;" data-lazy-sim="chamber">
       <div class="foundation-header" onclick="toggleFoundation(this)">
         <h3>
           <span class="material-symbols-outlined" style="font-size:1.3rem;vertical-align:middle;color:#7a5000;margin-right:.4rem;">graphic_eq</span>
@@ -1172,7 +1190,7 @@
     <div class="viz-category" id="renderings" data-category="renderings">
       <h2 class="category-title">Artist and AI Renderings</h2>
       <p class="category-intro">Images made to help you picture something, not to record it. AI renderings in particular can look photographic, so every one here is labeled and credited with the tool used to make it.</p>
-      <p class="empty-note">The first rendering, an annotated anatomy of a spinning black hole, is in preparation. The artwork will be labeled as illustration; its labels will follow general relativity.</p>
+      <p class="empty-note">No renderings yet. The black hole anatomy was planned as an AI rendering, but it is now computed from general relativity instead, so it sits under Simulations. Renderings will appear here when an image is made for explanation rather than computed.</p>
       
     </div>
 
@@ -3370,6 +3388,10 @@ window._simInit.phimotion = function () {
     var a = el && el.closest('.foundation-accordion');
     if (a && !a.classList.contains('active')) { var h = a.querySelector('.foundation-header'); if (h) h.click(); }
   }
+  window.addEventListener('message', function (e) {
+    if (!e.data || !e.data.bhHeight) return;
+    document.querySelectorAll('.viz-embed iframe').forEach(function (f) { if (f.contentWindow === e.source) f.style.height = e.data.bhHeight + 'px'; });
+  });
   window.addEventListener('hashchange', applyHash);
   window.addEventListener('load', applyHash);
 
