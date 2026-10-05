@@ -17,7 +17,7 @@ os.chdir(ROOT)
 COLS = [
     ("Research", [("framework.html", "Framework"), ("validation.html", "Validation"), ("testing-schedule.html", "Testing"),
                   ("results.html", "Results"), ("programs-gateway.html", "Programs"), ("research-publications.html", "Publications"),
-                  ("simulations.html", "Simulations")]),
+                  ("visualizations.html", "Simulations")]),
     ("Explore", [("book.html", "The Big TOE"), ("quest-map.html", "The Quest"), ("mission-log.html", "Mission Log"),
                  ("media.html", "Horizon Scanner"), ("blog.html", "Blog"), ("gallery.html", "Gallery"), ("search.html", "Search")]),
     ("Institute", [("about-page.html", "About"), ("members.html", "Our Members"), ("events.html", "Events"),

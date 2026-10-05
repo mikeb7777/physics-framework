@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Moving thumbnails for simulations.html (2 Oct 2026). Michael: the simulations page looks
+"""Moving thumbnails for visualizations.html (2 Oct 2026). Michael: the simulations page looks
 static, needs thumbnails, and should show motion through time. Opens each simulation's
 panel in a real browser, records a short loop of the running canvas, and encodes it as a
 small silent looping MP4 (sim-thumbs/<canvas id>.mp4) plus a poster JPEG (the brightest
@@ -38,7 +38,7 @@ try:
     with sync_playwright() as p:
         b = p.chromium.launch(args=["--use-gl=angle", "--enable-webgl", "--ignore-gpu-blocklist"])
         pg = b.new_page(viewport={"width": 1280, "height": 900})
-        pg.goto("http://localhost:8797/simulations.html", wait_until="load"); pg.wait_for_timeout(1500)
+        pg.goto("http://localhost:8797/visualizations.html", wait_until="load"); pg.wait_for_timeout(1500)
         pg.add_style_tag(content="[data-aos]{transform:none!important;opacity:1!important}")
         for cid in only:
             opened = pg.evaluate("""(id)=>{const c=document.getElementById(id); if(!c) return false;
