@@ -75,17 +75,19 @@ for m, part in zip(sections, ORDER):
     pos = end
 s = "".join(out) + s[pos:]
 
-INTRO = ("<p><strong>Matched to Version 6D (October 2026).</strong> The numbers below are the numbers printed in the book. "
-         "Each entry was checked against the sentence that cites it and against the publisher&rsquo;s record. Where the book "
-         "uses one number for two claims, both sources are given; where no source has been found yet, the entry says so, and "
-         "the sentence is being corrected in the next version.</p>\n        ")
+VERSION = "6E"
+INTRO = (f"<p><strong>Matched to Version {VERSION} (October 2026).</strong> The numbers below are the numbers printed in the book. "
+         "Each entry was checked against the sentence that cites it and against the publisher&rsquo;s record, and each number "
+         "marks one claim.</p>\n        ")
+s = re.sub(r"<p><strong>Matched to Version 6[A-Z] \(October 2026\)\.</strong>.*?</p>\n        ", "", s, flags=re.S)
 a = '<h2>About This Reference List</h2>\n        '
 assert s.count(a) == 1
 s = s.replace(a, a + INTRO)
 CSS = ("    .ref-src { display:inline-block; background:#4a5868; color:#fff; font-size:.78rem; font-weight:700; padding:.15rem .65rem; "
        "border-radius:20px; text-decoration:none; margin-left:.4rem; letter-spacing:.03em; } .reference-item a.ref-src, .reference-item a.ref-src:visited { color:#ffffff !important; }\n"
        "    .ref-note p { color:#5a6878; }\n  </style>")
-i = s.find("</style>")
-s = s[:i] + CSS[:-len("  </style>")] + s[i:]
+if ".ref-src {" not in s:
+    i = s.find("</style>")
+    s = s[:i] + CSS[:-len("  </style>")] + s[i:]
 open(P, "w", encoding="utf-8").write(s)
 print("sections:", len(sections), "entries:", count)
