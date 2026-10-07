@@ -396,6 +396,8 @@
         .fw-tag { font-size:.75rem; font-weight:600; padding:.15rem .6rem; border-radius:20px; background:rgba(255,255,255,.14); color:#fff; text-decoration:none; }
         a.fw-tag { color:#f1e303; box-shadow:inset 0 0 0 1px rgba(241,227,3,.55); background:transparent; }
         a.fw-tag:hover { background:#f1e303; color:#1a1d33; }
+        .fw-rel.convergent { background:#1a1d33; color:#ffffff; }
+        .fw-dates { font-size:.85rem; color:#4a5868; }
         .fw-rel { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.15rem .6rem; border-radius:20px; background:#f1e303; color:#1a1d33; }
         .fw-unread { font-size:.72rem; font-weight:600; color:#f1e303; }
         .fw-note { font-size:.92rem; margin:.5rem 0 .2rem; color:#fff; }
@@ -1191,7 +1193,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 <script>
 /* Field Watch: field-watch.json is written weekly by tools/field_watch.py; reviews come from field-watch-notes.json. */
 (function () {
-  const REL = { 'consistent': 'Consistent', 'tension': 'In tension', 'independent-test': 'Independent test',
+  const REL = { 'consistent': 'Consistent', 'tension': 'In tension', 'independent-test': 'Independent test', 'convergent': 'Convergent',
                 'method': 'Method', 'context': 'Context', 'contact': 'In contact' };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const testLink = t => /^COSMIC-/.test(t) ? `<a class="fw-tag" href="testing-schedule.html#${t}">${t}</a>` : '';
@@ -1206,6 +1208,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
       <a class="fw-title" href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a>
       <div class="fw-authors">${esc(i.authors)}</div>
       ${n && n.note ? `<p class="fw-note">${esc(n.note)}</p>` : ''}
+      ${n && n.relation === 'convergent' && n.our_record ? `<p class="fw-note fw-dates">Our earlier record: <a href="${esc(n.our_record.ref)}" target="_blank" rel="noopener">${esc(n.our_record.date)}</a>${n.their_date ? ` &nbsp;·&nbsp; This work: ${esc(n.their_date)}` : ''}</p>` : ''}
       <div class="fw-tags">${tags}</div>
       ${i.abstract ? `<details><summary>Abstract</summary><p>${esc(i.abstract)}</p></details>` : ''}
     </article>`;

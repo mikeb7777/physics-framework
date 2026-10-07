@@ -137,7 +137,7 @@ def main():
         labels = {t["id"]: t["label"] for t in cfg["topics"]}
         lines = [f"Field Watch found {len(new)} new item(s) on {today.isoformat()}. "
                  "Read the ones that matter and record a relation in `field-watch-notes.json` "
-                 "(consistent, tension, independent-test, method, context or contact).", ""]
+                 "(consistent, tension, independent-test, convergent, method, context or contact).", ""]
         for t in cfg["topics"]:
             mine = [p for p in new if p["topics"][0] == t["id"]]
             if not mine: continue
