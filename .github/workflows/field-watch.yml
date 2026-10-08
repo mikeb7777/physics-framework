@@ -1,0 +1,47 @@
+name: Field Watch
+
+# Every Monday: search arXiv and Crossref for new research that bears on the
+# institute's tests, update field-watch.json (rendered on media.html), and open
+# an issue listing what is new so it can be read and reviewed. Then refresh
+# field-trends.json: papers per month (arXiv, PubMed) and new NSF and NIH
+# awards per year for each topic, so interest and funding can be followed. On the
+# first Monday of each month, refresh field-regions.json (OpenAlex, by country).
+on:
+  schedule:
+    - cron: "0 2 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Search the field
+        id: run
+        run: |
+          python tools/field_watch.py --new-md new.md | tee run.log
+          echo "count=$(grep -oP '(?<=NEW_COUNT )\d+' run.log || echo 0)" >> "$GITHUB_OUTPUT"
+      - name: Update interest and funding trends
+        run: python tools/field_trends.py
+        continue-on-error: true
+      - name: Update research by country (first Monday of the month)
+        run: if [ "$(date -u +%d)" -le 7 ]; then python tools/field_regions.py; fi
+        continue-on-error: true
+      - name: Commit the update
+        run: |
+          git config user.name "Field Watch"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add field-watch.json field-trends.json field-regions.json
+          git diff --cached --quiet || git commit -m "Field Watch: weekly update" && git push
+      - name: Open a review issue
+        if: steps.run.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Field Watch $(date -u +%F): ${{ steps.run.outputs.count }} new papers to review" --body-file new.md

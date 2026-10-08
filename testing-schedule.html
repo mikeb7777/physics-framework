@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing Schedule - COSMIC Framework Predictions</title>
+    <title>Testing Schedule | Ic² Research Institute</title>
     <meta name="description" content="Every testable prediction of the COSMIC Framework, listed in the order its result is expected, each with the result that would count against it.">
     
     <!-- AOS Animation Library -->
@@ -19,7 +19,7 @@
       --accent-blue: #005ba5;
       --accent-green: #1a5c2a;
       --accent-yellow: #f1e303;
-      --accent-orange: #a0522d;
+      --accent-orange: #7a5000;
       --text-dark: #2c3e50;
       --text-light: #555;
       --bg-light: #e8edf2;
@@ -83,7 +83,7 @@
     .prediction-card.validated { border-left-color: var(--accent-green); }
     .prediction-card.near-term { border-left-color: var(--accent-orange); }
     .prediction-card.long-term { border-left-color: var(--accent-blue); }
-    .prediction-card.speculative { border-left-color: #6a1b9a; }
+    .prediction-card.speculative { border-left-color: #8e0c45; }
     .prediction-card.active-testing { border-left-color: var(--primary-color); background: #f8f0f0; }
     .prediction-card.substrate-dynamics { border-left-color: white; background: white; }
 
@@ -98,7 +98,7 @@
     .status-badge.validated { background: var(--accent-green); color: white; }
     .status-badge.near-term { background: var(--accent-orange); color: white; }
     .status-badge.long-term { background: var(--accent-blue); color: white; }
-    .status-badge.speculative { background: #6a1b9a; color: white; }
+    .status-badge.speculative { background: #8e0c45; color: white; }
     .status-badge.active-testing { background: var(--primary-color); color: white; }
     .status-badge.substrate-dynamics { background: #1a4a2e; color: #a8d5b5; }
 
@@ -392,6 +392,27 @@
     <meta property="og:image:alt" content="Ic² Research Institute, eequalsicsquared.com">
     <meta name="twitter:card" content="summary_large_image">
     <!-- seo:end -->
+  <link rel="stylesheet" href="test-loggers.css">
+
+
+
+
+
+
+
+<style id="contrast-fixes">
+  /* readable text (WCAG AA), from the 2 Oct 2026 contrast audit: tools/contrast_fixes_2026_10_02.py */
+  .warning-box strong, .detail-box[style*="#1a1a2e"] li strong { color: #f1e303 !important; }
+  div.detail-box h4 { color: #ffffff !important; }
+  div.detail-box li { color: #ffffff !important; }
+  div.info-box li { color: #1a1d33 !important; }
+  div.info-box p { color: #1a1d33 !important; }
+  div.prediction-body a { color: #7a5000 !important; }
+  div.prediction-meta a { color: #ffffff !important; }
+  div.prediction-title span.status-badge.active-testing { color: #ffffff !important; }
+  div.warning-box a { color: #ffffff !important; }
+  div.warning-box h3 { color: #ffffff !important; }
+</style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -403,16 +424,18 @@
         </a>
         <nav class="main-navigation">
           <ul>
-            <li><a href="blog.html">Blog</a></li>
             <li><a href="framework.html">Framework</a></li>
             <li><a href="book.html">Big TOE</a></li>
             <li><a href="validation.html">Validation</a></li>
-          <li><a href="quest-map.html">Quest</a></li>
-            <li><a href="events.html">Events</a></li>
+            <li><a href="testing-schedule.html" aria-current="page">Testing</a></li>
+            <li><a href="quest-map.html">Quest</a></li>
             <li><a href="programs-gateway.html">Programs</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="discussions-page.html">Discussion</a></li>
+            <li><a href="about-page.html">About</a></li>
             <li><a href="contribute.html">Contribute</a></li>
             <li><a href="join.html">Join</a></li>
-                    <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
+            <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
           </ul>
         </nav>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -445,6 +468,321 @@
       <h1>What gets tested next, and when</h1>
         <p>A forward-looking public record of where the COSMIC Framework expects to be tested next. Predictions are documented here before experimental results arrive. This page shows what the framework anticipates. The <a href="validation.html" style="color:inherit; text-decoration:underline;">Validation page</a> records every result.</p>
         <p style="margin-top:1rem; opacity:.88;">This is a public reporting page, not an internal process portal. It documents the COSMIC Framework's predictions before experimental results are available, establishing a timestamped record of what the framework expects and when those expectations will be testable. No testing is conducted here. Results, when they arrive, are reported on the <a href="validation.html" style="color:inherit; text-decoration:underline;">Validation page</a>.</p>
+      </div>
+    </section>
+
+    <!-- Test loggers: one bench data logger per test (test-loggers.js, test-loggers.css) -->
+    <section class="lg-section" id="loggers" aria-labelledby="lg-title">
+      <div class="lg-inner">
+        <p class="eyebrow">Test loggers</p>
+        <h2 id="lg-title" style="color:var(--text-dark); margin:0;">Every test on its own instrument</h2>
+        <p class="lg-intro">Each test has a logger. Its screen shows what the test measures and how it will be decided, the lights show its stage, the readout counts down to the data and counts the new papers bearing on it, and <strong>ENTER</strong> opens the prediction with all three outcomes. A green, yellow or red lamp lights only when the data arrives.</p>
+        <div class="lg-grid" id="lg-grid"></div>
+        <div id="lg-src" class="lg-src" hidden>
+
+      <!-- DESI DR3 -->
+      <div class="rcard" id="rc1">
+        <div class="rcard-head" onclick="toggleRC('rc1')">
+          <img class="rc-mission" src="mission-marks/midnight-eridanus.svg" alt="Midnight Eridanus mission icon">
+          <div class="rcard-tg">
+            <h3>DESI DR3: Dark Energy Evolution</h3>
+            <div class="rc-mname">Midnight Eridanus</div>
+            <div class="rcard-meta"><span>COSMIC-005 &middot; Cosmology &middot; Expected 2027</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r1d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r1h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r1m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r1s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await"><span class="b-dot" style="background:white"></span>AWAITING</span>
+            <div class="xbtn"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (pre-registered 12 September 2026 &middot; <a href="https://doi.org/10.5281/zenodo.22719514" target="_blank" rel="noopener">10.5281/zenodo.22719514</a>; version 1.1, 17 September 2026 &middot; <a href="https://doi.org/10.5281/zenodo.22806153" target="_blank" rel="noopener">10.5281/zenodo.22806153</a>):</strong> The evolution DESI reported in DR1 and DR2 persists and strengthens in DR3. Using DESI BAO with CMB data and no supernovae, DR3's preference for evolving dark energy is higher than DR2's (about 3.1σ), and the best fit stays in the quadrant w₀ &gt; −1, wₐ &lt; 0. No specific parameter values are claimed. DESI's full five-year survey (DR3) completed observations April 15, 2026; the first dark energy results from this dataset are expected in 2027.</div>
+          <div class="sp-note"><strong>What ΛCDM predicts:</strong> dark energy is a cosmological constant, w = −1 at all times. On that view the hint of evolution in DR1 and DR2 is a statistical fluctuation or a systematic effect, and it should shrink as the data grows. DESI's July 2026 Lyman-alpha analysis of the same three-year data agrees with a constant. <strong>Others that expect the same as the framework:</strong> other evolving dark energy models, so a green result supports them just as much.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>The DESI-plus-CMB preference for evolving dark energy is higher in DR3 than in DR2, with the best fit in the quadrant w₀ &gt; −1, wₐ &lt; 0.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">First pre-registered pass · No revision</span><p class="sp-line"><strong>For &Lambda;CDM:</strong> the constant comes under more pressure but is not overturned. The result is not expected to reach the 5σ discovery threshold.</p></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>The best fit stays in the quadrant and the preference is at least 2σ, but it is not higher than in DR2.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Partial · Not counted as a success</span><p class="sp-line"><strong>For &Lambda;CDM:</strong> the hint persists without growing. Neither side gains.</p></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>The preference falls below 2σ, consistent with a cosmological constant, or the best fit leaves the quadrant. The scale-transition postulate is revised to introduce a minimum redshift threshold for information gradient effects.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Edition 7 triggered</span><p class="rev-note"><strong>Lesson:</strong> Introduce z_min into PEG field equations.</p><p class="sp-line"><strong>For &Lambda;CDM:</strong> the constant holds. The earlier hint was most likely a fluctuation or a systematic effect.</p></div>
+          </div>
+          <div class="sp-foot"><p><strong>How well this test tells them apart:</strong> moderately against ΛCDM, which expects the opposite trend; not at all against rival evolving dark energy models, which expect the same result.</p><p><strong>What this mission teaches:</strong> a result can show that dark energy is probably not constant without showing which explanation is right.</p></div>
+        </div>
+      </div>
+
+      <!-- Cognitive Augmentation -->
+      <div class="rcard" id="rc2">
+        <div class="rcard-head" onclick="toggleRC('rc2')">
+          <img class="rc-mission" src="mission-marks/citrine-monoceros.svg" alt="Citrine Monoceros mission icon">
+          <div class="rcard-tg">
+            <h3>Cognitive Augmentation: Phase 1 Encoding</h3>
+            <div class="rc-mname">Citrine Monoceros</div>
+            <div class="rcard-meta"><span>Cognitive Science · Testing begins February 2027</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r2d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r2h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r2m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r2s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await"><span class="b-dot" style="background:white"></span>AWAITING</span>
+            <div class="xbtn"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (Jan 31, 2026):</strong> Structured electromagnetic encoding via peripheral sensory channels measurably improves working-memory throughput, following the same E = Ic² compression principle operating at biological scale.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Transfer-rate advantage detected. Bridges cosmological and biological domains under one principle. Phase 2 opens immediately. Framework's cross-scale claim substantially strengthened.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.3–0.5σ</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Advantage found for some task modalities but not others. Letter revision narrows encoding prediction to specific sensory modalities. Phase 2 redesigned to target those pathways.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Neutral · Scope refined</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>No measurable advantage. Cognitive postulates are analogical, not mechanistic at the peripheral encoding level. Cosmological and quantum predictions entirely unaffected.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Edition 7 triggered</span><p class="rev-note"><strong>Lesson:</strong> Restrict quantitative predictions to neural-electrical substrate measurements.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simons Observatory -->
+      <div class="rcard" id="rc3">
+        <div class="rcard-head" onclick="toggleRC('rc3')">
+          <img class="rc-mission" src="mission-marks/cerulean-phoenix.svg" alt="Cerulean Phoenix mission icon">
+          <div class="rcard-tg">
+            <h3>Simons Observatory: CMB Polarization</h3>
+            <div class="rc-mname">Cerulean Phoenix</div>
+            <div class="rcard-meta"><span>COSMIC-008 &middot; Cosmology &middot; Expected 2027</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r3d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r3h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r3m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r3s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await"><span class="b-dot" style="background:white"></span>AWAITING</span>
+            <div class="xbtn"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (2024):</strong> Non-random CMB polarization patterns consistent with computational boundary signatures from early universe information processing. Angular scale and correlation length predicted from COSMIC Framework information density equations.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Predicted signatures detected at specified angular scale. Information processing geometry of the early universe is imprinted in the oldest observable light, one of the strongest possible validations.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.5–0.7σ · Major event</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Pattern detected at different angular scale than predicted. Boundary geometry model requires a corrected scale factor. Letter revision updates the angular prediction formula only.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.1σ · Scale factor refined</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>No predicted patterns found. Information substrate is isotropic at the CMB epoch in ways Edition 6A does not accommodate. Dark energy and quantum predictions fully decoupled and unaffected.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Edition 7 triggered</span><p class="rev-note"><strong>Lesson:</strong> Introduce a phase-transition redshift above which information geometry is isotropic.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thermodynamic Erasure -->
+      <div class="rcard" id="rc4">
+        <div class="rcard-head" onclick="toggleRC('rc4')">
+          <img class="rc-mission" src="mission-marks/citrine-telescopium.svg" alt="Citrine Telescopium mission icon">
+          <div class="rcard-tg">
+            <h3>Thermodynamic Erasure: Biological Systems</h3>
+            <div class="rc-mname">Citrine Telescopium</div>
+            <div class="rcard-meta"><span>COSMIC-013 &middot; Biophysics &middot; Pre-registration pending &middot; Testing from April 2027</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r4d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r4h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r4m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r4s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await"><span class="b-dot" style="background:white"></span>TESTING APR 2027</span>
+            <div class="xbtn"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (documented Jan 24, 2026; pre-registration pending):</strong> Biological information erasure (autophagy, synaptic pruning) produces Landauer-consistent heat signatures ~10⁻²¹ J/bit. Aggregate heat during peak autophagy exceeds baseline by a detectable megajoule-scale signal. Pre-registration is complete; testing begins April 2027. Participants receive actionable health data regardless of outcome.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Landauer heat signatures detected. First quantitative confirmation that biological information processing obeys the same entropy-information relation as physical systems. Opens a new research field.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.4–0.6σ · Cross-domain</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Heat signature detected below predicted magnitude. Cellular dissipation too spatially diffuse. Letter revision narrows prediction to high-density neural tissue during sleep specifically.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Neutral · Tissue scope refined</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>No detectable signal. Biological Landauer principle does not apply at cellular metabolic scale. Cosmological and quantum predictions entirely unaffected.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Edition 7 triggered</span><p class="rev-note"><strong>Lesson:</strong> Restrict to synchronous, high-density neural firing events where heat aggregation is geometrically favorable.</p></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Rubin Observatory DR1 -->
+      <div class="rcard" id="rc9">
+        <div class="rcard-head" onclick="toggleRC('rc9')">
+          <img class="rc-mission" src="mission-marks/midnight-orion.svg" alt="Midnight Orion mission icon">
+          <div class="rcard-tg">
+            <h3>Rubin Observatory DR1: Large-Scale Structure Isotropy</h3>
+            <div class="rc-mname">Midnight Orion</div>
+            <div class="rcard-meta"><span>COSMIC-007 &middot; NSF&ndash;DOE Vera C. Rubin Observatory (LSST) &middot; Expected mid-2028</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r9d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r9h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r9m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r9s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await"><span class="b-dot" style="background:white"></span>AWAITING</span>
+            <div class="xbtn"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (pre-registered 12 September 2026 &middot; <a href="https://doi.org/10.5281/zenodo.22720954" target="_blank" rel="noopener">10.5281/zenodo.22720954</a>):</strong> Beyond 100 megaparsecs, galaxy distributions should show directional asymmetry rather than perfect isotropy, following specific angular patterns tied to the substrate's information-density geometry, and correlated with the independently identified large-scale-structure axis at (l,&nbsp;b)&nbsp;&asymp;&nbsp;(210&deg;,&nbsp;&minus;20&deg;).</div>
+          <div class="sp-note"><strong>What ΛCDM and the cosmological principle predict:</strong> on large scales the universe is statistically the same in every direction, apart from a small dipole caused by our own motion. Two contested anomalies challenge this: a hemispherical power asymmetry in the CMB at about 3σ, and a dipole in quasar counts twice the size our motion explains, at 4.9σ (Secrest et al. 2021). <strong>Where the axis came from:</strong> the predicted direction was taken from existing anomalies, including the CMB asymmetry, so a match would support those anomalies as well as the framework.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Anisotropy above 3&sigma; at the predicted scale, surviving systematics, along the independently identified axis at (l,&nbsp;b)&nbsp;&asymp;&nbsp;(210&deg;,&nbsp;&minus;20&deg;). Strong corroboration, strengthened further if Euclid's overlapping survey agrees.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.5&ndash;0.7&sigma; &middot; Major event</span><p class="sp-line"><strong>For the cosmological principle:</strong> a serious challenge, needing independent confirmation, for example from Euclid.</p></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>An anisotropy appears, but at a different angular scale, below 3&sigma;, or along a different axis. That calls for a revised scale factor in the geometric-transition model, not abandonment.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Neutral &middot; Scale factor refined</span><p class="sp-line"><strong>For the cosmological principle:</strong> an anisotropy above 3&sigma; along any direction would still be a challenge.</p></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>Large-scale structure proves statistically isotropic once full-precision data is in. This prediction is dead, and we will say so.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Edition 7 triggered</span><p class="rev-note"><strong>Lesson:</strong> The substrate's directional imprint is erased by structure formation below some scale; introduce an explicit smoothing scale above 100&nbsp;Mpc.</p><p class="sp-line"><strong>For the cosmological principle:</strong> it passes one of its strongest tests.</p></div>
+          </div>
+          <div class="sp-foot"><p><strong>How well this test tells them apart:</strong> strongly against ΛCDM, which expects no preferred direction, and the direction is named in advance. Because that direction came from existing anomalies, a match supports those anomalies as much as the framework.</p><p><strong>What this mission teaches:</strong> naming a direction in advance makes a prediction hard to pass by chance, and knowing where the direction came from tells you how much a pass would mean.</p></div>
+          <p style="font-size:.78rem; line-height:1.6; margin:.9rem 0 0; color:rgba(255,255,255,.8);"><strong style="color:#fff;">Criteria tightened September 2026.</strong> Green now also requires the anisotropy to exceed 3&sigma; and to lie along (l,&nbsp;b)&nbsp;&asymp;&nbsp;(210&deg;,&nbsp;&minus;20&deg;); anything weaker or off-axis counts as Yellow. This makes the prediction harder to pass. The outcomes registered on 31 July 2025 are unchanged on the <a href="testing-schedule.html#COSMIC-007">Testing Schedule</a>.</p>
+        </div>
+      </div>
+
+      <!-- COSMIC-SD-001: Landauer Heat @ QCD scale -->
+      <div class="rcard" id="rc5" style="border-left-color:#1a4a2e;">
+        <div class="rcard-head" onclick="toggleRC('rc5')">
+          <img class="rc-mission" src="mission-marks/crimson-centaurus.svg" alt="Crimson Centaurus mission icon">
+          <div class="rcard-tg">
+            <h3>COSMIC-SD-001: Landauer Heat at QCD Scale</h3>
+            <div class="rc-mname">Crimson Centaurus</div>
+            <div class="rcard-meta"><span>Particle Physics · Documented May 21, 2026 · Pre-registration pending</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r5d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r5h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r5m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r5s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await" style="background:#1a4a2e;"><span class="b-dot" style="background:#a8d5b5"></span>DOCUMENTED</span>
+            <div class="xbtn" style="background:#1a4a2e;"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (May 21, 2026):</strong> CP-violating processes at the quark scale produce measurable heat excess above standard QCD momentum transfer predictions, proportional to information erased in the irreversible gate operation. Consistent with Landauer minimum kT ln2 per bit erased.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Heat excess confirmed. First direct evidence that quark-scale gate operations are information processing in the Landauer sense. Substrate dynamics confirmed at the most fundamental accessible scale.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.5–0.7σ · Major event</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Partial signal detected below predicted magnitude. Landauer cost present but quark-scale measurement precision requires refinement. Pre-registration updated with narrower prediction range.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Neutral · Magnitude refined</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>No Landauer excess. Quark-scale gate operations are reversible unitary transformations. Establishes that Landauer irreversibility begins above the quark scale. Significant finding in its own right.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Constraining · Boundary located</span><p class="rev-note"><strong>Lesson:</strong> Information processing irreversibility begins above QCD scale. Revise framework scale claims accordingly.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COSMIC-SD-002: CKM Information Optima -->
+      <div class="rcard" id="rc6" style="border-left-color:#1a4a2e;">
+        <div class="rcard-head" onclick="toggleRC('rc6')">
+          <img class="rc-mission" src="mission-marks/crimson-draco.svg" alt="Crimson Draco mission icon">
+          <div class="rcard-tg">
+            <h3>COSMIC-SD-002: CKM Angles as Information Optima</h3>
+            <div class="rc-mname">Crimson Draco</div>
+            <div class="rcard-meta"><span>Flavor Physics · Documented May 21, 2026 · Theoretical derivation in progress</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r6d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r6h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r6m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r6s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await" style="background:#1a4a2e;"><span class="b-dot" style="background:#a8d5b5"></span>DOCUMENTED</span>
+            <div class="xbtn" style="background:#1a4a2e;"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (May 21, 2026):</strong> The three CKM quark mixing angles and CP-violating phase minimize an information-theoretic cost function derivable from the pre-geometric substrate mechanism. The specific measured values reflect optimization, not arbitrary symmetry breaking.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Derived cost function minimum matches PDG precision CKM values. Substrate optimization predicts Standard Model free parameters. One of the most ambitious confirmations in theoretical physics.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.6–0.8σ · Landmark</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Predicted ratios approximately match but not within PDG precision. Cost function structure correct, specific minimum requires refinement of substrate mechanism parameters.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.2σ · Parameters refined</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>No information-theoretic structure in CKM angles. Substrate optimization does not extend to flavor gate parameters. Constrains universality claim to cosmological and above-hadronic scales.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Constraining · Scope defined</span><p class="rev-note"><strong>Lesson:</strong> CKM angles set by early-universe symmetry breaking, not ongoing optimization. Revise universality claims to specify scale range.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COSMIC-SD-003: Confinement Entanglement Scaling -->
+      <div class="rcard" id="rc7" style="border-left-color:#1a4a2e;">
+        <div class="rcard-head" onclick="toggleRC('rc7')">
+          <img class="rc-mission" src="mission-marks/magenta-aquila.svg" alt="Magenta Aquila mission icon">
+          <div class="rcard-tg">
+            <h3>COSMIC-SD-003: Confinement Boundary Entanglement Scaling</h3>
+            <div class="rc-mname">Magenta Aquila</div>
+            <div class="rcard-meta"><span>QCD · Lattice QCD near-term · EIC 2030s</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r7d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r7h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r7m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r7s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await" style="background:#1a4a2e;"><span class="b-dot" style="background:#a8d5b5"></span>DOCUMENTED</span>
+            <div class="xbtn" style="background:#1a4a2e;"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (May 21, 2026):</strong> Entanglement entropy at the QCD confinement boundary scales with the framework's information-density parameter A(z) in a specific functional relationship, connecting quark-scale structure to the same mechanism producing DESI dark energy evolution and JWST early galaxy formation anomalies.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Scaling relationship confirmed. The pre-geometric substrate mechanism operates continuously from quark to cosmological scales. The same information-density parameter governs both. Most powerful cross-scale validation possible.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.7–0.9σ · Cross-scale unification</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Scaling structure confirmed but with a different functional form. Mechanism operates at both scales but requires a bridging parameter between QCD and cosmological regimes.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.3σ · Bridge parameter added</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>No relationship to cosmological parameter. QCD entanglement and cosmological information density are governed by different mechanisms. Framework requires separate QCD-scale mechanism.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Edition 7 triggered</span><p class="rev-note"><strong>Lesson:</strong> Add QCD-specific information-density parameter distinct from cosmological A(z).</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COSMIC-SD-004: QCD Phase Transition Bamboo Signature -->
+      <div class="rcard" id="rc8" style="border-left-color:#1a4a2e;">
+        <div class="rcard-head" onclick="toggleRC('rc8')">
+          <img class="rc-mission" src="mission-marks/magenta-sextans.svg" alt="Magenta Sextans mission icon">
+          <div class="rcard-tg">
+            <h3>COSMIC-SD-004: QCD Phase Transition: Bamboo Signature</h3>
+            <div class="rc-mname">Magenta Sextans</div>
+            <div class="rcard-meta"><span>Heavy-Ion Physics · RHIC / ALICE · Existing data</span></div>
+            <div class="ct-row">
+              <div class="ct-u"><span class="ct-n" id="r8d">--</span><span class="ct-l">days</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r8h">--</span><span class="ct-l">hrs</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r8m">--</span><span class="ct-l">min</span></div>
+              <span class="ct-sep">:</span>
+              <div class="ct-u"><span class="ct-n" id="r8s">--</span><span class="ct-l">sec</span></div>
+            </div>
+          </div>
+          <div class="rcard-badges">
+            <span class="rc-badge await" style="background:#1a4a2e;"><span class="b-dot" style="background:#a8d5b5"></span>DOCUMENTED</span>
+            <div class="xbtn" style="background:#1a4a2e;"><img src="arrow_drop_down_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt=""></div>
+          </div>
+        </div>
+        <div class="rcard-body">
+          <div class="pred-note"><strong>Prediction (May 21, 2026):</strong> The quark-hadron crossover at ~150 MeV produces a specific entanglement entropy discontinuity exceeding standard thermal QCD predictions. This is the Bamboo Principle at the quark scale: below-threshold preparation in the QGP phase followed by threshold crossing with a specific information-theoretic signature.</div>
+          <div class="oc3">
+            <div class="op g"><div class="op-h"><span class="op-dot"></span><strong>Green</strong></div><p>Entropy discontinuity confirmed above thermal QCD predictions. Bamboo Principle operates at the quark scale. The same threshold-crossing mechanism governs from quarks to cosmic phase transitions.</p><span class="tag up"><img src="bolt_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.4–0.6σ · Scale-invariant</span></div>
+            <div class="op y"><div class="op-h"><span class="op-dot"></span><strong>Yellow</strong></div><p>Discontinuity present but with different magnitude. Bamboo Principle operates at QCD scale but with a modified threshold parameter specific to the QCD transition energy.</p><span class="tag neu"><img src="autorenew_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">+0.2σ · Threshold parameter refined</span></div>
+            <div class="op r"><div class="op-h"><span class="op-dot"></span><strong>Red</strong></div><p>Entropy change fully explained by thermal QCD. Bamboo Principle does not operate at the QCD scale. Constrains the Bamboo Principle to above-hadronic scales of organization.</p><span class="tag rev"><img src="change_history_24dp_1F1F1F_FILL1_wght500_GRAD200_opsz24.png" alt="">Constraining · Scale floor located</span><p class="rev-note"><strong>Lesson:</strong> Bamboo Principle begins above QCD transition scale. Revise to specify minimum organizational depth for threshold dynamics.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
       </div>
     </section>
 
@@ -558,19 +896,19 @@
             <tr><th colspan="6" style="text-align:left; padding: 1.25rem 0.875rem .45rem; font-size:.8rem; letter-spacing:1.4px; text-transform:uppercase; color:#8B0000; border-bottom:2px solid #8B0000;">2027</th></tr>
             <tr id="COSMIC-005" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">2027, first DESI five-year results</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/midnight-eridanus.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Dark energy trend persistence, five-year dataset</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Midnight Eridanus</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">The evolution DESI found in DR1 and DR2 persists and strengthens in the five-year DR3 analysis, with w0 above −1 and wa below 0; a return to w = −1 falsifies it.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">DESI DR3, 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">Sep 2026 (<a href="https://doi.org/10.5281/zenodo.22719514" target="_blank" rel="noopener">COSMIC-005 record</a>)</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-005</td></tr>
             <tr id="COSMIC-006" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">With DESI DR3, 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><strong style="color:#1a1a2e;">Expansion rate correlated with black hole density</strong><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Regions dense in stellar-remnant black holes show higher local H0 than voids, correlated with black hole number density.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">DESI DR3; Euclid; Roman</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">27 May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-006</td></tr>
-            <tr id="pred-cognitive-augmentation-phase-1-information-encod" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Testing Feb–Mar 2027; results Apr–Jul 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/blue-crater.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Cognitive Augmentation, Phase 1: information encoding</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Blue Crater</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Four working-memory and encoding effects. 1.1: Text presentation requiring more than 2-3 simultaneous working memory chunks will degrade comprehension by at least 15%.</span><ul style="margin:.4rem 0 0 1.1rem; padding:0; font-size:.82rem; color:#555;"><li>1.1 Working memory chunk limit</li><li>1.2 Adaptive compression benefits</li><li>1.3 Knowledge retention enhancement</li><li>1.4 Expertise interaction effect</li></ul></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Internal study, testing from Feb 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">31 Jan 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
-            <tr id="COSMIC-SD-004" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Analysis from February 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/cyan-draco.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">QCD phase transition: Bamboo signature</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Cyan Draco</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">The quark-hadron crossover shows an entanglement entropy drop distinct from thermal predictions.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">RHIC / ALICE existing data</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-004</td></tr>
-            <tr id="COSMIC-008" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Est. 1 Mar 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/midnight-phoenix.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">CMB polarization signature</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Midnight Phoenix</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Non-random CMB polarization patterns at an angular scale derived from the framework's information-density equations.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Simons Observatory, early 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026 (website)</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-008</td></tr>
-            <tr id="COSMIC-SD-003" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Lattice QCD comparison from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/cyan-corona-borealis.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Confinement boundary entanglement entropy scaling</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Cyan Corona Borealis</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Entanglement entropy at the confinement boundary scales with the information-density parameter.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Lattice QCD; EIC 2030s</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-003</td></tr>
-            <tr id="COSMIC-013" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Testing from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/amber-ara.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Landauer heat at biological scale (autophagy, synaptic pruning)</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Amber Ara</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Autophagy and synaptic pruning release Landauer-consistent heat, about 10⁻²¹ J/bit, detectable above baseline.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Internal, from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">24 Jan 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-013</td></tr>
+            <tr id="pred-cognitive-augmentation-phase-1-information-encod" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Testing Feb–Mar 2027; results Apr–Jul 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/citrine-monoceros.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Cognitive Augmentation, Phase 1: information encoding</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Citrine Monoceros</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Four working-memory and encoding effects. 1.1: Text presentation requiring more than 2-3 simultaneous working memory chunks will degrade comprehension by at least 15%.</span><ul style="margin:.4rem 0 0 1.1rem; padding:0; font-size:.82rem; color:#555;"><li>1.1 Working memory chunk limit</li><li>1.2 Adaptive compression benefits</li><li>1.3 Knowledge retention enhancement</li><li>1.4 Expertise interaction effect</li></ul></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Internal study, testing from Feb 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">31 Jan 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
+            <tr id="COSMIC-SD-004" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Analysis from February 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/magenta-sextans.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">QCD phase transition: Bamboo signature</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Magenta Sextans</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">The quark-hadron crossover shows an entanglement entropy drop distinct from thermal predictions.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">RHIC / ALICE existing data</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-004</td></tr>
+            <tr id="COSMIC-008" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Est. 1 Mar 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/cerulean-phoenix.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">CMB polarization signature</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Cerulean Phoenix</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Non-random CMB polarization patterns at an angular scale derived from the framework's information-density equations.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Simons Observatory, early 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026 (website)</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-008</td></tr>
+            <tr id="COSMIC-SD-003" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Lattice QCD comparison from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/magenta-aquila.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Confinement boundary entanglement entropy scaling</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Magenta Aquila</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Entanglement entropy at the confinement boundary scales with the information-density parameter.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Lattice QCD; EIC 2030s</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-003</td></tr>
+            <tr id="COSMIC-013" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Testing from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/citrine-telescopium.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Landauer heat at biological scale (autophagy, synaptic pruning)</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Citrine Telescopium</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Autophagy and synaptic pruning release Landauer-consistent heat, about 10⁻²¹ J/bit, detectable above baseline.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Internal, from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">24 Jan 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-013</td></tr>
             <tr id="pred-integrated-information-in-nbi-attention-approach" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">2027–2028</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><strong style="color:#1a1a2e;">Integrated information Φ in NBI attention approaches biological thresholds</strong><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Applying Tononi's integrated information measure Φ (phi) to transformer attention patterns during active inference will yield values that scale with model complexity and approach biological consciousness threshold estimates, rather than remaining near zero as in simple computation. This is the first substrate-independent test of the consciousness threshold.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Computational</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">2 Mar 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">NBI-004</td></tr>
-            <tr id="pred-structured-performance-gradient-biological-vs-nb" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Testing from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/magenta-gemini.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Structured performance gradient, biological vs NBI, by task type</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Magenta Gemini</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Biological intelligence allocates a fixed proportion of cognitive capacity to survival overhead (threat assessment, social monitoring, resource management) that NBI systems do not carry. This predicts a systematic, information-theoretically structured performance gap, not a random one, between biological and NBI systems across task types.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Performance testing</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">2 Mar 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">NBI-005</td></tr>
-            <tr id="COSMIC-SD-001" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">LHCb comparison from May 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/cyan-libra.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Landauer heat signature in CP-violating processes</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Cyan Libra</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">CP-violating processes release heat above momentum-transfer predictions, proportional to information erased.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">LHCb / ATLAS / CMS</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-001</td></tr>
-            <tr id="COSMIC-SD-002" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Cost-function derivation by Jun 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/cyan-triangulum.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">CKM angles as information-theoretic optima</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Cyan Triangulum</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">The CKM angles and CP phase minimize an information-theoretic cost function.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">PDG values, once the cost function is derived</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-002</td></tr>
+            <tr id="pred-structured-performance-gradient-biological-vs-nb" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Testing from April 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/aqua-delphinus.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Structured performance gradient, biological vs NBI, by task type</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Aqua Delphinus</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Biological intelligence allocates a fixed proportion of cognitive capacity to survival overhead (threat assessment, social monitoring, resource management) that NBI systems do not carry. This predicts a systematic, information-theoretically structured performance gap, not a random one, between biological and NBI systems across task types.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Performance testing</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">2 Mar 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">NBI-005</td></tr>
+            <tr id="COSMIC-SD-001" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">LHCb comparison from May 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/crimson-centaurus.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Landauer heat signature in CP-violating processes</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Crimson Centaurus</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">CP-violating processes release heat above momentum-transfer predictions, proportional to information erased.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">LHCb / ATLAS / CMS</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-001</td></tr>
+            <tr id="COSMIC-SD-002" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Cost-function derivation by Jun 2027</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/crimson-draco.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">CKM angles as information-theoretic optima</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Crimson Draco</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">The CKM angles and CP phase minimize an information-theoretic cost function.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">PDG values, once the cost function is derived</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">COSMIC-SD-002</td></tr>
             <tr id="pred-crystallized-optimization-ceiling-on-real-time-s" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">2027–2029</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><strong style="color:#1a1a2e;">Crystallized optimization ceiling on real-time self-modification</strong><br><span style="color:#444; font-size:.86rem; line-height:1.55;">NBI systems undergo crystallized optimization: training shapes parameters completely, then stops. Biological intelligence undergoes active ongoing optimization: continuously rewiring through every experience.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Longitudinal testing</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">2 Mar 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
             <tr id="pred-consciousness-state-affects-quantum-decoherence" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">2027–2029</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><strong style="color:#1a1a2e;">Consciousness state affects quantum decoherence</strong><br><span style="color:#444; font-size:.86rem; line-height:1.55;">If consciousness involves high-efficiency information processing, quantum coherence times should show measurable differences across consciousness states. τ_coherence(meditation) &gt; τ_coherence(normal) &gt; τ_coherence(anesthesia)</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Laboratory, human subjects</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">Oct 2025 (book v2.0)</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
             <tr id="pred-dark-energy-matter-density-cross-correlation" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">2027–2030</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><strong style="color:#1a1a2e;">Dark energy–matter density cross-correlation</strong><br><span style="color:#444; font-size:.86rem; line-height:1.55;">If dark energy emerges from information processing, fluctuations in dark energy density should correlate with matter density fluctuations.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">2027–2030 surveys</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">Oct 2025 (book v3.0)</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
-            <tr id="pred-cognitive-augmentation-phase-2-sensory-augmentat" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Q4 2027 – Q4 2028</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/blue-crater.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Cognitive Augmentation, Phase 2: sensory augmentation</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Blue Crater</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Five sensory-augmentation effects, from chunk limits to a three-phase neuroplastic adaptation timeline.</span><ul style="margin:.4rem 0 0 1.1rem; padding:0; font-size:.82rem; color:#555;"><li>2.1 Working memory chunk limit (sensory)</li><li>2.2 Neuroplastic adaptation timeline</li><li>2.3 Modality effectiveness tiers</li><li>2.4 Environmental psychology transformation</li><li>2.5 Substrate perception (exploratory)</li></ul></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Internal, 2027–2028</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">31 Jan 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
+            <tr id="pred-cognitive-augmentation-phase-2-sensory-augmentat" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Q4 2027 – Q4 2028</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/citrine-monoceros.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Cognitive Augmentation, Phase 2: sensory augmentation</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Citrine Monoceros</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Five sensory-augmentation effects, from chunk limits to a three-phase neuroplastic adaptation timeline.</span><ul style="margin:.4rem 0 0 1.1rem; padding:0; font-size:.82rem; color:#555;"><li>2.1 Working memory chunk limit (sensory)</li><li>2.2 Neuroplastic adaptation timeline</li><li>2.3 Modality effectiveness tiers</li><li>2.4 Environmental psychology transformation</li><li>2.5 Substrate perception (exploratory)</li></ul></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Internal, 2027–2028</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">31 Jan 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
             <tr><th colspan="6" style="text-align:left; padding: 1.25rem 0.875rem .45rem; font-size:.8rem; letter-spacing:1.4px; text-transform:uppercase; color:#8B0000; border-bottom:2px solid #8B0000;">2028</th></tr>
             <tr id="COSMIC-007" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">Est. 1 Jul 2028, Rubin DR1</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><img src="mission-marks/midnight-orion.svg" alt="" style="width:24px; height:24px; border-radius:50%; vertical-align:-5px; margin-right:.4rem;"><strong style="color:#1a1a2e;">Large-scale structure anisotropy along (l, b) ≈ (210°, −20°)</strong> <span style="color:#7a5000; font-weight:700; font-size:.8rem; white-space:nowrap;">Midnight Orion</span><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Beyond 100 Mpc, galaxy distributions are anisotropic along (l, b) ≈ (210°, −20°).</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">Rubin LSST DR1, mid-2028</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">May 2026 (website)</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#005ba5; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Active</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;"><a href="https://doi.org/10.5281/zenodo.22720954" target="_blank" rel="noopener">COSMIC-007</a></td></tr>
             <tr id="pred-black-hole-positional-correlation-with-large-sca" style="scroll-margin-top:90px;"><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.85rem; color:#1a1a2e; font-weight:600;">2028–2030</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><strong style="color:#1a1a2e;">Black hole positional correlation with large-scale structure</strong><br><span style="color:#444; font-size:.86rem; line-height:1.55;">Statistically significant correlation between the positions of the oldest confirmed black holes (z &gt; 6) and present-day large-scale structure filaments, nodes, and voids. Regions with the highest density of early black holes should correspond to present-day galaxy cluster cores. Cosmic voids should correspond to regions where few early black holes formed.</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444;">DESI DR3; JWST high-z catalog</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-size:.84rem; color:#444; overflow-wrap:anywhere;">8 Jun 2026</td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top;"><span style="display:inline-block; background:#5a6878; color:#fff; font-size:.7rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;">Queued</span></td><td style="padding: .7rem 0.875rem; border-bottom:1px solid #e4e7eb; vertical-align:top; font-family: monospace; font-size:.76rem; color:#1a1a2e; overflow-wrap:anywhere;">Not assigned</td></tr>
@@ -1855,7 +2193,7 @@
               </ul>
             </div>
 
-            <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text-light);">
+            <p style="margin-top: 1.25rem; font-size: 0.95rem; color: #ffffff;">
               <strong>Falsifiability:</strong> Each prediction is independently falsifiable. A water-mist shell at the pressure-node radius instead of 0.587a would count against Prediction 1; shells at harmonic frequencies against Prediction 2; cluster counts other than 4, 12 and 24 at the stated tunings against Prediction 3; and a two-frequency pattern that differs from the sum of the single-frequency patterns against Prediction 4. A complete absence of structure at the planned pressure amplitudes would mean the radiation force was too weak or was masked, for example by acoustic streaming, and would be published.
             </p>
 
@@ -2747,11 +3085,11 @@
             <p style="color:white; font-size:.88rem; line-height:1.65;">Clear criteria specified for what would disprove each prediction. A prediction that cannot be proven wrong is not a test.</p>
           </div>
           <div style="background:#005ba5; border-radius:8px; padding: 1.25rem; border-bottom:4px solid #f1e303;">
-            <p style="font-size:.65rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.65); margin-bottom:.35rem;">Specificity</p>
+            <p style="font-size:.65rem; text-transform:uppercase; letter-spacing:1px; color:#ffffff; margin-bottom:.35rem;">Specificity</p>
             <p style="color:white; font-size:.88rem; line-height:1.65;">Quantitative claims with measurable parameters, not vague qualitative statements that fit any outcome.</p>
           </div>
           <div style="background:#005f6e; border-radius:8px; padding: 1.25rem; border-bottom:4px solid #c62828;">
-            <p style="font-size:.65rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.65); margin-bottom:.35rem;">Transparency</p>
+            <p style="font-size:.65rem; text-transform:uppercase; letter-spacing:1px; color:#ffffff; margin-bottom:.35rem;">Transparency</p>
             <p style="color:white; font-size:.88rem; line-height:1.65;">Predictions are made publicly to prevent post-hoc rationalization. The record is permanent, and every change to it is logged.</p>
           </div>
         </div>
@@ -2798,75 +3136,22 @@
     </div>
   </section>
 
-  <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Ic² Research Institute</h3>
-                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent research institute advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish every result.</p>
-                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. Open to anyone. The work is the only standard.</p>
-            </div>
-            <div class="footer-icons">
-                <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram" title="Instagram">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    Instagram
-                </a>
-                <a href="https://www.youtube.com/@IC2ResearchInstitute" target="_blank" rel="noopener" class="social-btn youtube" title="YouTube">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    YouTube
-                </a>
-                <a href="mailto:ic2.info@proton.me" class="social-btn email" title="Email">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    ic2.info@proton.me
-                </a>
-            </div>
-            <div class="footer-links-group">
-                <div class="footer-section">
-                    <h3>Research</h3>
-                    <ul>
-                        <li><a href="framework.html">Framework</a></li>
-                        <li><a href="validation.html">Validation</a></li>
-                        <li><a href="testing-schedule.html">Testing</a></li>
-                        <li><a href="programs-gateway.html">Programs</a></li>
-                        <li><a href="research-publications.html">Publications</a></li>
-                        <li><a href="simulations.html">Simulations</a></li>
-                        <li><a href="results.html">Results</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="book.html">The Big TOE</a></li>
-                        <li><a href="media.html">Media</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="faq-page.html">FAQ</a></li>
-                        <li><a href="search.html">Search</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="research-publications.html">Archive</a></li>
-                        <li><a href="shop.html">Shop (opening soon)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Connect</h3>
-                    <ul>
-                        <li><a href="about-page.html">About</a></li>
-                        <li><a href="legal.html">Legal</a></li>
-                        <li><a href="contribute.html">Contribute</a></li><li><a href="support.html">Support</a></li>
-                        <li><a href="discussions-page.html">Discussions</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="subscribe.html">Subscribe</a></li>
-                        <li><a href="https://www.michaelkbaines.com" target="_blank" rel="noopener">Author's Website</a></li>
-                        <li><a href="members.html">Our Members</a></li>
-                        <li><a href="become-member.html">Work With Us</a></li>
-                        <li><a href="about-page.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
+  <footer class="site-footer">
+    <div class="sf-inner">
+      <div class="sf-about">
+        <p class="sf-name">Ic&sup2; Research Institute</p>
+        <p>An independent research institute advancing theoretical physics through open science. We develop falsifiable predictions across cosmology, quantum mechanics and consciousness research, and we publish every result.</p>
+        <p>Every contributor keeps full ownership of their work. All findings are freely available. Open to anyone.</p>
+        <div class="sf-social">
+          <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="instagram"><svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+          <a href="https://www.youtube.com/@IC2ResearchInstitute" target="_blank" rel="noopener" class="youtube"><svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+          <a href="mailto:ic2.info@proton.me" class="email"><svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>ic2.info@proton.me</a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
-        </div>
-    </footer>
+      </div>
+      <nav class="sf-links" aria-label="Site links"><div class="sf-col"><h3>Research</h3><ul><li><a href="framework.html">Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing</a></li><li><a href="results.html">Results</a></li><li><a href="programs-gateway.html">Programs</a></li><li><a href="research-publications.html">Publications</a></li><li><a href="visualizations.html">Visualizations</a></li></ul></div><div class="sf-col"><h3>Explore</h3><ul><li><a href="book.html">The Big TOE</a></li><li><a href="quest-map.html">The Quest</a></li><li><a href="mission-log.html">Mission Log</a></li><li><a href="media.html">Horizon Scanner</a></li><li><a href="blog.html">Blog</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="search.html">Search</a></li></ul></div><div class="sf-col"><h3>Institute</h3><ul><li><a href="about-page.html">About</a></li><li><a href="members.html">Our Members</a></li><li><a href="events.html">Events</a></li><li><a href="discussions-page.html">Discussions</a></li><li><a href="faq-page.html">FAQ</a></li><li><a href="https://www.michaelkbaines.com" target="_blank" rel="noopener">Author's Website</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div><div class="sf-col"><h3>Take Part</h3><ul><li><a href="subscribe.html">Subscribe</a></li><li><a href="join.html">Join</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="support.html">Support Our Research</a></li><li><a href="become-member.html">Work With Us</a></li><li><a href="shop.html">Shop (opening soon)</a></li></ul></div></nav>
+    </div>
+    <div class="sf-bottom"><p>&copy; 2026 Ic&sup2; Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p></div>
+  </footer>
 
     <!-- Scripts -->
     <script>
@@ -3061,6 +3346,7 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 <!-- goatcounter:end -->
   <script src="back-to-top.js" defer></script>
 <script src="contact-form.js" defer></script>
+<script src="test-loggers.js" defer></script>
 </body>
 </html>    <div class="section-container" style="max-width:var(--max-width); margin:0 auto; padding:2rem 2rem;">
 

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media &amp; Press | Ic² Research Institute</title>
-    <meta name="description" content="Media resources, press coverage, conference appearances, and visual assets for the Ic² Research Institute and The Big TOE framework.">
+    <title>Horizon Scanner | Ic² Research Institute</title>
+    <meta name="description" content="The Ic² Research Institute's horizon scanner: a living review of new research on every test we run, trends in interest and funding across the field, and our news and press record.">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,1,200&icon_names=alternate_email,article,fact_check,headset_mic,menu_book,person,public,topic" rel="stylesheet">
@@ -323,7 +323,95 @@
     .footer-bottom { max-width:1200px; margin:.5rem auto 0; padding-top:1rem; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:rgba(255,255,255,.5); font-size:.8rem; }
     .footer-bottom a { color:rgba(255,255,255,.6); text-decoration:none; }
     .footer-bottom a:hover { color:white; }
-    </style>
+    
+        /* Horizon Scanner panels */
+        .hs-head { margin-bottom:.5rem; }
+        .hs-toggle { all:unset; box-sizing:border-box; display:flex; width:100%; align-items:center; justify-content:space-between; gap:1rem; cursor:pointer; font:inherit; color:inherit; }
+        .hs-toggle:focus-visible { outline:3px solid #005ba5; outline-offset:4px; border-radius:4px; }
+        .hs-chev { flex:0 0 auto; width:36px; height:36px; border-radius:50%; border:2px solid #cfd6de; position:relative; transition:transform .2s, border-color .2s; }
+        .hs-chev::before { content:""; position:absolute; left:50%; top:45%; width:10px; height:10px; border-right:2.5px solid #1a1d33; border-bottom:2.5px solid #1a1d33; transform:translate(-50%, -50%) rotate(45deg); }
+        .hs-toggle[aria-expanded="true"] .hs-chev { transform:rotate(180deg); border-color:#005ba5; }
+        .hs-toggle:hover .hs-chev { border-color:#005ba5; }
+        .hs-body { padding-top:.5rem; }
+        #field-watch .section-subtitle, #field-trends .section-subtitle, #field-regions .section-subtitle { margin-bottom:.5rem; }
+        #field-trends, #field-regions { padding-top:2.5rem; padding-bottom:2.5rem; }
+        #field-watch { padding-bottom:2.5rem; }
+        /* Around the World */
+        .rg-controls { display:flex; flex-wrap:wrap; gap:.75rem 1.25rem; align-items:center; margin-bottom:1rem; }
+        .rg-controls label { font-size:.8rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#5a6878; display:flex; flex-direction:column; gap:.3rem; }
+        .rg-controls select { font:600 .95rem 'IBM Plex Sans', sans-serif; padding:.45rem .7rem; border:1px solid #cfd6de; border-radius:8px; background:#fff; color:#1a1d33; max-width:100%; }
+        .rg-seg { display:inline-flex; border:1px solid #cfd6de; border-radius:8px; overflow:hidden; flex-wrap:wrap; }
+        .rg-seg button { font:600 .85rem 'IBM Plex Sans', sans-serif; padding:.45rem .8rem; border:0; background:#fff; color:#2d4053; cursor:pointer; }
+        .rg-seg button.on { background:#1a1d33; color:#fff; }
+        .rg-insight { background:#fff; border:1px solid #e3e6ea; border-left:4px solid #005ba5; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.25rem; font-size:.98rem; line-height:1.55; }
+        .rg-layout { display:grid; grid-template-columns:minmax(0, 1.7fr) minmax(0, 1fr); gap:1.25rem; }
+        .rg-panel { background:#fff; border:1px solid #e3e6ea; border-radius:10px; padding:1rem 1.1rem; min-width:0; }
+        .rg-panel h3 { font-size:.8rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#5a6878; margin:0 0 .6rem; }
+        #rg-map svg { display:block; width:100%; height:auto; }
+        #rg-map path.c { stroke:#fff; stroke-width:.4; cursor:pointer; }
+        #rg-map path.c:hover, #rg-map path.c.sel { stroke:#1a1d33; stroke-width:1.2; }
+        .rg-legend { display:flex; align-items:center; gap:.5rem; font-size:.75rem; color:#5a6878; margin-top:.4rem; flex-wrap:wrap; }
+        .rg-legend .bar { height:10px; width:160px; border-radius:3px; }
+        .rg-tip { font-size:.88rem; margin-top:.5rem; min-height:2.6em; color:#1a1d33; }
+        .rg-rank { list-style:none; margin:0; padding:0; font-size:.85rem; }
+        .rg-rank li { display:grid; grid-template-columns:1.6rem minmax(0, 8rem) 1fr 3.4rem; gap:.4rem; align-items:center; padding:.18rem 0; cursor:pointer; }
+        .rg-rank li:hover { background:#f3f5f8; }
+        .rg-rank .n { color:#8fa0b0; font-size:.75rem; text-align:right; }
+        .rg-rank .nm { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .rg-rank .b { height:9px; border-radius:2px; }
+        .rg-rank .v { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+        .rg-lower { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap:1.25rem; margin-top:1.25rem; }
+        .rg-lower svg { display:block; width:100%; height:auto; }
+        .rg-funders { font-size:.85rem; margin:0; padding-left:1.1rem; }
+        .rg-funders li { margin:.15rem 0; }
+        @media (max-width:820px) { .rg-layout { grid-template-columns:1fr; } }
+        /* Field Trends */
+        .ft-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap:1.25rem; }
+        .ft-card { background:#fff; border:1px solid #e3e6ea; border-radius:10px; padding:1.1rem 1.2rem 1rem; }
+        .ft-card h3 { font-size:1.02rem; margin:0 0 .2rem; color:#1a1d33; }
+        .ft-tests { font-size:.75rem; margin-bottom:.6rem; }
+        .ft-tests a { color:#005ba5; font-weight:600; text-decoration:none; margin-right:.5rem; }
+        .ft-row { margin-top:.55rem; }
+        .ft-k { display:flex; justify-content:space-between; align-items:baseline; font-size:.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#5a6878; }
+        .ft-v { font-size:.8rem; font-weight:700; letter-spacing:0; text-transform:none; }
+        .ft-up { color:#005ba5; } .ft-down { color:#4a5868; } .ft-flat { color:#8fa0b0; }
+        .ft-sub { font-size:.78rem; color:var(--text-light); margin-top:.15rem; }
+        .ft-card svg { display:block; width:100%; height:56px; margin-top:.3rem; }
+        .ft-rising { background:#fff; border:1px solid #e3e6ea; border-left:4px solid #005ba5; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; font-size:.95rem; }
+        .ft-notes { font-size:.8rem; color:var(--text-light); margin-top:1.25rem; line-height:1.5; }
+        /* Summary boxes: QCD pair B+Yw, as the Living Review cards */
+        .ft-rising, .rg-insight { background:#005ba5 !important; color:#fff; border:0 !important; border-left:5px solid #f1e303 !important; }
+        .ft-rising strong, .rg-insight strong { color:#f1e303; }
+        /* Field Watch */
+        .fw-meta { font-size:.85rem; color:var(--text-light); margin:-1rem 0 1.5rem; }
+        .fw-list { display:grid; gap:1rem; }
+        /* Paper cards: QCD pair B+Yw (quark #005ba5, antiquark #f1e303) */
+        .fw-item { background:#005ba5; color:#fff; border:0; border-left:5px solid #f1e303; border-radius:10px; padding:1rem 1.25rem; }
+        .fw-item.reviewed { box-shadow:inset 0 0 0 2px #f1e303; }
+        .fw-top { display:flex; flex-wrap:wrap; gap:.4rem .75rem; align-items:center; font-size:.8rem; color:rgba(255,255,255,.82); margin-bottom:.35rem; }
+        .fw-title { display:block; font-weight:700; font-size:1.02rem; line-height:1.35; color:#fff; text-decoration:none; }
+        .fw-title:hover { color:#f1e303; text-decoration:underline; }
+        .fw-authors { font-size:.85rem; color:rgba(255,255,255,.85); margin:.25rem 0 .4rem; }
+        .fw-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
+        .fw-tag { font-size:.75rem; font-weight:600; padding:.15rem .6rem; border-radius:20px; background:rgba(255,255,255,.14); color:#fff; text-decoration:none; }
+        a.fw-tag { color:#f1e303; box-shadow:inset 0 0 0 1px rgba(241,227,3,.55); background:transparent; }
+        a.fw-tag:hover { background:#f1e303; color:#1a1d33; }
+        .fw-rel.convergent { background:#1a1d33; color:#ffffff; }
+        .fw-dates { font-size:.85rem; color:#4a5868; }
+        .fw-rel { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.15rem .6rem; border-radius:20px; background:#f1e303; color:#1a1d33; }
+        .fw-unread { font-size:.72rem; font-weight:600; color:#f1e303; }
+        .fw-note { font-size:.92rem; margin:.5rem 0 .2rem; color:#fff; }
+        .fw-item details { margin-top:.4rem; font-size:.88rem; color:rgba(255,255,255,.9); }
+        .fw-item summary { cursor:pointer; font-weight:600; color:#fff; }
+        .fw-item summary:hover { color:#f1e303; }
+        .fw-item summary:focus-visible, .fw-title:focus-visible, a.fw-tag:focus-visible { outline:2px solid #f1e303; outline-offset:2px; }
+        .fw-more { margin-top:1.5rem; }
+        @media (max-width:640px) {
+            #fw-filters { flex-wrap:nowrap; overflow-x:auto; margin-bottom:1.5rem; padding-bottom:.4rem; scrollbar-width:thin; }
+            #fw-filters .filter-btn { flex:0 0 auto; padding:.35rem .9rem; font-size:.82rem; }
+        }
+        .fw-cta { margin-top:2rem; padding:1.25rem 1.5rem; border-radius:10px; background:#fff; border:1px solid #e3e6ea; }
+</style>
     <style id="title-cubes">
       /* One Metatron's Cube drifting across the open area of the title panel,
          the same figure as the Validation page header. It turns on its own
@@ -356,8 +444,8 @@
     <link rel="canonical" href="https://eequalsicsquared.com/media.html">
     <meta property="og:site_name" content="Ic² Research Institute">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Media &amp; Press | Ic² Research Institute">
-    <meta property="og:description" content="Media resources, press coverage, conference appearances, and visual assets for the Ic² Research Institute and The Big TOE framework.">
+    <meta property="og:title" content="Horizon Scanner | Ic² Research Institute">
+    <meta property="og:description" content="The Ic² Research Institute's horizon scanner: a living review of new research on every test we run, trends in interest and funding across the field, and our news and press record.">
     <meta property="og:url" content="https://eequalsicsquared.com/media.html">
     <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
     <meta property="og:image:width" content="1200">
@@ -365,6 +453,19 @@
     <meta property="og:image:alt" content="Ic² Research Institute, eequalsicsquared.com">
     <meta name="twitter:card" content="summary_large_image">
     <!-- seo:end -->
+
+
+
+
+
+
+
+<style id="contrast-fixes">
+  /* readable text (WCAG AA), from the 2 Oct 2026 contrast audit: tools/contrast_fixes_2026_10_02.py */
+  div.conf-item.upcoming span.conf-tag.tag-upcoming { color: #1a1d33 !important; }
+  div.ft-k span.ft-v.ft-flat { color: #5a6878 !important; }
+  ol#rg-funders.rg-funders span { color: #5a6878 !important; }
+</style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -381,15 +482,15 @@
                 <li><a href="book.html">Big TOE</a></li>
                 <li><a href="validation.html">Validation</a></li>
                 <li><a href="testing-schedule.html">Testing</a></li>
-          <li><a href="quest-map.html">Quest</a></li>
+                <li><a href="quest-map.html">Quest</a></li>
                 <li><a href="programs-gateway.html">Programs</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="discussions-page.html">Discussion</a></li>
                 <li><a href="about-page.html">About</a></li>
                 <li><a href="contribute.html">Contribute</a></li>
                 <li><a href="join.html">Join</a></li>
-                    <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
-            </ul>
+                <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
+              </ul>
         </nav>
         <div class="hamburger">
             <span></span><span></span><span></span>
@@ -404,34 +505,95 @@
         <li><a href="book.html">Big TOE</a></li>
         <li><a href="validation.html">Validation</a></li>
         <li><a href="testing-schedule.html">Testing</a></li>
-          <li><a href="quest-map.html">Quest</a></li>
+        <li><a href="quest-map.html">Quest</a></li>
         <li><a href="programs-gateway.html">Programs</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="discussions-page.html">Discussion</a></li>
         <li><a href="about-page.html">About</a></li>
         <li><a href="contribute.html">Contribute</a></li>
-        <li><a href="media.html">Media</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="join.html">Join</a></li>
-                    <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
-    </ul>
+        <li><a href="https://eequalsicsquared.zulipchat.com" target="_blank" rel="noopener" class="login-link"><span class="ml-word">Member </span>Login</a></li>
+      </ul>
 </div>
 
 <!-- ── Hero ── -->
 <section id="main-content" tabindex="-1" class="page-hero tp-center">
     <img src="metatron-spin.svg" class="title-cube" alt="" aria-hidden="true">
     <div class="page-hero-content" data-aos="fade-up">
-        <p class="eyebrow page-label">Press</p>
-      <h1>The story so far, for the record</h1>
-        <p>News coverage, conference appearances, press resources, and the growing story of independent physics research done differently.</p>
+        <p class="eyebrow page-label">Horizon Scanner</p>
+      <h1>Watching the field our tests belong to</h1>
+        <p>A living review of new research on every question we test, how interest and funding are moving across the field, and the institute&rsquo;s own news and press record. Updated every week.</p>
         <p style="font-size:.95rem; opacity:.85; margin-top:.9rem;">Five press releases from October 2025 have been withdrawn. <a href="superseded.html" style="color:#f1e303;">What they said, and why</a>.</p>
+    </div>
+</section>
+
+<!-- ── Field Watch ── -->
+<section class="section bg-light" id="field-watch">
+    <div class="section-inner">
+        <p class="section-label eyebrow">Living Review</p>
+        <h2 class="section-title hs-head"><button class="hs-toggle" aria-expanded="true" aria-controls="field-watch-body">What the Field Is Finding<span class="hs-chev" aria-hidden="true"></span></button></h2>
+        <p class="section-subtitle">Our predictions are kept under living review. Every week an automated search reads new papers on arXiv and in journals for work that bears on our registered tests. Other groups are testing the same questions, and their results can support, challenge or sharpen ours. Papers are listed as they are found; a relation appears only after one of us has read the paper.</p>
+        <div class="hs-body" id="field-watch-body">
+        <p class="fw-meta" id="fw-meta">Loading the latest search&hellip;</p>
+        <div class="filter-bar" id="fw-filters"></div>
+        <div class="fw-list" id="fw-list"></div>
+        <button class="filter-btn fw-more" id="fw-more" hidden>Show more</button>
+        <div class="fw-cta">
+            <strong>Working on one of these questions?</strong> If your measurements or analysis bear on one of our tests, we would like to compare notes and cite your work.
+            <a href="about-page.html#contact" class="news-card-link">Get in touch &rarr;</a>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Field Trends ── -->
+<section class="section" id="field-trends">
+    <div class="section-inner">
+        <p class="section-label eyebrow">Trends</p>
+        <h2 class="section-title">How the Field Is Moving</h2>
+        <p class="section-subtitle">Interest and funding for each question we test, followed over time: how many papers each year, what share of their field they make up, and how much new public funding goes to the work.</p>
+        <div id="field-trends-body">
+        <div class="ft-rising" id="ft-rising" hidden></div>
+        <div class="ft-grid" id="ft-grid"><p>Loading the trends&hellip;</p></div>
+        <p class="ft-notes" id="ft-notes"></p>
+        </div>
+    </div>
+</section>
+
+<!-- ── Around the World ── -->
+<section class="section bg-light" id="field-regions">
+    <div class="section-inner">
+        <p class="section-label eyebrow">Around the World</p>
+        <h2 class="section-title">Who Is Researching What</h2>
+        <p class="section-subtitle">Research and investment in each of our fields, country by country, from OpenAlex: an open index of scholarly work in every language. Specialization shows how strongly a country focuses on a field compared with its research overall, so smaller and non-Western countries that lead a field stand out, not only the largest producers.</p>
+        <div id="field-regions-body">
+        <div class="rg-controls">
+            <label>Field <select id="rg-field"></select></label>
+            <label>Year <select id="rg-year"></select></label>
+            <label>Measure <span class="rg-seg" id="rg-metric">
+                <button data-m="share" class="on">Share of papers</button><button data-m="spec">Specialization</button><button data-m="fund">Funding</button>
+            </span></label>
+        </div>
+        <div class="rg-insight" id="rg-insight">Loading the world data&hellip;</div>
+        <div class="rg-layout">
+            <div class="rg-panel"><h3 id="rg-map-title">Map</h3><div id="rg-map" role="img" aria-label="World map of the selected measure"></div>
+                <div class="rg-legend" id="rg-legend"></div><div class="rg-tip" id="rg-tip">Select a country on the map or in the list.</div></div>
+            <div class="rg-panel"><h3 id="rg-rank-title">Leading countries</h3><ol class="rg-rank" id="rg-rank"></ol></div>
+        </div>
+        <div class="rg-lower">
+            <div class="rg-panel"><h3>Share of the world&rsquo;s papers over time</h3><div id="rg-lines"></div></div>
+            <div class="rg-panel"><h3 id="rg-cont-title">By continent</h3><div id="rg-cont"></div></div>
+            <div class="rg-panel"><h3 id="rg-fund-title">Funders acknowledged most</h3><ol class="rg-funders" id="rg-funders"></ol></div>
+        </div>
+        <p class="ft-notes" id="rg-notes"></p>
+        </div>
     </div>
 </section>
 
 <!-- ── Featured Story ── -->
 <section class="section">
     <div class="section-inner">
-        <p class="section-label eyebrow">Featured</p>
+        <p class="section-label eyebrow">Press</p>
         <h2 class="section-title">In the News</h2>
         <p class="section-subtitle">Coverage, announcements, and notable moments from the Ic² Research Institute and The Big TOE framework.</p>
 
@@ -506,7 +668,7 @@
                 <div class="news-card-body">
                     <div class="news-card-meta">2026 &nbsp;·&nbsp; Book Release</div>
                     <div class="news-card-title">The Big TOE Released on an Honor System</div>
-                    <div class="news-card-excerpt">A Quest for The Big TOE: The COSMIC Framework's Theory of Everything is available at www.eequalsicsquared.com on an honor system: pay what you are willing and able to pay.</div>
+                    <div class="news-card-excerpt">A Quest for The Big TOE: The COSMIC Framework's Theory of Everything is available at www.eequalsicsquared.com and readers decide what to pay for it.</div>
                     <a href="book.html" class="news-card-link">Get the Book →</a>
                 </div>
             </div>
@@ -600,7 +762,7 @@
         <h2 class="section-title" data-aos="fade-up">Media Kit</h2>
         <p class="section-subtitle" data-aos="fade-up">Everything journalists, bloggers, and collaborators need to cover the institute and the research.</p>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(280px, 100%), 1fr)); gap:1.5rem;">
 
             <div data-aos="fade-up" data-aos-delay="0" style="background:#005ba5; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #f1e303; box-shadow:0 4px 20px rgba(0,91,165,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
                 <span class="material-symbols-outlined" style="font-size:2rem; color:#f1e303; display:block; margin-bottom:.75rem;">article</span>
@@ -613,35 +775,35 @@
                 <span class="material-symbols-outlined" style="font-size:2rem; color:#00838f; display:block; margin-bottom:.75rem;">fact_check</span>
                 <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Prediction Dossier</div>
                 <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">The full prediction record: the date each prediction was first documented and the independent source that will decide it.</div>
-                <a href="validation.html" style="color:#00838f; font-weight:700; font-size:.85rem; text-decoration:none;">View Validation →</a>
+                <a href="validation.html" style="color:#ffffff; font-weight:700; font-size:.85rem; text-decoration:underline;">View Validation →</a>
             </div>
 
             <div data-aos="fade-up" data-aos-delay="160" style="background:#1a5c2a; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #b01558; box-shadow:0 4px 20px rgba(26,92,42,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
                 <span class="material-symbols-outlined" style="font-size:2rem; color:#b01558; display:block; margin-bottom:.75rem;">menu_book</span>
                 <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">The Book (Free)</div>
                 <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;"><em>A Quest for The Big TOE</em>: the full manuscript, available to download on an honor system. 21 elements covering information, gravity, consciousness, and spacetime.</div>
-                <a href="book.html" style="color:#b01558; font-weight:700; font-size:.85rem; text-decoration:none;">Get the Book →</a>
+                <a href="book.html" style="color:#ffffff; font-weight:700; font-size:.85rem; text-decoration:underline;">Get the Book →</a>
             </div>
 
             <div data-aos="fade-up" data-aos-delay="0" style="background:#005f6e; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #c62828; box-shadow:0 4px 20px rgba(0,95,110,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
                 <span class="material-symbols-outlined" style="font-size:2rem; color:#c62828; display:block; margin-bottom:.75rem;">public</span>
                 <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Zenodo Publications</div>
                 <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">Peer-accessible research data and papers published openly on Zenodo, including the CMB geometric analysis and supporting datasets.</div>
-                <a href="https://zenodo.org/doi/10.5281/zenodo.16376121" target="_blank" style="color:#c62828; font-weight:700; font-size:.85rem; text-decoration:none;" rel="noopener">View on Zenodo →</a>
+                <a href="https://zenodo.org/doi/10.5281/zenodo.16376121" target="_blank" style="color:#ffffff; font-weight:700; font-size:.85rem; text-decoration:underline;" rel="noopener">View on Zenodo →</a>
             </div>
 
             <div data-aos="fade-up" data-aos-delay="80" style="background:#8e0c45; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #1a7a36; box-shadow:0 4px 20px rgba(142,12,69,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
                 <span class="material-symbols-outlined" style="font-size:2rem; color:#2e7d32; display:block; margin-bottom:.75rem;">person</span>
                 <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Author Bio</div>
                 <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">Michael K. Baines, independent researcher, ORCID 0009-0001-8084-3870. Long-form and short-form bios available for editorial use on request.</div>
-                <a href="about-page.html" style="color:#2e7d32; font-weight:700; font-size:.85rem; text-decoration:none;">About the Author →</a>
+                <a href="about-page.html" style="color:#ffffff; font-weight:700; font-size:.85rem; text-decoration:none;">About the Author →</a>
             </div>
 
             <div data-aos="fade-up" data-aos-delay="160" style="background:#7a5000; border-radius:8px; padding:1.75rem 1.5rem; border-bottom:4px solid #1565c0; box-shadow:0 4px 20px rgba(122,80,0,.2); transition:transform .3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
                 <span class="material-symbols-outlined" style="font-size:2rem; color:#1565c0; display:block; margin-bottom:.75rem;">alternate_email</span>
                 <div style="font-weight:700; color:white; font-size:1rem; margin-bottom:.5rem;">Press Contact</div>
                 <div style="color:rgba(255,255,255,.88); font-size:.9rem; line-height:1.7; margin-bottom:1.25rem;">For interview requests, fact-checking, collaboration inquiries, or any media-related questions, reach us directly.</div>
-                <a href="#press-contact" style="color:#1565c0; font-weight:700; font-size:.85rem; text-decoration:none;">Contact Us →</a>
+                <a href="#press-contact" style="color:#ffffff; font-weight:700; font-size:.85rem; text-decoration:none;">Contact Us →</a>
             </div>
 
         </div>
@@ -653,7 +815,7 @@
     <div class="section-inner">
         <p class="section-label eyebrow" data-aos="fade-up">Get in Touch</p>
         <h2 class="section-title" data-aos="fade-up">Press &amp; Media Inquiries</h2>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem;" data-aos="fade-up">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr)); gap:1.5rem;" data-aos="fade-up">
 
             <div style="border-radius:8px; overflow:hidden; box-shadow:0 4px 18px rgba(0,0,0,.12);">
                 <div style="background:#8B0000; padding:.9rem 1.25rem; display:flex; align-items:center; gap:.6rem;">
@@ -685,73 +847,22 @@
 </section>
 
 <!-- ── Footer ── -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Ic² Research Institute</h3>
-                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7;">The Ic² Research Institute is an independent research institute advancing theoretical physics through open science and radical transparency. We develop falsifiable predictions across cosmology, quantum mechanics, and consciousness research. We publish every result.</p>
-                <p style="color:rgba(255,255,255,.8); font-size:.9rem; line-height:1.7; margin-top:.5rem;">Every contributor retains full ownership of their work. All findings are freely available. Open to anyone. The work is the only standard.</p>
-            </div>
-            <div class="footer-icons">
-                <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="social-btn instagram" title="Instagram">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    Instagram
-                </a>
-                <a href="https://www.youtube.com/@IC2ResearchInstitute" target="_blank" rel="noopener" class="social-btn youtube" title="YouTube">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    YouTube
-                </a>
-                <a href="mailto:ic2.info@proton.me" class="social-btn email" title="Email">
-                    <svg class="social-icon" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    ic2.info@proton.me
-                </a>
-            </div>
-            <div class="footer-links-group">
-                <div class="footer-section">
-                    <h3>Research</h3>
-                    <ul>
-                        <li><a href="framework.html">Framework</a></li>
-                        <li><a href="validation.html">Validation</a></li>
-                        <li><a href="testing-schedule.html">Testing</a></li>
-                        <li><a href="programs-gateway.html">Programs</a></li>
-                        <li><a href="research-publications.html">Publications</a></li>
-                        <li><a href="simulations.html">Simulations</a></li>
-                        <li><a href="results.html">Results</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="book.html">The Big TOE</a></li>
-                        <li><a href="media.html">Media</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="faq-page.html">FAQ</a></li>
-                        <li><a href="search.html">Search</a></li>
-                        <li><a href="https://zenodo.org/search?q=baines+cosmic+framework" target="_blank" rel="noopener">Archive</a></li>
-                        <li><a href="shop.html">Shop (opening soon)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Connect</h3>
-                    <ul>
-                        <li><a href="about-page.html">About</a></li>
-                        <li><a href="legal.html">Legal</a></li>
-                        <li><a href="contribute.html">Contribute</a></li><li><a href="support.html">Support</a></li>
-                        <li><a href="discussions-page.html">Discussions</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="subscribe.html">Subscribe</a></li>
-                        <li><a href="https://www.michaelkbaines.com" target="_blank" rel="noopener">Author's Website</a></li>
-                        <li><a href="members.html">Our Members</a></li>
-                        <li><a href="become-member.html">Work With Us</a></li>
-                        <li><a href="about-page.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
+    <footer class="site-footer">
+    <div class="sf-inner">
+      <div class="sf-about">
+        <p class="sf-name">Ic&sup2; Research Institute</p>
+        <p>An independent research institute advancing theoretical physics through open science. We develop falsifiable predictions across cosmology, quantum mechanics and consciousness research, and we publish every result.</p>
+        <p>Every contributor keeps full ownership of their work. All findings are freely available. Open to anyone.</p>
+        <div class="sf-social">
+          <a href="https://www.instagram.com/eequalsicsquared?igsh=ZWFidnFyNTBheG4z" target="_blank" rel="noopener" class="instagram"><svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+          <a href="https://www.youtube.com/@IC2ResearchInstitute" target="_blank" rel="noopener" class="youtube"><svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a>
+          <a href="mailto:ic2.info@proton.me" class="email"><svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>ic2.info@proton.me</a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
-        </div>
-    </footer>
+      </div>
+      <nav class="sf-links" aria-label="Site links"><div class="sf-col"><h3>Research</h3><ul><li><a href="framework.html">Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing</a></li><li><a href="results.html">Results</a></li><li><a href="programs-gateway.html">Programs</a></li><li><a href="research-publications.html">Publications</a></li><li><a href="visualizations.html">Visualizations</a></li></ul></div><div class="sf-col"><h3>Explore</h3><ul><li><a href="book.html">The Big TOE</a></li><li><a href="quest-map.html">The Quest</a></li><li><a href="mission-log.html">Mission Log</a></li><li><a href="media.html">Horizon Scanner</a></li><li><a href="blog.html">Blog</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="search.html">Search</a></li></ul></div><div class="sf-col"><h3>Institute</h3><ul><li><a href="about-page.html">About</a></li><li><a href="members.html">Our Members</a></li><li><a href="events.html">Events</a></li><li><a href="discussions-page.html">Discussions</a></li><li><a href="faq-page.html">FAQ</a></li><li><a href="https://www.michaelkbaines.com" target="_blank" rel="noopener">Author's Website</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div><div class="sf-col"><h3>Take Part</h3><ul><li><a href="subscribe.html">Subscribe</a></li><li><a href="join.html">Join</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="support.html">Support Our Research</a></li><li><a href="become-member.html">Work With Us</a></li><li><a href="shop.html">Shop (opening soon)</a></li></ul></div></nav>
+    </div>
+    <div class="sf-bottom"><p>&copy; 2026 Ic&sup2; Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p></div>
+  </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -863,5 +974,274 @@ html.aos-failsafe [data-aos]{opacity:1!important;transform:none!important;transi
 <script data-goatcounter="https://ic2.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- goatcounter:end -->
   <script src="back-to-top.js" defer></script>
+<script>
+/* Horizon Scanner panels: open and close; a link to a panel opens it; the choice is remembered. */
+(function () {
+  const KEY = 'hs-panels';
+  let saved = {}; try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  const set = (btn, open) => { btn.setAttribute('aria-expanded', String(open)); document.getElementById(btn.getAttribute('aria-controls')).hidden = !open; };
+  document.querySelectorAll('.hs-toggle').forEach(btn => {
+    const id = btn.getAttribute('aria-controls');
+    if (id in saved) set(btn, saved[id]);
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true'; set(btn, open);
+      saved[id] = open; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+  const fromHash = () => { const sec = location.hash && document.querySelector(location.hash + ' .hs-toggle'); if (sec) set(sec, true); };
+  fromHash(); window.addEventListener('hashchange', fromHash);
+})();
+</script>
+<script>
+/* Around the World: field-regions.json from tools/field_regions.py (OpenAlex). d3 and the map load when the section is near. */
+(function () {
+  const sec = document.getElementById('field-regions'); if (!sec) return;
+  const load = src => new Promise((ok, no) => { const e = document.createElement('script'); e.src = src; e.onload = ok; e.onerror = no; document.head.appendChild(e); });
+  let started = false;
+  const go = () => { if (started) return; started = true;
+    Promise.all([load('https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js').then(() => load('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js')),
+                 fetch('field-regions.json').then(r => r.json()),
+                 fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json())])
+      .then(([, D, world]) => init(D, world))
+      .catch(() => { document.getElementById('rg-insight').textContent = 'The world data could not be loaded.'; }); };
+  if ('IntersectionObserver' in window) new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { o.disconnect(); go(); } }, { rootMargin: '600px' }).observe(sec); else go();
+
+  function init(D, world) {
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const MIN = 30;                                         // fewer papers than this: too few to rank on specialization
+    const NAME = D.countries, NUM = D.iso_numeric, A2 = Object.fromEntries(Object.entries(NUM).map(([a, n]) => [String(+n), a]));
+    const years = D.years.map(String), fundYears = years.filter(y => D.fields[0].years[y].funded_by_country);
+    let F = D.fields[0], Y = years[years.length - 1], M = 'share', SEL = null;
+    $('rg-field').innerHTML = D.fields.map((f, i) => `<option value="${i}">${esc(f.label)}</option>`).join('');
+    const setYears = () => { const ys = M === 'fund' ? fundYears : years; if (!ys.includes(Y)) Y = ys[ys.length - 1];
+      $('rg-year').innerHTML = ys.map(y => `<option${y === Y ? ' selected' : ''}>${y}</option>`).join(''); };
+    function stats(f, y) {
+      const fy = f.years[y], w = D.world[y], out = {};
+      for (const [c, n] of Object.entries(fy.countries)) {
+        const share = n / fy.known, ws = (w.countries[c] || 0) / w.known;
+        out[c] = { n, share, spec: ws ? share / ws : null };
+      }
+      const fb = fy.funded_by_country || {}, ft = Object.values(fb).reduce((a, b) => a + b, 0);
+      for (const [c, n] of Object.entries(fb)) { out[c] = out[c] || { n: 0, share: 0, spec: null }; out[c].fund = n / ft; out[c].fundN = n; }
+      return out;
+    }
+    const val = (s, c) => { const r = s[c]; if (!r) return null;
+      if (M === 'share') return r.share; if (M === 'fund') return r.fund ?? null; return r.n >= MIN ? r.spec : null; };
+    const fmt = v => v == null ? 'n/a' : M === 'spec' ? v.toFixed(2) + '×' : (v * 100).toFixed(v < .01 ? 2 : 1) + '%';
+    const colorFor = () => {
+      if (M === 'spec') return d3.scaleDiverging([0.25, 1, 4], t => d3.interpolateRgbBasis(['#8fa0b0', '#f3f5f8', '#005ba5'])(t)).clamp(true).unknown('#e3e6ea');
+      return d3.scaleSqrt([0, 0.25], ['#eef2f6', M === 'fund' ? '#1a1d33' : '#005ba5']).clamp(true);
+    };
+    const feats = topojson.feature(world, world.objects.countries).features.filter(f => f.id !== '010');
+    const W = 800, H = 400, proj = d3.geoNaturalEarth1().fitSize([W, H], { type: 'FeatureCollection', features: feats }), path = d3.geoPath(proj);
+    const svg = d3.select('#rg-map').append('svg').attr('viewBox', `0 0 ${W} ${H}`);
+    const paths = svg.selectAll('path').data(feats).join('path').attr('class', 'c').attr('d', path)
+      .on('click', (e, f) => pick(A2[String(+f.id)])).on('mousemove', (e, f) => tip(A2[String(+f.id)]));
+    function tip(c) {
+      if (!c) return; const s = stats(F, Y), r = s[c] || {};
+      $('rg-tip').innerHTML = `<strong>${esc(NAME[c] || c)}</strong>, ${Y}: ${(r.n || 0).toLocaleString()} papers, ${((r.share || 0) * 100).toFixed(1)}% of the world&rsquo;s` +
+        (r.spec != null && r.n >= MIN ? `, specialization ${r.spec.toFixed(2)}×` : r.n ? ' (too few papers to rate specialization)' : '') +
+        (r.fund != null ? `, ${(r.fund * 100).toFixed(1)}% of funding acknowledgments` : '');
+    }
+    function pick(c) { if (!c) return; SEL = c; tip(c); draw(); }
+    function insight(s) {
+      const f = F, y0 = years[0], s0 = stats(f, y0);
+      const lead = Object.entries(s).sort((a, b) => b[1].share - a[1].share)[0];
+      const gains = Object.keys(s).filter(c => s[c].n >= 30 && s0[c]).map(c => [c, s[c].share - s0[c].share]).sort((a, b) => b[1] - a[1]);
+      const spec = Object.entries(s).filter(([, r]) => r.n >= 30 && r.spec).sort((a, b) => b[1].spec - a[1].spec).slice(0, 3);
+      const fy = fundYears[fundYears.length - 1], fs = stats(f, fy), topF = Object.entries(fs).filter(([, r]) => r.fund).sort((a, b) => b[1].fund - a[1].fund).slice(0, 2);
+      const p = c => esc(NAME[c] || c);
+      return `In ${Y}, <strong>${p(lead[0])}</strong> wrote the most ${esc(f.label.toLowerCase())} papers (${(lead[1].share * 100).toFixed(1)}% of the world&rsquo;s). ` +
+        (gains.length ? `Since ${y0} the largest gain in share is <strong>${p(gains[0][0])}</strong> (${gains[0][1] >= 0 ? '+' : ''}${(gains[0][1] * 100).toFixed(1)} points). ` : '') +
+        (spec.length ? `Most specialized: ${spec.map(([c, r]) => `<strong>${p(c)}</strong> (${r.spec.toFixed(1)}×)`).join(', ')}. ` : '') +
+        (topF.length ? `Funding acknowledged in ${fy}: ${topF.map(([c, r]) => `${p(c)} ${(r.fund * 100).toFixed(0)}%`).join(', ')}.` : '');
+    }
+    function draw() {
+      setYears();
+      const s = stats(F, Y), col = colorFor();
+      paths.attr('fill', f => { const c = A2[String(+f.id)], v = c ? val(s, c) : null; return v == null ? '#e3e6ea' : col(v); })
+           .classed('sel', f => A2[String(+f.id)] === SEL);
+      const label = { share: 'Share of the world’s papers', spec: 'Specialization (1× = world average)', fund: 'Share of funding acknowledgments, by funder country' }[M];
+      $('rg-map-title').textContent = `${label}, ${Y}`;
+      $('rg-legend').innerHTML = M === 'spec'
+        ? `<span>0.25×</span><span class="bar" style="background:linear-gradient(90deg,#8fa0b0,#f3f5f8,#005ba5)"></span><span>4×</span><span>&middot; gray: fewer than ${MIN} papers</span>`
+        : `<span>0%</span><span class="bar" style="background:linear-gradient(90deg,#eef2f6,${M === 'fund' ? '#1a1d33' : '#005ba5'})"></span><span>25%+</span>`;
+      const rows = Object.keys(s).map(c => [c, val(s, c)]).filter(r => r[1] != null).sort((a, b) => b[1] - a[1]).slice(0, 15);
+      const mx = Math.max(...rows.map(r => r[1]), 1e-9);
+      $('rg-rank-title').textContent = M === 'spec' ? `Most specialized, ${Y}` : `Leading countries, ${Y}`;
+      $('rg-rank').innerHTML = rows.map(([c, v], i) => `<li data-c="${c}"${c === SEL ? ' style="background:#eef2f6"' : ''}><span class="n">${i + 1}</span><span class="nm">${esc(NAME[c] || c)}</span>` +
+        `<span class="b" style="width:${Math.max(v / mx * 100, 2)}%;background:${M === 'spec' ? col(v) : M === 'fund' ? '#1a1d33' : '#005ba5'}"></span><span class="v">${fmt(v)}</span></li>`).join('');
+      $('rg-insight').innerHTML = insight(s);
+      lines(); continents(); funders();
+    }
+    function lines() {
+      const s = stats(F, years[years.length - 1]);
+      let top = Object.entries(s).sort((a, b) => b[1].share - a[1].share).slice(0, 6).map(r => r[0]);
+      if (SEL && !top.includes(SEL)) top = top.slice(0, 5).concat(SEL);
+      const series = top.map(c => years.map(y => (F.years[y].countries[c] || 0) / F.years[y].known));
+      const W = 420, H = 230, m = { l: 40, r: 104, t: 8, b: 22 }, x = d3.scalePoint(years, [m.l, W - m.r]), y = d3.scaleLinear([0, d3.max(series.flat()) * 1.08], [H - m.b, m.t]);
+      const pal = ['#005ba5', '#1a1d33', '#005ba5', '#1a1d33', '#5a6878', '#8fa0b0'], dash = ['', '', '6 4', '6 4', '', '2 3'];
+      const el = d3.select('#rg-lines').html('').append('svg').attr('viewBox', `0 0 ${W} ${H}`);
+      el.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(years.filter((_, i) => i % 2 === 0))).attr('font-size', 12);
+      el.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('.0%'))).attr('font-size', 12);
+      const ly = series.map((v, i) => [i, y(v[v.length - 1]) + 4]).sort((p, q) => p[1] - q[1]);   // keep end labels 12px apart
+      for (let k = 1; k < ly.length; k++) ly[k][1] = Math.max(ly[k][1], ly[k - 1][1] + 14);
+      const labelY = Object.fromEntries(ly);
+      series.forEach((v, i) => {
+        const c = top[i], w = c === SEL ? 3.5 : 2;
+        el.append('path').attr('d', d3.line((d, j) => x(years[j]), d => y(d))(v)).attr('fill', 'none').attr('stroke', pal[i % 6]).attr('stroke-dasharray', dash[i % 6]).attr('stroke-width', w);
+        el.append('text').attr('x', W - m.r + 4).attr('y', labelY[i]).attr('font-size', 13).attr('font-weight', c === SEL ? 700 : 500).attr('fill', pal[i % 6]).text(NAME[c] || c);
+      });
+    }
+    function continents() {
+      const y0 = years[0], cs = ['Asia', 'Europe', 'North America', 'South America', 'Africa', 'Oceania'];
+      const sh = y => { const c = F.years[y].continents, t = cs.reduce((a, k) => a + (c[k] || 0), 0) || 1; return cs.map(k => (c[k] || 0) / t); };
+      const a = sh(y0), b = sh(Y), W = 420, H = 230, m = { l: 112, r: 40, t: 6, b: 6 }, bh = (H - m.t - m.b) / cs.length;
+      const x = d3.scaleLinear([0, Math.max(...a, ...b)], [m.l, W - m.r]);
+      $('rg-cont-title').textContent = `By continent, ${y0} and ${Y}`;
+      const el = d3.select('#rg-cont').html('').append('svg').attr('viewBox', `0 0 ${W} ${H}`);
+      cs.forEach((k, i) => {
+        const yy = m.t + i * bh;
+        el.append('text').attr('x', m.l - 6).attr('y', yy + bh / 2 + 4).attr('text-anchor', 'end').attr('font-size', 13).attr('fill', '#2d4053').text(k);
+        el.append('rect').attr('x', m.l).attr('y', yy + 3).attr('height', bh / 2 - 4).attr('width', x(a[i]) - m.l).attr('fill', '#8fa0b0');
+        el.append('rect').attr('x', m.l).attr('y', yy + bh / 2).attr('height', bh / 2 - 4).attr('width', x(b[i]) - m.l).attr('fill', '#005ba5');
+        el.append('text').attr('x', x(b[i]) + 4).attr('y', yy + bh - 6).attr('font-size', 12).attr('fill', '#1a1d33').text((b[i] * 100).toFixed(0) + '%');
+      });
+      el.append('text').attr('x', W - 4).attr('y', H - 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', '#5a6878').text(`gray ${y0} · blue ${Y}`);
+    }
+    function funders() {
+      const fy = fundYears.includes(Y) ? Y : fundYears[fundYears.length - 1];
+      $('rg-fund-title').textContent = `Funders acknowledged most, ${fy}`;
+      $('rg-funders').innerHTML = (F.years[fy].top_funders || []).map(([nm, c, n]) => `<li>${esc(nm)}${c ? ` <span style="color:#8fa0b0">(${esc(NAME[c] || c)})</span>` : ''}: ${n.toLocaleString()} papers</li>`).join('');
+    }
+    $('rg-field').addEventListener('change', e => { F = D.fields[+e.target.value]; draw(); });
+    $('rg-year').addEventListener('change', e => { Y = e.target.value; draw(); });
+    $('rg-rank').addEventListener('click', e => { const li = e.target.closest('li'); if (li) pick(li.dataset.c); });
+    $('rg-metric').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; M = b.dataset.m;
+      $('rg-metric').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); draw(); });
+    $('rg-notes').textContent = `Updated ${D.updated}. ${D.notes}`;
+    draw();
+  }
+})();
+</script>
+<script>
+/* Field Trends: field-trends.json is refreshed weekly by tools/field_trends.py. */
+(function () {
+  const grid = document.getElementById('ft-grid'); if (!grid) return;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const money = v => v >= 1e9 ? '$' + (v / 1e9).toFixed(1) + 'B' : v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : v >= 1e3 ? '$' + Math.round(v / 1e3) + 'K' : '$' + v;
+  const pct = (a, b) => b ? Math.round((a - b) / b * 100) : null;
+  const chg = p => p === null ? '' : `<span class="ft-v ${p > 4 ? 'ft-up' : p < -4 ? 'ft-down' : 'ft-flat'}">${p > 4 ? '\u25b2 ' : p < -4 ? '\u25bc ' : ''}${p > 0 ? '+' : ''}${p}%</span>`;
+  function bars(vals, labels, color, last) {
+    const W = 300, H = 56, n = vals.length, max = Math.max(...vals, 1), bw = W / n;
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(labels[0] + ' to ' + labels[n - 1])}">` +
+      vals.map((v, i) => `<rect x="${(i * bw + 1).toFixed(1)}" y="${(H - v / max * (H - 4)).toFixed(1)}" width="${Math.max(bw - 2, 1).toFixed(1)}" height="${(v / max * (H - 4)).toFixed(1)}" fill="${color}" opacity="${last && i === n - 1 ? .45 : 1}"><title>${esc(labels[i])}: ${v.toLocaleString()}</title></rect>`).join('') + '</svg>';
+  }
+  fetch('field-trends.json').then(r => r.json()).then(d => {
+    const now = new Date(d.updated || Date.now()), thisYear = now.getFullYear();
+    const rising = [];
+    grid.innerHTML = Object.entries(d.topics).filter(([id, t]) => Object.keys(t.papers || {}).length >= 24 || Object.keys(t.papers_yearly || {}).length || Object.keys(t.nsf || {}).length > 1).map(([id, t]) => {
+      let html = `<article class="ft-card"><h3>${esc(t.label)}</h3><div class="ft-tests">` +
+        (t.tests || []).filter(x => /^COSMIC-/.test(x)).map(x => `<a href="testing-schedule.html#${x}">${x}</a>`).join('') + '</div>';
+      const months = Object.keys(t.papers || {}).sort();
+      if (months.length >= 24) {
+        const v = months.map(k => t.papers[k]);
+        const last12 = v.slice(-12).reduce((a, b) => a + b, 0), prev12 = v.slice(-24, -12).reduce((a, b) => a + b, 0);
+        const qs = {}; months.forEach(k => { const [y, m] = k.split('-'); const q = `${y} Q${Math.ceil(m / 3)}`; qs[q] = (qs[q] || 0) + t.papers[k]; });
+        const qk = Object.keys(qs); const lastQFull = months[months.length - 1].endsWith('-03') || months[months.length - 1].endsWith('-06') || months[months.length - 1].endsWith('-09') || months[months.length - 1].endsWith('-12');
+        let share = '';
+        const base = t.baseline && d.baselines[t.baseline];
+        if (base) {
+          const b12 = months.slice(-12).reduce((a, k) => a + (base[k] || 0), 0), bp12 = months.slice(-24, -12).reduce((a, k) => a + (base[k] || 0), 0);
+          const s1 = b12 ? last12 / b12 * 100 : 0, s0 = bp12 ? prev12 / bp12 * 100 : 0;
+          share = `<div class="ft-sub">Share of its arXiv area: ${s1.toFixed(1)}% (a year earlier ${s0.toFixed(1)}%)</div>`;
+          if (s0) rising.push([t.label, pct(s1, s0)]);
+        }
+        html += `<div class="ft-row"><div class="ft-k">Papers, last 12 months ${chg(pct(last12, prev12))}</div>` +
+          bars(qk.map(q => qs[q]), qk, '#005ba5', !lastQFull) +
+          `<div class="ft-sub">${last12.toLocaleString()} on arXiv in the last 12 months, by quarter since ${qk[0].slice(0, 4)}</div>${share}</div>`;
+      } else if (t.papers_yearly && Object.keys(t.papers_yearly).length) {
+        const ys = Object.keys(t.papers_yearly).sort(), v = ys.map(y => t.papers_yearly[y]);
+        const full = ys.filter(y => +y < thisYear), a = t.papers_yearly[full[full.length - 1]], b = t.papers_yearly[full[full.length - 2]];
+        html += `<div class="ft-row"><div class="ft-k">Papers, ${full[full.length - 1]} ${chg(pct(a, b))}</div>` +
+          bars(v, ys, '#005ba5', true) + `<div class="ft-sub">${(a || 0).toLocaleString()} in PubMed in ${full[full.length - 1]}, by year since ${ys[0]}</div></div>`;
+      }
+      for (const [src, name, col] of [['nsf', 'NSF', '#1a1d33'], ['nih', 'NIH', '#5a6878']]) {
+        const f = t[src]; if (!f || !Object.keys(f).length) continue;
+        const ys = Object.keys(f).sort(), full = ys.filter(y => +y < thisYear);
+        const a = f[full[full.length - 1]], b = f[full[full.length - 2]];
+        html += `<div class="ft-row"><div class="ft-k">New ${name} funding, ${full[full.length - 1]} ${chg(pct(a.usd, b && b.usd))}</div>` +
+          bars(ys.map(y => f[y].usd), ys.map(y => `${y} (${f[y].awards} awards)`), col, true) +
+          `<div class="ft-sub">${money(a.usd)} across ${a.awards} awards in ${full[full.length - 1]}, by year since ${ys[0]}</div></div>`;
+      }
+      return html + '</article>';
+    }).join('');
+    rising.sort((x, y) => y[1] - x[1]);
+    if (rising.length) {
+      const el = document.getElementById('ft-rising'); el.hidden = false;
+      const say = ([l, p]) => `${esc(l)} (share ${p >= 0 ? 'up' : 'down'} ${Math.abs(p)}%)`;
+      const up = rising.filter(r => r[1] > 0).slice(0, 3), down = rising.filter(r => r[1] < 0).slice(-2).reverse();
+      el.innerHTML = (up.length ? `<strong>Gaining the most attention:</strong> ${up.map(say).join(' &middot; ')}.` : '')
+        + (down.length ? ` <strong>Cooling the most:</strong> ${down.map(say).join(' &middot; ')}.` : '');
+      el.hidden = !(up.length || down.length);
+    }
+    document.getElementById('ft-notes').textContent = `Updated ${d.updated || ''}. ${d.notes || ''} Faded bars are periods still in progress.`;
+  }).catch(() => { grid.innerHTML = '<p>The trends could not be loaded.</p>'; });
+})();
+</script>
+<script>
+/* Field Watch: field-watch.json is written weekly by tools/field_watch.py; reviews come from field-watch-notes.json. */
+(function () {
+  const REL = { 'consistent': 'Consistent', 'tension': 'In tension', 'independent-test': 'Independent test', 'convergent': 'Convergent',
+                'method': 'Method', 'context': 'Context', 'contact': 'In contact' };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const testLink = t => /^COSMIC-/.test(t) ? `<a class="fw-tag" href="testing-schedule.html#${t}">${t}</a>` : '';
+  const STEP = 12; let shown = STEP, filter = 'all', items = [], topics = {};
+  function card(i) {
+    const n = i.note;
+    const rel = n ? `<span class="fw-rel ${esc(n.relation)}">${esc(REL[n.relation] || n.relation)}</span>` : '<span class="fw-unread">Found by search, not yet reviewed</span>';
+    const tags = i.topics.map(t => `<span class="fw-tag">${esc(topics[t] ? topics[t].label : t)}</span>`).join('')
+               + [...new Set([...(n && n.test ? [n.test] : []), ...i.tests])].map(testLink).join('');
+    return `<article class="fw-item${n ? ' reviewed' : ''}">
+      <div class="fw-top"><span>${esc(i.date)}</span><span>${esc(i.venue)}</span>${rel}</div>
+      <a class="fw-title" href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a>
+      <div class="fw-authors">${esc(i.authors)}</div>
+      ${n && n.note ? `<p class="fw-note">${esc(n.note)}</p>` : ''}
+      ${n && n.relation === 'convergent' && n.our_record ? `<p class="fw-note fw-dates">Our earlier record: <a href="${esc(n.our_record.ref)}" target="_blank" rel="noopener">${esc(n.our_record.date)}</a>${n.their_date ? ` &nbsp;·&nbsp; This work: ${esc(n.their_date)}` : ''}</p>` : ''}
+      <div class="fw-tags">${tags}</div>
+      ${i.abstract ? `<details><summary>Abstract</summary><p>${esc(i.abstract)}</p></details>` : ''}
+    </article>`;
+  }
+  function draw() {
+    const list = items.filter(i => filter === 'all' || (filter === 'reviewed' ? i.note : i.topics.includes(filter)));
+    document.getElementById('fw-list').innerHTML = list.slice(0, shown).map(card).join('') || '<p>Nothing in this group yet.</p>';
+    const more = document.getElementById('fw-more'); more.hidden = list.length <= shown;
+  }
+  Promise.all([fetch('field-watch.json').then(r => r.json()),
+               fetch('field-watch-notes.json').then(r => r.json()).catch(() => ({ items: {} }))]).then(([d, notes]) => {
+    d.topics.forEach(t => topics[t.id] = t);
+    items = d.items.map(i => Object.assign({}, i, { note: (notes.items || {})[i.id] }))
+                   .sort((a, b) => (!!b.note - !!a.note) || b.date.localeCompare(a.date));
+    const nRev = items.filter(i => i.note).length;
+    document.getElementById('fw-meta').textContent =
+      `Last search ${d.updated} \u00b7 ${items.length} papers from the last six months \u00b7 ${nRev} reviewed`;
+    const bar = document.getElementById('fw-filters');
+    const btn = (id, label) => `<button class="filter-btn${id === 'all' ? ' active' : ''}" data-f="${id}">${esc(label)}</button>`;
+    bar.innerHTML = btn('all', 'All') + (nRev ? btn('reviewed', 'Reviewed') : '')
+      + d.topics.filter(t => items.some(i => i.topics.includes(t.id))).map(t => btn(t.id, t.label)).join('');
+    bar.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      bar.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+      filter = b.dataset.f; shown = STEP; draw();
+    });
+    document.getElementById('fw-more').addEventListener('click', () => { shown += STEP; draw(); });
+    const want = new URLSearchParams(location.search).get('fw');   /* media.html?fw=<topic> preselects a topic (the validation rack's PAPERS button) */
+    const pre = want && bar.querySelector(`[data-f="${CSS.escape(want)}"]`);
+    if (pre) { bar.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === pre)); filter = want; }
+    draw();
+  }).catch(() => { document.getElementById('fw-meta').textContent = 'The latest search could not be loaded.'; });
+})();
+</script>
 </body>
 </html>
