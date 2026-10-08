@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The COSMIC Framework poster, v6</title>
+<!--
+  Print poster, 24 x 36 in trim with 0.125 in bleed on every side (24.25 x 36.25 in),
+  laid out at 96 px per inch: 2328 x 3480 px. Keep text at least 0.75 in (72 px)
+  inside the trim. Render to PDF and PNG with render.js.
+-->
+<link href="../social/fonts/fonts.css" rel="stylesheet">
+<style>
+  @page { size: 24.25in 36.25in; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2328px; height: 3480px; background: #060a13; }
+  .poster { position: relative; width: 2328px; height: 3480px; overflow: hidden; color: #fff;
+    background: radial-gradient(ellipse 120% 60% at 50% 0%, #142443 0%, #0a1222 45%, #060a13 75%);
+    font-family: Inter, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #stars { position: absolute; inset: 0; }
+  .wrap { position: absolute; left: 156px; right: 156px; top: 0; bottom: 0; }   /* 1.5 in side margins */
+
+  /* top */
+  .eyebrow { position: absolute; top: 190px; left: 0; font: 700 34px/1 Inter, sans-serif; letter-spacing: .32em;
+    text-transform: uppercase; color: #f1e303; }
+  .headline { position: absolute; top: 255px; left: -6px; font-family: Anton, Impact, sans-serif; font-size: 222px;
+    line-height: .94; text-transform: uppercase; letter-spacing: .005em; }
+  .headline .y { color: #f1e303; }
+  .lede { position: absolute; top: 925px; left: 0; width: 1500px; font: italic 500 60px/1.32 'Source Serif 4', Georgia, serif;
+    color: rgba(255,255,255,.88); }
+
+  /* the spine */
+  .colheads { position: absolute; top: 1225px; left: 0; right: 0; display: grid; grid-template-columns: 1fr 120px 1fr;
+    font: 700 28px/1 Inter, sans-serif; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+  .colheads div:first-child { text-align: right; }
+  .colheads div:last-child { color: #f1e303; }
+  .spine { position: absolute; top: 1295px; left: 0; right: 0; }
+  .spine .line { position: absolute; left: calc(50% - 4px); top: 30px; width: 8px; height: 1110px; border-radius: 4px;
+    background: linear-gradient(180deg, #6b4cff 0%, #3aa0ff 30%, #9be3ff 55%, #f1e303 100%); box-shadow: 0 0 40px rgba(120,160,255,.35); }
+  .stage { position: absolute; left: 0; right: 0; display: grid; grid-template-columns: 1fr 120px 1fr; align-items: start; }
+  .stage .dot { justify-self: center; width: 44px; height: 44px; border-radius: 50%; background: #060a13; border: 7px solid #9be3ff;
+    margin-top: 6px; box-shadow: 0 0 0 10px rgba(155,227,255,.12); }
+  .stage.last .dot { border-color: #f1e303; box-shadow: 0 0 0 12px rgba(241,227,3,.18), 0 0 40px rgba(241,227,3,.6); }
+  .q { text-align: right; padding-right: 16px; }
+  .q p { font: 600 36px/1.25 Inter, sans-serif; color: rgba(255,255,255,.80); margin-bottom: 14px; }
+  .q p b { font-family: Anton, Impact, sans-serif; font-weight: 400; color: rgba(255,255,255,.45); margin-left: 10px; letter-spacing: .04em; }
+  .a { padding-left: 16px; }
+  .a h3 { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 64px; line-height: 1; text-transform: uppercase; }
+  .a p { font: italic 500 34px/1.3 'Source Serif 4', Georgia, serif; color: rgba(255,255,255,.80); margin-top: 8px; }
+
+  /* the tests */
+  .tests { position: absolute; top: 3215px - 0px; }
+  .band { position: absolute; top: 2655px; left: 0; right: 0; }
+  .band h2 { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 100px; line-height: 1; text-transform: uppercase; }
+  .band h2 .y { color: #f1e303; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 30px; }
+  .card { border-top: 10px solid #f1e303; background: rgba(255,255,255,.05); padding: 34px 40px 36px; }
+  .card .id { font: 700 28px/1 Inter, sans-serif; letter-spacing: .2em; color: #f1e303; }
+  .card .claim { font-family: Anton, Impact, sans-serif; font-size: 70px; line-height: 1.02; text-transform: uppercase; margin: 18px 0 14px; }
+  .card .when { font: 600 36px/1.3 Inter, sans-serif; }
+  .card .doi { font: 400 26px/1.3 Inter, sans-serif; color: rgba(255,255,255,.6); margin-top: 10px; }
+  .consistent { margin-top: 26px; font: 400 28px/1.45 Inter, sans-serif; color: rgba(255,255,255,.72); }
+  .consistent b { color: #fff; font-weight: 600; }
+
+  .foot { position: absolute; left: 0; right: 0; top: 3250px; display: flex; align-items: center; gap: 40px; }
+  .foot img.qr { width: 140px; height: 140px; background: #fff; padding: 12px; border-radius: 6px; }
+  .foot .url { font: 700 46px/1.1 Inter, sans-serif; }
+  .foot .promise { font: italic 500 34px/1.3 'Source Serif 4', Georgia, serif; color: rgba(255,255,255,.75); margin-top: 6px; }
+  .foot .marks { margin-left: auto; display: flex; align-items: center; gap: 44px; }
+  .foot .marks img { height: 84px; width: auto; }
+
+  /* v6: one glowing structure carries the origin sequence; numbered cards point into it */
+  #art { position: absolute; left: 0; top: 0; width: 2328px; height: 3480px; }
+  #leaders { position: absolute; left: 0; top: 0; }
+  .headline, .lede { text-shadow: 0 2px 18px rgba(3,5,12,.9); }
+  .lede { width: 1180px; font-size: 52px; }
+  .cards6 { position: absolute; left: 0; top: 1215px; width: 1040px; }
+  .c6 { position: relative; width: 1040px; margin-bottom: 14px; padding: 16px 26px 16px 96px; border-radius: 14px;
+    background: rgba(8,12,26,.78); border: 2px solid var(--c); box-shadow: 0 0 28px -6px var(--c); }
+  .c6 .n { position: absolute; left: 22px; top: 18px; width: 54px; height: 54px; border-radius: 50%; background: var(--c);
+    color: #060a13; font: 400 36px/54px Anton, Impact, sans-serif; text-align: center; }
+  .c6 h3 { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 46px; line-height: 1; text-transform: uppercase; }
+  .c6 .open { font: 600 25px/1.3 Inter, sans-serif; color: rgba(255,255,255,.66); margin-top: 6px; white-space: nowrap; }
+  .c6 .open b { color: var(--c); font-weight: 700; letter-spacing: .12em; font-size: 22px; margin-right: 8px; }
+  .c6 .prop { font: italic 500 30px/1.28 'Source Serif 4', Georgia, serif; color: #fff; margin-top: 6px; }
+  .key { position: absolute; left: 0; top: 1150px; font: 700 24px/1 Inter, sans-serif; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+  .key span { color: #f1e303; }
+</style>
+</head>
+<body>
+<div class="poster">
+  <canvas id="art" width="4656" height="6960" aria-hidden="true"></canvas>
+  <svg id="leaders" width="2328" height="3480" viewBox="0 0 2328 3480" aria-hidden="true"></svg>
+  <div class="wrap">
+
+    <div class="eyebrow">The COSMIC Framework</div>
+    <div class="headline">What if<br>it&rsquo;s all<br><span class="y">information?</span></div>
+    <p class="lede">An independent theory proposing that information is what reality is made of, and that one process runs from before spacetime to the mind reading this.</p>
+    <div class="key">The origin sequence &middot; <span>open questions and what the framework proposes</span></div>
+
+    <div class="cards6">
+      <div class="c6" style="--c:#a78bff;" data-i="0"><div class="n">1</div><h3>Pre-geometric substrate</h3><p class="open"><b>OPEN</b>What came before t&nbsp;=&nbsp;0? &middot; What are objects made of?</p><p class="prop">A prior state, outside space and time. Relationships come first; objects are patterns in them.</p></div>
+      <div class="c6" style="--c:#5b8cff;" data-i="1"><div class="n">2</div><h3>Planck crystallization</h3><p class="open"><b>OPEN</b>Inflation needs its own result &middot; Vacuum energy 120 orders off</p><p class="prop">Spacetime crystallizes out of the substrate. Expansion continues it, so dark energy should evolve.</p></div>
+      <div class="c6" style="--c:#45c8ff;" data-i="2"><div class="n">3</div><h3>Spacetime emerges</h3><p class="open"><b>OPEN</b>Why isn&rsquo;t the sky the same every way? &middot; Gravity vs quantum</p><p class="prop">Uneven crystallization leaves a direction in the sky. Gravity and quantum theory are two limits of one substrate.</p></div>
+      <div class="c6" style="--c:#3ff0d8;" data-i="3"><div class="n">4</div><h3>Quantum fields</h3><p class="open"><b>OPEN</b>Where is the observer in the equations?</p><p class="prop">Measurement is information exchange. The observer is inside physics.</p></div>
+      <div class="c6" style="--c:#c8fff0;" data-i="4"><div class="n">5</div><h3>Particles &amp; forces</h3><p class="open"><b>OPEN</b>Why do the constants have these values?</p><p class="prop">They are what stable information processing requires.</p></div>
+      <div class="c6" style="--c:#ffb45a;" data-i="5"><div class="n">6</div><h3>Stars &amp; renewal</h3><p class="open"><b>OPEN</b>Infinite density at zero volume?</p><p class="prop">No singularities. Black holes keep information and recycle structure.</p></div>
+      <div class="c6" style="--c:#ff5fd2;" data-i="6"><div class="n">7</div><h3>Consciousness</h3><p class="open"><b>OPEN</b>Why is the scientist outside the theory?</p><p class="prop">We are the universe examining itself, locally.</p></div>
+    </div>
+
+    <div class="band">
+      <h2>Put to the test. <span class="y">Dated in advance.</span></h2>
+      <div class="cards">
+        <div class="card">
+          <div class="id">COSMIC-005 &middot; DARK ENERGY</div>
+          <div class="claim">Dark energy keeps evolving</div>
+          <div class="when">Decided by DESI&rsquo;s third data release &middot; 2027</div>
+          <div class="doi">Pre-registered 12 Sept 2026 &middot; doi.org/10.5281/zenodo.22719514</div>
+        </div>
+        <div class="card">
+          <div class="id">COSMIC-007 &middot; LARGE-SCALE STRUCTURE</div>
+          <div class="claim">The sky has a direction</div>
+          <div class="when">Decided by Rubin&rsquo;s first data release &middot; mid-2028</div>
+          <div class="doi">Pre-registered 12 Sept 2026 &middot; doi.org/10.5281/zenodo.22720954</div>
+        </div>
+      </div>
+      <p class="consistent"><b>Consistent so far, but recorded after the data, so not counted as predictions:</b> DESI dark energy (2024&ndash;25) &middot; Google Willow error correction (2024) &middot; JWST early galaxies (2024&ndash;25) &middot; ALMA hot cluster gas (2026).</p>
+    </div>
+
+    <div class="foot">
+      <img class="qr" src="qr-framework.svg" alt="QR code: eequalsicsquared.com/framework.html">
+      <div><div class="url">eequalsicsquared.com</div><div class="promise">Every result published, whatever it shows.</div></div>
+      <div class="marks"><img src="../ic2-logo-white.png" alt="Ic² Research Institute"><img src="../framework-white.png" alt="The COSMIC Framework"></div>
+    </div>
+
+
+  </div>
+</div>
+<script src="v6-art.js"></script>
+</body>
+</html>
