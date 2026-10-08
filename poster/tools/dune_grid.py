@@ -1,4 +1,4 @@
-"""Builds the measurement grid that lies over the dunes in poster v5.
+"""Builds the neon scan grid that lies over the dunes in poster v5.
 
 Finds the skyline (where the sand meets the sky) in each column of the
 photograph, then draws a perspective grid on the sand: lines of equal depth
@@ -83,19 +83,77 @@ for t in np.linspace(-1.6, 2.6, 46):
 def poly(pts):
     return 'M' + ' L'.join(f'{x:.1f},{y:.1f}' for x, y in pts)
 
-# depth-cued opacity: faint near the horizon, stronger close up
-lines = []
+def surface(px, d):                  # a point on the draped surface, at depth d (0 = horizon)
+    s = skyline(px)
+    py = s + (bottom - s) * d
+    py -= (shade(px, py) - .35) * 34 * d
+    return to_poster(px, max(py, s + 2))
+
+# The scan: one sweep line part-way down the sand; the mesh is brightest around it,
+# as if a beam from above is passing over it now.
+DS = .30
+def lit(d):
+    return float(np.exp(-((d - DS) / .10) ** 2))
+
+wide, crisp = [], []
 for kind, v, pts in paths:
-    op = .16 + .30 * (v if kind == 'h' else .6)
-    lines.append(f'<path d="{poly(pts)}" stroke-opacity="{op:.2f}"/>')
-# a measured baseline: a dimension line with ticks across the foreground
-by = to_poster(0, skyline(W0 * .3) + (bottom - skyline(W0 * .3)) * .42)[1]
-ticks = ''.join(f'<line x1="{x}" y1="{by - 10:.0f}" x2="{x}" y2="{by + 10:.0f}"/>' for x in range(260, 2120, 186))
+    if kind == 'h':
+        op = .30 + .55 * lit(v)
+    else:
+        op = .34
+    wide.append(f'<path d="{poly(pts)}" stroke-opacity="{op * .55:.2f}"/>')
+    crisp.append(f'<path d="{poly(pts)}" stroke-opacity="{op:.2f}"/>')
+
+# scanned points where the lines cross, brightest near the sweep
+dots = []
+for d in depths:
+    for t in np.linspace(-1.6, 2.6, 46):
+        px = vpx + (t * W0 * .5) * (0.04 + d)
+        if px < 0 or px > W0: continue
+        x, y = surface(px, d)
+        r = 2.4 + 4 * d
+        dots.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill-opacity="{.55 + .45 * lit(d):.2f}"/>')
+
+# the sweep itself, and a curtain of light rising from it
+scan = [surface(px, DS) for px in np.linspace(0, W0, 260)]
+curtain = scan + [(x, y - 150) for x, y in reversed(scan)]
+
+# beams from a scanner high above, fanning down onto the sweep line
+SRC = (1900, 260)
+beams = []
+for i, (x, y) in enumerate(scan[::6]):
+    if x < 1050: continue           # keep the beams in the open sky, clear of the subheading
+    beams.append(f'<line x1="{SRC[0]}" y1="{SRC[1]}" x2="{x:.1f}" y2="{y:.1f}"/>')
+
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{POSTER_W}" height="2002" viewBox="0 0 {POSTER_W} 2002">
-<defs><filter id="glow" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-<g fill="none" stroke="#9ff3ff" stroke-width="2.1" filter="url(#glow)">
-{chr(10).join(lines)}
+<defs>
+  <linearGradient id="neon" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="{POSTER_W}" y2="0">
+    <stop offset="0" stop-color="#3fd8ff"/><stop offset=".45" stop-color="#8a6bff"/><stop offset="1" stop-color="#ff4fd8"/>
+  </linearGradient>
+  <linearGradient id="curtain" x1="0" y1="1" x2="0" y2="0">
+    <stop offset="0" stop-color="#b98cff" stop-opacity=".45"/><stop offset="1" stop-color="#b98cff" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="beam" gradientUnits="userSpaceOnUse" x1="0" y1="{SRC[1]}" x2="0" y2="1400">
+    <stop offset="0" stop-color="#ff7be6" stop-opacity="0"/><stop offset=".55" stop-color="#b98cff" stop-opacity=".10"/><stop offset="1" stop-color="#7fe3ff" stop-opacity=".32"/>
+  </linearGradient>
+  <filter id="blur8" x="-5%" y="-20%" width="110%" height="140%"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="blur3" x="-5%" y="-20%" width="110%" height="140%"><feGaussianBlur stdDeviation="2.5"/></filter>
+</defs>
+<g stroke="url(#beam)" stroke-width="2">
+{chr(10).join(beams)}
 </g>
+<path d="{poly(curtain)} Z" fill="url(#curtain)"/>
+<g fill="none" stroke="url(#neon)" stroke-width="7" filter="url(#blur8)">
+{chr(10).join(wide)}
+</g>
+<g fill="none" stroke="url(#neon)" stroke-width="2.2">
+{chr(10).join(crisp)}
+</g>
+<g fill="#ffe6fb" filter="url(#blur3)">
+{chr(10).join(dots)}
+</g>
+<path d="{poly(scan)}" fill="none" stroke="#ffd6f6" stroke-width="12" stroke-opacity=".55" filter="url(#blur8)"/>
+<path d="{poly(scan)}" fill="none" stroke="#fff2fc" stroke-width="3"/>
 </svg>'''
 open(out, 'w').write(svg)
-print('skyline (poster y) min/max:', round(OY + sky.min() * 4 * SC), round(OY + sky.max() * 4 * SC), 'paths:', len(paths))
+print('skyline (poster y) min/max:', round(OY + sky.min() * 4 * SC), round(OY + sky.max() * 4 * SC), 'paths:', len(paths), 'dots:', len(dots))
