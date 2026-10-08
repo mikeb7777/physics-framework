@@ -23,8 +23,10 @@ record brought up to date:
 
 - The Zenodo deposit of 31 July 2025 made the general claim (directional
   asymmetry beyond 100 Mpc). The direction (l, b) ≈ (210°, −20°) was first
-  written on the website in May 2026, and the pass mark was tightened in
-  September 2026 (more than 3σ, along that axis). The reel shows all three dates.
+  written on the website in May 2026. The full pre-registration, with the
+  direction and the pass mark (more than 3σ, along that axis), is the Zenodo
+  deposit of 12 September 2026, doi.org/10.5281/zenodo.22720954. The reel
+  shows all three dates.
 - The carousel's "1.65 m focal plane" was wrong: the LSST Camera's focal plane
   is about 64 cm across. Its "DP2: now" is out of date. Neither is in the reel.
 - Rubin Data Release 1 is expected by the end of June 2028.
@@ -33,10 +35,10 @@ record brought up to date:
 
 > We made a prediction. The Rubin Observatory will check it.
 >
-> COSMIC-007: on the largest scales, beyond 100 megaparsecs, galaxies should lean toward one direction in the sky, (l, b) ≈ (210°, −20°). Every step is dated, including the ones we added later: filed on Zenodo in July 2025, direction stated in May 2026, bar raised in September 2026. Rubin's first data release, expected mid-2028, decides it. Whatever it shows, we publish it.
+> COSMIC-007: on the largest scales, beyond 100 megaparsecs, galaxies should lean toward one direction in the sky, (l, b) ≈ (210°, −20°). Every step is dated, including the ones we added later: first claim on Zenodo in July 2025, direction stated in May 2026, pre-registered in full in September 2026 with a pass mark of more than 3σ on that axis. Rubin's first data release, expected mid-2028, decides it. Whatever it shows, we publish it.
 >
 > Follow the test: eequalsicsquared.com
-> Registered: doi.org/10.5281/zenodo.16639922
+> Pre-registered: doi.org/10.5281/zenodo.22720954
 >
 > Images: NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA/P. Horálek (Institute of Physics in Opava); NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA/H. Stockebrand. CC BY 4.0. Independent research; not affiliated with, or endorsed by, Rubin Observatory or NOIRLab.
 >
