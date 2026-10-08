@@ -48,3 +48,11 @@ record brought up to date:
 
 Landauer's limit as the hook, information as physical, time as changing
 relationships, a registered test walking to DESI DR3 in 2027, and the Quest.
+
+## Ideas for later posts
+
+- **8 billion minds.** "8 billion conscious minds, and every one of them is the
+  universe looking at itself." The scale version of the poster's Consciousness
+  stage ("Where are you in the theory?"). Suits a short reel or a single image:
+  the web of connections from the poster, pulling back to the scale of the
+  cosmic web.
