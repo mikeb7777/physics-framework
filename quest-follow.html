@@ -51,13 +51,15 @@
       border-top: 1px solid rgba(241,227,3,.45); }
     /* the print on the moon */
     .q-print { padding-top: 1rem; padding-bottom: 2rem; }
-    .moonfig { margin: 0; }
-    .moonfig img { display: block; width: 100%; height: auto; border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12); box-shadow: 0 10px 34px rgba(0,0,0,.45); }
-    .moonfig figcaption { color: rgba(255,255,255,.72); font-size: .95rem; line-height: 1.8;
-      max-width: 68ch; margin: 1rem auto 0; text-align: center; font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic; }
-    @media (max-width: 700px) { .moonfig figcaption { text-align: left; font-size: .9rem; } }
+    /* the real thing: NASA's photograph of an Apollo 11 bootprint, beside the caption */
+    .moonfig { margin: 0 auto; max-width: 980px; display: grid; grid-template-columns: minmax(0, 380px) 1fr; gap: 2.75rem; align-items: center; }
+    .moonfig img { display: block; width: 100%; height: auto; border-radius: 10px; filter: grayscale(1) contrast(1.15);
+      border: 1px solid rgba(255,255,255,.14); box-shadow: 0 12px 36px rgba(0,0,0,.5); }
+    .moonfig figcaption { color: rgba(255,255,255,.82); font-size: 1.08rem; line-height: 1.85;
+      font-family: 'Source Serif 4', Georgia, serif; font-style: italic; }
+    .moonfig .credit { display: block; margin-top: 1rem; font: normal 600 .72rem/1.5 -apple-system, 'Segoe UI', sans-serif;
+      letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    @media (max-width: 760px) { .moonfig { grid-template-columns: 1fr; gap: 1.5rem; } .moonfig img { max-width: 360px; margin: 0 auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 40%; } .moonfig figcaption { font-size: .98rem; } }
 
     .q-section { padding: 3rem 2rem; }
     .q-inner { max-width: var(--max-width); margin: 0 auto; }
@@ -400,8 +402,8 @@
     <section class="q-section q-print">
       <div class="q-inner">
         <figure class="moonfig">
-          <img src="moon-footprint.svg" alt="A trail of bootprints pressed into lunar regolith, walking toward the viewer, with Earth low in the black sky." loading="lazy">
-          <figcaption>Nothing on the Moon moves dust. No wind, no water, no weather. The prints left there in 1969 are still exactly where they were put, which makes them the plainest record anyone has ever left: a dated mark that cannot be edited afterward. That is the whole idea behind registering a prediction before the data exists, and it is why the Quest walks on footprints.</figcaption>
+          <img src="apollo-bootprint.jpg" width="760" height="1198" alt="A single astronaut bootprint pressed into grey lunar soil, its ridged tread sharp-edged, photographed from above." loading="lazy">
+          <figcaption>Nothing on the Moon moves dust. No wind, no water, no weather. The prints left there in 1969 are still exactly where they were put, which makes them the plainest record anyone has ever left: a dated mark that cannot be edited afterward. That is the whole idea behind registering a prediction before the data exists, and it is why the Quest walks on footprints.<span class="credit">Apollo 11 bootprint in lunar soil, 20 July 1969. NASA, AS11-40-5878.</span></figcaption>
         </figure>
       </div>
     </section>
