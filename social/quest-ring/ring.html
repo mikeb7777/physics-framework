@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<!-- The Follow the Quest figure: a holographic ring whose signal spikes at each dated step of
+     COSMIC-007 and runs on, dotted, to the two data releases still ahead. Rendered as
+     quest-ring.jpg and .webp (760 x 980) by social/quest-ring/render.js -->
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>html,body{margin:0;background:#070812}canvas{display:block}</style></head>
+<body><canvas id="c" width="760" height="980"></canvas>
+<script>
+Promise.all(['700 28px Inter', '400 22px Inter', '600 20px Inter'].map(f => document.fonts.load(f))).then(() => {
+const W = 760, H = 980, cv = document.getElementById('c'), g = cv.getContext('2d');
+// background: deep navy with a soft spectral wash under the ring
+g.fillStyle = '#070812'; g.fillRect(0, 0, W, H);
+const wash = (x, y, r, c) => { const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, c); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, W, H); };
+wash(380, 420, 420, 'rgba(60,70,190,.22)'); wash(250, 520, 260, 'rgba(255,120,40,.10)'); wash(520, 520, 260, 'rgba(40,200,255,.10)');
+// faint measuring grid, fading out to the edges
+g.save(); g.globalAlpha = .07; g.strokeStyle = '#9fb4ff'; g.lineWidth = 1;
+for (let x = 20; x < W; x += 40) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke(); }
+for (let y = 20; y < H; y += 40) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
+g.restore();
+const fade = g.createRadialGradient(380, 440, 200, 380, 440, 620); fade.addColorStop(0, 'rgba(7,8,18,0)'); fade.addColorStop(1, 'rgba(7,8,18,1)');
+g.fillStyle = fade; g.fillRect(0, 0, W, H);
+
+const CX = 380, CY = 400, RX = 300, RY = 112, BAND = 70;   // ring centre, radii, band height
+const pt = (th, h) => [CX + RX * Math.cos(th), CY + RY * Math.sin(th) - h];   // h: height on the band
+// colour runs amber -> magenta -> violet -> cyan, left to right across the front
+const hue = th => 30 - 205 * (1 + Math.cos(th)) / 2;   // by position across the ring, so the back matches the front
+const col = (th, a) => `hsla(${(hue(th) + 360) % 360}, 100%, 62%, ${a})`;
+
+// the events: angles on the front of the ring (pi = far left, 0 = far right)
+const EV = [
+  { th: Math.PI * .86, d: '31 Jul 2025', l: 'first claim, Zenodo', done: true },
+  { th: Math.PI * .68, d: 'May 2026', l: 'direction stated', done: true },
+  { th: Math.PI * .50, d: '12 Sep 2026', l: 'COSMIC-007 filed', done: true },
+  { th: Math.PI * .31, d: '2027', l: 'DESI DR3', done: false },
+  { th: Math.PI * .13, d: 'mid-2028', l: 'Rubin DR1', done: false },
+];
+const NOW = Math.PI * .42;   // the record runs up to here; beyond it the trace is dotted
+// the signal: a quiet baseline with a heartbeat spike at each recorded event
+function sig(th) {
+  let s = Math.sin(th * 23) * 2.5 + Math.sin(th * 57 + 1) * 1.5;
+  for (const e of EV) { const d = th - e.th, k = e.done ? 1 : .35;
+    s += k * (52 * Math.exp(-((d * 34) ** 2)) - 20 * Math.exp(-(((d - .05) * 30) ** 2)) + 8 * Math.exp(-(((d + .07) * 20) ** 2))); }
+  return BAND / 2 + s;
+}
+// the band as glass: back half, then front half
+function band(front) {
+  const a0 = front ? 0 : Math.PI, a1 = front ? Math.PI : 2 * Math.PI, N = 160;
+  g.beginPath();
+  for (let i = 0; i <= N; i++) { const [x, y] = pt(a0 + (a1 - a0) * i / N, 0); i ? g.lineTo(x, y) : g.moveTo(x, y); }
+  for (let i = N; i >= 0; i--) { const [x, y] = pt(a0 + (a1 - a0) * i / N, BAND); g.lineTo(x, y); }
+  g.closePath();
+  const gr = g.createLinearGradient(CX - RX, 0, CX + RX, 0);
+  gr.addColorStop(0, `rgba(120,160,255,${front ? .10 : .05})`); gr.addColorStop(.5, `rgba(200,220,255,${front ? .16 : .06})`); gr.addColorStop(1, `rgba(120,160,255,${front ? .10 : .05})`);
+  g.fillStyle = gr; g.fill();
+  for (const h of [0, BAND]) { g.beginPath();
+    for (let i = 0; i <= N; i++) { const [x, y] = pt(a0 + (a1 - a0) * i / N, h); i ? g.lineTo(x, y) : g.moveTo(x, y); }
+    g.strokeStyle = `rgba(190,215,255,${front ? .55 : .22})`; g.lineWidth = front ? 2.2 : 1.4; g.stroke(); }
+}
+// the trace, drawn as added light in short coloured segments
+function trace(a0, a1, front) {
+  const N = 900; g.save(); g.globalCompositeOperation = 'lighter'; g.lineCap = 'round';
+  for (const [w, a] of [[14, .08], [6, .22], [2.6, .95]]) {
+    for (let i = 0; i < N; i++) {
+      const t0 = a0 + (a1 - a0) * i / N, t1 = a0 + (a1 - a0) * (i + 1) / N;
+      const future = front && t0 < NOW; if (future && (i % 10) > 5) continue;
+      const k = front ? (future ? .45 : 1) : .16;
+      const [x0, y0] = pt(t0, sig(t0)), [x1, y1] = pt(t1, sig(t1));
+      g.strokeStyle = col(t0, a * k); g.lineWidth = w; g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke();
+    }
+  }
+  g.restore();
+}
+// glow on the floor beneath the ring
+g.save(); g.globalCompositeOperation = 'lighter';
+for (let i = 0; i < 40; i++) { const th = Math.PI * (i / 39); const [x, y] = pt(th, -26);
+  const gr = g.createRadialGradient(x, y + 18, 0, x, y + 18, 60); gr.addColorStop(0, col(th, .10)); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.fillRect(x - 60, y - 42, 120, 120); }
+g.restore();
+
+band(false); trace(Math.PI, 2 * Math.PI, false);
+band(true); trace(0, Math.PI, true);
+
+// event markers and labels: alternate between two rows below the ring
+g.textAlign = 'center';
+EV.forEach((e, i) => {
+  const [x, y] = pt(e.th, sig(e.th)), row = i % 2 ? 1 : 0, ly = 640 + row * 130;
+  g.save(); g.globalCompositeOperation = 'lighter';
+  const gr = g.createRadialGradient(x, y, 0, x, y, 30); gr.addColorStop(0, col(e.th, e.done ? .9 : .4)); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.fillRect(x - 30, y - 30, 60, 60); g.restore();
+  g.beginPath(); g.arc(x, y, 7, 0, 2 * Math.PI);
+  if (e.done) { g.fillStyle = '#ffffff'; g.fill(); } else { g.strokeStyle = col(e.th, .95); g.lineWidth = 2.5; g.stroke(); }
+  // leader
+  const [bx, by] = pt(e.th, -4);
+  g.strokeStyle = col(e.th, e.done ? .55 : .35); g.lineWidth = 1.5; g.setLineDash(e.done ? [] : [5, 6]);
+  g.beginPath(); g.moveTo(bx, by + 8); g.lineTo(bx, ly - 44); g.stroke(); g.setLineDash([]);
+  g.fillStyle = e.done ? '#ffffff' : `hsl(${(hue(e.th) + 360) % 360}, 100%, 76%)`; g.font = '700 28px Inter';
+  g.fillText(e.d, bx, ly - 8);
+  g.fillStyle = 'rgba(255,255,255,.62)'; g.font = '400 22px Inter';
+  g.fillText(e.l, bx, ly + 24);
+});
+// heading and key
+g.textAlign = 'center'; g.fillStyle = 'rgba(255,255,255,.55)'; g.font = '600 20px Inter';
+g.fillText('THE RECORD SO FAR', CX, 120);
+g.fillStyle = 'rgba(255,255,255,.45)'; g.font = '400 20px Inter';
+g.fillText('solid: on the record      dotted: data still to come', CX, 890);
+g.fillText('DESI DR3 decides COSMIC-005.  Rubin DR1 decides COSMIC-007.', CX, 926);
+document.body.dataset.ready = 1;
+});
+</script></body></html>
