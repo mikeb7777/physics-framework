@@ -82,6 +82,24 @@ So the book is not empty of this work, but what it cites from outside the
 West is either Japanese, Soviet-era, or Chinese work that happened to appear
 in an American journal.
 
+## 2a. Second run: Version 6F (10 October 2026)
+
+Same script, same method. 6F adds eight reference entries (Singh; Imhausen,
+twice; Martzloff; Plofker; Berggren, twice; He et al.).
+
+| | 6E | 6F |
+|---|---|---|
+| Reference entries counted | 368 | 376 |
+| Published in North America or Western Europe | 96.5% | 96.5% |
+
+The share did not move, and that is the measure's limit, not a failure of the
+revision. Every new reference is about mathematics or physics done outside the
+West, by Egyptian, Chinese, Indian and Persian mathematicians and a Chinese
+quantum computing team, but each is published by a Western press or journal
+(Princeton, Springer, Elsevier, the American Physical Society). The venue count
+cannot see whose work is being credited. The affiliation pass in section 8 is
+what can.
+
 ## 3. History credits
 
 The book was searched for every passage that names who discovered or first

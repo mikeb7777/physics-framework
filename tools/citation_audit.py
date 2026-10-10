@@ -34,7 +34,7 @@ V=[
  (r'Journal of Neurophysiology|Journal of Comparative Neurology|Publications of the Astronomical Society of the Pacific|Chemical Reviews|Biological Bulletin|ACM Symposium','US society/journal','North America'),
  (r'General Relativity and Gravitation|Selecta Mathematica','German/Springer','Western Europe'),
  (r'Experimental Mathematics|Advances in Physics|Journal of Experimental Biology','UK publisher','Western Europe'),
- (r'Vision Research|Journal of Magnetic Resonance','Elsevier (NL)','Western Europe'),
+ (r'Vision Research|Journal of Magnetic Resonance|Historia Mathematica','Elsevier (NL)','Western Europe'),
  (r'Quantum, \d|QISS','European publisher','Western Europe'),
  (r'World Scientific','World Scientific (SG)','Asia (non-Western)'),
  (r'arXiv','arXiv preprint','Preprint (global)'),

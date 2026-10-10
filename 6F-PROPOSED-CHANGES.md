@@ -7,9 +7,24 @@ Page numbers are 6E's and are for locating only.
 
 # Version 6F: proposed changes
 
-**Status: proposed, awaiting Michael's decision.** Nothing here is applied.
-Whether these warrant a 6F at all, or wait for a larger revision, is Michael's
-call ("We will change the book revision, if needed").
+**Status: applied to the Word file, 10 October 2026** (Michael: "We can do 6F
+now"). `A Quest for The Big TOE Version 6F.docx` is built from 6E by
+`tools/book_6f_2026_10_10.py`. A1, A2, A3, A4 and B1 are in, and the edition line,
+which had still read "Version 6C" through 6D and 6E, now reads "Version 6F". D is
+not applied in the book: its references live on the website, where the note on
+their reach is already published. **Released 10 October 2026.** Michael exported the PDF from
+Word (461 pages) and uploaded it; all five changes and the edition line were
+checked in its text before the download page switched to 6F.
+
+**B1's citation is confirmed:** He, T., et al. (2025), "Experimental Quantum Error
+Correction below the Surface Code Threshold via All-Microwave Leakage
+Suppression," *Physical Review Letters* 135(26), 260601, published 22 December
+2025, doi:10.1103/rqkg-dw31. Confirmed against the APS record, the PRL issue
+cover and PubMed (41557410).
+
+New reference numbers, added to references.html: Introduction [59] Singh,
+[60] Imhausen; Element 1 [30] Imhausen, [31] Martzloff, [32] Plofker,
+[33] Berggren; Element 2 [28] Berggren; Element 21 [12] He et al.
 
 All the items come from the same finding: 96.5 percent of the book's 368
 cited works are published in North America or Western Europe, and no cited
