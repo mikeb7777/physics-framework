@@ -12,9 +12,9 @@ now"). `A Quest for The Big TOE Version 6F.docx` is built from 6E by
 `tools/book_6f_2026_10_10.py`. A1, A2, A3, A4 and B1 are in, and the edition line,
 which had still read "Version 6C" through 6D and 6E, now reads "Version 6F". D is
 not applied in the book: its references live on the website, where the note on
-their reach is already published. **The PDF is still to be exported from Word**,
-as every earlier edition was; the download page switches to 6F in the same
-commit as the PDF.
+their reach is already published. **Released 10 October 2026.** Michael exported the PDF from
+Word (461 pages) and uploaded it; all five changes and the edition line were
+checked in its text before the download page switched to 6F.
 
 **B1's citation is confirmed:** He, T., et al. (2025), "Experimental Quantum Error
 Correction below the Surface Code Threshold via All-Microwave Leakage
