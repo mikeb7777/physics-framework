@@ -43,7 +43,7 @@ head = head.replace("<title>Search | Ic² Research Institute</title>",
                     "  <link rel=\"canonical\" href=\"https://eequalsicsquared.com/support.html\">\n"
                     "  <meta property=\"og:title\" content=\"Support the Research\">\n"
                     f"  <meta property=\"og:description\" content=\"{html.escape(DESC)}\">\n"
-                    "  <meta property=\"og:image\" content=\"https://eequalsicsquared.com/share-card.jpg\">")
+                    "  <meta property=\"og:image\" content=\"https://eequalsicsquared.com/share-card.jpg?v=rgb\">")
 
 WAYS = [
     ("#8B0000", "Founding Supporters",
