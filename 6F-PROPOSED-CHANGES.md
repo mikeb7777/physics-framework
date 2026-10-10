@@ -11,7 +11,7 @@ Page numbers are 6E's and are for locating only.
 Whether these warrant a 6F at all, or wait for a larger revision, is Michael's
 call ("We will change the book revision, if needed").
 
-All three items come from the same finding: 96.5 percent of the book's 368
+All the items come from the same finding: 96.5 percent of the book's 368
 cited works are published in North America or Western Europe, and no cited
 work is in a language other than English, German or Latin. None of the items
 below corrects an error. Each one finishes a story the book tells only half
@@ -55,20 +55,64 @@ rule, found independently wherever someone counts carefully.
 **Change to.**
 > Pi doesn’t describe a property of circles; it emerges from the relationship
 > between a circle’s circumference and its diameter [13]. That relationship
-> was pursued independently across the ancient world: Archimedes bounded it
-> with polygons, Liu Hui and Zu Chongzhi in China carried the same method to
-> seven decimal places by the fifth century, and Madhava in Kerala found an
-> infinite series for it around 1400, nearly three centuries before it
-> appeared in Europe [n, n+1].
+> was pursued independently across the ancient and medieval world. Egyptian
+> scribes worked with a value close to 3.16 in a text first written about
+> 1850 BCE. Archimedes bounded
+> it with polygons. Liu Hui and Zu Chongzhi in China carried the polygon method
+> to seven decimal places by the fifth century. Madhava in Kerala found an
+> infinite series for it around 1400, and in 1424 al-Kashi in Samarkand
+> computed it to sixteen decimal places, a record that stood for nearly two
+> centuries [n, n+1, n+2, n+3].
 
 **New references.**
+> Imhausen, A. (2016). *Mathematics in Ancient Egypt: A Contextual History*.
+> Princeton University Press.
+>
 > Martzloff, J.-C. (1997). *A History of Chinese Mathematics*. Springer.
 >
 > Plofker, K. (2009). *Mathematics in India*. Princeton University Press.
+>
+> Berggren, J. L. (2016). *Episodes in the Mathematics of Medieval Islam*, 2nd
+> ed. Springer.
 
-**Why.** It strengthens the book's own point. A constant that several
+**Why.** It strengthens the book's own point. A constant that five
 civilizations reached separately, by different methods, is better evidence
 that π belongs to the geometry and not to a culture.
+
+### A3. The oldest written binary arithmetic
+
+**Where.** "The Binary Condition and Conservation", p. 27, after "Every
+binary in physics traces back to this original twoness."
+
+**Add.**
+> People found that twoness long before physics did. Egyptian scribes
+> multiplied by doubling: to multiply by 23 they doubled the other number
+> four times and added the rows for 16, 4, 2 and 1, which is writing 23 in
+> binary. The Rhind papyrus, copied around 1550 BCE from an older text, records the
+> method, and a
+> halving-and-doubling form of it is still taught in Ethiopia and Eritrea [n].
+
+**New reference.** Imhausen (2016), as in A2.
+
+**Why.** The section argues that distinction into two is the root of
+everything that follows. The oldest surviving arithmetic is built the same
+way, which is worth a sentence.
+
+**Wording note.** The Ethiopian method's history is thinly documented, so
+the sentence says only that it is taught there, not where or when it began.
+
+### A4. Optional: where the word "algorithm" comes from
+
+**Where.** The first use of "algorithm" in Element 2 (p. 67, "algorithms
+that avoid logically irreversible operations").
+
+**Add, as a footnote or a parenthesis.**
+> The word comes from al-Khwarizmi, the ninth-century Persian scholar in
+> Baghdad whose name was Latinized as *Algoritmi*; his book on equations also
+> gave us “algebra”.
+
+**Why.** The book leans on the word throughout. Optional because it is a
+credit, not an argument.
 
 ## B. Proposed, citation to confirm first
 

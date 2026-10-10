@@ -100,6 +100,20 @@ on optics and experimental method. Madhava is covered above. The book does not
 discuss the history of optics or of the experimental method, so there is
 nothing to correct; Ibn al-Haytham goes in the blog article instead.
 
+### 3a. Persia, Egypt, Ethiopia and Babylon (added 10 October 2026)
+
+Michael asked whether early mathematics from Persia, Egypt and Ethiopia had
+been checked. It had not: the first pass only examined passages that name a
+discoverer, and the book names none from these traditions. A second pass
+looked for places where their work bears on what the book discusses.
+
+| Tradition | Finding | Where it bears on the book | Outcome |
+|---|---|---|---|
+| Egypt | The Rhind papyrus (copied c. 1550 BCE from a text of about 1850 BCE; British Museum EA10057) works with π ≈ 256/81 ≈ 3.16, within 1%; Egyptian multiplication is by repeated doubling, which decomposes a number into powers of two | The π passage (Element 1); "The Binary Condition and Conservation" | Proposed for 6F (A2, A3) |
+| Persia | al-Kashi, Samarkand, July 1424: 2π to nine sexagesimal places, sixteen decimal places, unbeaten for nearly two centuries (MacTutor, Britannica). "Algorithm" comes from the Latinized name of al-Khwarizmi, and "algebra" from his *al-jabr* | The π passage; the book's frequent use of "algorithm" | Proposed for 6F (A2, and A4 as optional) |
+| Ethiopia | Halving-and-doubling multiplication, still taught in Ethiopia and Eritrea; its origin is not documented in any scholarly source found. Bahre Hasab, the Ethiopian Orthodox calendar computation kept in Ge'ez manuscripts, subject of a University of Münster project (2025–2030), which notes that many of its elements came from Hellenistic, Arabic or European sources | The binary passage, as a living tradition only | Mentioned in A3 without claiming a date or a first; Bahre Hasab in the blog and on the site |
+| Babylon | YBC 7289 (Old Babylonian): √2 as 1;24,51,10 in base 60, off by about 4 parts in 10 million (Fowler and Robson, *Historia Mathematica* 25, 1998) | No direct passage in the book | Blog, Global Research page and appendix only |
+
 ## 4. Where relevant work from outside the West exists and the book does not cite it
 
 | Book passage | Missing work | Status |
@@ -143,7 +157,9 @@ October 2026. Outcomes:
 - **`global-research.html`, new:** where research from each region is published, how to reach it and whether you can, how we weigh any source, and how to read a paper in another language. It asks readers who can reach a restricted database, through a library abroad, a home university, or because they live in the region, to say so.
 - **The blog article** "Reading the Whole Map", with the corrections in its own section.
 - **The Quest Map:** the International path now names instruments outside Europe and North America, and a new section covers the half of the map an English-language search does not show.
-- **`references.html`:** a note on the reach of the list, with the numbers above and a link to this work.
+- **`references.html`:** a note on the reach of the list, with the numbers above and a link to this work, and a separate section listing the references proposed for 6F, marked as not yet in the book.
+- **`appendix.html`:** the independent Zuchongzhi 3.2 replication in Element 21, and a supplement on independent routes to π and to binary arithmetic, both marked as website notes not yet in the book.
+- **`glossary.html`:** new terms: Algorithm, Diamond Open Access, Fibonacci Sequence, Neutrino Oscillation, Paper Mill, Pi (π), Preprint, Retraction, Sexagesimal.
 
 ## 7. Practices adopted
 

@@ -53,6 +53,7 @@ def classify(ref):
 
 def references():
     s = io.open(os.path.join(ROOT, "references.html"), encoding="utf-8").read()
+    s = s.split("<!-- PROPOSED REFERENCES", 1)[0]      # proposed for a revision, not yet in the book
     items = re.findall(r'<div class="reference-item">\s*<p>(.*?)</p>', s, re.S)
     seen, out = set(), []
     for it in items:

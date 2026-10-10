@@ -250,6 +250,7 @@
       color: var(--text-dark);
     }
 
+    .web-note { background: #fff8e1; border-left: 4px solid #7a5000; padding: .6rem 1rem; border-radius: 0 6px 6px 0; font-size: .92rem; color: #2c3e50; }
     .equation {
       background: #f8f9fa;
       border-left: 4px solid var(--primary-color);
@@ -1689,6 +1690,17 @@
                         <p>Error correction extracts syndrome information I_syndrome without measuring quantum information I_quantum directly. Shannon's noisy channel coding theorem proves that reliable communication (error-free information transmission) is possible below channel capacity [Shannon, 1948]. Quantum error correction extends this to quantum channels, showing that quantum information can be protected if error rates stay below the threshold.</p>
                     </div>
                     <div class="section">
+                        <h3>Independent Replication: Zuchongzhi 3.2 (December 2025)</h3>
+                        <p class="web-note"><strong>Website note, not yet in the book.</strong> Added October 2026 and proposed for the next revision; see <a href="global-research.html">Global Research</a>.</p>
+                        <p>The suppression factor compares logical error rates at successive code distances:</p>
+                        <div class="equation">Λ = ε_d / ε_(d+2)</div>
+                        <p>Λ &gt; 1 means each step up in code distance lowers the logical error rate, which is what "below threshold" means in practice. A team at the University of Science and Technology of China reported a distance-7 surface code on its 107-qubit Zuchongzhi 3.2 processor, using 97 of the qubits, with:</p>
+                        <div class="equation">Zuchongzhi 3.2: Λ ≈ 1.40 (d = 7)</div>
+                        <div class="equation">Willow: Λ = 2.14 ± 0.02</div>
+                        <p>The Chinese result is smaller but above one, on different hardware, from a different group. Its main technical step was suppressing leakage, qubits escaping their two computational states, with microwave control alone. A second, independent demonstration is what turns a laboratory result into an established one. Reported in <em>Physical Review Letters</em>, December 2025; the exact citation is being confirmed against the journal before it enters the book. <a href="https://quantumcomputingreport.com/ustcs-zuchongzhi-3-2-achieves-below-threshold-qec-milestone/" target="_blank" rel="noopener" style="display:inline-block;background:#4a5868;color:white;font-size:0.78rem;font-weight:700;padding:0.15rem 0.65rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.03em;">Report</a></p>
+                        <p>An earlier step on the same road: Zhao, Y., et al. (2022), a distance-3 surface code on Zuchongzhi 2.1. <a href="https://doi.org/10.1103/PhysRevLett.129.030501" target="_blank" rel="noopener" style="display:inline-block;background:#4a5868;color:white;font-size:0.78rem;font-weight:700;padding:0.15rem 0.65rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.03em;">PRL 129, 030501</a></p>
+                    </div>
+                    <div class="section">
                         <h3>Willow Technical Implementation</h3>
                         <h4>Physical Qubit Performance:</h4>
                         <h4>Superconducting transmon qubits with improved coherence:</h4>
@@ -1712,6 +1724,66 @@
                         <p>Error correction overhead decreases as physical qubits improve.</p>
                         <div class="equation">Goal: Reduce d=7 overhead to d=5 through better physical qubits</div>
                         <p>Google estimates that commercially useful systems will be within a decade, assuming continued progress in fabrication, control, and error correction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="appendix-element" id="history-supplement">
+            <div class="element-header" onclick="toggleElement(this)">
+                <h2>Supplement: Independent Routes to π and to Binary Arithmetic</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="element-content">
+                <div class="element-inner">
+                    <div class="section">
+                        <p class="web-note"><strong>Website note, not yet in the book.</strong> Added October 2026 and proposed for the next revision; see <a href="global-research.html">Global Research</a>.</p>
+                        <p>The book argues that mathematical constants describe the geometry of relationships rather than a culture's way of describing it. The history supports that: the same values were reached separately, by different methods, across four thousand years.</p>
+                    </div>
+                    <div class="section">
+                        <h3>Section A: π, Five Times Over</h3>
+                        <h4>Egypt, Rhind papyrus (copied c. 1550 BCE from a text of about 1850 BCE):</h4>
+                        <p>The area of a circle of diameter 9 is taken as that of a square of side 8, which implies</p>
+                        <div class="equation">π ≈ 4 × (8/9)² = 256/81 ≈ 3.1605</div>
+                        <h4>Greece, Archimedes (c. 250 BCE):</h4>
+                        <p>Inscribed and circumscribed 96-sided polygons give</p>
+                        <div class="equation">223/71 &lt; π &lt; 22/7, that is 3.1408 &lt; π &lt; 3.1429</div>
+                        <h4>China, Liu Hui (3rd century) and Zu Chongzhi (5th century):</h4>
+                        <p>Liu Hui's polygon method reaches 3.1416 with a 3,072-sided polygon. Zu Chongzhi carries it further:</p>
+                        <div class="equation">3.1415926 &lt; π &lt; 3.1415927, with π ≈ 355/113</div>
+                        <p>355/113 is correct to six decimal places and is the best rational approximation with a denominator below 16,604.</p>
+                        <h4>India, Madhava of Sangamagrama (c. 1400):</h4>
+                        <p>The first infinite series for π, now called the Madhava–Gregory–Leibniz series, and a faster-converging form:</p>
+                        <div class="equation">π/4 = 1 − 1/3 + 1/5 − 1/7 + …</div>
+                        <div class="equation">π = √12 (1 − 1/(3·3) + 1/(5·3²) − 1/(7·3³) + …)</div>
+                        <h4>Persia, Jamshid al-Kashi (Samarkand, 1424):</h4>
+                        <p>Using a polygon of 3 × 2²⁸ sides and working in base 60, al-Kashi computed 2π to nine sexagesimal places, equivalent to sixteen decimal places:</p>
+                        <div class="equation">π ≈ 3.1415926535897932</div>
+                        <p>His stated aim was an error in the circumference of the heavens smaller than the width of a horse's hair. The record stood until Ludolph van Ceulen, nearly two centuries later.</p>
+                    </div>
+                    <div class="section">
+                        <h3>Section B: Base 60 and the Square Root of 2</h3>
+                        <p>The Old Babylonian tablet YBC 7289 gives √2 along the diagonal of a square as 1;24,51,10 in base 60:</p>
+                        <div class="equation">1 + 24/60 + 51/60² + 10/60³ = 1.41421296…</div>
+                        <div class="equation">√2 = 1.41421356…, relative error ≈ 4 × 10⁻⁷</div>
+                        <p>It is the closest possible three-place sexagesimal value. Base 60 survives in every minute of time and every minute of arc. (Fowler and Robson, <em>Historia Mathematica</em> 25, 366–378, 1998.)</p>
+                    </div>
+                    <div class="section">
+                        <h3>Section C: Multiplication by Doubling Is Binary</h3>
+                        <p>Egyptian multiplication, recorded in the Rhind papyrus, uses only doubling and addition. To multiply 23 by 27, double 27 and keep the rows whose multipliers add up to 23:</p>
+                        <div class="equation">1 × 27 = 27 ✓ &nbsp; 2 × 27 = 54 ✓ &nbsp; 4 × 27 = 108 ✓ &nbsp; 8 × 27 = 216 &nbsp; 16 × 27 = 432 ✓</div>
+                        <div class="equation">23 = 16 + 4 + 2 + 1 = 10111₂, so 23 × 27 = 432 + 108 + 54 + 27 = 621</div>
+                        <p>The rows kept are the 1s in the binary form of 23. The halving-and-doubling method still taught in Ethiopia and Eritrea finds the same rows another way: halve one number, dropping remainders, double the other, and keep the rows where the halved number is odd.</p>
+                        <div class="equation">17 × 34: (17, 34) ✓ (8, 68) (4, 136) (2, 272) (1, 544) ✓ → 34 + 544 = 578</div>
+                        <p>Both are the same algorithm a binary computer uses for multiplication: shift and add.</p>
+                    </div>
+                    <div class="section">
+                        <h3>Section D: Where "Algorithm" and "Algebra" Come From</h3>
+                        <p>Muhammad ibn Musa al-Khwarizmi, a ninth-century Persian scholar in Baghdad, wrote a book on Indian numerals whose Latin translation, <em>Algoritmi de numero Indorum</em>, carried place-value arithmetic to Europe; his Latinized name became "algorithm". His book on equations, <em>al-Kitab al-mukhtasar fi hisab al-jabr wa'l-muqabala</em>, gave "algebra", from <em>al-jabr</em>, "restoration": moving a subtracted term to the other side of an equation.</p>
+                    </div>
+                    <div class="section">
+                        <h3>Sources</h3>
+                        <p>Imhausen, A. (2016). <em>Mathematics in Ancient Egypt</em>. Princeton University Press. Martzloff, J.-C. (1997). <em>A History of Chinese Mathematics</em>. Springer. Plofker, K. (2009). <em>Mathematics in India</em>. Princeton University Press. Berggren, J. L. (2016). <em>Episodes in the Mathematics of Medieval Islam</em>, 2nd ed. Springer. Fowler, D. and Robson, E. (1998). <em>Historia Mathematica</em> 25, 366–378. Singh, P. (1985). <em>Historia Mathematica</em> 12, 229–244. <a href="https://mathshistory.st-andrews.ac.uk/" target="_blank" rel="noopener" style="display:inline-block;background:#4a5868;color:white;font-size:0.78rem;font-weight:700;padding:0.15rem 0.65rem;border-radius:20px;text-decoration:none;margin-left:0.4rem;letter-spacing:0.03em;">MacTutor</a></p>
                     </div>
                 </div>
             </div>
@@ -1765,6 +1837,11 @@
         const element = header.parentElement;
         element.classList.toggle('active');
     }
+    // a link to a named supplement opens it
+    (function () {
+        var el = location.hash && document.getElementById(location.hash.slice(1));
+        if (el && el.classList.contains('appendix-element')) el.classList.add('active');
+    })();
 
     // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger') || document.createElement('div');
