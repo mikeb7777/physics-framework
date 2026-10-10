@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #04060f; color: #fff; -webkit-font-smoothing: antialiased; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; }
+    a { color: #ffd700; } a:hover { color: #ffe600; }
+    .card { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #04060f; }
+    .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .scrim, .tint, .scan { position: absolute; inset: 0; pointer-events: none; }
+    .tint { mix-blend-mode: screen; }
+    .scan { background: repeating-linear-gradient(0deg, rgba(170,235,255,.05) 0 1px, transparent 1px 4px);
+      mix-blend-mode: overlay; }
+    .bloom { position: absolute; border-radius: 50%; filter: blur(105px); pointer-events: none; }
+    .vig { position: absolute; inset: 0; pointer-events: none; background:
+      radial-gradient(ellipse 82% 66% at 50% 44%, transparent 0%, rgba(4,6,15,.40) 72%, rgba(4,6,15,.88) 100%); }
+    .hud { position: absolute; width: 56px; height: 56px; border: 5px solid;
+      border-image: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%) 1; filter: drop-shadow(0 0 12px rgba(0,224,255,.85)); }
+    .hud.tl { top: 40px; left: 40px; border-right: 0; border-bottom: 0; }
+    .hud.tr { top: 40px; right: 40px; border-left: 0; border-bottom: 0; }
+    .hud.bl { bottom: 40px; left: 40px; border-right: 0; border-top: 0; }
+    .hud.br { bottom: 40px; right: 40px; border-left: 0; border-top: 0; }
+    .inner { position: absolute; inset: 0; padding: 112px 84px 0; display: flex; flex-direction: column; }
+    .brandbar { display: flex; align-items: center; justify-content: space-between; }
+    .brandbar img.ic2 { height: 62px; filter: drop-shadow(0 0 16px rgba(150,225,255,.45)); }
+    .rightmark { display: flex; align-items: center; gap: 20px; }
+    .rightmark img.spin { height: 56px; filter: drop-shadow(0 0 14px rgba(255,200,60,.55)); }
+    .pagenum { display: flex; align-items: center; gap: 14px; }
+    .pagenum .bar { width: 46px; height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 20px rgba(0,224,255,.85); }
+    .pagenum .n { font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 21px; letter-spacing: .18em;
+      color: #4fe6ff; text-shadow: 0 0 22px rgba(0,224,255,.60); }
+    .tag { display: flex; align-items: center; gap: 16px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700;
+      font-size: 24px; letter-spacing: .18em; text-transform: uppercase; color: #ffd23d;
+      text-shadow: 0 0 26px rgba(255,180,40,.55); }
+    .tag .bar { width: 56px; height: 8px; flex-shrink: 0; background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%);
+      box-shadow: 0 0 20px rgba(255,140,26,.85); }
+    .tag.c { color: #5ef2ff; text-shadow: 0 0 26px rgba(0,224,255,.60); }
+    .tag.c .bar { background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 20px rgba(0,224,255,.85); }
+    .d { font-family: Anton, Impact, Haettenschweiler, "Arial Narrow", sans-serif; font-weight: 400;
+      text-transform: uppercase; line-height: .92; letter-spacing: .004em; color: #fff;
+      text-shadow: 0 0 26px rgba(110,190,255,.20); }
+    .d .cool { color: #00e0ff; text-shadow: 0 0 30px rgba(0,224,255,.65), 0 0 68px rgba(0,224,255,.34); }
+    .d .hot { color: #ffc83d; text-shadow: 0 0 30px rgba(255,180,40,.60), 0 0 68px rgba(255,120,26,.30); }
+    .rule { height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 22px rgba(0,224,255,.85); }
+    .rule.hot { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 22px rgba(255,140,26,.85); }
+    .dek { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 33px; line-height: 1.40; color: rgba(255,255,255,.95); }
+    .dek b { font-weight: 700; color: #fff; }
+    .dek .k { color: #5ef2ff; font-weight: 700; text-shadow: 0 0 26px rgba(0,224,255,.75); }
+    .dek .g { color: #ffd23d; font-weight: 700; text-shadow: 0 0 26px rgba(255,170,30,.70); }
+
+    /* --- stat cards: the numbers are designed objects, not loose type ------ */
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .q { display: flex; padding: 2px; background: linear-gradient(170deg, rgba(0,224,255,.75) 0%, rgba(0,230,118,.30) 60%, rgba(0,224,255,.10) 100%);
+      box-shadow: 0 0 26px rgba(0,224,255,.18);
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); }
+    .q.h { background: linear-gradient(170deg, rgba(255,215,0,.75) 0%, rgba(255,60,26,.30) 60%, rgba(255,138,26,.10) 100%);
+      box-shadow: 0 0 26px rgba(255,140,26,.16); }
+    .q > .in { position: relative; flex-grow: 1; background: rgba(5,10,22,.90); padding: 22px 18px 20px;
+      clip-path: polygon(0 0, calc(100% - 19px) 0, 100% 19px, 100% 100%, 19px 100%, 0 calc(100% - 19px)); }
+    .q .top { position: absolute; left: 0; top: 0; width: 62%; height: 5px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%);
+      box-shadow: 0 0 16px rgba(0,224,255,.85); }
+    .q.h .top { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 16px rgba(255,140,26,.85); }
+    .q .ix { position: absolute; right: 16px; top: 18px; font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600;
+      font-size: 15px; letter-spacing: .12em; color: rgba(140,220,255,.42); }
+    .q .n { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 64px;
+      line-height: .9; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); -webkit-background-clip: text; background-clip: text;
+      color: transparent; filter: drop-shadow(0 0 22px rgba(0,224,255,.60)); }
+    .q .l { display: block; margin-top: 10px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 20px;
+      letter-spacing: .05em; text-transform: uppercase; color: rgba(226,244,255,.88); }
+
+    /* --- neon statement panel --------------------------------------------- */
+    .np { display: flex; padding: 2px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 38px rgba(0,224,255,.28);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .np.h { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 38px rgba(255,140,26,.26); }
+    .np > .in { flex-grow: 1; display: flex; flex-direction: column; background: rgba(5,9,20,.94);
+      padding: 24px 28px;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .np .lbl { display: block; margin-bottom: 10px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 20px;
+      letter-spacing: .16em; text-transform: uppercase; color: #5ef2ff; text-shadow: 0 0 22px rgba(0,224,255,.70); }
+    .np.h .lbl { color: #ffd23d; text-shadow: 0 0 22px rgba(255,170,30,.70); }
+    .np p { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 28px; line-height: 1.38; color: rgba(255,255,255,.95); }
+
+    .optics { display: flex; padding: 2px; background: linear-gradient(160deg, rgba(0,224,255,.55) 0%, rgba(0,230,118,.18) 55%, rgba(0,224,255,.08) 100%);
+      box-shadow: 0 0 40px rgba(0,224,255,.22);
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px)); }
+    .optics > .in { flex-grow: 1; display: flex; align-items: center; justify-content: center;
+      background: rgba(4,9,20,.92);
+      clip-path: polygon(0 0, calc(100% - 23px) 0, 100% 23px, 100% 100%, 23px 100%, 0 calc(100% - 23px)); }
+    .shot { display: flex; padding: 2px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 40px rgba(0,224,255,.26);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .shot > .in { position: relative; flex-grow: 1; overflow: hidden; background: #04060f;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 16px;
+      background: linear-gradient(0deg, rgba(4,6,15,.92) 0%, rgba(4,6,15,0) 100%);
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 17px; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(220,242,255,.92); }
+    .flare { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; z-index: 2; }
+    .flare .fh { position: absolute; right: -250px; top: 700px; width: 470px; height: 470px;
+      border-radius: 50%; filter: blur(54px); background: radial-gradient(circle,
+      rgba(150,230,255,.34) 0%, rgba(0,180,255,.14) 34%, transparent 64%); }
+    .flare .fp { position: absolute; right: -84px; top: 838px; width: 176px; height: 176px;
+      border-radius: 50%; filter: blur(15px); background: radial-gradient(circle,
+      rgba(255,255,255,.95) 0%, rgba(198,248,255,.62) 24%, rgba(0,196,255,.24) 46%, transparent 68%); }
+    .flare .fs { position: absolute; right: -84px; top: 918px; width: 880px; height: 11px;
+      filter: blur(7px); background: linear-gradient(90deg, transparent 0%,
+      rgba(150,232,255,.08) 30%, rgba(206,250,255,.58) 78%, rgba(255,255,255,.85) 95%, transparent 100%); }
+    .flare .fx { position: absolute; right: -70px; top: 892px; width: 250px; height: 74px;
+      border-radius: 50%; filter: blur(26px); background: radial-gradient(circle,
+      rgba(255,198,104,.30) 0%, transparent 66%); }
+    .flare .fg { position: absolute; border-radius: 50%; filter: blur(8px); }
+
+    .claim { display: flex; padding: 2px; background: linear-gradient(160deg,
+      rgba(255,215,0,.95) 0%, rgba(255,90,26,.62) 52%, rgba(255,138,26,.40) 100%);
+      box-shadow: 0 0 46px rgba(255,140,26,.24);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .claim > .in { flex-grow: 1; background: rgba(5,9,20,.80); padding: 24px 30px 28px;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .claim .chip { display: inline-block; font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 16px;
+      letter-spacing: .22em; text-transform: uppercase; color: #0a0f1e; background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%);
+      padding: 8px 15px; box-shadow: 0 0 28px rgba(255,150,30,.60);
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+    .claim .line { margin-top: 16px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 29px; line-height: 1.24;
+      color: rgba(255,255,255,.88); }
+    .claim .hit { margin-top: 2px; font-family: Anton, Impact, "Arial Narrow", sans-serif;
+      font-size: 56px; line-height: .98; letter-spacing: .004em; text-transform: uppercase;
+      color: #ffc83d; text-shadow: 0 0 30px rgba(255,180,40,.62), 0 0 66px rgba(255,120,26,.30); }
+    .claim .sub { margin-top: 12px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 26px; line-height: 1.3;
+      color: rgba(255,255,255,.80); }
+    .mark { position: relative; width: 560px; height: 560px; }
+    .mark .ic2big { position: absolute; left: 50%; top: 50%; width: 360px;
+      transform: translate(-50%, -50%); filter: drop-shadow(0 0 30px rgba(150,225,255,.55)); }
+    .url { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 54px; line-height: 1;
+      text-transform: uppercase; letter-spacing: .01em; color: #ffc83d;
+      text-shadow: 0 0 30px rgba(255,180,40,.62), 0 0 68px rgba(255,120,26,.30); }
+    .footline { display: flex; align-items: center; gap: 24px; }
+    .footline .bar { flex-grow: 1; height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 22px rgba(0,224,255,.80); }
+    .footline .bar.hot { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 22px rgba(255,140,26,.80); }
+    .footline .u { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 24px; letter-spacing: .14em;
+      text-transform: uppercase; color: #5ef2ff; white-space: nowrap; text-shadow: 0 0 24px rgba(0,224,255,.70); }
+    .footline .u.g { color: #ffd23d; text-shadow: 0 0 24px rgba(255,170,30,.70); }
+    .doi { font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 19px; letter-spacing: .03em;
+      color: #7ef4ff; text-shadow: 0 0 20px rgba(0,224,255,.55); white-space: nowrap; }
+    .credit { position: absolute; left: 84px; right: 84px; bottom: 42px; font-family: "IBM Plex Mono", "Courier New", monospace;
+      font-size: 12.5px; line-height: 1.5; color: rgba(200,225,255,.52); }
+    .credit .dis { color: rgba(200,225,255,.40); }
+    .spacer { flex-grow: 1; }
+
+    .outs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .out { display: flex; padding: 2px;
+      clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px)); }
+    .out.g { background: linear-gradient(170deg, rgba(0,230,118,.90) 0%, rgba(0,230,118,.16) 100%);
+      box-shadow: 0 0 32px rgba(0,230,118,.22); }
+    .out.y { background: linear-gradient(170deg, rgba(255,230,0,.90) 0%, rgba(255,230,0,.16) 100%);
+      box-shadow: 0 0 32px rgba(255,230,0,.18); }
+    .out.r { background: linear-gradient(170deg, rgba(255,26,26,.90) 0%, rgba(255,26,26,.16) 100%);
+      box-shadow: 0 0 32px rgba(255,26,26,.20); }
+    .out > .in { flex-grow: 1; background: rgba(5,10,22,.93); padding: 20px 18px 22px;
+      clip-path: polygon(0 0, calc(100% - 21px) 0, 100% 21px, 100% 100%, 21px 100%, 0 calc(100% - 21px)); }
+    .out .k { display: block; font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 16px;
+      letter-spacing: .18em; text-transform: uppercase; }
+    .out.g .k { color: #00e676; text-shadow: 0 0 20px rgba(0,230,118,.65); }
+    .out.y .k { color: #ffe600; text-shadow: 0 0 20px rgba(255,230,0,.60); }
+    .out.r .k { color: #ff5a3c; text-shadow: 0 0 20px rgba(255,60,40,.60); }
+    .out .t { display: block; margin-top: 8px; font-family: Anton, Impact, "Arial Narrow", sans-serif;
+      font-size: 38px; line-height: .96; text-transform: uppercase; color: #fff; }
+    .out p { margin-top: 10px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 21px; line-height: 1.32;
+      color: rgba(255,255,255,.90); }
+    .globe { position: absolute; right: -180px; top: 206px; pointer-events: none; opacity: .95;
+      filter: drop-shadow(0 0 46px rgba(0,200,255,.55)); }
+    .hunts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .hunts .hl { display: block; margin-top: auto; padding-top: 18px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 600;
+      font-size: 19px; letter-spacing: .06em; text-transform: uppercase; color: rgba(235,248,255,.94); }
+  </style>
+</helmet>
+<div class="card">
+  <img class="photo" src="plate1.jpg" style="filter: {{photoFilter}}">
+  <div class="scrim" style="background: linear-gradient(180deg, rgba(4,6,15,.94) 0%, rgba(4,6,15,.90) 24%, rgba(4,6,15,.86) 46%, rgba(4,6,15,.44) 68%, rgba(4,6,15,.72) 88%, rgba(4,6,15,.95) 100%)"></div>
+  <div class="tint" style="background: radial-gradient(ellipse 44% 26% at 38% 22%, rgba(0,145,220,.30) 0%, transparent 74%), radial-gradient(ellipse 46% 22% at 62% 86%, rgba(255,130,20,.20) 0%, transparent 76%)"></div>
+  <div class="bloom" style="width: 640px; height: 640px; right: -180px; top: 130px; background: rgba(0,185,255,.30)"></div>
+  <div class="bloom" style="width: 620px; height: 460px; left: -160px; bottom: 140px; background: rgba(255,140,26,.16)"></div>
+  <div class="globe"><svg width="620" height="620" viewBox="0 0 620 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cool" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#00e0ff"/><stop offset="1" stop-color="#00e676"/></linearGradient>
+    <linearGradient id="hot" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ffd700"/><stop offset=".5" stop-color="#ff8a1a"/><stop offset="1" stop-color="#ff1a1a"/></linearGradient>
+    <radialGradient id="core"><stop offset="0" stop-color="#bff6ff" stop-opacity=".95"/><stop offset="1" stop-color="#00c8ff" stop-opacity="0"/></radialGradient>
+    <filter id="tg" x="-40%" y="-120%" width="180%" height="340%">
+      <feGaussianBlur stdDeviation="3.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <defs>
+    <linearGradient id="dish" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a9f2ff" stop-opacity=".82"/>
+      <stop offset="0.42" stop-color="#12a5e0" stop-opacity=".60"/>
+      <stop offset="1" stop-color="#063a63" stop-opacity=".82"/>
+    </linearGradient>
+    <radialGradient id="sky"><stop offset="0" stop-color="#0aa6e0" stop-opacity=".26"/>
+      <stop offset="1" stop-color="#062038" stop-opacity=".10"/></radialGradient>
+    <radialGradient id="fcore"><stop offset="0" stop-color="#dff9ff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#5ef2ff" stop-opacity="0"/></radialGradient>
+    <filter id="dg" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="dgs" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="310.0" cy="310.0" r="300.0" fill="url(#sky)"/>
+  <ellipse cx="310.0" cy="310.0" rx="300.0" ry="90.0" fill="url(#dish)"/>
+  <ellipse cx="310.0" cy="310.0" rx="300.0" ry="90.0" fill="none" stroke="url(#cool)"
+           stroke-width="3.4" filter="url(#dg)"/>
+  <ellipse cx="310.0" cy="579.6" rx="131.5" ry="26.3" fill="none" stroke="url(#cool)" stroke-width="1.7" stroke-opacity="0.52" filter="url(#dgs)"/><ellipse cx="310.0" cy="510.7" rx="222.9" ry="44.6" fill="none" stroke="url(#cool)" stroke-width="1.7" stroke-opacity="0.52" filter="url(#dgs)"/><ellipse cx="310.0" cy="417.5" rx="280.1" ry="56.0" fill="none" stroke="url(#cool)" stroke-width="1.7" stroke-opacity="0.52" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="300.0" ry="60.0" fill="none" stroke="url(#cool)" stroke-width="2.4" stroke-opacity="0.90" filter="url(#dgs)"/><ellipse cx="310.0" cy="202.5" rx="280.1" ry="56.0" fill="none" stroke="url(#cool)" stroke-width="1.7" stroke-opacity="0.52" filter="url(#dgs)"/><ellipse cx="310.0" cy="109.3" rx="222.9" ry="44.6" fill="none" stroke="url(#cool)" stroke-width="1.7" stroke-opacity="0.52" filter="url(#dgs)"/><ellipse cx="310.0" cy="40.4" rx="131.5" ry="26.3" fill="none" stroke="url(#cool)" stroke-width="1.7" stroke-opacity="0.52" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="300.0" ry="300.0" fill="none" stroke="#5ef2ff" stroke-width="1.7" stroke-opacity=".46" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="270.3" ry="300.0" fill="none" stroke="#5ef2ff" stroke-width="1.7" stroke-opacity=".46" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="187.0" ry="300.0" fill="none" stroke="#5ef2ff" stroke-width="1.7" stroke-opacity=".46" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="66.8" ry="300.0" fill="none" stroke="#5ef2ff" stroke-width="1.7" stroke-opacity=".46" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="66.8" ry="300.0" fill="none" stroke="#5ef2ff" stroke-width="1.7" stroke-opacity=".46" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="187.0" ry="300.0" fill="none" stroke="#5ef2ff" stroke-width="1.7" stroke-opacity=".46" filter="url(#dgs)"/><ellipse cx="310.0" cy="310.0" rx="270.3" ry="300.0" fill="none" stroke="#5ef2ff" stroke-width="1.7" stroke-opacity=".46" filter="url(#dgs)"/>
+  <path d="M310.0 310.0 L610.0 310.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L569.8 355.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L460.0 387.9" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L310.0 400.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L160.0 387.9" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L50.2 355.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L10.0 310.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L50.2 265.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L160.0 232.1" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L310.0 220.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L460.0 232.1" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/><path d="M310.0 310.0 L569.8 265.0" stroke="#8df6ff" stroke-width="2" stroke-opacity=".70" filter="url(#dg)"/>
+  <rect x="140.7" y="553.4" width="6.2" height="4.6" fill="#7fefff" opacity="0.26" /><rect x="156.8" y="552.7" width="8.3" height="6.2" fill="#7fefff" opacity="0.37" /><rect x="183.3" y="552.0" width="10.1" height="7.5" fill="#7fefff" opacity="0.35" /><rect x="218.2" y="551.5" width="11.5" height="8.5" fill="url(#hot)" opacity="0.73" filter="url(#dg)"/><rect x="259.3" y="551.2" width="12.3" height="9.1" fill="url(#hot)" opacity="0.76" filter="url(#dg)"/><rect x="303.7" y="551.1" width="12.6" height="9.3" fill="url(#hot)" opacity="0.77" filter="url(#dg)"/><rect x="348.4" y="551.2" width="12.3" height="9.1" fill="#7fefff" opacity="0.47" /><rect x="390.3" y="551.5" width="11.5" height="8.5" fill="#7fefff" opacity="0.46" /><rect x="426.6" y="552.0" width="10.1" height="7.5" fill="#7fefff" opacity="0.26" /><rect x="454.9" y="552.7" width="8.3" height="6.2" fill="#7fefff" opacity="0.22" /><rect x="473.1" y="553.4" width="6.2" height="4.6" fill="#7fefff" opacity="0.41" /><rect x="72.0" y="483.7" width="7.1" height="5.3" fill="#7fefff" opacity="0.27" /><rect x="94.8" y="482.6" width="10.1" height="7.4" fill="#7fefff" opacity="0.31" /><rect x="132.1" y="481.7" width="12.6" height="9.3" fill="#7fefff" opacity="0.61" /><rect x="181.4" y="481.0" width="14.5" height="10.7" fill="url(#hot)" opacity="0.83" filter="url(#dg)"/><rect x="239.3" y="480.5" width="15.7" height="11.6" fill="url(#hot)" opacity="0.87" filter="url(#dg)"/><rect x="301.9" y="480.4" width="16.1" height="11.9" fill="url(#hot)" opacity="0.89" filter="url(#dg)"/><rect x="365.0" y="480.5" width="15.7" height="11.6" fill="#7fefff" opacity="0.49" /><rect x="424.1" y="481.0" width="14.5" height="10.7" fill="#7fefff" opacity="0.60" /><rect x="475.3" y="481.7" width="12.6" height="9.3" fill="#7fefff" opacity="0.43" /><rect x="515.2" y="482.6" width="10.1" height="7.4" fill="#7fefff" opacity="0.44" /><rect x="540.9" y="483.7" width="7.1" height="5.3" fill="#7fefff" opacity="0.25" /><rect x="29.0" y="394.9" width="7.7" height="5.7" fill="#7fefff" opacity="0.39" /><rect x="56.0" y="393.6" width="11.2" height="8.3" fill="#7fefff" opacity="0.53" /><rect x="100.1" y="392.5" width="14.1" height="10.4" fill="#7fefff" opacity="0.48" /><rect x="158.3" y="391.7" width="16.4" height="12.1" fill="url(#hot)" opacity="0.90" filter="url(#dg)"/><rect x="226.8" y="391.1" width="17.9" height="13.2" fill="url(#hot)" opacity="0.94" filter="url(#dg)"/><rect x="300.8" y="391.0" width="18.3" height="13.5" fill="url(#hot)" opacity="0.96" filter="url(#dg)"/><rect x="375.3" y="391.1" width="17.9" height="13.2" fill="#7fefff" opacity="0.64" /><rect x="445.2" y="391.7" width="16.4" height="12.1" fill="#7fefff" opacity="0.58" /><rect x="505.8" y="392.5" width="14.1" height="10.4" fill="#7fefff" opacity="0.31" /><rect x="552.9" y="393.6" width="11.2" height="8.3" fill="#7fefff" opacity="0.50" /><rect x="583.3" y="394.9" width="7.7" height="5.7" fill="#7fefff" opacity="0.37" /><rect x="16.5" y="296.6" width="7.9" height="5.8" fill="#7fefff" opacity="0.30" /><rect x="44.6" y="295.3" width="11.5" height="8.5" fill="#7fefff" opacity="0.27" /><rect x="90.7" y="294.1" width="14.6" height="10.8" fill="#7fefff" opacity="0.62" /><rect x="151.6" y="293.3" width="17.0" height="12.5" fill="url(#hot)" opacity="0.91" filter="url(#dg)"/><rect x="223.2" y="292.7" width="18.5" height="13.6" fill="url(#hot)" opacity="0.96" filter="url(#dg)"/><rect x="300.5" y="292.5" width="19.0" height="14.0" fill="url(#hot)" opacity="0.98" filter="url(#dg)"/><rect x="378.4" y="292.7" width="18.5" height="13.6" fill="#7fefff" opacity="0.54" /><rect x="451.4" y="293.3" width="17.0" height="12.5" fill="#7fefff" opacity="0.61" /><rect x="514.7" y="294.1" width="14.6" height="10.8" fill="#7fefff" opacity="0.62" /><rect x="563.9" y="295.3" width="11.5" height="8.5" fill="#7fefff" opacity="0.49" /><rect x="595.7" y="296.6" width="7.9" height="5.8" fill="#7fefff" opacity="0.47" /><rect x="35.7" y="199.7" width="7.6" height="5.7" fill="#7fefff" opacity="0.32" /><rect x="61.9" y="198.4" width="11.0" height="8.1" fill="#7fefff" opacity="0.51" /><rect x="105.0" y="197.4" width="13.9" height="10.3" fill="#7fefff" opacity="0.44" /><rect x="161.9" y="196.5" width="16.1" height="11.9" fill="url(#hot)" opacity="0.89" filter="url(#dg)"/><rect x="228.7" y="196.0" width="17.5" height="12.9" fill="url(#hot)" opacity="0.93" filter="url(#dg)"/><rect x="301.0" y="195.9" width="18.0" height="13.3" fill="url(#hot)" opacity="0.95" filter="url(#dg)"/><rect x="373.7" y="196.0" width="17.5" height="12.9" fill="#7fefff" opacity="0.71" /><rect x="442.0" y="196.5" width="16.1" height="11.9" fill="#7fefff" opacity="0.66" /><rect x="501.1" y="197.4" width="13.9" height="10.3" fill="#7fefff" opacity="0.32" /><rect x="547.1" y="198.4" width="11.0" height="8.1" fill="#7fefff" opacity="0.29" /><rect x="576.7" y="199.7" width="7.6" height="5.7" fill="#7fefff" opacity="0.27" /><rect x="84.5" y="114.6" width="7.0" height="5.2" fill="#7fefff" opacity="0.46" /><rect x="106.1" y="113.6" width="9.7" height="7.2" fill="#7fefff" opacity="0.37" /><rect x="141.4" y="112.7" width="12.1" height="9.0" fill="#7fefff" opacity="0.47" /><rect x="188.1" y="112.0" width="14.0" height="10.3" fill="url(#hot)" opacity="0.82" filter="url(#dg)"/><rect x="243.0" y="111.6" width="15.1" height="11.1" fill="url(#hot)" opacity="0.85" filter="url(#dg)"/><rect x="302.3" y="111.5" width="15.5" height="11.4" fill="url(#hot)" opacity="0.87" filter="url(#dg)"/><rect x="361.9" y="111.6" width="15.1" height="11.1" fill="#7fefff" opacity="0.41" /><rect x="417.9" y="112.0" width="14.0" height="10.3" fill="#7fefff" opacity="0.47" /><rect x="466.4" y="112.7" width="12.1" height="9.0" fill="#7fefff" opacity="0.39" /><rect x="504.2" y="113.6" width="9.7" height="7.2" fill="#7fefff" opacity="0.34" /><rect x="528.5" y="114.6" width="7.0" height="5.2" fill="#7fefff" opacity="0.36" /><rect x="157.8" y="50.6" width="6.0" height="4.5" fill="#7fefff" opacity="0.34" /><rect x="172.3" y="49.9" width="7.9" height="5.8" fill="#7fefff" opacity="0.46" /><rect x="196.0" y="49.3" width="9.5" height="7.0" fill="#7fefff" opacity="0.44" /><rect x="227.4" y="48.9" width="10.7" height="7.9" fill="url(#hot)" opacity="0.71" filter="url(#dg)"/><rect x="264.3" y="48.6" width="11.5" height="8.5" fill="url(#hot)" opacity="0.73" filter="url(#dg)"/><rect x="304.1" y="48.5" width="11.7" height="8.7" fill="url(#hot)" opacity="0.74" filter="url(#dg)"/><rect x="344.3" y="48.6" width="11.5" height="8.5" fill="#7fefff" opacity="0.56" /><rect x="381.9" y="48.9" width="10.7" height="7.9" fill="#7fefff" opacity="0.52" /><rect x="414.5" y="49.3" width="9.5" height="7.0" fill="#7fefff" opacity="0.53" /><rect x="439.9" y="49.9" width="7.9" height="5.8" fill="#7fefff" opacity="0.40" /><rect x="456.2" y="50.6" width="6.0" height="4.5" fill="#7fefff" opacity="0.23" />
+  <circle cx="310.0" cy="310.0" r="300.0" fill="none" stroke="url(#cool)" stroke-width="3.6"
+          filter="url(#dg)"/>
+  <path d="M34.0 352.0 L310.0 88.0" stroke="#bff6ff" stroke-width="2.6" stroke-opacity=".92" filter="url(#dg)"/><path d="M172.0 331.0 L310.0 88.0" stroke="#bff6ff" stroke-width="2.6" stroke-opacity=".92" filter="url(#dg)"/><path d="M448.0 331.0 L310.0 88.0" stroke="#bff6ff" stroke-width="2.6" stroke-opacity=".92" filter="url(#dg)"/><path d="M586.0 352.0 L310.0 88.0" stroke="#bff6ff" stroke-width="2.6" stroke-opacity=".92" filter="url(#dg)"/><circle cx="310.0" cy="88.0" r="28" fill="url(#fcore)"/><circle cx="310.0" cy="88.0" r="10" fill="#e6fdff" filter="url(#dg)"/><circle cx="310.0" cy="88.0" r="23" fill="none" stroke="#8df6ff" stroke-width="1.8" stroke-opacity=".70" filter="url(#dgs)"/>
+</svg></div>
+  <div class="vig"></div>
+  <div class="grid"></div>
+  <div class="scan"></div>
+  <div class="hud tl"></div><div class="hud tr"></div><div class="hud bl"></div><div class="hud br"></div>
+
+  <div class="inner">
+    <div class="brandbar">
+      <img class="ic2" src="logo-ic2.png">
+      <div class="rightmark">
+        
+        <div class="pagenum"><span class="bar"></span><span class="n">04 / 05</span></div>
+      </div>
+    </div>
+
+    <div style="height: 42px"></div>
+    <div class="tag"><span class="bar"></span><span>04 — What counts as a result</span></div>
+
+    <div style="height: 22px"></div>
+    <div class="d" style="font-size: 90px; max-width: 800px">Three outcomes.<br><span class="cool">No moving</span><br>the goalposts.</div>
+
+    <div style="height: 28px"></div>
+    <div class="outs">
+      <div class="out g"><div class="in">
+        <span class="k">Green</span>
+        <span class="t">Corroborated</span>
+        <p>Asymmetry at the predicted scale, on the independently identified axis.</p>
+      </div></div>      <div class="out y"><div class="in">
+        <span class="k">Yellow</span>
+        <span class="t">Revise</span>
+        <p>Asymmetry, but at a different angular scale. Revise the scale factor.</p>
+      </div></div>      <div class="out r"><div class="in">
+        <span class="k">Red</span>
+        <span class="t">Falsified</span>
+        <p>Structure proves statistically isotropic. The prediction is dead, and we say so.</p>
+      </div></div>
+    </div>
+
+    <div style="height: 24px"></div>
+    <div class="dek" style="font-size: 26px; max-width: 780px">The dataset that settles it is
+      <span class="k">Data Release 1</span>, expected mid-2028.</div>
+
+    <div class="spacer"></div>
+
+    <div class="footline">
+      <span class="u g">Swipe — the record</span>
+      <span class="bar hot"></span>
+    </div>
+    <div style="height: 150px"></div>
+  </div>
+
+  <div class="credit">Image: NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA/P.&nbsp;Horálek (Institute of Physics in Opava) · CC BY 4.0</div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"lift":{"editor":"range","default":152,"min":60,"max":220,"step":2,"unit":"%","section":"Plate"},"$preview":{"width":1080,"height":1350}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const lift = this.props.lift ?? 152;
+    const photoFilter = 'brightness(' + (lift / 100).toFixed(2) + ') contrast(1.16) saturate(1.42)';
+
+    return { photoFilter: photoFilter };
+  }
+}
+</script>
+</body>
+</html>

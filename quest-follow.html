@@ -51,13 +51,15 @@
       border-top: 1px solid rgba(241,227,3,.45); }
     /* the print on the moon */
     .q-print { padding-top: 1rem; padding-bottom: 2rem; }
-    .moonfig { margin: 0; }
-    .moonfig img { display: block; width: 100%; height: auto; border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12); box-shadow: 0 10px 34px rgba(0,0,0,.45); }
-    .moonfig figcaption { color: rgba(255,255,255,.72); font-size: .95rem; line-height: 1.8;
-      max-width: 68ch; margin: 1rem auto 0; text-align: center; font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic; }
-    @media (max-width: 700px) { .moonfig figcaption { text-align: left; font-size: .9rem; } }
+    /* the book's ideas rising as a hologram, beside the caption */
+    .moonfig { margin: 0 auto; max-width: 1100px; display: grid; grid-template-columns: minmax(0, 1.25fr) 1fr; gap: 2.75rem; align-items: center; }
+    .moonfig .holo { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 12px 36px rgba(0,0,0,.5); }
+    .moonfig .credit { display: block; margin-top: 1rem; font: normal 600 .72rem/1.5 -apple-system, 'Segoe UI', sans-serif;
+      letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    .moonfig figcaption { color: rgba(255,255,255,.82); font-size: 1.08rem; line-height: 1.85;
+      font-family: 'Source Serif 4', Georgia, serif; font-style: italic; }
+    @media (max-width: 900px) { .moonfig { grid-template-columns: 1fr; gap: 1.5rem; } .moonfig figcaption { font-size: .98rem; } }
 
     .q-section { padding: 3rem 2rem; }
     .q-inner { max-width: var(--max-width); margin: 0 auto; }
@@ -313,7 +315,7 @@
   <meta property="og:title" content="Follow the Quest | Ic² Research Institute">
   <meta property="og:description" content="The Quest is a video series on YouTube, with a written companion for every episode: an honest, ongoing look at how a theory meets the world.">
   <meta property="og:url" content="https://eequalsicsquared.com/quest-follow.html">
-  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg?v=rgb">
   <meta name="twitter:card" content="summary_large_image">
   <style id="q-head">
     /* Quest title panel: the Framework page's pattern on light gray. */
@@ -354,6 +356,7 @@
     <nav class="family-bar" aria-label="The Quest and related sites">
         <ul>
         <li class="fam-lead"><a href="quest-map.html"><img src="quest-logo-color.svg" alt="The Quest"></a></li>
+        <li class="fb-contribute"><a href="contribute.html">Contribute</a></li>
         <li><a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a></li>
         <li><a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a></li>
         <li><a href="book.html"><img src="bigtoeindexlogo.png?v=rgb" alt="A Quest for The Big TOE"></a></li>
@@ -400,8 +403,11 @@
     <section class="q-section q-print">
       <div class="q-inner">
         <figure class="moonfig">
-          <img src="moon-footprint.svg" alt="A trail of bootprints pressed into lunar regolith, walking toward the viewer, with Earth low in the black sky." loading="lazy">
-          <figcaption>Nothing on the Moon moves dust. No wind, no water, no weather. The prints left there in 1969 are still exactly where they were put, which makes them the plainest record anyone has ever left: a dated mark that cannot be edited afterward. That is the whole idea behind registering a prediction before the data exists, and it is why the Quest walks on footprints.</figcaption>
+          <picture>
+            <source srcset="quest-hologram.webp" type="image/webp">
+            <img class="holo" src="quest-hologram.jpg" width="1376" height="768" loading="lazy" alt="An open book on a dark wooden desk at night. From its pages rises a glowing hologram of the cosmic web, cyan and violet filaments, above a thin line of five lit markers.">
+          </picture>
+          <figcaption>Nothing on the Moon moves dust. No wind, no water, no weather. The prints left there in 1969 are still exactly where they were put, which makes them the plainest record anyone has ever left: a dated mark that cannot be edited afterward. That is the whole idea behind registering a prediction before the data exists, and it is why the Quest walks on footprints.<span class="credit">Illustration, AI-generated</span></figcaption>
         </figure>
       </div>
     </section>
@@ -489,7 +495,7 @@
     </a>
         </div>
       </div>
-      <nav class="pub-links" aria-label="Site links"><div><h3>The Book</h3><ul><li><a href="book.html">Overview</a></li><li><a href="download.html">Download</a></li><li><a href="conversion.html">Formats</a></li><li><a href="references.html">References</a></li><li><a href="appendix.html">Appendices</a></li><li><a href="glossary.html">Glossary</a></li></ul></div><div><h3>The Quest</h3><ul><li><a href="quest-map.html">Quest Map</a></li><li><a href="instruments.html">The Instruments</a></li><li><a href="mission-log.html">Mission Log</a></li><li><a href="media.html">Horizon Scanner</a></li><li><a href="quest-follow.html#episodes">Episodes</a></li><li><a href="quest-follow.html">Follow the Quest</a></li></ul></div><div><h3>Ic&sup2; Institute</h3><ul><li><a href="index.html">Home</a></li><li><a href="framework.html">The Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing Schedule</a></li><li><a href="faq-page.html">FAQ</a></li><li><a href="about-page.html">About</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div></nav>
+      <nav class="pub-links" aria-label="Site links"><div><h3>The Book</h3><ul><li><a href="book.html">Overview</a></li><li><a href="download.html">Download</a></li><li><a href="conversion.html">Formats</a></li><li><a href="references.html">References</a></li><li><a href="appendix.html">Appendices</a></li><li><a href="glossary.html">Glossary</a></li></ul></div><div><h3>The Quest</h3><ul><li><a href="quest-map.html">Quest Map</a></li><li><a href="instruments.html">The Instruments</a></li><li><a href="mission-log.html">Mission Log</a></li><li><a href="media.html">Horizon Scanner</a></li><li><a href="quest-follow.html#episodes">Episodes</a></li><li><a href="quest-follow.html">Follow the Quest</a></li></ul></div><div><h3>Ic&sup2; Institute</h3><ul><li><a href="index.html">Home</a></li><li><a href="framework.html">The Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing Schedule</a></li><li><a href="faq-page.html">FAQ</a></li><li><a href="about-page.html">About</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div><div><h3>Take Part</h3><ul><li><a href="subscribe.html">Subscribe</a></li><li><a href="join.html">Join</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="support.html">Support Our Research</a></li><li><a href="shop.html">Shop (opening soon)</a></li></ul></div></nav>
     </div>
     <div class="pub-footer-bottom">
       <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>

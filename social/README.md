@@ -1,0 +1,58 @@
+# Social media
+
+Instagram reels, 1080 × 1920, 30 fps. Each reel is a page (`reel.html`) that
+draws every frame from a time value, so it renders the same every time.
+
+```
+python3 -m http.server 8765 &
+node social/render-reel.js social/rubin-reel/reel.html social/rubin-reel/rubin-reel.mp4
+node social/render-reel.js social/rubin-reel/reel.html check.mp4 --stills   # one PNG per scene
+```
+
+Needs Playwright and ffmpeg. Fonts (Anton, Inter, Source Serif 4; SIL Open Font
+License) are in `fonts/`, so rendering needs no network.
+
+Text stays clear of the top 250 px and bottom 420 px, where Instagram puts the
+caption, buttons and profile name. Add music in Instagram or CapCut from their
+licensed libraries.
+
+## rubin-reel: COSMIC-007 and the Rubin Observatory (31 s)
+
+Rebuilt from the September 2025 carousel in `rubin-carousel/source`, with the
+record brought up to date:
+
+- The Zenodo deposit of 31 July 2025 made the general claim (directional
+  asymmetry beyond 100 Mpc). The direction (l, b) ≈ (210°, −20°) was first
+  written on the website in May 2026. The full pre-registration, with the
+  direction and the pass mark (more than 3σ, along that axis), is the Zenodo
+  deposit of 12 September 2026, doi.org/10.5281/zenodo.22720954. The reel
+  shows all three dates.
+- The carousel's "1.65 m focal plane" was wrong: the LSST Camera's focal plane
+  is about 64 cm across. Its "DP2: now" is out of date. Neither is in the reel.
+- Rubin Data Release 1 is expected by the end of June 2028.
+
+**Caption** (paste into Instagram):
+
+> We made a prediction. The Rubin Observatory will check it.
+>
+> COSMIC-007: on the largest scales, beyond 100 megaparsecs, galaxies should lean toward one direction in the sky, (l, b) ≈ (210°, −20°). Every step is dated, including the ones we added later: first claim on Zenodo in July 2025, direction stated in May 2026, pre-registered in full in September 2026 with a pass mark of more than 3σ on that axis. Rubin's first data release, expected mid-2028, decides it. Whatever it shows, we publish it.
+>
+> Follow the test: eequalsicsquared.com
+> Pre-registered: doi.org/10.5281/zenodo.22720954
+>
+> Images: NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA/P. Horálek (Institute of Physics in Opava); NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA/H. Stockebrand. CC BY 4.0. Independent research; not affiliated with, or endorsed by, Rubin Observatory or NOIRLab.
+>
+> #RubinObservatory #LSST #cosmology #astronomy #physics #openscience
+
+## framework-reel: the COSMIC Framework (25.5 s)
+
+Landauer's limit as the hook, information as physical, time as changing
+relationships, a registered test walking to DESI DR3 in 2027, and the Quest.
+
+## Ideas for later posts
+
+- **8 billion minds.** "8 billion conscious minds, and every one of them is the
+  universe looking at itself." The scale version of the poster's Consciousness
+  stage ("Where are you in the theory?"). Suits a short reel or a single image:
+  the web of connections from the poster, pulling back to the scale of the
+  cosmic web.

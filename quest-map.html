@@ -121,6 +121,29 @@
     .lk-dia { background: #7a5000; border: 2px solid #f1e303; transform: rotate(45deg) scale(.8); }
     .lk-pill { background: #0f3d2e; border: 2px solid #f1e303; border-radius: 6px; }
     .lk-foot { background: rgba(241,227,3,.9); border-radius: 50% 50% 45% 45%; width: 9px; }
+
+    /* newsletter footprints: a plain print until its issue is out; then hover, focus or tap turns it into the issue menu */
+    .qfoot .qf-print { fill: rgba(241,227,3,.92); outline: none; }
+    .qfoot .qf-print circle { fill: transparent; }
+    .qfoot .qf-print use { transition: opacity .45s .2s, filter .2s; }
+    .qfoot .qf-menu { opacity: 0; pointer-events: none; transition: opacity .35s; font-size: 17px; }
+    .qfoot .qf-menu rect { fill: #0b131d; stroke: #f1e303; stroke-width: 2; }
+    .qfoot .qf-menu text { fill: #fff; }
+    .qfoot .qf-menu .qf-title { fill: #f1e303; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .qfoot .qf-menu a:hover text, .qfoot .qf-menu a:focus text { fill: #f1e303; text-decoration: underline; }
+    .qfoot .qf-menu .qf-u { text-decoration: underline; }
+    .qfoot .qf-menu a:focus { outline: none; }
+    .qfoot .qf-date { display: none; fill: #f1e303; font-size: 14px; font-weight: 700; letter-spacing: .06em; }
+    .qfoot.live .qf-print { cursor: pointer; }
+    .qfoot.live:hover .qf-print use, .qfoot.live:focus-within .qf-print use, .qfoot.live.open .qf-print use {
+      opacity: 0; filter: drop-shadow(0 0 6px #f1e303) drop-shadow(0 0 14px #f1e303); }
+    .qfoot.live:hover .qf-menu, .qfoot.live:focus-within .qf-menu, .qfoot.live.open .qf-menu {
+      opacity: 1; pointer-events: auto; transition-delay: .25s; }
+    .qfoot:not(.live) .qf-menu { display: none; }
+    .qfoot.next .qf-date { display: block; }
+    .qfoot.next .qf-print use { animation: qf-step 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes qf-step { 0%, 100% { opacity: .35; transform: scale(.92); } 50% { opacity: 1; transform: scale(1.08); } }
+    @media (prefers-reduced-motion: reduce) { .qfoot.next .qf-print use { animation: none; } }
     .lc-scroll { margin-left: auto; font-style: italic; }
     .lc-hint { color: rgba(255,255,255,.5); font-size: .9rem; font-style: italic; margin-bottom: 1rem; }
     .lc-panel { background: rgba(255,255,255,.055); border-left: 4px solid var(--yellow); border-radius: 0 10px 10px 0;
@@ -383,7 +406,7 @@
   <meta property="og:title" content="The Quest Map | Ic² Research Institute">
   <meta property="og:description" content="Where the COSMIC Framework stands on the road every theory travels, from inception through its life cycle: the stages, the four routes and the data still to come.">
   <meta property="og:url" content="https://eequalsicsquared.com/quest-map.html">
-  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg">
+  <meta property="og:image" content="https://eequalsicsquared.com/share-card.jpg?v=rgb">
   <meta name="twitter:card" content="summary_large_image">
   <style id="q-head">
     /* Quest title panel: the Framework page's pattern on light gray. */
@@ -427,6 +450,7 @@
     <nav class="family-bar" aria-label="The Quest and related sites">
         <ul>
         <li class="fam-lead"><a href="quest-map.html"><img src="quest-logo-color.svg" alt="The Quest"></a></li>
+        <li class="fb-contribute"><a href="contribute.html">Contribute</a></li>
         <li><a href="index.html"><img src="ic2-logo.png" alt="Ic² Research Institute"></a></li>
         <li><a href="framework.html"><img src="framework.png" alt="The COSMIC Framework"></a></li>
         <li><a href="book.html"><img src="bigtoeindexlogo.png?v=rgb" alt="A Quest for The Big TOE"></a></li>
@@ -480,12 +504,13 @@
         costs, the success rates, and links to the sources. For every gate in detail, with the way through and where to go, see the <a href="quest-guide.html">Quest Guide</a>.</p>
 
         <div class="lc-wrap">
-        <svg class="lifecycle" viewBox="0 0 1860 960" role="img" aria-label="Lifecycle of a physics result, by lane: affiliated, industry and independent, converging on an internal check, preprint, journal submission and peer review, with a rejection loop and a sigma threshold before publication">
+        <svg class="lifecycle" viewBox="0 0 1860 960" role="group" aria-label="Lifecycle of a physics result, by lane: affiliated, industry and independent, converging on an internal check, preprint, journal submission and peer review, with a rejection loop and a sigma threshold before publication">
         <defs>
         <pattern id="lgrid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0v26" fill="none" stroke="rgba(255,255,255,.045)"/></pattern>
-        <marker id="fp" markerWidth="40" markerHeight="40" refX="20" refY="20" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(20 20)"><g transform="rotate(90) scale(0.2) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(241,227,3,.92)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(241,227,3,.92)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(241,227,3,.92)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(241,227,3,.92)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(241,227,3,.92)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(241,227,3,.92)"/></g></g></marker>
-        <marker id="fpr" markerWidth="40" markerHeight="40" refX="20" refY="20" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(20 20)"><g transform="rotate(90) scale(0.2) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(224,107,122,.95)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(224,107,122,.95)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(224,107,122,.95)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(224,107,122,.95)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(224,107,122,.95)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(224,107,122,.95)"/></g></g></marker>
-        <marker id="fpg" markerWidth="40" markerHeight="40" refX="20" refY="20" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(20 20)"><g transform="rotate(90) scale(0.2) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(120,220,170,.95)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(120,220,170,.95)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(120,220,170,.95)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(120,220,170,.95)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(120,220,170,.95)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(120,220,170,.95)"/></g></g></marker>
+        <marker id="fp" markerWidth="64" markerHeight="64" refX="32" refY="32" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(32 32)"><g transform="rotate(90) scale(0.3) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(241,227,3,.92)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(241,227,3,.92)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(241,227,3,.92)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(241,227,3,.92)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(241,227,3,.92)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(241,227,3,.92)"/></g></g></marker>
+        <marker id="fpr" markerWidth="64" markerHeight="64" refX="32" refY="32" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(32 32)"><g transform="rotate(90) scale(0.3) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(224,107,122,.95)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(224,107,122,.95)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(224,107,122,.95)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(224,107,122,.95)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(224,107,122,.95)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(224,107,122,.95)"/></g></g></marker>
+        <marker id="fpg" markerWidth="64" markerHeight="64" refX="32" refY="32" orient="auto" markerUnits="userSpaceOnUse"><g transform="translate(32 32)"><g transform="rotate(90) scale(0.3) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z" fill="rgba(120,220,170,.95)"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)" fill="rgba(120,220,170,.95)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)" fill="rgba(120,220,170,.95)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)" fill="rgba(120,220,170,.95)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)" fill="rgba(120,220,170,.95)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)" fill="rgba(120,220,170,.95)"/></g></g></marker>
+        <g id="foot"><g transform="rotate(90) scale(0.3) translate(-60 -75)"><path d="M20 62 C19 46 38 39 57 41 C77 43 91 53 89 71 C87 90 83 104 81 118 C79 134 66 143 54 141 C41 139 36 127 40 115 C44 103 50 95 46 85 C42 77 21 78 20 62 Z"/><ellipse cx="30" cy="30" rx="11.5" ry="13.5" transform="rotate(-10 30 30)"/><ellipse cx="51" cy="27" rx="7.2" ry="8.6" transform="rotate(-2 51 27)"/><ellipse cx="65" cy="30" rx="6.2" ry="7.2" transform="rotate(8 65 30)"/><ellipse cx="77" cy="37" rx="5.3" ry="6.2" transform="rotate(18 77 37)"/><ellipse cx="86" cy="47" rx="4.4" ry="5.2" transform="rotate(26 86 47)"/></g></g>
         <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter>
         </defs>
         <rect width="1860" height="960" fill="#0b131d"/>
@@ -520,8 +545,8 @@
         <path d="M490 440 L510 440 L530 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
         <path d="M710 440 L730 440 L750 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
         <path d="M270 680 L290 680 L310 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
-        <path d="M490 680 L510 680 L530 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
-        <path d="M710 680 L730 680 L750 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
+        <path d="M490 680 L510 680 L530 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" />
+        <path d="M710 680 L730 680 L750 680" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" />
         <path d="M930 200 C1000 200 995 330 1030 405" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-end="url(#fp)"/>
         <path d="M930 440 L957.5 440 L985 440" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-mid="url(#fp)" />
         <path d="M930 680 C1000 680 995 550 1030 475" fill="none" stroke="rgba(241,227,3,.42)" stroke-width="2" marker-end="url(#fp)"/>
@@ -641,6 +666,18 @@
         <text x="1150" y="857" text-anchor="middle" font-size="14.5" font-weight="600" fill="#fff">testing</text>
         </g>
         <g class="here"><path d="M840 713 L840 742" stroke="#f1e303" stroke-width="2"/><rect x="560" y="742" width="470" height="34" rx="17" fill="#f1e303"/><text x="795" y="764" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e">Ic² is here: registered, waiting for data in 2027</text></g>
+        
+        <!-- Newsletter issues on the trail. data-live is the month the issue is published; before it, the next issue's footprint shows its date, after it the footprint opens the issue menu. ?preview opens them all. -->
+        <g class="qfoot" data-issue="1" data-live="2026-11-01" transform="translate(510 680)">
+        <g class="qf-menu" transform="translate(-140 -214)"><rect width="280" height="190" rx="10"/><text class="qf-title" x="22" y="28">Issue 1 &#183; Setting Out</text><a href="quest-issue-1.html#newsletter"><text x="22" y="58">1&#8195;Newsletter: <tspan class="qf-u">view</tspan></text></a><a href="quest-issue-1.html?print=1"><text x="182" y="58"><tspan class="qf-u">download</tspan></text></a><a href="quest-issue-1.html#data"><text x="22" y="88">2&#8195;What the data says</text></a><a href="quest-issue-1.html#links"><text x="22" y="118">3&#8195;Important links</text></a><a href="quest-issue-1.html#options"><text x="22" y="148">4&#8195;Options</text></a><a href="quest-issue-1.html#sources"><text x="22" y="178">5&#8195;Sources and references</text></a></g>
+        <g class="qf-print" role="button" aria-label="Issue 1, November 2026: Setting Out"><circle r="26"/><use href="#foot"/></g>
+        <text class="qf-date" y="44" text-anchor="middle">November 2026</text>
+        </g>
+        <g class="qfoot" data-issue="2" data-live="2027-01-01" transform="translate(730 680)">
+        <g class="qf-menu" transform="translate(-140 -214)"><rect width="280" height="190" rx="10"/><text class="qf-title" x="22" y="28">Issue 2 &#183; Testing and marketing</text><a href="quest-issue-2.html#newsletter"><text x="22" y="58">1&#8195;Newsletter: <tspan class="qf-u">view</tspan></text></a><a href="quest-issue-2.html?print=1"><text x="182" y="58"><tspan class="qf-u">download</tspan></text></a><a href="quest-issue-2.html#data"><text x="22" y="88">2&#8195;What the data says</text></a><a href="quest-issue-2.html#links"><text x="22" y="118">3&#8195;Important links</text></a><a href="quest-issue-2.html#options"><text x="22" y="148">4&#8195;Options</text></a><a href="quest-issue-2.html#sources"><text x="22" y="178">5&#8195;Sources and references</text></a></g>
+        <g class="qf-print" role="button" aria-label="Issue 2, January 2027: Testing and marketing"><circle r="26"/><use href="#foot"/></g>
+        <text class="qf-date" y="44" text-anchor="middle">January 2027</text>
+        </g>
         <text x="40" y="892" font-size="11" font-weight="700" fill="rgba(241,227,3,.8)" letter-spacing="2">WHAT COUNTS AS AN ENDING</text>
         <rect x="40" y="906" width="132" height="32" rx="16" fill="#0f3d2e" stroke="rgba(255,255,255,.3)"/><text x="106" y="927" text-anchor="middle" font-size="13" fill="#fff">Accepted</text>
         <rect x="190" y="906" width="132" height="32" rx="16" fill="#005ba5" stroke="rgba(255,255,255,.3)"/><text x="256" y="927" text-anchor="middle" font-size="13" fill="#fff">Modified</text>
@@ -934,7 +971,7 @@
     </a>
         </div>
       </div>
-      <nav class="pub-links" aria-label="Site links"><div><h3>The Book</h3><ul><li><a href="book.html">Overview</a></li><li><a href="download.html">Download</a></li><li><a href="conversion.html">Formats</a></li><li><a href="references.html">References</a></li><li><a href="appendix.html">Appendices</a></li><li><a href="glossary.html">Glossary</a></li></ul></div><div><h3>The Quest</h3><ul><li><a href="quest-map.html">Quest Map</a></li><li><a href="instruments.html">The Instruments</a></li><li><a href="mission-log.html">Mission Log</a></li><li><a href="media.html">Horizon Scanner</a></li><li><a href="quest-follow.html#episodes">Episodes</a></li><li><a href="quest-follow.html">Follow the Quest</a></li></ul></div><div><h3>Ic&sup2; Institute</h3><ul><li><a href="index.html">Home</a></li><li><a href="framework.html">The Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing Schedule</a></li><li><a href="faq-page.html">FAQ</a></li><li><a href="about-page.html">About</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div></nav>
+      <nav class="pub-links" aria-label="Site links"><div><h3>The Book</h3><ul><li><a href="book.html">Overview</a></li><li><a href="download.html">Download</a></li><li><a href="conversion.html">Formats</a></li><li><a href="references.html">References</a></li><li><a href="appendix.html">Appendices</a></li><li><a href="glossary.html">Glossary</a></li></ul></div><div><h3>The Quest</h3><ul><li><a href="quest-map.html">Quest Map</a></li><li><a href="instruments.html">The Instruments</a></li><li><a href="mission-log.html">Mission Log</a></li><li><a href="media.html">Horizon Scanner</a></li><li><a href="quest-follow.html#episodes">Episodes</a></li><li><a href="quest-follow.html">Follow the Quest</a></li></ul></div><div><h3>Ic&sup2; Institute</h3><ul><li><a href="index.html">Home</a></li><li><a href="framework.html">The Framework</a></li><li><a href="validation.html">Validation</a></li><li><a href="testing-schedule.html">Testing Schedule</a></li><li><a href="faq-page.html">FAQ</a></li><li><a href="about-page.html">About</a></li><li><a href="about-page.html#contact">Contact</a></li></ul></div><div><h3>Take Part</h3><ul><li><a href="subscribe.html">Subscribe</a></li><li><a href="join.html">Join</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="support.html">Support Our Research</a></li><li><a href="shop.html">Shop (opening soon)</a></li></ul></div></nav>
     </div>
     <div class="pub-footer-bottom">
       <p>&copy; 2026 Ic² Research Institute. All rights reserved. | <a href="legal.html">Legal</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms &amp; Conditions</a> | <a href="unsubscribe.html">Unsubscribe</a></p>
@@ -984,6 +1021,39 @@
       n.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(n.dataset.n); }
       });
+    });
+  })();
+  </script>
+  <script>
+  // Newsletter footprints: published issues open a menu; the next one shows its month.
+  (function () {
+    var feet = document.querySelectorAll('.lifecycle .qfoot');
+    if (!feet.length) return;
+    var preview = /[?&]preview\b/.test(location.search), now = new Date(), next = null;
+    feet.forEach(function (f) {
+      var live = preview || now >= new Date(f.dataset.live + 'T00:00:00');
+      var print = f.querySelector('.qf-print');
+      if (live) {
+        f.classList.add('live');
+        print.setAttribute('tabindex', '0');
+        print.setAttribute('aria-expanded', 'false');
+        var toggle = function (e) {
+          e.stopPropagation();
+          var open = !f.classList.contains('open');
+          feet.forEach(function (o) { o.classList.remove('open'); });
+          f.classList.toggle('open', open);
+          print.setAttribute('aria-expanded', open);
+        };
+        print.addEventListener('click', toggle);
+        print.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(e); } });
+      } else {
+        print.removeAttribute('role');
+        f.querySelectorAll('.qf-menu a').forEach(function (a) { a.setAttribute('tabindex', '-1'); });
+        if (!next) { next = f; f.classList.add('next'); }
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.qfoot')) feet.forEach(function (o) { o.classList.remove('open'); });
     });
   })();
   </script>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #04060f; color: #fff; -webkit-font-smoothing: antialiased; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; }
+    a { color: #ffd700; } a:hover { color: #ffe600; }
+    .card { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #04060f; }
+    .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .scrim, .tint, .scan { position: absolute; inset: 0; pointer-events: none; }
+    .tint { mix-blend-mode: screen; }
+    .scan { background: repeating-linear-gradient(0deg, rgba(170,235,255,.05) 0 1px, transparent 1px 4px);
+      mix-blend-mode: overlay; }
+    .bloom { position: absolute; border-radius: 50%; filter: blur(105px); pointer-events: none; }
+    .vig { position: absolute; inset: 0; pointer-events: none; background:
+      radial-gradient(ellipse 82% 66% at 50% 44%, transparent 0%, rgba(4,6,15,.40) 72%, rgba(4,6,15,.88) 100%); }
+    .hud { position: absolute; width: 56px; height: 56px; border: 5px solid;
+      border-image: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%) 1; filter: drop-shadow(0 0 12px rgba(0,224,255,.85)); }
+    .hud.tl { top: 40px; left: 40px; border-right: 0; border-bottom: 0; }
+    .hud.tr { top: 40px; right: 40px; border-left: 0; border-bottom: 0; }
+    .hud.bl { bottom: 40px; left: 40px; border-right: 0; border-top: 0; }
+    .hud.br { bottom: 40px; right: 40px; border-left: 0; border-top: 0; }
+    .inner { position: absolute; inset: 0; padding: 112px 84px 0; display: flex; flex-direction: column; }
+    .brandbar { display: flex; align-items: center; justify-content: space-between; }
+    .brandbar img.ic2 { height: 62px; filter: drop-shadow(0 0 16px rgba(150,225,255,.45)); }
+    .rightmark { display: flex; align-items: center; gap: 20px; }
+    .rightmark img.spin { height: 56px; filter: drop-shadow(0 0 14px rgba(255,200,60,.55)); }
+    .pagenum { display: flex; align-items: center; gap: 14px; }
+    .pagenum .bar { width: 46px; height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 20px rgba(0,224,255,.85); }
+    .pagenum .n { font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 21px; letter-spacing: .18em;
+      color: #4fe6ff; text-shadow: 0 0 22px rgba(0,224,255,.60); }
+    .tag { display: flex; align-items: center; gap: 16px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700;
+      font-size: 24px; letter-spacing: .18em; text-transform: uppercase; color: #ffd23d;
+      text-shadow: 0 0 26px rgba(255,180,40,.55); }
+    .tag .bar { width: 56px; height: 8px; flex-shrink: 0; background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%);
+      box-shadow: 0 0 20px rgba(255,140,26,.85); }
+    .tag.c { color: #5ef2ff; text-shadow: 0 0 26px rgba(0,224,255,.60); }
+    .tag.c .bar { background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 20px rgba(0,224,255,.85); }
+    .d { font-family: Anton, Impact, Haettenschweiler, "Arial Narrow", sans-serif; font-weight: 400;
+      text-transform: uppercase; line-height: .92; letter-spacing: .004em; color: #fff;
+      text-shadow: 0 0 26px rgba(110,190,255,.20); }
+    .d .cool { color: #00e0ff; text-shadow: 0 0 30px rgba(0,224,255,.65), 0 0 68px rgba(0,224,255,.34); }
+    .d .hot { color: #ffc83d; text-shadow: 0 0 30px rgba(255,180,40,.60), 0 0 68px rgba(255,120,26,.30); }
+    .rule { height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 22px rgba(0,224,255,.85); }
+    .rule.hot { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 22px rgba(255,140,26,.85); }
+    .dek { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 33px; line-height: 1.40; color: rgba(255,255,255,.95); }
+    .dek b { font-weight: 700; color: #fff; }
+    .dek .k { color: #5ef2ff; font-weight: 700; text-shadow: 0 0 26px rgba(0,224,255,.75); }
+    .dek .g { color: #ffd23d; font-weight: 700; text-shadow: 0 0 26px rgba(255,170,30,.70); }
+
+    /* --- stat cards: the numbers are designed objects, not loose type ------ */
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .q { display: flex; padding: 2px; background: linear-gradient(170deg, rgba(0,224,255,.75) 0%, rgba(0,230,118,.30) 60%, rgba(0,224,255,.10) 100%);
+      box-shadow: 0 0 26px rgba(0,224,255,.18);
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); }
+    .q.h { background: linear-gradient(170deg, rgba(255,215,0,.75) 0%, rgba(255,60,26,.30) 60%, rgba(255,138,26,.10) 100%);
+      box-shadow: 0 0 26px rgba(255,140,26,.16); }
+    .q > .in { position: relative; flex-grow: 1; background: rgba(5,10,22,.90); padding: 22px 18px 20px;
+      clip-path: polygon(0 0, calc(100% - 19px) 0, 100% 19px, 100% 100%, 19px 100%, 0 calc(100% - 19px)); }
+    .q .top { position: absolute; left: 0; top: 0; width: 62%; height: 5px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%);
+      box-shadow: 0 0 16px rgba(0,224,255,.85); }
+    .q.h .top { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 16px rgba(255,140,26,.85); }
+    .q .ix { position: absolute; right: 16px; top: 18px; font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600;
+      font-size: 15px; letter-spacing: .12em; color: rgba(140,220,255,.42); }
+    .q .n { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 64px;
+      line-height: .9; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); -webkit-background-clip: text; background-clip: text;
+      color: transparent; filter: drop-shadow(0 0 22px rgba(0,224,255,.60)); }
+    .q .l { display: block; margin-top: 10px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 20px;
+      letter-spacing: .05em; text-transform: uppercase; color: rgba(226,244,255,.88); }
+
+    /* --- neon statement panel --------------------------------------------- */
+    .np { display: flex; padding: 2px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 38px rgba(0,224,255,.28);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .np.h { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 38px rgba(255,140,26,.26); }
+    .np > .in { flex-grow: 1; display: flex; flex-direction: column; background: rgba(5,9,20,.94);
+      padding: 24px 28px;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .np .lbl { display: block; margin-bottom: 10px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 20px;
+      letter-spacing: .16em; text-transform: uppercase; color: #5ef2ff; text-shadow: 0 0 22px rgba(0,224,255,.70); }
+    .np.h .lbl { color: #ffd23d; text-shadow: 0 0 22px rgba(255,170,30,.70); }
+    .np p { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 28px; line-height: 1.38; color: rgba(255,255,255,.95); }
+
+    .optics { display: flex; padding: 2px; background: linear-gradient(160deg, rgba(0,224,255,.55) 0%, rgba(0,230,118,.18) 55%, rgba(0,224,255,.08) 100%);
+      box-shadow: 0 0 40px rgba(0,224,255,.22);
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px)); }
+    .optics > .in { flex-grow: 1; display: flex; align-items: center; justify-content: center;
+      background: rgba(4,9,20,.92);
+      clip-path: polygon(0 0, calc(100% - 23px) 0, 100% 23px, 100% 100%, 23px 100%, 0 calc(100% - 23px)); }
+    .shot { display: flex; padding: 2px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 40px rgba(0,224,255,.26);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .shot > .in { position: relative; flex-grow: 1; overflow: hidden; background: #04060f;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 16px;
+      background: linear-gradient(0deg, rgba(4,6,15,.92) 0%, rgba(4,6,15,0) 100%);
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 17px; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(220,242,255,.92); }
+    .flare { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; z-index: 2; }
+    .flare .fh { position: absolute; right: -250px; top: 700px; width: 470px; height: 470px;
+      border-radius: 50%; filter: blur(54px); background: radial-gradient(circle,
+      rgba(150,230,255,.34) 0%, rgba(0,180,255,.14) 34%, transparent 64%); }
+    .flare .fp { position: absolute; right: -84px; top: 838px; width: 176px; height: 176px;
+      border-radius: 50%; filter: blur(15px); background: radial-gradient(circle,
+      rgba(255,255,255,.95) 0%, rgba(198,248,255,.62) 24%, rgba(0,196,255,.24) 46%, transparent 68%); }
+    .flare .fs { position: absolute; right: -84px; top: 918px; width: 880px; height: 11px;
+      filter: blur(7px); background: linear-gradient(90deg, transparent 0%,
+      rgba(150,232,255,.08) 30%, rgba(206,250,255,.58) 78%, rgba(255,255,255,.85) 95%, transparent 100%); }
+    .flare .fx { position: absolute; right: -70px; top: 892px; width: 250px; height: 74px;
+      border-radius: 50%; filter: blur(26px); background: radial-gradient(circle,
+      rgba(255,198,104,.30) 0%, transparent 66%); }
+    .flare .fg { position: absolute; border-radius: 50%; filter: blur(8px); }
+
+    .claim { display: flex; padding: 2px; background: linear-gradient(160deg,
+      rgba(255,215,0,.95) 0%, rgba(255,90,26,.62) 52%, rgba(255,138,26,.40) 100%);
+      box-shadow: 0 0 46px rgba(255,140,26,.24);
+      clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .claim > .in { flex-grow: 1; background: rgba(5,9,20,.80); padding: 24px 30px 28px;
+      clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px)); }
+    .claim .chip { display: inline-block; font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 16px;
+      letter-spacing: .22em; text-transform: uppercase; color: #0a0f1e; background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%);
+      padding: 8px 15px; box-shadow: 0 0 28px rgba(255,150,30,.60);
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+    .claim .line { margin-top: 16px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 29px; line-height: 1.24;
+      color: rgba(255,255,255,.88); }
+    .claim .hit { margin-top: 2px; font-family: Anton, Impact, "Arial Narrow", sans-serif;
+      font-size: 56px; line-height: .98; letter-spacing: .004em; text-transform: uppercase;
+      color: #ffc83d; text-shadow: 0 0 30px rgba(255,180,40,.62), 0 0 66px rgba(255,120,26,.30); }
+    .claim .sub { margin-top: 12px; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-size: 26px; line-height: 1.3;
+      color: rgba(255,255,255,.80); }
+    .mark { position: relative; width: 560px; height: 560px; }
+    .mark .ic2big { position: absolute; left: 50%; top: 50%; width: 360px;
+      transform: translate(-50%, -50%); filter: drop-shadow(0 0 30px rgba(150,225,255,.55)); }
+    .url { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 54px; line-height: 1;
+      text-transform: uppercase; letter-spacing: .01em; color: #ffc83d;
+      text-shadow: 0 0 30px rgba(255,180,40,.62), 0 0 68px rgba(255,120,26,.30); }
+    .footline { display: flex; align-items: center; gap: 24px; }
+    .footline .bar { flex-grow: 1; height: 6px; background: linear-gradient(96deg,#00e0ff 0%,#28ecc0 55%,#00e676 100%); box-shadow: 0 0 22px rgba(0,224,255,.80); }
+    .footline .bar.hot { background: linear-gradient(96deg,#ffd700 0%,#ff8a1a 46%,#ff1a1a 100%); box-shadow: 0 0 22px rgba(255,140,26,.80); }
+    .footline .u { font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 24px; letter-spacing: .14em;
+      text-transform: uppercase; color: #5ef2ff; white-space: nowrap; text-shadow: 0 0 24px rgba(0,224,255,.70); }
+    .footline .u.g { color: #ffd23d; text-shadow: 0 0 24px rgba(255,170,30,.70); }
+    .doi { font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; font-size: 19px; letter-spacing: .03em;
+      color: #7ef4ff; text-shadow: 0 0 20px rgba(0,224,255,.55); white-space: nowrap; }
+    .credit { position: absolute; left: 84px; right: 84px; bottom: 42px; font-family: "IBM Plex Mono", "Courier New", monospace;
+      font-size: 12.5px; line-height: 1.5; color: rgba(200,225,255,.52); }
+    .credit .dis { color: rgba(200,225,255,.40); }
+    .spacer { flex-grow: 1; }
+
+  </style>
+</helmet>
+<div class="card">
+  <img class="photo" src="plate3.jpg" style="filter: {{photoFilter}}">
+  <div class="scrim" style="background: linear-gradient(180deg, rgba(4,6,15,.88) 0%, rgba(4,6,15,.93) 30%, rgba(4,6,15,.96) 62%, rgba(4,6,15,.98) 100%)"></div>
+  <div class="tint" style="background: radial-gradient(ellipse 46% 26% at 50% 40%, rgba(0,150,225,.34) 0%, transparent 74%)"></div>
+  <div class="bloom" style="width: 720px; height: 720px; left: 180px; top: 170px; background: rgba(0,190,255,.26)"></div>
+  <div class="bloom" style="width: 560px; height: 420px; right: -140px; bottom: 120px; background: rgba(255,140,26,.16)"></div>
+  <div class="vig"></div>
+  <div class="grid"></div>
+  <div class="scan"></div>
+  <div class="hud tl"></div><div class="hud tr"></div><div class="hud bl"></div><div class="hud br"></div>
+
+  <div class="inner" style="align-items: center; text-align: center">
+    <div style="width: 100%; display: flex; justify-content: flex-end">
+      <div class="pagenum"><span class="bar"></span><span class="n">05 / 05</span></div>
+    </div>
+
+    <div style="height: 54px"></div>
+    <div class="mark">
+      <svg width="560" height="560" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cool" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#00e0ff"/><stop offset="1" stop-color="#00e676"/></linearGradient>
+    <linearGradient id="hot" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ffd700"/><stop offset=".5" stop-color="#ff8a1a"/><stop offset="1" stop-color="#ff1a1a"/></linearGradient>
+    <radialGradient id="core"><stop offset="0" stop-color="#bff6ff" stop-opacity=".95"/><stop offset="1" stop-color="#00c8ff" stop-opacity="0"/></radialGradient>
+    <filter id="tg" x="-40%" y="-120%" width="180%" height="340%">
+      <feGaussianBlur stdDeviation="3.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <defs>
+    <radialGradient id="rhalo"><stop offset="0" stop-color="#0aa6e0" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#041c30" stop-opacity="0"/></radialGradient>
+    <filter id="rg" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <circle cx="280.0" cy="280.0" r="266.0" fill="url(#rhalo)"/>
+  <circle cx="280.0" cy="280.0" r="266.0" fill="none" stroke="url(#cool)" stroke-width="4.5"
+          filter="url(#rg)"/>
+  <circle cx="280.0" cy="280.0" r="236.7" fill="none" stroke="#5ef2ff" stroke-width="2"
+          stroke-opacity=".50"/>
+  <circle cx="280.0" cy="280.0" r="212.8" fill="none" stroke="url(#hot)" stroke-width="3.4"
+          stroke-opacity=".85" stroke-dasharray="26 18" filter="url(#rg)"/>
+  <g filter="url(#rg)"><line x1="512.0" y1="280.0" x2="546.0" y2="280.0" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="527.9" y1="312.6" x2="543.7" y2="314.7" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="521.5" y1="344.7" x2="536.9" y2="348.8" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="511.0" y1="375.7" x2="525.8" y2="381.8" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="496.5" y1="405.0" x2="510.4" y2="413.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="478.3" y1="432.2" x2="491.0" y2="441.9" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="444.0" y1="444.0" x2="468.1" y2="468.1" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="432.2" y1="478.3" x2="441.9" y2="491.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="405.0" y1="496.5" x2="413.0" y2="510.4" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="375.7" y1="511.0" x2="381.8" y2="525.8" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="344.7" y1="521.5" x2="348.8" y2="536.9" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="312.6" y1="527.9" x2="314.7" y2="543.7" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="280.0" y1="512.0" x2="280.0" y2="546.0" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="247.4" y1="527.9" x2="245.3" y2="543.7" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="215.3" y1="521.5" x2="211.2" y2="536.9" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="184.3" y1="511.0" x2="178.2" y2="525.8" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="155.0" y1="496.5" x2="147.0" y2="510.4" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="127.8" y1="478.3" x2="118.1" y2="491.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="116.0" y1="444.0" x2="91.9" y2="468.1" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="81.7" y1="432.2" x2="69.0" y2="441.9" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="63.5" y1="405.0" x2="49.6" y2="413.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="49.0" y1="375.7" x2="34.2" y2="381.8" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="38.5" y1="344.7" x2="23.1" y2="348.8" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="32.1" y1="312.6" x2="16.3" y2="314.7" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="48.0" y1="280.0" x2="14.0" y2="280.0" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="32.1" y1="247.4" x2="16.3" y2="245.3" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="38.5" y1="215.3" x2="23.1" y2="211.2" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="49.0" y1="184.3" x2="34.2" y2="178.2" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="63.5" y1="155.0" x2="49.6" y2="147.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="81.7" y1="127.8" x2="69.0" y2="118.1" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="116.0" y1="116.0" x2="91.9" y2="91.9" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="127.8" y1="81.7" x2="118.1" y2="69.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="155.0" y1="63.5" x2="147.0" y2="49.6" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="184.3" y1="49.0" x2="178.2" y2="34.2" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="215.3" y1="38.5" x2="211.2" y2="23.1" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="247.4" y1="32.1" x2="245.3" y2="16.3" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="280.0" y1="48.0" x2="280.0" y2="14.0" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="312.6" y1="32.1" x2="314.7" y2="16.3" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="344.7" y1="38.5" x2="348.8" y2="23.1" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="375.7" y1="49.0" x2="381.8" y2="34.2" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="405.0" y1="63.5" x2="413.0" y2="49.6" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="432.2" y1="81.7" x2="441.9" y2="69.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="444.0" y1="116.0" x2="468.1" y2="91.9" stroke="#8df6ff" stroke-width="4" stroke-opacity="0.95"/><line x1="478.3" y1="127.8" x2="491.0" y2="118.1" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="496.5" y1="155.0" x2="510.4" y2="147.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="511.0" y1="184.3" x2="525.8" y2="178.2" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="521.5" y1="215.3" x2="536.9" y2="211.2" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/><line x1="527.9" y1="247.4" x2="543.7" y2="245.3" stroke="#5ef2ff" stroke-width="2" stroke-opacity="0.45"/></g>
+  <line x1="280.0" y1="14" x2="280.0" y2="560" stroke="#5ef2ff" stroke-width="2" stroke-opacity=".18"/>
+  <line x1="14" y1="280.0" x2="560" y2="280.0" stroke="#5ef2ff" stroke-width="2" stroke-opacity=".18"/>
+  <circle cx="546.0" cy="280.0" r="6" fill="#bff6ff" filter="url(#rg)"/><circle cx="413.0" cy="510.4" r="6" fill="#bff6ff" filter="url(#rg)"/><circle cx="49.6" cy="413.0" r="6" fill="#bff6ff" filter="url(#rg)"/><circle cx="178.2" cy="34.2" r="6" fill="#bff6ff" filter="url(#rg)"/>
+</svg>
+      <img class="ic2big" src="logo-ic2.png">
+    </div>
+
+    <div style="height: 40px"></div>
+    <div class="rule" style="width: 320px"></div>
+
+    <div style="height: 34px"></div>
+    <img src="logo-cosmic.png" style="width: 262px; filter: drop-shadow(0 0 22px rgba(255,90,60,.55))">
+
+    <div style="height: 30px"></div>
+    <div class="url">eequalsicsquared.com</div>
+
+    <div style="height: 22px"></div>
+    <div class="doi">doi.org/10.5281/zenodo.16639922</div>
+
+    <div style="height: 46px"></div>
+    <img src="logo-spinner.png" style="width: 70px; filter: drop-shadow(0 0 20px rgba(255,200,60,.60))">
+
+    <div class="spacer"></div>
+    <div style="height: 120px"></div>
+  </div>
+
+  <div class="credit" style="text-align: center">Images: NSF–DOE Vera C. Rubin Observatory/NOIRLab/SLAC/AURA — P.&nbsp;Horálek (Institute of Physics in Opava), H.&nbsp;Stockebrand · RubinObs/NOIRLab/SLAC/NSF/DOE/AURA — H.&nbsp;Stockebrand, T.&nbsp;Lange · CC BY 4.0<br><span class="dis">Independent research. Not affiliated with, or endorsed by, Rubin Observatory or NOIRLab.</span></div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"lift":{"editor":"range","default":74,"min":60,"max":220,"step":2,"unit":"%","section":"Plate"},"$preview":{"width":1080,"height":1350}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const lift = this.props.lift ?? 74;
+    const photoFilter = 'brightness(' + (lift / 100).toFixed(2) + ') contrast(1.16) saturate(1.42)';
+
+    return { photoFilter: photoFilter };
+  }
+}
+</script>
+</body>
+</html>

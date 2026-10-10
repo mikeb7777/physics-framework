@@ -19,7 +19,7 @@ head = head.replace("<title>Search | Ic² Research Institute</title>",
                     f"  <link rel=\"canonical\" href=\"https://eequalsicsquared.com/superseded.html\">\n"
                     f"  <meta property=\"og:title\" content=\"Superseded press releases\">\n"
                     f"  <meta property=\"og:description\" content=\"{html.escape(DESC)}\">\n"
-                    f"  <meta property=\"og:image\" content=\"https://eequalsicsquared.com/share-card.jpg\">")
+                    f"  <meta property=\"og:image\" content=\"https://eequalsicsquared.com/share-card.jpg?v=rgb\">")
 
 RELEASES = [
     ("28 October 2025", "The COSMIC Framework Achieves Perfect Validation Score Across Four Independent Breakthrough Discoveries",

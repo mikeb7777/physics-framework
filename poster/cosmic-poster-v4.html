@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The COSMIC Framework poster</title>
+<!--
+  Print poster, 24 x 36 in trim with 0.125 in bleed on every side (24.25 x 36.25 in),
+  laid out at 96 px per inch: 2328 x 3480 px. Keep text at least 0.75 in (72 px)
+  inside the trim. Render to PDF and PNG with render.js.
+-->
+<link href="../social/fonts/fonts.css" rel="stylesheet">
+<style>
+  @page { size: 24.25in 36.25in; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2328px; height: 3480px; background: #060a13; }
+  .poster { position: relative; width: 2328px; height: 3480px; overflow: hidden; color: #fff;
+    background: radial-gradient(ellipse 120% 60% at 50% 0%, #142443 0%, #0a1222 45%, #060a13 75%);
+    font-family: Inter, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #stars { position: absolute; inset: 0; }
+  #art { position: absolute; left: 0; top: 0; width: 2328px; height: 3480px; }
+  .headline, .lede, .colheads, .spine .q, .spine .a { text-shadow: 0 2px 16px rgba(4,7,14,.95), 0 0 4px rgba(4,7,14,.9); }
+  .wrap { position: absolute; left: 156px; right: 156px; top: 0; bottom: 0; }   /* 1.5 in side margins */
+
+  /* top */
+  .eyebrow { position: absolute; top: 190px; left: 0; font: 700 34px/1 Inter, sans-serif; letter-spacing: .32em;
+    text-transform: uppercase; color: #f1e303; }
+  .headline { position: absolute; top: 255px; left: -6px; font-family: Anton, Impact, sans-serif; font-size: 222px;
+    line-height: .94; text-transform: uppercase; letter-spacing: .005em; }
+  .headline .y { color: #f1e303; }
+  .lede { position: absolute; top: 925px; left: 0; width: 1500px; font: italic 500 60px/1.32 'Source Serif 4', Georgia, serif;
+    color: rgba(255,255,255,.88); }
+
+  /* the spine */
+  .colheads { position: absolute; top: 1225px; left: 0; right: 0; display: grid; grid-template-columns: 1fr 120px 1fr;
+    font: 700 28px/1 Inter, sans-serif; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+  .colheads div:first-child { text-align: right; }
+  .colheads div:last-child { color: #f1e303; }
+  .spine { position: absolute; top: 1295px; left: 0; right: 0; }
+  .spine .line { position: absolute; left: calc(50% - 4px); top: 30px; width: 8px; height: 1110px; border-radius: 4px;
+    background: linear-gradient(180deg, #6b4cff 0%, #3aa0ff 30%, #9be3ff 55%, #f1e303 100%); box-shadow: 0 0 40px rgba(120,160,255,.35); }
+  .stage { position: absolute; left: 0; right: 0; display: grid; grid-template-columns: 1fr 120px 1fr; align-items: start; }
+  .stage .dot { justify-self: center; width: 44px; height: 44px; border-radius: 50%; background: #060a13; border: 7px solid #9be3ff;
+    margin-top: 6px; box-shadow: 0 0 0 10px rgba(155,227,255,.12); }
+  .stage.last .dot { border-color: #f1e303; box-shadow: 0 0 0 12px rgba(241,227,3,.18), 0 0 40px rgba(241,227,3,.6); }
+  .q { text-align: right; padding-right: 16px; }
+  .q p { font: 600 36px/1.25 Inter, sans-serif; color: rgba(255,255,255,.80); margin-bottom: 14px; }
+  .q p b { font-family: Anton, Impact, sans-serif; font-weight: 400; color: rgba(255,255,255,.45); margin-left: 10px; letter-spacing: .04em; }
+  .a { padding-left: 16px; }
+  .a h3 { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 64px; line-height: 1; text-transform: uppercase; }
+  .a p { font: italic 500 34px/1.3 'Source Serif 4', Georgia, serif; color: rgba(255,255,255,.80); margin-top: 8px; }
+
+  /* the tests */
+  .tests { position: absolute; top: 3215px - 0px; }
+  .band { position: absolute; top: 2655px; left: 0; right: 0; }
+  .band h2 { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 100px; line-height: 1; text-transform: uppercase; }
+  .band h2 .y { color: #f1e303; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 30px; }
+  .card { border-top: 10px solid #f1e303; background: rgba(255,255,255,.05); padding: 34px 40px 36px; }
+  .card .id { font: 700 28px/1 Inter, sans-serif; letter-spacing: .2em; color: #f1e303; }
+  .card .claim { font-family: Anton, Impact, sans-serif; font-size: 70px; line-height: 1.02; text-transform: uppercase; margin: 18px 0 14px; }
+  .card .when { font: 600 36px/1.3 Inter, sans-serif; }
+  .card .doi { font: 400 26px/1.3 Inter, sans-serif; color: rgba(255,255,255,.6); margin-top: 10px; }
+  .consistent { margin-top: 26px; font: 400 28px/1.45 Inter, sans-serif; color: rgba(255,255,255,.72); }
+  .consistent b { color: #fff; font-weight: 600; }
+
+  .foot { position: absolute; left: 0; right: 0; top: 3250px; display: flex; align-items: center; gap: 40px; }
+  .foot img.qr { width: 140px; height: 140px; background: #fff; padding: 12px; border-radius: 6px; }
+  .foot .url { font: 700 46px/1.1 Inter, sans-serif; }
+  .foot .promise { font: italic 500 34px/1.3 'Source Serif 4', Georgia, serif; color: rgba(255,255,255,.75); margin-top: 6px; }
+  .foot .marks { margin-left: auto; display: flex; align-items: center; gap: 44px; }
+  .foot .marks img { height: 84px; width: auto; }
+</style>
+</head>
+<body>
+<div class="poster">
+  <canvas id="art" width="4656" height="6960" aria-hidden="true"></canvas>
+  <svg id="stars" width="2328" height="3480" viewBox="0 0 2328 3480" aria-hidden="true"></svg>
+  <div class="wrap">
+
+    <div class="eyebrow">The COSMIC Framework</div>
+    <div class="headline">What if<br>it&rsquo;s all<br><span class="y">information?</span></div>
+    <p class="lede">An independent theory proposing that information is what reality is made of, and that one process runs from before spacetime to the mind reading this.</p>
+
+    <div class="colheads"><div>What physics leaves open</div><div></div><div>What the framework proposes</div></div>
+    <div class="spine">
+      <div class="line"></div>
+
+      <div class="stage" style="top:0px;">
+        <div class="q"><p>What came before t&nbsp;=&nbsp;0?<b>07</b></p><p>What are objects made of?<b>01</b></p></div>
+        <div class="dot"></div>
+        <div class="a"><h3>Pre-geometric substrate</h3><p>A prior state, outside space and time. Relationships come first; objects are patterns in them.</p></div>
+      </div>
+
+      <div class="stage" style="top:205px;">
+        <div class="q"><p>Inflation needs the spacetime it creates.<b>04</b></p><p>Why is the vacuum energy 120 orders off?<b>08</b></p></div>
+        <div class="dot"></div>
+        <div class="a"><h3>Planck crystallization</h3><p>Spacetime crystallizes out of the substrate. Expansion is that process continuing, so dark energy should evolve.</p></div>
+      </div>
+
+      <div class="stage" style="top:410px;">
+        <div class="q"><p>Why isn&rsquo;t the sky the same in every direction?<b>09</b></p><p>Why won&rsquo;t gravity and quantum theory fit?<b>05</b></p></div>
+        <div class="dot"></div>
+        <div class="a"><h3>Spacetime emerges</h3><p>Uneven crystallization leaves a direction in the sky. Gravity and quantum theory are two limits of one substrate.</p></div>
+      </div>
+
+      <div class="stage" style="top:615px;">
+        <div class="q"><p>Where is the observer in the equations?<b>02</b></p></div>
+        <div class="dot"></div>
+        <div class="a"><h3>Quantum fields</h3><p>Measurement is information exchange. The observer is inside physics, not outside it.</p></div>
+      </div>
+
+      <div class="stage" style="top:790px;">
+        <div class="q"><p>Why do the constants have these values?<b>03</b></p></div>
+        <div class="dot"></div>
+        <div class="a"><h3>Particles &amp; forces</h3><p>They are what stable information processing requires.</p></div>
+      </div>
+
+      <div class="stage" style="top:950px;">
+        <div class="q"><p>Infinite density at zero volume?<b>06</b></p></div>
+        <div class="dot"></div>
+        <div class="a"><h3>Stars &amp; renewal</h3><p>No singularities. Black holes keep information and recycle structure.</p></div>
+      </div>
+
+      <div class="stage last" style="top:1130px;">
+        <div class="q"><p>Why is the scientist outside the theory?<b>10</b></p></div>
+        <div class="dot"></div>
+        <div class="a"><h3>Consciousness</h3><p>We are the universe examining itself, locally.</p></div>
+      </div>
+    </div>
+
+    <div class="band">
+      <h2>Put to the test. <span class="y">Dated in advance.</span></h2>
+      <div class="cards">
+        <div class="card">
+          <div class="id">COSMIC-005 &middot; DARK ENERGY</div>
+          <div class="claim">Dark energy keeps evolving</div>
+          <div class="when">Decided by DESI&rsquo;s third data release &middot; 2027</div>
+          <div class="doi">Pre-registered 12 Sept 2026 &middot; doi.org/10.5281/zenodo.22719514</div>
+        </div>
+        <div class="card">
+          <div class="id">COSMIC-007 &middot; LARGE-SCALE STRUCTURE</div>
+          <div class="claim">The sky has a direction</div>
+          <div class="when">Decided by Rubin&rsquo;s first data release &middot; mid-2028</div>
+          <div class="doi">Pre-registered 12 Sept 2026 &middot; doi.org/10.5281/zenodo.22720954</div>
+        </div>
+      </div>
+      <p class="consistent"><b>Consistent so far, but recorded after the data, so not counted as predictions:</b> DESI dark energy (2024&ndash;25) &middot; Google Willow error correction (2024) &middot; JWST early galaxies (2024&ndash;25) &middot; ALMA hot cluster gas (2026).</p>
+    </div>
+
+    <div class="foot">
+      <img class="qr" src="qr-framework.svg" alt="QR code: eequalsicsquared.com/framework.html">
+      <div><div class="url">eequalsicsquared.com</div><div class="promise">Every result published, whatever it shows.</div></div>
+      <div class="marks"><img src="../ic2-logo-white.png" alt="Ic² Research Institute"><img src="../framework-white.png" alt="The COSMIC Framework"></div>
+    </div>
+
+  </div>
+</div>
+<script>
+  // a quiet, fixed starfield (same every render)
+  let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const svg = document.getElementById('stars'); let out = '';
+  for (let i = 0; i < 260; i++) {
+    const x = rnd() * 2328, y = 2560 + rnd() * 920, r = rnd() < .97 ? .8 + rnd() * 1.6 : 2.4 + rnd() * 2;
+    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(2)}" fill="#fff" opacity="${(.15 + rnd() * .55).toFixed(2)}"/>`;
+  }
+  svg.innerHTML = out;
+
+  // The origin sequence, drawn behind the timeline. Each stage is painted on its own layer,
+  // then faded in and out over its stretch of the poster. Coordinates are poster px (x2 canvas).
+  (function () {
+    const W = 2328, H = 3480, K = 2;
+    const art = document.getElementById('art'), g = art.getContext('2d'); g.scale(K, K);
+    let sd = 3; const r = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+    function layer(y0, y1, fade, draw) {
+      const c = document.createElement('canvas'); c.width = W * K; c.height = H * K;
+      const x = c.getContext('2d'); x.scale(K, K); draw(x);
+      const m = x.createLinearGradient(0, y0 - fade, 0, y1 + fade);
+      const a = fade / (y1 - y0 + 2 * fade), b = 1 - a;
+      m.addColorStop(0, 'rgba(0,0,0,0)'); m.addColorStop(a, '#000'); m.addColorStop(b, '#000'); m.addColorStop(1, 'rgba(0,0,0,0)');
+      x.globalCompositeOperation = 'destination-in'; x.fillStyle = m; x.fillRect(0, 0, W, H);
+      g.drawImage(c, 0, 0, W, H);
+    }
+    const S = 1295;                                // top of the timeline
+    const Y = [S, S + 205, S + 410, S + 615, S + 790, S + 950, S + 1130];
+
+    // information: a field of bits behind the headline
+    layer(-200, 1180, 160, x => {
+      x.font = '600 26px Inter, monospace'; x.textAlign = 'center';
+      for (let yy = 40; yy < 1400; yy += 38) for (let xx = 20; xx < W; xx += 30) {
+        if (r() < .5) continue;
+        x.fillStyle = `rgba(110,170,255,${(.05 + r() * .22).toFixed(3)})`;
+        x.fillText(r() < .5 ? '0' : '1', xx + (r() - .5) * 8, yy);
+      }
+    });
+    // pre-geometric substrate: formless points
+    layer(Y[0] - 140, Y[0] + 120, 110, x => {
+      for (let i = 0; i < 5200; i++) { x.fillStyle = `rgba(160,130,255,${(.1 + r() * .45).toFixed(2)})`;
+        x.fillRect(r() * W, Y[0] - 300 + r() * 600, 2.2, 2.2); }
+    });
+    // Planck crystallization: points settle into a lattice as you go down
+    layer(Y[1] - 60, Y[1] + 130, 110, x => {
+      const s = 44;
+      for (let row = 0, yy = Y[1] - 260; yy < Y[1] + 330; yy += s * .866, row++) {
+        const t = Math.min(1, Math.max(0, (yy - (Y[1] - 260)) / 420)), jit = (1 - t) * 26;
+        for (let xx = (row % 2) * s / 2; xx < W; xx += s) {
+          const px = xx + (r() - .5) * jit, py = yy + (r() - .5) * jit;
+          x.fillStyle = `rgba(110,150,255,${(.25 + .45 * t).toFixed(2)})`; x.beginPath(); x.arc(px, py, 2.6 + t * 1.6, 0, 7); x.fill();
+          if (t > .45) { x.strokeStyle = `rgba(110,150,255,${(.22 * t).toFixed(2)})`; x.lineWidth = 1.2;
+            x.beginPath(); x.moveTo(px, py); x.lineTo(px + s, py); x.moveTo(px, py); x.lineTo(px + s / 2, py + s * .866); x.stroke(); }
+        }
+      }
+    });
+    // spacetime emerges: a grid bent by a mass
+    layer(Y[2] - 60, Y[2] + 130, 110, x => {
+      const wx = 1880, wy = Y[2] + 60, M = 9000;
+      const bend = (px, py) => { const dx = wx - px, dy = wy - py, d2 = dx * dx + dy * dy + 6000;
+        const f = M / d2; return [px + dx * f * .5, py + dy * f * .5]; };
+      x.strokeStyle = 'rgba(140,200,255,.38)'; x.lineWidth = 1.6;
+      for (let yy = Y[2] - 280; yy < Y[2] + 360; yy += 56) { x.beginPath();
+        for (let xx = -20; xx <= W + 20; xx += 12) { const [a, b] = bend(xx, yy); xx < 0 ? x.moveTo(a, b) : x.lineTo(a, b); } x.stroke(); }
+      for (let xx = 0; xx <= W; xx += 56) { x.beginPath();
+        for (let yy = Y[2] - 280; yy <= Y[2] + 360; yy += 12) { const [a, b] = bend(xx, yy); yy === Y[2] - 280 ? x.moveTo(a, b) : x.lineTo(a, b); } x.stroke(); }
+    });
+    // quantum fields: two sources, interfering
+    layer(Y[3] - 40, Y[3] + 110, 100, x => {
+      x.lineWidth = 2.2;
+      [[380, Y[3] + 40], [1960, Y[3] + 40]].forEach(([cx, cy]) => {
+        for (let rad = 20; rad < 1700; rad += 26) { x.strokeStyle = `rgba(120,230,255,${(.26 * Math.max(.2, 1 - rad / 1800)).toFixed(3)})`;
+          x.beginPath(); x.arc(cx, cy, rad, 0, 7); x.stroke(); }
+      });
+    });
+    // particles and forces: curling tracks, as in a bubble chamber
+    layer(Y[4] - 30, Y[4] + 90, 90, x => {
+      for (let i = 0; i < 46; i++) {
+        let px = r() * W, py = Y[4] - 120 + r() * 300, a = r() * 6.28, c = (r() - .5) * .08, st = 7;
+        x.strokeStyle = `rgba(${r() < .5 ? '140,255,220' : '255,255,255'},${(.18 + r() * .3).toFixed(2)})`; x.lineWidth = 1.6;
+        x.beginPath(); x.moveTo(px, py);
+        for (let k = 0; k < 120; k++) { px += Math.cos(a) * st; py += Math.sin(a) * st; a += c; c *= 1.025; st *= .985; x.lineTo(px, py); }
+        x.stroke();
+      }
+    });
+    // stars and renewal: stars, and a spiral galaxy
+    layer(Y[5] - 30, Y[5] + 110, 100, x => {
+      for (let i = 0; i < 170; i++) { const px = r() * W, py = Y[5] - 140 + r() * 360, rr = 1 + r() * 2.2;
+        const gr = x.createRadialGradient(px, py, 0, px, py, rr * 5); gr.addColorStop(0, 'rgba(255,240,200,.6)'); gr.addColorStop(1, 'rgba(255,200,120,0)');
+        x.fillStyle = gr; x.beginPath(); x.arc(px, py, rr * 5, 0, 7); x.fill(); }
+      const gx = 2150, gy = Y[5] + 30;
+      for (let arm = 0; arm < 2; arm++) for (let i = 0; i < 900; i++) {
+        const t = i / 900, th = t * 9 + arm * Math.PI, rad = 12 + t * 210, sc = (1 - t) * 14 + 4;
+        const px = gx + Math.cos(th) * rad + (r() - .5) * sc * 2, py = gy + Math.sin(th) * rad * .45 + (r() - .5) * sc;
+        x.fillStyle = `rgba(255,${200 + Math.round(r() * 55)},${150 + Math.round(r() * 80)},${(.15 + (1 - t) * .5).toFixed(2)})`; x.fillRect(px, py, 2.2, 2.2);
+      }
+      const core = x.createRadialGradient(gx, gy, 0, gx, gy, 90); core.addColorStop(0, 'rgba(255,235,190,.85)'); core.addColorStop(1, 'rgba(255,200,120,0)');
+      x.fillStyle = core; x.beginPath(); x.arc(gx, gy, 90, 0, 7); x.fill();
+    });
+    // consciousness: a web of connections, like neurons and like the cosmic web
+    layer(Y[6] + 60, Y[6] + 210, 110, x => {
+      const N = []; for (let i = 0; i < 150; i++) N.push([r() * W, Y[6] - 40 + r() * 340]);
+      x.lineWidth = 1.5;
+      N.forEach(([ax, ay], i) => { N.map(([bx, by], j) => [Math.hypot(ax - bx, ay - by), bx, by, j]).filter(e => e[3] !== i)
+        .sort((p, q) => p[0] - q[0]).slice(0, 3).forEach(([d, bx, by]) => { if (d > 320) return;
+          x.strokeStyle = `rgba(241,227,3,${(.24 * (1 - d / 320) + .05).toFixed(3)})`; x.beginPath(); x.moveTo(ax, ay);
+          x.quadraticCurveTo((ax + bx) / 2 + (r() - .5) * 40, (ay + by) / 2 + (r() - .5) * 40, bx, by); x.stroke(); }); });
+      N.forEach(([ax, ay]) => { const gr = x.createRadialGradient(ax, ay, 0, ax, ay, 10); gr.addColorStop(0, 'rgba(255,245,160,.7)'); gr.addColorStop(1, 'rgba(241,227,3,0)');
+        x.fillStyle = gr; x.beginPath(); x.arc(ax, ay, 10, 0, 7); x.fill(); });
+    });
+  })();
+</script>
+</body>
+</html>
