@@ -577,6 +577,11 @@ h1, h2, h3 { text-wrap: balance; }
 .family-bar li { margin: 0; }
 .family-bar img { height: 24px; width: auto; display: block; transition: transform .2s ease; }
 .family-bar a:hover img, .family-bar a:focus-visible img { transform: translateY(-1px); }
+/* Contribute sits at the left of the family bar, as a small pill (after the Quest's logo on Quest pages) */
+.family-bar li.fb-contribute { margin-right: auto !important; }
+.bigtoe-header .family-bar .fb-contribute a { display: inline-flex; padding: .3rem .95rem !important; border-radius: 50px; background: #8B0000;
+  color: #ffffff; font-size: .82rem; font-weight: 600; line-height: 1.2; letter-spacing: .02em; text-decoration: none; min-height: 0; }
+.bigtoe-header .family-bar .fb-contribute a:hover, .bigtoe-header .family-bar .fb-contribute a:focus-visible { background: #a50d0d; color: #ffffff; }
 .quest-header .site-logo img { height: 40px; width: auto; }
 /* one header height on every public page, whatever the page's own rules say */
 .bigtoe-header .header-container { padding: .5rem 2rem !important; }
@@ -591,7 +596,7 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
   .family-bar ul { gap: .3rem 1.1rem; }
   .family-bar img { height: 20px; }
 }
-@media (max-width: 560px) { .family-bar ul { justify-content: center; } }
+@media (max-width: 560px) { .family-bar ul { justify-content: center; } .family-bar li.fb-contribute { margin-right: 0 !important; } }
 /* the Quest has three links, so its menu stays out until phone width */
 @media (min-width: 901px) and (max-width: 1100px) {
   .quest-header.bigtoe-header[data-phone-menu] .main-navigation { display: block; }
@@ -635,6 +640,7 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 /* The Quest carries its logo in the white bar, where its red reads best; the
    black row below holds its links on the left and the member button right. */
 .family-bar .fam-lead { margin-right: auto; }
+.family-bar .fam-lead:has(+ .fb-contribute) { margin-right: .4rem; }
 .family-bar .fam-lead img { height: 34px; }
 .quest-header .header-container { min-height: 56px; }
 .quest-header .main-navigation { flex: 1; }
@@ -643,7 +649,7 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 .quest-header .family-bar ul { justify-content: flex-end !important; }
 @media (max-width: 900px) { .family-bar .fam-lead img { height: 28px; } }
 /* on a phone the Quest bar keeps only its own logo; the footer links the rest */
-@media (max-width: 560px) { .quest-header .family-bar li:not(.fam-lead) { display: none; } }
+@media (max-width: 560px) { .quest-header .family-bar li:not(.fam-lead):not(.fb-contribute) { display: none; } }
 
 /* -- The public footer ------------------------------------------------------
    One footer for the Book and the Quest: the book and the contact buttons on
@@ -662,7 +668,7 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 .pub-social .instagram { background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
 .pub-social .youtube { background: #FF0000; }
 .pub-social .email { background: #0072C6; }
-.pub-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; justify-self: end; width: 100%; max-width: 580px; }
+.pub-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; justify-self: end; width: 100%; max-width: 780px; }
 .pub-links h3 { color: #ffffff; margin: 0 0 .9rem; letter-spacing: .01em;
   font: 600 1rem/1.3 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 .pub-links ul { list-style: none; margin: 0; padding: 0; }
@@ -674,9 +680,9 @@ html:has(.bigtoe-header) { scroll-padding-top: 7rem; }
 .pub-footer-bottom p { margin: 0; }
 .pub-footer-bottom a { color: rgba(255, 255, 255, .62); text-decoration: none; }
 .pub-footer-bottom a:hover { color: #ffffff; }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .pub-footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-  .pub-links { justify-self: start; }
+  .pub-links { justify-self: start; max-width: none; }
 }
 @media (max-width: 560px) {
   .pub-footer { padding: 2.5rem 1.25rem 1rem; }
@@ -835,6 +841,7 @@ footer.site-footer { background: #1a1d33 !important; color: #ffffff; margin: 0 !
 .pub-links h3 { padding-top: .7rem; border-top: 3px solid #c62828; }
 .pub-links > div:nth-child(2) h3 { border-top-color: #2e7d32; }
 .pub-links > div:nth-child(3) h3 { border-top-color: #1565c0; }
+.pub-links > div:nth-child(4) h3 { border-top-color: #f1e303; }
 /* YouTube buttons: a deeper red so the white label passes contrast (5.9:1) */
 .social-btn.youtube, .site-footer .sf-social .youtube, .pub-social .youtube, .q-btn-yt { background: #cc0000 !important; }
 
