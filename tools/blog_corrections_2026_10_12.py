@@ -330,8 +330,9 @@ R("The Bible says \"ashes to ashes, dust to dust.\" You ARE the earth,",
 
 # ---------------------------------------------------------------- Prime numbers (Oct 2025)
 blog.add_note('prime-numbers',
-    'Unique factorization is not unique to the integers&rsquo; number system in the way the post first claimed, '
-    'factoring is believed hard but not proven hard, and Shor&rsquo;s algorithm factors large integers, not primes.')
+    'The claim that no other number system has unique factorization was wrong (some do and some do not), '
+    'factoring is believed hard but has not been proven hard, and Shor&rsquo;s algorithm factors large integers, '
+    'not primes.')
 R("No other number system has this property.",
   "Not every number system has this property, which is part of what makes the integers special.")
 R("Prime multiplication is easy; prime factorization is exponentially hard.",
