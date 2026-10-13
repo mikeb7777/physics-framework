@@ -7,9 +7,14 @@ move between exports.
 
 # Version 6G: proposed changes
 
-**Status: proposed, not applied.** Nothing here has been put into the Word
-file. The website has already been corrected to match (framework page, glossary,
-appendix), so the book is now the only place the old wording stands.
+**Status: applied to the Word file, 13 October 2026** (Michael: "let's do 6G
+now"). `A Quest for The Big TOE Version 6G.docx` is built from 6F by
+`tools/book_6g_2026_10_13.py`. A1 to A5, B1 and B2 are in, and the edition line
+reads "Version 6G". The A4 echo reference points to Appendix Element 19,
+Section F, where the website appendix sets out the echo prediction. **Released 13 October 2026.** Michael exported the PDF from Word (464 pages)
+and uploaded it; all seven changes and the edition line were checked in its text
+before the download page switched to 6G. The website was corrected first (framework page, glossary,
+appendix).
 
 **Why.** Michael asked whether the physics and mathematics definitions of a
 singularity differ, and whether the book states them accurately. They do differ,
