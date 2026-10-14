@@ -11,7 +11,7 @@ move between exports.
 now"). `A Quest for The Big TOE Version 6G.docx` is built from 6F by
 `tools/book_6g_2026_10_13.py`. A1 to A5, B1 and B2 are in, and the edition line
 reads "Version 6G". The A4 echo reference points to Appendix Element 19,
-Section F, where the website appendix sets out the echo prediction. **Rebuilt 14 October 2026 with A6, still Version 6G** (Michael: "keep as 6G, we will overwrite the file"). The new PDF is needed before the download page and its change list are updated. First release: 13 October 2026. Michael exported the PDF from Word (464 pages)
+Section F, where the website appendix sets out the echo prediction. **Rebuilt 14 October 2026 with A6, still Version 6G** (Michael: "keep as 6G, we will overwrite the file"). Michael exported the new PDF from Word (465 pages) on 14 October; A6 and every earlier 6G change were checked in its text before release. The website appendix (Element 19, Sections D to F) was corrected to match on the same day. First release: 13 October 2026. Michael exported the PDF from Word (464 pages)
 and uploaded it; all seven changes and the edition line were checked in its text
 before the download page switched to 6G. The website was corrected first (framework page, glossary,
 appendix).
