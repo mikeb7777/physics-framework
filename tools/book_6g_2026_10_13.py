@@ -12,9 +12,12 @@ geodesic incompleteness, not infinite density; a rotating black hole's singulari
   A5  "Chaos as Information Processing": the uncertainty argument is heuristic
   B1  "The Singularity That Isn't": two meanings of one word
   B2  "How Not to Have a Universe": properties come from relationships
+  A6  Element 14, "Fractal dimensions in the CMB": what Caruso and Oguri found (an upper limit), and
+      what the fractal CMB isotherms are (a pattern on the sky, not the dimension of space). Added
+      14 Oct 2026 on Michael's question about fractal dimension; 6G was rebuilt with it, still 6G.
   --  Edition line: "Version 6F" -> "Version 6G"
 
-No new references. New paragraphs are copies of the paragraph they follow, with the text replaced,
+No new references in Element 19. Element 14 [12] to [15] are restored on the references page. New paragraphs are copies of the paragraph they follow, with the text replaced,
 so they keep the book's body style. Run once:  python3 tools/book_6g_2026_10_13.py
 """
 import copy, os
@@ -135,6 +138,18 @@ p.runs[0].text = (
     "experiences no breakdown, no discontinuity, no local signal that anything unusual is happening. Closer in, "
     "tidal forces grow without limit, and that is where the classical description ends. What the framework "
     "questions is whether the physics ends with it.")
+
+# A6  Element 14, fractal dimensions in the CMB (runs: lead-in, text, [12, 13], text, [14, 15], ".")
+p = para("Fractal dimensions in the CMB.")
+assert [r.text for r in p.runs][2] == "[12, 13]" and [r.text for r in p.runs][4] == "[14, 15]", [r.text for r in p.runs]
+p.runs[1].text = (" Caruso and Oguri fitted the CMB spectrum with a Planck law generalized to a non-integer number of "
+                  "spatial dimensions, 3 + \u03b5. They found \u03b5 of about 10\u207b\u2075 and read it as an upper limit on "
+                  "how far space could differ from three dimensions, not as evidence that it does; a later analysis of "
+                  "the same data bounds the deviation without settling its sign ")
+p.runs[3].text = (". A different kind of fractal appears on the sky itself. Lines of equal temperature on CMB maps are "
+                  "fractal curves, with a dimension between one and two, and the real maps match simulations of the "
+                  "standard cosmological model. Fractal dimension here measures how crinkled a curve is, as for "
+                  "Mandelbrot\u2019s coastline of Britain, not how many directions space has ")
 
 d.core_properties.revision = (d.core_properties.revision or 0) + 1
 d.save(DST)
