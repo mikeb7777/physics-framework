@@ -171,20 +171,51 @@
     margin-top: 3rem;
     }
 
+    /* The cover is dark, like the page: show it as a book. A soft light behind it, a lit edge,
+       page edges along the fore-edge and a crease at the spine keep its outline readable. */
     .book-cover-wrapper {
     position: relative;
+    padding: 1.5rem;
     }
 
-    .book-cover {
-    max-width: 350px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    .book-cover-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: -8% -14%;
+    background: radial-gradient(closest-side, rgba(241,227,3,0.16), rgba(110,140,255,0.13) 55%, rgba(110,140,255,0) 78%);
+    pointer-events: none;
+    }
+
+    .book-frame {
+    position: relative;
+    display: block;
+    border-radius: 3px 7px 7px 3px;
+    box-shadow:
+      1px 0 0 #f4f1e8, 3px 1px 0 #cfc9b9, 4px 1px 0 #f4f1e8, 6px 2px 0 #c4beae, 7px 2px 0 #ebe7dc, 9px 3px 0 #b9b3a3,
+      0 0 0 1px rgba(255,255,255,0.16),
+      0 28px 60px rgba(0,0,0,0.65), 0 0 46px rgba(150,170,255,0.18);
     transition: transform 0.3s ease;
     }
 
-    .book-cover:hover {
-    transform: scale(1.05);
+    .book-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(255,255,255,0.24) 0, rgba(255,255,255,0.06) 1.2%, rgba(0,0,0,0.38) 2.6%, rgba(0,0,0,0) 7%, rgba(255,255,255,0.05) 45%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+    }
+
+    .book-frame:hover {
+    transform: scale(1.04) rotate(-0.6deg);
+    }
+
+    .book-cover {
+    display: block;
+    max-width: 350px;
+    width: 100%;
+    height: auto;
+    border-radius: 3px 7px 7px 3px;
     }
 
     .hero-cta {
@@ -802,7 +833,9 @@
     
     <div class="hero-book-container">
     <div class="book-cover-wrapper" data-aos="fade-right" data-aos-delay="400">
+    <div class="book-frame">
     <img src="cover/front-700.jpg" width="700" height="1050" alt="A Quest for The Big TOE book cover: the title in white on a starry night sky, beside a footprint filled with a nebula, its big toe a glowing gold sphere" class="book-cover">
+    </div>
     </div>
     
     <div class="hero-cta" data-aos="fade-left" data-aos-delay="600">
