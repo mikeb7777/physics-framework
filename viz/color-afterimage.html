@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Where color comes from. Ic² Research Institute</title>
-<meta name="description" content="A perception demonstration: stare at a globe painted in false colors and your own visual system supplies the blue sea and green land. With it, three cases of structural color, where the material holds no matching pigment at all. Ic² Research Institute.">
+<meta name="description" content="A perception demonstration: stare at a sun and galaxy painted in false colors and your own visual system supplies the real yellow and blue. With it, three cases of structural color, where the material carries no matching pigment at all. Ic² Research Institute.">
 <link rel="canonical" href="https://eequalsicsquared.com/viz/color-afterimage.html">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
@@ -29,7 +29,8 @@
   .card .cardkick{font-family:monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ac);margin-bottom:.35rem}
   .card h2{font-family:'Source Serif 4',Georgia,serif;color:#fff;font-size:1.32rem;font-weight:700;margin-bottom:.5rem}
   .card .sub{color:var(--muted);font-size:.95rem;margin-bottom:1.1rem}
-  .stage{position:relative;background:#fff;border-radius:10px;overflow:hidden}
+  .stage{position:relative;background:#0d1020;border-radius:10px;overflow:hidden;transition:background .35s}
+  .stage.revealed{background:#e9e9ee}
   .stage svg{display:block;width:100%;height:auto}
   .outline{opacity:0;transition:opacity .4s}
   .figs{transition:opacity .35s}
@@ -66,24 +67,36 @@
   <div class="card c1">
     <p class="cardkick">Color made by the viewer</p>
     <h2>Your eye supplies the color</h2>
-    <p class="sub">This Earth is painted in the wrong colors, an orange sea and pink land. Stare at the × at its center, hold still, and let the timer run. When the paint is taken away, the sea turns blue and the land turns green. The screen never held those colors. The meeting happened in you.</p>
+    <p class="sub">The sun here is painted blue and the galaxy gold, the opposite of their familiar colors. Keep your eyes on the × between them while the timer runs. When the color drops away, the sun floods yellow and the galaxy turns blue. The screen never carried those colors. The meeting happened in you.</p>
     <div class="stage" id="stage">
-      <svg viewBox="0 0 760 440" role="img" aria-label="A globe painted in false colors, an orange ocean and pink continents, with a fixation cross at its center.">
-        <defs><clipPath id="globe"><circle cx="380" cy="220" r="150"/></clipPath></defs>
+      <svg viewBox="0 0 760 440" role="img" aria-label="A blue sun on the left and a golden galaxy on the right, painted in false colors, with a fixation cross between them.">
+        <defs>
+          <radialGradient id="sunB" cx="50%" cy="44%" r="62%"><stop offset="0%" stop-color="#4f93f4"/><stop offset="100%" stop-color="#113f9e"/></radialGradient>
+          <radialGradient id="galY" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#ffe868"/><stop offset="100%" stop-color="#e9a200"/></radialGradient>
+        </defs>
         <g class="figs" id="figs">
-          <circle cx="380" cy="220" r="150" fill="#F77F00"/>
-          <g clip-path="url(#globe)" fill="#E0218A">
-            <path d="M300 96 q44 -8 52 26 q30 6 24 40 q16 20 -10 34 q-30 20 -56 2 q-26 -16 -20 -46 q-12 -34 10 -56 Z"/>
-            <path d="M330 206 q34 6 30 42 q22 30 -2 70 q-14 40 -36 44 q-18 -6 -14 -40 q-18 -34 2 -66 q-6 -34 20 -50 Z"/>
-            <path d="M430 150 q40 -14 58 14 q30 2 28 36 q16 44 -22 86 q-24 42 -50 36 q-20 -14 -12 -48 q-20 -40 2 -78 q-14 -62 -2 -46 Z"/>
-            <path d="M452 118 q58 -16 86 6 q30 10 10 34 q-44 18 -92 2 q-24 -22 -4 -42 Z"/>
-            <ellipse cx="500" cy="322" rx="40" ry="26"/>
+          <path d="M343.0 220.0 L308.5 211.1 L308.5 228.9 Z M328.5 274.0 L303.1 249.1 L294.2 264.4 Z M289.0 313.5 L279.4 279.2 L264.1 288.1 Z M235.0 328.0 L243.9 293.5 L226.1 293.5 Z M181.0 313.5 L205.9 288.1 L190.6 279.2 Z M141.5 274.0 L175.8 264.4 L166.9 249.1 Z M127.0 220.0 L161.5 228.9 L161.5 211.1 Z M141.5 166.0 L166.9 190.9 L175.8 175.6 Z M181.0 126.5 L190.6 160.8 L205.9 151.9 Z M235.0 112.0 L226.1 146.5 L243.9 146.5 Z M289.0 126.5 L264.1 151.9 L279.4 160.8 Z M328.5 166.0 L294.2 175.6 L303.1 190.9 Z" fill="#1f6fe6"/>
+          <circle cx="235" cy="220" r="76" fill="url(#sunB)"/>
+          <g transform="rotate(-16 530 218)">
+            <ellipse cx="530" cy="218" rx="118" ry="56" fill="#eaa900" opacity="0.5"/>
+            <ellipse cx="530" cy="218" rx="86" ry="40" fill="#efb60c" opacity="0.72"/>
+            <path d="M548.0 218.0 L548.5 219.3 L548.5 220.8 L548.0 222.2 L546.9 223.7 L545.4 225.1 L543.3 226.4 L540.6 227.6 L537.5 228.6 L534.0 229.5 L530.0 230.1 L525.7 230.4 L521.3 230.4 L516.7 230.0 L512.1 229.4 L507.6 228.3 L503.4 226.9 L499.6 225.1 L496.3 223.0 L493.6 220.7 L491.7 218.0 L490.8 215.1 L490.8 212.1 L491.8 209.1 L494.0 206.0 L497.3 203.0 L501.8 200.1 L507.4 197.6 L514.0 195.4 L521.6 193.6 L530.0 192.3 L539.1 191.7 L548.6 191.7 L558.4 192.4 L568.1 193.9 L577.6 196.1 L586.6 199.1 L594.7 202.8 L601.7 207.3 L607.3 212.4 L611.3 218.0 L613.4 224.1 L613.4 230.5 L611.1 237.0 L606.5 243.6 L599.4 249.9 L589.9 255.9 L578.1 261.4 L564.0 266.1" fill="none" stroke="#ffd21a" stroke-width="14" stroke-linecap="round"/>
+            <path d="M512.0 218.0 L511.5 216.7 L511.5 215.2 L512.0 213.8 L513.1 212.3 L514.6 210.9 L516.7 209.6 L519.4 208.4 L522.5 207.4 L526.0 206.5 L530.0 205.9 L534.3 205.6 L538.7 205.6 L543.3 206.0 L547.9 206.6 L552.4 207.7 L556.6 209.1 L560.4 210.9 L563.7 213.0 L566.4 215.3 L568.3 218.0 L569.2 220.9 L569.2 223.9 L568.2 226.9 L566.0 230.0 L562.7 233.0 L558.2 235.9 L552.6 238.4 L546.0 240.6 L538.4 242.4 L530.0 243.7 L520.9 244.3 L511.4 244.3 L501.6 243.6 L491.9 242.1 L482.4 239.9 L473.4 236.9 L465.3 233.2 L458.3 228.7 L452.7 223.6 L448.7 218.0 L446.6 211.9 L446.6 205.5 L448.9 199.0 L453.5 192.4 L460.6 186.1 L470.1 180.1 L481.9 174.6 L496.0 169.9" fill="none" stroke="#ffd21a" stroke-width="14" stroke-linecap="round"/>
+            <ellipse cx="530" cy="218" rx="30" ry="17" fill="url(#galY)"/>
           </g>
-          <circle cx="380" cy="220" r="150" fill="none" stroke="rgba(0,0,0,.10)" stroke-width="2"/>
+          <g stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"><line x1="369" y1="220" x2="391" y2="220"/><line x1="380" y1="209" x2="380" y2="231"/></g>
         </g>
-        <g class="outline" fill="none" stroke="#cfcfcf" stroke-width="2"><circle cx="380" cy="220" r="150"/></g>
-        <g stroke="#15151a" stroke-width="3.5" stroke-linecap="round">
-          <line x1="369" y1="220" x2="391" y2="220"/><line x1="380" y1="209" x2="380" y2="231"/>
+        <g class="outline">
+          <path d="M343.0 220.0 L308.5 211.1 L308.5 228.9 Z M328.5 274.0 L303.1 249.1 L294.2 264.4 Z M289.0 313.5 L279.4 279.2 L264.1 288.1 Z M235.0 328.0 L243.9 293.5 L226.1 293.5 Z M181.0 313.5 L205.9 288.1 L190.6 279.2 Z M141.5 274.0 L175.8 264.4 L166.9 249.1 Z M127.0 220.0 L161.5 228.9 L161.5 211.1 Z M141.5 166.0 L166.9 190.9 L175.8 175.6 Z M181.0 126.5 L190.6 160.8 L205.9 151.9 Z M235.0 112.0 L226.1 146.5 L243.9 146.5 Z M289.0 126.5 L264.1 151.9 L279.4 160.8 Z M328.5 166.0 L294.2 175.6 L303.1 190.9 Z" fill="#b7b7c0"/>
+          <circle cx="235" cy="220" r="76" fill="#c3c3cc"/>
+          <g transform="rotate(-16 530 218)">
+            <ellipse cx="530" cy="218" rx="118" ry="56" fill="#cdcdd5" opacity="0.6"/>
+            <ellipse cx="530" cy="218" rx="86" ry="40" fill="#c8c8d1" opacity="0.8"/>
+            <path d="M548.0 218.0 L548.5 219.3 L548.5 220.8 L548.0 222.2 L546.9 223.7 L545.4 225.1 L543.3 226.4 L540.6 227.6 L537.5 228.6 L534.0 229.5 L530.0 230.1 L525.7 230.4 L521.3 230.4 L516.7 230.0 L512.1 229.4 L507.6 228.3 L503.4 226.9 L499.6 225.1 L496.3 223.0 L493.6 220.7 L491.7 218.0 L490.8 215.1 L490.8 212.1 L491.8 209.1 L494.0 206.0 L497.3 203.0 L501.8 200.1 L507.4 197.6 L514.0 195.4 L521.6 193.6 L530.0 192.3 L539.1 191.7 L548.6 191.7 L558.4 192.4 L568.1 193.9 L577.6 196.1 L586.6 199.1 L594.7 202.8 L601.7 207.3 L607.3 212.4 L611.3 218.0 L613.4 224.1 L613.4 230.5 L611.1 237.0 L606.5 243.6 L599.4 249.9 L589.9 255.9 L578.1 261.4 L564.0 266.1" fill="none" stroke="#d2d2da" stroke-width="14" stroke-linecap="round"/>
+            <path d="M512.0 218.0 L511.5 216.7 L511.5 215.2 L512.0 213.8 L513.1 212.3 L514.6 210.9 L516.7 209.6 L519.4 208.4 L522.5 207.4 L526.0 206.5 L530.0 205.9 L534.3 205.6 L538.7 205.6 L543.3 206.0 L547.9 206.6 L552.4 207.7 L556.6 209.1 L560.4 210.9 L563.7 213.0 L566.4 215.3 L568.3 218.0 L569.2 220.9 L569.2 223.9 L568.2 226.9 L566.0 230.0 L562.7 233.0 L558.2 235.9 L552.6 238.4 L546.0 240.6 L538.4 242.4 L530.0 243.7 L520.9 244.3 L511.4 244.3 L501.6 243.6 L491.9 242.1 L482.4 239.9 L473.4 236.9 L465.3 233.2 L458.3 228.7 L452.7 223.6 L448.7 218.0 L446.6 211.9 L446.6 205.5 L448.9 199.0 L453.5 192.4 L460.6 186.1 L470.1 180.1 L481.9 174.6 L496.0 169.9" fill="none" stroke="#d2d2da" stroke-width="14" stroke-linecap="round"/>
+            <ellipse cx="530" cy="218" rx="30" ry="17" fill="#dadae1"/>
+          </g>
+          <g stroke="#3a3a44" stroke-width="3.5" stroke-linecap="round"><line x1="369" y1="220" x2="391" y2="220"/><line x1="380" y1="209" x2="380" y2="231"/></g>
         </g>
       </svg>
     </div>
@@ -92,7 +105,7 @@
       <button class="go ghost" id="again" style="display:none">Show the colors again</button>
       <div class="status" id="status">Ready when you are. Twenty seconds of staring works best.</div>
     </div>
-    <p class="note">Why it happens: the color-sensing cells in your eye tire where they are held on one hue, so when the hue is removed the balance tips to its opposite, red against green, blue against yellow. The brain reads that imbalance as the opposite color, in the shape you were fixating. This is the negative afterimage, a standard result of opponent-process vision (Hering). How strong it looks varies from person to person and screen to screen, so take your own impression as a demonstration, not a measurement.</p>
+    <p class="note">Why it happens: the color-sensing cells in your eye tire where they rest on one hue, so when the hue is removed the balance tips to its opposite, red against green, blue against yellow. The brain reads that imbalance as the opposite color, in the shape you were fixating. This is the negative afterimage, a standard result of opponent-process vision (Hering). How strong it looks varies from person to person and screen to screen, so take your own impression as a demonstration, not a measurement.</p>
   </div>
 
   <div class="card c2">
@@ -148,7 +161,7 @@
   }
   function reveal(){
     stage.classList.add('revealed');
-    status.innerHTML='Keep your eyes on the ×. The sea should turn <b>blue</b> and the land <b>green</b>, the real Earth.';
+    status.innerHTML='Keep your eyes on the ×. The sun should glow <b>yellow</b> and the galaxy <b>blue</b>, their real colors.';
     again.style.display='';
   }
   start.addEventListener('click',function(){
